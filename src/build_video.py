@@ -72,12 +72,12 @@ def _cta_clips(duration: float) -> list[TextClip]:
     cta_duration = min(CTA_DURATION, duration)
     start = max(duration - cta_duration, 0)
     heart_y = int(TARGET_SIZE[1] * 0.40)
-    label_y = heart_y + 210
+    label_y = heart_y + 270
 
     heart = TextClip(
         "♥",
-        fontsize=130,
-        color="white",
+        fontsize=200,
+        color="red",
         font="Arial-Bold",
         stroke_color="black",
         stroke_width=3,
