@@ -1,0 +1,11 @@
+.env
+client_secret.json
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.mp4
+*.mp3
+test.mp3
+assets/backgrounds/*
+!assets/backgrounds/.gitkeep
