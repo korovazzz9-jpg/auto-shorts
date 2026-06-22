@@ -18,7 +18,7 @@ def run() -> None:
     data = generate_script()
     print(f"  Тема: {data['topic']} | Заголовок: {data['title']}")
 
-    with tempfile.TemporaryDirectory() as tmp:
+    with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
         audio_path = os.path.join(tmp, "audio.mp3")
         video_path = os.path.join(tmp, "video.mp4")
 

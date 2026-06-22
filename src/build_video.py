@@ -17,6 +17,7 @@ from moviepy.editor import (
 
 TARGET_SIZE = (1080, 1920)
 ZOOM_FACTOR = 1.08
+CAPTION_Y = int(TARGET_SIZE[1] * 0.68)  # ниже центра, но выше зоны названия канала/кнопок Shorts
 
 
 def _fit_clip(clip: VideoFileClip, duration: float) -> VideoFileClip:
@@ -53,7 +54,7 @@ def _karaoke_clips(words: list[dict]) -> list[TextClip]:
                 size=(TARGET_SIZE[0] - 100, None),
                 method="caption",
             )
-            .set_position(("center", "center"))
+            .set_position(("center", CAPTION_Y))
             .set_start(w["start"])
             .set_duration(max(w["end"] - w["start"], 0.05))
         )
