@@ -7,5 +7,9 @@ venv/
 *.mp4
 *.mp3
 test.mp3
+*.log
+*.jpg
+*.jpeg
+*.png
 assets/backgrounds/*
 !assets/backgrounds/.gitkeep
