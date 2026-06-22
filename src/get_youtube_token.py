@@ -7,7 +7,8 @@ import os
 
 from google_auth_oauthlib.flow import InstalledAppFlow
 
-SCOPES = ["https://www.googleapis.com/auth/youtube.upload"]
+from youtube_auth import SCOPES
+
 CLIENT_SECRET_PATH = os.path.join(os.path.dirname(__file__), "..", "client_secret.json")
 
 

@@ -1,23 +1,7 @@
 """Загружает готовый mp4 на YouTube как Short."""
-import os
-
-from google.oauth2.credentials import Credentials
-from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
 
-SCOPES = ["https://www.googleapis.com/auth/youtube.upload"]
-
-
-def _get_client():
-    creds = Credentials(
-        token=None,
-        refresh_token=os.environ["YT_REFRESH_TOKEN"],
-        client_id=os.environ["YT_CLIENT_ID"],
-        client_secret=os.environ["YT_CLIENT_SECRET"],
-        token_uri="https://oauth2.googleapis.com/token",
-        scopes=SCOPES,
-    )
-    return build("youtube", "v3", credentials=creds)
+from youtube_auth import get_client
 
 
 def upload_video(
@@ -27,7 +11,7 @@ def upload_video(
     tags: list[str],
     hashtags: list[str],
 ) -> str:
-    youtube = _get_client()
+    youtube = get_client()
     hashtag_line = " ".join(hashtags)
     body = {
         "snippet": {
