@@ -5,6 +5,8 @@ import random
 
 from anthropic import Anthropic
 
+from recent_titles import get_recent_titles
+
 TOPICS_POOL = [
     "space", "the ocean", "ancient history", "the human body",
     "the animal kingdom", "psychology", "future technology", "bizarre records",
@@ -33,6 +35,18 @@ def generate_script() -> dict:
     topic = random.choice(TOPICS_POOL)
     client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
 
+    try:
+        past_titles = get_recent_titles()
+    except Exception:
+        past_titles = []
+
+    avoid_block = ""
+    if past_titles:
+        avoid_block = (
+            "Already-published video titles on this channel — pick a DIFFERENT specific fact, "
+            "not a variation of any of these:\n" + "\n".join(f"- {t}" for t in past_titles) + "\n\n"
+        )
+
     message = client.messages.create(
         model="claude-sonnet-4-6",
         max_tokens=1200,
@@ -40,6 +54,7 @@ def generate_script() -> dict:
         messages=[{
             "role": "user",
             "content": (
+                avoid_block +
                 f"Topic: {topic}. Come up with one specific, lesser-known fact on this topic "
                 "and write a script for it. Also break the script into 4-6 short visual beats "
                 "(for fast cuts, roughly one every 4-5 seconds) and for each one write a short "
