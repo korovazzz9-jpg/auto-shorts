@@ -45,10 +45,23 @@ def generate_script() -> dict:
                 "(for fast cuts, roughly one every 4-5 seconds) and for each one write a short "
                 "stock-footage search query (2-4 words, concrete, visual, in English, the kind "
                 "you'd type into a stock video site search box, matching what's being said at "
-                "that point). Respond strictly in JSON, no markdown wrapper: "
-                '{"title": "short catchy title under 60 characters", '
+                "that point).\n\n"
+                "SEO requirements:\n"
+                "- title: include a specific keyword phrase someone would actually type into "
+                "YouTube search when looking for this kind of content (e.g. 'ocean facts', "
+                "'space facts you didn't know', 'how X works') naturally woven into a catchy "
+                "title under 60 characters — not just a vague hook with no searchable terms.\n"
+                "- tags: 10-15 specific YouTube search tags, mixing broad ones (e.g. 'facts', "
+                "'did you know', '" + topic + "') with specific long-tail ones tied to the exact "
+                "fact (e.g. the specific phenomenon, place, or thing named in the script).\n"
+                "- hashtags: 3-5 hashtags (lowercase, no spaces, with # prefix) to put in the "
+                "description, mixing one broad discovery hashtag (#shorts, #facts) with 2-4 "
+                "specific ones tied to the topic and fact.\n\n"
+                "Respond strictly in JSON, no markdown wrapper: "
+                '{"title": "short catchy SEO title under 60 characters", '
                 '"script": "voiceover script text", '
                 '"tags": ["tag1", "tag2", ...], '
+                '"hashtags": ["#tag1", "#tag2", ...], '
                 '"video_queries": ["query1", "query2", ...]}'
             ),
         }],

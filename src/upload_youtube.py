@@ -20,12 +20,19 @@ def _get_client():
     return build("youtube", "v3", credentials=creds)
 
 
-def upload_video(video_path: str, title: str, description: str, tags: list[str]) -> str:
+def upload_video(
+    video_path: str,
+    title: str,
+    description: str,
+    tags: list[str],
+    hashtags: list[str],
+) -> str:
     youtube = _get_client()
+    hashtag_line = " ".join(hashtags)
     body = {
         "snippet": {
             "title": title[:100],
-            "description": f"{description}\n\n#shorts",
+            "description": f"{hashtag_line}\n\n{description}",
             "tags": tags,
             "categoryId": "27",  # Education
         },

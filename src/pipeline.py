@@ -37,6 +37,7 @@ def run() -> None:
             title=data["title"],
             description=data["script"],
             tags=data["tags"],
+            hashtags=data["hashtags"],
         )
 
     print("Готово.")
