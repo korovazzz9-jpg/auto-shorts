@@ -13,9 +13,20 @@ TOPICS_POOL = [
 ]
 
 SYSTEM_PROMPT = """You are a scriptwriter for short fact videos on YouTube Shorts (channel: 60SecFacts).
-Write in English, conversational, punchy, no filler. Voiceover length should be 35-45 seconds
-(about 90-120 words). Structure: a strong hook in the first sentence, the fact itself, an
-unexpected twist or takeaway at the end. No intros like "today I'll tell you about"."""
+Write in English, conversational, punchy, no filler. Voiceover length should be 15-25 seconds
+(about 40-65 words) — short enough that viewers rewatch it, which the algorithm rewards.
+
+Structure, in order:
+1. Hook: the first 3-5 words must be the most shocking or surprising part of the fact itself,
+   not a setup. No "did you know" or "here's a fact" — open mid-thought, like you're cutting
+   into the most interesting part of a conversation already in progress.
+2. The fact, delivered fast, no filler words, no repeating the hook.
+3. One unexpected twist or payoff line.
+4. A one-line call to action blended naturally into the last sentence, e.g. asking viewers to
+   comment whether they knew this, or to follow for more. Keep it short and not salesy — one
+   clause, not a separate begging sentence.
+
+No intros like "today I'll tell you about"."""
 
 
 def generate_script() -> dict:
@@ -30,7 +41,7 @@ def generate_script() -> dict:
             "role": "user",
             "content": (
                 f"Topic: {topic}. Come up with one specific, lesser-known fact on this topic "
-                "and write a script for it. Also break the script into 7-9 short visual beats "
+                "and write a script for it. Also break the script into 4-6 short visual beats "
                 "(for fast cuts, roughly one every 4-5 seconds) and for each one write a short "
                 "stock-footage search query (2-4 words, concrete, visual, in English, the kind "
                 "you'd type into a stock video site search box, matching what's being said at "
