@@ -6,16 +6,16 @@ import random
 from anthropic import Anthropic
 
 TOPICS_POOL = [
-    "космос", "океан", "история древнего мира", "человеческое тело",
-    "животный мир", "психология", "технологии будущего", "необычные рекорды",
-    "вулканы и землетрясения", "древние цивилизации", "квантовая физика",
-    "криптография", "эволюция", "погодные явления", "археологические находки",
+    "space", "the ocean", "ancient history", "the human body",
+    "the animal kingdom", "psychology", "future technology", "bizarre records",
+    "volcanoes and earthquakes", "ancient civilizations", "quantum physics",
+    "cryptography", "evolution", "extreme weather", "archaeological discoveries",
 ]
 
-SYSTEM_PROMPT = """Ты сценарист коротких видео-фактов для YouTube Shorts.
-Пиши на русском, разговорно, цепляюще, без воды. Длительность озвучки — 35-45 секунд
-(примерно 90-120 слов). Структура: яркий крючок в первой фразе, сам факт, неожиданный
-поворот или вывод в конце. Никаких вступлений вида "сегодня я расскажу"."""
+SYSTEM_PROMPT = """You are a scriptwriter for short fact videos on YouTube Shorts (channel: 60SecFacts).
+Write in English, conversational, punchy, no filler. Voiceover length should be 35-45 seconds
+(about 90-120 words). Structure: a strong hook in the first sentence, the fact itself, an
+unexpected twist or takeaway at the end. No intros like "today I'll tell you about"."""
 
 
 def generate_script() -> dict:
@@ -29,11 +29,11 @@ def generate_script() -> dict:
         messages=[{
             "role": "user",
             "content": (
-                f"Тема: {topic}. Придумай один конкретный малоизвестный факт по этой теме "
-                "и напиши по нему сценарий. Ответь строго в формате JSON без markdown-обёртки: "
-                '{"title": "короткий цепляющий заголовок до 60 символов", '
-                '"script": "текст сценария для озвучки", '
-                '"tags": ["тег1", "тег2", ...]}'
+                f"Topic: {topic}. Come up with one specific, lesser-known fact on this topic "
+                "and write a script for it. Respond strictly in JSON, no markdown wrapper: "
+                '{"title": "short catchy title under 60 characters", '
+                '"script": "voiceover script text", '
+                '"tags": ["tag1", "tag2", ...]}'
             ),
         }],
     )

@@ -1,4 +1,4 @@
-# Auto Shorts — автоматический YouTube Shorts канал на фактах
+# 60SecFacts — автоматический YouTube Shorts канал на фактах (англоязычный)
 
 Конвейер: тема → сценарий (Claude API) → озвучка (edge-tts, бесплатно) →
 видео (фон + субтитры, MoviePy) → загрузка на YouTube (YouTube Data API) →

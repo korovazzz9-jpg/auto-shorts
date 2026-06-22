@@ -3,7 +3,7 @@ import asyncio
 
 import edge_tts
 
-VOICE = "ru-RU-DmitryNeural"
+VOICE = "en-US-GuyNeural"
 
 
 async def _synthesize(text: str, out_path: str) -> None:
@@ -17,4 +17,4 @@ def text_to_speech(text: str, out_path: str) -> str:
 
 
 if __name__ == "__main__":
-    text_to_speech("Это тестовая озвучка.", "test.mp3")
+    text_to_speech("This is a test voiceover.", "test.mp3")
