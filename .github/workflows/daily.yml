@@ -1,8 +1,9 @@
-name: Daily Short
+name: Daily Shorts
 
 on:
   schedule:
     - cron: "0 12 * * *"
+    - cron: "0 20 * * *"
   workflow_dispatch: {}
 
 jobs:
@@ -25,6 +26,7 @@ jobs:
         working-directory: src
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
           YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
           YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
           YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}

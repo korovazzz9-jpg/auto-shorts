@@ -24,16 +24,21 @@ def generate_script() -> dict:
 
     message = client.messages.create(
         model="claude-sonnet-4-6",
-        max_tokens=600,
+        max_tokens=1200,
         system=SYSTEM_PROMPT,
         messages=[{
             "role": "user",
             "content": (
                 f"Topic: {topic}. Come up with one specific, lesser-known fact on this topic "
-                "and write a script for it. Respond strictly in JSON, no markdown wrapper: "
+                "and write a script for it. Also break the script into 7-9 short visual beats "
+                "(for fast cuts, roughly one every 4-5 seconds) and for each one write a short "
+                "stock-footage search query (2-4 words, concrete, visual, in English, the kind "
+                "you'd type into a stock video site search box, matching what's being said at "
+                "that point). Respond strictly in JSON, no markdown wrapper: "
                 '{"title": "short catchy title under 60 characters", '
                 '"script": "voiceover script text", '
-                '"tags": ["tag1", "tag2", ...]}'
+                '"tags": ["tag1", "tag2", ...], '
+                '"video_queries": ["query1", "query2", ...]}'
             ),
         }],
     )
@@ -42,7 +47,8 @@ def generate_script() -> dict:
     if raw.startswith("```"):
         raw = raw.strip("`")
         raw = raw.split("\n", 1)[1] if "\n" in raw else raw
-    data = json.loads(raw)
+    start, end = raw.find("{"), raw.rfind("}")
+    data = json.loads(raw[start:end + 1])
     data["topic"] = topic
     return data
 
