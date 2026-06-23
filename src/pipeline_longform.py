@@ -7,17 +7,30 @@ import tempfile
 from dotenv import load_dotenv
 
 from build_video import build_video
+from config import CFG
 from fetch_stock_video import fetch_clips
 from generate_longform_script import generate_longform_script
 from playlists import add_video_to_playlist
 from tts import text_to_speech
 from upload_captions import upload_captions
 from upload_youtube import upload_video as upload_to_youtube
+from youtube_auth import get_authenticated_channel_title
 
 load_dotenv()
 
 
+def _verify_channel() -> None:
+    actual = get_authenticated_channel_title()
+    expected = CFG["channel_name"]
+    if actual != expected:
+        raise RuntimeError(
+            f"Канал не совпадает с CHANNEL={os.environ.get('CHANNEL', 'en')}: "
+            f"токен авторизован на '{actual}', ожидался '{expected}'. Останавливаюсь."
+        )
+
+
 def run() -> None:
+    _verify_channel()
     print("1/4 Генерация сценария-компиляции...")
     data = generate_longform_script()
     print(f"  Тема: {data['theme']} | Заголовок: {data['title']}")

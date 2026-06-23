@@ -21,3 +21,8 @@ def get_client():
         scopes=SCOPES,
     )
     return build("youtube", "v3", credentials=creds)
+
+
+def get_authenticated_channel_title() -> str:
+    response = get_client().channels().list(part="snippet", mine=True).execute()
+    return response["items"][0]["snippet"]["title"]

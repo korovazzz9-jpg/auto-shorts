@@ -14,11 +14,26 @@ from tts import text_to_speech
 from upload_captions import upload_captions
 from upload_instagram import upload_reel
 from upload_youtube import upload_video as upload_to_youtube
+from youtube_auth import get_authenticated_channel_title
 
 load_dotenv()
 
 
+def _verify_channel() -> None:
+    """Останавливает запуск, если YT_REFRESH_TOKEN в окружении указывает не на тот канал,
+    что выбран через CHANNEL -- иначе контент на одном языке может улететь не на тот канал
+    (бывает при ручном локальном запуске со старыми переменными окружения в сессии)."""
+    actual = get_authenticated_channel_title()
+    expected = CFG["channel_name"]
+    if actual != expected:
+        raise RuntimeError(
+            f"Канал не совпадает с CHANNEL={os.environ.get('CHANNEL', 'en')}: "
+            f"токен авторизован на '{actual}', ожидался '{expected}'. Останавливаюсь."
+        )
+
+
 def run() -> None:
+    _verify_channel()
     print(f"[{CFG['channel_name']}] 1/6 Генерация сценария...")
     data = generate_script()
     print(f"  Тема: {data['topic']} | Заголовок: {data['title']}")
