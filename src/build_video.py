@@ -26,7 +26,7 @@ from moviepy.editor import (
 from config import CFG
 from fetch_music import fetch_random_track
 
-MUSIC_VOLUME = 0.10  # тихо под голосом, не должна перетягивать внимание
+MUSIC_VOLUME = 0.18  # тихо под голосом, но должна реально быть слышна
 
 TARGET_SIZE = (1080, 1920)
 CAPTION_Y = int(TARGET_SIZE[1] * 0.78)  # ближе к низу, но всё ещё выше названия канала/кнопок Shorts
@@ -188,6 +188,9 @@ def _mix_music(voice_audio: AudioFileClip, duration: float, topic: str | None):
 
     try:
         music = AudioFileClip(music_path)
+        # Нормализуем громкость исходника перед множителем -- иначе если сам трек
+        # записан тихо, MUSIC_VOLUME от него получается почти неслышным.
+        music = afx.audio_normalize(music)
         music = afx.audio_loop(music, duration=duration).volumex(MUSIC_VOLUME)
         return CompositeAudioClip([music, voice_audio])
     except Exception:
