@@ -1,0 +1,62 @@
+name: Daily Shorts Watchdog
+
+on:
+  # 15 минут после каждого слота в daily.yml.
+  schedule:
+    - cron: "22 13 * * *"
+    - cron: "28 16 * * *"
+    - cron: "22 20 * * *"
+    - cron: "28 22 * * *"
+    - cron: "22 0 * * *"
+  workflow_dispatch: {}
+
+jobs:
+  check-and-retry:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Python deps
+        run: pip install -r requirements.txt
+
+      - name: Check for recent upload
+        id: check
+        working-directory: src
+        env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+        run: |
+          if python check_recent_upload.py; then
+            echo "missed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "missed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install system deps (only if retry needed)
+        if: steps.check.outputs.missed == 'true'
+        run: sudo apt-get update && sudo apt-get install -y imagemagick
+
+      - name: Allow ImageMagick to read caption text files (only if retry needed)
+        if: steps.check.outputs.missed == 'true'
+        run: sudo sed -i '/pattern="@\*"/d' /etc/ImageMagick-6/policy.xml
+
+      - name: Retry pipeline (scheduled run was missed)
+        if: steps.check.outputs.missed == 'true'
+        working-directory: src
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
+          CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
+          CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+        run: python pipeline.py
