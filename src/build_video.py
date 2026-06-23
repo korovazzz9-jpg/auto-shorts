@@ -5,6 +5,8 @@ import os
 import random
 import tempfile
 
+from PIL import Image, ImageDraw
+
 # Windows: moviepy 1.0.3 ищет legacy convert.exe, в ImageMagick 7+ бинарник называется magick.exe.
 for _candidate in glob.glob(r"C:\Program Files\ImageMagick-*\magick.exe"):
     os.environ.setdefault("IMAGEMAGICK_BINARY", _candidate)
@@ -14,6 +16,7 @@ from moviepy.editor import (
     AudioFileClip,
     CompositeAudioClip,
     CompositeVideoClip,
+    ImageClip,
     TextClip,
     VideoFileClip,
     afx,
@@ -94,29 +97,62 @@ def _karaoke_clips(words: list[dict], cutoff: float) -> list[TextClip]:
     return clips
 
 
-def _cta_clips(duration: float) -> list[TextClip]:
-    # Уменьшено и сдвинуто в верхне-среднюю зону по данным о поведении зрителей: CTA
-    # лучше работает выше центра, подальше от нижней зоны с реальными кнопками платформы,
-    # и с мягкой, а не резкой пульсацией (тише, но всё ещё заметно).
+def _draw_heart_png(path: str, size: int = 200) -> None:
+    """Рисует классическую округлую форму сердца (параметрическая кривая), а не полагается
+    на то, как конкретный шрифт рендерит символ ♥/❤ — те выходили угловатыми/нечитаемыми."""
+    scale = 4  # суперсэмплинг для сглаживания краёв
+    big = size * scale
+    img = Image.new("RGBA", (big, big), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(img)
+
+    points = []
+    for deg in range(720):
+        t = math.radians(deg / 2)
+        x = 16 * math.sin(t) ** 3
+        y = -(13 * math.cos(t) - 5 * math.cos(2 * t) - 2 * math.cos(3 * t) - math.cos(4 * t))
+        points.append((x, y))
+    xs, ys = [p[0] for p in points], [p[1] for p in points]
+    min_x, max_x, min_y, max_y = min(xs), max(xs), min(ys), max(ys)
+    pad = 0.08
+    cx, cy = (min_x + max_x) / 2, (min_y + max_y) / 2
+
+    def transform(p, expand=1.0):
+        nx = (p[0] - cx) * expand + cx
+        ny = (p[1] - cy) * expand + cy
+        nx = (nx - min_x) / (max_x - min_x)
+        ny = (ny - min_y) / (max_y - min_y)
+        return (pad * big + nx * (1 - 2 * pad) * big, pad * big + ny * (1 - 2 * pad) * big)
+
+    # Чёрная подложка чуть крупнее красного сердца поверх — даёт чистый контур без
+    # артефактов "бахромы", которые получаются от ImageDraw.polygon(outline=..., width=...)
+    # на многоточечном контуре.
+    outline_polygon = [transform(p, expand=1.12) for p in points]
+    draw.polygon(outline_polygon, fill=(0, 0, 0, 255))
+    fill_polygon = [transform(p, expand=1.0) for p in points]
+    draw.polygon(fill_polygon, fill=(225, 25, 25, 255))
+
+    img = img.resize((size, size), Image.LANCZOS)
+    img.save(path)
+
+
+def _cta_clips(duration: float) -> list[ImageClip]:
+    # Размер увеличен на ~27% и сдвинут в верхне-среднюю зону по данным о поведении
+    # зрителей: CTA лучше работает выше центра, подальше от нижней зоны с реальными
+    # кнопками платформы, и с мягкой, а не резкой пульсацией (тише, но всё ещё заметно).
     cta_duration = min(CTA_DURATION, duration)
     start = max(duration - cta_duration, 0)
-    heart_y = int(TARGET_SIZE[1] * 0.26)
-    label_y = heart_y + 130
+    heart_y = int(TARGET_SIZE[1] * 0.24)
+    label_y = heart_y + 230
 
-    heart = TextClip(
-        "♥",
-        fontsize=110,
-        color="red",
-        font="Arial-Bold",
-        stroke_color="black",
-        stroke_width=2,
-        method="label",
-    )
+    heart_png = os.path.join(tempfile.mkdtemp(), "heart.png")
+    _draw_heart_png(heart_png, size=200)
+
+    heart = ImageClip(heart_png)
     # Мягкая пульсация — плавная синусоида небольшой амплитуды вместо резкого "попа".
     pulse = lambda t: 1 + 0.12 * max(0.0, math.sin(t * CTA_PULSES * math.pi / max(cta_duration, 0.01))) ** 2
     heart = (
         heart.resize(pulse)
-        .set_position(lambda t: ("center", heart_y - int(20 * (pulse(t) - 1))))
+        .set_position(lambda t: ("center", heart_y - int(25 * (pulse(t) - 1))))
         .set_start(start)
         .set_duration(cta_duration)
     )
@@ -124,12 +160,12 @@ def _cta_clips(duration: float) -> list[TextClip]:
     label = (
         TextClip(
             _pick_cta_phrase(),
-            fontsize=38,
+            fontsize=48,
             color="white",
             font="Arial-Bold",
             stroke_color="black",
-            stroke_width=3,
-            size=(TARGET_SIZE[0] - 200, None),
+            stroke_width=4,
+            size=(TARGET_SIZE[0] - 160, None),
             method="caption",
             align="center",
         )
