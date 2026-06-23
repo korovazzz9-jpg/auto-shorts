@@ -10,13 +10,18 @@ def upload_video(
     description: str,
     tags: list[str],
     hashtags: list[str],
+    hashtag_position: str = "start",
 ) -> str:
     youtube = get_client()
     hashtag_line = " ".join(hashtags)
+    if hashtag_position == "end":
+        full_description = f"{description}\n\n{hashtag_line}"
+    else:
+        full_description = f"{hashtag_line}\n\n{description}"
     body = {
         "snippet": {
             "title": title[:100],
-            "description": f"{hashtag_line}\n\n{description}",
+            "description": full_description,
             "tags": tags,
             "categoryId": "27",  # Education
         },

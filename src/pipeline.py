@@ -18,7 +18,7 @@ load_dotenv()
 def run() -> None:
     print("1/6 Генерация сценария...")
     data = generate_script()
-    print(f"  Тема: {data['topic']} | Заголовок: {data['title']}")
+    print(f"  Тема: {data['topic']} | Вариант: {data['variant']} | Заголовок: {data['title']}")
 
     with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
         audio_path = os.path.join(tmp, "audio.mp3")
@@ -38,8 +38,9 @@ def run() -> None:
             video_path,
             title=data["title"],
             description=data["script"],
-            tags=data["tags"],
+            tags=data["tags"] + [f"abtest-{data['variant']}"],
             hashtags=data["hashtags"],
+            hashtag_position=data["hashtag_position"],
         )
 
         print("6/6 Загрузка в Instagram...")

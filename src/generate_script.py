@@ -14,9 +14,8 @@ TOPICS_POOL = [
     "cryptography", "evolution", "extreme weather", "archaeological discoveries",
 ]
 
-SYSTEM_PROMPT = """You are a scriptwriter for short fact videos on YouTube Shorts (channel: 60SecFacts).
-Write in English, conversational, punchy, no filler. Voiceover length should be 15-25 seconds
-(about 40-65 words) — short enough that viewers rewatch it, which the algorithm rewards.
+BASE_SYSTEM_PROMPT = """You are a scriptwriter for short fact videos on YouTube Shorts (channel: 60SecFacts).
+Write in English, conversational, punchy, no filler.
 
 Structure, in order:
 1. Hook: the first 3-5 words must be the most shocking or surprising part of the fact itself,
@@ -30,9 +29,41 @@ Structure, in order:
 
 No intros like "today I'll tell you about"."""
 
+# A/B-тест двух форматов после того, как короткий SEO-формат показал заметно меньше
+# просмотров, чем исходный длинный нарративный стиль на первых видео канала.
+VARIANTS = {
+    "long_narrative": {
+        "length_instruction": (
+            "Voiceover length should be 30-40 seconds (about 80-110 words) — long enough to "
+            "build a real narrative arc (setup, escalation, twist), not just a rapid-fire fact."
+        ),
+        "title_instruction": (
+            "title: a punchy narrative hook, under 60 characters. Do NOT append a '| topic facts' "
+            "style keyword suffix — it should read like a real headline, not a listicle."
+        ),
+        "hashtag_position": "end",
+        "tag_count": "6-9",
+    },
+    "short_seo": {
+        "length_instruction": (
+            "Voiceover length should be 15-25 seconds (about 40-65 words) — short enough that "
+            "viewers rewatch it."
+        ),
+        "title_instruction": (
+            "title: include a specific keyword phrase someone would actually type into YouTube "
+            "search (e.g. 'ocean facts', 'space facts you didn't know') naturally woven into a "
+            "catchy title under 60 characters."
+        ),
+        "hashtag_position": "start",
+        "tag_count": "10-15",
+    },
+}
+
 
 def generate_script() -> dict:
     topic = random.choice(TOPICS_POOL)
+    variant_name = random.choice(list(VARIANTS.keys()))
+    variant = VARIANTS[variant_name]
     client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
 
     try:
@@ -47,33 +78,32 @@ def generate_script() -> dict:
             "not a variation of any of these:\n" + "\n".join(f"- {t}" for t in past_titles) + "\n\n"
         )
 
+    system_prompt = BASE_SYSTEM_PROMPT + "\n\n" + variant["length_instruction"]
+
     message = client.messages.create(
         model="claude-sonnet-4-6",
         max_tokens=1200,
-        system=SYSTEM_PROMPT,
+        system=system_prompt,
         messages=[{
             "role": "user",
             "content": (
                 avoid_block +
                 f"Topic: {topic}. Come up with one specific, lesser-known fact on this topic "
-                "and write a script for it. Also break the script into 4-6 short visual beats "
-                "(for fast cuts, roughly one every 4-5 seconds) and for each one write a short "
-                "stock-footage search query (2-4 words, concrete, visual, in English, the kind "
-                "you'd type into a stock video site search box, matching what's being said at "
-                "that point).\n\n"
-                "SEO requirements:\n"
-                "- title: include a specific keyword phrase someone would actually type into "
-                "YouTube search when looking for this kind of content (e.g. 'ocean facts', "
-                "'space facts you didn't know', 'how X works') naturally woven into a catchy "
-                "title under 60 characters — not just a vague hook with no searchable terms.\n"
-                "- tags: 10-15 specific YouTube search tags, mixing broad ones (e.g. 'facts', "
-                "'did you know', '" + topic + "') with specific long-tail ones tied to the exact "
-                "fact (e.g. the specific phenomenon, place, or thing named in the script).\n"
-                "- hashtags: 3-5 hashtags (lowercase, no spaces, with # prefix) to put in the "
-                "description, mixing one broad discovery hashtag (#shorts, #facts) with 2-4 "
-                "specific ones tied to the topic and fact.\n\n"
+                "and write a script for it. Also break the script into visual beats (roughly one "
+                "every 4-5 seconds of the script) and for each one write a short stock-footage "
+                "search query (2-4 words, concrete, visual, in English, the kind you'd type into "
+                "a stock video site search box, matching what's being said at that point).\n\n"
+                "Requirements:\n"
+                f"- {variant['title_instruction']}\n"
+                f"- tags: {variant['tag_count']} specific YouTube search tags, mixing broad ones "
+                "(e.g. 'facts', 'did you know', '" + topic + "') with specific long-tail ones tied "
+                "to the exact fact (e.g. the specific phenomenon, place, or thing named in the "
+                "script).\n"
+                "- hashtags: 3-5 hashtags (lowercase, no spaces, with # prefix), mixing one broad "
+                "discovery hashtag (#shorts, #facts) with 2-4 specific ones tied to the topic and "
+                "fact.\n\n"
                 "Respond strictly in JSON, no markdown wrapper: "
-                '{"title": "short catchy SEO title under 60 characters", '
+                '{"title": "title text", '
                 '"script": "voiceover script text", '
                 '"tags": ["tag1", "tag2", ...], '
                 '"hashtags": ["#tag1", "#tag2", ...], '
@@ -89,6 +119,8 @@ def generate_script() -> dict:
     start, end = raw.find("{"), raw.rfind("}")
     data = json.loads(raw[start:end + 1])
     data["topic"] = topic
+    data["variant"] = variant_name
+    data["hashtag_position"] = variant["hashtag_position"]
     return data
 
 
