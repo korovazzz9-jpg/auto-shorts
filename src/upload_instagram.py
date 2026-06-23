@@ -1,0 +1,54 @@
+"""Публикует видео в Instagram как Reel через Graph API."""
+import os
+import time
+
+import requests
+
+GRAPH_URL = "https://graph.facebook.com/v21.0"
+POLL_INTERVAL_SECONDS = 5
+POLL_TIMEOUT_SECONDS = 180
+
+
+def _get(path: str, **params) -> dict:
+    params["access_token"] = os.environ["IG_ACCESS_TOKEN"]
+    response = requests.get(f"{GRAPH_URL}/{path}", params=params, timeout=30)
+    response.raise_for_status()
+    return response.json()
+
+
+def _post(path: str, **params) -> dict:
+    params["access_token"] = os.environ["IG_ACCESS_TOKEN"]
+    response = requests.post(f"{GRAPH_URL}/{path}", data=params, timeout=30)
+    response.raise_for_status()
+    return response.json()
+
+
+def _wait_until_ready(container_id: str) -> None:
+    deadline = time.time() + POLL_TIMEOUT_SECONDS
+    while time.time() < deadline:
+        status = _get(container_id, fields="status_code")["status_code"]
+        if status == "FINISHED":
+            return
+        if status == "ERROR":
+            raise RuntimeError(f"Instagram failed to process container {container_id}")
+        time.sleep(POLL_INTERVAL_SECONDS)
+    raise TimeoutError(f"Instagram container {container_id} did not finish processing in time")
+
+
+def upload_reel(video_url: str, caption: str) -> str:
+    ig_user_id = os.environ["IG_USER_ID"]
+
+    container = _post(
+        f"{ig_user_id}/media",
+        media_type="REELS",
+        video_url=video_url,
+        caption=caption[:2200],
+    )
+    container_id = container["id"]
+
+    _wait_until_ready(container_id)
+
+    publish = _post(f"{ig_user_id}/media_publish", creation_id=container_id)
+    media_id = publish["id"]
+    print(f"Posted to Instagram: media id {media_id}")
+    return media_id
