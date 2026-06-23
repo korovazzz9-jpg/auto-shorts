@@ -40,7 +40,7 @@ def run() -> None:
             video_path,
             title=data["title"],
             description=data["script"],
-            tags=data["tags"],
+            tags=data["tags"] + [f"topic-{data['topic'].replace(' ', '_')}"],
             hashtags=data["hashtags"],
             hashtag_position=data["hashtag_position"],
         )
