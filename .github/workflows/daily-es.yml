@@ -1,0 +1,45 @@
+name: Daily Shorts (ES)
+
+on:
+  # Те же пики US-аудитории работают и для США-латино + раннего вечера в Латам.
+  # Смещены от ровного часа и от слотов английского канала, чтобы не упираться в пик нагрузки.
+  schedule:
+    - cron: "17 13 * * *"
+    - cron: "23 16 * * *"
+    - cron: "17 20 * * *"
+    - cron: "23 22 * * *"
+    - cron: "17 0 * * *"
+  workflow_dispatch: {}
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install system deps
+        run: sudo apt-get update && sudo apt-get install -y imagemagick
+
+      - name: Allow ImageMagick to read caption text files
+        run: sudo sed -i '/pattern="@\*"/d' /etc/ImageMagick-6/policy.xml
+
+      - name: Install Python deps
+        run: pip install -r requirements.txt
+
+      - name: Run pipeline (Spanish channel)
+        working-directory: src
+        env:
+          CHANNEL: es
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+          PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
+          # ES-канал использует отдельный YouTube-токен (Brand Account), но те же
+          # client_id/secret приложения. Секрет YT_REFRESH_TOKEN_ES маппится в стандартное имя.
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN_ES }}
+        run: python pipeline.py

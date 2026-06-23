@@ -5,6 +5,7 @@ import random
 
 from anthropic import Anthropic
 
+from config import CFG
 from recent_titles import get_recent_titles
 from topic_stats import get_topic_avg_views
 
@@ -33,8 +34,9 @@ def _pick_topic() -> str:
     weights = [max(avg_views.get(t, overall_avg), 1.0) for t in TOPICS_POOL]
     return random.choices(TOPICS_POOL, weights=weights, k=1)[0]
 
-BASE_SYSTEM_PROMPT = """You are a scriptwriter for short fact videos on YouTube Shorts (channel: 60SecFacts).
-Write in English, conversational, punchy, no filler.
+BASE_SYSTEM_PROMPT = """You are a scriptwriter for short fact videos on YouTube Shorts (channel: {channel}).
+Write the TITLE, SCRIPT and HASHTAGS in {language}, conversational, punchy, no filler. (Keep the
+stock-footage search queries in English regardless — they are only used to search a stock video site.)
 
 The fact MUST overturn a common intuitive assumption — something most people would confidently
 believe is true (or would never think to question) until this fact breaks it. Not just "an
@@ -45,16 +47,18 @@ mechanics, relativity, advanced math) — the shock has to land for a general au
 
 Structure, in order:
 1. Hook: the first 3-5 words must be the most shocking or surprising part of the fact itself,
-   not a setup. No "did you know" or "here's a fact" — open mid-thought, like you're cutting
+   not a setup. No "did you know" / "¿sabías que?" openers — open mid-thought, like you're cutting
    into the most interesting part of a conversation already in progress.
 2. The fact, delivered fast, no filler words, no repeating the hook.
-3. One unexpected twist or payoff line that makes the misconception's collapse explicit (e.g.
-   "X thought... turns out...", "It's not Y, it's actually Z").
-4. A one-line call to action blended naturally into the last sentence, e.g. asking viewers to
-   comment whether they knew this, or to follow for more. Keep it short and not salesy — one
-   clause, not a separate begging sentence.
+3. One unexpected twist or payoff line that makes the misconception's collapse explicit.
+4. A one-line call to action blended naturally into the last sentence ({cta}). Keep it short and
+   not salesy — one clause, not a separate begging sentence.
 
-No intros like "today I'll tell you about"."""
+No "today I'll tell you about" style intros.""".format(
+    channel=CFG["channel_name"],
+    language=CFG["script_language"],
+    cta=CFG["cta_instruction"],
+)
 
 # 30-45s is the sweet spot for YouTube's 2026 Shorts algorithm (absolute watch time, not
 # just retention %) — shorter videos collapsed in reach even at high completion rates.
@@ -101,12 +105,13 @@ def generate_script() -> dict:
                 "a stock video site search box, matching what's being said at that point).\n\n"
                 "Requirements:\n"
                 f"- {TITLE_INSTRUCTION}\n"
-                "- tags: 6-9 specific YouTube search tags, mixing broad ones (e.g. 'facts', "
-                "'did you know', '" + topic + "') with specific long-tail ones tied to the exact "
-                "fact (e.g. the specific phenomenon, place, or thing named in the script).\n"
-                "- hashtags: 3-5 hashtags (lowercase, no spaces, with # prefix), mixing one broad "
-                "discovery hashtag (#shorts, #facts) with 2-4 specific ones tied to the topic and "
-                "fact.\n\n"
+                f"- tags: 6-9 specific YouTube search tags in {CFG['script_language']}, mixing "
+                "broad ones (e.g. the channel's equivalent of 'facts'/'did you know') with specific "
+                "long-tail ones tied to the exact fact (the specific phenomenon, place, or thing "
+                "named in the script).\n"
+                f"- hashtags: 3-5 hashtags in {CFG['script_language']} (lowercase, no spaces, with "
+                "# prefix), mixing one broad discovery hashtag (#shorts and the language's "
+                "equivalent of #facts) with 2-4 specific ones tied to the topic and fact.\n\n"
                 "Respond strictly in JSON, no markdown wrapper: "
                 '{"title": "title text", '
                 '"script": "voiceover script text", '

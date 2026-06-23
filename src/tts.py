@@ -4,19 +4,14 @@ import random
 
 import edge_tts
 
-# Ротация голосов — чтобы видео не звучали как один и тот же шаблон каждый раз
-# (YouTube's "inauthentic content" policy следит за этим).
-VOICES = [
-    "en-US-GuyNeural",
-    "en-US-EricNeural",
-    "en-US-ChristopherNeural",
-    "en-GB-RyanNeural",
-    "en-AU-WilliamNeural",
-]
+from config import CFG
+
+# Ротация голосов (берутся из конфига канала) — чтобы видео не звучали как один и тот же
+# шаблон каждый раз (YouTube's "inauthentic content" policy следит за этим).
 
 
 def _pick_voice() -> str:
-    return random.choice(VOICES)
+    return random.choice(CFG["voices"])
 
 
 async def _synthesize(text: str, out_path: str, voice: str) -> list[dict]:
@@ -41,5 +36,5 @@ def text_to_speech(text: str, out_path: str) -> list[dict]:
 
 
 if __name__ == "__main__":
-    result = text_to_speech("This is a test voiceover.", "test.mp3")
+    result = text_to_speech("Esto es una prueba de voz.", "test.mp3")
     print(result)

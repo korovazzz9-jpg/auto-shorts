@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 
 from build_video import build_video
 from cloudinary_upload import delete_video, upload_video as upload_to_cloudinary
+from config import CFG
 from fetch_stock_video import fetch_clips
 from generate_script import generate_script
 from playlists import add_video_to_playlist
@@ -18,7 +19,7 @@ load_dotenv()
 
 
 def run() -> None:
-    print("1/6 Генерация сценария...")
+    print(f"[{CFG['channel_name']}] 1/6 Генерация сценария...")
     data = generate_script()
     print(f"  Тема: {data['topic']} | Заголовок: {data['title']}")
 
@@ -55,20 +56,23 @@ def run() -> None:
         except Exception as e:
             print(f"  Не удалось добавить в плейлист: {e}")
 
-        print("6/6 Загрузка в Instagram...")
-        hosted = None
-        try:
-            hosted = upload_to_cloudinary(video_path)
-            caption = f"{data['title']}\n\n{data['script']}\n\n{' '.join(data['hashtags'])}"
-            upload_reel(hosted["url"], caption)
-        except Exception as e:
-            print(f"  Instagram-загрузка не удалась, пропускаю: {e}")
-        finally:
-            if hosted:
-                try:
-                    delete_video(hosted["public_id"])
-                except Exception as e:
-                    print(f"  Не удалось удалить временный файл из Cloudinary: {e}")
+        if CFG["post_to_instagram"]:
+            print("6/6 Загрузка в Instagram...")
+            hosted = None
+            try:
+                hosted = upload_to_cloudinary(video_path)
+                caption = f"{data['title']}\n\n{data['script']}\n\n{' '.join(data['hashtags'])}"
+                upload_reel(hosted["url"], caption)
+            except Exception as e:
+                print(f"  Instagram-загрузка не удалась, пропускаю: {e}")
+            finally:
+                if hosted:
+                    try:
+                        delete_video(hosted["public_id"])
+                    except Exception as e:
+                        print(f"  Не удалось удалить временный файл из Cloudinary: {e}")
+        else:
+            print("6/6 Instagram отключён для этого канала, пропускаю.")
 
     print("Готово.")
 

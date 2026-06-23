@@ -4,6 +4,7 @@ import io
 
 from googleapiclient.http import MediaIoBaseUpload
 
+from config import CFG
 from youtube_auth import get_client
 
 
@@ -37,8 +38,8 @@ def upload_captions(video_id: str, words: list[dict]) -> None:
         body={
             "snippet": {
                 "videoId": video_id,
-                "language": "en",
-                "name": "English",
+                "language": CFG["lang_code"],
+                "name": CFG["lang_code"].upper(),
                 "isDraft": False,
             }
         },

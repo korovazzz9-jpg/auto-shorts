@@ -1,22 +1,8 @@
 """Группирует видео в плейлисты по теме — увеличивает время сессии зрителя на канале."""
+from config import CFG
 from youtube_auth import get_client
 
-TOPIC_PLAYLIST_TITLES = {
-    "space": "Space Facts",
-    "the ocean": "Ocean Facts",
-    "ancient history": "Ancient History Facts",
-    "the human body": "Human Body Facts",
-    "the animal kingdom": "Animal Facts",
-    "psychology": "Psychology Facts",
-    "future technology": "Technology Facts",
-    "bizarre records": "Bizarre Records",
-    "volcanoes and earthquakes": "Volcano & Earthquake Facts",
-    "ancient civilizations": "Ancient Civilizations",
-    "cryptography": "Cryptography Facts",
-    "evolution": "Evolution Facts",
-    "extreme weather": "Extreme Weather Facts",
-    "archaeological discoveries": "Archaeology Facts",
-}
+TOPIC_PLAYLIST_TITLES = CFG["playlist_titles"]
 
 _playlist_cache: dict[str, str] = {}
 
