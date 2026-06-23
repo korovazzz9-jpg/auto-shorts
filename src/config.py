@@ -50,7 +50,7 @@ CONFIGS = {
         },
     },
     "es": {
-        "channel_name": "Datos en 60s",
+        "channel_name": "Datos en 30s",
         "lang_code": "es",
         "script_language": "Spanish (neutral Latin American / Mexican Spanish, NOT European Spanish)",
         "voices": [
