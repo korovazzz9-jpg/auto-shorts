@@ -2,10 +2,12 @@
 from __future__ import annotations
 
 import os
+import random
 
 import requests
 
 SEARCH_URL = "https://api.pexels.com/videos/search"
+RESULTS_PER_QUERY = 10
 
 
 def _best_vertical_file(video: dict) -> dict | None:
@@ -17,19 +19,22 @@ def _best_vertical_file(video: dict) -> dict | None:
 
 
 def _search(query: str, api_key: str) -> dict | None:
+    # Pexels returns the same top results for a given query every time, so picking
+    # a random candidate (instead of always the first) keeps opening frames from
+    # repeating across videos that use similar search terms.
     response = requests.get(
         SEARCH_URL,
-        params={"query": query, "orientation": "portrait", "per_page": 5},
+        params={"query": query, "orientation": "portrait", "per_page": RESULTS_PER_QUERY},
         headers={"Authorization": api_key},
         timeout=30,
     )
     response.raise_for_status()
     data = response.json()
-    for video in data.get("videos", []):
-        chosen = _best_vertical_file(video)
-        if chosen:
-            return chosen
-    return None
+    candidates = [_best_vertical_file(v) for v in data.get("videos", [])]
+    candidates = [c for c in candidates if c]
+    if not candidates:
+        return None
+    return random.choice(candidates)
 
 
 def fetch_clips(queries: list[str], out_dir: str) -> list[str]:
