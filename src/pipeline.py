@@ -43,13 +43,19 @@ def run() -> None:
         )
 
         print("6/6 Загрузка в Instagram...")
+        hosted = None
         try:
             hosted = upload_to_cloudinary(video_path)
             caption = f"{data['title']}\n\n{data['script']}\n\n{' '.join(data['hashtags'])}"
             upload_reel(hosted["url"], caption)
-            delete_video(hosted["public_id"])
         except Exception as e:
             print(f"  Instagram-загрузка не удалась, пропускаю: {e}")
+        finally:
+            if hosted:
+                try:
+                    delete_video(hosted["public_id"])
+                except Exception as e:
+                    print(f"  Не удалось удалить временный файл из Cloudinary: {e}")
 
     print("Готово.")
 
