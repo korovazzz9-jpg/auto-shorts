@@ -1,13 +1,26 @@
 """Озвучивает текст в mp3 через edge-tts и возвращает тайминги слов для синхронных субтитров."""
 import asyncio
+import random
 
 import edge_tts
 
-VOICE = "en-US-GuyNeural"
+# Ротация голосов — чтобы видео не звучали как один и тот же шаблон каждый раз
+# (YouTube's "inauthentic content" policy следит за этим).
+VOICES = [
+    "en-US-GuyNeural",
+    "en-US-EricNeural",
+    "en-US-ChristopherNeural",
+    "en-GB-RyanNeural",
+    "en-AU-WilliamNeural",
+]
 
 
-async def _synthesize(text: str, out_path: str) -> list[dict]:
-    communicate = edge_tts.Communicate(text, VOICE, rate="+5%", boundary="WordBoundary")
+def _pick_voice() -> str:
+    return random.choice(VOICES)
+
+
+async def _synthesize(text: str, out_path: str, voice: str) -> list[dict]:
+    communicate = edge_tts.Communicate(text, voice, rate="+5%", boundary="WordBoundary")
     words = []
     with open(out_path, "wb") as f:
         async for chunk in communicate.stream():
@@ -24,7 +37,7 @@ async def _synthesize(text: str, out_path: str) -> list[dict]:
 
 def text_to_speech(text: str, out_path: str) -> list[dict]:
     """Synthesizes speech to out_path, returns per-word timing: [{"text", "start", "end"}, ...]."""
-    return asyncio.run(_synthesize(text, out_path))
+    return asyncio.run(_synthesize(text, out_path, _pick_voice()))
 
 
 if __name__ == "__main__":
