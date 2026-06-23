@@ -92,25 +92,28 @@ def _karaoke_clips(words: list[dict], cutoff: float) -> list[TextClip]:
 
 
 def _cta_clips(duration: float) -> list[TextClip]:
+    # Уменьшено и сдвинуто в верхне-среднюю зону по данным о поведении зрителей: CTA
+    # лучше работает выше центра, подальше от нижней зоны с реальными кнопками платформы,
+    # и с мягкой, а не резкой пульсацией (тише, но всё ещё заметно).
     cta_duration = min(CTA_DURATION, duration)
     start = max(duration - cta_duration, 0)
-    heart_y = int(TARGET_SIZE[1] * 0.40)
-    label_y = heart_y + 270
+    heart_y = int(TARGET_SIZE[1] * 0.26)
+    label_y = heart_y + 130
 
     heart = TextClip(
         "♥",
-        fontsize=200,
+        fontsize=110,
         color="red",
         font="Arial-Bold",
         stroke_color="black",
-        stroke_width=3,
+        stroke_width=2,
         method="label",
     )
-    # Резкий "поп" при каждом тапе вместо плавной синусоиды — больше похоже на нажатие кнопки.
-    pulse = lambda t: 1 + 0.35 * max(0.0, math.sin(t * CTA_PULSES * math.pi / max(cta_duration, 0.01))) ** 6
+    # Мягкая пульсация — плавная синусоида небольшой амплитуды вместо резкого "попа".
+    pulse = lambda t: 1 + 0.12 * max(0.0, math.sin(t * CTA_PULSES * math.pi / max(cta_duration, 0.01))) ** 2
     heart = (
         heart.resize(pulse)
-        .set_position(lambda t: ("center", heart_y - int(55 * (pulse(t) - 1))))
+        .set_position(lambda t: ("center", heart_y - int(20 * (pulse(t) - 1))))
         .set_start(start)
         .set_duration(cta_duration)
     )
@@ -118,12 +121,12 @@ def _cta_clips(duration: float) -> list[TextClip]:
     label = (
         TextClip(
             _pick_cta_phrase(),
-            fontsize=60,
+            fontsize=38,
             color="white",
             font="Arial-Bold",
             stroke_color="black",
-            stroke_width=4,
-            size=(TARGET_SIZE[0] - 140, None),
+            stroke_width=3,
+            size=(TARGET_SIZE[0] - 200, None),
             method="caption",
             align="center",
         )

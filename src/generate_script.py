@@ -37,41 +37,20 @@ Structure, in order:
 
 No intros like "today I'll tell you about"."""
 
-# A/B-тест двух форматов после того, как короткий SEO-формат показал заметно меньше
-# просмотров, чем исходный длинный нарративный стиль на первых видео канала.
-VARIANTS = {
-    "long_narrative": {
-        "length_instruction": (
-            "Voiceover length should be 30-40 seconds (about 80-110 words) — long enough to "
-            "build a real narrative arc (setup, escalation, twist), not just a rapid-fire fact."
-        ),
-        "title_instruction": (
-            "title: a punchy narrative hook, under 60 characters. Do NOT append a '| topic facts' "
-            "style keyword suffix — it should read like a real headline, not a listicle."
-        ),
-        "hashtag_position": "end",
-        "tag_count": "6-9",
-    },
-    "short_seo": {
-        "length_instruction": (
-            "Voiceover length should be 15-25 seconds (about 40-65 words) — short enough that "
-            "viewers rewatch it."
-        ),
-        "title_instruction": (
-            "title: include a specific keyword phrase someone would actually type into YouTube "
-            "search (e.g. 'ocean facts', 'space facts you didn't know') naturally woven into a "
-            "catchy title under 60 characters."
-        ),
-        "hashtag_position": "start",
-        "tag_count": "10-15",
-    },
-}
+# 30-45s is the sweet spot for YouTube's 2026 Shorts algorithm (absolute watch time, not
+# just retention %) — shorter videos collapsed in reach even at high completion rates.
+LENGTH_INSTRUCTION = (
+    "Voiceover length should be 30-40 seconds (about 80-110 words) — long enough to build a "
+    "real narrative arc (setup, escalation, twist), not just a rapid-fire fact."
+)
+TITLE_INSTRUCTION = (
+    "title: a punchy narrative hook, under 60 characters. Do NOT append a '| topic facts' "
+    "style keyword suffix — it should read like a real headline, not a listicle."
+)
 
 
 def generate_script() -> dict:
     topic = random.choice(TOPICS_POOL)
-    variant_name = random.choice(list(VARIANTS.keys()))
-    variant = VARIANTS[variant_name]
     client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
 
     try:
@@ -86,7 +65,7 @@ def generate_script() -> dict:
             "not a variation of any of these:\n" + "\n".join(f"- {t}" for t in past_titles) + "\n\n"
         )
 
-    system_prompt = BASE_SYSTEM_PROMPT + "\n\n" + variant["length_instruction"]
+    system_prompt = BASE_SYSTEM_PROMPT + "\n\n" + LENGTH_INSTRUCTION
 
     message = client.messages.create(
         model="claude-sonnet-4-6",
@@ -102,11 +81,10 @@ def generate_script() -> dict:
                 "search query (2-4 words, concrete, visual, in English, the kind you'd type into "
                 "a stock video site search box, matching what's being said at that point).\n\n"
                 "Requirements:\n"
-                f"- {variant['title_instruction']}\n"
-                f"- tags: {variant['tag_count']} specific YouTube search tags, mixing broad ones "
-                "(e.g. 'facts', 'did you know', '" + topic + "') with specific long-tail ones tied "
-                "to the exact fact (e.g. the specific phenomenon, place, or thing named in the "
-                "script).\n"
+                f"- {TITLE_INSTRUCTION}\n"
+                "- tags: 6-9 specific YouTube search tags, mixing broad ones (e.g. 'facts', "
+                "'did you know', '" + topic + "') with specific long-tail ones tied to the exact "
+                "fact (e.g. the specific phenomenon, place, or thing named in the script).\n"
                 "- hashtags: 3-5 hashtags (lowercase, no spaces, with # prefix), mixing one broad "
                 "discovery hashtag (#shorts, #facts) with 2-4 specific ones tied to the topic and "
                 "fact.\n\n"
@@ -127,8 +105,7 @@ def generate_script() -> dict:
     start, end = raw.find("{"), raw.rfind("}")
     data = json.loads(raw[start:end + 1])
     data["topic"] = topic
-    data["variant"] = variant_name
-    data["hashtag_position"] = variant["hashtag_position"]
+    data["hashtag_position"] = "end"
     return data
 
 
