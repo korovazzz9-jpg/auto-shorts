@@ -3,6 +3,7 @@ import glob
 import math
 import os
 import random
+import tempfile
 
 # Windows: moviepy 1.0.3 ищет legacy convert.exe, в ImageMagick 7+ бинарник называется magick.exe.
 for _candidate in glob.glob(r"C:\Program Files\ImageMagick-*\magick.exe"):
@@ -11,13 +12,18 @@ for _candidate in glob.glob(r"C:\Program Files\ImageMagick-*\magick.exe"):
 
 from moviepy.editor import (
     AudioFileClip,
+    CompositeAudioClip,
     CompositeVideoClip,
     TextClip,
     VideoFileClip,
+    afx,
     concatenate_videoclips,
 )
 
 from config import CFG
+from fetch_music import fetch_random_track
+
+MUSIC_VOLUME = 0.10  # тихо под голосом, не должна перетягивать внимание
 
 TARGET_SIZE = (1080, 1920)
 CAPTION_Y = int(TARGET_SIZE[1] * 0.78)  # ближе к низу, но всё ещё выше названия канала/кнопок Shorts
@@ -135,6 +141,23 @@ def _cta_clips(duration: float) -> list[TextClip]:
     return [heart, label]
 
 
+def _mix_music(voice_audio: AudioFileClip, duration: float):
+    music_path = os.path.join(tempfile.mkdtemp(), "music.mp3")
+    try:
+        found = fetch_random_track(music_path)
+    except Exception:
+        found = False
+    if not found:
+        return voice_audio
+
+    try:
+        music = AudioFileClip(music_path)
+        music = afx.audio_loop(music, duration=duration).volumex(MUSIC_VOLUME)
+        return CompositeAudioClip([music, voice_audio])
+    except Exception:
+        return voice_audio
+
+
 def build_video(
     audio_path: str,
     clip_paths: list[str],
@@ -153,7 +176,8 @@ def build_video(
     background = _build_background(clip_paths, duration)
     caption_clips = _karaoke_clips(words, cutoff=cta_start)
     cta_clips = _cta_clips(duration)
+    mixed_audio = _mix_music(audio, duration)
 
-    final = CompositeVideoClip([background, *caption_clips, *cta_clips], size=TARGET_SIZE).set_audio(audio)
+    final = CompositeVideoClip([background, *caption_clips, *cta_clips], size=TARGET_SIZE).set_audio(mixed_audio)
     final.write_videofile(out_path, fps=30, codec="libx264", audio_codec="aac", logger=None)
     return out_path
