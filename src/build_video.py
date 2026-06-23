@@ -177,10 +177,10 @@ def _cta_clips(duration: float) -> list[ImageClip]:
     return [heart, label]
 
 
-def _mix_music(voice_audio: AudioFileClip, duration: float):
+def _mix_music(voice_audio: AudioFileClip, duration: float, topic: str | None):
     music_path = os.path.join(tempfile.mkdtemp(), "music.mp3")
     try:
-        found = fetch_random_track(music_path)
+        found = fetch_random_track(music_path, topic=topic)
     except Exception:
         found = False
     if not found:
@@ -199,6 +199,7 @@ def build_video(
     clip_paths: list[str],
     words: list[dict],
     out_path: str,
+    topic: str | None = None,
 ) -> str:
     audio = AudioFileClip(audio_path)
     duration = audio.duration
@@ -212,7 +213,7 @@ def build_video(
     background = _build_background(clip_paths, duration)
     caption_clips = _karaoke_clips(words, cutoff=cta_start)
     cta_clips = _cta_clips(duration)
-    mixed_audio = _mix_music(audio, duration)
+    mixed_audio = _mix_music(audio, duration, topic)
 
     final = CompositeVideoClip([background, *caption_clips, *cta_clips], size=TARGET_SIZE).set_audio(mixed_audio)
     final.write_videofile(out_path, fps=30, codec="libx264", audio_codec="aac", logger=None)

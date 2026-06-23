@@ -49,7 +49,7 @@ def run() -> None:
         words = text_to_speech(data["script"], audio_path)
 
         print("4/6 Сборка видео...")
-        build_video(audio_path, clip_paths, words, video_path)
+        build_video(audio_path, clip_paths, words, video_path, topic=data["topic"])
 
         print("5/6 Загрузка на YouTube...")
         video_id = upload_to_youtube(

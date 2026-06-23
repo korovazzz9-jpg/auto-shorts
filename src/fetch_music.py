@@ -13,13 +13,31 @@ DOWNLOAD_URL = "https://archive.org/download/{identifier}/{filename}"
 SAFE_LICENSE_MARKERS = ["publicdomain", "/zero/", "cc0", "/by/", "/by-sa/"]
 UNSAFE_LICENSE_MARKERS = ["-nc", "-nd", "noncommercial", "noderivs"]
 
-SEARCH_QUERIES = [
+FALLBACK_QUERIES = [
     "ambient instrumental background",
     "cinematic ambient instrumental",
     "calm piano instrumental",
     "uplifting ambient electronic instrumental",
     "curious mysterious ambient instrumental",
 ]
+
+# Настроение музыки под тему факта — ключи совпадают с TOPICS_POOL в generate_script.py.
+TOPIC_MOOD_QUERIES = {
+    "space": ["epic cosmic ambient instrumental", "space atmospheric synth instrumental"],
+    "the ocean": ["calm oceanic ambient instrumental", "underwater atmospheric instrumental"],
+    "ancient history": ["mysterious ancient ambient instrumental", "epic historical orchestral instrumental"],
+    "the human body": ["curious soft ambient instrumental", "gentle organic ambient instrumental"],
+    "the animal kingdom": ["nature ambient instrumental", "wild adventurous instrumental"],
+    "psychology": ["mysterious tense ambient instrumental", "introspective dark ambient instrumental"],
+    "future technology": ["futuristic electronic ambient instrumental", "tech synth instrumental"],
+    "bizarre records": ["quirky upbeat instrumental", "playful energetic instrumental"],
+    "volcanoes and earthquakes": ["dramatic intense ambient instrumental", "epic tension orchestral instrumental"],
+    "ancient civilizations": ["epic historical orchestral instrumental", "mysterious ancient ambient instrumental"],
+    "cryptography": ["futuristic electronic ambient instrumental", "tense mysterious synth instrumental"],
+    "evolution": ["epic orchestral ambient instrumental", "nature ambient instrumental"],
+    "extreme weather": ["dramatic intense ambient instrumental", "powerful atmospheric instrumental"],
+    "archaeological discoveries": ["mysterious ancient ambient instrumental", "curious discovery ambient instrumental"],
+}
 
 
 def _is_safe_license(license_url: str | None) -> bool:
@@ -60,10 +78,14 @@ def _find_mp3_file(identifier: str) -> dict | None:
     return {"identifier": identifier, "filename": mp3_files[0]["name"]}
 
 
-def fetch_random_track(out_path: str) -> bool:
-    """Returns True if a track was found and saved to out_path."""
-    queries = SEARCH_QUERIES.copy()
-    random.shuffle(queries)
+def fetch_random_track(out_path: str, topic: str | None = None) -> bool:
+    """Returns True if a track was found and saved to out_path. If topic matches a known
+    mood mapping, tries mood-appropriate queries first, then falls back to generic ones."""
+    mood_queries = TOPIC_MOOD_QUERIES.get(topic, []).copy()
+    random.shuffle(mood_queries)
+    fallback = [q for q in FALLBACK_QUERIES if q not in mood_queries]
+    random.shuffle(fallback)
+    queries = mood_queries + fallback
 
     for query in queries:
         try:
