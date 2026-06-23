@@ -8,7 +8,9 @@ from build_video import build_video
 from cloudinary_upload import delete_video, upload_video as upload_to_cloudinary
 from fetch_stock_video import fetch_clips
 from generate_script import generate_script
+from playlists import add_video_to_playlist
 from tts import text_to_speech
+from upload_captions import upload_captions
 from upload_instagram import upload_reel
 from upload_youtube import upload_video as upload_to_youtube
 
@@ -34,7 +36,7 @@ def run() -> None:
         build_video(audio_path, clip_paths, words, video_path)
 
         print("5/6 Загрузка на YouTube...")
-        upload_to_youtube(
+        video_id = upload_to_youtube(
             video_path,
             title=data["title"],
             description=data["script"],
@@ -42,6 +44,16 @@ def run() -> None:
             hashtags=data["hashtags"],
             hashtag_position=data["hashtag_position"],
         )
+
+        try:
+            upload_captions(video_id, words)
+        except Exception as e:
+            print(f"  Не удалось загрузить субтитры: {e}")
+
+        try:
+            add_video_to_playlist(video_id, data["topic"])
+        except Exception as e:
+            print(f"  Не удалось добавить в плейлист: {e}")
 
         print("6/6 Загрузка в Instagram...")
         hosted = None

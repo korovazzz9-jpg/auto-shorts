@@ -51,7 +51,7 @@ TITLE_INSTRUCTION = (
 
 def generate_script() -> dict:
     topic = random.choice(TOPICS_POOL)
-    client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+    client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"], max_retries=5)
 
     try:
         past_titles = get_recent_titles()

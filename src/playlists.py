@@ -1,0 +1,72 @@
+"""Группирует видео в плейлисты по теме — увеличивает время сессии зрителя на канале."""
+from youtube_auth import get_client
+
+TOPIC_PLAYLIST_TITLES = {
+    "space": "Space Facts",
+    "the ocean": "Ocean Facts",
+    "ancient history": "Ancient History Facts",
+    "the human body": "Human Body Facts",
+    "the animal kingdom": "Animal Facts",
+    "psychology": "Psychology Facts",
+    "future technology": "Technology Facts",
+    "bizarre records": "Bizarre Records",
+    "volcanoes and earthquakes": "Volcano & Earthquake Facts",
+    "ancient civilizations": "Ancient Civilizations",
+    "cryptography": "Cryptography Facts",
+    "evolution": "Evolution Facts",
+    "extreme weather": "Extreme Weather Facts",
+    "archaeological discoveries": "Archaeology Facts",
+}
+
+_playlist_cache: dict[str, str] = {}
+
+
+def _find_existing_playlist(youtube, title: str) -> str | None:
+    response = youtube.playlists().list(part="snippet", mine=True, maxResults=50).execute()
+    for item in response.get("items", []):
+        if item["snippet"]["title"] == title:
+            return item["id"]
+    return None
+
+
+def _create_playlist(youtube, title: str) -> str:
+    response = youtube.playlists().insert(
+        part="snippet,status",
+        body={
+            "snippet": {"title": title, "description": f"{title} — bite-sized videos from 60SecFacts."},
+            "status": {"privacyStatus": "public"},
+        },
+    ).execute()
+    return response["id"]
+
+
+def get_or_create_playlist(topic: str) -> str | None:
+    title = TOPIC_PLAYLIST_TITLES.get(topic)
+    if not title:
+        return None
+    if title in _playlist_cache:
+        return _playlist_cache[title]
+
+    youtube = get_client()
+    playlist_id = _find_existing_playlist(youtube, title) or _create_playlist(youtube, title)
+    _playlist_cache[title] = playlist_id
+    return playlist_id
+
+
+def add_video_to_playlist(video_id: str, topic: str) -> None:
+    playlist_id = get_or_create_playlist(topic)
+    if not playlist_id:
+        print(f"  Нет плейлиста для темы '{topic}', пропускаю.")
+        return
+
+    youtube = get_client()
+    youtube.playlistItems().insert(
+        part="snippet",
+        body={
+            "snippet": {
+                "playlistId": playlist_id,
+                "resourceId": {"kind": "youtube#video", "videoId": video_id},
+            }
+        },
+    ).execute()
+    print(f"  Added to playlist '{TOPIC_PLAYLIST_TITLES[topic]}'")

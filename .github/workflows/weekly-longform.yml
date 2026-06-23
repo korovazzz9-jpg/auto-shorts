@@ -1,0 +1,36 @@
+name: Weekly Longform Compilation
+
+on:
+  # Раз в неделю, по воскресеньям 15:07 UTC (~11am US Eastern) — отдельно от Shorts-расписания.
+  schedule:
+    - cron: "7 15 * * 0"
+  workflow_dispatch: {}
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install system deps
+        run: sudo apt-get update && sudo apt-get install -y imagemagick
+
+      - name: Allow ImageMagick to read caption text files
+        run: sudo sed -i '/pattern="@\*"/d' /etc/ImageMagick-6/policy.xml
+
+      - name: Install Python deps
+        run: pip install -r requirements.txt
+
+      - name: Run longform pipeline
+        working-directory: src
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+        run: python pipeline_longform.py
