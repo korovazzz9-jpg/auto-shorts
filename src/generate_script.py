@@ -80,9 +80,12 @@ No "today I'll tell you about" style intros.""".format(
 # 30-45s is the sweet spot for YouTube's 2026 Shorts algorithm (absolute watch time, not
 # just retention %) — shorter videos collapsed in reach even at high completion rates.
 LENGTH_INSTRUCTION = (
-    "Voiceover length should be 30-40 seconds (about 80-110 words) — long enough to build a "
-    "real narrative arc (setup, escalation, twist), not just a rapid-fire fact."
+    "Voiceover length MUST be 30-40 seconds. Count your words before responding: the script "
+    "must be 85-110 words. Under 85 words is too short — expand the narrative. "
+    "Build a full arc: setup, escalation, twist, payoff."
 )
+
+SCRIPT_MIN_WORDS = 85
 TITLE_INSTRUCTION = (
     "title: a punchy narrative hook, under 60 characters. Do NOT append a '| topic facts' "
     "style keyword suffix — it should read like a real headline, not a listicle."

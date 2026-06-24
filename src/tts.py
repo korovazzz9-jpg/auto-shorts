@@ -9,6 +9,9 @@ from config import CFG
 # Ротация голосов (берутся из конфига канала) — чтобы видео не звучали как один и тот же
 # шаблон каждый раз (YouTube's "inauthentic content" policy следит за этим).
 
+TTS_MIN_DURATION = 25.0  # секунд — меньше значит обрыв стрима, нужен retry
+TTS_MAX_RETRIES = 3
+
 
 def _pick_voice() -> str:
     return random.choice(CFG["voices"])
@@ -32,7 +35,15 @@ async def _synthesize(text: str, out_path: str, voice: str) -> list[dict]:
 
 def text_to_speech(text: str, out_path: str) -> list[dict]:
     """Synthesizes speech to out_path, returns per-word timing: [{"text", "start", "end"}, ...]."""
-    return asyncio.run(_synthesize(text, out_path, _pick_voice()))
+    voice = _pick_voice()
+    for attempt in range(1, TTS_MAX_RETRIES + 1):
+        words = asyncio.run(_synthesize(text, out_path, voice))
+        duration = words[-1]["end"] if words else 0
+        if duration >= TTS_MIN_DURATION:
+            return words
+        print(f"  TTS attempt {attempt}: audio too short ({duration:.1f}s < {TTS_MIN_DURATION}s), retrying...")
+    # Последняя попытка — возвращаем что есть, pipeline дальше разберётся
+    return words
 
 
 if __name__ == "__main__":
