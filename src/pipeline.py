@@ -5,7 +5,7 @@ import tempfile
 from dotenv import load_dotenv
 
 from build_video import build_video
-from cloudinary_upload import delete_video, upload_video as upload_to_cloudinary
+from cloudinary_upload import delete_image, delete_video, upload_image, upload_video as upload_to_cloudinary
 from config import CFG
 from fetch_stock_video import fetch_clips
 from generate_script import generate_script
@@ -49,7 +49,7 @@ def run() -> None:
         words = text_to_speech(data["script"], audio_path)
 
         print("4/6 Сборка видео...")
-        build_video(audio_path, clip_paths, words, video_path, topic=data["topic"])
+        video_path, thumb_path = build_video(audio_path, clip_paths, words, video_path, topic=data["topic"])
 
         print("5/6 Загрузка на YouTube...")
         video_id = upload_to_youtube(
@@ -74,10 +74,12 @@ def run() -> None:
         if CFG["post_to_instagram"]:
             print("6/6 Загрузка в Instagram...")
             hosted = None
+            hosted_thumb = None
             try:
                 hosted = upload_to_cloudinary(video_path)
+                hosted_thumb = upload_image(thumb_path)
                 caption = f"{data['title']}\n\n{data['script']}\n\n{' '.join(data['hashtags'])}"
-                upload_reel(hosted["url"], caption)
+                upload_reel(hosted["url"], caption, cover_url=hosted_thumb["url"])
             except Exception as e:
                 print(f"  Instagram-загрузка не удалась, пропускаю: {e}")
             finally:
@@ -86,6 +88,11 @@ def run() -> None:
                         delete_video(hosted["public_id"])
                     except Exception as e:
                         print(f"  Не удалось удалить временный файл из Cloudinary: {e}")
+                if hosted_thumb:
+                    try:
+                        delete_image(hosted_thumb["public_id"])
+                    except Exception as e:
+                        print(f"  Не удалось удалить thumbnail из Cloudinary: {e}")
         else:
             print("6/6 Instagram отключён для этого канала, пропускаю.")
 

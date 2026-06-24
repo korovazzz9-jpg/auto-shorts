@@ -25,6 +25,22 @@ def upload_video(video_path: str) -> dict:
     return {"url": result["secure_url"], "public_id": result["public_id"]}
 
 
+def upload_image(image_path: str) -> dict:
+    """Returns {"url": public https url, "public_id": id for later deletion}."""
+    _configure()
+    result = cloudinary.uploader.upload(
+        image_path,
+        resource_type="image",
+        folder="auto-shorts",
+    )
+    return {"url": result["secure_url"], "public_id": result["public_id"]}
+
+
 def delete_video(public_id: str) -> None:
     _configure()
     cloudinary.uploader.destroy(public_id, resource_type="video")
+
+
+def delete_image(public_id: str) -> None:
+    _configure()
+    cloudinary.uploader.destroy(public_id, resource_type="image")

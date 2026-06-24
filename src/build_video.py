@@ -203,7 +203,8 @@ def build_video(
     words: list[dict],
     out_path: str,
     topic: str | None = None,
-) -> str:
+) -> tuple[str, str]:
+    """Returns (video_path, thumbnail_path)."""
     audio = AudioFileClip(audio_path)
     duration = audio.duration
 
@@ -218,4 +219,9 @@ def build_video(
     cta_clips = _cta_clips(duration)
     final = CompositeVideoClip([background, *caption_clips, *cta_clips], size=TARGET_SIZE).set_audio(audio)
     final.write_videofile(out_path, fps=30, codec="libx264", audio_codec="aac", logger=None)
-    return out_path
+
+    thumb_path = out_path.replace(".mp4", "_thumb.jpg")
+    # t=1.0 — субтитры уже видны, фоновое видео показывает интересный кадр
+    final.save_frame(thumb_path, t=min(1.0, duration * 0.1))
+
+    return out_path, thumb_path
