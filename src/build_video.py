@@ -221,7 +221,8 @@ def build_video(
     final.write_videofile(out_path, fps=30, codec="libx264", audio_codec="aac", logger=None)
 
     thumb_path = out_path.replace(".mp4", "_thumb.jpg")
-    # t=1.0 — субтитры уже видны, фоновое видео показывает интересный кадр
-    final.save_frame(thumb_path, t=min(1.0, duration * 0.1))
+    # CompositeVideoClip с субтитрами даёт RGBA — конвертируем в RGB перед сохранением в JPEG
+    frame = final.get_frame(min(1.0, duration * 0.1))
+    Image.fromarray(frame).convert("RGB").save(thumb_path, "JPEG")
 
     return out_path, thumb_path
