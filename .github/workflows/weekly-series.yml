@@ -1,0 +1,81 @@
+name: Weekly Series (EN)
+
+on:
+  # Понедельник 13:07 UTC (20:07 Vietnam) — Part 1, генерирует все 3 скрипта
+  # Среда     13:07 UTC — Part 2
+  # Пятница   13:07 UTC — Part 3
+  schedule:
+    - cron: "7 13 * * 1"   # Monday
+    - cron: "7 13 * * 3"   # Wednesday
+    - cron: "7 13 * * 5"   # Friday
+  workflow_dispatch:
+    inputs:
+      part:
+        description: "Which part to publish (1, 2, or 3)"
+        required: true
+        default: "1"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Determine series part
+        id: part
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "part=${{ github.event.inputs.part }}" >> $GITHUB_OUTPUT
+          else
+            DOW=$(date +%u)  # 1=Mon, 3=Wed, 5=Fri
+            case $DOW in
+              1) echo "part=1" >> $GITHUB_OUTPUT ;;
+              3) echo "part=2" >> $GITHUB_OUTPUT ;;
+              5) echo "part=3" >> $GITHUB_OUTPUT ;;
+              *) echo "part=1" >> $GITHUB_OUTPUT ;;
+            esac
+          fi
+
+      - name: Restore series state
+        uses: actions/cache@v4
+        with:
+          path: src/series_state.json
+          key: series-state-en
+          restore-keys: series-state-en
+
+      - name: Restore titles cache
+        uses: actions/cache@v4
+        with:
+          path: src/titles_cache.json
+          key: titles-cache-en
+          restore-keys: titles-cache-en
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install system deps
+        run: sudo apt-get update && sudo apt-get install -y imagemagick
+
+      - name: Allow ImageMagick policy
+        run: sudo sed -i '/pattern="@\*"/d' /etc/ImageMagick-6/policy.xml
+
+      - name: Install Python deps
+        run: pip install -r requirements.txt
+
+      - name: Run series pipeline
+        working-directory: src
+        env:
+          SERIES_PART: ${{ steps.part.outputs.part }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+          PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
+          CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
+          CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+        run: python pipeline_series.py

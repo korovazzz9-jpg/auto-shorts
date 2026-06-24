@@ -197,12 +197,36 @@ def _mix_music(voice_audio: AudioFileClip, duration: float, topic: str | None):
         return voice_audio
 
 
+PART_LABEL_DURATION = 2.5  # секунд показа "PART N / 3" в начале видео
+
+
+def _part_label_clip(part: int, total: int) -> TextClip:
+    """Полупрозрачный оверлей 'PART 1 / 3' в верхней части экрана на первые 2.5 сек."""
+    label = TextClip(
+        f"PART {part} / {total}",
+        fontsize=72,
+        color="white",
+        font="Arial-Bold",
+        stroke_color="black",
+        stroke_width=5,
+    )
+    label = (
+        label
+        .set_position(("center", int(TARGET_SIZE[1] * 0.08)))
+        .set_start(0)
+        .set_duration(PART_LABEL_DURATION)
+    )
+    return label
+
+
 def build_video(
     audio_path: str,
     clip_paths: list[str],
     words: list[dict],
     out_path: str,
     topic: str | None = None,
+    part: int | None = None,
+    total_parts: int = 3,
 ) -> tuple[str, str]:
     """Returns (video_path, thumbnail_path)."""
     audio = AudioFileClip(audio_path)
@@ -217,7 +241,10 @@ def build_video(
     background = _build_background(clip_paths, duration)
     caption_clips = _karaoke_clips(words, cutoff=cta_start)
     cta_clips = _cta_clips(duration)
-    final = CompositeVideoClip([background, *caption_clips, *cta_clips], size=TARGET_SIZE).set_audio(audio)
+    part_clips = [_part_label_clip(part, total_parts)] if part else []
+    final = CompositeVideoClip(
+        [background, *caption_clips, *cta_clips, *part_clips], size=TARGET_SIZE
+    ).set_audio(audio)
     final.write_videofile(out_path, fps=30, codec="libx264", audio_codec="aac", logger=None)
 
     thumb_path = out_path.replace(".mp4", "_thumb.jpg")

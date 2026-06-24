@@ -14,3 +14,4 @@ test.mp3
 assets/backgrounds/*
 !assets/backgrounds/.gitkeep
 src/titles_cache.json
+src/series_state.json
