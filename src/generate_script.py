@@ -9,6 +9,10 @@ from config import CFG
 from recent_titles import add_title_to_cache, get_recent_titles
 from topic_stats import get_topic_avg_views
 
+# Темы, которые НЕЛЬЗЯ использовать — слишком абстрактны/технически сложны,
+# аудитория не понимает сюрпризы без специальных знаний.
+BANNED_TOPICS = {"physics", "quantum physics", "quantum mechanics"}
+
 TOPICS_POOL = [
     # History/archaeology — исторически лучшие результаты на канале
     "ancient history", "archaeological discoveries", "ancient civilizations",
@@ -56,6 +60,7 @@ interesting detail about X," but "X is the opposite of what you'd assume." Body-
 or sensory facts with a clear before/after contrast in understanding work best. Avoid abstract or
 purely technical facts that require specialist background to feel surprising (e.g. quantum
 mechanics, relativity, advanced math) — the shock has to land for a general audience in one watch.
+Physics and quantum physics are strictly off-limits as topics.
 
 Structure, in order:
 1. Hook: the first 3-5 words must be the most shocking or surprising part of the fact itself,
