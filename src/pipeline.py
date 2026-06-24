@@ -10,6 +10,7 @@ from config import CFG
 from fetch_stock_video import fetch_clips
 from generate_script import generate_script
 from playlists import add_video_to_playlist
+from post_comment import post_channel_comment
 from tts import text_to_speech
 from upload_captions import upload_captions
 from upload_instagram import upload_reel
@@ -70,6 +71,14 @@ def run() -> None:
             add_video_to_playlist(video_id, data["topic"])
         except Exception as e:
             print(f"  Не удалось добавить в плейлист: {e}")
+
+        try:
+            channel_url = f"https://www.youtube.com/@{CFG['channel_handle']}" if CFG.get("channel_handle") else ""
+            comment = CFG.get("first_comment", "").format(channel_url=channel_url).strip()
+            if comment:
+                post_channel_comment(video_id, comment)
+        except Exception as e:
+            print(f"  Не удалось опубликовать комментарий: {e}")
 
         if CFG["post_to_instagram"]:
             print("6/6 Загрузка в Instagram...")

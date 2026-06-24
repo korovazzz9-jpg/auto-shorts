@@ -10,7 +10,7 @@ from googleapiclient.http import MediaIoBaseUpload
 from config import CFG
 from youtube_auth import get_client
 
-_EXTRA_CAPTION_LANGS = ["vi"]  # языки, для которых автоматически генерируется перевод
+_EXTRA_CAPTION_LANGS = ["vi", "tl"]  # языки, для которых автоматически генерируется перевод
 
 
 def _format_timestamp(seconds: float) -> str:

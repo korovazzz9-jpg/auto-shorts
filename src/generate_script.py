@@ -10,10 +10,16 @@ from recent_titles import add_title_to_cache, get_recent_titles
 from topic_stats import get_topic_avg_views
 
 TOPICS_POOL = [
-    "space", "the ocean", "ancient history", "the human body",
-    "the animal kingdom", "psychology", "future technology", "bizarre records",
-    "volcanoes and earthquakes", "ancient civilizations",
-    "cryptography", "evolution", "extreme weather", "archaeological discoveries",
+    # History/archaeology — исторически лучшие результаты на канале
+    "ancient history", "archaeological discoveries", "ancient civilizations",
+    "shipwrecks and lost treasures", "historical mysteries",
+    # Science/nature — стабильно хорошая вовлечённость
+    "the human body", "the animal kingdom", "the ocean", "evolution",
+    "volcanoes and earthquakes", "extreme weather", "natural wonders",
+    # Space — широкая аудитория
+    "space",
+    # Прочие
+    "psychology", "future technology", "bizarre records",
 ]
 
 MIN_TOPICS_WITH_DATA = 5  # не взвешивать, пока статистика не накопилась хотя бы по стольким темам
@@ -32,6 +38,12 @@ def _pick_topic() -> str:
     # Темы без данных получают средний вес (чтобы не застревать на старых лидерах
     # и продолжать исследовать темы, которые ещё не пробовали).
     weights = [max(avg_views.get(t, overall_avg), 1.0) for t in TOPICS_POOL]
+
+    # Логируем топ-5 тем для отладки в GitHub Actions
+    ranked = sorted(zip(TOPICS_POOL, weights), key=lambda x: -x[1])
+    top5 = ", ".join(f"{t}({w:.0f})" for t, w in ranked[:5])
+    print(f"  Topic weights top-5: {top5}")
+
     return random.choices(TOPICS_POOL, weights=weights, k=1)[0]
 
 BASE_SYSTEM_PROMPT = """You are a scriptwriter for short fact videos on YouTube Shorts (channel: {channel}).

@@ -32,6 +32,11 @@ CONFIGS = {
         ),
         # Используется ли кросс-постинг в Instagram для этого канала.
         "post_to_instagram": True,
+        # Хэндл канала без @, нужен для ссылки в первом комментарии.
+        "channel_handle": "60SecFacts",
+        # Первый комментарий от имени канала после каждой публикации.
+        # {channel_url} — подставляется автоматически.
+        "first_comment": "Follow for more facts like this 👉 {channel_url}",
         "playlist_titles": {
             "space": "Space Facts",
             "the ocean": "Ocean Facts",
@@ -47,6 +52,9 @@ CONFIGS = {
             "evolution": "Evolution Facts",
             "extreme weather": "Extreme Weather Facts",
             "archaeological discoveries": "Archaeology Facts",
+            "shipwrecks and lost treasures": "Shipwrecks & Lost Treasures",
+            "historical mysteries": "Historical Mysteries",
+            "natural wonders": "Natural Wonders",
         },
     },
     "es": {
@@ -69,6 +77,8 @@ CONFIGS = {
         ),
         # Испанский канал — отдельный Instagram появится позже; пока только YouTube.
         "post_to_instagram": False,
+        "channel_handle": "DatosEn30s",
+        "first_comment": "Síguenos para más datos 👉 {channel_url}",
         "playlist_titles": {
             "space": "Datos del Espacio",
             "the ocean": "Datos del Océano",
@@ -84,6 +94,9 @@ CONFIGS = {
             "evolution": "Datos de Evolución",
             "extreme weather": "Clima Extremo",
             "archaeological discoveries": "Descubrimientos Arqueológicos",
+            "shipwrecks and lost treasures": "Naufragios y Tesoros Perdidos",
+            "historical mysteries": "Misterios Históricos",
+            "natural wonders": "Maravillas Naturales",
         },
     },
 }
