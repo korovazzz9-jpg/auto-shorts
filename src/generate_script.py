@@ -6,7 +6,7 @@ import random
 from anthropic import Anthropic
 
 from config import CFG
-from recent_titles import get_recent_titles
+from recent_titles import add_title_to_cache, get_recent_titles
 from topic_stats import get_topic_avg_views
 
 TOPICS_POOL = [
@@ -130,6 +130,7 @@ def generate_script() -> dict:
     data = json.loads(raw[start:end + 1])
     data["topic"] = topic
     data["hashtag_position"] = "end"
+    add_title_to_cache(data["title"])
     return data
 
 

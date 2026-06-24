@@ -13,3 +13,4 @@ test.mp3
 *.png
 assets/backgrounds/*
 !assets/backgrounds/.gitkeep
+src/titles_cache.json
