@@ -216,8 +216,6 @@ def build_video(
     background = _build_background(clip_paths, duration)
     caption_clips = _karaoke_clips(words, cutoff=cta_start)
     cta_clips = _cta_clips(duration)
-    mixed_audio = _mix_music(audio, duration, topic)
-
-    final = CompositeVideoClip([background, *caption_clips, *cta_clips], size=TARGET_SIZE).set_audio(mixed_audio)
+    final = CompositeVideoClip([background, *caption_clips, *cta_clips], size=TARGET_SIZE).set_audio(audio)
     final.write_videofile(out_path, fps=30, codec="libx264", audio_codec="aac", logger=None)
     return out_path
