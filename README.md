@@ -33,6 +33,7 @@ Watchdog запускается через 15 мин после каждого E
 | Instagram EN (@a30secfacts) | ✅ включён, кросспостинг через Cloudinary |
 | Instagram (ES) | ⏳ отключён — нет отдельного аккаунта |
 | TikTok EN | ⏳ ожидает одобрения TikTok Developer App (1–5 дней) |
+| Pinterest EN | ⏳ ожидает одобрения Pinterest Developer App (1–3 дня) |
 | Лонгформ (EN, еженедельно) | ✅ каждое воскресенье 15:07 UTC |
 | Серии (EN, 3 части Пн/Ср/Пт) | ✅ `weekly-series.yml`, Part 1 генерирует все 3 |
 | Watchdog (авторетрай) | ✅ проверяет через 15 мин после каждого слота |
@@ -131,7 +132,8 @@ src/
   upload_instagram.py       # Instagram Graph API v21.0 (Reels), cover_url поддержка
   cloudinary_upload.py      # временный хостинг видео/изображений для IG (Cloudinary)
   post_comment.py           # авто-комментарий от канала после загрузки
-  upload_captions.py        # EN + VI + TL субтитры (авто-перевод через Claude Haiku)
+  upload_captions.py        # EN + VI + TL субтитры (авто-перевод через Claude Haiku) [временно отключены]
+  upload_pinterest.py       # генерация карточки PIL + публикация пина Pinterest API v5
   playlists.py              # авто-плейлисты по теме
   recent_titles.py          # последние 100 заголовков + локальный кеш (дедупликация)
   topic_stats.py            # средние просмотры по темам для взвешенного выбора
@@ -166,6 +168,8 @@ src/
 | `IG_ACCESS_TOKEN` | только EN (Instagram) |
 | `IG_USER_ID` | только EN (Instagram) |
 | `TIKTOK_ACCESS_TOKEN` | только EN (TikTok, после одобрения app) |
+| `PINTEREST_ACCESS_TOKEN` | только EN (Pinterest, после одобрения app) |
+| `PINTEREST_BOARD_ID` | только EN (Pinterest, после одобрения app) |
 
 ---
 
@@ -278,6 +282,31 @@ gh secret set TIKTOK_ACCESS_TOKEN -b"<access_token>"
 
 ---
 
+## Pinterest — как активировать (ожидает одобрения app)
+
+Каждое видео автоматически генерирует карточку с фактом (1000×1500px, PIL) и публикует её как пин со ссылкой на YouTube Short.
+
+**Что сделано:**
+- `src/upload_pinterest.py` — генерация карточки + Pinterest API v5
+- `pipeline.py` — шаг после Instagram/TikTok, не зависит от Cloudinary
+- `config.py` → EN: `post_to_pinterest: True`
+- Все workflows → `PINTEREST_ACCESS_TOKEN` и `PINTEREST_BOARD_ID` прописаны в env
+
+**Сайт приложения:** `https://60secfacts.netlify.app`
+
+**Активация после одобрения Pinterest Dev App:**
+
+```bash
+# 1. Получить access token в developers.pinterest.com → My Apps → Authentication
+# 2. Получить board ID
+gh secret set PINTEREST_ACCESS_TOKEN -b"<токен>"
+gh secret set PINTEREST_BOARD_ID -b"<board_id>"
+```
+
+**Если Pinterest сломается:** `"post_to_pinterest": False` в `config.py` → EN-конфиг.
+
+---
+
 ## История ключевых решений
 
 - **Ниша "факты"** — выбрана из-за низкого риска авторских прав и простоты генерации
@@ -307,6 +336,7 @@ gh secret set TIKTOK_ACCESS_TOKEN -b"<access_token>"
 | Авто-комментарий | Убрать `"first_comment"` из конфига канала в `config.py` |
 | Instagram thumbnail | Убрать `cover_url=hosted_thumb["url"]` из вызова `upload_reel` в `pipeline.py` |
 | TikTok | `"post_to_tiktok": False` в `config.py` → EN-конфиг |
+| Pinterest | `"post_to_pinterest": False` в `config.py` → EN-конфиг |
 | PART N оверлей | Убрать `part=` аргумент из вызова `build_video` в `pipeline_series.py` |
 | TTS retry | Убрать цикл в `text_to_speech`, оставить один вызов `_synthesize` |
 | CTA (сердце + бэйдж) | `_draw_heart_png()` и `_draw_cta_badge()` в `build_video.py` |
