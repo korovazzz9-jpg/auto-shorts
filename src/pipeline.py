@@ -51,7 +51,7 @@ def run() -> None:
         words = text_to_speech(data["script"], audio_path)
 
         print("4/6 Сборка видео...")
-        video_path, thumb_path = build_video(audio_path, clip_paths, words, video_path, topic=data["topic"])
+        video_path, thumb_path = build_video(audio_path, clip_paths, words, video_path, topic=data["topic"], title=data["title"])
 
         print("5/6 Загрузка на YouTube...")
         video_id = upload_to_youtube(
@@ -63,18 +63,21 @@ def run() -> None:
             hashtag_position=data["hashtag_position"],
         )
 
+        playlist_id = None
+        try:
+            playlist_id = add_video_to_playlist(video_id, data["topic"])
+        except Exception as e:
+            print(f"  Не удалось добавить в плейлист: {e}")
+
         try:
             channel_url = f"https://www.youtube.com/@{CFG['channel_handle']}" if CFG.get("channel_handle") else ""
-            comment = CFG.get("first_comment", "").format(channel_url=channel_url).strip()
+            comment_template = CFG.get("first_comment", "")
+            playlist_url = f"https://www.youtube.com/playlist?list={playlist_id}" if playlist_id else ""
+            comment = comment_template.format(channel_url=channel_url, playlist_url=playlist_url).strip()
             if comment:
                 post_channel_comment(video_id, comment)
         except Exception as e:
             print(f"  Не удалось опубликовать комментарий: {e}")
-
-        try:
-            add_video_to_playlist(video_id, data["topic"])
-        except Exception as e:
-            print(f"  Не удалось добавить в плейлист: {e}")
 
         try:
             upload_captions(video_id, words)

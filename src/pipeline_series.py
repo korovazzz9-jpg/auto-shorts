@@ -84,6 +84,7 @@ def run() -> None:
             topic=data["topic"],
             part=part,
             total_parts=3,
+            title=data["title"],
         )
 
         print("Uploading to YouTube...")
@@ -96,18 +97,21 @@ def run() -> None:
             hashtag_position=data["hashtag_position"],
         )
 
+        playlist_id = None
+        try:
+            playlist_id = add_video_to_playlist(video_id, data["topic"])
+        except Exception as e:
+            print(f"  Playlist failed: {e}")
+
         try:
             channel_url = f"https://www.youtube.com/@{CFG.get('channel_handle', '')}"
-            comment = CFG.get("first_comment", "").format(channel_url=channel_url).strip()
+            comment_template = CFG.get("first_comment", "")
+            playlist_url = f"https://www.youtube.com/playlist?list={playlist_id}" if playlist_id else ""
+            comment = comment_template.format(channel_url=channel_url, playlist_url=playlist_url).strip()
             if comment:
                 post_channel_comment(video_id, comment)
         except Exception as e:
             print(f"  Comment failed: {e}")
-
-        try:
-            add_video_to_playlist(video_id, data["topic"])
-        except Exception as e:
-            print(f"  Playlist failed: {e}")
 
         try:
             upload_captions(video_id, words)

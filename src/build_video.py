@@ -227,6 +227,8 @@ def build_video(
     topic: str | None = None,
     part: int | None = None,
     total_parts: int = 3,
+    title: str | None = None,
+    **kwargs,
 ) -> tuple[str, str]:
     """Returns (video_path, thumbnail_path)."""
     audio = AudioFileClip(audio_path)
@@ -248,8 +250,89 @@ def build_video(
     final.write_videofile(out_path, fps=30, codec="libx264", audio_codec="aac", logger=None)
 
     thumb_path = out_path.replace(".mp4", "_thumb.jpg")
-    # CompositeVideoClip с субтитрами даёт RGBA — конвертируем в RGB перед сохранением в JPEG
     frame = final.get_frame(min(1.0, duration * 0.1))
-    Image.fromarray(frame).convert("RGB").save(thumb_path, "JPEG")
+    _save_thumbnail(Image.fromarray(frame).convert("RGB"), thumb_path, title=title)
 
     return out_path, thumb_path
+
+
+def _save_thumbnail(img: Image.Image, path: str, title: str | None = None) -> None:
+    """Сохраняет thumbnail. Если передан title — рисует текст поверх кадра."""
+    if not title:
+        img.save(path, "JPEG")
+        return
+
+    from PIL import ImageFont
+    draw = ImageDraw.Draw(img)
+    W, H = img.size
+
+    # Полупрозрачная тёмная полоса снизу под текстом
+    overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
+    ov_draw = ImageDraw.Draw(overlay)
+    ov_draw.rectangle([(0, H - 420), (W, H)], fill=(0, 0, 0, 160))
+    img = img.convert("RGBA")
+    img = Image.alpha_composite(img, overlay).convert("RGB")
+    draw = ImageDraw.Draw(img)
+
+    # Подбираем размер шрифта чтобы текст влез в ширину
+    font_path = None
+    for candidate in [
+        r"C:\Windows\Fonts\arialbd.ttf",
+        r"C:\Windows\Fonts\Arial Bold.ttf",
+        "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf",
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+    ]:
+        if os.path.exists(candidate):
+            font_path = candidate
+            break
+
+    max_w = W - 80
+    font_size = 96
+    while font_size > 40:
+        try:
+            font = ImageFont.truetype(font_path, font_size) if font_path else ImageFont.load_default()
+        except Exception:
+            font = ImageFont.load_default()
+        # Перенос слов вручную
+        words_list = title.upper().split()
+        lines, current = [], ""
+        for word in words_list:
+            test = (current + " " + word).strip()
+            bbox = draw.textbbox((0, 0), test, font=font)
+            if bbox[2] - bbox[0] <= max_w:
+                current = test
+            else:
+                if current:
+                    lines.append(current)
+                current = word
+        if current:
+            lines.append(current)
+
+        # Проверяем что все строки влезают
+        too_wide = any(
+            draw.textbbox((0, 0), l, font=font)[2] - draw.textbbox((0, 0), l, font=font)[0] > max_w
+            for l in lines
+        )
+        if not too_wide and len(lines) <= 3:
+            break
+        font_size -= 8
+
+    try:
+        font = ImageFont.truetype(font_path, font_size) if font_path else ImageFont.load_default()
+    except Exception:
+        font = ImageFont.load_default()
+
+    line_h = font_size + 12
+    total_h = len(lines) * line_h
+    y = H - total_h - 48
+
+    for line in lines:
+        bbox = draw.textbbox((0, 0), line, font=font)
+        lw = bbox[2] - bbox[0]
+        x = (W - lw) // 2
+        # Тень
+        draw.text((x + 4, y + 4), line, font=font, fill=(0, 0, 0, 200))
+        draw.text((x, y), line, font=font, fill=(255, 255, 255))
+        y += line_h
+
+    img.save(path, "JPEG")

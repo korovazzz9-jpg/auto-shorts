@@ -44,7 +44,7 @@ def run() -> None:
 
         print("3/4 Озвучка и сборка видео...")
         words = text_to_speech(data["script"], audio_path)
-        video_path, _ = build_video(audio_path, clip_paths, words, video_path, topic=data["theme"])
+        video_path, _ = build_video(audio_path, clip_paths, words, video_path, topic=data["theme"], title=data["title"])
 
         print("4/4 Загрузка на YouTube...")
         video_id = upload_to_youtube(

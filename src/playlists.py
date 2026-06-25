@@ -39,11 +39,12 @@ def get_or_create_playlist(topic: str) -> str | None:
     return playlist_id
 
 
-def add_video_to_playlist(video_id: str, topic: str) -> None:
+def add_video_to_playlist(video_id: str, topic: str) -> str | None:
+    """Returns playlist_id if successful, else None."""
     playlist_id = get_or_create_playlist(topic)
     if not playlist_id:
         print(f"  Нет плейлиста для темы '{topic}', пропускаю.")
-        return
+        return None
 
     youtube = get_client()
     youtube.playlistItems().insert(
@@ -56,3 +57,4 @@ def add_video_to_playlist(video_id: str, topic: str) -> None:
         },
     ).execute()
     print(f"  Added to playlist '{TOPIC_PLAYLIST_TITLES[topic]}'")
+    return playlist_id
