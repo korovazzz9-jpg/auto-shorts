@@ -79,10 +79,11 @@ def run() -> None:
         except Exception as e:
             print(f"  Не удалось опубликовать комментарий: {e}")
 
-        try:
-            upload_captions(video_id, words)
-        except Exception as e:
-            print(f"  Не удалось загрузить субтитры: {e}")
+        # temporarily disabled (quota), re-enable after quota increase approved
+        # try:
+        #     upload_captions(video_id, words)
+        # except Exception as e:
+        #     print(f"  Не удалось загрузить субтитры: {e}")
 
         need_cloudinary = CFG["post_to_instagram"] or CFG.get("post_to_tiktok")
         if need_cloudinary:
