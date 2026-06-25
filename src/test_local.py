@@ -1,0 +1,61 @@
+"""Тестовый прогон: генерирует видео локально без загрузки на YouTube.
+Сохраняет video.mp4, thumb.jpg, audio.mp3 и клипы на рабочий стол
+чтобы можно было перерендерить через rerender.py без нового сюжета."""
+import os, shutil, json
+
+from dotenv import load_dotenv
+load_dotenv()
+
+from build_video import build_video
+from fetch_stock_video import fetch_clips
+from generate_script import generate_script
+from tts import text_to_speech
+
+import tempfile
+
+OUT_DIR = os.path.join(os.path.expanduser("~"), "Desktop", "auto-shorts-test")
+os.makedirs(OUT_DIR, exist_ok=True)
+
+print("1/4 Генерация сценария...")
+data = generate_script()
+print(f"  Тема: {data['topic']}")
+print(f"  Заголовок: {data['title']}")
+
+with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
+    audio_path = os.path.join(tmp, "audio.mp3")
+    video_path = os.path.join(tmp, "video.mp4")
+
+    print("2/4 Стоковые клипы...")
+    clip_paths = fetch_clips(data["video_queries"], tmp)
+
+    print("3/4 Озвучка...")
+    words = text_to_speech(data["script"], audio_path)
+    print(f"  Длина: {words[-1]['end']:.1f}s")
+
+    print("4/4 Сборка видео...")
+    video_path, thumb_path = build_video(
+        audio_path, clip_paths, words, video_path,
+        topic=data["topic"],
+        title=data["title"],
+    )
+
+    # Сохраняем всё на рабочий стол для возможного перерендера
+    shutil.copy2(video_path, os.path.join(OUT_DIR, "video.mp4"))
+    shutil.copy2(thumb_path, os.path.join(OUT_DIR, "thumb.jpg"))
+    shutil.copy2(audio_path, os.path.join(OUT_DIR, "audio.mp3"))
+    clips_dir = os.path.join(OUT_DIR, "clips")
+    os.makedirs(clips_dir, exist_ok=True)
+    saved_clips = []
+    for i, cp in enumerate(clip_paths):
+        dst = os.path.join(clips_dir, f"clip_{i:02d}{os.path.splitext(cp)[1]}")
+        shutil.copy2(cp, dst)
+        saved_clips.append(dst)
+
+    with open(os.path.join(OUT_DIR, "meta.json"), "w", encoding="utf-8") as f:
+        json.dump({"data": data, "words": words, "clip_paths": saved_clips}, f, ensure_ascii=False, indent=2)
+
+print(f"\nГотово!")
+print(f"  Видео:     {os.path.join(OUT_DIR, 'video.mp4')}")
+print(f"  Thumbnail: {os.path.join(OUT_DIR, 'thumb.jpg')}")
+print(f"\nЗаголовок для TikTok: {data['title']}")
+print(f"Хэштеги: {' '.join(data['hashtags'])}")

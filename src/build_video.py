@@ -97,29 +97,50 @@ def _karaoke_clips(words: list[dict], cutoff: float) -> list[TextClip]:
     return clips
 
 
-def _draw_heart_png(path: str, size: int = 220) -> None:
-    """Классическое сердце через параметрическую кривую + тёмная тень (без белого контура)."""
+def _cubic_bezier(p0, p1, p2, p3, n=40):
+    """Возвращает n точек кубической кривой Безье."""
+    pts = []
+    for i in range(n + 1):
+        t = i / n
+        u = 1 - t
+        x = u**3*p0[0] + 3*u**2*t*p1[0] + 3*u*t**2*p2[0] + t**3*p3[0]
+        y = u**3*p0[1] + 3*u**2*t*p1[1] + 3*u*t**2*p2[1] + t**3*p3[1]
+        pts.append((x, y))
+    return pts
+
+
+def _draw_heart_png(path: str, size: int = 600) -> None:
+    """Сердце через кубические безье (вариант 1) + тонкая тень.
+    Рендерится в 440px чтобы при анимации масштаба не было пикселизации."""
     scale = 4
     big = size * scale
     img = Image.new("RGBA", (big, big), (0, 0, 0, 0))
     draw = ImageDraw.Draw(img)
 
-    cx, cy = big * 0.50, big * 0.48
-    sc = big * 0.028  # масштаб кривой
+    # SVG path варианта 1: M0,-18 C2,-38 28,-46 38,-28 C48,-10 28,12 0,38
+    #                       C-28,12 -48,-10 -38,-28 C-28,-46 -2,-38 0,-18 Z
+    # Масштабируем под big, центр = (big/2, big/2 + small_offset)
+    cx, cy = big * 0.5, big * 0.52
+    sc = big * 0.011  # подбираем чтобы сердце занимало ~80% canvas
 
-    def heart_pts(offset_x=0, offset_y=0, expand=1.0):
-        pts = []
-        for i in range(720):
-            t = math.radians(i / 2)
-            x = 16 * math.sin(t) ** 3
-            y = -(13 * math.cos(t) - 5 * math.cos(2*t) - 2 * math.cos(3*t) - math.cos(4*t))
-            pts.append((cx + x * sc * expand + offset_x, cy + y * sc * expand + offset_y))
-        return pts
+    def s(nx, ny):
+        return (cx + nx * sc, cy + ny * sc)
 
-    # тёмная тень — тот же контур, смещённый вправо-вниз
-    draw.polygon(heart_pts(offset_x=big*0.018, offset_y=big*0.022), fill=(0, 0, 0, 160))
+    segments = [
+        _cubic_bezier(s(0,-18), s(2,-38),  s(28,-46), s(38,-28)),
+        _cubic_bezier(s(38,-28), s(48,-10), s(28,12),  s(0,38)),
+        _cubic_bezier(s(0,38),  s(-28,12), s(-48,-10), s(-38,-28)),
+        _cubic_bezier(s(-38,-28), s(-28,-46), s(-2,-38), s(0,-18)),
+    ]
+    pts = [pt for seg in segments for pt in seg]
+
+    def shifted(dx, dy):
+        return [(x + dx, y + dy) for x, y in pts]
+
+    # тонкая тень
+    draw.polygon(shifted(big*0.006, big*0.008), fill=(0, 0, 0, 70))
     # красное сердце
-    draw.polygon(heart_pts(), fill=(255, 23, 68, 255))
+    draw.polygon(pts, fill=(255, 23, 68, 255))
 
     img = img.resize((size, size), Image.LANCZOS)
     img.save(path)
@@ -183,14 +204,17 @@ def _cta_clips(duration: float) -> list[ImageClip]:
     heart_png = os.path.join(tmp, "heart.png")
     badge_png = os.path.join(tmp, "badge.png")
 
-    _draw_heart_png(heart_png, size=220)
+    _draw_heart_png(heart_png)  # рендерится в 600px — анимация всегда downscale, без пикселей
     _draw_cta_badge(badge_png, _pick_cta_phrase(), width=700)
 
-    heart = ImageClip(heart_png)
-    pulse = lambda t: 1 + 0.14 * max(0.0, math.sin(t * CTA_PULSES * math.pi / max(cta_duration, 0.01))) ** 2
+    BASE = 220  # базовый размер сердца в видео (px)
+    # pulse всегда downscale с 600px → 220-251px, пикселей нет
+    pulse_raw = lambda t: 1 + 0.14 * max(0.0, math.sin(t * CTA_PULSES * math.pi / max(cta_duration, 0.01))) ** 2
+    pulse = lambda t: BASE * pulse_raw(t) / 600
     heart = (
-        heart.resize(pulse)
-        .set_position(lambda t: ("center", heart_y - int(30 * (pulse(t) - 1))))
+        ImageClip(heart_png)
+        .resize(pulse)
+        .set_position(lambda t: ("center", heart_y - int(30 * (pulse_raw(t) - 1))))
         .set_start(start)
         .set_duration(cta_duration)
     )
