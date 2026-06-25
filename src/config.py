@@ -33,6 +33,7 @@ CONFIGS = {
         # Используется ли кросс-постинг в Instagram для этого канала.
         "post_to_instagram": True,
         "post_to_tiktok": True,
+        "post_to_pinterest": True,
         # Хэндл канала без @, нужен для ссылки в первом комментарии.
         "channel_handle": "60SecFacts",
         # Первый комментарий от имени канала после каждой публикации.
@@ -79,6 +80,7 @@ CONFIGS = {
         # Испанский канал — отдельный Instagram появится позже; пока только YouTube.
         "post_to_instagram": False,
         "post_to_tiktok": False,
+        "post_to_pinterest": False,
         "channel_handle": "DatosEn30s",
         "first_comment": "Más videos sobre este tema 👉 {playlist_url}\nSíguenos para más datos 👉 {channel_url}",
         "playlist_titles": {

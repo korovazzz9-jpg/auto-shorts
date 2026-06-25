@@ -14,6 +14,7 @@ from post_comment import post_channel_comment
 from tts import text_to_speech
 from upload_captions import upload_captions
 from upload_instagram import upload_reel
+from upload_pinterest import upload_pin
 from upload_tiktok import upload_video as upload_to_tiktok, wait_for_publish
 from upload_youtube import upload_video as upload_to_youtube
 from youtube_auth import get_authenticated_channel_title
@@ -106,6 +107,12 @@ def run() -> None:
                         print(f"  TikTok: {status}")
                     except Exception as e:
                         print(f"  TikTok-загрузка не удалась, пропускаю: {e}")
+
+            if CFG.get("post_to_pinterest"):
+                try:
+                    upload_pin(data["title"], data["script"], CFG["channel_handle"], video_id)
+                except Exception as e:
+                    print(f"  Pinterest-загрузка не удалась, пропускаю: {e}")
             except Exception as e:
                 print(f"  Cloudinary/Instagram загрузка не удалась, пропускаю: {e}")
             finally:
