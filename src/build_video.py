@@ -97,84 +97,131 @@ def _karaoke_clips(words: list[dict], cutoff: float) -> list[TextClip]:
     return clips
 
 
-def _draw_heart_png(path: str, size: int = 200) -> None:
-    """Рисует классическую округлую форму сердца (параметрическая кривая), а не полагается
-    на то, как конкретный шрифт рендерит символ ♥/❤ — те выходили угловатыми/нечитаемыми."""
-    scale = 4  # суперсэмплинг для сглаживания краёв
+def _draw_heart_png(path: str, size: int = 220) -> None:
+    """Плоское emoji-стиль сердце: два круга + ромб снизу, белый ободок.
+    Такой формат (идентичный кнопке лайка YouTube) лучше ассоциируется с действием."""
+    scale = 4
     big = size * scale
     img = Image.new("RGBA", (big, big), (0, 0, 0, 0))
     draw = ImageDraw.Draw(img)
 
-    points = []
-    for deg in range(720):
-        t = math.radians(deg / 2)
-        x = 16 * math.sin(t) ** 3
-        y = -(13 * math.cos(t) - 5 * math.cos(2 * t) - 2 * math.cos(3 * t) - math.cos(4 * t))
-        points.append((x, y))
-    xs, ys = [p[0] for p in points], [p[1] for p in points]
-    min_x, max_x, min_y, max_y = min(xs), max(xs), min(ys), max(ys)
-    pad = 0.08
-    cx, cy = (min_x + max_x) / 2, (min_y + max_y) / 2
+    # Сердце = два круга сверху + повёрнутый квадрат снизу.
+    # Параметры подобраны чтобы форма выглядела как ❤️ emoji.
+    r = big * 0.27
+    # левый круг
+    lx, ly = big * 0.29, big * 0.30
+    # правый круг
+    rx, ry = big * 0.71, big * 0.30
+    # нижняя точка
+    bx, by = big * 0.50, big * 0.88
 
-    def transform(p, expand=1.0):
-        nx = (p[0] - cx) * expand + cx
-        ny = (p[1] - cy) * expand + cy
-        nx = (nx - min_x) / (max_x - min_x)
-        ny = (ny - min_y) / (max_y - min_y)
-        return (pad * big + nx * (1 - 2 * pad) * big, pad * big + ny * (1 - 2 * pad) * big)
+    WHITE = (255, 255, 255, 255)
+    RED   = (255, 23, 68, 255)   # #FF1744 — YouTube-red
 
-    # Чёрная подложка чуть крупнее красного сердца поверх — даёт чистый контур без
-    # артефактов "бахромы", которые получаются от ImageDraw.polygon(outline=..., width=...)
-    # на многоточечном контуре.
-    outline_polygon = [transform(p, expand=1.12) for p in points]
-    draw.polygon(outline_polygon, fill=(0, 0, 0, 255))
-    fill_polygon = [transform(p, expand=1.0) for p in points]
-    draw.polygon(fill_polygon, fill=(225, 25, 25, 255))
+    # белый ободок (чуть крупнее)
+    expand = 1.13
+    draw.ellipse([lx - r*expand, ly - r*expand, lx + r*expand, ly + r*expand], fill=WHITE)
+    draw.ellipse([rx - r*expand, ry - r*expand, rx + r*expand, ry + r*expand], fill=WHITE)
+    # белый треугольник снизу
+    draw.polygon([
+        (lx - r*expand*0.6, ly + r*0.5),
+        (rx + r*expand*0.6, ry + r*0.5),
+        (bx, by + big*0.04),
+    ], fill=WHITE)
+
+    # красное сердце поверх
+    draw.ellipse([lx - r, ly - r, lx + r, ly + r], fill=RED)
+    draw.ellipse([rx - r, ry - r, rx + r, ry + r], fill=RED)
+    draw.polygon([
+        (lx - r*0.6, ly + r*0.5),
+        (rx + r*0.6, ry + r*0.5),
+        (bx, by),
+    ], fill=RED)
 
     img = img.resize((size, size), Image.LANCZOS)
     img.save(path)
 
 
+def _draw_cta_badge(path: str, text: str, width: int = 760) -> None:
+    """Рисует pill-бэйдж с белым текстом на полупрозрачном тёмном фоне через PIL.
+    Это надёжнее чем TextClip+stroke — текст читается на любом фоне кадра."""
+    from PIL import ImageFont
+
+    font_path = None
+    for candidate in [
+        r"C:\Windows\Fonts\arialbd.ttf",
+        "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf",
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+    ]:
+        if os.path.exists(candidate):
+            font_path = candidate
+            break
+
+    font_size = 62
+    try:
+        font = ImageFont.truetype(font_path, font_size) if font_path else ImageFont.load_default()
+    except Exception:
+        font = ImageFont.load_default()
+
+    # Измеряем текст
+    dummy = Image.new("RGBA", (1, 1))
+    d = ImageDraw.Draw(dummy)
+    lines = text.split("\n")
+    line_h = font_size + 16
+    total_h = len(lines) * line_h
+    pad_x, pad_y = 48, 28
+
+    h = total_h + pad_y * 2
+    img = Image.new("RGBA", (width, h), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(img)
+
+    # Тёмная полупрозрачная pill-подложка
+    r = h // 2
+    draw.rounded_rectangle([0, 0, width - 1, h - 1], radius=r, fill=(0, 0, 0, 175))
+
+    # Белый текст по центру
+    y = pad_y
+    for line in lines:
+        bbox = draw.textbbox((0, 0), line, font=font)
+        lw = bbox[2] - bbox[0]
+        x = (width - lw) // 2
+        draw.text((x, y), line, font=font, fill=(255, 255, 255, 255))
+        y += line_h
+
+    img.save(path)
+
+
 def _cta_clips(duration: float) -> list[ImageClip]:
-    # Размер увеличен на ~27% и сдвинут в верхне-среднюю зону по данным о поведении
-    # зрителей: CTA лучше работает выше центра, подальше от нижней зоны с реальными
-    # кнопками платформы, и с мягкой, а не резкой пульсацией (тише, но всё ещё заметно).
     cta_duration = min(CTA_DURATION, duration)
     start = max(duration - cta_duration, 0)
     heart_y = int(TARGET_SIZE[1] * 0.24)
-    label_y = heart_y + 230
 
-    heart_png = os.path.join(tempfile.mkdtemp(), "heart.png")
-    _draw_heart_png(heart_png, size=200)
+    tmp = tempfile.mkdtemp()
+    heart_png = os.path.join(tmp, "heart.png")
+    badge_png = os.path.join(tmp, "badge.png")
+
+    _draw_heart_png(heart_png, size=220)
+    _draw_cta_badge(badge_png, _pick_cta_phrase(), width=700)
 
     heart = ImageClip(heart_png)
-    # Мягкая пульсация — плавная синусоида небольшой амплитуды вместо резкого "попа".
-    pulse = lambda t: 1 + 0.12 * max(0.0, math.sin(t * CTA_PULSES * math.pi / max(cta_duration, 0.01))) ** 2
+    pulse = lambda t: 1 + 0.14 * max(0.0, math.sin(t * CTA_PULSES * math.pi / max(cta_duration, 0.01))) ** 2
     heart = (
         heart.resize(pulse)
-        .set_position(lambda t: ("center", heart_y - int(25 * (pulse(t) - 1))))
+        .set_position(lambda t: ("center", heart_y - int(30 * (pulse(t) - 1))))
         .set_start(start)
         .set_duration(cta_duration)
     )
 
-    label = (
-        TextClip(
-            _pick_cta_phrase(),
-            fontsize=48,
-            color="white",
-            font="Arial-Bold",
-            stroke_color="black",
-            stroke_width=4,
-            size=(TARGET_SIZE[0] - 160, None),
-            method="caption",
-            align="center",
-        )
-        .set_position(("center", label_y))
+    badge_h = ImageClip(badge_png).size[1]
+    badge_y = heart_y + 250
+    badge = (
+        ImageClip(badge_png)
+        .set_position(("center", badge_y))
         .set_start(start)
         .set_duration(cta_duration)
     )
 
-    return [heart, label]
+    return [heart, badge]
 
 
 def _mix_music(voice_audio: AudioFileClip, duration: float, topic: str | None):
