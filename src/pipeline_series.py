@@ -20,6 +20,7 @@ from post_comment import post_channel_comment
 from tts import text_to_speech
 from upload_captions import upload_captions
 from upload_instagram import upload_reel
+from upload_tiktok import upload_video as upload_to_tiktok, wait_for_publish
 from upload_youtube import upload_video as upload_to_youtube
 from youtube_auth import get_authenticated_channel_title
 
@@ -113,17 +114,29 @@ def run() -> None:
         except Exception as e:
             print(f"  Comment failed: {e}")
 
-        if CFG["post_to_instagram"]:
-            print("Uploading to Instagram...")
+        need_cloudinary = CFG["post_to_instagram"] or CFG.get("post_to_tiktok")
+        if need_cloudinary:
+            print("Uploading to cloud (Cloudinary) and publishing...")
             hosted = None
             hosted_thumb = None
             try:
                 hosted = upload_to_cloudinary(video_path)
-                hosted_thumb = upload_image(thumb_path)
-                caption = f"{data['title']}\n\n{data['script']}\n\n{' '.join(data['hashtags'])}"
-                upload_reel(hosted["url"], caption, cover_url=hosted_thumb["url"])
+                if CFG["post_to_instagram"]:
+                    hosted_thumb = upload_image(thumb_path)
+                    caption = f"{data['title']}\n\n{data['script']}\n\n{' '.join(data['hashtags'])}"
+                    upload_reel(hosted["url"], caption, cover_url=hosted_thumb["url"])
+                    print("  Instagram: published")
+
+                if CFG.get("post_to_tiktok"):
+                    try:
+                        publish_id = upload_to_tiktok(hosted["url"], data["title"], data["hashtags"])
+                        token = os.environ["TIKTOK_ACCESS_TOKEN"]
+                        status = wait_for_publish(publish_id, token)
+                        print(f"  TikTok: {status}")
+                    except Exception as e:
+                        print(f"  TikTok failed: {e}")
             except Exception as e:
-                print(f"  Instagram failed: {e}")
+                print(f"  Cloudinary/Instagram failed: {e}")
             finally:
                 if hosted:
                     try:

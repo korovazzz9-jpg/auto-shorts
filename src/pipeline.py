@@ -14,6 +14,7 @@ from post_comment import post_channel_comment
 from tts import text_to_speech
 from upload_captions import upload_captions
 from upload_instagram import upload_reel
+from upload_tiktok import upload_video as upload_to_tiktok, wait_for_publish
 from upload_youtube import upload_video as upload_to_youtube
 from youtube_auth import get_authenticated_channel_title
 
@@ -80,17 +81,29 @@ def run() -> None:
         except Exception as e:
             print(f"  Не удалось опубликовать комментарий: {e}")
 
-        if CFG["post_to_instagram"]:
-            print("6/6 Загрузка в Instagram...")
+        need_cloudinary = CFG["post_to_instagram"] or CFG.get("post_to_tiktok")
+        if need_cloudinary:
+            print("6/6 Загрузка в облако (Cloudinary) и публикация...")
             hosted = None
             hosted_thumb = None
             try:
                 hosted = upload_to_cloudinary(video_path)
-                hosted_thumb = upload_image(thumb_path)
-                caption = f"{data['title']}\n\n{data['script']}\n\n{' '.join(data['hashtags'])}"
-                upload_reel(hosted["url"], caption, cover_url=hosted_thumb["url"])
+                if CFG["post_to_instagram"]:
+                    hosted_thumb = upload_image(thumb_path)
+                    caption = f"{data['title']}\n\n{data['script']}\n\n{' '.join(data['hashtags'])}"
+                    upload_reel(hosted["url"], caption, cover_url=hosted_thumb["url"])
+                    print("  Instagram: опубликовано")
+
+                if CFG.get("post_to_tiktok"):
+                    try:
+                        publish_id = upload_to_tiktok(hosted["url"], data["title"], data["hashtags"])
+                        token = os.environ["TIKTOK_ACCESS_TOKEN"]
+                        status = wait_for_publish(publish_id, token)
+                        print(f"  TikTok: {status}")
+                    except Exception as e:
+                        print(f"  TikTok-загрузка не удалась, пропускаю: {e}")
             except Exception as e:
-                print(f"  Instagram-загрузка не удалась, пропускаю: {e}")
+                print(f"  Cloudinary/Instagram загрузка не удалась, пропускаю: {e}")
             finally:
                 if hosted:
                     try:
@@ -103,7 +116,7 @@ def run() -> None:
                     except Exception as e:
                         print(f"  Не удалось удалить thumbnail из Cloudinary: {e}")
         else:
-            print("6/6 Instagram отключён для этого канала, пропускаю.")
+            print("6/6 Instagram и TikTok отключены для этого канала, пропускаю.")
 
     print("Готово.")
 
