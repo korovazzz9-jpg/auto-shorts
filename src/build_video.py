@@ -98,45 +98,28 @@ def _karaoke_clips(words: list[dict], cutoff: float) -> list[TextClip]:
 
 
 def _draw_heart_png(path: str, size: int = 220) -> None:
-    """Плоское emoji-стиль сердце: два круга + ромб снизу, белый ободок.
-    Такой формат (идентичный кнопке лайка YouTube) лучше ассоциируется с действием."""
+    """Классическое сердце через параметрическую кривую + тёмная тень (без белого контура)."""
     scale = 4
     big = size * scale
     img = Image.new("RGBA", (big, big), (0, 0, 0, 0))
     draw = ImageDraw.Draw(img)
 
-    # Сердце = два круга сверху + повёрнутый квадрат снизу.
-    # Параметры подобраны чтобы форма выглядела как ❤️ emoji.
-    r = big * 0.27
-    # левый круг
-    lx, ly = big * 0.29, big * 0.30
-    # правый круг
-    rx, ry = big * 0.71, big * 0.30
-    # нижняя точка
-    bx, by = big * 0.50, big * 0.88
+    cx, cy = big * 0.50, big * 0.48
+    sc = big * 0.028  # масштаб кривой
 
-    WHITE = (255, 255, 255, 255)
-    RED   = (255, 23, 68, 255)   # #FF1744 — YouTube-red
+    def heart_pts(offset_x=0, offset_y=0, expand=1.0):
+        pts = []
+        for i in range(720):
+            t = math.radians(i / 2)
+            x = 16 * math.sin(t) ** 3
+            y = -(13 * math.cos(t) - 5 * math.cos(2*t) - 2 * math.cos(3*t) - math.cos(4*t))
+            pts.append((cx + x * sc * expand + offset_x, cy + y * sc * expand + offset_y))
+        return pts
 
-    # белый ободок (чуть крупнее)
-    expand = 1.13
-    draw.ellipse([lx - r*expand, ly - r*expand, lx + r*expand, ly + r*expand], fill=WHITE)
-    draw.ellipse([rx - r*expand, ry - r*expand, rx + r*expand, ry + r*expand], fill=WHITE)
-    # белый треугольник снизу
-    draw.polygon([
-        (lx - r*expand*0.6, ly + r*0.5),
-        (rx + r*expand*0.6, ry + r*0.5),
-        (bx, by + big*0.04),
-    ], fill=WHITE)
-
-    # красное сердце поверх
-    draw.ellipse([lx - r, ly - r, lx + r, ly + r], fill=RED)
-    draw.ellipse([rx - r, ry - r, rx + r, ry + r], fill=RED)
-    draw.polygon([
-        (lx - r*0.6, ly + r*0.5),
-        (rx + r*0.6, ry + r*0.5),
-        (bx, by),
-    ], fill=RED)
+    # тёмная тень — тот же контур, смещённый вправо-вниз
+    draw.polygon(heart_pts(offset_x=big*0.018, offset_y=big*0.022), fill=(0, 0, 0, 160))
+    # красное сердце
+    draw.polygon(heart_pts(), fill=(255, 23, 68, 255))
 
     img = img.resize((size, size), Image.LANCZOS)
     img.save(path)
