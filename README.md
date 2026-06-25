@@ -311,6 +311,25 @@ gh secret set TIKTOK_ACCESS_TOKEN -b"<access_token>"
 | TTS retry | Убрать цикл в `text_to_speech`, оставить один вызов `_synthesize` |
 | CTA (сердце + бэйдж) | `_draw_heart_png()` и `_draw_cta_badge()` в `build_video.py` |
 
+## Аналитика
+
+```bash
+# Оба канала сразу
+python src/analytics.py
+
+# Только один канал
+CHANNEL=es python src/analytics.py
+```
+
+Показывает для каждого канала:
+- Подписчиков, всего просмотров, кол-во видео
+- За последние 7 дней: просмотры, лайки, среднее на видео
+- Таблицу последних 20 видео: заголовок, возраст, просмотры, лайки
+
+Использует YouTube Data API v3 (не требует отдельного включения Analytics API).
+
+---
+
 ## Мониторинг
 
 - **GitHub Actions** — вкладка Actions: каждый запуск, ошибки, логи
