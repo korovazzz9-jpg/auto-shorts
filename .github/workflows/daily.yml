@@ -9,8 +9,9 @@ on:
     - cron: "7 13 * * *"
     - cron: "13 16 * * *"
     - cron: "7 20 * * *"
-    - cron: "13 22 * * *"
-    - cron: "7 0 * * *"
+    # temporarily disabled 2026-06-25 (quota), restore tomorrow:
+    # - cron: "13 22 * * *"
+    # - cron: "7 0 * * *"
   workflow_dispatch: {}
 
 jobs:
