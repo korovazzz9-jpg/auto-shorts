@@ -64,9 +64,12 @@ def run() -> None:
         )
 
         try:
-            upload_captions(video_id, words)
+            channel_url = f"https://www.youtube.com/@{CFG['channel_handle']}" if CFG.get("channel_handle") else ""
+            comment = CFG.get("first_comment", "").format(channel_url=channel_url).strip()
+            if comment:
+                post_channel_comment(video_id, comment)
         except Exception as e:
-            print(f"  Не удалось загрузить субтитры: {e}")
+            print(f"  Не удалось опубликовать комментарий: {e}")
 
         try:
             add_video_to_playlist(video_id, data["topic"])
@@ -74,12 +77,9 @@ def run() -> None:
             print(f"  Не удалось добавить в плейлист: {e}")
 
         try:
-            channel_url = f"https://www.youtube.com/@{CFG['channel_handle']}" if CFG.get("channel_handle") else ""
-            comment = CFG.get("first_comment", "").format(channel_url=channel_url).strip()
-            if comment:
-                post_channel_comment(video_id, comment)
+            upload_captions(video_id, words)
         except Exception as e:
-            print(f"  Не удалось опубликовать комментарий: {e}")
+            print(f"  Не удалось загрузить субтитры: {e}")
 
         need_cloudinary = CFG["post_to_instagram"] or CFG.get("post_to_tiktok")
         if need_cloudinary:
