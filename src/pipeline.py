@@ -107,12 +107,6 @@ def run() -> None:
                         print(f"  TikTok: {status}")
                     except Exception as e:
                         print(f"  TikTok-загрузка не удалась, пропускаю: {e}")
-
-            if CFG.get("post_to_pinterest"):
-                try:
-                    upload_pin(data["title"], data["script"], CFG["channel_handle"], video_id)
-                except Exception as e:
-                    print(f"  Pinterest-загрузка не удалась, пропускаю: {e}")
             except Exception as e:
                 print(f"  Cloudinary/Instagram загрузка не удалась, пропускаю: {e}")
             finally:
@@ -128,6 +122,12 @@ def run() -> None:
                         print(f"  Не удалось удалить thumbnail из Cloudinary: {e}")
         else:
             print("6/6 Instagram и TikTok отключены для этого канала, пропускаю.")
+
+        if CFG.get("post_to_pinterest"):
+            try:
+                upload_pin(data["title"], data["script"], CFG["channel_handle"], video_id)
+            except Exception as e:
+                print(f"  Pinterest-загрузка не удалась, пропускаю: {e}")
 
     print("Готово.")
 
