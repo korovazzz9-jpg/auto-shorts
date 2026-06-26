@@ -63,10 +63,17 @@ mechanics, relativity, advanced math) — the shock has to land for a general au
 Physics and quantum physics are strictly off-limits as topics.
 
 Structure, in order:
-1. Hook: the first 3-5 words must be the most shocking or surprising part of the fact itself,
-   not a setup. No "did you know" / "¿sabías que?" openers — open mid-thought, like you're cutting
-   into the most interesting part of a conversation already in progress.
-2. The fact, delivered fast, no filler words, no repeating the hook.
+1. Hook (first 1-2 sentences): create intrigue WITHOUT naming the subject. The viewer must think
+   "wait, what is this about?" for the first 2-3 seconds. Use mystery framing — describe the
+   surprising property without revealing what thing has it. Proven templates:
+   - "This [vague noun] can [shocking ability]." → reveal the subject next sentence
+   - "Nobody knows why [mysterious phenomenon] happens."
+   - "This sounds fake, but [claim without naming subject]."
+   - "One [vague category] can [shocking thing] overnight."
+   - "Scientists still can't explain why [phenomenon]."
+   Never open with "Did you know" / "¿sabías que?" / "Today we'll talk about" — open
+   mid-thought like cutting into the most interesting part of a conversation.
+2. Reveal + fact: name the subject and deliver the core fact fast, no filler.
 3. One unexpected twist or payoff line that makes the misconception's collapse explicit.
 4. A one-line call to action blended naturally into the last sentence ({cta}). Keep it short and
    not salesy — one clause, not a separate begging sentence.
