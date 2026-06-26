@@ -283,12 +283,12 @@ def _hook_clip(title: str) -> TextClip:
     кто смотрит ленту без звука — главный рычаг retention в первой секунде."""
     txt = TextClip(
         title.upper(),
-        fontsize=88,
+        fontsize=124,
         color="white",
         font="Arial-Bold",
         stroke_color="black",
-        stroke_width=6,
-        size=(TARGET_SIZE[0] - 120, None),
+        stroke_width=9,
+        size=(TARGET_SIZE[0] - 80, None),
         method="caption",
     )
     return (

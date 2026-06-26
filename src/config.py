@@ -31,10 +31,10 @@ CONFIGS = {
         # который Claude пометил как подходящий по смыслу к хуку. На стыке петли
         # "<фраза> <хук>" читается как одно связное предложение ("This is why <хук>").
         "loop_phrases": {
-            "why": ["This is why.", "And that's exactly why.", "Which is why.", "And here's why."],
-            "how": ["Here's how.", "And here's how.", "And this is how."],
-            "when": ["And it only happens when.", "And that's exactly when."],
-            "where": ["And that's exactly where.", "Which is exactly where."],
+            "why": ["This is why.", "And that's exactly why.", "And that's why.", "Which is why."],
+            "how": ["And that's how.", "And that's exactly how.", "And this is how."],
+            "when": ["And that's exactly when.", "And it all started when."],
+            "where": ["And that's exactly where.", "And it all happened where."],
             "because": ["And it's all because.", "And that's because."],
         },
         # Доля видео с петлёй (остальные — обычная концовка). Не 100%, чтобы приём не стал
@@ -107,10 +107,10 @@ CONFIGS = {
             "DALE LIKE\nsi no lo sabías",
         ],
         "loop_phrases": {
-            "why": ["Y por eso.", "Y por eso exactamente.", "Por eso mismo.", "Y por eso pasa."],
-            "how": ["Y así es como.", "Así es como.", "Y de esta forma."],
-            "when": ["Y solo pasa cuando.", "Y justo cuando."],
-            "where": ["Y justo ahí donde.", "Y ahí es donde."],
+            "why": ["Y por eso.", "Y por eso exactamente.", "Y por eso pasa.", "Por eso mismo."],
+            "how": ["Y así es como.", "Y exactamente así.", "Y de esta forma."],
+            "when": ["Y justo cuando.", "Y todo empezó cuando."],
+            "where": ["Y justo ahí donde.", "Y todo pasó donde."],
             "because": ["Y todo porque.", "Y es porque."],
         },
         "loop_probability": 0.65,

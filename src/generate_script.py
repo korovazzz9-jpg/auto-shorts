@@ -89,15 +89,15 @@ Structure, in order:
    c) Camps: split the audience into two groups who'll argue. ("Half of you will refuse to
       believe this even now.")
    d) Unfinished "actually": an almost-complete claim that begs an "actually..." reply.
-   This sentence must NOT be the last sentence.
-5. CTA: the script's LAST sentence is the CTA ({cta}) — short, standalone. Do NOT write any loop
-   line yourself — a loop connector will be appended automatically after your script.
-   Instead, separately tell me which loop connectors fit (field "loop_connectors", see below).
+   This comment-bait IS the LAST spoken sentence of your script.
+   Do NOT add any spoken call-to-action ("follow", "comment", "like") — the follow prompt is shown
+   on-screen as a badge, not spoken. A voiced CTA here breaks the flow into the loop. Do NOT write
+   any loop line yourself either — a loop connector is appended automatically.
 
-LOOP CONNECTORS (field "loop_connectors"): a short loop phrase will be appended right after your CTA
-and the video will then loop back to sentence 1. The appended phrase ends in one of: why / how / when /
-where / because — so on the loop it reads "<that word> <sentence 1>". Your job: list ONLY the
-connector words for which "<word> <sentence 1>" is a COHERENT, grammatical sentence.
+LOOP CONNECTORS (field "loop_connectors"): a short loop phrase is appended right after your last
+sentence and the video loops back to sentence 1. The appended phrase ends in one of:
+why / how / when / where / because — so on the loop it reads "<that word> <sentence 1>". Your job:
+list ONLY the connector words for which "<word> <sentence 1>" is a COHERENT, grammatical sentence.
   Test each: read "why <sentence 1>", "how <sentence 1>", "when <sentence 1>", "where <sentence 1>",
   "because <sentence 1>" aloud — include a word ONLY if it forms a real sentence.
   Example: sentence 1 = "This creature ages backwards." → "why this creature ages backwards" ✓,
@@ -108,7 +108,6 @@ connector words for which "<word> <sentence 1>" is a COHERENT, grammatical sente
 No "today I'll tell you about" style intros.""".format(
     channel=CFG["channel_name"],
     language=CFG["script_language"],
-    cta=CFG["cta_instruction"],
 )
 
 # 30-38s is the sweet spot for YouTube's 2026 Shorts algorithm (absolute watch time, not
@@ -155,7 +154,7 @@ def _build_user_content(topic: str, avoid_block: str) -> str:
         "equivalent of #facts) with 2-4 specific ones tied to the topic and fact.\n\n"
         "Respond strictly in JSON, no markdown wrapper: "
         '{"title": "title text", '
-        '"script": "voiceover script text ending with the CTA (no loop line)", '
+        '"script": "voiceover script ending with the comment-bait line (NO spoken CTA, NO loop line)", '
         '"loop_connectors": ["why", "how"], '
         '"tags": ["tag1", "tag2", ...], '
         '"hashtags": ["#tag1", "#tag2", ...], '
