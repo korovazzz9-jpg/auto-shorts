@@ -9,6 +9,10 @@ on:
     - cron: "17 0 * * *"
   workflow_dispatch: {}
 
+concurrency:
+  group: daily-es
+  cancel-in-progress: true
+
 jobs:
   publish:
     runs-on: ubuntu-latest
