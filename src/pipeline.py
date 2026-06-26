@@ -5,21 +5,23 @@ import tempfile
 from dotenv import load_dotenv
 
 from build_video import build_video
-from cloudinary_upload import delete_image, delete_video, upload_image, upload_video as upload_to_cloudinary
 from config import CFG
 from fetch_stock_video import fetch_clips
 from generate_script import generate_script
-from playlists import add_video_to_playlist
-from post_comment import post_channel_comment
+from notify import notify
+from publish import publish
 from tts import text_to_speech
-from upload_captions import upload_captions
-from upload_instagram import upload_reel
-from upload_pinterest import upload_pin
-from upload_tiktok import upload_video as upload_to_tiktok, wait_for_publish
-from upload_youtube import upload_video as upload_to_youtube
 from youtube_auth import get_authenticated_channel_title
 
 load_dotenv()
+
+
+def _alert(step: str, err: Exception) -> None:
+    """Частичный сбой: видео залилось, но один из шагов отвалился. GitHub про это
+    письмо НЕ шлёт (exit 0), поэтому сообщаем в Telegram сами."""
+    msg = f"⚠️ [{CFG['channel_name']}] шаг «{step}» упал, но пайплайн продолжил:\n{err}"
+    print(f"  {msg}")
+    notify(msg)
 
 
 def _verify_channel() -> None:
@@ -54,83 +56,30 @@ def run() -> None:
         print("4/6 Сборка видео...")
         video_path, thumb_path = build_video(audio_path, clip_paths, words, video_path, topic=data["topic"], title=data["title"])
 
-        print("5/6 Загрузка на YouTube...")
-        video_id = upload_to_youtube(
-            video_path,
-            title=data["title"],
-            description=data["script"],
-            tags=data["tags"] + [f"topic-{data['topic'].replace(' ', '_')}"],
-            hashtags=data["hashtags"],
-            hashtag_position=data["hashtag_position"],
+        print("5/6 Публикация...")
+        publish(
+            data=data,
+            video_path=video_path,
+            thumb_path=thumb_path,
+            words=words,
+            topic=data["topic"],
+            alert=_alert,
+            extra_tags=[
+                f"topic-{data['topic'].replace(' ', '_')}",
+                f"loop-{'yes' if data.get('has_loop') else 'no'}",
+            ],
+            enable_captions=False,  # временно (квота), вернуть после увеличения квоты
+            enable_pinterest=True,
         )
-
-        playlist_id = None
-        try:
-            playlist_id = add_video_to_playlist(video_id, data["topic"])
-        except Exception as e:
-            print(f"  Не удалось добавить в плейлист: {e}")
-
-        try:
-            channel_url = f"https://www.youtube.com/@{CFG['channel_handle']}" if CFG.get("channel_handle") else ""
-            comment_template = CFG.get("first_comment", "")
-            playlist_url = f"https://www.youtube.com/playlist?list={playlist_id}" if playlist_id else ""
-            comment = comment_template.format(channel_url=channel_url, playlist_url=playlist_url).strip()
-            if comment:
-                post_channel_comment(video_id, comment)
-        except Exception as e:
-            print(f"  Не удалось опубликовать комментарий: {e}")
-
-        # temporarily disabled (quota), re-enable after quota increase approved
-        # try:
-        #     upload_captions(video_id, words)
-        # except Exception as e:
-        #     print(f"  Не удалось загрузить субтитры: {e}")
-
-        need_cloudinary = CFG["post_to_instagram"] or CFG.get("post_to_tiktok")
-        if need_cloudinary:
-            print("6/6 Загрузка в облако (Cloudinary) и публикация...")
-            hosted = None
-            hosted_thumb = None
-            try:
-                hosted = upload_to_cloudinary(video_path)
-                if CFG["post_to_instagram"]:
-                    hosted_thumb = upload_image(thumb_path)
-                    caption = f"{data['title']}\n\n{data['script']}\n\n{' '.join(data['hashtags'])}"
-                    upload_reel(hosted["url"], caption, cover_url=hosted_thumb["url"])
-                    print("  Instagram: опубликовано")
-
-                if CFG.get("post_to_tiktok"):
-                    try:
-                        publish_id = upload_to_tiktok(hosted["url"], data["title"], data["hashtags"])
-                        token = os.environ["TIKTOK_ACCESS_TOKEN"]
-                        status = wait_for_publish(publish_id, token)
-                        print(f"  TikTok: {status}")
-                    except Exception as e:
-                        print(f"  TikTok-загрузка не удалась, пропускаю: {e}")
-            except Exception as e:
-                print(f"  Cloudinary/Instagram загрузка не удалась, пропускаю: {e}")
-            finally:
-                if hosted:
-                    try:
-                        delete_video(hosted["public_id"])
-                    except Exception as e:
-                        print(f"  Не удалось удалить временный файл из Cloudinary: {e}")
-                if hosted_thumb:
-                    try:
-                        delete_image(hosted_thumb["public_id"])
-                    except Exception as e:
-                        print(f"  Не удалось удалить thumbnail из Cloudinary: {e}")
-        else:
-            print("6/6 Instagram и TikTok отключены для этого канала, пропускаю.")
-
-        if CFG.get("post_to_pinterest"):
-            try:
-                upload_pin(data["title"], data["script"], CFG["channel_handle"], video_id)
-            except Exception as e:
-                print(f"  Pinterest-загрузка не удалась, пропускаю: {e}")
 
     print("Готово.")
 
 
 if __name__ == "__main__":
-    run()
+    try:
+        run()
+    except Exception as e:
+        # Жёсткий сбой — видео НЕ вышло. Сообщаем в Telegram и пробрасываем дальше,
+        # чтобы GitHub Actions тоже пометил запуск красным.
+        notify(f"🔴 [{CFG['channel_name']}] пайплайн УПАЛ, видео не вышло:\n{e}")
+        raise

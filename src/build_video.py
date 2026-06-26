@@ -3,6 +3,7 @@ import glob
 import math
 import os
 import random
+import shutil
 import tempfile
 
 from PIL import Image, ImageDraw
@@ -47,26 +48,48 @@ def _pick_caption_color() -> str:
     return random.choice(CAPTION_COLORS)
 
 
-def _pick_cta_phrase() -> str:
+def _pick_cta_phrase(topic: str | None = None) -> str:
+    """Topic-aware CTA: если для темы есть слово — персональный призыв
+    («FOLLOW for more OCEAN facts»), иначе генерик-фраза из cta_phrases."""
+    words = CFG.get("topic_cta_words", {})
+    template = CFG.get("cta_topic_template")
+    if topic and template and topic in words:
+        return template.format(word=words[topic])
     return random.choice(CFG["cta_phrases"])
 
 
-def _fit_clip(clip: VideoFileClip, duration: float, zoom_factor: float) -> VideoFileClip:
+def _fit_clip(clip: VideoFileClip, duration: float, zoom_factor: float, loop: bool = False) -> VideoFileClip:
     clip = clip.without_audio().resize(height=TARGET_SIZE[1])
     if clip.w < TARGET_SIZE[0]:
         clip = clip.resize(width=TARGET_SIZE[0])
     clip = clip.crop(x_center=clip.w / 2, y_center=clip.h / 2, width=TARGET_SIZE[0], height=TARGET_SIZE[1])
     if clip.duration < duration:
-        loops = int(duration // clip.duration) + 1
-        clip = clip.loop(n=loops)
+        if loop:
+            loops = int(duration // clip.duration) + 1
+            clip = clip.loop(n=loops)
+        else:
+            duration = clip.duration
     clip = clip.subclip(0, duration)
     clip = clip.resize(lambda t: 1 + (zoom_factor - 1) * (t / max(duration, 0.01)))
     return clip.set_position("center")
 
 
 def _build_background(clip_paths: list[str], duration: float) -> CompositeVideoClip:
+    # Визуальный loop: первый клип повторяем в конце — кадр конца ≈ кадр начала,
+    # петля (которую держит и текстовый loop в скрипте) ощущается бесшовной → больше пересмотров.
+    # ВАЖНО: копируем в отдельный файл — нельзя открывать один и тот же файл двумя
+    # VideoFileClip-ридерами (второй читает чёрные кадры → чёрный конец видео).
+    clip_paths = list(clip_paths)
+    if len(clip_paths) >= 2:
+        loop_tail = os.path.join(tempfile.mkdtemp(), "loop_tail" + os.path.splitext(clip_paths[0])[1])
+        shutil.copy2(clip_paths[0], loop_tail)
+        clip_paths.append(loop_tail)
+
     per_clip = duration / len(clip_paths)
-    fitted = [_fit_clip(VideoFileClip(p), per_clip, _pick_zoom_factor()) for p in clip_paths]
+    fitted = [
+        _fit_clip(VideoFileClip(p), per_clip, _pick_zoom_factor(), loop=(i == len(clip_paths) - 1))
+        for i, p in enumerate(clip_paths)
+    ]
     sequence = concatenate_videoclips(fitted, method="compose")
     return CompositeVideoClip([sequence], size=TARGET_SIZE).set_duration(duration)
 
@@ -195,7 +218,7 @@ def _draw_cta_badge(path: str, text: str, width: int = 760) -> None:
     img.save(path)
 
 
-def _cta_clips(duration: float) -> list[ImageClip]:
+def _cta_clips(duration: float, topic: str | None = None) -> list[ImageClip]:
     cta_duration = min(CTA_DURATION, duration)
     start = max(duration - cta_duration, 0)
     heart_y = int(TARGET_SIZE[1] * 0.24)
@@ -205,7 +228,7 @@ def _cta_clips(duration: float) -> list[ImageClip]:
     badge_png = os.path.join(tmp, "badge.png")
 
     _draw_heart_png(heart_png)  # рендерится в 600px — анимация всегда downscale, без пикселей
-    _draw_cta_badge(badge_png, _pick_cta_phrase(), width=700)
+    _draw_cta_badge(badge_png, _pick_cta_phrase(topic), width=700)
 
     BASE = 220  # базовый размер сердца в видео (px)
     # pulse всегда downscale с 600px → 220-251px, пикселей нет
@@ -252,6 +275,27 @@ def _mix_music(voice_audio: AudioFileClip, duration: float, topic: str | None):
 
 
 PART_LABEL_DURATION = 2.5  # секунд показа "PART N / 3" в начале видео
+HOOK_DURATION = 2.8  # секунд показа крупного текста-хука (стоп-скролл в первой секунде)
+
+
+def _hook_clip(title: str) -> TextClip:
+    """Крупный статичный текст-хук поверх первых ~3 сек. Останавливает палец у тех,
+    кто смотрит ленту без звука — главный рычаг retention в первой секунде."""
+    txt = TextClip(
+        title.upper(),
+        fontsize=88,
+        color="white",
+        font="Arial-Bold",
+        stroke_color="black",
+        stroke_width=6,
+        size=(TARGET_SIZE[0] - 120, None),
+        method="caption",
+    )
+    return (
+        txt.set_position(("center", int(TARGET_SIZE[1] * 0.30)))
+        .set_start(0)
+        .set_duration(HOOK_DURATION)
+    )
 
 
 def _part_label_clip(part: int, total: int) -> TextClip:
@@ -295,17 +339,21 @@ def build_video(
     cta_start = max(duration - cta_duration, 0)
 
     background = _build_background(clip_paths, duration)
-    caption_clips = _karaoke_clips(words, cutoff=cta_start)
-    cta_clips = _cta_clips(duration)
+    caption_clips = _karaoke_clips(words, cutoff=duration)
+    cta_clips = _cta_clips(duration, topic)
     part_clips = [_part_label_clip(part, total_parts)] if part else []
+    hook_clips = [_hook_clip(title)] if title else []
     final = CompositeVideoClip(
-        [background, *caption_clips, *cta_clips, *part_clips], size=TARGET_SIZE
+        [background, *caption_clips, *cta_clips, *part_clips, *hook_clips], size=TARGET_SIZE
     ).set_audio(audio)
     final.write_videofile(out_path, fps=30, codec="libx264", audio_codec="aac", logger=None)
 
+    # Тумбу берём из кадра во время показа текста-хука — заголовок уже вписан в кадр,
+    # отдельную полосу-overlay больше не рисуем (иначе текст дублируется).
     thumb_path = out_path.replace(".mp4", "_thumb.jpg")
-    frame = final.get_frame(min(1.0, duration * 0.1))
-    _save_thumbnail(Image.fromarray(frame).convert("RGB"), thumb_path, title=title)
+    thumb_time = HOOK_DURATION / 2 if title else min(1.0, duration * 0.1)
+    frame = final.get_frame(min(thumb_time, duration - 0.1))
+    Image.fromarray(frame).convert("RGB").save(thumb_path, "JPEG")
 
     return out_path, thumb_path
 
@@ -320,10 +368,10 @@ def _save_thumbnail(img: Image.Image, path: str, title: str | None = None) -> No
     draw = ImageDraw.Draw(img)
     W, H = img.size
 
-    # Полупрозрачная тёмная полоса снизу под текстом
+    # Полупрозрачная тёмная полоса в верхней части (видна в Instagram 1:1 кропе)
     overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
     ov_draw = ImageDraw.Draw(overlay)
-    ov_draw.rectangle([(0, H - 420), (W, H)], fill=(0, 0, 0, 160))
+    ov_draw.rectangle([(0, 0), (W, 420)], fill=(0, 0, 0, 160))
     img = img.convert("RGBA")
     img = Image.alpha_composite(img, overlay).convert("RGB")
     draw = ImageDraw.Draw(img)
@@ -378,7 +426,7 @@ def _save_thumbnail(img: Image.Image, path: str, title: str | None = None) -> No
 
     line_h = font_size + 12
     total_h = len(lines) * line_h
-    y = H - total_h - 48
+    y = 48  # текст сверху — виден в Instagram 1:1 кропе и в полном 9:16
 
     for line in lines:
         bbox = draw.textbbox((0, 0), line, font=font)

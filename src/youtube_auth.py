@@ -12,8 +12,8 @@ SCOPES = [
 ]
 
 
-def get_client():
-    creds = Credentials(
+def _credentials() -> Credentials:
+    return Credentials(
         token=None,
         refresh_token=os.environ["YT_REFRESH_TOKEN"],
         client_id=os.environ["YT_CLIENT_ID"],
@@ -21,7 +21,15 @@ def get_client():
         token_uri="https://oauth2.googleapis.com/token",
         scopes=SCOPES,
     )
-    return build("youtube", "v3", credentials=creds)
+
+
+def get_client():
+    return build("youtube", "v3", credentials=_credentials())
+
+
+def get_analytics_client():
+    """YouTube Analytics API v2 — для retention-метрик (avg view duration / % досмотра)."""
+    return build("youtubeAnalytics", "v2", credentials=_credentials())
 
 
 def get_authenticated_channel_title() -> str:

@@ -1,0 +1,116 @@
+"""Общая логика публикации одного готового видео на все площадки.
+
+Используется и `pipeline.py` (обычные Shorts), и `pipeline_series.py` (серии) —
+чтобы оркестрация загрузки (YouTube → плейлист → коммент → субтитры → Cloudinary/IG/TikTok
+→ Pinterest) жила в ОДНОМ месте и не рассинхронизировалась между пайплайнами.
+"""
+import os
+
+from cloudinary_upload import delete_image, delete_video, upload_image, upload_video as upload_to_cloudinary
+from config import CFG
+from notify import notify
+from playlists import add_video_to_playlist
+from post_comment import post_channel_comment
+from upload_captions import upload_captions
+from upload_instagram import upload_reel
+from upload_pinterest import upload_pin
+from upload_tiktok import upload_video as upload_to_tiktok, wait_for_publish
+from upload_youtube import upload_video as upload_to_youtube
+
+
+def publish(
+    *,
+    data: dict,
+    video_path: str,
+    thumb_path: str,
+    words: list,
+    topic: str,
+    alert,
+    extra_tags=(),
+    enable_captions: bool = False,
+    enable_pinterest: bool = False,
+) -> str:
+    """Заливает видео на YouTube и кросс-постит. Возвращает video_id.
+
+    `alert(step, err)` — колбэк для частичных сбоев (видео уже вышло, шаг отвалился),
+    каждый пайплайн передаёт свой с нужным префиксом (канал / "Part N").
+    Субтитры и Pinterest по умолчанию выключены — включаются явно.
+    """
+    print("Загрузка на YouTube...")
+    video_id = upload_to_youtube(
+        video_path,
+        title=data["title"],
+        description=data["script"],
+        tags=list(data["tags"]) + list(extra_tags),
+        hashtags=data["hashtags"],
+        hashtag_position=data["hashtag_position"],
+        thumbnail_path=thumb_path,
+    )
+
+    playlist_id = None
+    try:
+        playlist_id = add_video_to_playlist(video_id, topic)
+    except Exception as e:
+        alert("playlist", e)
+
+    try:
+        channel_url = f"https://www.youtube.com/@{CFG['channel_handle']}" if CFG.get("channel_handle") else ""
+        comment_template = CFG.get("first_comment", "")
+        playlist_url = f"https://www.youtube.com/playlist?list={playlist_id}" if playlist_id else ""
+        comment = comment_template.format(channel_url=channel_url, playlist_url=playlist_url).strip()
+        if comment:
+            post_channel_comment(video_id, comment)
+    except Exception as e:
+        alert("first comment", e)
+
+    # Субтитры жгут ~1200 ед. квоты YouTube/видео — включать только когда квота позволяет.
+    if enable_captions:
+        try:
+            upload_captions(video_id, words)
+        except Exception as e:
+            alert("captions", e)
+
+    need_cloudinary = CFG["post_to_instagram"] or CFG.get("post_to_tiktok")
+    if need_cloudinary:
+        print("Загрузка в облако (Cloudinary) и публикация...")
+        hosted = None
+        hosted_thumb = None
+        try:
+            hosted = upload_to_cloudinary(video_path)
+            if CFG["post_to_instagram"]:
+                hosted_thumb = upload_image(thumb_path)
+                caption = f"{data['title']}\n\n{data['script']}\n\n{' '.join(data['hashtags'])}"
+                upload_reel(hosted["url"], caption, cover_url=hosted_thumb["url"])
+                print("  Instagram: опубликовано")
+
+            if CFG.get("post_to_tiktok"):
+                try:
+                    publish_id = upload_to_tiktok(hosted["url"], data["title"], data["hashtags"])
+                    token = os.environ["TIKTOK_ACCESS_TOKEN"]
+                    status = wait_for_publish(publish_id, token)
+                    print(f"  TikTok: {status}")
+                except Exception as e:
+                    alert("TikTok", e)
+        except Exception as e:
+            alert("Cloudinary/Instagram", e)
+        finally:
+            if hosted:
+                try:
+                    delete_video(hosted["public_id"])
+                except Exception as e:
+                    print(f"  Не удалось удалить временный файл из Cloudinary: {e}")
+            if hosted_thumb:
+                try:
+                    delete_image(hosted_thumb["public_id"])
+                except Exception as e:
+                    print(f"  Не удалось удалить thumbnail из Cloudinary: {e}")
+
+    if enable_pinterest and CFG.get("post_to_pinterest"):
+        try:
+            upload_pin(data["title"], data["script"], CFG["channel_handle"], video_id)
+        except Exception as e:
+            alert("Pinterest", e)
+
+    url = f"https://youtube.com/shorts/{video_id}"
+    notify(f"✅ [{CFG['channel_name']}] видео опубликовано:\n{data['title']}\n{url}")
+    return video_id

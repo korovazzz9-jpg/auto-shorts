@@ -20,20 +20,52 @@ CONFIGS = {
             "en-GB-RyanNeural",
             "en-AU-WilliamNeural",
         ],
-        # Подпись призыва (вариативность) — на языке канала.
+        # Подпись призыва (вариативность) — на языке канала. Генерик-fallback,
+        # когда тема не маппится (см. topic_cta_words ниже).
         "cta_phrases": [
             "LIKE & FOLLOW\nfor more",
             "FOLLOW for more\nfacts like this",
             "DOUBLE TAP\nif you knew this",
         ],
-        # Инструкция по CTA внутри сценария.
+        # Фразы-петли (loop): дописываются в конец скрипта детерминированно. Ключ = коннектор,
+        # который Claude пометил как подходящий по смыслу к хуку. На стыке петли
+        # "<фраза> <хук>" читается как одно связное предложение ("This is why <хук>").
+        "loop_phrases": {
+            "why": ["This is why.", "And that's exactly why.", "Which is why.", "And here's why."],
+            "how": ["Here's how.", "And here's how.", "And this is how."],
+            "when": ["And it only happens when.", "And that's exactly when."],
+            "where": ["And that's exactly where.", "Which is exactly where."],
+            "because": ["And it's all because.", "And that's because."],
+        },
+        # Доля видео с петлёй (остальные — обычная концовка). Не 100%, чтобы приём не стал
+        # формулой и чтобы было с чем сравнить в analytics_retention.py (тег loop-yes/loop-no).
+        "loop_probability": 0.65,
+        # Topic-aware CTA: персональный призыв под тему видео конвертит лучше генерика.
+        "cta_topic_template": "FOLLOW for more\n{word} facts",
+        "topic_cta_words": {
+            "the ocean": "OCEAN",
+            "the animal kingdom": "ANIMAL",
+            "space": "SPACE",
+            "the human body": "BODY",
+            "ancient history": "HISTORY",
+            "archaeological discoveries": "ARCHAEOLOGY",
+            "ancient civilizations": "ANCIENT",
+            "volcanoes and earthquakes": "VOLCANO",
+            "extreme weather": "WEATHER",
+            "historical mysteries": "MYSTERY",
+            "evolution": "EVOLUTION",
+            "natural wonders": "NATURE",
+            "shipwrecks and lost treasures": "SHIPWRECK",
+        },
+        # Инструкция по CTA внутри сценария. Держим КОРОТКОЙ — иначе раздувает длину видео.
         "cta_instruction": (
-            "comment whether they knew this, or follow for more"
+            "ONE short CTA, 4-7 words MAX — either \"Follow for more.\" or "
+            "\"Comment if you knew this.\" Pick one, no embellishment, no extra clauses"
         ),
         # Используется ли кросс-постинг в Instagram для этого канала.
         "post_to_instagram": True,
-        "post_to_tiktok": True,
-        "post_to_pinterest": True,
+        "post_to_tiktok": False,  # ожидает одобрения TikTok Dev App + токена — вернуть True после
+        "post_to_pinterest": False,  # ожидает одобрения Pinterest Dev App — вернуть True после
         # Хэндл канала без @, нужен для ссылки в первом комментарии.
         "channel_handle": "60SecFacts",
         # Первый комментарий от имени канала после каждой публикации.
@@ -74,8 +106,33 @@ CONFIGS = {
             "SÍGUEME para más\ndatos como este",
             "DALE LIKE\nsi no lo sabías",
         ],
+        "loop_phrases": {
+            "why": ["Y por eso.", "Y por eso exactamente.", "Por eso mismo.", "Y por eso pasa."],
+            "how": ["Y así es como.", "Así es como.", "Y de esta forma."],
+            "when": ["Y solo pasa cuando.", "Y justo cuando."],
+            "where": ["Y justo ahí donde.", "Y ahí es donde."],
+            "because": ["Y todo porque.", "Y es porque."],
+        },
+        "loop_probability": 0.65,
+        "cta_topic_template": "SÍGUEME para más\ndatos de {word}",
+        "topic_cta_words": {
+            "the ocean": "OCÉANO",
+            "the animal kingdom": "ANIMALES",
+            "space": "ESPACIO",
+            "the human body": "CUERPO",
+            "ancient history": "HISTORIA",
+            "archaeological discoveries": "ARQUEOLOGÍA",
+            "ancient civilizations": "CIVILIZACIONES",
+            "volcanoes and earthquakes": "VOLCANES",
+            "extreme weather": "CLIMA",
+            "historical mysteries": "MISTERIOS",
+            "evolution": "EVOLUCIÓN",
+            "natural wonders": "NATURALEZA",
+            "shipwrecks and lost treasures": "NAUFRAGIOS",
+        },
         "cta_instruction": (
-            "ask viewers to comment if they knew this, or to follow for more (in Spanish)"
+            "ONE short CTA in Spanish, 4-7 words MAX — either \"Sígueme para más.\" or "
+            "\"Comenta si lo sabías.\" Pick one, no embellishment, no extra clauses"
         ),
         # Испанский канал — отдельный Instagram появится позже; пока только YouTube.
         "post_to_instagram": False,

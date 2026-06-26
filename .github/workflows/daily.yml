@@ -18,7 +18,28 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # В Пн/Вт/Ср слот 13:00 занимает серия (weekly-series.yml) — обычное видео в этот слот
+  # не публикуем, иначе будет 6 роликов в день вместо 5. Guard ловит и schedule, и
+  # cron-job.org (оба бьют в ~13:07 UTC), независимо от типа триггера.
+  guard:
+    runs-on: ubuntu-latest
+    outputs:
+      skip: ${{ steps.check.outputs.skip }}
+    steps:
+      - id: check
+        run: |
+          DOW=$(date -u +%u)    # 1=Mon ... 7=Sun
+          HOUR=$(date -u +%H)
+          if [ "$DOW" -le 3 ] && [ "$HOUR" = "13" ]; then
+            echo "Серия (Part $DOW) замещает слот 13:00 сегодня — обычное видео пропускаем."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
   publish:
+    needs: guard
+    if: needs.guard.outputs.skip == 'false'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -60,4 +81,6 @@ jobs:
           TIKTOK_ACCESS_TOKEN: ${{ secrets.TIKTOK_ACCESS_TOKEN }}
           PINTEREST_ACCESS_TOKEN: ${{ secrets.PINTEREST_ACCESS_TOKEN }}
           PINTEREST_BOARD_ID: ${{ secrets.PINTEREST_BOARD_ID }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python pipeline.py

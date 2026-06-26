@@ -39,9 +39,15 @@ with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
         title=data["title"],
     )
 
-    # Сохраняем всё на рабочий стол для возможного перерендера
+    # Определяем номер следующего видео
+    existing = [f for f in os.listdir(OUT_DIR) if f.startswith("video_") and f.endswith(".mp4")]
+    next_num = len(existing) + 1
+    num = f"{next_num:02d}"
+
     shutil.copy2(video_path, os.path.join(OUT_DIR, "video.mp4"))
+    shutil.copy2(video_path, os.path.join(OUT_DIR, f"video_{num}.mp4"))
     shutil.copy2(thumb_path, os.path.join(OUT_DIR, "thumb.jpg"))
+    shutil.copy2(thumb_path, os.path.join(OUT_DIR, f"thumb_{num}.jpg"))
     shutil.copy2(audio_path, os.path.join(OUT_DIR, "audio.mp3"))
     clips_dir = os.path.join(OUT_DIR, "clips")
     os.makedirs(clips_dir, exist_ok=True)
@@ -51,11 +57,15 @@ with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
         shutil.copy2(cp, dst)
         saved_clips.append(dst)
 
+    meta = {"data": data, "words": words, "clip_paths": saved_clips}
     with open(os.path.join(OUT_DIR, "meta.json"), "w", encoding="utf-8") as f:
-        json.dump({"data": data, "words": words, "clip_paths": saved_clips}, f, ensure_ascii=False, indent=2)
+        json.dump(meta, f, ensure_ascii=False, indent=2)
+    with open(os.path.join(OUT_DIR, f"meta_{num}.json"), "w", encoding="utf-8") as f:
+        json.dump(meta, f, ensure_ascii=False, indent=2)
 
 print(f"\nГотово!")
-print(f"  Видео:     {os.path.join(OUT_DIR, 'video.mp4')}")
-print(f"  Thumbnail: {os.path.join(OUT_DIR, 'thumb.jpg')}")
+print(f"  Видео:     {os.path.join(OUT_DIR, f'video_{num}.mp4')}")
+print(f"  Thumbnail: {os.path.join(OUT_DIR, f'thumb_{num}.jpg')}")
 print(f"\nЗаголовок для TikTok: {data['title']}")
 print(f"Хэштеги: {' '.join(data['hashtags'])}")
+print(f"Caption: {data['title']}\n\n{' '.join(data['hashtags'])}")

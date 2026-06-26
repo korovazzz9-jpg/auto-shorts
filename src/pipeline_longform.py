@@ -10,6 +10,7 @@ from build_video import build_video
 from config import CFG
 from fetch_stock_video import fetch_clips
 from generate_longform_script import generate_longform_script
+from notify import notify
 from playlists import add_video_to_playlist
 from tts import text_to_speech
 from upload_captions import upload_captions
@@ -17,6 +18,13 @@ from upload_youtube import upload_video as upload_to_youtube
 from youtube_auth import get_authenticated_channel_title
 
 load_dotenv()
+
+
+def _alert(step: str, err: Exception) -> None:
+    """Частичный сбой лонгформа — видео вышло, но шаг отвалился."""
+    msg = f"⚠️ [{CFG['channel_name']}] лонгформ, шаг «{step}» упал, но продолжил:\n{err}"
+    print(f"  {msg}")
+    notify(msg)
 
 
 def _verify_channel() -> None:
@@ -44,7 +52,7 @@ def run() -> None:
 
         print("3/4 Озвучка и сборка видео...")
         words = text_to_speech(data["script"], audio_path)
-        video_path, _ = build_video(audio_path, clip_paths, words, video_path, topic=data["theme"], title=data["title"])
+        video_path, thumb_path = build_video(audio_path, clip_paths, words, video_path, topic=data["theme"], title=data["title"])
 
         print("4/4 Загрузка на YouTube...")
         video_id = upload_to_youtube(
@@ -54,20 +62,28 @@ def run() -> None:
             tags=data["tags"],
             hashtags=data["hashtags"],
             hashtag_position="end",
+            thumbnail_path=thumb_path,
         )
 
-        try:
-            upload_captions(video_id, words)
-        except Exception as e:
-            print(f"  Не удалось загрузить субтитры: {e}")
+        # Субтитры временно отключены (квота) — как и в Shorts/сериях. Вернуть после увеличения квоты:
+        # try:
+        #     upload_captions(video_id, words)
+        # except Exception as e:
+        #     _alert("captions", e)
 
         try:
             add_video_to_playlist(video_id, data["theme"])
         except Exception as e:
-            print(f"  Не удалось добавить в плейлист: {e}")
+            _alert("playlist", e)
 
-    print(f"Готово: https://youtube.com/watch?v={video_id}")
+    url = f"https://youtube.com/watch?v={video_id}"
+    notify(f"✅ [{CFG['channel_name']}] лонгформ опубликован:\n{data['title']}\n{url}")
+    print(f"Готово: {url}")
 
 
 if __name__ == "__main__":
-    run()
+    try:
+        run()
+    except Exception as e:
+        notify(f"🔴 [{CFG['channel_name']}] лонгформ УПАЛ:\n{e}")
+        raise
