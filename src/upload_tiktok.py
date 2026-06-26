@@ -36,7 +36,7 @@ def upload_video(video_url: str, title: str, hashtags: list[str]) -> str:
         },
     )
     data = resp.json()
-    if resp.status_code != 200 or "error" in data.get("error", {}).get("code", "ok"):
+    if resp.status_code != 200 or data.get("error", {}).get("code", "ok") != "ok":
         raise RuntimeError(f"TikTok upload failed: {data}")
 
     publish_id = data["data"]["publish_id"]

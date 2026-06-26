@@ -81,7 +81,7 @@ def run() -> None:
         print("Building video...")
         video_path, thumb_path = build_video(
             audio_path, clip_paths, words, video_path,
-            topic=data["topic"],
+            topic=data.get("topic", state.get("topic")),
             part=part,
             total_parts=3,
             title=data["title"],
@@ -99,7 +99,7 @@ def run() -> None:
 
         playlist_id = None
         try:
-            playlist_id = add_video_to_playlist(video_id, data["topic"])
+            playlist_id = add_video_to_playlist(video_id, data.get("topic", state.get("topic", "")))
         except Exception as e:
             print(f"  Playlist failed: {e}")
 

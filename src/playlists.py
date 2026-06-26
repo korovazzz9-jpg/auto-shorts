@@ -19,7 +19,7 @@ def _create_playlist(youtube, title: str) -> str:
     response = youtube.playlists().insert(
         part="snippet,status",
         body={
-            "snippet": {"title": title, "description": f"{title} — bite-sized videos from 60SecFacts."},
+            "snippet": {"title": title, "description": f"{title} — {CFG['channel_name']}"},
             "status": {"privacyStatus": "public"},
         },
     ).execute()

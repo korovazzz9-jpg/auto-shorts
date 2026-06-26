@@ -3,7 +3,7 @@ import os
 import requests
 
 CLIENT_KEY = os.environ.get("TIKTOK_CLIENT_KEY", "awlqkv9gr65hjezw")
-CLIENT_SECRET = os.environ.get("TIKTOK_CLIENT_SECRET", "tYmXHmUnQBSIfx6NFHX3tTVMXd0Qd9t7")
+CLIENT_SECRET = os.environ.get("TIKTOK_CLIENT_SECRET", "")
 REDIRECT_URI = "https://korovazzz9-jpg.github.io/pages/callback.html"
 
 with open("tiktok_auth.txt") as f:

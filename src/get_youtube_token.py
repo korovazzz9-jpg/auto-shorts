@@ -20,6 +20,18 @@ def main() -> None:
     print(f"YT_CLIENT_SECRET={creds.client_secret}")
     print(f"YT_REFRESH_TOKEN={creds.refresh_token}")
 
+    env_path = os.path.join(os.path.dirname(__file__), "..", ".env")
+    if os.path.exists(env_path):
+        with open(env_path, encoding="utf-8") as f:
+            lines = f.readlines()
+        with open(env_path, "w", encoding="utf-8") as f:
+            for line in lines:
+                if line.startswith("YT_REFRESH_TOKEN="):
+                    f.write(f"YT_REFRESH_TOKEN={creds.refresh_token}\n")
+                else:
+                    f.write(line)
+        print("\n.env обновлён автоматически.")
+
 
 if __name__ == "__main__":
     main()

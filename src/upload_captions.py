@@ -44,7 +44,7 @@ def _translate_srt(srt_content: str, target_lang: str) -> str:
         f"{srt_content}"
     )
     response = client.messages.create(
-        model="claude-haiku-4-5-20251001",
+        model="claude-haiku-4-5",
         max_tokens=2048,
         messages=[{"role": "user", "content": prompt}],
     )
