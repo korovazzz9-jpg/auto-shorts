@@ -2,8 +2,13 @@
 watchdog-воркфлоу: если нет — значит запланированный запуск pipeline.py не сработал
 (например, GitHub Actions пропустил scheduled trigger), и его нужно повторить.
 
-Exit code 0 — свежее видео есть, всё ок.
-Exit code 1 — свежего видео нет, нужен повторный запуск.
+Exit code 0 — ретрай НЕ нужен (свежее видео есть ЛИБО сейчас не окно слота).
+Exit code 1 — свежего видео нет и мы в окне после слота → нужен повторный запуск.
+
+ВАЖНО: guard по времени. GitHub-cron палит watchdog с опозданием в часы (видели
+запуски в 07:40/08:17/09:34 UTC вместо 00:22) — без этого guard watchdog публиковал
+лишние ролики в случайное время (почти 0 просмотров, YouTube душит частые загрузки).
+Ретраим ТОЛЬКО если сейчас в окне RETRY_WINDOW после реального слота.
 """
 import datetime
 import sys
@@ -11,6 +16,22 @@ import sys
 from youtube_auth import get_client
 
 LOOKBACK_MINUTES = 25
+
+# Слоты публикации (UTC, час:мин). Должны совпадать с cron-job.org / daily.yml.
+SLOTS_UTC = [(13, 7), (16, 13), (20, 7), (22, 13), (0, 7)]
+# Сколько минут после слота watchdog имеет право доретраивать.
+RETRY_WINDOW = (10, 60)
+
+
+def in_retry_window() -> bool:
+    now = datetime.datetime.now(datetime.timezone.utc)
+    now_m = now.hour * 60 + now.minute
+    lo, hi = RETRY_WINDOW
+    for h, m in SLOTS_UTC:
+        delta = (now_m - (h * 60 + m)) % 1440  # минут прошло с этого слота
+        if lo <= delta <= hi:
+            return True
+    return False
 
 
 def has_recent_upload() -> bool:
@@ -34,6 +55,9 @@ def has_recent_upload() -> bool:
 
 
 if __name__ == "__main__":
+    if not in_retry_window():
+        print("SKIP: not within retry window after a slot — no retry.")
+        sys.exit(0)
     if has_recent_upload():
         print("OK: recent upload found.")
         sys.exit(0)
