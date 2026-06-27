@@ -1,9 +1,8 @@
-name: Weekly Longform Compilation
+name: Weekly Longform Compilation (ES)
 
 on:
-  # Раз в неделю, воскресенье 23:00 UTC (19:00 ET, вечерний прайм) — ОТДЕЛЬНЫЙ слот, не
-  # забирает шортс (23:00 не совпадает со слотами daily). Триггерится cron-job.org
-  # (workflow_dispatch); GitHub-cron убран — опаздывал и мог разъехаться с прайм-временем.
+  # Раз в неделю, воскресенье 23:17 UTC (17:17 Мехико, вечер) — ОТДЕЛЬНЫЙ слот, не забирает
+  # шортс. Триггерится cron-job.org (workflow_dispatch).
   workflow_dispatch: {}
 
 jobs:
@@ -25,15 +24,16 @@ jobs:
       - name: Install Python deps
         run: pip install -r requirements.txt
 
-      - name: Run longform pipeline
+      - name: Run longform pipeline (Spanish channel)
         working-directory: src
         env:
+          CHANNEL: es
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
           PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
           YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
           YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
-          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN_ES }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python pipeline_longform.py

@@ -7,14 +7,16 @@ import random
 
 from anthropic import Anthropic
 
+from config import CFG
 from generate_script import TOPICS_POOL as THEMES
 from recent_titles import get_recent_titles
 
-SYSTEM_PROMPT = """You are a scriptwriter for 60SecFacts, a YouTube channel about mind-blowing,
-misconception-busting facts. Write a long-form compilation video script: 5 distinct facts on one
-theme, each with its own hook-fact-twist mini-arc (like a chapter), stitched into one continuous
-narration with short transitions between facts ("But here's where it gets stranger...", "Speaking
-of things that don't add up...", etc.) Total length 3.5-4.5 minutes (550-700 words).
+SYSTEM_PROMPT = """You are a scriptwriter for {channel}, a YouTube channel about mind-blowing,
+misconception-busting facts. Write the ENTIRE script in {language}. Write a long-form compilation
+video script: 5 distinct facts on one theme, each with its own hook-fact-twist mini-arc (like a
+chapter), stitched into one continuous narration with short transitions between facts ("But here's
+where it gets stranger...", "Speaking of things that don't add up...", etc.) Total length
+3.5-4.5 minutes (550-700 words).
 
 Each individual fact must overturn a common intuitive assumption, same bar as the channel's
 Shorts: not just an interesting detail, but something that breaks what people assume is true.
@@ -23,7 +25,10 @@ Avoid abstract/technical facts requiring specialist background (quantum mechanic
 End with a stronger call to action than usual: ask viewers to subscribe for daily fact videos,
 and comment which fact surprised them most.
 
-Conversational, energetic, no filler, no "today I'll tell you about" intros."""
+Conversational, energetic, no filler, no "today I'll tell you about" intros.""".format(
+    channel=CFG["channel_name"],
+    language=CFG["script_language"],
+)
 
 
 def generate_longform_script() -> dict:
@@ -54,10 +59,11 @@ def generate_longform_script() -> dict:
                 "beats (roughly one every 12-15 seconds) and for each one write a short "
                 "stock-footage search query (2-4 words, concrete, visual, in English).\n\n"
                 "Requirements:\n"
-                "- title: a compelling compilation title under 70 characters (e.g. "
-                "'5 Facts That Will Change How You See [Theme]'), no '| topic facts' suffix.\n"
-                "- tags: 10-15 specific YouTube search tags.\n"
-                "- hashtags: 3-5 hashtags (lowercase, with # prefix).\n\n"
+                f"- title: a compelling compilation title in {CFG['script_language']} under 70 "
+                "characters (e.g. '5 Facts That Will Change How You See [Theme]'), no "
+                "'| topic facts' suffix.\n"
+                f"- tags: 10-15 specific YouTube search tags in {CFG['script_language']}.\n"
+                f"- hashtags: 3-5 hashtags in {CFG['script_language']} (lowercase, with # prefix).\n\n"
                 "Respond strictly in JSON, no markdown wrapper: "
                 '{"title": "title text", '
                 '"script": "full voiceover script text", '

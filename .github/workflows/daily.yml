@@ -13,9 +13,9 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # В Пн/Вт/Ср слот 13:00 занимает серия (weekly-series.yml) — обычное видео в этот слот
-  # не публикуем, иначе будет 6 роликов в день вместо 5. Guard ловит и schedule, и
-  # cron-job.org (оба бьют в ~13:07 UTC), независимо от типа триггера.
+  # В Пн/Вт/Ср ПРАЙМОВЫЙ слот 00:07 UTC (20:07 ET) занимает серия (weekly-series.yml) —
+  # обычное видео в этот слот не публикуем, иначе будет 6 роликов в день вместо 5.
+  # Guard срабатывает независимо от типа триггера (cron-job.org бьёт daily в 00:07).
   guard:
     runs-on: ubuntu-latest
     outputs:
@@ -25,8 +25,8 @@ jobs:
         run: |
           DOW=$(date -u +%u)    # 1=Mon ... 7=Sun
           HOUR=$(date -u +%H)
-          if [ "$DOW" -le 3 ] && [ "$HOUR" = "13" ]; then
-            echo "Серия (Part $DOW) замещает слот 13:00 сегодня — обычное видео пропускаем."
+          if [ "$DOW" -le 3 ] && [ "$HOUR" = "00" ]; then
+            echo "Серия (Part $DOW) замещает прайм-слот 00:07 сегодня — обычное видео пропускаем."
             echo "skip=true" >> "$GITHUB_OUTPUT"
           else
             echo "skip=false" >> "$GITHUB_OUTPUT"
