@@ -9,7 +9,6 @@ import os
 from cloudinary_upload import delete_image, delete_video, upload_image, upload_video as upload_to_cloudinary
 from config import CFG
 from notify import notify
-from playlists import add_video_to_playlist
 from post_comment import post_channel_comment
 from upload_captions import upload_captions
 from upload_instagram import upload_reel
@@ -47,17 +46,15 @@ def publish(
         thumbnail_path=thumb_path,
     )
 
-    playlist_id = None
-    try:
-        playlist_id = add_video_to_playlist(video_id, topic)
-    except Exception as e:
-        alert("playlist", e)
-
+    # Плейлисты для Shorts отключены: 0 открытий (Shorts смотрят в ленте, не через
+    # плейлисты), а каждый ролик тратил ~50 ед. квоты YouTube. Лонгформ плейлисты сохраняет
+    # (свой pipeline_longform).
     try:
         channel_url = f"https://www.youtube.com/@{CFG['channel_handle']}" if CFG.get("channel_handle") else ""
         comment_template = CFG.get("first_comment", "")
-        playlist_url = f"https://www.youtube.com/playlist?list={playlist_id}" if playlist_id else ""
-        comment = comment_template.format(channel_url=channel_url, playlist_url=playlist_url).strip()
+        # Выкидываем строки про плейлист — плейлистов у Shorts больше нет.
+        lines = [ln for ln in comment_template.split("\n") if "{playlist_url}" not in ln]
+        comment = "\n".join(lines).format(channel_url=channel_url).strip()
         if comment:
             post_channel_comment(video_id, comment)
     except Exception as e:
