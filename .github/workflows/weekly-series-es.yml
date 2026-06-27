@@ -42,7 +42,9 @@ jobs:
       - name: Restore titles cache
         uses: actions/cache@v4
         with:
-          path: src/titles_cache.json
+          path: |
+            src/titles_cache.json
+            src/topics_cache.json
           key: titles-cache-es
           restore-keys: titles-cache-es
 

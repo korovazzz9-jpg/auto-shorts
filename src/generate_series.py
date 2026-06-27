@@ -6,7 +6,7 @@ from anthropic import Anthropic
 
 from config import CFG
 from generate_script import BASE_SYSTEM_PROMPT, TITLE_INSTRUCTION, TOPICS_POOL, BANNED_TOPICS
-from recent_titles import add_title_to_cache, get_recent_titles
+from recent_titles import add_title_to_cache, add_topic_to_cache, get_recent_titles
 from topic_stats import get_topic_avg_views
 import random
 
@@ -111,6 +111,7 @@ def generate_series() -> dict:
         ]
         add_title_to_cache(data[part_key]["title"])
 
+    add_topic_to_cache(data["topic"])
     return data
 
 

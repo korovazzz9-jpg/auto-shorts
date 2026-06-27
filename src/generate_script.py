@@ -6,7 +6,7 @@ import random
 from anthropic import Anthropic
 
 from config import CFG
-from recent_titles import add_title_to_cache, get_recent_titles
+from recent_titles import add_title_to_cache, add_topic_to_cache, get_recent_titles, get_recent_topics
 from topic_stats import get_topic_avg_views
 
 # Темы, которые НЕЛЬЗЯ использовать — слишком абстрактны/технически сложны,
@@ -30,25 +30,29 @@ MIN_TOPICS_WITH_DATA = 5  # не взвешивать, пока статисти
 
 
 def _pick_topic() -> str:
+    # Исключаем темы последних видео, чтобы не выходило два похожих ролика подряд.
+    exclude = set(get_recent_topics(2))
+    pool = [t for t in TOPICS_POOL if t not in exclude] or TOPICS_POOL
+
     try:
         avg_views = get_topic_avg_views()
     except Exception:
         avg_views = {}
 
     if len(avg_views) < MIN_TOPICS_WITH_DATA:
-        return random.choice(TOPICS_POOL)
+        return random.choice(pool)
 
     overall_avg = sum(avg_views.values()) / len(avg_views)
     # Темы без данных получают средний вес (чтобы не застревать на старых лидерах
     # и продолжать исследовать темы, которые ещё не пробовали).
-    weights = [max(avg_views.get(t, overall_avg), 1.0) for t in TOPICS_POOL]
+    weights = [max(avg_views.get(t, overall_avg), 1.0) for t in pool]
 
     # Логируем топ-5 тем для отладки в GitHub Actions
-    ranked = sorted(zip(TOPICS_POOL, weights), key=lambda x: -x[1])
+    ranked = sorted(zip(pool, weights), key=lambda x: -x[1])
     top5 = ", ".join(f"{t}({w:.0f})" for t, w in ranked[:5])
     print(f"  Topic weights top-5: {top5}")
 
-    return random.choices(TOPICS_POOL, weights=weights, k=1)[0]
+    return random.choices(pool, weights=weights, k=1)[0]
 
 BASE_SYSTEM_PROMPT = """You are a scriptwriter for short fact videos on YouTube Shorts (channel: {channel}).
 Write the TITLE, SCRIPT and HASHTAGS in {language}, conversational, punchy, no filler. (Keep the
@@ -296,6 +300,7 @@ def generate_script() -> dict:
     data["topic"] = topic
     data["hashtag_position"] = "end"
     add_title_to_cache(data["title"])
+    add_topic_to_cache(topic)
     return data
 
 

@@ -16,4 +16,5 @@ assets/backgrounds/*
 # Фоновая музыка и шрифты нужны в CI — исключаем из общего игнора *.mp3
 !assets/music/*.mp3
 src/titles_cache.json
+src/topics_cache.json
 src/series_state.json

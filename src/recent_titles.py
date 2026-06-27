@@ -14,6 +14,32 @@ MAX_TITLES = 100
 _CACHE_FILE = os.path.join(os.path.dirname(__file__), "titles_cache.json")
 _CACHE_MAX = 200
 
+# Темы последних видео — чтобы не выпускать два ролика подряд на одну тему.
+_TOPICS_FILE = os.path.join(os.path.dirname(__file__), "topics_cache.json")
+_TOPICS_MAX = 20
+
+
+def add_topic_to_cache(topic: str) -> None:
+    """Запоминает тему только что сгенерированного видео (до загрузки на YouTube —
+    обходит лаг индексации API)."""
+    try:
+        with open(_TOPICS_FILE, encoding="utf-8") as f:
+            topics = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        topics = []
+    topics.insert(0, topic)
+    with open(_TOPICS_FILE, "w", encoding="utf-8") as f:
+        json.dump(topics[:_TOPICS_MAX], f, ensure_ascii=False, indent=2)
+
+
+def get_recent_topics(n: int = 2) -> list[str]:
+    """Последние n тем (свежая первой) — их исключаем при выборе следующей темы."""
+    try:
+        with open(_TOPICS_FILE, encoding="utf-8") as f:
+            return json.load(f)[:n]
+    except (FileNotFoundError, json.JSONDecodeError):
+        return []
+
 
 def _load_cache() -> list[str]:
     try:
