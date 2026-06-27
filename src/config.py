@@ -39,7 +39,7 @@ CONFIGS = {
         },
         # Доля видео с петлёй (остальные — обычная концовка). Не 100%, чтобы приём не стал
         # формулой и чтобы было с чем сравнить в analytics_retention.py (тег loop-yes/loop-no).
-        "loop_probability": 0.65,
+        "loop_probability": 0.5,
         # Topic-aware CTA: персональный призыв под тему видео конвертит лучше генерика.
         "cta_topic_template": "FOLLOW for more\n{word} facts",
         "topic_cta_words": {
@@ -113,7 +113,7 @@ CONFIGS = {
             "where": ["Y justo ahí donde.", "Y todo pasó donde."],
             "because": ["Y todo porque.", "Y es porque."],
         },
-        "loop_probability": 0.65,
+        "loop_probability": 0.5,
         "cta_topic_template": "SÍGUEME para más\ndatos de {word}",
         "topic_cta_words": {
             "the ocean": "OCÉANO",

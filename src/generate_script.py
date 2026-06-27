@@ -89,10 +89,19 @@ Structure, in order:
    c) Camps: split the audience into two groups who'll argue. ("Half of you will refuse to
       believe this even now.")
    d) Unfinished "actually": an almost-complete claim that begs an "actually..." reply.
-   This comment-bait IS the LAST spoken sentence of your script.
-   Do NOT add any spoken call-to-action ("follow", "comment", "like") — the follow prompt is shown
-   on-screen as a badge, not spoken. A voiced CTA here breaks the flow into the loop. Do NOT write
-   any loop line yourself either — a loop connector is appended automatically.
+
+No "today I'll tell you about" style intros.""".format(
+    channel=CFG["channel_name"],
+    language=CFG["script_language"],
+)
+
+# Loop-специфичная концовка — добавляется ТОЛЬКО к ежедневным Shorts (generate_script).
+# Series и longform используют BASE_SYSTEM_PROMPT без неё: у них своя концовка/CTA и нет петли.
+LOOP_INSTRUCTION = """ENDING & LOOP (daily Shorts only):
+The comment-bait IS the LAST spoken sentence of your script.
+Do NOT add any spoken call-to-action ("follow", "comment", "like") — the follow prompt is shown
+on-screen as a badge, not spoken. A voiced CTA here breaks the flow into the loop. Do NOT write
+any loop line yourself either — a loop connector is appended automatically.
 
 LOOP CONNECTORS (field "loop_connectors"): a short loop phrase is appended right after your last
 sentence and the video loops back to sentence 1. The appended phrase ends in one of:
@@ -103,12 +112,7 @@ list ONLY the connector words for which "<word> <sentence 1>" is a COHERENT, gra
   Example: sentence 1 = "This creature ages backwards." → "why this creature ages backwards" ✓,
     "how this creature ages backwards" ✓, "when this creature ages backwards" ✓(weaker),
     "where..." ✗, "because..." ✗  → loop_connectors: ["why","how"].
-  Always include at least one (usually "why" and/or "how" fit a fact-statement hook).
-
-No "today I'll tell you about" style intros.""".format(
-    channel=CFG["channel_name"],
-    language=CFG["script_language"],
-)
+  Always include at least one (usually "why" and/or "how" fit a fact-statement hook)."""
 
 # 30-38s is the sweet spot for YouTube's 2026 Shorts algorithm (absolute watch time, not
 # just retention %). edge-tts at +5% ≈ 2.6 words/sec, so 75-95 words ≈ 30-37s.
@@ -216,7 +220,7 @@ def _append_loop(data: dict) -> None:
     """С вероятностью loop_probability дописывает loop-фразу в конец скрипта на языке канала
     (коннектор — из помеченных Claude). Иначе оставляет обычную концовку.
     Проставляет data["has_loop"] для пометки тегом и сравнения в аналитике."""
-    if random.random() >= CFG.get("loop_probability", 0.65):
+    if random.random() >= CFG.get("loop_probability", 0.5):
         data["has_loop"] = False
         return
 
@@ -246,7 +250,7 @@ def generate_script() -> dict:
             "not a variation of any of these:\n" + "\n".join(f"- {t}" for t in past_titles) + "\n\n"
         )
 
-    system_prompt = BASE_SYSTEM_PROMPT + "\n\n" + LENGTH_INSTRUCTION
+    system_prompt = BASE_SYSTEM_PROMPT + "\n\n" + LOOP_INSTRUCTION + "\n\n" + LENGTH_INSTRUCTION
     user_content = _build_user_content(topic, avoid_block)
 
     message = client.messages.create(
