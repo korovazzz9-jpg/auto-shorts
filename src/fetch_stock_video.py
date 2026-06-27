@@ -12,23 +12,40 @@ PIXABAY_SEARCH_URL = "https://pixabay.com/api/videos/"
 RESULTS_PER_QUERY = 10
 VISION_CANDIDATES = 4  # сколько клипов скачиваем для vision-отбора
 MIN_HEIGHT = 960  # ниже этого — слишком мутно для полноэкранного Shorts-видео
+MIN_WIDTH = 1280  # для горизонтального лонгформа — минимум по ширине
+
+# Ориентация скачиваемых клипов. По умолчанию вертикаль (Shorts); fetch_clips(landscape=True)
+# переключает на горизонталь (лонгформ 16:9). Модульный флаг, чтобы не тащить параметр
+# через всю цепочку поиска.
+LANDSCAPE = False
+
+
+def _orientation_ok(w: int, h: int) -> bool:
+    if LANDSCAPE:
+        return w >= h and w >= MIN_WIDTH
+    return h >= w and h >= MIN_HEIGHT
+
+
+def _long_side(f: dict) -> int:
+    return f.get("width", 0) if LANDSCAPE else f.get("height", 0)
 
 
 def _best_vertical_file(video: dict) -> dict | None:
     files = [
         f for f in video["video_files"]
-        if f.get("height", 0) >= f.get("width", 1) and f.get("height", 0) >= MIN_HEIGHT
+        if _orientation_ok(f.get("width", 1), f.get("height", 0))
     ]
     if not files:
         return None
-    files.sort(key=lambda f: abs(f.get("height", 0) - 1920))
+    files.sort(key=lambda f: abs(_long_side(f) - 1920))
     return files[0]
 
 
 def _search_pexels(query: str, api_key: str, used_ids: set, limit: int) -> list[dict]:
     response = requests.get(
         PEXELS_SEARCH_URL,
-        params={"query": query, "orientation": "portrait", "per_page": RESULTS_PER_QUERY},
+        params={"query": query, "orientation": "landscape" if LANDSCAPE else "portrait",
+                "per_page": RESULTS_PER_QUERY},
         headers={"Authorization": api_key},
         timeout=30,
     )
@@ -49,10 +66,10 @@ def _search_pexels(query: str, api_key: str, used_ids: set, limit: int) -> list[
 
 def _best_pixabay_variant(hit: dict) -> dict | None:
     variants = [v for v in hit.get("videos", {}).values() if v.get("url")]
-    variants = [v for v in variants if v.get("height", 0) >= v.get("width", 1) and v.get("height", 0) >= MIN_HEIGHT]
+    variants = [v for v in variants if _orientation_ok(v.get("width", 1), v.get("height", 0))]
     if not variants:
         return None
-    variants.sort(key=lambda v: abs(v.get("height", 0) - 1920))
+    variants.sort(key=lambda v: abs(_long_side(v) - 1920))
     return variants[0]
 
 
@@ -144,7 +161,9 @@ def _search_with_fallback(query: str, used_ids: set) -> dict | None:
     return _pick_best_clip(candidates, query)
 
 
-def fetch_clips(queries: list[str], out_dir: str) -> list[str]:
+def fetch_clips(queries: list[str], out_dir: str, landscape: bool = False) -> list[str]:
+    global LANDSCAPE
+    LANDSCAPE = landscape
     paths = []
     used_ids: set = set()
     for i, query in enumerate(queries):

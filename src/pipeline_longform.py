@@ -6,7 +6,7 @@ import tempfile
 
 from dotenv import load_dotenv
 
-from build_video import build_video
+from build_longform_video import build_longform_video
 from config import CFG
 from fetch_stock_video import fetch_clips
 from generate_longform_script import generate_longform_script
@@ -47,12 +47,12 @@ def run() -> None:
         audio_path = os.path.join(tmp, "audio.mp3")
         video_path = os.path.join(tmp, "video.mp4")
 
-        print("2/4 Подбор стоковых видео...")
-        clip_paths = fetch_clips(data["video_queries"], tmp)
+        print("2/4 Подбор стоковых видео (горизонтальные 16:9)...")
+        clip_paths = fetch_clips(data["video_queries"], tmp, landscape=True)
 
-        print("3/4 Озвучка и сборка видео...")
+        print("3/4 Озвучка и сборка видео (горизонтальный лонгформ)...")
         words = text_to_speech(data["script"], audio_path)
-        video_path, thumb_path = build_video(audio_path, clip_paths, words, video_path, topic=data["theme"], title=data["title"])
+        video_path, thumb_path = build_longform_video(audio_path, clip_paths, words, video_path, topic=data["theme"], title=data["title"])
 
         print("4/4 Загрузка на YouTube...")
         video_id = upload_to_youtube(
