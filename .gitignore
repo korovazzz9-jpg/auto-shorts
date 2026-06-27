@@ -13,5 +13,7 @@ test.mp3
 *.png
 assets/backgrounds/*
 !assets/backgrounds/.gitkeep
+# Фоновая музыка и шрифты нужны в CI — исключаем из общего игнора *.mp3
+!assets/music/*.mp3
 src/titles_cache.json
 src/series_state.json

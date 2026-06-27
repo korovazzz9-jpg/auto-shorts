@@ -29,6 +29,12 @@ from fetch_music import fetch_random_track
 
 MUSIC_VOLUME = 0.18  # тихо под голосом, но должна реально быть слышна
 
+# Шрифт субтитров и хука. По умолчанию — Anton (узкий жирный, выбран после теста
+# Anton/LuckiestGuy/ArchivoBlack), лежит в репо → работает и на CI/Ubuntu без системных шрифтов.
+# Можно переопределить env-переменной SUBTITLE_FONT (путь к .ttf или имя системного шрифта).
+_ANTON = os.path.join(os.path.dirname(__file__), "..", "assets", "fonts", "Anton.ttf")
+SUBTITLE_FONT = os.environ.get("SUBTITLE_FONT", _ANTON)
+
 TARGET_SIZE = (1080, 1920)
 CAPTION_Y = int(TARGET_SIZE[1] * 0.78)  # ближе к низу, но всё ещё выше названия канала/кнопок Shorts
 CTA_DURATION = 2.0  # сколько секунд в конце висит призыв лайкнуть/подписаться
@@ -106,7 +112,7 @@ def _karaoke_clips(words: list[dict], cutoff: float) -> list[TextClip]:
                 w["text"].upper(),
                 fontsize=100,
                 color=color,
-                font="Arial-Bold",
+                font=SUBTITLE_FONT,
                 stroke_color="black",
                 stroke_width=5,
                 size=(TARGET_SIZE[0] - 100, None),
@@ -276,26 +282,37 @@ def _mix_music(voice_audio: AudioFileClip, duration: float, topic: str | None):
 
 PART_LABEL_DURATION = 2.5  # секунд показа "PART N / 3" в начале видео
 HOOK_DURATION = 2.8  # секунд показа крупного текста-хука (стоп-скролл в первой секунде)
+LOOP_TAIL_PAD = 0.18  # запас после последнего слова при обрезке хвоста тишины (чтобы не резать слово)
 
 
-def _hook_clip(title: str) -> TextClip:
-    """Крупный статичный текст-хук поверх первых ~3 сек. Останавливает палец у тех,
-    кто смотрит ленту без звука — главный рычаг retention в первой секунде."""
+HOOK_BOX_OPACITY = 0.4   # прозрачность тёмной плашки под хуком
+HOOK_BOX_PAD_Y = 24      # вертикальный отступ плашки
+
+
+def _hook_box_png(w: int, h: int, path: str) -> None:
+    img = Image.new("RGBA", (w, h), (0, 0, 0, int(255 * HOOK_BOX_OPACITY)))
+    img.save(path)
+
+
+def _hook_clips(title: str) -> list:
+    """Текст-хук на полупрозрачной тёмной плашке от края до края."""
     txt = TextClip(
         title.upper(),
-        fontsize=124,
+        fontsize=120,
         color="white",
-        font="Arial-Bold",
-        stroke_color="black",
-        stroke_width=9,
-        size=(TARGET_SIZE[0] - 80, None),
+        font=SUBTITLE_FONT,
+        size=(TARGET_SIZE[0] - 140, None),
         method="caption",
     )
-    return (
-        txt.set_position(("center", int(TARGET_SIZE[1] * 0.30)))
-        .set_start(0)
-        .set_duration(HOOK_DURATION)
-    )
+    tw, th = txt.size
+    box_png = os.path.join(tempfile.mkdtemp(), "hookbox.png")
+    _hook_box_png(TARGET_SIZE[0], th + 2 * HOOK_BOX_PAD_Y, box_png)
+
+    y = int(TARGET_SIZE[1] * 0.30)
+    box = (ImageClip(box_png).set_position((0, y - HOOK_BOX_PAD_Y))
+           .set_start(0).set_duration(HOOK_DURATION))
+    txt = (txt.set_position(("center", y)).set_start(0).set_duration(HOOK_DURATION))
+    return [box, txt]
 
 
 def _part_label_clip(part: int, total: int) -> TextClip:
@@ -317,6 +334,31 @@ def _part_label_clip(part: int, total: int) -> TextClip:
     return label
 
 
+MUSIC_DIR = os.path.join(os.path.dirname(__file__), "..", "assets", "music")
+MUSIC_LOOP_VOLUME = 0.12  # фоновый луп под голосом — тихо, но слышно
+
+
+def _music_layer(duration: float):
+    """Случайный фоновый луп из assets/music/ (ротация против шаблонности),
+    нормализован, зациклен под длину видео, тихо под голосом."""
+    try:
+        tracks = glob.glob(os.path.join(MUSIC_DIR, "*.mp3"))
+        if not tracks:
+            return None
+        m = AudioFileClip(random.choice(tracks))
+        m = afx.audio_normalize(m)
+        return afx.audio_loop(m, duration=duration).volumex(MUSIC_LOOP_VOLUME)
+    except Exception as e:
+        print(f"  Музыка пропущена: {e}")
+        return None
+
+
+def _build_audio(voice, words: list[dict], duration: float):
+    """Финальная дорожка: голос + фоновый луп. Если музыки нет — только голос."""
+    music = _music_layer(duration)
+    return CompositeAudioClip([voice, music]) if music is not None else voice
+
+
 def build_video(
     audio_path: str,
     clip_paths: list[str],
@@ -335,6 +377,12 @@ def build_video(
     if not clip_paths:
         raise ValueError("No video clips provided to build_video")
 
+    # Обрезаем хвост тишины TTS после последнего слова — иначе перед зацикливанием
+    # видна пауза. Оставляем небольшой запас, чтобы не отрезать само слово.
+    if words:
+        duration = min(duration, words[-1]["end"] + LOOP_TAIL_PAD)
+        audio = audio.subclip(0, duration)
+
     cta_duration = min(CTA_DURATION, duration)
     cta_start = max(duration - cta_duration, 0)
 
@@ -342,16 +390,16 @@ def build_video(
     caption_clips = _karaoke_clips(words, cutoff=duration)
     cta_clips = _cta_clips(duration, topic)
     part_clips = [_part_label_clip(part, total_parts)] if part else []
-    hook_clips = [_hook_clip(title)] if title else []
+    hook_clips = _hook_clips(title) if title else []
     final = CompositeVideoClip(
         [background, *caption_clips, *cta_clips, *part_clips, *hook_clips], size=TARGET_SIZE
-    ).set_audio(audio)
+    ).set_audio(_build_audio(audio, words, duration))
     final.write_videofile(out_path, fps=30, codec="libx264", audio_codec="aac", logger=None)
 
-    # Тумбу берём из кадра во время показа текста-хука — заголовок уже вписан в кадр,
-    # отдельную полосу-overlay больше не рисуем (иначе текст дублируется).
+    # Тумба = самый первый кадр: виден только текст-хук, первое слово субтитров ещё
+    # не появилось (стартует ~0.1с). Чище, чем кадр из середины хука, где вылезает субтитр.
     thumb_path = out_path.replace(".mp4", "_thumb.jpg")
-    thumb_time = HOOK_DURATION / 2 if title else min(1.0, duration * 0.1)
+    thumb_time = 0.05 if title else min(1.0, duration * 0.1)
     frame = final.get_frame(min(thumb_time, duration - 0.1))
     Image.fromarray(frame).convert("RGB").save(thumb_path, "JPEG")
 
