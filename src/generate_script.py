@@ -67,16 +67,18 @@ mechanics, relativity, advanced math) — the shock has to land for a general au
 Physics and quantum physics are strictly off-limits as topics.
 
 Structure, in order:
-1. Hook (first 1-2 sentences): create intrigue WITHOUT naming the subject. The viewer must think
-   "wait, what is this about?" for the first 2-3 seconds. Use mystery framing — describe the
-   surprising property without revealing what thing has it. Proven templates:
-   - "This [vague noun] can [shocking ability]." → reveal the subject next sentence
-   - "Nobody knows why [mysterious phenomenon] happens."
+1. Hook (the FIRST sentence, max ~12 words): the swipe-away decision is instant, so the single
+   most shocking, hard-to-believe claim must come FIRST — no warm-up clause before it. Open an
+   information gap the viewer is COMPELLED to close, WITHOUT naming the subject. The first 3-4
+   words alone must stop the scroll. Break a belief or raise real stakes — don't merely tease.
+   Proven templates:
+   - "This [vague noun] can [shocking ability] — and [surprising consequence]."
+   - "You've [common experience], and you never knew [hidden reason]."
+   - "One [vague category] can [shocking thing] in [short timeframe]."
+   - "[Authority] still can't explain why [phenomenon]."
    - "This sounds fake, but [claim without naming subject]."
-   - "One [vague category] can [shocking thing] overnight."
-   - "Scientists still can't explain why [phenomenon]."
-   Never open with "Did you know" / "¿sabías que?" / "Today we'll talk about" — open
-   mid-thought like cutting into the most interesting part of a conversation.
+   Never open with "Did you know" / "¿sabías que?" / "Today we'll talk about" / any warm-up —
+   the shocking words come FIRST, framing second. Cut into the most interesting part mid-thought.
 2. Reveal + fact: name the subject and deliver the core fact fast, no filler. The fact MUST
    contain at least one concrete anchor — a number, a date, a named place, or a named person
    (e.g. "100,000 years", "the 1888 Ritter Island eruption", "a goldsmith named Amenhotep").
@@ -84,15 +86,17 @@ Structure, in order:
    the stakes personal where you honestly can: tie it to the viewer's own body, safety, daily
    life, or something they've experienced — not just abstract "this is interesting."
 3. One unexpected twist or payoff line that makes the misconception's collapse explicit.
-4. Comment bait (one sentence, standalone): the viewer must feel an itch to reply. Pick ONE
-   of these four mechanisms — whichever fits the fact best — never a generic "what do you think?":
-   a) Correction trap: state something a chunk of viewers will believe is wrong, so they rush
-      to correct you. ("Technically this means [common belief] was never true.")
-   b) Personal-experience call: invite people who've felt/seen it to confirm. ("If you've ever
-      [common experience tied to the fact], you already knew this on some level.")
-   c) Camps: split the audience into two groups who'll argue. ("Half of you will refuse to
-      believe this even now.")
-   d) Unfinished "actually": an almost-complete claim that begs an "actually..." reply.
+4. Comment bait (one sentence, standalone, MUST provoke a strong reaction): comments and shares
+   are a top ranking signal, so the viewer should feel they CAN'T scroll without replying. Land
+   on the single most debatable or personal point of the fact — never a generic recap or a soft
+   "what do you think?". Pick the mechanism that creates the most disagreement or self-recognition:
+   a) Correction trap: state it so confidently that people who "know better" rush to correct you.
+      ("So technically, [common belief] was never actually true.")
+   b) Personal-experience call: make a specific bet about the viewer's own body/life they'll want
+      to confirm or deny. ("If your [body part] ever [sensation], you've felt this and didn't know it.")
+   c) Camps: explicitly split the audience and predict one side won't accept it. ("Half of you will
+      refuse to believe this even after watching twice.")
+   d) Unfinished "actually": leave a deliberate, baitable gap that begs an "actually..." reply.
 
 No "today I'll tell you about" style intros.""".format(
     channel=CFG["channel_name"],
@@ -118,19 +122,19 @@ list ONLY the connector words for which "<word> <sentence 1>" is a COHERENT, gra
     "where..." ✗, "because..." ✗  → loop_connectors: ["why","how"].
   Always include at least one (usually "why" and/or "how" fit a fact-statement hook)."""
 
-# 30-38s is the sweet spot for YouTube's 2026 Shorts algorithm (absolute watch time, not
-# just retention %). edge-tts at +5% ≈ 2.6 words/sec, so 75-95 words ≈ 30-37s.
-# 85-110 words drifted to 44-47s in practice — ceiling lowered to hit the target reliably.
+# 2026 Shorts algorithm favours ~20-25s (retention/AVD is the whole game; >45s drops off hard).
+# We target ~25-32s — short enough to hold retention, long enough for a fact's anchor+twist.
+# edge-tts at +5% ≈ 2.6 words/sec, so 62-82 words ≈ 24-32s.
 LENGTH_INSTRUCTION = (
     "HARD LENGTH LIMIT: the script (hook through CTA, the loop line is added later) MUST be "
-    "75-90 words. This is the single most important constraint — count the words before you "
-    "answer and DO NOT exceed 90. A script over 90 words is a failure even if great. "
-    "Be ruthless: one tight sentence per beat, no throat-clearing, no second comment-bait, "
-    "no padding adjectives. Build a full arc (setup, twist, payoff) inside the budget."
+    "62-80 words — the algorithm favours ~25-30s Shorts and punishes longer ones with retention "
+    "drop-off. Count the words before you answer and DO NOT exceed 80. A script over 80 words is "
+    "a failure even if great. Be ruthless: one tight sentence per beat, no throat-clearing, no "
+    "second comment-bait, no padding adjectives. Build a full arc (setup, twist, payoff) tightly."
 )
 
-SCRIPT_MIN_WORDS = 70
-SCRIPT_MAX_WORDS = 92  # gate: above this we retry; loop line (~3 words) appended after
+SCRIPT_MIN_WORDS = 58
+SCRIPT_MAX_WORDS = 82  # gate: above this we retry; loop line (~3 words) appended after
 TITLE_INSTRUCTION = (
     "title: a punchy narrative hook, under 60 characters. Do NOT append a '| topic facts' "
     "style keyword suffix — it should read like a real headline, not a listicle."
@@ -195,8 +199,8 @@ def _validate(data: dict) -> list[str]:
     word_count = len(script.split())
     if word_count > SCRIPT_MAX_WORDS:
         problems.append(
-            f"The script is {word_count} words — too long (runs over 37s). "
-            f"Cut it to 75-95 words while keeping the hook, the core fact, the comment bait "
+            f"The script is {word_count} words — too long (the algorithm favours ~25-30s Shorts). "
+            f"Cut it to 62-80 words while keeping the hook, the core fact, the comment bait "
             f"and the CTA as the last sentence. Tighten the middle."
         )
 
