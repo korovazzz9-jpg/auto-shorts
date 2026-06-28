@@ -62,9 +62,10 @@ Keep tension between the two sides alive throughout. No lists — continuous nar
 }
 
 COMMON_SUFFIX = """
-Each individual fact must overturn a common intuitive assumption — not just an interesting
-detail, but something that breaks what people assume is true. Avoid abstract/technical facts
-requiring specialist background (quantum mechanics, advanced math, physics)."""
+The fact (or facts) at the heart of the video must overturn a common intuitive assumption —
+not just an interesting detail, but something that breaks what people assume is true. Avoid
+abstract/technical facts requiring specialist background (quantum mechanics, advanced math,
+physics)."""
 
 
 def _load_state() -> dict:

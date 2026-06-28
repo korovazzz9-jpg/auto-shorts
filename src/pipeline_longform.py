@@ -41,7 +41,7 @@ def run() -> None:
     _verify_channel()
     print("1/4 Генерация сценария-компиляции...")
     data = generate_longform_script()
-    print(f"  Тема: {data['theme']} | Заголовок: {data['title']}")
+    print(f"  Формат: {data.get('longform_format', '?')} | Тема: {data['theme']} | Заголовок: {data['title']}")
 
     with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
         audio_path = os.path.join(tmp, "audio.mp3")
