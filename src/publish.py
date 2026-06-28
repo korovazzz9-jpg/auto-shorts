@@ -76,7 +76,15 @@ def publish(
             hosted = upload_to_cloudinary(video_path)
             if CFG["post_to_instagram"]:
                 hosted_thumb = upload_image(thumb_path)
-                caption = f"{data['title']}\n\n{data['script']}\n\n{' '.join(data['hashtags'])}"
+                # #shorts на IG бесполезен (это ютубовский тег) — меняем на Reels-нативные,
+                # они реально влияют на попадание в Reels-ленту.
+                ig_tags = []
+                for t in data["hashtags"]:
+                    if t.lower() == "#shorts":
+                        ig_tags += ["#reels", "#reelsinstagram"]
+                    else:
+                        ig_tags.append(t)
+                caption = f"{data['title']}\n\n{data['script']}\n\n{' '.join(ig_tags)}"
                 upload_reel(hosted["url"], caption, cover_url=hosted_thumb["url"])
                 print("  Instagram: опубликовано")
 
