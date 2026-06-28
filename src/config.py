@@ -160,6 +160,52 @@ CONFIGS = {
             "natural wonders": "Maravillas Naturales",
         },
     },
+    # Вьетнамский TikTok-профиль. Аккаунт TikTok зарегистрирован во Вьетнаме → раздаётся
+    # вьетнамской аудитории, поэтому контент на вьетнамском. Публикация ручная (генерим
+    # локально через `CHANNEL=vi python test_local.py`), автопостинг выключен.
+    "vi": {
+        "channel_name": "Sự Thật 60 Giây",
+        "lang_code": "vi",
+        "script_language": "Vietnamese (natural, conversational Vietnamese)",
+        "voices": [
+            "vi-VN-NamMinhNeural",
+        ],
+        "cta_phrases": [
+            "THEO DÕI\nđể xem thêm",
+            "THEO DÕI để xem\nnhững sự thật như này",
+            "NHẤN ĐÔI\nnếu bạn chưa biết",
+        ],
+        # Петля на вьетнамском грамматически не складывается так же, как в EN/ES
+        # («<слово> <хук>» не читается единым предложением), поэтому петлю отключаем.
+        "loop_phrases": {},
+        "loop_probability": 0.0,
+        "cta_topic_template": "THEO DÕI để xem thêm\nsự thật về {word}",
+        "topic_cta_words": {
+            "the ocean": "ĐẠI DƯƠNG",
+            "the animal kingdom": "ĐỘNG VẬT",
+            "space": "VŨ TRỤ",
+            "the human body": "CƠ THỂ",
+            "ancient history": "LỊCH SỬ",
+            "archaeological discoveries": "KHẢO CỔ",
+            "ancient civilizations": "CỔ ĐẠI",
+            "volcanoes and earthquakes": "NÚI LỬA",
+            "extreme weather": "THỜI TIẾT",
+            "historical mysteries": "BÍ ẨN",
+            "evolution": "TIẾN HÓA",
+            "natural wonders": "THIÊN NHIÊN",
+            "shipwrecks and lost treasures": "KHO BÁU",
+        },
+        "cta_instruction": (
+            "ONE short CTA in Vietnamese, 4-7 words MAX — either \"Theo dõi để xem thêm.\" or "
+            "\"Bình luận nếu bạn đã biết.\" Pick one, no embellishment, no extra clauses"
+        ),
+        "post_to_instagram": False,
+        "post_to_tiktok": False,
+        "post_to_pinterest": False,
+        "channel_handle": "",
+        "first_comment": "",
+        "playlist_titles": {},
+    },
 }
 
 CFG = CONFIGS[CHANNEL]
