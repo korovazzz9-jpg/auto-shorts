@@ -5,6 +5,9 @@ on:
   # шортс. Триггерится cron-job.org (workflow_dispatch).
   workflow_dispatch: {}
 
+permissions:
+  contents: write   # коммитит longform_state_es.json для ротации форматов
+
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -37,3 +40,12 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python pipeline_longform.py
+
+      - name: Commit longform state (format rotation)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git pull --rebase
+          git add longform_state_es.json
+          git diff --cached --quiet || git commit -m "chore: longform_state_es format rotation"
+          git push
