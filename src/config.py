@@ -68,9 +68,10 @@ CONFIGS = {
         "post_to_pinterest": False,  # ожидает одобрения Pinterest Dev App — вернуть True после
         # Хэндл канала без @, нужен для ссылки в первом комментарии.
         "channel_handle": "60SecFacts",
-        # Первый комментарий от имени канала после каждой публикации.
-        # {channel_url} — подставляется автоматически.
-        "first_comment": "More videos on this topic 👉 {playlist_url}\nFollow for daily facts 👉 {channel_url}",
+        # Первый комментарий от имени канала после каждой публикации. Вопрос-провокация
+        # СВЕРХУ — комменты/ответы это топ-сигнал алгоритма (engagement density), generic
+        # "follow" так не работает. {channel_url} подставляется автоматически.
+        "first_comment": "Wait — did you actually already know this one? 👇\nFollow for a new fact every day 👉 {channel_url}",
         "playlist_titles": {
             "space": "Space Facts",
             "the ocean": "Ocean Facts",
@@ -139,7 +140,7 @@ CONFIGS = {
         "post_to_tiktok": False,
         "post_to_pinterest": False,
         "channel_handle": "DatosEn30s",
-        "first_comment": "Más videos sobre este tema 👉 {playlist_url}\nSíguenos para más datos 👉 {channel_url}",
+        "first_comment": "Un momento — ¿tú ya sabías esto? 👇\nSíguenos para un dato nuevo cada día 👉 {channel_url}",
         "playlist_titles": {
             "space": "Datos del Espacio",
             "the ocean": "Datos del Océano",
