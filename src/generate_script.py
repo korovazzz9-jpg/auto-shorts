@@ -122,19 +122,19 @@ list ONLY the connector words for which "<word> <sentence 1>" is a COHERENT, gra
     "where..." ✗, "because..." ✗  → loop_connectors: ["why","how"].
   Always include at least one (usually "why" and/or "how" fit a fact-statement hook)."""
 
-# 2026 Shorts algorithm favours ~20-25s (retention/AVD is the whole game; >45s drops off hard).
-# We target ~25-32s — short enough to hold retention, long enough for a fact's anchor+twist.
-# edge-tts at +5% ≈ 2.6 words/sec, so 62-82 words ≈ 24-32s.
+# Top-performing fact/educational Shorts cluster at 25-35s (viral range 20-40s; retention/AVD is
+# the whole game, >45s drops off hard). Facts aren't tutorials, but need room for anchor+twist+bait,
+# so we target ~28-35s — the upper sweet spot. edge-tts at +5% ≈ 2.6 words/sec, so 70-88 words.
 LENGTH_INSTRUCTION = (
     "HARD LENGTH LIMIT: the script (hook through CTA, the loop line is added later) MUST be "
-    "62-80 words — the algorithm favours ~25-30s Shorts and punishes longer ones with retention "
-    "drop-off. Count the words before you answer and DO NOT exceed 80. A script over 80 words is "
-    "a failure even if great. Be ruthless: one tight sentence per beat, no throat-clearing, no "
-    "second comment-bait, no padding adjectives. Build a full arc (setup, twist, payoff) tightly."
+    "70-88 words — top fact Shorts land at ~28-35s; longer than that and retention drops off. "
+    "Count the words before you answer and DO NOT exceed 88. A script over 88 words is a failure "
+    "even if great. Be ruthless: one tight sentence per beat, no throat-clearing, no second "
+    "comment-bait, no padding adjectives. Build a full arc (setup, twist, payoff) tightly."
 )
 
-SCRIPT_MIN_WORDS = 58
-SCRIPT_MAX_WORDS = 82  # gate: above this we retry; loop line (~3 words) appended after
+SCRIPT_MIN_WORDS = 65
+SCRIPT_MAX_WORDS = 90  # gate: above this we retry; loop line (~3 words) appended after
 TITLE_INSTRUCTION = (
     "title: a punchy narrative hook, under 60 characters. Do NOT append a '| topic facts' "
     "style keyword suffix — it should read like a real headline, not a listicle."
@@ -199,8 +199,8 @@ def _validate(data: dict) -> list[str]:
     word_count = len(script.split())
     if word_count > SCRIPT_MAX_WORDS:
         problems.append(
-            f"The script is {word_count} words — too long (the algorithm favours ~25-30s Shorts). "
-            f"Cut it to 62-80 words while keeping the hook, the core fact, the comment bait "
+            f"The script is {word_count} words — too long (top fact Shorts land at ~28-35s). "
+            f"Cut it to 70-88 words while keeping the hook, the core fact, the comment bait "
             f"and the CTA as the last sentence. Tighten the middle."
         )
 

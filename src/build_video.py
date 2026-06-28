@@ -25,9 +25,6 @@ from moviepy.editor import (
 )
 
 from config import CFG
-from fetch_music import fetch_random_track
-
-MUSIC_VOLUME = 0.18  # тихо под голосом, но должна реально быть слышна
 
 # Шрифт субтитров и хука. По умолчанию — Anton (узкий жирный, выбран после теста
 # Anton/LuckiestGuy/ArchivoBlack), лежит в репо → работает и на CI/Ubuntu без системных шрифтов.
@@ -258,26 +255,6 @@ def _cta_clips(duration: float, topic: str | None = None) -> list[ImageClip]:
     )
 
     return [heart, badge]
-
-
-def _mix_music(voice_audio: AudioFileClip, duration: float, topic: str | None):
-    music_path = os.path.join(tempfile.mkdtemp(), "music.mp3")
-    try:
-        found = fetch_random_track(music_path, topic=topic)
-    except Exception:
-        found = False
-    if not found:
-        return voice_audio
-
-    try:
-        music = AudioFileClip(music_path)
-        # Нормализуем громкость исходника перед множителем -- иначе если сам трек
-        # записан тихо, MUSIC_VOLUME от него получается почти неслышным.
-        music = afx.audio_normalize(music)
-        music = afx.audio_loop(music, duration=duration).volumex(MUSIC_VOLUME)
-        return CompositeAudioClip([music, voice_audio])
-    except Exception:
-        return voice_audio
 
 
 PART_LABEL_DURATION = 2.5  # секунд показа "PART N / 3" в начале видео
