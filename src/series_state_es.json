@@ -1,0 +1,101 @@
+{
+  "topic": "space",
+  "part1": {
+    "title": "El espacio huele a algo que conoces | Part 1",
+    "script": "Huele a esto todos los días y nunca lo relacionaste con el universo. Los astronautas que regresan de caminatas espaciales describen un olor específico en sus trajes: metal quemado, carne a la parrilla, y pólvora. No es su imaginación. El espacio exterior tiene un olor real. Moléculas de hidrógeno, carbono y oxígeno flotan entre las estrellas formando compuestos orgánicos. Algunos de esos compuestos son idénticos a los que produces cuando cocinas carne a fuego alto. El universo entero huele a algo que tú has olido esta semana. Síguenos para no perderte la Parte 2.",
+    "tags": [
+      "espacio exterior",
+      "datos del espacio",
+      "astronautas",
+      "olor del espacio",
+      "curiosidades del universo",
+      "ciencia espacial",
+      "hechos increíbles",
+      "nasa curiosidades",
+      "topic-space",
+      "series-part-1"
+    ],
+    "hashtags": [
+      "#EspacioExterior",
+      "#CienciaEspacial",
+      "#DatosIncreíbles"
+    ],
+    "video_queries": [
+      "astronaut spacewalk returning to space station",
+      "grilling meat fire smoke close up",
+      "outer space nebula stars floating particles",
+      "astronaut removing spacesuit helmet"
+    ],
+    "topic": "space",
+    "part": 1,
+    "total_parts": 3,
+    "hashtag_position": "end"
+  },
+  "part2": {
+    "title": "Por qué el espacio huele a carne quemada | Part 2",
+    "script": "Ya sabes que el espacio huele a algo familiar. Aquí está la razón que nadie te dice. Entre las estrellas existe una nube molecular llamada Sagitario B2, ubicada a 26,000 años luz de aquí, y contiene etil formiato, el mismo compuesto químico que le da sabor a las frambuesas y al ron. Pero también hay policiclicos aromáticos, moléculas que se forman cuando quemas proteína animal. La radiación de las estrellas cocina literalmente materia orgánica flotando en el vacío desde hace millones de años. El universo lleva cocinando desde antes de que existiera la Tierra. Síguenos para la conclusión en la Parte 3.",
+    "tags": [
+      "sagitario b2",
+      "química del espacio",
+      "moléculas en el espacio",
+      "nebulosa interestelar",
+      "compuestos orgánicos espacio",
+      "curiosidades científicas",
+      "datos del universo",
+      "espacio datos",
+      "topic-space",
+      "series-part-2"
+    ],
+    "hashtags": [
+      "#QuímicaEspacial",
+      "#UniversoIncreíble",
+      "#DatosEnciencia",
+      "#EspacioExterior"
+    ],
+    "video_queries": [
+      "Sagittarius B2 nebula space animation",
+      "molecular cloud deep space timelapse",
+      "star radiation energy visualization",
+      "chemical molecules floating animation",
+      "milky way galaxy center zoom"
+    ],
+    "topic": "space",
+    "part": 2,
+    "total_parts": 3,
+    "hashtag_position": "end"
+  },
+  "part3": {
+    "title": "El universo ya estaba vivo antes que tú | Part 3",
+    "script": "Empezamos con un olor familiar. Después descubriste que las estrellas cocinan materia orgánica desde hace miles de millones de años. Ahora viene lo que cambia todo: los mismos aminoácidos que forman tus proteínas, los que construyen cada célula de tu cuerpo, se han encontrado en meteoritos. No evolucionaron solo en la Tierra. Llegaron del espacio. Eso significa que los bloques básicos de la vida no nacieron aquí, llegaron flotando entre estrellas que olían a pólvora y a carne. No eres un ser de la Tierra que mira el espacio. Eres espacio que aprendió a mirarse a sí mismo. Síguenos para más series como esta.",
+    "tags": [
+      "aminoácidos en meteoritos",
+      "origen de la vida",
+      "panspermia",
+      "meteoritos y vida",
+      "curiosidades del universo",
+      "espacio y vida",
+      "datos científicos",
+      "origen del ser humano espacio",
+      "topic-space",
+      "series-part-3"
+    ],
+    "hashtags": [
+      "#OrigenDeLaVida",
+      "#EspacioExterior",
+      "#UniversoIncreíble",
+      "#CienciaEspacial",
+      "#DatosIncreíbles"
+    ],
+    "video_queries": [
+      "meteorite falling through atmosphere slow motion",
+      "DNA strand animation molecules",
+      "human body cells microscope zoom",
+      "meteor impact earth ancient",
+      "person looking up at stars night sky"
+    ],
+    "topic": "space",
+    "part": 3,
+    "total_parts": 3,
+    "hashtag_position": "end"
+  }
+}
