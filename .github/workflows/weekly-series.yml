@@ -15,6 +15,9 @@ on:
         required: false
         default: ""
 
+permissions:
+  contents: write   # Part 1 коммитит series_state_en.json в репо
+
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -35,13 +38,6 @@ jobs:
             esac
           fi
           echo "part=$PART" >> $GITHUB_OUTPUT
-
-      - name: Restore series state
-        uses: actions/cache@v4
-        with:
-          path: src/series_state.json
-          key: series-state-en
-          restore-keys: series-state-en
 
       - name: Restore titles cache
         uses: actions/cache@v4
@@ -86,3 +82,15 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python pipeline_series.py
+
+      # Part 1 сгенерировал все 3 скрипта — коммитим состояние, чтобы Part 2/3 (Вт/Ср)
+      # получили его через checkout. Надёжнее actions/cache (тот вытеснялся за 7 дней).
+      - name: Persist series state (Part 1)
+        if: steps.part.outputs.part == '1'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/series_state_en.json
+          git commit -m "chore(series): EN state $(date -u +%F)" || { echo "no changes"; exit 0; }
+          git pull --rebase origin master
+          git push

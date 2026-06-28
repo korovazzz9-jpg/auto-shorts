@@ -17,4 +17,4 @@ assets/backgrounds/*
 !assets/music/*.mp3
 src/titles_cache.json
 src/topics_cache.json
-src/series_state.json
+# series_state_*.json НЕ игнорируем — коммитится в Part 1, читается в Part 2/3 через checkout

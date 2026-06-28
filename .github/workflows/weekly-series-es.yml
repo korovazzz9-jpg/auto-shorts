@@ -11,6 +11,9 @@ on:
         required: false
         default: ""
 
+permissions:
+  contents: write   # Part 1 коммитит series_state_es.json в репо
+
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -31,13 +34,6 @@ jobs:
             esac
           fi
           echo "part=$PART" >> $GITHUB_OUTPUT
-
-      - name: Restore series state
-        uses: actions/cache@v4
-        with:
-          path: src/series_state.json
-          key: series-state-es
-          restore-keys: series-state-es
 
       - name: Restore titles cache
         uses: actions/cache@v4
@@ -76,3 +72,13 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python pipeline_series.py
+
+      - name: Persist series state (Part 1)
+        if: steps.part.outputs.part == '1'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/series_state_es.json
+          git commit -m "chore(series): ES state $(date -u +%F)" || { echo "no changes"; exit 0; }
+          git pull --rebase origin master
+          git push

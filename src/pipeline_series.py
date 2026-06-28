@@ -11,7 +11,7 @@ import tempfile
 from dotenv import load_dotenv
 
 from build_video import build_video
-from config import CFG
+from config import CFG, CHANNEL
 from fetch_stock_video import fetch_clips
 from generate_series import generate_series
 from notify import notify
@@ -21,7 +21,9 @@ from youtube_auth import get_authenticated_channel_title
 
 load_dotenv()
 
-SERIES_STATE_FILE = os.path.join(os.path.dirname(__file__), "series_state.json")
+# Per-channel: EN и ES не должны затирать состояние друг друга. Файл коммитится в репо
+# в Part 1 (Пн) и читается через checkout в Part 2/3 — надёжнее, чем actions/cache (TTL 7 дней).
+SERIES_STATE_FILE = os.path.join(os.path.dirname(__file__), f"series_state_{CHANNEL}.json")
 
 
 def _alert(step: str, err: Exception) -> None:

@@ -133,7 +133,7 @@ python src/rerender.py
 
 Серии идут БЕЗ loop-петли (loop только в daily Shorts). Каждое видео начинается с оверлея **"PART N / 3"** (2.5 сек).
 
-`series_state.json` — персистируется через `actions/cache`: ключ `series-state-en` (EN) / `series-state-es` (ES), отдельные кеши на канал.
+**Передача состояния между днями:** Part 1 пишет 3 скрипта в `series_state_<channel>.json` (per-channel) и **коммитит файл в репо** (шаг `Persist series state`, `permissions: contents: write`); Part 2/3 получают его обычным `checkout`. Раньше был `actions/cache` — ненадёжно (TTL 7 дней + вытеснение), теперь файл версионируется в git. `pull --rebase` перед push защищает от гонки с другими коммитами.
 
 **Отключить серии** — задизейблить `weekly-series.yml` / `weekly-series-es.yml`. Ежедневные видео работают независимо.
 
