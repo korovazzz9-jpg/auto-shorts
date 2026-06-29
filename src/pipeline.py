@@ -54,7 +54,7 @@ def run() -> None:
         words = text_to_speech(data["script"], audio_path)
 
         print("4/6 Сборка видео...")
-        video_path, thumb_path = build_video(audio_path, clip_paths, words, video_path, topic=data["topic"], title=data["title"])
+        video_path, thumb_path = build_video(audio_path, clip_paths, words, video_path, topic=data["topic"], title=data["title"], hook_text=data.get("hook_text"))
 
         print("5/6 Публикация...")
         publish(
@@ -67,6 +67,7 @@ def run() -> None:
             extra_tags=[
                 f"topic-{data['topic'].replace(' ', '_')}",
                 f"loop-{'yes' if data.get('has_loop') else 'no'}",
+                f"hook-{data.get('hook_template', 'other')}",
             ],
             enable_captions=False,  # временно (квота), вернуть после увеличения квоты
             enable_pinterest=True,

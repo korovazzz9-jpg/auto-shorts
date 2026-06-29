@@ -46,6 +46,7 @@ with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
         audio_path, clip_paths, words, video_path,
         topic=None if SATISFYING else data["topic"],   # None → общий VN CTA-бейдж
         title=None if SATISFYING else data["title"],   # None → без EN-хук-плашки
+        hook_text=None if SATISFYING else data.get("hook_text"),  # двойной хук (текст ≠ озвучка)
     )
 
     # Определяем номер следующего видео

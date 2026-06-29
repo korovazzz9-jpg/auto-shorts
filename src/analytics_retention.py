@@ -26,6 +26,7 @@ load_dotenv()
 
 TOPIC_TAG_RE = re.compile(r"^topic-(.+)$")
 LOOP_TAG_RE = re.compile(r"^loop-(yes|no)$")
+HOOK_TAG_RE = re.compile(r"^hook-(.+)$")
 MAX_VIDEOS = 50  # сколько последних видео анализировать
 
 
@@ -63,6 +64,7 @@ def _recent_videos(youtube) -> list[dict]:
         for v in resp.get("items", []):
             topic = None
             loop = None
+            hook = None
             for tag in v["snippet"].get("tags", []):
                 mt = TOPIC_TAG_RE.match(tag)
                 if mt:
@@ -70,6 +72,9 @@ def _recent_videos(youtube) -> list[dict]:
                 ml = LOOP_TAG_RE.match(tag)
                 if ml:
                     loop = ml.group(1)
+                mh = HOOK_TAG_RE.match(tag)
+                if mh:
+                    hook = mh.group(1)
             videos.append({
                 "id": v["id"],
                 "title": v["snippet"]["title"],
@@ -77,6 +82,7 @@ def _recent_videos(youtube) -> list[dict]:
                 "length": _iso8601_to_seconds(v["contentDetails"].get("duration", "")),
                 "topic": topic or "—",
                 "loop": loop or "?",
+                "hook": hook or "—",
             })
     return videos
 
@@ -148,6 +154,15 @@ def main() -> None:
     for key, pcts in buckets.items():
         if pcts:
             print(f"{sum(pcts) / len(pcts):6.1f}%  ({len(pcts):2} видео)  {key}")
+
+    # #2 Средний % досмотра по хук-шаблону — чтобы взвешивать сильнейшие хуки.
+    by_hook: dict[str, list[float]] = {}
+    for v in videos:
+        if v["pct"] > 0:  # видео без данных (свежие) не занижают средние нулями
+            by_hook.setdefault(v["hook"], []).append(v["pct"])
+    print("\n=== Средний % досмотра по хук-шаблону ===\n")
+    for hook, pcts in sorted(by_hook.items(), key=lambda kv: -sum(kv[1]) / len(kv[1])):
+        print(f"{sum(pcts) / len(pcts):6.1f}%  ({len(pcts):2} видео)  {hook}")
 
     # Главное сравнение: петля vs без петли (только видео с проставленным тегом)
     by_loop: dict[str, list[float]] = {"yes": [], "no": []}

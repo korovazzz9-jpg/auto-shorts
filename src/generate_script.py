@@ -90,7 +90,9 @@ Structure, in order:
    Vague facts feel like trivia; a specific anchor makes it feel true and memorable. Also make
    the stakes personal where you honestly can: tie it to the viewer's own body, safety, daily
    life, or something they've experienced — not just abstract "this is interesting."
-3. One unexpected twist or payoff line that makes the misconception's collapse explicit.
+3. Re-hook + twist: right before the payoff, re-open curiosity with a SHORT re-hook (3-5 words,
+   e.g. "But here's the strange part" / "And it gets weirder") so viewers don't drop in the
+   middle — then deliver one unexpected twist that makes the misconception's collapse explicit.
 4. Comment bait (one sentence, standalone, MUST provoke a strong reaction): comments and shares
    are a top ranking signal, so the viewer should feel they CAN'T scroll without replying. Land
    on the single most debatable or personal point of the fact — never a generic recap or a soft
@@ -102,6 +104,9 @@ Structure, in order:
    c) Camps: explicitly split the audience and predict one side won't accept it. ("Half of you will
       refuse to believe this even after watching twice.")
    d) Unfinished "actually": leave a deliberate, baitable gap that begs an "actually..." reply.
+   e) Share trigger: phrase it so the viewer wants to SEND it to a specific person — name the
+      type of person who needs to see it ("Send this to someone who still thinks [belief]").
+      Shares and share-to-DM are a top distribution signal on both YouTube and TikTok.
 
 No "today I'll tell you about" style intros.""".format(
     channel=CFG["channel_name"],
@@ -145,6 +150,17 @@ TITLE_INSTRUCTION = (
     "style keyword suffix — it should read like a real headline, not a listicle."
 )
 
+# Хук-шаблоны: модель сообщает, какой использовала; пайплайн тегирует видео hook-<id>,
+# а analytics_retention меряет % досмотра по типу хука — чтобы взвешивать сильнейшие.
+HOOK_TEMPLATES = [
+    "vague-ability",           # "This [vague noun] can [shocking ability]..."
+    "you-experience",          # "You've [common experience], you never knew [hidden reason]"
+    "one-category",            # "One [vague category] can [shocking thing] in [timeframe]"
+    "authority-cant-explain",  # "[Authority] still can't explain why..."
+    "sounds-fake",             # "This sounds fake, but [claim]"
+    "other",
+]
+
 
 def _build_user_content(topic: str, avoid_block: str) -> str:
     return (
@@ -162,6 +178,12 @@ def _build_user_content(topic: str, avoid_block: str) -> str:
         "of specific objects.\n\n"
         "Requirements:\n"
         f"- {TITLE_INSTRUCTION}\n"
+        f"- hook_text: a 3-6 word ON-SCREEN hook shown over the first seconds. It must be a "
+        "DIFFERENT angle from the spoken first sentence (the eye and the ear deliver two "
+        "separate hooks in the first 2 seconds) and NOT a copy of the title. Punchy, in "
+        f"{CFG['script_language']}, no ending period.\n"
+        f"- hook_template: which opening template the spoken hook uses — exactly one of "
+        f"[{', '.join(HOOK_TEMPLATES)}]. Report the closest match (use 'other' if none fits).\n"
         f"- tags: 6-9 specific YouTube search tags in {CFG['script_language']}, mixing "
         "broad ones (e.g. the channel's equivalent of 'facts'/'did you know') with specific "
         "long-tail ones tied to the exact fact (the specific phenomenon, place, or thing "
@@ -171,6 +193,8 @@ def _build_user_content(topic: str, avoid_block: str) -> str:
         "equivalent of #facts) with 2-4 specific ones tied to the topic and fact.\n\n"
         "Respond strictly in JSON, no markdown wrapper: "
         '{"title": "title text", '
+        '"hook_text": "short on-screen hook", '
+        '"hook_template": "vague-ability", '
         '"script": "voiceover script ending with the comment-bait line (NO spoken CTA, NO loop line)", '
         '"loop_connectors": ["why", "how"], '
         '"tags": ["tag1", "tag2", ...], '
@@ -308,6 +332,12 @@ def generate_script() -> dict:
     _append_loop(data)  # детерминированно дописываем loop-фразу под помеченный коннектор
     data["topic"] = topic
     data["hashtag_position"] = "end"
+    # #2 хук-шаблон: нормализуем к известному id (для тега hook-<id> и аналитики).
+    ht = str(data.get("hook_template", "")).strip().lower()
+    data["hook_template"] = ht if ht in HOOK_TEMPLATES else "other"
+    # #4 двойной хук: если on-screen hook пуст — падаем на заголовок (хук-плашка не исчезнет).
+    if not str(data.get("hook_text", "")).strip():
+        data["hook_text"] = data["title"]
     add_title_to_cache(data["title"])
     add_topic_to_cache(topic)
     return data

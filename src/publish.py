@@ -9,7 +9,7 @@ import os
 from cloudinary_upload import delete_image, delete_video, upload_image, upload_video as upload_to_cloudinary
 from config import CFG
 from notify import notify
-from post_comment import post_channel_comment
+from post_comment import post_channel_comment, post_comment_reply
 from upload_captions import upload_captions
 from upload_instagram import upload_reel
 from upload_pinterest import upload_pin
@@ -73,7 +73,14 @@ def publish(
             comment_cta = CFG.get("longform_comment_cta", "Want the full story?")
             comment = (comment + f"\n\n▶ {comment_cta} {longform_url}").strip()
         if comment:
-            post_channel_comment(video_id, comment)
+            comment_id = post_channel_comment(video_id, comment)
+            # #3 Само-ответ → мини-тред (engagement density). Генерик из CFG, без доп. токенов.
+            reply = CFG.get("first_comment_reply", "")
+            if reply:
+                try:
+                    post_comment_reply(comment_id, reply)
+                except Exception as e:
+                    alert("comment reply", e)
     except Exception as e:
         alert("first comment", e)
 

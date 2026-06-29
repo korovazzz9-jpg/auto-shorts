@@ -21,3 +21,16 @@ def post_channel_comment(video_id: str, text: str) -> str:
     comment_id = resp["snippet"]["topLevelComment"]["id"]
     print(f"  Comment posted: {comment_id}")
     return comment_id
+
+
+def post_comment_reply(parent_id: str, text: str) -> str:
+    """Отвечает на собственный закреп-коммент — образует мини-тред. Ветки комментов
+    повышают engagement density (сильный сигнал ранжирования) и провоцируют людей
+    влезать в обсуждение. Возвращает id ответа."""
+    youtube = get_client()
+    resp = youtube.comments().insert(
+        part="snippet",
+        body={"snippet": {"parentId": parent_id, "textOriginal": text}},
+    ).execute()
+    print(f"  Reply posted: {resp['id']}")
+    return resp["id"]

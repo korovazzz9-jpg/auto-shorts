@@ -371,9 +371,13 @@ def build_video(
     part: int | None = None,
     total_parts: int = 3,
     title: str | None = None,
+    hook_text: str | None = None,
     **kwargs,
 ) -> tuple[str, str]:
-    """Returns (video_path, thumbnail_path)."""
+    """Returns (video_path, thumbnail_path).
+
+    hook_text — текст ON-SCREEN хук-плашки. Если задан, отличается от произносимой первой
+    фразы (двойной хук: глаз+ухо). Если None — используем title (обратная совместимость)."""
     audio = AudioFileClip(audio_path)
     duration = audio.duration
 
@@ -393,7 +397,8 @@ def build_video(
     caption_clips = _karaoke_clips(words, cutoff=duration)
     cta_clips = _cta_clips(duration, topic)
     part_clips = [_part_label_clip(part, total_parts)] if part else []
-    hook_clips = _hook_clips(title) if title else []
+    hook_overlay = hook_text or title  # двойной хук: on-screen текст может отличаться от озвучки
+    hook_clips = _hook_clips(hook_overlay) if hook_overlay else []
     final = CompositeVideoClip(
         [background, *caption_clips, *cta_clips, *part_clips, *hook_clips], size=TARGET_SIZE
     ).set_audio(_build_audio(audio, words, duration))
