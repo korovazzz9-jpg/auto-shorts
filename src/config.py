@@ -68,6 +68,10 @@ CONFIGS = {
         "post_to_pinterest": False,  # ожидает одобрения Pinterest Dev App — вернуть True после
         # Хэндл канала без @, нужен для ссылки в первом комментарии.
         "channel_handle": "60SecFacts",
+        # Воронка Shorts→лонгформ: фразы перед ссылкой на последний длинный ролик
+        # (в описании и закреп-комменте). Тема не важна — продаём формат «глубокий разбор».
+        "longform_desc_cta": "Full deep-dives on the channel:",
+        "longform_comment_cta": "Want the full story? Watch the deep-dive 👉",
         # Первый комментарий от имени канала после каждой публикации. Вопрос-провокация
         # СВЕРХУ — комменты/ответы это топ-сигнал алгоритма (engagement density), generic
         # "follow" так не работает. {channel_url} подставляется автоматически.
@@ -140,6 +144,8 @@ CONFIGS = {
         "post_to_tiktok": False,
         "post_to_pinterest": False,
         "channel_handle": "DatosEn30s",
+        "longform_desc_cta": "Análisis completos en el canal:",
+        "longform_comment_cta": "¿Quieres la historia completa? Mira el análisis 👉",
         "first_comment": "Un momento — ¿tú ya sabías esto? 👇\nSíguenos para un dato nuevo cada día 👉 {channel_url}",
         "playlist_titles": {
             "space": "Datos del Espacio",

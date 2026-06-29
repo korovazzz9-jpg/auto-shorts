@@ -76,6 +76,14 @@ def run() -> None:
         except Exception as e:
             _alert("playlist", e)
 
+    # Запоминаем id для воронки Shorts→лонгформ (daily/серии вставят ссылку в описание+коммент).
+    # Файл коммитит weekly-longform workflow тем же шагом, что и формат-ротацию.
+    try:
+        from longform_link import set_last_longform
+        set_last_longform(video_id)
+    except Exception as e:
+        _alert("last-longform-link", e)
+
     url = f"https://youtube.com/watch?v={video_id}"
     notify(f"✅ [{CFG['channel_name']}] лонгформ опубликован:\n{data['title']}\n{url}")
     print(f"Готово: {url}")

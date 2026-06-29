@@ -35,11 +35,25 @@ def publish(
     каждый пайплайн передаёт свой с нужным префиксом (канал / "Part N").
     Субтитры и Pinterest по умолчанию выключены — включаются явно.
     """
+    # Воронка Shorts→лонгформ: ведём зрителя на последний длинный ролик ради часов просмотра.
+    # Тема не важна — это «глубокий разбор» как формат. Пусто, если лонгформов ещё не было.
+    longform_url = ""
+    try:
+        from longform_link import get_last_longform_url
+        longform_url = get_last_longform_url()
+    except Exception:
+        longform_url = ""
+
+    description = data["script"]
+    if longform_url:
+        desc_cta = CFG.get("longform_desc_cta", "Full deep-dives on the channel:")
+        description += f"\n\n▶ {desc_cta} {longform_url}"
+
     print("Загрузка на YouTube...")
     video_id = upload_to_youtube(
         video_path,
         title=data["title"],
-        description=data["script"],
+        description=description,
         tags=list(data["tags"]) + list(extra_tags),
         hashtags=data["hashtags"],
         hashtag_position=data["hashtag_position"],
@@ -55,6 +69,9 @@ def publish(
         # Выкидываем строки про плейлист — плейлистов у Shorts больше нет.
         lines = [ln for ln in comment_template.split("\n") if "{playlist_url}" not in ln]
         comment = "\n".join(lines).format(channel_url=channel_url).strip()
+        if longform_url:  # та же воронка — ссылка на лонгформ в закреп-комменте
+            comment_cta = CFG.get("longform_comment_cta", "Want the full story?")
+            comment = (comment + f"\n\n▶ {comment_cta} {longform_url}").strip()
         if comment:
             post_channel_comment(video_id, comment)
     except Exception as e:
