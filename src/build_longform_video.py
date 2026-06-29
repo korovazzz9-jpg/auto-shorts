@@ -7,7 +7,7 @@
 import os
 import tempfile
 
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 from moviepy.editor import (
     AudioFileClip,
     CompositeVideoClip,
@@ -16,12 +16,71 @@ from moviepy.editor import (
     concatenate_videoclips,
 )
 
-# Импорт build_video настраивает ImageMagick и даёт общие куски (шрифт, аудио, тумба).
+# Импорт build_video настраивает ImageMagick и даёт общие куски (шрифт, аудио).
 import build_video as bv
-from build_video import SUBTITLE_FONT, _build_audio, _pick_zoom_factor, _save_thumbnail
+from build_video import SUBTITLE_FONT, _build_audio, _pick_zoom_factor
 
 TARGET_SIZE = (1920, 1080)
 CAPTION_Y = int(TARGET_SIZE[1] * 0.80)  # субтитры в нижней трети, не перекрывают центр кадра
+
+
+def _save_longform_thumb(img: Image.Image, path: str, hook_text: str | None) -> None:
+    """Тумба лонгформа (16:9): крупная короткая фраза-хук на затемнённой нижней трети.
+    Рисуем именно короткий thumb_text (3-5 слов), а НЕ длинный заголовок — иначе кадр
+    захламляется мелким текстом. Если фразы нет — отдаём чистый кадр."""
+    img = img.convert("RGB")
+    if not hook_text or not hook_text.strip():
+        img.save(path, "JPEG", quality=90)
+        return
+
+    W, H = img.size
+    text = hook_text.strip().upper()
+    max_w = int(W * 0.88)
+    draw = ImageDraw.Draw(img)
+
+    # Подбираем размер шрифта так, чтобы фраза влезла максимум в 2 строки.
+    font_size = 170
+    while font_size > 60:
+        try:
+            font = ImageFont.truetype(bv._ANTON, font_size)
+        except Exception:
+            font = ImageFont.load_default()
+        lines, cur = [], ""
+        for w in text.split():
+            t = (cur + " " + w).strip()
+            if draw.textbbox((0, 0), t, font=font)[2] <= max_w:
+                cur = t
+            else:
+                if cur:
+                    lines.append(cur)
+                cur = w
+        if cur:
+            lines.append(cur)
+        if len(lines) <= 2 and all(
+            draw.textbbox((0, 0), l, font=font)[2] <= max_w for l in lines
+        ):
+            break
+        font_size -= 10
+
+    line_h = font_size + 16
+    block_h = len(lines) * line_h
+    band_top = max(0, H - block_h - 130)
+
+    # Затемняющая полоса снизу — текст читается на любом кадре.
+    overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
+    ImageDraw.Draw(overlay).rectangle([(0, band_top), (W, H)], fill=(0, 0, 0, 150))
+    img = Image.alpha_composite(img.convert("RGBA"), overlay).convert("RGB")
+    draw = ImageDraw.Draw(img)
+
+    y = band_top + 60
+    for l in lines:
+        bbox = draw.textbbox((0, 0), l, font=font)
+        x = (W - (bbox[2] - bbox[0])) // 2 - bbox[0]
+        for dx, dy in [(-3, 0), (3, 0), (0, -3), (0, 3)]:  # чёрная обводка
+            draw.text((x + dx, y + dy), l, font=font, fill="black")
+        draw.text((x, y), l, font=font, fill="white")
+        y += line_h
+    img.save(path, "JPEG", quality=90)
 
 
 def _fit_clip(clip: VideoFileClip, duration: float, zoom_factor: float) -> VideoFileClip:
@@ -77,6 +136,7 @@ def build_longform_video(
     out_path: str,
     topic: str | None = None,
     title: str | None = None,
+    thumb_text: str | None = None,
     **kwargs,
 ) -> tuple[str, str]:
     """Returns (video_path, thumbnail_path). Сигнатура совместима с build_video."""
@@ -96,10 +156,10 @@ def build_longform_video(
         threads=4, preset="medium", logger=None,
     )
 
-    # Тумба — первый кадр + заголовок (переиспользуем рендер из build_video).
+    # Тумба — кадр + крупная короткая фраза-хук (thumb_text), не весь заголовок.
     thumb_path = os.path.splitext(out_path)[0] + "_thumb.jpg"
     frame = background.get_frame(0.5)
-    _save_thumbnail(Image.fromarray(frame), thumb_path, title=title)
+    _save_longform_thumb(Image.fromarray(frame), thumb_path, thumb_text or title)
 
     final.close()
     audio.close()

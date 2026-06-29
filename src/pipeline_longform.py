@@ -52,7 +52,7 @@ def run() -> None:
 
         print("3/4 Озвучка и сборка видео (горизонтальный лонгформ)...")
         words = text_to_speech(data["script"], audio_path)
-        video_path, thumb_path = build_longform_video(audio_path, clip_paths, words, video_path, topic=data["theme"], title=data["title"])
+        video_path, thumb_path = build_longform_video(audio_path, clip_paths, words, video_path, topic=data["theme"], title=data["title"], thumb_text=data.get("thumb_text"))
 
         print("4/4 Загрузка на YouTube...")
         video_id = upload_to_youtube(

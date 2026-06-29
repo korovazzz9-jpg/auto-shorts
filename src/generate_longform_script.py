@@ -129,10 +129,16 @@ def generate_longform_script() -> dict:
                 f"- title: compelling narrative hook in {CFG['script_language']}, under 70 "
                 "characters. Must read like a real headline, NOT a listicle "
                 "(no '5 Facts...' / 'X Things...' patterns).\n"
+                f"- thumb_text: a SHORT punchy thumbnail phrase in {CFG['script_language']}, "
+                "3-5 words MAX, the single most intriguing/shocking idea of the video. This is "
+                "NOT the title — it's big bold text on the thumbnail, so it must be instantly "
+                "readable and create curiosity (e.g. 'A SIGNAL FROM SPACE', 'IT SHOULDN'T "
+                "EXIST'). No punctuation needed.\n"
                 f"- tags: 10-15 specific YouTube search tags in {CFG['script_language']}.\n"
                 f"- hashtags: 3-5 hashtags in {CFG['script_language']} (lowercase, with # prefix).\n\n"
                 "Respond strictly in JSON, no markdown wrapper: "
                 '{"title": "title text", '
+                '"thumb_text": "short thumbnail phrase", '
                 '"script": "full voiceover script", '
                 '"tags": ["tag1", ...], '
                 '"hashtags": ["#tag1", ...], '
@@ -149,6 +155,10 @@ def generate_longform_script() -> dict:
     data = json.loads(raw[start:end + 1])
     data["theme"] = theme
     data["longform_format"] = fmt
+    # Фолбэк: если модель не дала короткую фразу — берём первые 4 слова заголовка,
+    # чтобы тумба не осталась с длинным захламлённым заголовком.
+    if not data.get("thumb_text", "").strip():
+        data["thumb_text"] = " ".join(data["title"].split()[:4])
 
     _save_state(state)
     return data
