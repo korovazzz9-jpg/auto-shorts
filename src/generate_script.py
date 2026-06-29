@@ -22,8 +22,13 @@ TOPICS_POOL = [
     "volcanoes and earthquakes", "extreme weather", "natural wonders",
     # Space — широкая аудитория
     "space",
-    # Удалены 2026-06: psychology (avg 136), future technology (avg 16), bizarre records
-    # (непроверенная, размытая) — в 5-8 раз хуже топа, мешали consistency канала.
+    # Re-test 2026-06-29: future technology возвращена. Старые EN-видео по ней удалены
+    # (тег пропал из topic_stats) → тема получает НЕЙТРАЛЬНЫЙ вес и честно тестируется
+    # под текущим сильным промптом. Прежний провал (avg 16) был под старым слабым промптом;
+    # в ES та же тема сейчас 64% досмотра / 850-1380 просмотров. Если снова <300 — убрать.
+    "future technology",
+    # Удалены 2026-06: psychology (avg 136), bizarre records (непроверенная, размытая) —
+    # в 5-8 раз хуже топа, мешали consistency канала.
 ]
 
 MIN_TOPICS_WITH_DATA = 5  # не взвешивать, пока статистика не накопилась хотя бы по стольким темам
