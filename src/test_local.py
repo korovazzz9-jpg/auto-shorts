@@ -7,7 +7,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from build_video import build_video
-from fetch_stock_video import fetch_clips
+from config import CFG
+from fetch_stock_video import fetch_clips, fetch_satisfying_clips
+from generate_rapid_facts import FACTS_PER_VIDEO, generate_rapid_facts
 from generate_script import generate_script
 from tts import text_to_speech
 
@@ -16,8 +18,11 @@ import tempfile
 OUT_DIR = os.path.join(os.path.expanduser("~"), "Desktop", "auto-shorts-test")
 os.makedirs(OUT_DIR, exist_ok=True)
 
+# VN-канал в satisfying-режиме: random-facts сценарий + залипательный фон, без хук-плашки.
+SATISFYING = CFG.get("satisfying_mode", False)
+
 print("1/4 Генерация сценария...")
-data = generate_script()
+data = generate_rapid_facts() if SATISFYING else generate_script()
 print(f"  Тема: {data['topic']}")
 print(f"  Заголовок: {data['title']}")
 
@@ -26,7 +31,11 @@ with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
     video_path = os.path.join(tmp, "video.mp4")
 
     print("2/4 Стоковые клипы...")
-    clip_paths = fetch_clips(data["video_queries"], tmp)
+    if SATISFYING:
+        # Фон не тематический — берём залипательные клипы (на 1 больше фактов для ротации).
+        clip_paths = fetch_satisfying_clips(FACTS_PER_VIDEO, tmp)
+    else:
+        clip_paths = fetch_clips(data["video_queries"], tmp)
 
     print("3/4 Озвучка...")
     words = text_to_speech(data["script"], audio_path)
@@ -35,8 +44,8 @@ with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
     print("4/4 Сборка видео...")
     video_path, thumb_path = build_video(
         audio_path, clip_paths, words, video_path,
-        topic=data["topic"],
-        title=data["title"],
+        topic=None if SATISFYING else data["topic"],   # None → общий VN CTA-бейдж
+        title=None if SATISFYING else data["title"],   # None → без EN-хук-плашки
     )
 
     # Определяем номер следующего видео

@@ -161,6 +161,26 @@ def _search_with_fallback(query: str, used_ids: set) -> dict | None:
     return _pick_best_clip(candidates, query)
 
 
+# Залипательные («satisfying») фоны для VN-формата random-facts. Все запросы проверены
+# по Pexels-API (отдают 15/15 вертикальных клипов ≥960px). Фон НЕ обязан совпадать с темой
+# факта — берём любой залипательный, он держит completion (главный сигнал TikTok-алгоритма).
+SATISFYING_QUERIES = [
+    "kinetic sand cutting", "slime", "paint mixing", "soap cutting", "fluid art",
+    "marble run", "ink in water", "honey pouring", "sand art", "color paint swirl",
+    "glass blowing", "water ripple", "lava lamp", "cake icing", "candle making",
+    "pottery clay wheel", "powder explosion color", "oddly satisfying", "liquid paint flow",
+]
+
+
+def fetch_satisfying_clips(count: int, out_dir: str) -> list[str]:
+    """Качает `count` залипательных вертикальных клипов из случайных satisfying-запросов
+    (vision-отбор выбирает лучший по постер-кадру). Для VN random-facts формата."""
+    import random
+    n = min(count, len(SATISFYING_QUERIES))
+    queries = random.sample(SATISFYING_QUERIES, n)
+    return fetch_clips(queries, out_dir)
+
+
 def fetch_clips(queries: list[str], out_dir: str, landscape: bool = False) -> list[str]:
     global LANDSCAPE
     LANDSCAPE = landscape

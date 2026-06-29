@@ -209,6 +209,10 @@ CONFIGS = {
         "post_to_instagram": False,
         "post_to_tiktok": False,
         "post_to_pinterest": False,
+        # VN TikTok-формат: random-facts (3-4 коротких факта) поверх залипательного фона,
+        # без EN-хук-плашки. test_local.py при этом флаге берёт generate_rapid_facts +
+        # fetch_satisfying_clips вместо обычной generate_script/тематических клипов.
+        "satisfying_mode": True,
         "channel_handle": "",
         "first_comment": "",
         "playlist_titles": {},
