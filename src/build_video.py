@@ -311,6 +311,32 @@ def _part_label_clip(part: int, total: int) -> TextClip:
     return label
 
 
+def _draw_part_badge(thumb_path: str, part: int, total: int) -> None:
+    """Дорисовывает крупный бейдж «PART N/T» сверху готовой тумбы серии через PIL.
+    Делаем именно в PIL (а не полагаемся на in-video TextClip): на CI/Ubuntu системного
+    Arial-Bold нет, поэтому MoviePy-лейбл мог не отрисоваться в кадре-тумбе. Бейдж нужен,
+    чтобы зритель в ленте сразу видел, что это часть серии, и искал остальные части."""
+    from PIL import ImageFont
+    img = Image.open(thumb_path).convert("RGB")
+    draw = ImageDraw.Draw(img)
+    W, H = img.size
+    text = f"PART {part}/{total}"
+    try:
+        font = ImageFont.truetype(_ANTON, 120)
+    except Exception:
+        font = ImageFont.load_default()
+
+    bbox = draw.textbbox((0, 0), text, font=font)
+    tw, th = bbox[2] - bbox[0], bbox[3] - bbox[1]
+    pad_x, pad_y = 48, 28
+    cx = W // 2
+    by0 = int(H * 0.04)
+    pill = [cx - tw // 2 - pad_x, by0, cx + tw // 2 + pad_x, by0 + th + 2 * pad_y]
+    draw.rounded_rectangle(pill, radius=28, fill=(214, 40, 40))  # красная пилюля — заметна в ленте
+    draw.text((cx - tw // 2 - bbox[0], by0 + pad_y - bbox[1]), text, font=font, fill="white")
+    img.save(thumb_path, "JPEG", quality=90)
+
+
 MUSIC_DIR = os.path.join(os.path.dirname(__file__), "..", "assets", "music")
 MUSIC_LOOP_VOLUME = 0.12  # фоновый луп под голосом — тихо, но слышно
 
@@ -379,6 +405,10 @@ def build_video(
     thumb_time = 0.05 if title else min(1.0, duration * 0.1)
     frame = final.get_frame(min(thumb_time, duration - 0.1))
     Image.fromarray(frame).convert("RGB").save(thumb_path, "JPEG")
+
+    # Серия: дорисовываем «PART N/T» поверх тумбы (PIL), чтобы части были узнаваемы в ленте.
+    if part:
+        _draw_part_badge(thumb_path, part, total_parts)
 
     return out_path, thumb_path
 
