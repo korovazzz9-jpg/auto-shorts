@@ -75,7 +75,7 @@ CONFIGS = {
         # Первый комментарий от имени канала после каждой публикации. Вопрос-провокация
         # СВЕРХУ — комменты/ответы это топ-сигнал алгоритма (engagement density), generic
         # "follow" так не работает. {channel_url} подставляется автоматически.
-        "first_comment": "Wait — did you actually already know this one? 👇\nFollow for a new fact every day 👉 {channel_url}",
+        "first_comment": "Wait — did you actually already know this one? 👇\nSubscribe for a new fact every day 👉 {channel_url}",
         "playlist_titles": {
             "space": "Space Facts",
             "the ocean": "Ocean Facts",
@@ -146,7 +146,7 @@ CONFIGS = {
         "channel_handle": "DatosEn30s",
         "longform_desc_cta": "Análisis completos en el canal:",
         "longform_comment_cta": "¿Quieres la historia completa? Mira el análisis 👉",
-        "first_comment": "Un momento — ¿tú ya sabías esto? 👇\nSíguenos para un dato nuevo cada día 👉 {channel_url}",
+        "first_comment": "Un momento — ¿tú ya sabías esto? 👇\nSuscríbete para un dato nuevo cada día 👉 {channel_url}",
         "playlist_titles": {
             "space": "Datos del Espacio",
             "the ocean": "Datos del Océano",
