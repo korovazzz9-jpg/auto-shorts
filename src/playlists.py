@@ -39,6 +39,26 @@ def get_or_create_playlist(topic: str) -> str | None:
     return playlist_id
 
 
+def create_playlist(title: str) -> str:
+    """Создаёт публичный плейлист и возвращает его id. Для серий: один плейлист на цикл,
+    чтобы зритель с любой части мог найти Part 1/2/3 по порядку."""
+    return _create_playlist(get_client(), title)
+
+
+def add_video_to_playlist_by_id(video_id: str, playlist_id: str) -> None:
+    """Добавляет видео в плейлист по его id (а не по теме). Для серий."""
+    get_client().playlistItems().insert(
+        part="snippet",
+        body={
+            "snippet": {
+                "playlistId": playlist_id,
+                "resourceId": {"kind": "youtube#video", "videoId": video_id},
+            }
+        },
+    ).execute()
+    print(f"  Added {video_id} to playlist {playlist_id}")
+
+
 def add_video_to_playlist(video_id: str, topic: str) -> str | None:
     """Returns playlist_id if successful, else None."""
     playlist_id = get_or_create_playlist(topic)

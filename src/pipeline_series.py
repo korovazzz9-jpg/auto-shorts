@@ -15,6 +15,7 @@ from config import CFG, CHANNEL
 from fetch_stock_video import fetch_clips
 from generate_series import generate_series
 from notify import notify
+from playlists import add_video_to_playlist_by_id, create_playlist
 from publish import publish
 from tts import text_to_speech
 from youtube_auth import get_authenticated_channel_title
@@ -57,6 +58,22 @@ def _determine_part() -> int:
     return np if isinstance(np, int) and 2 <= np <= 3 else 1
 
 
+def _series_extra_comment(part: int, state: dict) -> str:
+    """Текст в закреп-коммент серии: ссылка на плейлист (зритель с любой части найдёт
+    остальные по порядку) + для Part 3 прямые ссылки на уже вышедшие Part 1/2."""
+    lines = []
+    pid = state.get("playlist_id")
+    if pid:
+        cta = CFG.get("series_playlist_cta", "Watch the full series in order 👉")
+        lines.append(f"{cta} https://www.youtube.com/playlist?list={pid}")
+    if part == 3:  # части 1/2 уже вышли — даём прямые ссылки
+        for n in (1, 2):
+            vid = state.get(f"part{n}_video_id")
+            if vid:
+                lines.append(f"Part {n} 👉 https://youtube.com/shorts/{vid}")
+    return "\n".join(lines)
+
+
 def run() -> None:
     # Проверяем канал
     actual = get_authenticated_channel_title()
@@ -83,6 +100,15 @@ def run() -> None:
 
     print(f"  Title: {data['title']}")
 
+    # Серия: один плейлист на цикл (создаём в Part 1) — навигация между частями.
+    if part == 1 and not state.get("playlist_id"):
+        try:
+            series_title = data["title"].split("|")[0].strip()
+            state["playlist_id"] = create_playlist(series_title)
+            print(f"  Создан плейлист серии: {state['playlist_id']}")
+        except Exception as e:
+            _alert("create playlist", e)
+
     with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
         audio_path = os.path.join(tmp, "audio.mp3")
         video_path = os.path.join(tmp, "video.mp4")
@@ -104,16 +130,25 @@ def run() -> None:
         )
 
         print("Publishing...")
-        publish(
+        video_id = publish(
             data=data,
             video_path=video_path,
             thumb_path=thumb_path,
             words=words,
             topic=data.get("topic", state.get("topic", "")),
             alert=lambda step, e: _alert(f"{step} (Part {part})", e),
+            extra_comment=_series_extra_comment(part, state),  # плейлист + ссылки на части
             enable_captions=False,  # временно (квота), как и в обычном пайплайне
             enable_pinterest=False,  # Pinterest только для обычных Shorts
         )
+
+    # Добавляем часть в плейлист серии и запоминаем её id (для ссылок в Part 3 и навигации).
+    if state.get("playlist_id"):
+        try:
+            add_video_to_playlist_by_id(video_id, state["playlist_id"])
+        except Exception as e:
+            _alert("add to playlist", e)
+    state[f"part{part}_video_id"] = video_id
 
     # Прогресс серии: помечаем следующую часть. Воркфлоу закоммитит обновлённый state,
     # и следующий запуск опубликует именно её (а после Part 3 → next_part=4 → новый цикл).

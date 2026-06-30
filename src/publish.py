@@ -26,6 +26,7 @@ def publish(
     topic: str,
     alert,
     extra_tags=(),
+    extra_comment: str = "",
     enable_captions: bool = False,
     enable_pinterest: bool = False,
 ) -> str:
@@ -72,6 +73,8 @@ def publish(
         if longform_url:  # та же воронка — ссылка на лонгформ в закреп-комменте
             comment_cta = CFG.get("longform_comment_cta", "Want the full story?")
             comment = (comment + f"\n\n▶ {comment_cta} {longform_url}").strip()
+        if extra_comment:  # серии: ссылка на плейлист (+ прямые ссылки на части в Part 3)
+            comment = (comment + "\n\n" + extra_comment).strip()
         if comment:
             comment_id = post_channel_comment(video_id, comment)
             # #3 Само-ответ → мини-тред (engagement density). Генерик из CFG, без доп. токенов.

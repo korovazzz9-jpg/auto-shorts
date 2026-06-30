@@ -78,6 +78,8 @@ CONFIGS = {
         "first_comment": "Wait — did you actually already know this one? 👇\nSubscribe for a new fact every day 👉 {channel_url}",
         # #3 Само-ответ на закреп-коммент → мини-тред (engagement density). Генерик, без доп. токенов.
         "first_comment_reply": "Be honest — did this actually surprise you, or did you already know? 👀",
+        # Навигация по серии: ссылка на плейлист в закреп-комменте каждой части.
+        "series_playlist_cta": "📺 Watch all parts in order 👉",
         "playlist_titles": {
             "space": "Space Facts",
             "the ocean": "Ocean Facts",
@@ -150,6 +152,7 @@ CONFIGS = {
         "longform_comment_cta": "¿Quieres la historia completa? Mira el análisis 👉",
         "first_comment": "Un momento — ¿tú ya sabías esto? 👇\nSuscríbete para un dato nuevo cada día 👉 {channel_url}",
         "first_comment_reply": "Sé sincero — ¿esto te sorprendió o ya lo sabías? 👀",
+        "series_playlist_cta": "📺 Mira todas las partes en orden 👉",
         "playlist_titles": {
             "space": "Datos del Espacio",
             "the ocean": "Datos del Océano",
