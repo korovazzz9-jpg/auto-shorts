@@ -8,6 +8,11 @@ import os
 import tempfile
 
 from PIL import Image, ImageDraw, ImageFont
+
+# build_video импортируем ПЕРВЫМ: он на Windows ставит IMAGEMAGICK_BINARY до импорта moviepy.
+# Если moviepy импортнуть раньше — на Windows TextClip не находит ImageMagick (в CI/Linux ок).
+import build_video as bv
+from build_video import SUBTITLE_FONT, _build_audio, _pick_zoom_factor
 from moviepy.editor import (
     AudioFileClip,
     CompositeVideoClip,
@@ -15,10 +20,6 @@ from moviepy.editor import (
     VideoFileClip,
     concatenate_videoclips,
 )
-
-# Импорт build_video настраивает ImageMagick и даёт общие куски (шрифт, аудио).
-import build_video as bv
-from build_video import SUBTITLE_FONT, _build_audio, _pick_zoom_factor
 
 TARGET_SIZE = (1920, 1080)
 CAPTION_Y = int(TARGET_SIZE[1] * 0.80)  # субтитры в нижней трети, не перекрывают центр кадра
