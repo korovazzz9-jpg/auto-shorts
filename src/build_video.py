@@ -293,12 +293,12 @@ def _hook_clips(title: str) -> list:
 
 
 def _part_label_clip(part: int, total: int) -> TextClip:
-    """Полупрозрачный оверлей 'PART 1 / 3' в верхней части экрана на первые 2.5 сек."""
+    """Оверлей 'PART 1/3' (Anton) в верхней части экрана на первые 2.5 сек."""
     label = TextClip(
-        f"PART {part} / {total}",
+        f"PART {part}/{total}",
         fontsize=72,
         color="white",
-        font="Arial-Bold",
+        font=SUBTITLE_FONT,  # Anton — единый шрифт с субтитрами/хуком/тумба-бейджем
         stroke_color="black",
         stroke_width=5,
     )
