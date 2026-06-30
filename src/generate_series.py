@@ -84,19 +84,31 @@ def generate_series() -> dict:
         '"part3": {"title": "...", "script": "...", "tags": [], "hashtags": [], "video_queries": []}}'
     )
 
-    message = client.messages.create(
-        model="claude-sonnet-4-6",
-        max_tokens=3000,
-        system=system_prompt,
-        messages=[{"role": "user", "content": prompt}],
-    )
-
-    raw = message.content[0].text.strip()
-    if raw.startswith("```"):
-        raw = raw.strip("`")
-        raw = raw.split("\n", 1)[1] if "\n" in raw else raw
-    start, end = raw.find("{"), raw.rfind("}")
-    data = json.loads(raw[start:end + 1])
+    # 3-частный JSON — самый большой пейлоад пайплайна, иногда модель возвращает битый
+    # JSON (пропущенная запятая/кавычка в тексте). Ретраим парсинг, иначе весь Part 1
+    # падает → series_state не сохраняется → Part 2/3 недели тоже не выходят.
+    data = None
+    last_err = None
+    for attempt in range(3):
+        message = client.messages.create(
+            model="claude-sonnet-4-6",
+            max_tokens=3000,
+            system=system_prompt,
+            messages=[{"role": "user", "content": prompt}],
+        )
+        raw = message.content[0].text.strip()
+        if raw.startswith("```"):
+            raw = raw.strip("`")
+            raw = raw.split("\n", 1)[1] if "\n" in raw else raw
+        start, end = raw.find("{"), raw.rfind("}")
+        try:
+            data = json.loads(raw[start:end + 1])
+            break
+        except json.JSONDecodeError as e:
+            last_err = e
+            print(f"  Series JSON parse failed (attempt {attempt + 1}/3): {e}; retrying...")
+    if data is None:
+        raise RuntimeError(f"Series JSON невалиден после 3 попыток: {last_err}")
 
     # Добавляем метаданные
     for part_key in ("part1", "part2", "part3"):
