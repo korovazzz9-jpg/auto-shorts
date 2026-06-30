@@ -82,6 +82,11 @@ CONFIGS = {
         "series_playlist_cta": "📺 Watch all parts in order 👉",
         # Закреп-коммент лонгформа: провокация + подписка (досмотревший = горячий подписчик).
         "longform_comment": "Which part surprised you the most? 👇\nSubscribe for a new deep-dive every week 👉 {channel_url}",
+        # Лонгформ-TTS через novita (MiniMax speech-02-turbo) — качество голоса важнее, чем у
+        # 30-сек Shorts. Daily остаётся на edge-tts. Фолбэк на edge-tts, если novita упала.
+        "longform_use_novita": True,
+        "novita_language": "English",   # language_boost для MiniMax
+        "novita_voice": "Wise_Woman",   # voice_id; сменить после прослушивания сэмплов
         "playlist_titles": {
             "space": "Space Facts",
             "the ocean": "Ocean Facts",
@@ -156,6 +161,9 @@ CONFIGS = {
         "first_comment_reply": "Sé sincero — ¿esto te sorprendió o ya lo sabías? 👀",
         "series_playlist_cta": "📺 Mira todas las partes en orden 👉",
         "longform_comment": "¿Qué parte te sorprendió más? 👇\nSuscríbete para un análisis nuevo cada semana 👉 {channel_url}",
+        "longform_use_novita": True,
+        "novita_language": "Spanish",
+        "novita_voice": "Wise_Woman",
         "playlist_titles": {
             "space": "Datos del Espacio",
             "the ocean": "Datos del Océano",

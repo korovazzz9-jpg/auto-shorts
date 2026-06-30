@@ -28,6 +28,21 @@ def _alert(step: str, err: Exception) -> None:
     notify(msg)
 
 
+def _longform_tts(script: str, audio_path: str) -> list:
+    """Лонгформ-озвучка: novita (MiniMax) если включено и есть ключ, иначе edge-tts.
+    Фолбэк на edge-tts при любой ошибке novita — лонгформ не должен падать из-за TTS."""
+    if CFG.get("longform_use_novita") and os.environ.get("NOVITA_KEY"):
+        try:
+            from tts_novita import text_to_speech_novita
+            words = text_to_speech_novita(script, audio_path)
+            print(f"  TTS: novita/{CFG.get('novita_voice')} — {words[-1]['end']:.1f}s")
+            return words
+        except Exception as e:
+            print(f"  novita TTS упал, фолбэк на edge-tts: {e}")
+            notify(f"⚠️ [{CFG['channel_name']}] лонгформ: novita TTS упал, edge-tts фолбэк:\n{e}")
+    return text_to_speech(script, audio_path)
+
+
 def _verify_channel() -> None:
     actual = get_authenticated_channel_title()
     expected = CFG["channel_name"]
@@ -52,7 +67,7 @@ def run() -> None:
         clip_paths = fetch_clips(data["video_queries"], tmp, landscape=True)
 
         print("3/4 Озвучка и сборка видео (горизонтальный лонгформ)...")
-        words = text_to_speech(data["script"], audio_path)
+        words = _longform_tts(data["script"], audio_path)
         video_path, thumb_path = build_longform_video(audio_path, clip_paths, words, video_path, topic=data["theme"], title=data["title"], thumb_text=data.get("thumb_text"))
 
         print("4/4 Загрузка на YouTube...")
