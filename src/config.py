@@ -80,6 +80,8 @@ CONFIGS = {
         "first_comment_reply": "Be honest — did this actually surprise you, or did you already know? 👀",
         # Навигация по серии: ссылка на плейлист в закреп-комменте каждой части.
         "series_playlist_cta": "📺 Watch all parts in order 👉",
+        # Закреп-коммент лонгформа: провокация + подписка (досмотревший = горячий подписчик).
+        "longform_comment": "Which part surprised you the most? 👇\nSubscribe for a new deep-dive every week 👉 {channel_url}",
         "playlist_titles": {
             "space": "Space Facts",
             "the ocean": "Ocean Facts",
@@ -153,6 +155,7 @@ CONFIGS = {
         "first_comment": "Un momento — ¿tú ya sabías esto? 👇\nSuscríbete para un dato nuevo cada día 👉 {channel_url}",
         "first_comment_reply": "Sé sincero — ¿esto te sorprendió o ya lo sabías? 👀",
         "series_playlist_cta": "📺 Mira todas las partes en orden 👉",
+        "longform_comment": "¿Qué parte te sorprendió más? 👇\nSuscríbete para un análisis nuevo cada semana 👉 {channel_url}",
         "playlist_titles": {
             "space": "Datos del Espacio",
             "the ocean": "Datos del Océano",

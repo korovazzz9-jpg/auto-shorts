@@ -12,6 +12,7 @@ from fetch_stock_video import fetch_clips
 from generate_longform_script import generate_longform_script
 from notify import notify
 from playlists import add_video_to_playlist
+from post_comment import post_channel_comment, post_comment_reply
 from tts import text_to_speech
 from upload_captions import upload_captions
 from upload_youtube import upload_video as upload_to_youtube
@@ -75,6 +76,22 @@ def run() -> None:
             add_video_to_playlist(video_id, data["theme"])
         except Exception as e:
             _alert("playlist", e)
+
+    # Закреп-коммент: вопрос-провокация (engagement density) + подписка. Зритель, досмотревший
+    # длинный разбор, — самый горячий кандидат в подписчики (subs+часы = порог монетизации).
+    try:
+        channel_url = f"https://www.youtube.com/@{CFG['channel_handle']}" if CFG.get("channel_handle") else ""
+        comment = CFG.get("longform_comment", "").format(channel_url=channel_url).strip()
+        if comment:
+            comment_id = post_channel_comment(video_id, comment)
+            reply = CFG.get("first_comment_reply", "")
+            if reply:
+                try:
+                    post_comment_reply(comment_id, reply)
+                except Exception as e:
+                    _alert("comment reply", e)
+    except Exception as e:
+        _alert("comment", e)
 
     # Запоминаем id для воронки Shorts→лонгформ (daily/серии вставят ссылку в описание+коммент).
     # Файл коммитит weekly-longform workflow тем же шагом, что и формат-ротацию.
