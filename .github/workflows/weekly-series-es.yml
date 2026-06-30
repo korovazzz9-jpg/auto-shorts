@@ -20,21 +20,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Determine series part
-        id: part
-        run: |
-          PART="${{ github.event.inputs.part }}"
-          if [ -z "$PART" ]; then
-            DOW=$(date -u +%u)  # 1=Mon, 2=Tue, 3=Wed
-            case $DOW in
-              1) PART=1 ;;
-              2) PART=2 ;;
-              3) PART=3 ;;
-              *) PART=1 ;;
-            esac
-          fi
-          echo "part=$PART" >> $GITHUB_OUTPUT
-
       - name: Restore titles cache
         uses: actions/cache@v4
         with:
@@ -61,7 +46,8 @@ jobs:
         working-directory: src
         env:
           CHANNEL: es
-          SERIES_PART: ${{ steps.part.outputs.part }}
+          # Пусто = авто (часть по прогрессу серии из series_state). Ручной запуск может задать 1/2/3.
+          SERIES_PART: ${{ github.event.inputs.part }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
           PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
@@ -73,8 +59,8 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python pipeline_series.py
 
-      - name: Persist series state (Part 1)
-        if: steps.part.outputs.part == '1'
+      - name: Persist series state
+        if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"

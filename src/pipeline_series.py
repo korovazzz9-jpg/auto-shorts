@@ -45,16 +45,28 @@ def _save_state(state: dict) -> None:
         json.dump(state, f, ensure_ascii=False, indent=2)
 
 
-def run() -> None:
-    part = int(os.environ.get("SERIES_PART", "1"))
+def _determine_part() -> int:
+    """Номер части определяем по ПРОГРЕССУ серии (`next_part` в state), а НЕ по дню недели.
+    Так устойчиво к тому, во сколько и в какой день cron запустил воркфлоу (раньше `date +%u`
+    давал Part 1 и в Вс, и в Пн → две первые части подряд). Ручной override: SERIES_PART=1/2/3."""
+    requested = os.environ.get("SERIES_PART", "").strip()
+    if requested in ("1", "2", "3"):
+        return int(requested)
+    st = _load_state()
+    np = st.get("next_part")
+    return np if isinstance(np, int) and 2 <= np <= 3 else 1
 
+
+def run() -> None:
     # Проверяем канал
     actual = get_authenticated_channel_title()
     expected = CFG["channel_name"]
     if actual != expected:
         raise RuntimeError(f"Wrong channel: got '{actual}', expected '{expected}'")
 
-    # Part 1 — генерируем все 3 части и сохраняем
+    part = _determine_part()
+
+    # Part 1 — генерируем все 3 части и сохраняем; Part 2/3 — читаем готовый state.
     if part == 1:
         print(f"[{CFG['channel_name']}] Series Part 1 — generating all 3 scripts...")
         state = generate_series()
@@ -62,8 +74,8 @@ def run() -> None:
         print(f"  Topic: {state['topic']}")
     else:
         state = _load_state()
-        if not state:
-            raise RuntimeError("series_state.json not found — run Part 1 first")
+        if not state or f"part{part}" not in state:
+            raise RuntimeError(f"series_state без part{part} — сначала нужен Part 1")
         print(f"[{CFG['channel_name']}] Series Part {part} — topic: {state['topic']}")
 
     part_key = f"part{part}"
@@ -103,7 +115,11 @@ def run() -> None:
             enable_pinterest=False,  # Pinterest только для обычных Shorts
         )
 
-    print(f"Done — Part {part}/3 published.")
+    # Прогресс серии: помечаем следующую часть. Воркфлоу закоммитит обновлённый state,
+    # и следующий запуск опубликует именно её (а после Part 3 → next_part=4 → новый цикл).
+    state["next_part"] = part + 1
+    _save_state(state)
+    print(f"Done — Part {part}/3 published. next_part={part + 1}")
 
 
 if __name__ == "__main__":

@@ -3,15 +3,13 @@ name: Weekly Series (EN)
 on:
   # Серия идёт 3 дня подряд и ЗАМЕЩАЕТ прайм-слот 00:07 UTC (20:07 ET) обычного daily.yml
   # в эти дни (daily.yml сам пропускает 00:07-слот в Пн/Вт/Ср — см. guard там).
-  # Триггерится cron-job.org (workflow_dispatch) Пн/Вт/Ср 00:07 UTC — GitHub-cron убран
-  # (опаздывал, а тут опоздание = пропуск прайм-слота). Part определяется по дню недели.
-  #   Понедельник 00:07 UTC — Part 1 (генерирует все 3 скрипта)
-  #   Вторник     00:07 UTC — Part 2
-  #   Среда       00:07 UTC — Part 3
+  # Триггерится cron-job.org (workflow_dispatch) 3 дня подряд. Part определяется по ПРОГРЕССУ
+  # серии (next_part в series_state), а не по дню недели: 1-й запуск цикла → Part 1 (генерит
+  # все 3 скрипта), следующие → Part 2, Part 3. Устойчиво к времени/дню запуска cron.
   workflow_dispatch:
     inputs:
       part:
-        description: "Which part to publish (1/2/3). Пусто = авто по дню недели."
+        description: "Force part 1/2/3. Пусто = авто (по прогрессу серии)."
         required: false
         default: ""
 
@@ -23,21 +21,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Determine series part
-        id: part
-        run: |
-          PART="${{ github.event.inputs.part }}"
-          if [ -z "$PART" ]; then
-            DOW=$(date -u +%u)  # 1=Mon, 2=Tue, 3=Wed
-            case $DOW in
-              1) PART=1 ;;
-              2) PART=2 ;;
-              3) PART=3 ;;
-              *) PART=1 ;;
-            esac
-          fi
-          echo "part=$PART" >> $GITHUB_OUTPUT
 
       - name: Restore titles cache
         uses: actions/cache@v4
@@ -64,7 +47,8 @@ jobs:
       - name: Run series pipeline
         working-directory: src
         env:
-          SERIES_PART: ${{ steps.part.outputs.part }}
+          # Пусто = авто (часть по прогрессу серии из series_state). Ручной запуск может задать 1/2/3.
+          SERIES_PART: ${{ github.event.inputs.part }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
           PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
@@ -83,10 +67,10 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python pipeline_series.py
 
-      # Part 1 сгенерировал все 3 скрипта — коммитим состояние, чтобы Part 2/3 (Вт/Ср)
-      # получили его через checkout. Надёжнее actions/cache (тот вытеснялся за 7 дней).
-      - name: Persist series state (Part 1)
-        if: steps.part.outputs.part == '1'
+      # Состояние меняется КАЖДЫЙ запуск (Part 1 пишет 3 скрипта, Part 2/3 двигают next_part),
+      # поэтому коммитим всегда — Part 2/3 получают свежий state через checkout.
+      - name: Persist series state
+        if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
