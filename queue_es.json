@@ -81,48 +81,6 @@
     "hashtag_position": "end"
   },
   {
-    "title": "El ejército que desapareció sin dejar rastro",
-    "hook_text": "50,000 soldados... esfumados",
-    "hook_template": "sounds-fake",
-    "script": "Cincuenta mil soldados marcharon al desierto y nunca regresaron — ni uno solo. En el 525 a.C., el rey persa Cambises II envió un ejército completo a través del desierto del Sahara hacia el oasis de Siwa. Desaparecieron sin dejar armadura, hueso ni testigo. Y lo más perturbador: nadie encontró nada durante 2,500 años. En 2009, dos arqueólogos italianos afirmaron hallar los restos enterrados bajo una tormenta de arena masiva. Pero Egipto nunca permitió excavaciones serias en la zona. Mándale esto a alguien que crea que la historia no tiene secretos.",
-    "word_count": 87,
-    "search_summary": "El ejército de Cambises II de 50,000 soldados desapareció en el desierto del Sahara en 525 a.C. sin dejar rastro.",
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "misterios históricos",
-      "datos curiosos",
-      "ejército perdido de Cambises",
-      "desierto del Sahara misterio",
-      "historia antigua egypt",
-      "misterios sin resolver",
-      "datos en 30 segundos",
-      "historia que no te enseñaron",
-      "arqueología descubrimientos"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#datoscuriosos",
-      "#misterioshistóricos",
-      "#egiptoantiguo",
-      "#historiaoculta"
-    ],
-    "video_queries": [
-      "sandstorm desert soldiers marching",
-      "vast sahara desert aerial landscape",
-      "ancient persian warriors ruins",
-      "desert sand dunes wind storm",
-      "archaeologist digging desert excavation",
-      "egypt desert restricted zone",
-      "sand buried ancient ruins discovery"
-    ],
-    "has_loop": false,
-    "topic": "historical mysteries",
-    "hashtag_position": "end"
-  },
-  {
     "title": "Tu esqueleto se renueva completo cada 10 años",
     "hook_text": "Tu cuerpo te está mintiendo",
     "hook_template": "sounds-fake",
@@ -281,46 +239,6 @@
     ],
     "has_loop": true,
     "topic": "evolution",
-    "hashtag_position": "end"
-  },
-  {
-    "title": "El lago que convierte animales en piedra",
-    "hook_text": "Toca esto y te congelas",
-    "hook_template": "sounds-fake",
-    "script": "Este lago mata animales y los convierte en estatuas de sal — y nadie lo veía venir. El lago Natron, en Tanzania, tiene un pH de casi 12 y temperaturas de 60 grados. Cualquier animal que cae muere calcificado, cubierto de carbonato de sodio, como escultura perfecta. Pero lo más raro: los flamencos anidan ahí, en ese mismo infierno químico, porque ningún depredador se atreve a acercarse. Manda esto a alguien que piense que la naturaleza siempre protege a sus criaturas.",
-    "word_count": 85,
-    "search_summary": "El lago Natron en Tanzania calcifica animales muertos con carbonato de sodio y pH extremo, mientras flamencos anidan en sus orillas.",
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "maravillas naturales",
-      "datos curiosos",
-      "lago Natron Tanzania",
-      "animales petrificados",
-      "fenómenos naturales extremos",
-      "datos en 30 segundos",
-      "naturaleza sorprendente",
-      "lagos peligrosos del mundo"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#datoscuriosos",
-      "#naturaleza",
-      "#lagonatron",
-      "#maravillasnaturales"
-    ],
-    "video_queries": [
-      "extreme salt lake africa aerial",
-      "flamingos nesting alkaline lake",
-      "dead birds lake shore",
-      "toxic red lake landscape tanzania",
-      "flamingo flock walking red water",
-      "salt flats wildlife africa"
-    ],
-    "has_loop": false,
-    "topic": "natural wonders",
     "hashtag_position": "end"
   },
   {
