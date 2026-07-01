@@ -150,8 +150,8 @@ CONFIGS = {
             "ONE short CTA in Spanish, 4-7 words MAX — either \"Sígueme para más.\" or "
             "\"Comenta si lo sabías.\" Pick one, no embellishment, no extra clauses"
         ),
-        # Испанский канал — отдельный Instagram появится позже; пока только YouTube.
-        "post_to_instagram": False,
+        # Instagram ES (2026-07-01): @datosen30s, свой Business-аккаунт/токен (см. daily-es.yml).
+        "post_to_instagram": True,
         "post_to_tiktok": False,
         "post_to_pinterest": False,
         "channel_handle": "DatosEn30s",
