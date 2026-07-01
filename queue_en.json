@@ -1,50 +1,5 @@
 [
   {
-    "title": "The Ghost Ship Where Everyone Just… Vanished",
-    "hook_text": "NO BODY. NO CLUE.",
-    "hook_template": "sounds-fake",
-    "script": "Ten people vanished off a ship — no blood, no struggle, no missing cargo. The Mary Celeste was found drifting in the Atlantic in 1872, completely intact. Food still warm. Lifeboats gone. But here's what breaks it — the cargo was 1,700 barrels of raw alcohol. Fumes likely triggered a pressure blast — loud enough to terrify, leaving zero damage. The crew panicked, jumped a lifeboat, and watched their perfectly fine ship drift away. They died abandoning a vessel that never needed abandoning. Send this to someone who still blames pirates. And that's exactly why.",
-    "word_count": 88,
-    "search_summary": "The Mary Celeste crew vanished in 1872 likely after abandoning their intact ship in a panic over alcohol fume pressure blast.",
-    "loop_connectors": [
-      "why",
-      "how",
-      "when",
-      "where"
-    ],
-    "tags": [
-      "historical mysteries",
-      "mary celeste",
-      "ghost ship mystery",
-      "unsolved history",
-      "facts",
-      "did you know",
-      "1872 mary celeste disappearance",
-      "mary celeste alcohol fumes theory",
-      "abandoned ship history"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#historyfacts",
-      "#maryceleste",
-      "#ghostship",
-      "#historymystery"
-    ],
-    "video_queries": [
-      "stormy ocean waves dark sky",
-      "old sailing ship drifting sea",
-      "abandoned ship deck empty",
-      "historic port harbor 1800s",
-      "alcohol barrels wooden warehouse",
-      "explosion smoke pressure burst",
-      "sailors rowing lifeboat ocean",
-      "empty sailing vessel open sea"
-    ],
-    "has_loop": true,
-    "topic": "historical mysteries",
-    "hashtag_position": "end"
-  },
-  {
     "title": "Rome's Greatest Gift Was Just a Tax Grab",
     "hook_text": "THE GIFT THAT COST YOU EVERYTHING",
     "hook_template": "sounds-fake",
