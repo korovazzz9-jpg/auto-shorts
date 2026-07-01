@@ -142,13 +142,16 @@ list ONLY the connector words for which "<word> <sentence 1>" is a COHERENT, gra
 LENGTH_INSTRUCTION = (
     "HARD LENGTH LIMIT: the script (hook through CTA, the loop line is added later) MUST be "
     "70-88 words — top fact Shorts land at ~28-35s; longer than that and retention drops off. "
-    "Count the words before you answer and DO NOT exceed 88. A script over 88 words is a failure "
-    "even if great. Be ruthless: one tight sentence per beat, no throat-clearing, no second "
-    "comment-bait, no padding adjectives. Build a full arc (setup, twist, payoff) tightly."
+    "Before writing the JSON, draft the script, COUNT its words one by one, and if it's over 88 "
+    "cut a clause or an adjective and recount — repeat until it's 88 or under. A script over 88 "
+    "words is a failure even if great. Be ruthless: one tight sentence per beat, no "
+    "throat-clearing, no second comment-bait, no padding adjectives. Build a full arc (setup, "
+    "twist, payoff) tightly. Report your final count in the \"word_count\" field — it must match "
+    "the actual word count of \"script\"."
 )
 
 SCRIPT_MIN_WORDS = 65
-SCRIPT_MAX_WORDS = 90  # gate: above this we retry; loop line (~3 words) appended after
+SCRIPT_MAX_WORDS = 93  # gate: above this we retry; loop line (~3 words) appended after
 TITLE_INSTRUCTION = (
     "title: a punchy narrative hook, under 60 characters. Do NOT append a '| topic facts' "
     "style keyword suffix — it should read like a real headline, not a listicle."
@@ -206,6 +209,7 @@ def _build_user_content(topic: str, avoid_block: str) -> str:
         '"hook_text": "short on-screen hook", '
         '"hook_template": "vague-ability", '
         '"script": "voiceover script ending with the comment-bait line (NO spoken CTA, NO loop line)", '
+        '"word_count": 85, '
         '"search_summary": "plain keyword-dense sentence", '
         '"loop_connectors": ["why", "how"], '
         '"tags": ["tag1", "tag2", ...], '
@@ -237,6 +241,9 @@ def _validate(data: dict) -> list[str]:
     problems = []
     script = data.get("script", "")
     word_count = len(script.split())
+    reported = data.get("word_count")
+    if isinstance(reported, int) and abs(reported - word_count) > 5:
+        print(f"    (self-reported word_count {reported} vs actual {word_count} — model miscounted)")
     if word_count > SCRIPT_MAX_WORDS:
         problems.append(
             f"The script is {word_count} words — too long (top fact Shorts land at ~28-35s). "
