@@ -77,13 +77,17 @@ def _fit_clip(clip: VideoFileClip, duration: float, zoom_factor: float, loop: bo
     return clip.set_position("center")
 
 
-def _build_background(clip_paths: list[str], duration: float) -> CompositeVideoClip:
+def _build_background(clip_paths: list[str], duration: float, visual_loop: bool = True) -> CompositeVideoClip:
     # Визуальный loop: первый клип повторяем в конце — кадр конца ≈ кадр начала,
     # петля (которую держит и текстовый loop в скрипте) ощущается бесшовной → больше пересмотров.
+    # Только для daily (там есть текстовый loop и молчаливый follow-бейдж). У серий в конце
+    # ОЗВУЧЕННЫЙ CTA («follow for Part 2/3») — зацикливать видео на начало после него бессмысленно
+    # и режет ощущение (build_video.py вызывается и для daily, и для series — visual_loop=False
+    # для серий передаётся из pipeline_series.py).
     # ВАЖНО: копируем в отдельный файл — нельзя открывать один и тот же файл двумя
     # VideoFileClip-ридерами (второй читает чёрные кадры → чёрный конец видео).
     clip_paths = list(clip_paths)
-    if len(clip_paths) >= 2:
+    if visual_loop and len(clip_paths) >= 2:
         loop_tail = os.path.join(tempfile.mkdtemp(), "loop_tail" + os.path.splitext(clip_paths[0])[1])
         shutil.copy2(clip_paths[0], loop_tail)
         clip_paths.append(loop_tail)
@@ -393,7 +397,9 @@ def build_video(
     cta_duration = min(CTA_DURATION, duration)
     cta_start = max(duration - cta_duration, 0)
 
-    background = _build_background(clip_paths, duration)
+    # Серия (part задан) заканчивается ОЗВУЧЕННЫМ CTA («follow for Part 2/3») — визуальный
+    # loop-хвост (видео тела зацикливается на начало) после него не нужен, в отличие от daily.
+    background = _build_background(clip_paths, duration, visual_loop=(part is None))
     caption_clips = _karaoke_clips(words, cutoff=duration)
     cta_clips = _cta_clips(duration, topic)
     part_clips = [_part_label_clip(part, total_parts)] if part else []
