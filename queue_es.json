@@ -1,0 +1,43 @@
+[
+  {
+    "title": "The Ocean Has Lakes That Kill on Contact",
+    "hook_text": "El mar tiene sus propios lagos",
+    "hook_template": "sounds-fake",
+    "script": "This sounds fake, but the ocean floor has lakes with real shores and waves. They're called brine pools — water so salty it sits beneath the ocean like a separate liquid. The Gulf of Mexico holds one at 3,300 feet deep, and anything that swims in dies almost instantly. But here's the twist: the brine is so dense it forms underwater waterfalls where the two liquids meet. Crabs crawl to the edge, freeze, and float back out dead. Send this to someone who thinks the ocean floor is boring mud. Y así es como.",
+    "word_count": 88,
+    "search_summary": "Las piscinas de salmuera en el fondo del océano son tan densas que forman lagos con orillas propias y matan a los animales marinos al instante.",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "datos curiosos",
+      "océano",
+      "fondo del mar",
+      "piscinas de salmuera",
+      "misterios del océano",
+      "datos en 30 segundos",
+      "ciencia curiosa",
+      "golfo de méxico",
+      "vida marina"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#océano",
+      "#fondodelmar",
+      "#ciencia"
+    ],
+    "video_queries": [
+      "deep ocean floor underwater",
+      "underwater brine pool lake",
+      "ocean abyss dark water",
+      "underwater waterfall deep sea",
+      "sea creatures ocean floor",
+      "crab underwater seafloor"
+    ],
+    "has_loop": true,
+    "topic": "the ocean",
+    "hashtag_position": "end"
+  }
+]
