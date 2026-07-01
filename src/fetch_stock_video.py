@@ -193,11 +193,18 @@ def fetch_clips(queries: list[str], out_dir: str, landscape: bool = False) -> li
             continue
         used_ids.add(file_info["id"])
         out_path = os.path.join(out_dir, f"clip_{i}.mp4")
-        video_response = requests.get(file_info["link"], timeout=60)
-        video_response.raise_for_status()
-        with open(out_path, "wb") as f:
-            f.write(video_response.content)
-        paths.append(out_path)
+        # Скачивание одного клипа изолировано: транзиентный сбой CDN на одном клипе не должен
+        # ронять весь fetch_clips (иначе теряется всё видео из-за одного битого клипа). Пустой
+        # итоговый список ловит guard в build_video/_build_background с понятной ошибкой.
+        try:
+            video_response = requests.get(file_info["link"], timeout=60)
+            video_response.raise_for_status()
+            with open(out_path, "wb") as f:
+                f.write(video_response.content)
+            paths.append(out_path)
+        except Exception as e:
+            print(f"  (не скачался клип для '{query}': {e}, пропускаем)")
+            continue
     return paths
 
 

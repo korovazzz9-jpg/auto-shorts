@@ -87,6 +87,11 @@ def _build_background(clip_paths: list[str], duration: float, visual_loop: bool 
     # ВАЖНО: копируем в отдельный файл — нельзя открывать один и тот же файл двумя
     # VideoFileClip-ридерами (второй читает чёрные кадры → чёрный конец видео).
     clip_paths = list(clip_paths)
+    # Понятная ошибка вместо ZeroDivisionError ниже: клипов нет, только если ВСЕ стоковые
+    # запросы не нашли/не скачали видео (оба стока легли или пустая выдача). Явный текст
+    # уходит в Telegram-алерт (🔴), а не «division by zero».
+    if not clip_paths:
+        raise RuntimeError("Нет стоковых клипов (все запросы к Pexels/Pixabay пусты или упали) — видео не собрать.")
     if visual_loop and len(clip_paths) >= 2:
         loop_tail = os.path.join(tempfile.mkdtemp(), "loop_tail" + os.path.splitext(clip_paths[0])[1])
         shutil.copy2(clip_paths[0], loop_tail)

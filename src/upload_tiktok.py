@@ -34,6 +34,7 @@ def upload_video(video_url: str, title: str, hashtags: list[str]) -> str:
                 "video_url": video_url,
             },
         },
+        timeout=30,
     )
     data = resp.json()
     if resp.status_code != 200 or data.get("error", {}).get("code", "ok") != "ok":
@@ -55,6 +56,7 @@ def wait_for_publish(publish_id: str, token: str, timeout: int = 120) -> str:
                 "Content-Type": "application/json; charset=UTF-8",
             },
             json={"publish_id": publish_id},
+            timeout=30,
         )
         status = resp.json().get("data", {}).get("status", "UNKNOWN")
         print(f"  TikTok status: {status}")

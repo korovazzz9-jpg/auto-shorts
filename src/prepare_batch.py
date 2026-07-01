@@ -164,29 +164,45 @@ def main() -> None:
             print(f"  item-{i}: не распарсился JSON ({e}), пропускаем.")
             continue
 
-        problems = _validate(data)
-        if problems:
-            # Один невалидный скрипт из батча — не гоняем повторный батч ради одного,
-            # берём как есть (лучше короткий/несовершенный скрипт, чем потерянный слот).
-            print(f"  item-{i}: замечания валидации ({len(problems)}), беру как есть.")
-
-        _append_loop(data)
-        ht = str(data.get("hook_template", "")).strip().lower()
-        data["hook_template"] = ht if ht in HOOK_TEMPLATES else "other"
-        if not str(data.get("hook_text", "")).strip():
-            data["hook_text"] = data["title"]
-        data["topic"] = topic
-        data["hashtag_position"] = "end"
-
-        dupe_of = next((q for q in queue if _is_duplicate(data, q)), None)
-        if dupe_of:
-            print(f"  item-{i}: похож на уже добавленный «{dupe_of['title']}» — пропускаем "
-                  f"(тот же факт, разная формулировка).")
+        # Обязательные поля для публикации (pipeline.py/publish.py читают их без .get) —
+        # если модель что-то пропустила, кладём неполный элемент в очередь = daily.yml потом
+        # упадёт при публикации (пропущенный слот). Лучше пропустить сейчас (очередь доберётся
+        # следующим прогоном), чем отдать битый сценарий в прод.
+        missing = [k for k in ("title", "script", "video_queries", "tags", "hashtags")
+                   if not data.get(k)]
+        if missing:
+            print(f"  item-{i}: в JSON нет полей {missing}, пропускаем.")
             continue
 
-        add_title_to_cache(data["title"])
-        queue.append(data)
-        added += 1
+        # Пост-обработка одного элемента изолирована: сбой на одном не должен обрушить весь
+        # прогон и потерять уже добавленные в очередь элементы (save_queue — после цикла).
+        try:
+            problems = _validate(data)
+            if problems:
+                # Один невалидный скрипт из батча — не гоняем повторный батч ради одного,
+                # берём как есть (лучше короткий/несовершенный скрипт, чем потерянный слот).
+                print(f"  item-{i}: замечания валидации ({len(problems)}), беру как есть.")
+
+            _append_loop(data)
+            ht = str(data.get("hook_template", "")).strip().lower()
+            data["hook_template"] = ht if ht in HOOK_TEMPLATES else "other"
+            if not str(data.get("hook_text", "")).strip():
+                data["hook_text"] = data["title"]
+            data["topic"] = topic
+            data["hashtag_position"] = "end"
+
+            dupe_of = next((q for q in queue if _is_duplicate(data, q)), None)
+            if dupe_of:
+                print(f"  item-{i}: похож на уже добавленный «{dupe_of['title']}» — пропускаем "
+                      f"(тот же факт, разная формулировка).")
+                continue
+
+            add_title_to_cache(data["title"])
+            queue.append(data)
+            added += 1
+        except Exception as e:
+            print(f"  item-{i}: пост-обработка упала ({e}), пропускаем.")
+            continue
 
     save_queue(queue)
     print(f"  Добавлено {added} сценариев в очередь ({len(queue)}/{QUEUE_TARGET}).")

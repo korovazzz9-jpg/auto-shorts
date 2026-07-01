@@ -99,6 +99,10 @@ def _fit_clip(clip: VideoFileClip, duration: float, zoom_factor: float) -> Video
 
 
 def _build_background(clip_paths: list[str], duration: float) -> CompositeVideoClip:
+    # Понятная ошибка вместо ZeroDivisionError: клипов нет только если все стоковые запросы
+    # пусты/упали (см. build_video.py). Явный текст в Telegram-алерт вместо «division by zero».
+    if not clip_paths:
+        raise RuntimeError("Нет стоковых клипов (все запросы к Pexels/Pixabay пусты или упали) — лонгформ не собрать.")
     per_clip = duration / len(clip_paths)
     fitted = [_fit_clip(VideoFileClip(p), per_clip, _pick_zoom_factor()) for p in clip_paths]
     sequence = concatenate_videoclips(fitted, method="compose")
