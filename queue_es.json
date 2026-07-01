@@ -1,46 +1,5 @@
 [
   {
-    "title": "El ejército romano que simplemente desapareció",
-    "hook_text": "Nadie los vio salir",
-    "hook_template": "sounds-fake",
-    "script": "Diez mil soldados marcharon al desierto y nunca regresaron — y Roma no supo explicarlo. Era el año 525 a.C.: el rey persa Cambises II envió un ejército de 50,000 hombres a conquistar el oasis de Siwa, en Egipto. Llegaron al desierto. Desaparecieron. Pero aquí viene lo raro: dos mil años después, arqueólogos encontraron huesos y armas en las dunas — no un campamento, sino un entierro masivo, como si la arena los hubiera tragado vivos. Manda esto a alguien que crea que la historia antigua ya no tiene secretos.",
-    "word_count": 88,
-    "search_summary": "El ejército persa de Cambises II desapareció en el desierto egipcio en 525 a.C. rumbo al oasis de Siwa.",
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "historia antigua",
-      "datos curiosos",
-      "ejército persa desaparecido",
-      "oasis de Siwa Egipto",
-      "Cambises II",
-      "misterios históricos",
-      "datos en 30 segundos",
-      "civilizaciones antiguas",
-      "arqueología egipto"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#historianciente",
-      "#misterioshistoricos",
-      "#egipto",
-      "#datoscuriosos"
-    ],
-    "video_queries": [
-      "desert sandstorm wide landscape",
-      "ancient army soldiers marching desert",
-      "egypt sahara dunes aerial view",
-      "archaeologist digging desert ruins",
-      "bones artifacts sand excavation",
-      "desert sand burial wide shot"
-    ],
-    "has_loop": false,
-    "topic": "ancient history",
-    "hashtag_position": "end"
-  },
-  {
     "title": "El lago que convierte animales en piedra",
     "hook_text": "Se petrifica todo lo que toca",
     "hook_template": "vague-ability",
