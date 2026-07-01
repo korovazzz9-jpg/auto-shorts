@@ -127,6 +127,7 @@ def run() -> None:
             part=part,
             total_parts=3,
             title=data["title"],
+            hook_text=data.get("hook_text"),  # двойной хук (текст ≠ озвучка), как в daily
         )
 
         print("Publishing...")
@@ -137,6 +138,7 @@ def run() -> None:
             words=words,
             topic=data.get("topic", state.get("topic", "")),
             alert=lambda step, e: _alert(f"{step} (Part {part})", e),
+            extra_tags=[f"hook-{data.get('hook_template', 'other')}"],  # для analytics_retention
             extra_comment=_series_extra_comment(part, state),  # плейлист + ссылки на части
             enable_captions=False,  # временно (квота), как и в обычном пайплайне
             enable_pinterest=False,  # Pinterest только для обычных Shorts

@@ -5,7 +5,7 @@ import os
 from anthropic import Anthropic
 
 from config import CFG
-from generate_script import BASE_SYSTEM_PROMPT, TITLE_INSTRUCTION, TOPICS_POOL, BANNED_TOPICS
+from generate_script import BASE_SYSTEM_PROMPT, HOOK_TEMPLATES, TITLE_INSTRUCTION, TOPICS_POOL, BANNED_TOPICS
 from recent_titles import add_title_to_cache, add_topic_to_cache, get_recent_titles
 from topic_stats import get_topic_avg_views
 import random
@@ -74,14 +74,19 @@ def generate_series() -> dict:
         f"{SERIES_CTA[3]}.\n\n"
         "Requirements for EACH part:\n"
         f"- {TITLE_INSTRUCTION} — append ' | Part 1', ' | Part 2', ' | Part 3' to each title\n"
+        f"- hook_text: a SHORT on-screen hook (3-6 words) for that part, a DIFFERENT angle from "
+        "the spoken first sentence (eye and ear give two separate hooks in the first 2 seconds) "
+        f"and NOT a copy of the title. Punchy, in {CFG['script_language']}, no ending period.\n"
+        f"- hook_template: which opening template that part's spoken hook uses — exactly one of "
+        f"[{', '.join(HOOK_TEMPLATES)}] (use 'other' if none fits)\n"
         f"- tags: 6-9 YouTube search tags in {CFG['script_language']}\n"
         f"- hashtags: 3-5 hashtags in {CFG['script_language']} (with # prefix)\n"
         "- video_queries: 3-5 stock footage search queries in English\n\n"
         "Respond strictly in JSON:\n"
         '{"topic": "topic name", '
-        '"part1": {"title": "...", "script": "...", "tags": [], "hashtags": [], "video_queries": []}, '
-        '"part2": {"title": "...", "script": "...", "tags": [], "hashtags": [], "video_queries": []}, '
-        '"part3": {"title": "...", "script": "...", "tags": [], "hashtags": [], "video_queries": []}}'
+        '"part1": {"title": "...", "hook_text": "...", "hook_template": "...", "script": "...", "tags": [], "hashtags": [], "video_queries": []}, '
+        '"part2": {"title": "...", "hook_text": "...", "hook_template": "...", "script": "...", "tags": [], "hashtags": [], "video_queries": []}, '
+        '"part3": {"title": "...", "hook_text": "...", "hook_template": "...", "script": "...", "tags": [], "hashtags": [], "video_queries": []}}'
     )
 
     # 3-частный JSON — самый большой пейлоад пайплайна, иногда модель возвращает битый
@@ -113,15 +118,21 @@ def generate_series() -> dict:
     # Добавляем метаданные
     for part_key in ("part1", "part2", "part3"):
         part_num = int(part_key[-1])
-        data[part_key]["topic"] = data["topic"]
-        data[part_key]["part"] = part_num
-        data[part_key]["total_parts"] = 3
-        data[part_key]["hashtag_position"] = "end"
-        data[part_key]["tags"] = data[part_key].get("tags", []) + [
+        part = data[part_key]
+        part["topic"] = data["topic"]
+        part["part"] = part_num
+        part["total_parts"] = 3
+        part["hashtag_position"] = "end"
+        part["tags"] = part.get("tags", []) + [
             f"topic-{data['topic'].replace(' ', '_')}",
             f"series-part-{part_num}",
         ]
-        add_title_to_cache(data[part_key]["title"])
+        # #2/#4 хук-шаблон + двойной хук (та же логика, что в generate_script).
+        ht = str(part.get("hook_template", "")).strip().lower()
+        part["hook_template"] = ht if ht in HOOK_TEMPLATES else "other"
+        if not str(part.get("hook_text", "")).strip():
+            part["hook_text"] = part["title"]
+        add_title_to_cache(part["title"])
 
     add_topic_to_cache(data["topic"])
     return data
