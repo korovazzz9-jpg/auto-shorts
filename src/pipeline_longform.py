@@ -71,10 +71,14 @@ def run() -> None:
         video_path, thumb_path = build_longform_video(audio_path, clip_paths, words, video_path, topic=data["theme"], title=data["title"], thumb_text=data.get("thumb_text"))
 
         print("4/4 Загрузка на YouTube...")
+        description = data["script"]
+        search_summary = str(data.get("search_summary", "")).strip()
+        if search_summary:  # ключевые слова для YouTube Search — скрипт их почти не содержит
+            description = f"{search_summary}\n\n{description}"
         video_id = upload_to_youtube(
             video_path,
             title=data["title"],
-            description=data["script"],
+            description=description,
             tags=data["tags"],
             hashtags=data["hashtags"],
             hashtag_position="end",
@@ -117,7 +121,13 @@ def run() -> None:
         _alert("last-longform-link", e)
 
     url = f"https://youtube.com/watch?v={video_id}"
-    notify(f"✅ [{CFG['channel_name']}] лонгформ опубликован:\n{data['title']}\n{url}")
+    # End Screen (Subscribe + похожее видео) доступен только вручную в Studio — API его не
+    # даёт. Раз лонгформ выходит 1 раз/неделю — это 2 минуты в Studio, бесплатно и конвертит
+    # самого «горячего» зрителя канала (досмотревшего разбор) в подписчика.
+    notify(
+        f"✅ [{CFG['channel_name']}] лонгформ опубликован:\n{data['title']}\n{url}\n\n"
+        f"📌 Не забудь добавить End Screen (Subscribe + похожее видео) вручную в YouTube Studio."
+    )
     print(f"Готово: {url}")
 
 

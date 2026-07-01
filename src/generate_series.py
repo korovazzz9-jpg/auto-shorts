@@ -81,12 +81,15 @@ def generate_series() -> dict:
         f"[{', '.join(HOOK_TEMPLATES)}] (use 'other' if none fits)\n"
         f"- tags: 6-9 YouTube search tags in {CFG['script_language']}\n"
         f"- hashtags: 3-5 hashtags in {CFG['script_language']} (with # prefix)\n"
-        "- video_queries: 3-5 stock footage search queries in English\n\n"
+        "- video_queries: 3-5 stock footage search queries in English\n"
+        "- search_summary: ONE plain, keyword-dense sentence (max 20 words) stating that part's "
+        "fact directly for YouTube SEARCH — opposite style from the hook (no info gap, name the "
+        f"subject plainly). NOT spoken, NOT shown on screen. In {CFG['script_language']}.\n\n"
         "Respond strictly in JSON:\n"
         '{"topic": "topic name", '
-        '"part1": {"title": "...", "hook_text": "...", "hook_template": "...", "script": "...", "tags": [], "hashtags": [], "video_queries": []}, '
-        '"part2": {"title": "...", "hook_text": "...", "hook_template": "...", "script": "...", "tags": [], "hashtags": [], "video_queries": []}, '
-        '"part3": {"title": "...", "hook_text": "...", "hook_template": "...", "script": "...", "tags": [], "hashtags": [], "video_queries": []}}'
+        '"part1": {"title": "...", "hook_text": "...", "hook_template": "...", "script": "...", "search_summary": "...", "tags": [], "hashtags": [], "video_queries": []}, '
+        '"part2": {"title": "...", "hook_text": "...", "hook_template": "...", "script": "...", "search_summary": "...", "tags": [], "hashtags": [], "video_queries": []}, '
+        '"part3": {"title": "...", "hook_text": "...", "hook_template": "...", "script": "...", "search_summary": "...", "tags": [], "hashtags": [], "video_queries": []}}'
     )
 
     # 3-частный JSON — самый большой пейлоад пайплайна, иногда модель возвращает битый

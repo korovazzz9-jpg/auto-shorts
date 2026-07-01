@@ -194,12 +194,19 @@ def _build_user_content(topic: str, avoid_block: str) -> str:
         "named in the script).\n"
         f"- hashtags: 3-5 hashtags in {CFG['script_language']} (lowercase, no spaces, with "
         "# prefix), mixing one broad discovery hashtag (#shorts and the language's "
-        "equivalent of #facts) with 2-4 specific ones tied to the topic and fact.\n\n"
+        "equivalent of #facts) with 2-4 specific ones tied to the topic and fact.\n"
+        "- search_summary: ONE plain, keyword-dense sentence (max 20 words) that states the "
+        "fact directly for YouTube SEARCH — the OPPOSITE style from the spoken hook: no info "
+        "gap, no vague noun, name the subject and the claim plainly (e.g. 'Turritopsis "
+        "jellyfish can reverse their aging process and effectively avoid death'). This is NOT "
+        f"spoken and NOT shown on screen — only used as the first line of the description, in "
+        f"{CFG['script_language']}.\n\n"
         "Respond strictly in JSON, no markdown wrapper: "
         '{"title": "title text", '
         '"hook_text": "short on-screen hook", '
         '"hook_template": "vague-ability", '
         '"script": "voiceover script ending with the comment-bait line (NO spoken CTA, NO loop line)", '
+        '"search_summary": "plain keyword-dense sentence", '
         '"loop_connectors": ["why", "how"], '
         '"tags": ["tag1", "tag2", ...], '
         '"hashtags": ["#tag1", "#tag2", ...], '

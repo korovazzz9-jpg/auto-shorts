@@ -135,11 +135,15 @@ def generate_longform_script() -> dict:
                 "readable and create curiosity (e.g. 'A SIGNAL FROM SPACE', 'IT SHOULDN'T "
                 "EXIST'). No punctuation needed.\n"
                 f"- tags: 10-15 specific YouTube search tags in {CFG['script_language']}.\n"
-                f"- hashtags: 3-5 hashtags in {CFG['script_language']} (lowercase, with # prefix).\n\n"
+                f"- hashtags: 3-5 hashtags in {CFG['script_language']} (lowercase, with # prefix).\n"
+                "- search_summary: ONE plain, keyword-dense sentence (max 25 words) stating the "
+                "video's core fact directly for YouTube SEARCH — opposite style from the title "
+                f"(no info gap, name the subject plainly). In {CFG['script_language']}.\n\n"
                 "Respond strictly in JSON, no markdown wrapper: "
                 '{"title": "title text", '
                 '"thumb_text": "short thumbnail phrase", '
                 '"script": "full voiceover script", '
+                '"search_summary": "plain keyword-dense sentence", '
                 '"tags": ["tag1", ...], '
                 '"hashtags": ["#tag1", ...], '
                 '"video_queries": ["query1", ...]}'

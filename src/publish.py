@@ -45,7 +45,13 @@ def publish(
     except Exception:
         longform_url = ""
 
+    # SEO-строка первой: разговорный скрипт (хук специально скрывает субъект) почти не
+    # содержит ключевых слов, по которым ищут в YouTube Search — search_summary называет
+    # факт прямо, для находимости. Не озвучивается и не показывается на экране.
     description = data["script"]
+    search_summary = str(data.get("search_summary", "")).strip()
+    if search_summary:
+        description = f"{search_summary}\n\n{description}"
     if longform_url:
         desc_cta = CFG.get("longform_desc_cta", "Full deep-dives on the channel:")
         description += f"\n\n▶ {desc_cta} {longform_url}"
