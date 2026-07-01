@@ -220,6 +220,11 @@ python src/rerender.py
 
 **Петля ТОЛЬКО в daily Shorts.** Loop-инструкция вынесена в `LOOP_INSTRUCTION` и добавляется к системному промпту только в `generate_script()`. Series и longform используют `BASE_SYSTEM_PROMPT` без неё — у них своя концовка/CTA, петли нет. У серий также отключён визуальный loop-хвост (см. раздел про серии).
 
+### Batch API preload (`prepare_batch.py` + `script_queue.py`) — экономия на генерации сценария
+**Сознательно суженный объём:** батчится ТОЛЬКО `generate_script` (Sonnet, самый дорогой одиночный вызов) — не vision-отбор клипов, не TTS, не сборка/загрузка. Anthropic Message Batches даёт **−50%** на этом вызове, но результат готов до 24ч, а не мгновенно — несовместимо с публикацией «сейчас». Поэтому: ночной воркфлоу `prepare-batch.yml` заранее готовит `queue_<channel>.json` (FIFO, держим ~2 дня вперёд, `QUEUE_TARGET=10`), `pipeline.py` при запуске сначала пробует взять сценарий из очереди — **если она пуста, генерит вживую, как раньше** (`generate_script()`). Отсутствие/сбой prepare-джобы **не ломает публикацию** — просто нет экономии в этот раз.
+
+`daily.yml`/`daily-es.yml` коммитят обновлённую очередь обратно в репо после каждого запуска (`permissions: contents: write`) — без этого локальный `pop()` терялся бы вместе с раннером, и следующий прогон снова видел бы несдвинутую очередь из git.
+
 ### Валидация-гейт (`_validate` + `_better` в `generate_script.py`)
 После генерации — **один** таргетный повтор, только если плохо (платный 2-й вызов в ~30% случаев):
 - слов > 90 (`SCRIPT_MAX_WORDS`) → длинно (повтор регенерирует и `video_queries`, десинхрона нет)
@@ -257,7 +262,10 @@ python src/rerender.py
 
 ```
 src/
-  pipeline.py               # точка входа Shorts (ежедневные видео)
+  pipeline.py               # точка входа Shorts (ежедневные видео); сначала пробует queue, иначе live-генерация
+  script_queue.py           # FIFO очередь предгенерённых сценариев (queue_<channel>.json)
+  prepare_batch.py          # ночной preload очереди через Anthropic Batch API (−50% на script-gen)
+  weekly_report.py          # еженедельная retention-сводка (hook/loop/темы) в Telegram, без Claude
   pipeline_longform.py      # точка входа лонгформа
   pipeline_series.py        # точка входа недельных серий (Part 1/2/3, part по прогрессу)
   publish.py                # ОБЩАЯ публикация (YT→воронка-в-лонгформ→коммент→IG/TikTok→Pinterest); зовут оба пайплайна
@@ -304,6 +312,8 @@ assets/
   weekly-longform.yml   # EN лонгформ: Вс 23:00 UTC (отдельный слот)
   weekly-longform-es.yml# ES лонгформ: Вс 23:17 UTC (отдельный слот)
   watchdog.yml          # авторетрай через 15 мин после каждого EN-слота
+  prepare-batch.yml     # ночной preload очереди сценариев через Batch API (оба канала)
+  weekly-report.yml     # еженедельная retention-сводка в Telegram (оба канала)
 ```
 
 ---
@@ -531,6 +541,7 @@ gh secret set PINTEREST_BOARD_ID -b"<board_id>"
 | Pinterest | `"post_to_pinterest": False` в `config.py` → EN-конфиг |
 | PART N оверлей | Убрать `part=` аргумент из вызова `build_video` в `pipeline_series.py` |
 | TTS retry | Убрать цикл в `text_to_speech`, оставить один вызов `_synthesize` |
+| Batch API preload | Задизейблить `prepare-batch.yml` в Actions — `pipeline.py` вернётся к 100% live-генерации (пустая очередь = как раньше) |
 | CTA (сердце + бэйдж) | `_draw_heart_png()` и `_draw_cta_badge()` в `build_video.py` |
 | Novita TTS (лонгформ) | `CFG["longform_use_novita"] = False` → откатится на edge-tts |
 | Визуальный loop серий | Убрать `visual_loop=(part is None)`, вернуть `_build_background(clip_paths, duration)` без параметра |
