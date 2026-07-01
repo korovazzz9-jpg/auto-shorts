@@ -39,7 +39,7 @@ from script_queue import load_queue, save_queue
 
 load_dotenv()
 
-QUEUE_TARGET = 10  # держим очередь на ~2 дня вперёд (5 EN / 3 ES слотов/день)
+QUEUE_TARGET = 10  # держим очередь на ~2.5 дня вперёд (4 EN / 4 ES слота/день с 2026-07-01)
 POLL_INTERVAL = 20
 POLL_TIMEOUT = 1800  # 30 минут ожидания в этом запуске; не успело — доберём в след. прогон
 

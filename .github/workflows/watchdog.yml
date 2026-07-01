@@ -2,8 +2,8 @@ name: Daily Shorts Watchdog
 
 on:
   # 15 минут после каждого слота в daily.yml.
+  # 2026-07-01: EN 5→4 слотов (перелив на ES) — убран watchdog для слота 13:07.
   schedule:
-    - cron: "22 13 * * *"
     - cron: "28 16 * * *"
     - cron: "22 20 * * *"
     - cron: "28 22 * * *"
