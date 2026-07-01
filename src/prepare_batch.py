@@ -14,7 +14,9 @@ watchdog/расписания/публикации.
   CHANNEL=es python prepare_batch.py
 """
 import os
+import re
 import time
+import unicodedata
 
 from anthropic import Anthropic
 from anthropic.types.message_create_params import MessageCreateParamsNonStreaming
@@ -40,6 +42,52 @@ load_dotenv()
 QUEUE_TARGET = 10  # держим очередь на ~2 дня вперёд (5 EN / 3 ES слотов/день)
 POLL_INTERVAL = 20
 POLL_TIMEOUT = 1800  # 30 минут ожидания в этом запуске; не успело — доберём в след. прогон
+
+# Batch-запросы идут параллельно и НЕ видят друг друга (в отличие от live-генерации, где
+# avoid_block обновляется между вызовами) — модель может независимо выбрать один и тот же
+# канонический факт дважды под разными заголовками ("армия Камбиса пропала в пустыне" vs
+# "исчезнувшая без следа армия" — заголовки разные, факт один). Заголовки в стиле "El X que Y"
+# слишком шаблонны, чтобы сравнивать их слова напрямую (ловит ложные срабатывания на разных
+# фактах с одинаковой синтаксической рамкой). Вместо этого сравниваем СОБСТВЕННЫЕ ИМЕНА и
+# ЧИСЛА, упомянутые в самом script — это то, что реально идентифицирует конкретный факт.
+_PROPER_NOUN_RE = re.compile(r"\b[A-ZÁÉÍÓÚÑ][a-záéíóúñ]{3,}\b")
+_NUMBER_RE = re.compile(r"\b\d{3,}\b")
+_COMMON_CAPITALIZED = {
+    "pero", "este", "esta", "ellos", "ellas", "cada", "solo", "sólo", "otro", "otra",
+    "aqui", "aquí", "nadie", "todos", "todas", "casi", "porque", "cuando", "donde",
+    "the", "this", "that", "they", "their", "your", "here", "when", "where", "because",
+}
+
+
+def _signature(data: dict) -> set[str]:
+    text = f"{data.get('script', '')} {data.get('title', '')}"
+    nouns = {
+        unicodedata.normalize("NFKD", w.lower())
+        for w in _PROPER_NOUN_RE.findall(text)
+    }
+    nouns = {"".join(c for c in w if not unicodedata.combining(c)) for w in nouns}
+    nouns -= _COMMON_CAPITALIZED
+    numbers = set(_NUMBER_RE.findall(text))
+    return nouns | numbers
+
+
+def _title_words(title: str) -> set[str]:
+    normalized = unicodedata.normalize("NFKD", title.lower())
+    normalized = "".join(c for c in normalized if not unicodedata.combining(c))
+    words = re.findall(r"[a-z0-9]+", normalized)
+    return words and set(words) or set()
+
+
+def _is_duplicate(a: dict, b: dict) -> bool:
+    # Основной сигнал: >=2 совпадающих собственных имени/числа — это конкретный факт,
+    # совпадение случайно не бывает (в отличие от шаблонных слов заголовка).
+    if len(_signature(a) & _signature(b)) >= 2:
+        return True
+    # Резерв: почти дословно совпадающий заголовок (перефразировки без изменений сути).
+    wa, wb = _title_words(a["title"]), _title_words(b["title"])
+    if wa and wb and len(wa & wb) / len(wa | wb) >= 0.6:
+        return True
+    return False
 
 
 def main() -> None:
@@ -129,6 +177,13 @@ def main() -> None:
             data["hook_text"] = data["title"]
         data["topic"] = topic
         data["hashtag_position"] = "end"
+
+        dupe_of = next((q for q in queue if _is_duplicate(data, q)), None)
+        if dupe_of:
+            print(f"  item-{i}: похож на уже добавленный «{dupe_of['title']}» — пропускаем "
+                  f"(тот же факт, разная формулировка).")
+            continue
+
         add_title_to_cache(data["title"])
         queue.append(data)
         added += 1
