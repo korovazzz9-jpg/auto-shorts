@@ -1,48 +1,5 @@
 [
   {
-    "title": "The $210 Million Shipwreck Nobody Could Own",
-    "hook_text": "FINDERS KEEPERS — AT 4,700 METERS",
-    "hook_template": "sounds-fake",
-    "script": "A sunken ship worth $210 million sat untouched for 70 years — and when someone finally claimed it, it wasn't a government. The SS Gairsoppa, a British cargo vessel, was torpedoed in 1941 carrying 200 tons of silver. It sank to 4,700 meters — deeper than most submarines can even reach. But here's the twist: a private salvage company bid for the wreck rights, won, and legally kept 80% of the silver. Send this to anyone who thinks sunken treasure automatically belongs to a country.",
-    "word_count": 83,
-    "search_summary": "The SS Gairsoppa, sunk in 1941 with 200 tons of silver, was salvaged by a private company that legally kept 80% of the $210 million haul.",
-    "loop_connectors": [
-      "why",
-      "how",
-      "because"
-    ],
-    "tags": [
-      "shipwreck facts",
-      "lost treasure",
-      "SS Gairsoppa",
-      "deep sea salvage",
-      "sunken silver",
-      "WWII shipwreck",
-      "underwater treasure recovery",
-      "facts",
-      "did you know"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#facts",
-      "#shipwreck",
-      "#losttreasure",
-      "#wwii"
-    ],
-    "video_queries": [
-      "deep ocean underwater dark",
-      "WWII cargo ship sailing stormy sea",
-      "submarine underwater torpedo",
-      "deep sea exploration vessel",
-      "salvage diver underwater wreck",
-      "silver bars recovered treasure",
-      "lawyer signing contract document"
-    ],
-    "has_loop": false,
-    "topic": "shipwrecks and lost treasures",
-    "hashtag_position": "end"
-  },
-  {
     "title": "The Ghost Ship Where Everyone Just… Vanished",
     "hook_text": "NO BODY. NO CLUE.",
     "hook_template": "sounds-fake",
