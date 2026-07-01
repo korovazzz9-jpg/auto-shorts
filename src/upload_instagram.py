@@ -9,17 +9,28 @@ POLL_INTERVAL_SECONDS = 5
 POLL_TIMEOUT_SECONDS = 180
 
 
+def _raise_with_body(response: requests.Response) -> None:
+    """response.raise_for_status() сам по себе теряет тело ответа — а именно там Graph API
+    кладёт error.message с реальной причиной (401/400 без этого не продиагностировать)."""
+    if response.status_code >= 400:
+        try:
+            detail = response.json().get("error", {})
+        except ValueError:
+            detail = response.text[:500]
+        raise RuntimeError(f"Instagram Graph API {response.status_code}: {detail}")
+
+
 def _get(path: str, **params) -> dict:
     params["access_token"] = os.environ["IG_ACCESS_TOKEN"]
     response = requests.get(f"{GRAPH_URL}/{path}", params=params, timeout=30)
-    response.raise_for_status()
+    _raise_with_body(response)
     return response.json()
 
 
 def _post(path: str, **params) -> dict:
     params["access_token"] = os.environ["IG_ACCESS_TOKEN"]
     response = requests.post(f"{GRAPH_URL}/{path}", data=params, timeout=30)
-    response.raise_for_status()
+    _raise_with_body(response)
     return response.json()
 
 
