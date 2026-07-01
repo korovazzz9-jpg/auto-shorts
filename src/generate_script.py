@@ -84,6 +84,10 @@ Structure, in order:
    - "This sounds fake, but [claim without naming subject]."
    Never open with "Did you know" / "¿sabías que?" / "Today we'll talk about" / any warm-up —
    the shocking words come FIRST, framing second. Cut into the most interesting part mid-thought.
+   Throughout the whole script (not just the hook): prefer strong, vivid verbs over "is"/"there
+   is" constructions (e.g. "This cave BREATHES" not "There is a cave that breathes"). Keep
+   sentences short and punchy — cut connector words and generic hedging phrases like
+   "fascinating", "scientists discovered", "this phenomenon".
 2. Reveal + fact: name the subject and deliver the core fact fast, no filler. The fact MUST
    contain at least one concrete anchor — a number, a date, a named place, or a named person
    (e.g. "100,000 years", "the 1888 Ritter Island eruption", "a goldsmith named Amenhotep").
