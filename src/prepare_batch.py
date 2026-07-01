@@ -78,7 +78,7 @@ def main() -> None:
             custom_id=f"item-{i}",
             params=MessageCreateParamsNonStreaming(
                 model="claude-sonnet-4-6",
-                max_tokens=1200,
+                max_tokens=1600,
                 system=system_prompt,
                 messages=[{"role": "user", "content": _build_user_content(topics[i], avoid_block)}],
             ),

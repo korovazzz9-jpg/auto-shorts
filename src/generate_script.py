@@ -142,12 +142,12 @@ list ONLY the connector words for which "<word> <sentence 1>" is a COHERENT, gra
 LENGTH_INSTRUCTION = (
     "HARD LENGTH LIMIT: the script (hook through CTA, the loop line is added later) MUST be "
     "70-88 words — top fact Shorts land at ~28-35s; longer than that and retention drops off. "
-    "Before writing the JSON, draft the script, COUNT its words one by one, and if it's over 88 "
-    "cut a clause or an adjective and recount — repeat until it's 88 or under. A script over 88 "
-    "words is a failure even if great. Be ruthless: one tight sentence per beat, no "
-    "throat-clearing, no second comment-bait, no padding adjectives. Build a full arc (setup, "
-    "twist, payoff) tightly. Report your final count in the \"word_count\" field — it must match "
-    "the actual word count of \"script\"."
+    "Silently count the words of your script before responding (do NOT show any draft, count, or "
+    "reasoning in your reply — go straight to the JSON object, nothing before it). If your silent "
+    "count is over 88, trim it before outputting. A script over 88 words is a failure even if "
+    "great. Be ruthless: one tight sentence per beat, no throat-clearing, no second comment-bait, "
+    "no padding adjectives. Build a full arc (setup, twist, payoff) tightly. Report your word "
+    "count in the \"word_count\" field — it must match the actual word count of \"script\"."
 )
 
 SCRIPT_MIN_WORDS = 65
@@ -310,7 +310,7 @@ def generate_script() -> dict:
 
     message = client.messages.create(
         model="claude-sonnet-4-6",
-        max_tokens=1200,
+        max_tokens=1600,
         system=system_prompt,
         messages=[{"role": "user", "content": user_content}],
     )
@@ -331,7 +331,7 @@ def generate_script() -> dict:
         )
         retry = client.messages.create(
             model="claude-sonnet-4-6",
-            max_tokens=1200,
+            max_tokens=1600,
             system=system_prompt,
             messages=[
                 {"role": "user", "content": user_content},
