@@ -33,6 +33,8 @@ jobs:
     needs: guard
     if: needs.guard.outputs.skip == 'false'
     runs-on: ubuntu-latest
+    permissions:
+      contents: write   # коммитит queue_es.json обратно (Batch API preload, prepare_batch.py)
     steps:
       - uses: actions/checkout@v4
 
@@ -73,3 +75,14 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python pipeline.py
+
+      - name: Persist queue state
+        if: always()
+        run: |
+          if [ ! -f queue_es.json ]; then echo "queue_es.json ещё не создан (prepare_batch.py не запускался) — пропускаем"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add queue_es.json
+          git commit -m "chore(queue): ES queue state $(date -u +%F)" || { echo "no changes"; exit 0; }
+          git pull --rebase origin master
+          git push

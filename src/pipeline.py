@@ -10,6 +10,7 @@ from fetch_stock_video import fetch_clips
 from generate_script import generate_script
 from notify import notify
 from publish import publish
+from script_queue import pop_next
 from tts import text_to_speech
 from youtube_auth import get_authenticated_channel_title
 
@@ -39,8 +40,14 @@ def _verify_channel() -> None:
 
 def run() -> None:
     _verify_channel()
-    print(f"[{CFG['channel_name']}] 1/6 Генерация сценария...")
-    data = generate_script()
+    # Batch API preload (prepare_batch.py) экономит ~50% на этом вызове, если очередь заполнена.
+    # Пустая очередь = сценарий генерится вживую, как раньше — отсутствие preload не ломает публикацию.
+    data = pop_next()
+    if data is not None:
+        print(f"[{CFG['channel_name']}] 1/6 Сценарий из очереди (Batch API preload)...")
+    else:
+        print(f"[{CFG['channel_name']}] 1/6 Генерация сценария (вживую)...")
+        data = generate_script()
     print(f"  Тема: {data['topic']} | Заголовок: {data['title']}")
 
     with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
