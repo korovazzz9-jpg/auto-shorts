@@ -66,6 +66,16 @@ def build_report() -> str:
         for name, avg, n in topics[:3]:
             lines.append(f"  {avg:5.1f}%  ({n:2})  {name}")
 
+    by_views = [v for v in videos if v.get("views", 0) > 0]
+    if by_views:
+        top = max(by_views, key=lambda v: v["views"])
+        url = f"https://youtube.com/shorts/{top['id']}"
+        lines.append(
+            f"\n🧪 Топ по просмотрам: {top['title']} ({top['views']} views)\n{url}\n"
+            f"Попробуй Test & Compare в YouTube Studio (заголовок/тумба) — это ручной шаг, "
+            f"API для этого нет."
+        )
+
     return "\n".join(lines)
 
 

@@ -66,11 +66,10 @@ def _series_extra_comment(part: int, state: dict) -> str:
     if pid:
         cta = CFG.get("series_playlist_cta", "Watch the full series in order 👉")
         lines.append(f"{cta} https://www.youtube.com/playlist?list={pid}")
-    if part == 3:  # части 1/2 уже вышли — даём прямые ссылки
-        for n in (1, 2):
-            vid = state.get(f"part{n}_video_id")
-            if vid:
-                lines.append(f"Part {n} 👉 https://youtube.com/shorts/{vid}")
+    for n in range(1, part):  # части 1..part-1 уже вышли — даём прямые ссылки
+        vid = state.get(f"part{n}_video_id")
+        if vid:
+            lines.append(f"Part {n} 👉 https://youtube.com/shorts/{vid}")
     return "\n".join(lines)
 
 
