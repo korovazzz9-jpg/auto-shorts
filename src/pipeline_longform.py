@@ -116,7 +116,7 @@ def run() -> None:
     # Файл коммитит weekly-longform workflow тем же шагом, что и формат-ротацию.
     try:
         from longform_link import set_last_longform
-        set_last_longform(video_id)
+        set_last_longform(video_id, theme=data["theme"])
     except Exception as e:
         _alert("last-longform-link", e)
 

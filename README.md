@@ -189,7 +189,9 @@ python src/rerender.py
 **Горизонтальный формат (16:9, 1920×1080)** — лонгформ собирается ОТДЕЛЬНЫМ билдером `build_longform_video.py`, а НЕ вертикальным `build_video` (Shorts). Длинные видео смотрят с десктопа/ТВ, где вертикаль идёт с чёрными полосами. Билдер упрощённый: фон из клипов + лёгкий зум + караоке-субтитры снизу, без Shorts-фишек (хук-плашка, CTA-пульс, петля, PART), визуального loop-хвоста тоже нет — своя `_build_background` без дублирования клипа. Клипы качаются горизонтальные: `fetch_clips(..., landscape=True)` (Pexels `orientation=landscape`, фильтр `width >= height`).
 
 ### Воронка Shorts → лонгформ (`longform_link.py`)
-Каждый Short/серия ссылается на **последний опубликованный лонгформ канала** в описании (`CFG["longform_desc_cta"]`) и закреп-комменте (`CFG["longform_comment_cta"]`) — ради часов просмотра (порог монетизации лонгформа). Тема не важна: продаём формат «глубокий разбор», не продолжение сюжета. `pipeline_longform.py` пишет `last_video_id` в тот же `longform_state_<channel>.json` (read-modify-write, не трогает ротацию формата), `publish()` читает его через `get_last_longform_url()`.
+Каждый Short/серия ссылается на лонгформ в описании (`CFG["longform_desc_cta"]`) и закреп-комменте (`CFG["longform_comment_cta"]`) — ради часов просмотра (порог монетизации лонгформа).
+
+**Тематическая линковка (2026-07-01):** приоритет — лонгформ на **ту же тему**, что и текущий Short (`data["topic"]`, из того же `TOPICS_POOL`, что и лонгформ-темы — сравнение точной строкой, без нечёткого мэтчинга). Если тематического лонгформа ещё не было — фолбэк на последний лонгформ вообще («глубокий разбор» как формат, как было раньше). Состояние — карта `by_topic: {theme: video_id}` + `last_video_id` в `longform_state_<channel>.json` (read-modify-write, не трогает ротацию формата). `pipeline_longform.py` пишет через `set_last_longform(video_id, theme=...)`, `publish()` читает через `get_last_longform_url(topic)`. Откат: вызывать `get_last_longform_url()` без аргумента — вернёт `last_video_id` как раньше.
 
 ### CTA (call-to-action)
 
