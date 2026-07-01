@@ -337,5 +337,87 @@
     "has_loop": false,
     "topic": "future technology",
     "hashtag_position": "end"
+  },
+  {
+    "title": "The Immortal Jellyfish That Cheats Death",
+    "hook_text": "IT REFUSES TO DIE",
+    "hook_template": "sounds-fake",
+    "script": "This creature dies — then decides to come back as a baby. The Turritopsis dohrnii jellyfish, barely 4.5mm wide, can reverse its aging completely. When injured or starving, it sinks to the ocean floor and transforms back into a polyp — its infant stage — restarting life from scratch. It can repeat this cycle forever. But here's the wild part: every ocean on Earth already has them, silently spreading. Send this to someone who still thinks nothing lives forever. And that's exactly how.",
+    "word_count": 87,
+    "search_summary": "Turritopsis dohrnii jellyfish can biologically reverse aging and restart its life cycle indefinitely, making it effectively immortal.",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "animal facts",
+      "did you know",
+      "immortal jellyfish",
+      "turritopsis dohrnii",
+      "jellyfish facts",
+      "biology facts",
+      "ocean creatures",
+      "weird animals",
+      "facts"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#facts",
+      "#jellyfish",
+      "#oceanlife",
+      "#immortal"
+    ],
+    "video_queries": [
+      "jellyfish floating ocean",
+      "deep ocean dark water",
+      "ocean floor underwater",
+      "jellyfish close up swimming",
+      "vast open ocean surface"
+    ],
+    "has_loop": true,
+    "topic": "the animal kingdom",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "The Computer That Runs on Your Body Heat",
+    "hook_text": "YOUR BODY POWERS THIS",
+    "hook_template": "sounds-fake",
+    "script": "This sounds fake, but a computer chip needs no battery — your skin runs it. IBM researchers built a thermoelectric processor in 2023 that harvests the 2–3 watts your body constantly radiates as heat and converts it directly into computing power. No charging. No cables. No battery death at 7%. But here's the strange part — the warmer your skin runs, the faster it computes. Your own fever literally overclocks it. Send this to someone who still thinks batteries are unavoidable. And that's how.",
+    "word_count": 87,
+    "search_summary": "IBM thermoelectric chip 2023 harvests body heat to power a computer processor with no battery",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "future technology",
+      "body heat computer",
+      "thermoelectric chip",
+      "IBM processor 2023",
+      "wearable tech facts",
+      "no battery technology",
+      "tech facts",
+      "did you know tech",
+      "60 second facts"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#techfacts",
+      "#futuretechnology",
+      "#wearabletech",
+      "#nобатарейки"
+    ],
+    "video_queries": [
+      "person working laptop close skin",
+      "wearable technology arm device",
+      "futuristic computer chip close",
+      "human body heat infrared glow",
+      "smartwatch wrist technology",
+      "charging cable phone battery dying",
+      "fever thermometer forehead"
+    ],
+    "has_loop": true,
+    "topic": "future technology",
+    "hashtag_position": "end"
   }
 ]
