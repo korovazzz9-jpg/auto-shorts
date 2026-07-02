@@ -10,7 +10,7 @@ from datetime import date
 
 from dotenv import load_dotenv
 
-from analytics_retention import _recent_videos, _retention
+from analytics_retention import _recent_videos, _retention, _retention_curve, biggest_drop
 from config import CFG, CHANNEL
 from notify import notify
 from youtube_auth import get_analytics_client, get_client
@@ -48,6 +48,24 @@ def _videos_with_retention() -> list[dict]:
         v["pct"] = float(r.get("pct", 0) or 0)
         v["views"] = int(r.get("views", 0) or 0)
     return videos
+
+
+DROP_OFF_SAMPLE = 2  # худших видео недели, на которые тратим доп. Analytics-запросы (дёшево, но не для всех 50)
+
+
+def _add_drop_offs(analytics, videos: list[dict]) -> None:
+    """Для нескольких худших по retention видео недели тянет посекундную кривую
+    (analytics_retention._retention_curve — эндпоинт принимает только 1 video== за раз,
+    поэтому не батчится, берём точечно) и находит момент наибольшего обрыва зрителя.
+    Мутирует videos на месте, добавляя v['drop']. Не критично к сбоям — одно упавшее
+    видео не должно рушить весь отчёт."""
+    scored = sorted((v for v in videos if v.get("pct", 0) > 0), key=lambda v: v["pct"])
+    for v in scored[:DROP_OFF_SAMPLE]:
+        try:
+            curve = _retention_curve(analytics, v["id"], v["published"], date.today().isoformat())
+            v["drop"] = biggest_drop(curve, v.get("length", 0))
+        except Exception as e:
+            print(f"  drop-off для '{v['title'][:40]}' не получен: {e}")
 
 
 def save_hook_stats(videos: list[dict]) -> None:
@@ -116,10 +134,23 @@ def build_report(videos: list[dict]) -> str:
             "сильнее ссылки в описании; API её не даёт)"
         )
 
+    # Retention-кривая (не только % досмотра, а В КАКОЙ МОМЕНТ отваливаются) — для худших
+    # видео недели. Показывает не «эта тема слабая», а «на 6-й секунде теряем зрителя».
+    drops = [v for v in videos if v.get("drop")]
+    if drops:
+        lines.append("\n📉 Где теряем зрителя (худшие видео недели):")
+        for v in drops:
+            d = v["drop"]
+            lines.append(f"  «{v['title'][:40]}» — обрыв ~{d['second']}s (−{d['drop_pct']} п.п.)")
+
     return "\n".join(lines)
 
 
 if __name__ == "__main__":
     videos = _videos_with_retention()
+    try:
+        _add_drop_offs(get_analytics_client(), videos)
+    except Exception as e:
+        print(f"  drop-off анализ пропущен: {e}")
     notify(build_report(videos))
     save_hook_stats(videos)

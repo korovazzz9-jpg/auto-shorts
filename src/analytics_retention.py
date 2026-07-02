@@ -88,6 +88,41 @@ def _recent_videos(youtube) -> list[dict]:
     return videos
 
 
+def _retention_curve(analytics, video_id: str, start: str, end: str) -> list[tuple[float, float]]:
+    """Посекундная (точнее — по 1%-долям длины видео) кривая retention для ОДНОГО видео.
+    В отличие от averageViewPercentage (одно число на видео) показывает, В КАКОЙ МОМЕНТ
+    зритель отваливается — на хуке, на reveal, на twist. elapsedVideoTimeRatio — эндпоинт
+    Analytics API, который принимает фильтр только по одному video== за раз (не батчится),
+    поэтому кривую тянем по видео отдельно, не для всех 50 разом.
+    Возвращает [(elapsed_ratio 0..1, audience_watch_ratio), ...], отсортировано по времени."""
+    resp = analytics.reports().query(
+        ids="channel==MINE",
+        startDate=start,
+        endDate=end,
+        metrics="audienceWatchRatio",
+        dimensions="elapsedVideoTimeRatio",
+        filters=f"video=={video_id}",
+    ).execute()
+    rows = resp.get("rows", []) or []
+    return sorted((float(r[0]), float(r[1])) for r in rows)
+
+
+def biggest_drop(curve: list[tuple[float, float]], video_length: int) -> dict | None:
+    """Сегмент кривой с наибольшим падением audienceWatchRatio — где именно теряем зрителя.
+    Возвращает {"second": ~секунда видео, "drop_pct": падение в п.п.} или None (мало точек)."""
+    if len(curve) < 2 or video_length <= 0:
+        return None
+    best = None
+    for (t0, r0), (t1, r1) in zip(curve, curve[1:]):
+        drop = r0 - r1
+        if drop > 0 and (best is None or drop > best[1]):
+            best = (t1, drop)
+    if not best:
+        return None
+    ratio, drop = best
+    return {"second": round(ratio * video_length), "drop_pct": round(drop * 100, 1)}
+
+
 def _retention(analytics, video_ids: list[str], start: str, end: str) -> dict:
     """Возвращает {video_id: {pct, dur, views}}."""
     out = {}
@@ -179,5 +214,29 @@ def main() -> None:
             print(f"   —    ( 0 видео)  {label} (ещё нет данных)")
 
 
+def _print_curve(video_id: str) -> None:
+    """Ручной разбор одного видео: python analytics_retention.py <video_id>."""
+    youtube = get_client()
+    analytics = get_analytics_client()
+    info = youtube.videos().list(part="snippet,contentDetails", id=video_id).execute()["items"][0]
+    length = _iso8601_to_seconds(info["contentDetails"]["duration"])
+    published = info["snippet"]["publishedAt"][:10]
+    curve = _retention_curve(analytics, video_id, published, date.today().isoformat())
+    if not curve:
+        print("Нет данных retention-кривой (видео слишком свежее или мало просмотров).")
+        return
+    print(f"\n=== Retention-кривая: {info['snippet']['title']} ({length}s) ===\n")
+    for ratio, watch in curve:
+        bar = "#" * int(watch * 40)
+        print(f"{ratio*100:5.0f}% ({round(ratio*length):3}s)  {watch*100:5.1f}%  {bar}")
+    drop = biggest_drop(curve, length)
+    if drop:
+        print(f"\nСамый большой обрыв: ~{drop['second']}s, падение {drop['drop_pct']} п.п.")
+
+
 if __name__ == "__main__":
-    main()
+    import sys
+    if len(sys.argv) > 1:
+        _print_curve(sys.argv[1])
+    else:
+        main()
