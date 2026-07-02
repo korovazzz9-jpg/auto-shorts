@@ -56,10 +56,7 @@ jobs:
           python-version: "3.11"
 
       - name: Install system deps
-        uses: awalsh128/cache-apt-pkgs-action@v1
-        with:
-          packages: imagemagick
-          version: 1.0
+        run: sudo apt-get update && sudo apt-get install -y imagemagick
 
       - name: Allow ImageMagick to read caption text files
         run: sudo sed -i '/pattern="@\*"/d' /etc/ImageMagick-6/policy.xml

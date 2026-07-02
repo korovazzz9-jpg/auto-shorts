@@ -61,10 +61,7 @@ jobs:
 
       - name: Install system deps (only if retry needed)
         if: steps.guard.outputs.skip == 'false' && steps.check.outputs.missed == 'true'
-        uses: awalsh128/cache-apt-pkgs-action@v1
-        with:
-          packages: imagemagick
-          version: 1.0
+        run: sudo apt-get update && sudo apt-get install -y imagemagick
 
       - name: Allow ImageMagick to read caption text files (only if retry needed)
         if: steps.guard.outputs.skip == 'false' && steps.check.outputs.missed == 'true'
