@@ -2,6 +2,7 @@
 Не часть Shorts-расписания — отдельный workflow, раз в неделю. Не постится в Instagram
 (там лимит длины Reels около 90 сек, не подходит)."""
 import os
+import random
 import tempfile
 
 from dotenv import load_dotenv
@@ -103,7 +104,8 @@ def run() -> None:
         comment = CFG.get("longform_comment", "").format(channel_url=channel_url).strip()
         if comment:
             comment_id = post_channel_comment(video_id, comment)
-            reply = CFG.get("first_comment_reply", "")
+            replies = CFG.get("first_comment_replies", [])
+            reply = random.choice(replies) if replies else ""
             if reply:
                 try:
                     post_comment_reply(comment_id, reply)

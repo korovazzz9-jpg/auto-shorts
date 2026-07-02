@@ -5,6 +5,7 @@
 → Pinterest) жила в ОДНОМ месте и не рассинхронизировалась между пайплайнами.
 """
 import os
+import random
 
 from cloudinary_upload import delete_image, delete_video, upload_image, upload_video as upload_to_cloudinary
 from config import CFG
@@ -84,8 +85,10 @@ def publish(
             comment = (comment + "\n\n" + extra_comment).strip()
         if comment:
             comment_id = post_channel_comment(video_id, comment)
-            # #3 Само-ответ → мини-тред (engagement density). Генерик из CFG, без доп. токенов.
-            reply = CFG.get("first_comment_reply", "")
+            # #3 Само-ответ → мини-тред (engagement density). Пул вариантов из CFG — один и
+            # тот же текст под каждым видео выглядел ботово.
+            replies = CFG.get("first_comment_replies", [])
+            reply = random.choice(replies) if replies else ""
             if reply:
                 try:
                     post_comment_reply(comment_id, reply)

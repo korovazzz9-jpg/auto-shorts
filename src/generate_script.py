@@ -5,7 +5,7 @@ import random
 
 from anthropic import Anthropic
 
-from config import CFG
+from config import CFG, CHANNEL
 from recent_titles import add_title_to_cache, add_topic_to_cache, get_recent_titles, get_recent_topics
 from topic_stats import get_topic_avg_views
 
@@ -44,20 +44,31 @@ def _pick_topic() -> str:
     except Exception:
         avg_views = {}
 
-    if len(avg_views) < MIN_TOPICS_WITH_DATA:
+    if len(avg_views) < MIN_TOPICS_WITH_DATA or len(pool) < 3:
         return random.choice(pool)
 
     overall_avg = sum(avg_views.values()) / len(avg_views)
-    # Темы без данных получают средний вес (чтобы не застревать на старых лидерах
-    # и продолжать исследовать темы, которые ещё не пробовали).
-    weights = [max(avg_views.get(t, overall_avg), 1.0) for t in pool]
+    # Темы без данных получают средний вес — попадают в середину рейтинга и продолжают
+    # исследоваться, не застревая ни в топе, ни в хвосте.
+    weight = lambda t: max(avg_views.get(t, overall_avg), 1.0)
+    ranked = sorted(pool, key=lambda t: -weight(t))
 
-    # Логируем топ-5 тем для отладки в GitHub Actions
-    ranked = sorted(zip(pool, weights), key=lambda x: -x[1])
-    top5 = ", ".join(f"{t}({w:.0f})" for t, w in ranked[:5])
-    print(f"  Topic weights top-5: {top5}")
+    # Квоты 70/20/10 вместо чистого взвешивания по avg_views: взвешивание самоусиливает
+    # победителей до усталости темы (локальный максимум — напр. серия почти одинаковых
+    # shipwreck-роликов). Явные квоты гарантируют исследование: 70% — верхняя треть тем,
+    # 20% — средняя, 10% — нижняя (wildcard). Внутри яруса — равномерно.
+    third = max(1, len(ranked) // 3)
+    roll = random.random()
+    if roll < 0.7:
+        tier, label = ranked[:third], "top"
+    elif roll < 0.9:
+        tier, label = ranked[third:2 * third] or ranked[:third], "mid"
+    else:
+        tier, label = ranked[2 * third:] or ranked[-third:], "wild"
 
-    return random.choices(pool, weights=weights, k=1)[0]
+    top5 = ", ".join(f"{t}({weight(t):.0f})" for t in ranked[:5])
+    print(f"  Topic weights top-5: {top5} | tier={label}")
+    return random.choice(tier)
 
 BASE_SYSTEM_PROMPT = """You are a scriptwriter for short fact videos on YouTube Shorts (channel: {channel}).
 Write the TITLE, SCRIPT and HASHTAGS in {language}, conversational, punchy, no filler. (Keep the
@@ -169,6 +180,23 @@ HOOK_TEMPLATES = [
 ]
 
 
+def _hook_preference() -> str:
+    """Замыкает петлю хук-аналитики: weekly_report.py раз в неделю пишет лучший по retention
+    хук-шаблон в hook_stats_<channel>.json (коммитится воркфлоу), а мы мягко подсказываем его
+    модели. Подсказка, не приказ — иначе шаблон станет формулой и данные для сравнения иссякнут.
+    Нет файла/данных — пустая строка, промпт как раньше."""
+    path = os.path.join(os.path.dirname(__file__), "..", f"hook_stats_{CHANNEL}.json")
+    try:
+        with open(path, encoding="utf-8") as f:
+            best = json.load(f).get("best_template", "")
+    except (FileNotFoundError, json.JSONDecodeError):
+        return ""
+    if best not in HOOK_TEMPLATES or best == "other":
+        return ""
+    return (f" Data note: on this channel the '{best}' opening currently retains viewers "
+            "best — prefer it when it fits the fact naturally, but never force it.")
+
+
 def _build_user_content(topic: str, avoid_block: str) -> str:
     return (
         avoid_block +
@@ -190,7 +218,8 @@ def _build_user_content(topic: str, avoid_block: str) -> str:
         "separate hooks in the first 2 seconds) and NOT a copy of the title. Punchy, in "
         f"{CFG['script_language']}, no ending period.\n"
         f"- hook_template: which opening template the spoken hook uses — exactly one of "
-        f"[{', '.join(HOOK_TEMPLATES)}]. Report the closest match (use 'other' if none fits).\n"
+        f"[{', '.join(HOOK_TEMPLATES)}]. Report the closest match (use 'other' if none fits)."
+        f"{_hook_preference()}\n"
         f"- tags: 6-9 specific YouTube search tags in {CFG['script_language']}, mixing "
         "broad ones (e.g. the channel's equivalent of 'facts'/'did you know') with specific "
         "long-tail ones tied to the exact fact (the specific phenomenon, place, or thing "

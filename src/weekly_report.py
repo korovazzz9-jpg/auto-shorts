@@ -4,16 +4,21 @@ _recent_videos/_retention из analytics_retention.py). Запуск:
   python weekly_report.py            # EN
   CHANNEL=es python weekly_report.py # ES
 """
+import json
+import os
 from datetime import date
 
 from dotenv import load_dotenv
 
 from analytics_retention import _recent_videos, _retention
-from config import CFG
+from config import CFG, CHANNEL
 from notify import notify
 from youtube_auth import get_analytics_client, get_client
 
 load_dotenv()
+
+HOOK_STATS_FILE = os.path.join(os.path.dirname(__file__), "..", f"hook_stats_{CHANNEL}.json")
+MIN_HOOK_SAMPLE = 5  # меньше видео на шаблон — рано делать выводы, файл не пишем
 
 
 def _avg_by(videos: list[dict], key: str, min_pct: float = 0.0) -> list[tuple[str, float, int]]:
@@ -29,13 +34,12 @@ def _avg_by(videos: list[dict], key: str, min_pct: float = 0.0) -> list[tuple[st
     )
 
 
-def build_report() -> str:
+def _videos_with_retention() -> list[dict]:
     youtube = get_client()
     analytics = get_analytics_client()
     videos = _recent_videos(youtube)
     if not videos:
-        return f"📊 [{CFG['channel_name']}] Нет видео для отчёта."
-
+        return []
     start = min(v["published"] for v in videos)
     end = date.today().isoformat()
     ret = _retention(analytics, [v["id"] for v in videos], start, end)
@@ -43,6 +47,28 @@ def build_report() -> str:
         r = ret.get(v["id"], {})
         v["pct"] = float(r.get("pct", 0) or 0)
         v["views"] = int(r.get("views", 0) or 0)
+    return videos
+
+
+def save_hook_stats(videos: list[dict]) -> None:
+    """Лучший по retention хук-шаблон недели → hook_stats_<channel>.json (коммитит
+    weekly-report.yml). generate_script._hook_preference() читает его и мягко подсказывает
+    модели предпочтительный шаблон — данные аналитики замыкаются обратно в генерацию."""
+    hooks = [(k, avg, n) for k, avg, n in _avg_by(videos, "hook")
+             if k not in ("—", "other") and n >= MIN_HOOK_SAMPLE]
+    if not hooks:
+        print(f"  hook_stats: <{MIN_HOOK_SAMPLE} видео на шаблон — данных мало, файл не трогаем.")
+        return
+    best_template, avg, n = hooks[0]
+    with open(HOOK_STATS_FILE, "w", encoding="utf-8") as f:
+        json.dump({"best_template": best_template, "avg_pct": round(avg, 1), "videos": n,
+                   "updated": date.today().isoformat()}, f, ensure_ascii=False, indent=2)
+    print(f"  hook_stats: {best_template} ({avg:.1f}%, n={n})")
+
+
+def build_report(videos: list[dict]) -> str:
+    if not videos:
+        return f"📊 [{CFG['channel_name']}] Нет видео для отчёта."
 
     lines = [f"📊 Retention-сводка за неделю: {CFG['channel_name']}"]
 
@@ -80,4 +106,6 @@ def build_report() -> str:
 
 
 if __name__ == "__main__":
-    notify(build_report())
+    videos = _videos_with_retention()
+    notify(build_report(videos))
+    save_hook_stats(videos)

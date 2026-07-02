@@ -25,7 +25,10 @@ CONFIGS = {
         "cta_phrases": [
             "LIKE & FOLLOW\nfor more",
             "FOLLOW for more\nfacts like this",
-            "DOUBLE TAP\nif you knew this",
+            # Было "DOUBLE TAP if you knew this" — это Instagram-жест, на YouTube (основная
+            # площадка) двойного тапа нет. Коммент-CTA работает на обеих платформах и
+            # усиливает главный сигнал ранжирования (comment density).
+            "COMMENT\nif you knew this",
         ],
         # Фразы-петли (loop): дописываются в конец скрипта детерминированно. Ключ = коннектор,
         # который Claude пометил как подходящий по смыслу к хуку. На стыке петли
@@ -76,8 +79,15 @@ CONFIGS = {
         # СВЕРХУ — комменты/ответы это топ-сигнал алгоритма (engagement density), generic
         # "follow" так не работает. {channel_url} подставляется автоматически.
         "first_comment": "Wait — did you actually already know this one? 👇\nSubscribe for a new fact every day 👉 {channel_url}",
-        # #3 Само-ответ на закреп-коммент → мини-тред (engagement density). Генерик, без доп. токенов.
-        "first_comment_reply": "Be honest — did this actually surprise you, or did you already know? 👀",
+        # #3 Само-ответ на закреп-коммент → мини-тред (engagement density). Генерик, без доп.
+        # токенов. ПУЛ вариантов (random.choice в publish/pipeline_longform): один и тот же
+        # текст под каждым видео выглядел ботово.
+        "first_comment_replies": [
+            "Be honest — did this actually surprise you, or did you already know? 👀",
+            "Most people scroll past without believing it. Did you?",
+            "On a scale of 1-10, how fake did this sound at first? 👇",
+            "If you already knew this one, you're officially in the top 1% 👇",
+        ],
         # Навигация по серии: ссылка на плейлист в закреп-комменте каждой части.
         "series_playlist_cta": "📺 Watch all parts in order 👉",
         # Закреп-коммент лонгформа: провокация + подписка (досмотревший = горячий подписчик).
@@ -158,7 +168,12 @@ CONFIGS = {
         "longform_desc_cta": "Análisis completos en el canal:",
         "longform_comment_cta": "¿Quieres la historia completa? Mira el análisis 👉",
         "first_comment": "Un momento — ¿tú ya sabías esto? 👇\nSuscríbete para un dato nuevo cada día 👉 {channel_url}",
-        "first_comment_reply": "Sé sincero — ¿esto te sorprendió o ya lo sabías? 👀",
+        "first_comment_replies": [
+            "Sé sincero — ¿esto te sorprendió o ya lo sabías? 👀",
+            "La mayoría pasa de largo sin creerlo. ¿Tú lo creíste?",
+            "Del 1 al 10, ¿qué tan falso te sonó al principio? 👇",
+            "Si ya lo sabías, estás en el 1% — demuéstralo abajo 👇",
+        ],
         "series_playlist_cta": "📺 Mira todas las partes en orden 👉",
         "longform_comment": "¿Qué parte te sorprendió más? 👇\nSuscríbete para un análisis nuevo cada semana 👉 {channel_url}",
         "longform_use_novita": True,
