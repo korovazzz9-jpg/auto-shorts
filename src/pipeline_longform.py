@@ -81,11 +81,12 @@ def run() -> None:
         sister_ctas = CFG.get("sister_desc_ctas", [])
         if sister_handle and sister_ctas:
             description += f"\n\n{random.choice(sister_ctas)} https://www.youtube.com/@{sister_handle}"
+        tags = list(data["tags"]) + list(CFG.get("sister_lang_tags", []))
         video_id = upload_to_youtube(
             video_path,
             title=data["title"],
             description=description,
-            tags=data["tags"],
+            tags=tags,
             hashtags=data["hashtags"],
             hashtag_position="end",
             thumbnail_path=thumb_path,

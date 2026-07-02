@@ -33,6 +33,7 @@ from generate_script import (
     _parse_response,
     _pick_topic,
     _validate,
+    pick_title_variant,
 )
 from recent_titles import add_title_to_cache, add_topic_to_cache, get_recent_titles
 from script_queue import load_queue, save_queue
@@ -115,11 +116,14 @@ def main() -> None:
 
     # Выбираем темы ПОСЛЕДОВАТЕЛЬНО, тегируя каждую в кеш сразу — иначе _pick_topic() внутри
     # этого же батча не увидит темы, выбранные парой строк выше, и может задвоить.
-    topics = []
+    # title_variant роллится ЗДЕСЬ (не внутри _build_user_content) — иначе после парсинга
+    # ответа неоткуда было бы узнать, какой вариант ушёл в конкретный запрос батча.
+    topics, title_variants = [], []
     for _ in range(need):
         t = _pick_topic()
         topics.append(t)
         add_topic_to_cache(t)
+        title_variants.append(pick_title_variant())
 
     requests_ = [
         Request(
@@ -128,7 +132,8 @@ def main() -> None:
                 model="claude-sonnet-4-6",
                 max_tokens=1600,
                 system=system_prompt,
-                messages=[{"role": "user", "content": _build_user_content(topics[i], avoid_block)}],
+                messages=[{"role": "user", "content": _build_user_content(
+                    topics[i], avoid_block, title_variants[i][0])}],
             ),
         )
         for i in range(need)
@@ -189,6 +194,7 @@ def main() -> None:
             if not str(data.get("hook_text", "")).strip():
                 data["hook_text"] = data["title"]
             data["topic"] = topic
+            data["title_variant"] = title_variants[i][1]
             data["hashtag_position"] = "end"
 
             dupe_of = next((q for q in queue if _is_duplicate(data, q)), None)

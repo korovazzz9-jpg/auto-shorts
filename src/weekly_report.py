@@ -10,7 +10,7 @@ from datetime import date
 
 from dotenv import load_dotenv
 
-from analytics_retention import _recent_videos, _retention, _retention_curve, biggest_drop
+from analytics_retention import _recent_videos, _retention, _retention_curve, biggest_drop, retention_threshold
 from config import CFG, CHANNEL
 from notify import notify
 from youtube_auth import get_analytics_client, get_client
@@ -103,6 +103,28 @@ def build_report(videos: list[dict]) -> str:
         for name, avg, n in loops:
             label = "с петлёй" if name == "yes" else "без петли"
             lines.append(f"  {avg:5.1f}%  ({n:2})  {label}")
+
+    # A/B заголовков (2026-07-02): keyword-насыщенный (seo) vs чисто нарративный. См.
+    # generate_script.TITLE_SEO_PROBABILITY — 30% видео идут с seo-вариантом.
+    titles = _avg_by(videos, "title_variant")
+    titles = [(k, a, n) for k, a, n in titles if k in ("seo", "narrative")]
+    if titles:
+        lines.append("\nЗаголовок (A/B):")
+        for name, avg, n in titles:
+            lines.append(f"  {avg:5.1f}%  ({n:2})  {name}")
+
+    # Пороги retention (2026-07-02, retention_threshold): explore-and-exploit тест YouTube —
+    # ниже порога (65% для <30с, 50% для 30-60с) раздача резко сокращается. Не абстрактное
+    # "выше/ниже среднего", а конкретный порог из индустриальных 2026-данных.
+    threshold_videos = [v for v in videos if v.get("pct", 0) > 0 and v.get("length")]
+    if threshold_videos:
+        passed = [v for v in threshold_videos if v["pct"] >= retention_threshold(v["length"])]
+        lines.append(f"\nПорог retention: {len(passed)}/{len(threshold_videos)} видео прошли "
+                      f"(65% для <30с, 50% для 30-60с)")
+        failed = sorted((v for v in threshold_videos if v not in passed), key=lambda v: v["pct"])
+        for v in failed[:3]:
+            lines.append(f"  ниже порога: «{v['title'][:40]}» — {v['pct']:.1f}% "
+                          f"(нужно {retention_threshold(v['length']):.0f}%)")
 
     topics = _avg_by(videos, "topic")
     if topics:

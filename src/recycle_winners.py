@@ -41,6 +41,7 @@ from generate_script import (
     _build_user_content,
     _parse_response,
     _validate,
+    pick_title_variant,
 )
 from prepare_batch import _is_duplicate
 from recent_titles import add_title_to_cache
@@ -188,7 +189,7 @@ def main() -> None:
     print(f"  Пересоздаём {len(candidates)} победителей через Batch API...")
 
     system_prompt = BASE_SYSTEM_PROMPT + "\n\n" + LOOP_INSTRUCTION + "\n\n" + LENGTH_INSTRUCTION
-    requests_ = []
+    requests_, title_variants = [], []
     for i, (w, src_item) in enumerate(candidates):
         anchor = (
             "\n\nOVERRIDE — DO NOT invent a new fact. Recreate THIS exact proven fact (a top "
@@ -197,6 +198,8 @@ def main() -> None:
             f"Source title: {w['title']}\n"
             f"Source script: {src_item['script']}"
         )
+        title_instruction, title_variant = pick_title_variant()
+        title_variants.append(title_variant)
         requests_.append(Request(
             custom_id=f"recycle-{i}",
             params=MessageCreateParamsNonStreaming(
@@ -204,7 +207,7 @@ def main() -> None:
                 max_tokens=1600,
                 system=system_prompt,
                 messages=[{"role": "user",
-                           "content": _build_user_content(_source_topic(w), "") + anchor}],
+                           "content": _build_user_content(_source_topic(w), "", title_instruction) + anchor}],
             ),
         ))
 
@@ -245,6 +248,7 @@ def main() -> None:
             if not str(data.get("hook_text", "")).strip():
                 data["hook_text"] = data["title"]
             data["topic"] = _source_topic(w)
+            data["title_variant"] = title_variants[i]
             data["hashtag_position"] = "end"
             data["recycled_from"] = w["id"]  # маркер происхождения (виден в queue-файле)
 

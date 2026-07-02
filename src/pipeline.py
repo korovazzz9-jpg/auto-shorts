@@ -75,6 +75,7 @@ def run() -> None:
                 f"topic-{data['topic'].replace(' ', '_')}",
                 f"loop-{'yes' if data.get('has_loop') else 'no'}",
                 f"hook-{data.get('hook_template', 'other')}",
+                f"title-{data.get('title_variant', 'narrative')}",
             ],
             enable_captions=False,  # временно (квота), вернуть после увеличения квоты
             enable_pinterest=True,

@@ -89,6 +89,7 @@ CONFIGS = {
             "🌎 We also post in Spanish:",
             "🌎 En español too:",
         ],
+        "sister_lang_tags": ["datos curiosos", "hechos curiosos", "sabías que"],
         # Воронка Shorts→лонгформ: фразы перед ссылкой на последний длинный ролик
         # (в описании и закреп-комменте). Тема не важна — продаём формат «глубокий разбор».
         "longform_desc_cta": "Full deep-dives on the channel:",
@@ -189,6 +190,7 @@ CONFIGS = {
             "🌎 También publicamos en inglés:",
             "🌎 In English too:",
         ],
+        "sister_lang_tags": ["facts", "did you know", "fun facts"],
         "ig_caption_ctas": [
             "🔗 Sígueme para más datos — link en bio",
             "📌 Un dato nuevo cada día — link en bio",

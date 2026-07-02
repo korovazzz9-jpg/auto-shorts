@@ -27,6 +27,7 @@ load_dotenv()
 TOPIC_TAG_RE = re.compile(r"^topic-(.+)$")
 LOOP_TAG_RE = re.compile(r"^loop-(yes|no)$")
 HOOK_TAG_RE = re.compile(r"^hook-(.+)$")
+TITLE_VARIANT_TAG_RE = re.compile(r"^title-(seo|narrative)$")  # A/B заголовков, см. generate_script.py
 MAX_VIDEOS = 50  # сколько последних видео анализировать
 
 
@@ -37,6 +38,15 @@ def _iso8601_to_seconds(duration: str) -> int:
         return 0
     h, mi, s = (int(x) if x else 0 for x in m.groups())
     return h * 3600 + mi * 60 + s
+
+
+def retention_threshold(length_seconds: int) -> float:
+    """Порог % досмотра, ниже которого YouTube резко сокращает раздачу Shorts (данные
+    индустриальных бенчмарков 2026, не официальный YouTube-документ, но воспроизводимая
+    цифра в нескольких независимых источниках): 65% для <30с, 50% для 30-60с. Абсолютное
+    число менее важно, чем сам факт порога — это explore-and-exploit тест на малой
+    аудитории, не постепенная шкала."""
+    return 65.0 if length_seconds < 30 else 50.0
 
 
 def _recent_videos(youtube) -> list[dict]:
@@ -65,6 +75,7 @@ def _recent_videos(youtube) -> list[dict]:
             topic = None
             loop = None
             hook = None
+            title_variant = None
             for tag in v["snippet"].get("tags", []):
                 mt = TOPIC_TAG_RE.match(tag)
                 if mt:
@@ -75,6 +86,9 @@ def _recent_videos(youtube) -> list[dict]:
                 mh = HOOK_TAG_RE.match(tag)
                 if mh:
                     hook = mh.group(1)
+                mv = TITLE_VARIANT_TAG_RE.match(tag)
+                if mv:
+                    title_variant = mv.group(1)
             videos.append({
                 "id": v["id"],
                 "title": v["snippet"]["title"],
@@ -84,6 +98,7 @@ def _recent_videos(youtube) -> list[dict]:
                 "topic": topic or "—",
                 "loop": loop or "?",
                 "hook": hook or "—",
+                "title_variant": title_variant or "—",
             })
     return videos
 

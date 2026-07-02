@@ -163,10 +163,33 @@ LENGTH_INSTRUCTION = (
 
 SCRIPT_MIN_WORDS = 65
 SCRIPT_MAX_WORDS = 93  # gate: above this we retry; loop line (~3 words) appended after
-TITLE_INSTRUCTION = (
+
+# A/B заголовков (2026-07-02): чисто нарративные заголовки (текущая практика) против
+# keyword-насыщенных. Причина теста: индустриальные данные за 2026 говорят, что поисковая
+# карусель для Shorts вернулась и заголовок-ключевые-слова снова участвуют в ранжировании —
+# но наш промпт СОЗНАТЕЛЬНО их избегал ("read like a real headline, not a listicle"). Не
+# меняем стратегию вслепую — тегируем title-seo/title-narrative (как hook_template) и
+# сравниваем в weekly_report.py, прежде чем менять соотношение или отказываться от теста.
+TITLE_INSTRUCTION_NARRATIVE = (
     "title: a punchy narrative hook, under 60 characters. Do NOT append a '| topic facts' "
     "style keyword suffix — it should read like a real headline, not a listicle."
 )
+TITLE_INSTRUCTION_SEO = (
+    "title: under 60 characters. Name the specific subject plainly (the animal/place/era/"
+    "phenomenon) and include the one concrete keyword a viewer would actually type into "
+    "YouTube search for this fact — but it must still read like a real headline, not a "
+    "listicle or a '| topic facts' keyword-stuffed suffix."
+)
+TITLE_INSTRUCTION = TITLE_INSTRUCTION_NARRATIVE  # обратная совместимость (generate_series.py)
+TITLE_SEO_PROBABILITY = 0.3  # доля видео с keyword-насыщенным заголовком
+
+
+def pick_title_variant() -> tuple[str, str]:
+    """Возвращает (текст инструкции, тег 'seo'|'narrative') — вызывающий код передаёт текст в
+    _build_user_content и должен сохранить тег в data["title_variant"] после парсинга."""
+    if random.random() < TITLE_SEO_PROBABILITY:
+        return TITLE_INSTRUCTION_SEO, "seo"
+    return TITLE_INSTRUCTION_NARRATIVE, "narrative"
 
 # Хук-шаблоны: модель сообщает, какой использовала; пайплайн тегирует видео hook-<id>,
 # а analytics_retention меряет % досмотра по типу хука — чтобы взвешивать сильнейшие.
@@ -198,7 +221,7 @@ def _hook_preference() -> str:
             "best — prefer it when it fits the fact naturally, but never force it.")
 
 
-def _build_user_content(topic: str, avoid_block: str) -> str:
+def _build_user_content(topic: str, avoid_block: str, title_instruction: str = TITLE_INSTRUCTION_NARRATIVE) -> str:
     return (
         avoid_block +
         f"Topic: {topic}. Come up with one specific, lesser-known fact on this topic "
@@ -213,7 +236,7 @@ def _build_user_content(topic: str, avoid_block: str) -> str:
         "tunnel'. Always prefer wide scenes, landscapes, and human action over close-ups "
         "of specific objects.\n\n"
         "Requirements:\n"
-        f"- {TITLE_INSTRUCTION}\n"
+        f"- {title_instruction}\n"
         f"- hook_text: a 3-6 word ON-SCREEN hook shown over the first seconds. It must be a "
         "DIFFERENT angle from the spoken first sentence (the eye and the ear deliver two "
         "separate hooks in the first 2 seconds) and NOT a copy of the title. Punchy, in "
@@ -336,7 +359,8 @@ def generate_script() -> dict:
         )
 
     system_prompt = BASE_SYSTEM_PROMPT + "\n\n" + LOOP_INSTRUCTION + "\n\n" + LENGTH_INSTRUCTION
-    user_content = _build_user_content(topic, avoid_block)
+    title_instruction, title_variant = pick_title_variant()
+    user_content = _build_user_content(topic, avoid_block, title_instruction)
 
     message = client.messages.create(
         model="claude-sonnet-4-6",
@@ -379,6 +403,7 @@ def generate_script() -> dict:
 
     _append_loop(data)  # детерминированно дописываем loop-фразу под помеченный коннектор
     data["topic"] = topic
+    data["title_variant"] = title_variant  # A/B заголовков: тег title-seo/title-narrative
     data["hashtag_position"] = "end"
     # #2 хук-шаблон: нормализуем к известному id (для тега hook-<id> и аналитики).
     ht = str(data.get("hook_template", "")).strip().lower()

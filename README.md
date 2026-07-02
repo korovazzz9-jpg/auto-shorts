@@ -248,6 +248,14 @@ python src/rerender.py
 
 Отбор: Shorts источника (не серии/лонгформ, старше 3 дней — просмотрам надо накопиться), выше 75-го перцентиля по просмотрам, максимум 3 за прогон. Дедуп против цели — по сигнатуре имён собственных/чисел (`prepare_batch._is_duplicate`): она переживает перевод, в отличие от слов заголовка. Каждый пересозданный элемент несёт `recycled_from: <id источника>` в queue-файле — потом можно сравнить, как рецайклы заходят против свежесгенерённых. Источник = env `SOURCE_YT_REFRESH_TOKEN` (воркфлоу маппит токен второго канала). Откат: задизейблить `recycle-winners.yml` в Actions.
 
+### A/B заголовков: seo vs narrative (2026-07-02, `TITLE_SEO_PROBABILITY` в `generate_script.py`)
+Индустриальные 2026-данные: поисковая карусель для Shorts вернулась, заголовок-ключевые-слова снова участвуют в ранжировании. Но наш `TITLE_INSTRUCTION` **сознательно** избегал keyword-стаффинга ("read like a real headline, not a listicle") — возможная тензия. Не меняем стратегию вслепую: **30%** видео (`TITLE_SEO_PROBABILITY = 0.3`) идут с `TITLE_INSTRUCTION_SEO` (называет тему прямо + один конкретный keyword, но не листикл), 70% — как раньше (`TITLE_INSTRUCTION_NARRATIVE`). Вариант роллится **до** вызова Claude (`pick_title_variant()`, не внутри `_build_user_content`) — иначе после парсинга ответа неоткуда узнать, что ушло в конкретный запрос. Тегируется `title-seo`/`title-narrative`, как `hook-<template>`. Работает во всех 3 источниках сценария (live `generate_script()`, `prepare_batch.py`, `recycle_winners.py`) — везде роллится независимо на каждый item. Серии (`generate_series.py`) НЕ участвуют в тесте — там своя структура заголовка (`| Part N` суффикс), `TITLE_INSTRUCTION` там всегда алиас на narrative.
+
+Сравнение — в `weekly_report.py`, секция «Заголовок (A/B)» (retention seo vs narrative). Откат: `TITLE_SEO_PROBABILITY = 0.0`.
+
+### Пороги retention (2026-07-02, `analytics_retention.retention_threshold`)
+YouTube Shorts работает в режиме "explore-and-exploit": каждый новый Short тестируется на маленькой аудитории, и если retention падает ниже порога — раздача обрывается почти сразу, а не постепенно снижается. Индустриальные 2026-бенчмарки (не официальный YouTube-документ, но воспроизводимая цифра в нескольких независимых источниках): **65% для <30с, 50% для 30-60с**. `weekly_report.py` теперь считает не абстрактное "выше/ниже среднего", а конкретный pass/fail по этому порогу — секция «Порог retention: N/M видео прошли» + список худших с недостающим %.
+
 ### Валидация-гейт (`_validate` + `_better` в `generate_script.py`)
 После генерации — **один** таргетный повтор, только если плохо (платный 2-й вызов; по замеру на 30 запусках EN daily.yml 2026-06-26…07-01 — **8/30 (~27%)**, все 8 из-за длины, ни одного по loop_connectors):
 - слов > 93 (`SCRIPT_MAX_WORDS`) → длинно (повтор регенерирует и `video_queries`, десинхрона нет)
@@ -589,6 +597,9 @@ gh secret set PINTEREST_BOARD_ID -b"<board_id>"
 | Vision-кэш клипов | Убрать `src/vision_cache.json` из path кэша воркфлоу (кэш перестанет переживать раны) |
 | Кросс-канальный рецайкл | Задизейблить `recycle-winners.yml` в Actions |
 | apt-кэш (imagemagick) | Вернуть `run: sudo apt-get update && sudo apt-get install -y imagemagick` вместо `awalsh128/cache-apt-pkgs-action` |
+| A/B заголовков (seo/narrative) | `TITLE_SEO_PROBABILITY = 0.0` в `generate_script.py` |
+| Кросс-промо EN↔ES | Убрать `sister_channel_handle`/`sister_desc_ctas`/`sister_lang_tags` из `config.py` |
+| Instagram caption CTA | Убрать `ig_caption_ctas` из `config.py` (или оставить пустым списком) |
 
 ---
 

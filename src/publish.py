@@ -67,12 +67,17 @@ def publish(
         sister_cta = random.choice(sister_ctas)
         description += f"\n\n{sister_cta} https://www.youtube.com/@{sister_handle}"
 
+    # Билингвальные теги (2026-07-02): пара generic discovery-тегов НА ДРУГОМ языке —
+    # шанс попасть в рекомендации зрителю, который смотрит на двух языках. Не топик-
+    # специфичные (те и так на языке канала), а самые общие ("facts"/"datos curiosos").
+    tags = list(data["tags"]) + list(extra_tags) + list(CFG.get("sister_lang_tags", []))
+
     print("Загрузка на YouTube...")
     video_id = upload_to_youtube(
         video_path,
         title=data["title"],
         description=description,
-        tags=list(data["tags"]) + list(extra_tags),
+        tags=tags,
         hashtags=data["hashtags"],
         hashtag_position=data["hashtag_position"],
         thumbnail_path=thumb_path,
