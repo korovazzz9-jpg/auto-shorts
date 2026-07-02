@@ -1,48 +1,5 @@
 [
   {
-    "title": "Your Appendix Fooled Every Textbook",
-    "hook_text": "EVOLUTION LIED TO YOU",
-    "hook_template": "sounds-fake",
-    "script": "Your appendix was labeled useless junk for over a century — and every biology textbook got it wrong. The appendix stores good gut bacteria, acting as a safe house when illness wipes your digestive system clean. Evolution even confirms this: species lost the appendix and then re-evolved it from scratch at least 32 separate times. But here's the twist — no organ gets re-invented that many times by accident. Send this to anyone who still calls it evolutionary garbage. And it all started when.",
-    "word_count": 77,
-    "search_summary": "The human appendix stores gut bacteria as a reservoir and has been independently re-evolved at least 32 times across species, proving it is not vestigial.",
-    "loop_connectors": [
-      "why",
-      "how",
-      "when"
-    ],
-    "tags": [
-      "evolution facts",
-      "human body facts",
-      "appendix function",
-      "vestigial organs",
-      "gut bacteria science",
-      "biology facts",
-      "did you know",
-      "science shorts",
-      "appendix not useless"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#sciencefacts",
-      "#evolution",
-      "#humanbody",
-      "#appendix"
-    ],
-    "video_queries": [
-      "old biology textbook classroom",
-      "human digestive system animation",
-      "gut bacteria microscope animation",
-      "stomach illness hospital bed",
-      "animal evolution wildlife montage",
-      "scientist research laboratory",
-      "person reading shocked expression"
-    ],
-    "has_loop": true,
-    "topic": "evolution",
-    "hashtag_position": "end"
-  },
-  {
     "title": "Your Storage Is Already Outdated — By 3.5 Billion Years",
     "hook_text": "DNA BEATS YOUR HARD DRIVE",
     "hook_template": "vague-ability",
