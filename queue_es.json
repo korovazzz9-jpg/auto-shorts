@@ -1,45 +1,5 @@
 [
   {
-    "title": "La tormenta que congeló personas en segundos",
-    "hook_text": "Murieron sin moverse",
-    "hook_template": "sounds-fake",
-    "script": "Una tormenta mató a 246 personas en menos de dos horas — y ninguna alcanzó a correr. En 1888, una granizada súbita golpeó las planicies de Kansas y Nebraska. El cielo estaba despejado minutos antes. El granizo llegó con vientos de 100 km/h y temperatura bajo cero al mismo tiempo. Los granjeros que salieron a revisar sus cosechas simplemente se congelaron en el campo. Pero aquí lo brutal: los que murieron estaban a menos de 100 metros de su casa. Mándale esto a alguien que crea que el granizo no mata.",
-    "word_count": 87,
-    "search_summary": "La granizada de 1888 en Kansas y Nebraska mató a 246 personas en menos de dos horas por congelamiento repentino.",
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "datos curiosos",
-      "clima extremo",
-      "tormentas mortales",
-      "granizada 1888",
-      "fenómenos naturales",
-      "datos en 30 segundos",
-      "historia climática",
-      "muertes por clima"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#datoscuriosos",
-      "#climaextremo",
-      "#tormentas",
-      "#fenómenosnaturales"
-    ],
-    "video_queries": [
-      "hailstorm dark sky midwest",
-      "blizzard plains snowstorm wide landscape",
-      "farmer walking field winter storm",
-      "frozen field ice storm aerial",
-      "person lost snow blizzard whiteout",
-      "farmhouse isolated winter plains"
-    ],
-    "has_loop": false,
-    "topic": "extreme weather",
-    "hashtag_position": "end"
-  },
-  {
     "title": "El volcán que destruyó un ejército entero",
     "hook_text": "Un volcán eligió al ganador",
     "hook_template": "sounds-fake",
