@@ -76,6 +76,11 @@ def run() -> None:
         search_summary = str(data.get("search_summary", "")).strip()
         if search_summary:  # ключевые слова для YouTube Search — скрипт их почти не содержит
             description = f"{search_summary}\n\n{description}"
+        # Кросс-промо EN↔ES — та же логика, что в publish.py для Shorts.
+        sister_handle = CFG.get("sister_channel_handle", "")
+        sister_ctas = CFG.get("sister_desc_ctas", [])
+        if sister_handle and sister_ctas:
+            description += f"\n\n{random.choice(sister_ctas)} https://www.youtube.com/@{sister_handle}"
         video_id = upload_to_youtube(
             video_path,
             title=data["title"],

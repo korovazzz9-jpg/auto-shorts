@@ -58,6 +58,15 @@ def publish(
         desc_cta = CFG.get("longform_desc_cta", "Full deep-dives on the channel:")
         description += f"\n\n▶ {desc_cta} {longform_url}"
 
+    # Кросс-промо EN↔ES (2026-07-02): реальная билингвальная аудитория пересекается —
+    # ссылка на сестринский канал почти ничего не стоит и может перетянуть подписчиков
+    # в обе стороны. Пул фраз (random.choice), не один статичный текст.
+    sister_handle = CFG.get("sister_channel_handle", "")
+    sister_ctas = CFG.get("sister_desc_ctas", [])
+    if sister_handle and sister_ctas:
+        sister_cta = random.choice(sister_ctas)
+        description += f"\n\n{sister_cta} https://www.youtube.com/@{sister_handle}"
+
     print("Загрузка на YouTube...")
     video_id = upload_to_youtube(
         video_path,

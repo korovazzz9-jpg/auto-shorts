@@ -79,6 +79,16 @@ CONFIGS = {
             "📌 New fact every day — link in bio",
             "🔗 More facts like this — link in bio",
         ],
+        # Кросс-промо EN↔ES (2026-07-02): реальная билингвальная аудитория пересекается,
+        # ссылка на сестринский канал в описании — почти нулевая цена, потенциальный переток
+        # подписчиков. sister_channel_handle — БЕЗ @, sister_desc_cta — фраза на СВОЁМ языке
+        # про сестринский канал НА ДРУГОМ языке. Пул для разнообразия (тот же паттерн, что CTA).
+        "sister_channel_handle": "DatosEn30s",
+        "sister_desc_ctas": [
+            "🌎 Also in Spanish:",
+            "🌎 We also post in Spanish:",
+            "🌎 En español too:",
+        ],
         # Воронка Shorts→лонгформ: фразы перед ссылкой на последний длинный ролик
         # (в описании и закреп-комменте). Тема не важна — продаём формат «глубокий разбор».
         "longform_desc_cta": "Full deep-dives on the channel:",
@@ -173,6 +183,12 @@ CONFIGS = {
         "post_to_tiktok": False,
         "post_to_pinterest": False,
         "channel_handle": "DatosEn30s",
+        "sister_channel_handle": "60SecFacts",
+        "sister_desc_ctas": [
+            "🌎 También en inglés:",
+            "🌎 También publicamos en inglés:",
+            "🌎 In English too:",
+        ],
         "ig_caption_ctas": [
             "🔗 Sígueme para más datos — link en bio",
             "📌 Un dato nuevo cada día — link en bio",
