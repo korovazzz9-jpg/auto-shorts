@@ -1,45 +1,5 @@
 [
   {
-    "title": "El lago que convierte animales en piedra",
-    "hook_text": "Se petrifica todo lo que toca",
-    "hook_template": "vague-ability",
-    "script": "Este lago mata cualquier animal que lo toca — y lo momifica en segundos. El lago Natron, en Tanzania, tiene un pH de casi 12 y concentraciones de sal tan extremas que calcifican tejidos en horas. Los fotógrafos encontraron flamencos, murciélagos y águilas convertidos en estatuas blancas a la orilla. Pero aquí está lo retorcido: esos mismos flamencos anidan ahí cada año — porque ningún depredador se atreve a acercarse. El lago que mata todo lo que cae también es el lugar más seguro del planeta para criar crías. Mándale esto a alguien que crea que la naturaleza siempre tiene sentido. Y por eso.",
-    "word_count": 98,
-    "search_summary": "El lago Natron en Tanzania calcifica y petrifica animales muertos gracias a su extrema alcalinidad y sal.",
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "maravillas naturales",
-      "datos curiosos",
-      "lago natron tanzania",
-      "lago que petrifica animales",
-      "naturaleza extrema",
-      "hechos increíbles",
-      "datos en 30 segundos",
-      "animales convertidos en piedra",
-      "lagos peligrosos del mundo"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#datoscuriosos",
-      "#lagonatron",
-      "#naturalezaextrema",
-      "#maravillasnaturales"
-    ],
-    "video_queries": [
-      "lake shore dead birds wildlife",
-      "tanzania salt lake aerial view",
-      "white calcified animal skeleton shore",
-      "flamingos nesting lake colony",
-      "extreme nature landscape africa"
-    ],
-    "has_loop": true,
-    "topic": "natural wonders",
-    "hashtag_position": "end"
-  },
-  {
     "title": "Tu esqueleto se renueva completo cada 10 años",
     "hook_text": "Tu cuerpo te está mintiendo",
     "hook_template": "sounds-fake",
