@@ -1,46 +1,5 @@
 [
   {
-    "title": "Tu esqueleto se renueva completo cada 10 años",
-    "hook_text": "Tu cuerpo te está mintiendo",
-    "hook_template": "sounds-fake",
-    "script": "Los huesos que tienes ahorita no son los mismos de hace 10 años — y casi nadie lo sabe. Tu esqueleto se destruye y reconstruye constantemente mediante células llamadas osteoclastos y osteoblastos. Para los 25 años, tienes la masa ósea máxima de tu vida. Pero aquí viene lo extraño: si fracturaste un hueso de niño, ese hueso ya no existe — fue reemplazado célula por célula. Mándale esto a alguien que crea que sus huesos son los mismos de toda la vida. Y por eso pasa.",
-    "word_count": 85,
-    "search_summary": "El esqueleto humano se renueva completamente cada 10 años mediante osteoclastos y osteoblastos que destruyen y reconstruyen el tejido óseo.",
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "curiosidades del cuerpo humano",
-      "datos curiosos",
-      "huesos del cuerpo",
-      "renovación ósea",
-      "osteoclastos osteoblastos",
-      "esqueleto humano",
-      "datos en 30 segundos",
-      "sabías que",
-      "ciencia del cuerpo"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#datosuriosos",
-      "#cuerpohumano",
-      "#esqueleto",
-      "#ciencia"
-    ],
-    "video_queries": [
-      "human skeleton xray moving",
-      "bone structure microscope",
-      "athlete running strong body",
-      "child playing sports outdoors",
-      "medical animation cell regeneration",
-      "broken bone healing xray"
-    ],
-    "has_loop": true,
-    "topic": "the human body",
-    "hashtag_position": "end"
-  },
-  {
     "title": "La tormenta que congeló personas en segundos",
     "hook_text": "Murieron sin moverse",
     "hook_template": "sounds-fake",
