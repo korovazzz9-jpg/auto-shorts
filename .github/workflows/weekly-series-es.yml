@@ -26,7 +26,7 @@ jobs:
           path: |
             src/titles_cache.json
             src/topics_cache.json
-          key: titles-cache-es
+          key: titles-cache-es-${{ github.run_id }}
           restore-keys: titles-cache-es
 
       - uses: actions/setup-python@v5
