@@ -246,5 +246,47 @@
     "has_loop": true,
     "topic": "future technology",
     "hashtag_position": "end"
+  },
+  {
+    "title": "The Sound That Exists in Outer Space",
+    "hook_text": "SPACE ISN'T SILENT",
+    "hook_template": "sounds-fake",
+    "script": "This sounds fake, but something in space screams — and it's louder than anything on Earth. The Perseus galaxy cluster, 250 million light-years away, produces actual sound waves rippling through hot gas. NASA translated those waves in 2022 — and the note is a B-flat, 57 octaves below middle C. But here's the wild part: that pitch sits a million billion times lower than human hearing. You will never hear it — yet it never stops. Half of you will refuse to believe space has been making noise this whole time.",
+    "word_count": 88,
+    "search_summary": "NASA confirmed the Perseus galaxy cluster produces real sound waves pitched 57 octaves below middle C.",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "space facts",
+      "facts",
+      "did you know",
+      "NASA discovery",
+      "Perseus galaxy cluster",
+      "sound in space",
+      "space sounds 2022",
+      "outer space facts",
+      "science facts"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#spacefacts",
+      "#NASA",
+      "#didyouknow",
+      "#space"
+    ],
+    "video_queries": [
+      "galaxy cluster deep space",
+      "NASA space visualization",
+      "sound wave animation",
+      "piano keys close up",
+      "deep space nebula",
+      "scientist listening data",
+      "outer space time lapse"
+    ],
+    "has_loop": false,
+    "topic": "space",
+    "hashtag_position": "end"
   }
 ]

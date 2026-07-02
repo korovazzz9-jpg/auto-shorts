@@ -242,5 +242,126 @@
     "has_loop": false,
     "topic": "evolution",
     "hashtag_position": "end"
+  },
+  {
+    "title": "Tu estómago se destruye a sí mismo cada semana",
+    "hook_text": "Se come a sí mismo",
+    "hook_template": "sounds-fake",
+    "script": "Tu estómago te digiere a ti — y lo hace cada dos semanas sin parar. El ácido clorhídrico dentro de tu estómago disuelve metal, pero no te perfora porque produce una capa nueva de moco cada 14 días. Sin esa capa, el ácido abriría un hoyo en tu propia pared estomacal en horas. Pero aquí viene lo raro: cuando tienes úlceras, ese proceso falló — y literalmente te estás comiendo desde adentro. Mándale esto a alguien que dice que tiene el estómago de acero.",
+    "word_count": 86,
+    "search_summary": "El estómago humano produce ácido capaz de disolver metal y renueva su capa protectora de moco cada 14 días para no autodigerirse.",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "datos curiosos cuerpo humano",
+      "curiosidades del cuerpo",
+      "ácido estomacal",
+      "úlceras estomacales",
+      "datos en segundos",
+      "hechos increíbles",
+      "biología humana curiosidades",
+      "sistema digestivo datos"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#cuerphumano",
+      "#biologiahumana",
+      "#sabiasque"
+    ],
+    "video_queries": [
+      "human stomach anatomy animation",
+      "acid dissolving metal experiment",
+      "digestive system close up",
+      "person holding stomach pain",
+      "medical stomach ulcer illustration",
+      "friends sharing phone outdoors"
+    ],
+    "has_loop": false,
+    "topic": "the human body",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "El volcán que creó una ola de 524 metros",
+    "hook_text": "Una ola imposible de ignorar",
+    "hook_template": "sounds-fake",
+    "script": "Una ola de 524 metros destruyó una costa entera — sin ningún terremoto ni huracán. En 1958, un pedazo de montaña cayó al fiordo de Lituya, en Alaska. El impacto levantó agua más alto que el Empire State. Arrasó árboles, rocas, todo. Pero aquí viene lo extraño: tres botes estaban dentro del fiordo esa noche. Uno los surfió. Los tripulantes sobrevivieron montando esa ola monstruosa hacia mar abierto. Mándale esto a alguien que crea que los volcanes solo matan con lava. Y de esta forma.",
+    "word_count": 82,
+    "search_summary": "En 1958 el desprendimiento de una montaña en Lituya Bay, Alaska, generó la ola más grande registrada en la historia, de 524 metros.",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "datos curiosos",
+      "volcanes y terremotos",
+      "ola gigante Lituya Bay",
+      "desastres naturales historia",
+      "hechos increíbles",
+      "megatsunami Alaska",
+      "curiosidades científicas",
+      "datos en 30 segundos"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#desastresnaturales",
+      "#megatsunami",
+      "#alaska"
+    ],
+    "video_queries": [
+      "massive ocean wave coast",
+      "mountain landslide water impact",
+      "Alaska fjord aerial view",
+      "giant wave hitting shore",
+      "small boat rough ocean waves",
+      "survivor rescue open sea"
+    ],
+    "has_loop": true,
+    "topic": "volcanoes and earthquakes",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "El día que el Sol lanzó plasma directo a la Tierra",
+    "hook_text": "Casi nos borra del mapa",
+    "hook_template": "sounds-fake",
+    "script": "Esto suena a ficción, pero en 1859 una explosión solar frió todos los telégrafos del mundo y lanzó auroras hasta Cuba. Se llama el Evento Carrington. El Sol disparó una nube de plasma tan brutal que llegó a la Tierra en solo 17 horas, cuando lo normal son tres días. Y lo peor: si eso pasara hoy, colapsaría toda la red eléctrica global, sin internet, sin hospitales, sin nada. Mándale esto a alguien que cree que el Sol es solo para broncearse. Y por eso exactamente.",
+    "word_count": 87,
+    "search_summary": "El Evento Carrington de 1859 fue una tormenta solar que destruyó redes de telégrafos y podría colapsar la electricidad global si ocurriera hoy.",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "datos curiosos",
+      "hechos increíbles",
+      "evento Carrington",
+      "tormenta solar 1859",
+      "el sol y la tierra",
+      "datos del espacio",
+      "curiosidades del universo",
+      "apagón global solar",
+      "shorts de ciencia"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#espacio",
+      "#tormentasolar",
+      "#eventocarrington"
+    ],
+    "video_queries": [
+      "solar flare sun explosion",
+      "aurora borealis night sky",
+      "old telegraph office historical",
+      "massive power grid electricity",
+      "city lights blackout aerial",
+      "sun surface plasma burst"
+    ],
+    "has_loop": true,
+    "topic": "space",
+    "hashtag_position": "end"
   }
 ]
