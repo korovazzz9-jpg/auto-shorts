@@ -110,11 +110,20 @@ def generate_series() -> dict:
             raw = raw.split("\n", 1)[1] if "\n" in raw else raw
         start, end = raw.find("{"), raw.rfind("}")
         try:
-            data = json.loads(raw[start:end + 1])
+            candidate = json.loads(raw[start:end + 1])
+            # Структуру проверяем ЗДЕСЬ же: валидный JSON без part2/title раньше падал
+            # KeyError уже ПОСЛЕ цикла ретраев — серия недели терялась без второй попытки.
+            if "topic" not in candidate:
+                raise ValueError("в JSON нет поля topic")
+            for pk in ("part1", "part2", "part3"):
+                p = candidate.get(pk)
+                if not isinstance(p, dict) or not p.get("title") or not p.get("script"):
+                    raise ValueError(f"{pk} отсутствует или неполный (нет title/script)")
+            data = candidate
             break
-        except json.JSONDecodeError as e:
+        except (json.JSONDecodeError, ValueError) as e:
             last_err = e
-            print(f"  Series JSON parse failed (attempt {attempt + 1}/3): {e}; retrying...")
+            print(f"  Series JSON parse/structure failed (attempt {attempt + 1}/3): {e}; retrying...")
     if data is None:
         raise RuntimeError(f"Series JSON невалиден после 3 попыток: {last_err}")
 
@@ -126,7 +135,10 @@ def generate_series() -> dict:
         part["part"] = part_num
         part["total_parts"] = 3
         part["hashtag_position"] = "end"
-        part["tags"] = part.get("tags", []) + [
+        tags = part.get("tags")
+        if not isinstance(tags, list):  # модель изредка отдаёт строку — не конкатенируется
+            tags = []
+        part["tags"] = tags + [
             f"topic-{data['topic'].replace(' ', '_')}",
             f"series-part-{part_num}",
         ]

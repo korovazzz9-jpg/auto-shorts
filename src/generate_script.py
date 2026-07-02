@@ -188,8 +188,9 @@ def _hook_preference() -> str:
     path = os.path.join(os.path.dirname(__file__), "..", f"hook_stats_{CHANNEL}.json")
     try:
         with open(path, encoding="utf-8") as f:
-            best = json.load(f).get("best_template", "")
-    except (FileNotFoundError, json.JSONDecodeError):
+            stats = json.load(f)
+        best = stats.get("best_template", "") if isinstance(stats, dict) else ""
+    except Exception:  # подсказка опциональна — ЛЮБАЯ проблема с файлом не должна ломать генерацию
         return ""
     if best not in HOOK_TEMPLATES or best == "other":
         return ""

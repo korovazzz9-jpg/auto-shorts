@@ -113,13 +113,7 @@ def generate_longform_script() -> dict:
         + COMMON_SUFFIX
     )
 
-    message = client.messages.create(
-        model="claude-sonnet-4-6",
-        max_tokens=2500,
-        system=system_prompt,
-        messages=[{
-            "role": "user",
-            "content": (
+    user_content = (
                 avoid_block +
                 f"Theme: {theme}. Write the script. Break it into 15-20 visual beats "
                 "(roughly one every 12-15 seconds) and for each one write a short "
@@ -147,21 +141,44 @@ def generate_longform_script() -> dict:
                 '"tags": ["tag1", ...], '
                 '"hashtags": ["#tag1", ...], '
                 '"video_queries": ["query1", ...]}'
-            ),
-        }],
     )
 
-    raw = message.content[0].text.strip()
-    if raw.startswith("```"):
-        raw = raw.strip("`")
-        raw = raw.split("\n", 1)[1] if "\n" in raw else raw
-    start, end = raw.find("{"), raw.rfind("}")
-    data = json.loads(raw[start:end + 1])
+    # Ретрай битого JSON — как в generate_series (там добавлен после реального прод-падения):
+    # пейлоад лонгформа такой же большой, а провал парсинга = потерянный слот на НЕДЕЛЮ
+    # (следующий лонгформ только в воскресенье).
+    data = None
+    last_err = None
+    for attempt in range(3):
+        message = client.messages.create(
+            model="claude-sonnet-4-6",
+            max_tokens=2500,
+            system=system_prompt,
+            messages=[{"role": "user", "content": user_content}],
+        )
+        raw = message.content[0].text.strip()
+        if raw.startswith("```"):
+            raw = raw.strip("`")
+            raw = raw.split("\n", 1)[1] if "\n" in raw else raw
+        start, end = raw.find("{"), raw.rfind("}")
+        try:
+            candidate = json.loads(raw[start:end + 1])
+            missing = [k for k in ("title", "script", "video_queries") if not candidate.get(k)]
+            if missing:
+                raise ValueError(f"в JSON нет полей {missing}")
+            data = candidate
+            break
+        except (json.JSONDecodeError, ValueError) as e:
+            last_err = e
+            print(f"  Longform JSON parse failed (attempt {attempt + 1}/3): {e}; retrying...")
+    if data is None:
+        raise RuntimeError(f"Longform JSON невалиден после 3 попыток: {last_err}")
+
     data["theme"] = theme
     data["longform_format"] = fmt
     # Фолбэк: если модель не дала короткую фразу — берём первые 4 слова заголовка,
-    # чтобы тумба не осталась с длинным захламлённым заголовком.
-    if not data.get("thumb_text", "").strip():
+    # чтобы тумба не осталась с длинным захламлённым заголовком. str(... or "") —
+    # модель может вернуть "thumb_text": null, и голый .get(...).strip() упал бы.
+    if not str(data.get("thumb_text") or "").strip():
         data["thumb_text"] = " ".join(data["title"].split()[:4])
 
     _save_state(state)
