@@ -79,6 +79,7 @@ def _recent_videos(youtube) -> list[dict]:
                 "id": v["id"],
                 "title": v["snippet"]["title"],
                 "published": v["snippet"]["publishedAt"][:10],
+                "published_full": v["snippet"]["publishedAt"],  # для слот-анализа (час UTC)
                 "length": _iso8601_to_seconds(v["contentDetails"].get("duration", "")),
                 "topic": topic or "—",
                 "loop": loop or "?",

@@ -47,6 +47,7 @@ jobs:
           path: |
             src/titles_cache.json
             src/topics_cache.json
+            src/vision_cache.json
           key: titles-cache-es-${{ github.run_id }}
           restore-keys: titles-cache-es
 
@@ -55,7 +56,10 @@ jobs:
           python-version: "3.11"
 
       - name: Install system deps
-        run: sudo apt-get update && sudo apt-get install -y imagemagick
+        uses: awalsh128/cache-apt-pkgs-action@v1
+        with:
+          packages: imagemagick
+          version: 1.0
 
       - name: Allow ImageMagick to read caption text files
         run: sudo sed -i '/pattern="@\*"/d' /etc/ImageMagick-6/policy.xml

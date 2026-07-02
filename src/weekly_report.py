@@ -92,14 +92,28 @@ def build_report(videos: list[dict]) -> str:
         for name, avg, n in topics[:3]:
             lines.append(f"  {avg:5.1f}%  ({n:2})  {name}")
 
+    # Слот-анализ: средние просмотры по часу публикации (UTC) — так был найден слабый
+    # слот 13:07 EN. Свежие видео с нулём просмотров (лаг Analytics) не учитываем.
+    slot_videos = [v for v in videos if v.get("views", 0) > 0 and v.get("published_full")]
+    if slot_videos:
+        by_slot: dict[str, list[int]] = {}
+        for v in slot_videos:
+            hour = v["published_full"][11:13]  # "2026-07-01T16:13:08Z" -> "16"
+            by_slot.setdefault(f"{hour}:xx UTC", []).append(v["views"])
+        lines.append("\nСлоты (ср. просмотры):")
+        for slot, views in sorted(by_slot.items(), key=lambda kv: -sum(kv[1]) / len(kv[1])):
+            lines.append(f"  {sum(views) / len(views):7.0f}  ({len(views):2})  {slot}")
+
     by_views = [v for v in videos if v.get("views", 0) > 0]
     if by_views:
-        top = max(by_views, key=lambda v: v["views"])
-        url = f"https://youtube.com/shorts/{top['id']}"
+        top3 = sorted(by_views, key=lambda v: -v["views"])[:3]
+        lines.append("\n🧪 Топ недели — 2 ручных шага в Studio (5 мин):")
+        for v in top3:
+            lines.append(f"  {v['views']:6} — {v['title']}\n  https://youtube.com/shorts/{v['id']}")
         lines.append(
-            f"\n🧪 Топ по просмотрам: {top['title']} ({top['views']} views)\n{url}\n"
-            f"Попробуй Test & Compare в YouTube Studio (заголовок/тумба) — это ручной шаг, "
-            f"API для этого нет."
+            "1) Test & Compare (заголовок/тумба)\n"
+            "2) Related video → укажи свежий лонгформ (официальная воронка Shorts→длинное, "
+            "сильнее ссылки в описании; API её не даёт)"
         )
 
     return "\n".join(lines)

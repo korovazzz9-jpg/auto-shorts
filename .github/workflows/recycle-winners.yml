@@ -1,0 +1,59 @@
+name: Recycle Cross-Channel Winners
+
+on:
+  # Раз в неделю: топ-факты одного канала пересоздаются для другого (Batch API, −50%).
+  # Не критично ко времени публикации (только пополняет очереди) — штатный GitHub-cron ок.
+  # Чт 03:47 UTC — после ночного prepare-batch (03:17), чтобы очередь уже была подтянута.
+  schedule:
+    - cron: "47 3 * * 4"
+  workflow_dispatch: {}
+
+jobs:
+  recycle:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # коммитит queue_en.json / queue_es.json
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Python deps
+        run: pip install -r requirements.txt
+
+      # Цель = ES, источник = EN: победители EN пересоздаются на испанском.
+      - name: Recycle EN winners into ES queue
+        working-directory: src
+        env:
+          CHANNEL: es
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN_ES }}
+          SOURCE_YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+        run: python recycle_winners.py
+
+      # Цель = EN, источник = ES: и в обратную сторону.
+      - name: Recycle ES winners into EN queue
+        working-directory: src
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          SOURCE_YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN_ES }}
+        run: python recycle_winners.py
+
+      - name: Persist queue files
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          for f in queue_en.json queue_es.json; do
+            if [ -f "$f" ]; then git add "$f"; fi
+          done
+          git commit -m "chore(queue): recycled cross-channel winners $(date -u +%F)" || { echo "no changes"; exit 0; }
+          git pull --rebase origin master
+          git push

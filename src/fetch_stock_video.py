@@ -1,8 +1,10 @@
 """Скачивает вертикальные стоковые видеоклипы по ключевым словам через Pexels API (бесплатно)."""
 from __future__ import annotations
 
+import json
 import os
 import tempfile
+import time
 
 import requests
 from anthropic import Anthropic
@@ -13,6 +15,48 @@ RESULTS_PER_QUERY = 10
 VISION_CANDIDATES = 4  # сколько клипов скачиваем для vision-отбора
 MIN_HEIGHT = 960  # ниже этого — слишком мутно для полноэкранного Shorts-видео
 MIN_WIDTH = 1280  # для горизонтального лонгформа — минимум по ширине
+
+# Кэш vision-выбора: запрос → id уже одобренного Haiku клипа. Стоковые запросы повторяются
+# между видео ("ocean waves", "ancient ruins"...) — не дёргаем vision заново за тот же выбор.
+# Vision — главный Claude-расход после генерации скриптов; кэш срезает повторные вызовы с
+# нулевым риском качества. TTL 7 дней — чтобы визуал не прирастал к одному клипу навечно.
+# Файл персистится через actions/cache (та же связка, что titles/topics cache).
+_VISION_CACHE_FILE = os.path.join(os.path.dirname(__file__), "vision_cache.json")
+_VISION_CACHE_TTL_DAYS = 7
+_VISION_CACHE_MAX = 300
+
+
+def _load_vision_cache() -> dict:
+    try:
+        with open(_VISION_CACHE_FILE, encoding="utf-8") as f:
+            data = json.load(f)
+        return data if isinstance(data, dict) else {}
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {}
+
+
+def _vision_cache_get(query: str, candidates: list[dict]) -> dict | None:
+    entry = _load_vision_cache().get(query)
+    if not isinstance(entry, dict):
+        return None
+    try:
+        age = time.time() - float(entry.get("ts", 0))
+    except (TypeError, ValueError):
+        return None
+    if age > _VISION_CACHE_TTL_DAYS * 86400:
+        return None
+    # Клип должен быть среди ТЕКУЩИХ кандидатов (used_ids уже отфильтрованы) — иначе miss.
+    return next((c for c in candidates if c["id"] == entry.get("id")), None)
+
+
+def _vision_cache_put(query: str, clip_id) -> None:
+    cache = _load_vision_cache()
+    cache[query] = {"id": clip_id, "ts": time.time()}
+    if len(cache) > _VISION_CACHE_MAX:  # не даём файлу расти бесконечно
+        for k, _ in sorted(cache.items(), key=lambda kv: kv[1].get("ts", 0))[:len(cache) - _VISION_CACHE_MAX]:
+            del cache[k]
+    with open(_VISION_CACHE_FILE, "w", encoding="utf-8") as f:
+        json.dump(cache, f, ensure_ascii=False, indent=2)
 
 # Ориентация скачиваемых клипов. По умолчанию вертикаль (Shorts); fetch_clips(landscape=True)
 # переключает на горизонталь (лонгформ 16:9). Модульный флаг, чтобы не тащить параметр
@@ -124,6 +168,11 @@ def _pick_best_clip(candidates: list[dict], query: str) -> dict | None:
     if len(with_preview) < 2:
         return candidates[0]
 
+    cached = _vision_cache_get(query, with_preview)
+    if cached:
+        print(f"  Vision cache hit for '{query}' — без вызова Haiku")
+        return cached
+
     client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
     content = [{"type": "text", "text": (
         f"I need a stock video clip that visually matches: \"{query}\"\n\n"
@@ -143,6 +192,10 @@ def _pick_best_clip(candidates: list[dict], query: str) -> dict | None:
         pick = int(response.content[0].text.strip()[0]) - 1
         pick = max(0, min(pick, len(with_preview) - 1))
         print(f"  Vision picked clip {pick + 1}/{len(with_preview)} for '{query}'")
+        try:  # кэшируем только реальный vision-выбор (не фолбэки) — сбой кэша не роняет пайплайн
+            _vision_cache_put(query, with_preview[pick]["id"])
+        except Exception as e:
+            print(f"  (vision cache write failed: {e})")
         return with_preview[pick]
     except Exception:
         return with_preview[0]
