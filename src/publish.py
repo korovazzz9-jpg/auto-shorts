@@ -121,7 +121,14 @@ def publish(
                         ig_tags += ["#reels", "#reelsinstagram"]
                     else:
                         ig_tags.append(t)
-                caption = f"{data['title']}\n\n{data['script']}\n\n{' '.join(ig_tags)}"
+                # CTA (2026-07-02): подпись раньше не звала ни подписаться, ни перейти в
+                # био — единственное место со ссылкой на YouTube. Пул фраз, не один текст.
+                ig_ctas = CFG.get("ig_caption_ctas", [])
+                ig_cta = random.choice(ig_ctas) if ig_ctas else ""
+                caption = f"{data['title']}\n\n{data['script']}"
+                if ig_cta:
+                    caption += f"\n\n{ig_cta}"
+                caption += f"\n\n{' '.join(ig_tags)}"
                 upload_reel(hosted["url"], caption, cover_url=hosted_thumb["url"])
                 print("  Instagram: опубликовано")
 

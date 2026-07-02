@@ -71,6 +71,14 @@ CONFIGS = {
         "post_to_pinterest": False,  # ожидает одобрения Pinterest Dev App — вернуть True после
         # Хэндл канала без @, нужен для ссылки в первом комментарии.
         "channel_handle": "60SecFacts",
+        # CTA в подписи Instagram Reel (2026-07-02) — раньше подпись была без единого
+        # призыва подписаться/перейти в био, хотя ссылка на YouTube лежит именно в био.
+        # Пул — random.choice в publish.py, чтобы не выглядело ботом под каждым постом.
+        "ig_caption_ctas": [
+            "🔗 Follow for daily facts — link in bio",
+            "📌 New fact every day — link in bio",
+            "🔗 More facts like this — link in bio",
+        ],
         # Воронка Shorts→лонгформ: фразы перед ссылкой на последний длинный ролик
         # (в описании и закреп-комменте). Тема не важна — продаём формат «глубокий разбор».
         "longform_desc_cta": "Full deep-dives on the channel:",
@@ -165,6 +173,11 @@ CONFIGS = {
         "post_to_tiktok": False,
         "post_to_pinterest": False,
         "channel_handle": "DatosEn30s",
+        "ig_caption_ctas": [
+            "🔗 Sígueme para más datos — link en bio",
+            "📌 Un dato nuevo cada día — link en bio",
+            "🔗 Más datos como este — link en bio",
+        ],
         "longform_desc_cta": "Análisis completos en el canal:",
         "longform_comment_cta": "¿Quieres la historia completa? Mira el análisis 👉",
         "first_comment": "Un momento — ¿tú ya sabías esto? 👇\nSuscríbete para un dato nuevo cada día 👉 {channel_url}",
