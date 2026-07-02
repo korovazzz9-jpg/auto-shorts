@@ -1,46 +1,5 @@
 [
   {
-    "title": "La ciudad azteca que se enterró a sí misma",
-    "hook_text": "Tu metro pasa por esto",
-    "hook_template": "sounds-fake",
-    "script": "Debajo de tu ciudad existe algo que nadie derrumbó ni saqueó — y lleva siglos ahí porque los propios aztecas lo escondieron a propósito. En Tenochtitlán, cada nuevo rey ordenaba construir una pirámide encima de la anterior, como una muñeca rusa de piedra. En 1978, trabajadores del metro de la Ciudad de México rompieron una pared y encontraron siete pirámides anidadas, una dentro de otra. El metro literalmente atraviesa esos muros hoy. Mándale esto a alguien que crea que ya conoce la Ciudad de México.",
-    "word_count": 85,
-    "search_summary": "Los aztecas en Tenochtitlán enterraban pirámides enteras dentro de nuevas construcciones; en 1978 se descubrieron siete pirámides anidadas bajo la Ciudad de México.",
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "datos curiosos",
-      "civilizaciones antiguas",
-      "aztecas",
-      "Tenochtitlán",
-      "pirámides aztecas",
-      "Ciudad de México historia",
-      "arqueología México",
-      "metro CDMX ruinas",
-      "historia prehispánica"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#datoscuriosos",
-      "#aztecas",
-      "#México",
-      "#arqueología"
-    ],
-    "video_queries": [
-      "ancient pyramid ruins aerial",
-      "mexico city subway tunnel workers",
-      "archaeological excavation underground",
-      "stone ruins buried layers",
-      "mexico city downtown street"
-    ],
-    "has_loop": false,
-    "topic": "ancient civilizations",
-    "hashtag_position": "end",
-    "recycled_from": "KIVPyqUFzIY"
-  },
-  {
     "title": "El camarón que golpea más rápido que una bala",
     "hook_text": "Más rápido que una bala",
     "hook_template": "vague-ability",
