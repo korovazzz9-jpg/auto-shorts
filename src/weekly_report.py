@@ -113,6 +113,21 @@ def build_report(videos: list[dict]) -> str:
         for name, avg, n in titles:
             lines.append(f"  {avg:5.1f}%  ({n:2})  {name}")
 
+    # Ротация опенеров заголовка (2026-07-03): было 84% "The"/"Your"/"This" на EN-канале —
+    # см. TITLE_OPENERS в generate_script.py. "—" (нет тега, старые видео) исключён.
+    openers = [(k, a, n) for k, a, n in _avg_by(videos, "title_opener") if k not in ("—", "other")]
+    if openers:
+        lines.append("\nОпенер заголовка:")
+        for name, avg, n in openers[:6]:
+            lines.append(f"  {avg:5.1f}%  ({n:2})  {name}")
+
+    # Эмоциональный тон факта (2026-07-03) — независимая от темы ось (EMOTIONAL_TONES).
+    tones = [(k, a, n) for k, a, n in _avg_by(videos, "emotional_tone") if k not in ("—", "other")]
+    if tones:
+        lines.append("\nЭмоциональный тон:")
+        for name, avg, n in tones[:6]:
+            lines.append(f"  {avg:5.1f}%  ({n:2})  {name}")
+
     # Пороги retention (2026-07-02, retention_threshold): explore-and-exploit тест YouTube —
     # ниже порога (65% для <30с, 50% для 30-60с) раздача резко сокращается. Не абстрактное
     # "выше/ниже среднего", а конкретный порог из индустриальных 2026-данных.

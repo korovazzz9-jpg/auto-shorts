@@ -255,6 +255,18 @@ python src/rerender.py
 
 Сравнение — в `weekly_report.py`, секция «Заголовок (A/B)» (retention seo vs narrative). Откат: `TITLE_SEO_PROBABILITY = 0.0`.
 
+### Ротация опенеров заголовка (2026-07-03, `TITLE_OPENERS` в `generate_script.py`)
+Проверено эмпирически (не спекуляция): **84% заголовков EN-канала** начинались с «The»/«Your»/«This» (64 заголовка: 61%+22%+2%). Причина — заголовок генерится в том же вызове, что `hook_template`, и, судя по всему, эхует структуру спич-хука ("This X can...", "You've..."). Модель теперь дополнительно репортит `title_opener` — один из `TITLE_OPENERS` (`the-x`/`your-x`/`scientists-discovered`/`shouldnt-exist`/`nobody-expected`/`only-place`/`question`/`other`), тегируется `opener-<id>`, как `hook-<template>`.
+
+**Дата-driven anti-repeat (`_title_variety_note`):** если ≥60% последних 10 опубликованных заголовков начинаются с "the"/"your"/"this" (эвристика по первому слову, работает и для старых видео без тега) — в промпт добавляется явное требование использовать другой опенер для ЭТОГО видео. Не квота на всё время, а реакция на текущий перекос — если перекос уйдёт, подсказка перестанет добавляться сама. Работает в `generate_script()` и `prepare_batch.py` (один расчёт на весь батч, `past_titles` не меняется внутри одного прогона). В `recycle_winners.py` тегирование есть, но variety-note не подключена (там нет доступа к `past_titles` дешёво — не критично при 3 видео/неделю).
+
+Сравнение retention по опенеру — секция «Опенер заголовка» в `weekly_report.py`. Откат: убрать `TITLE_OPENER_INSTRUCTION` из `_build_user_content` и нормализацию `title_opener` — тег просто перестанет проставляться.
+
+### Эмоциональный тон факта (2026-07-03, `EMOTIONAL_TONES` в `generate_script.py`)
+Тема (space/ocean/history...) и эмоциональный регистр факта — разные оси: факт про космос может быть «fear» (запах горелого мяса у астронавтов) или «beautiful» (голубая лава), и в ленте они воспринимаются совершенно по-разному, хотя тема одна. Добавлено КАК ДОПОЛНИТЕЛЬНОЕ измерение поверх темы, не взамен — тематическая система (`topic_stats.py`, квоты 70/20/10, `playlist_titles`) не тронута, она работает и завязана именно на тему.
+
+Модель репортит `emotional_tone` — один из `EMOTIONAL_TONES` (`fear`/`awe`/`creepy`/`beautiful`/`huge`/`impossible`/`disgust`/`humor`/`other`), тегируется `tone-<id>`. Сравнение retention по тону — секция «Эмоциональный тон» в `weekly_report.py`. Пока без активного nudge (в отличие от `_hook_preference()`) — сначала копим данные. Откат: убрать `EMOTIONAL_TONE_INSTRUCTION` из `_build_user_content`.
+
 ### Пороги retention (2026-07-02, `analytics_retention.retention_threshold`)
 YouTube Shorts работает в режиме "explore-and-exploit": каждый новый Short тестируется на маленькой аудитории, и если retention падает ниже порога — раздача обрывается почти сразу, а не постепенно снижается. Индустриальные 2026-бенчмарки (не официальный YouTube-документ, но воспроизводимая цифра в нескольких независимых источниках): **65% для <30с, 50% для 30-60с**. `weekly_report.py` теперь считает не абстрактное "выше/ниже среднего", а конкретный pass/fail по этому порогу — секция «Порог retention: N/M видео прошли» + список худших с недостающим %.
 
@@ -599,6 +611,8 @@ gh secret set PINTEREST_BOARD_ID -b"<board_id>"
 | Vision-кэш клипов | Убрать `src/vision_cache.json` из path кэша воркфлоу (кэш перестанет переживать раны) |
 | Кросс-канальный рецайкл | Задизейблить `recycle-winners.yml` в Actions |
 | A/B заголовков (seo/narrative) | `TITLE_SEO_PROBABILITY = 0.0` в `generate_script.py` |
+| Ротация опенеров заголовка | Убрать `TITLE_OPENER_INSTRUCTION`/`_title_variety_note()` из `_build_user_content` (`generate_script.py`) |
+| Эмоциональный тон | Убрать `EMOTIONAL_TONE_INSTRUCTION` из `_build_user_content` (`generate_script.py`) |
 | Кросс-промо EN↔ES | Убрать `sister_channel_handle`/`sister_desc_ctas`/`sister_lang_tags` из `config.py` |
 | Instagram caption CTA | Убрать `ig_caption_ctas` из `config.py` (или оставить пустым списком) |
 

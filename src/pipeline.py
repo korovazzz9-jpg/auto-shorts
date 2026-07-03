@@ -76,6 +76,8 @@ def run() -> None:
                 f"loop-{'yes' if data.get('has_loop') else 'no'}",
                 f"hook-{data.get('hook_template', 'other')}",
                 f"title-{data.get('title_variant', 'narrative')}",
+                f"opener-{data.get('title_opener', 'other')}",
+                f"tone-{data.get('emotional_tone', 'other')}",
             ],
             enable_captions=False,  # временно (квота), вернуть после увеличения квоты
             enable_pinterest=True,

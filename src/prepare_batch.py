@@ -25,13 +25,16 @@ from dotenv import load_dotenv
 
 from generate_script import (
     BASE_SYSTEM_PROMPT,
+    EMOTIONAL_TONES,
     HOOK_TEMPLATES,
     LENGTH_INSTRUCTION,
     LOOP_INSTRUCTION,
+    TITLE_OPENERS,
     _append_loop,
     _build_user_content,
     _parse_response,
     _pick_topic,
+    _title_variety_note,
     _validate,
     pick_title_variant,
 )
@@ -113,6 +116,7 @@ def main() -> None:
         )
 
     system_prompt = BASE_SYSTEM_PROMPT + "\n\n" + LOOP_INSTRUCTION + "\n\n" + LENGTH_INSTRUCTION
+    variety_note = _title_variety_note(past_titles)  # один расчёт на весь батч — past_titles не меняется внутри батча
 
     # Выбираем темы ПОСЛЕДОВАТЕЛЬНО, тегируя каждую в кеш сразу — иначе _pick_topic() внутри
     # этого же батча не увидит темы, выбранные парой строк выше, и может задвоить.
@@ -133,7 +137,7 @@ def main() -> None:
                 max_tokens=1600,
                 system=system_prompt,
                 messages=[{"role": "user", "content": _build_user_content(
-                    topics[i], avoid_block, title_variants[i][0])}],
+                    topics[i], avoid_block, title_variants[i][0] + variety_note)}],
             ),
         )
         for i in range(need)
@@ -191,6 +195,10 @@ def main() -> None:
             _append_loop(data)
             ht = str(data.get("hook_template", "")).strip().lower()
             data["hook_template"] = ht if ht in HOOK_TEMPLATES else "other"
+            to = str(data.get("title_opener", "")).strip().lower()
+            data["title_opener"] = to if to in TITLE_OPENERS else "other"
+            et = str(data.get("emotional_tone", "")).strip().lower()
+            data["emotional_tone"] = et if et in EMOTIONAL_TONES else "other"
             if not str(data.get("hook_text", "")).strip():
                 data["hook_text"] = data["title"]
             data["topic"] = topic

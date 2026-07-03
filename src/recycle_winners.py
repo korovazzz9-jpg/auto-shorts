@@ -34,9 +34,11 @@ from googleapiclient.discovery import build
 from config import CFG
 from generate_script import (
     BASE_SYSTEM_PROMPT,
+    EMOTIONAL_TONES,
     HOOK_TEMPLATES,
     LENGTH_INSTRUCTION,
     LOOP_INSTRUCTION,
+    TITLE_OPENERS,
     _append_loop,
     _build_user_content,
     _parse_response,
@@ -245,6 +247,10 @@ def main() -> None:
             _append_loop(data)
             ht = str(data.get("hook_template", "")).strip().lower()
             data["hook_template"] = ht if ht in HOOK_TEMPLATES else "other"
+            to = str(data.get("title_opener", "")).strip().lower()
+            data["title_opener"] = to if to in TITLE_OPENERS else "other"
+            et = str(data.get("emotional_tone", "")).strip().lower()
+            data["emotional_tone"] = et if et in EMOTIONAL_TONES else "other"
             if not str(data.get("hook_text", "")).strip():
                 data["hook_text"] = data["title"]
             data["topic"] = _source_topic(w)

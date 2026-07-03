@@ -221,6 +221,73 @@ def _hook_preference() -> str:
             "best — prefer it when it fits the fact naturally, but never force it.")
 
 
+# Ротация заголовков (2026-07-03): проверено эмпирически — 84% заголовков EN-канала начинались
+# с "The"/"Your"/"This" (64 заголовка: 61% + 22% + 2%). Заголовок генерится в том же вызове,
+# что hook_template ("This X can...", "You've...") — модель эхует структуру спич-хука в title.
+# Явный список открывашек + отчёт о выбранной (title_opener) — тот же паттерн, что HOOK_TEMPLATES.
+TITLE_OPENERS = [
+    "the-x",                   # "The [subject/mystery/creature] that..."
+    "your-x",                  # "Your [body part/bones/skin] does/is..."
+    "scientists-discovered",   # "Scientists just found/discovered..."
+    "shouldnt-exist",          # "This shouldn't exist/be possible..."
+    "nobody-expected",         # "Nobody expected/saw this coming..."
+    "only-place",              # "The only place on Earth where..."
+    "question",                # "Why does/do..."
+    "other",
+]
+
+TITLE_OPENER_INSTRUCTION = (
+    f"title_opener: which opening style the title uses — exactly one of "
+    f"[{', '.join(TITLE_OPENERS)}]. VARY this across videos — don't default to 'the-x'/"
+    "'your-x' every time; 'scientists-discovered', 'shouldnt-exist', 'nobody-expected', "
+    "'only-place', and 'question' are equally valid and often punchier. Report the closest "
+    "match (use 'other' if none fits)."
+)
+
+
+def _title_variety_note(past_titles: list[str]) -> str:
+    """Считает, сколько из последних заголовков начинаются с The/Your/This (без доступа к
+    тегам — эвристика по первому слову самого заголовка, работает даже для старых видео,
+    опубликованных до введения title_opener). Если ≥60% — явно просим другой опенер, а не
+    просто "варьируй" — иначе модель по инерции продолжает тот же паттерн."""
+    if not past_titles:
+        return ""
+    sample = past_titles[:10]
+    common_openers = {"the", "your", "this"}
+    hits = sum(1 for t in sample if t.split()[:1] and t.split()[0].lower() in common_openers)
+    if hits / len(sample) < 0.6:
+        return ""
+    return (" Data note: recent titles on this channel are heavily skewed toward 'The'/'Your'/"
+            "'This' openings — for THIS title, deliberately use a different opener style "
+            "('scientists-discovered', 'shouldnt-exist', 'nobody-expected', 'only-place', or "
+            "'question') unless the fact genuinely reads better the old way.")
+
+
+# Эмоциональный тон (2026-07-03): тема (space/ocean/history...) и эмоциональный регистр факта —
+# разные оси. "Fear" и "Impossible" могут оба быть про космос, но восприниматься совершенно
+# по-разному в ленте. Добавляем КАК ДОПОЛНИТЕЛЬНОЕ измерение поверх темы (не взамен) — тот же
+# tag+track паттерн, что hook_template, БЕЗ переделки topic-системы (playlist/topic_stats/квоты
+# 70/20/10 остаются как есть, они работают и завязаны на тему, не на эмоцию).
+EMOTIONAL_TONES = [
+    "fear",        # unsettling, threatening
+    "awe",         # vast, mind-bending scale
+    "creepy",      # unsettling, body-horror, parasitic
+    "beautiful",   # aesthetic, rare, mesmerizing
+    "huge",        # scale-shock (biggest/smallest/fastest)
+    "impossible",  # defies intuition/physics as commonly understood
+    "disgust",     # visceral, gross-out
+    "humor",       # absurd, funny
+    "other",
+]
+
+EMOTIONAL_TONE_INSTRUCTION = (
+    f"emotional_tone: the emotional register the fact lands on for the viewer — exactly one "
+    f"of [{', '.join(EMOTIONAL_TONES)}]. This is independent of the topic — e.g. a space fact "
+    "can be 'fear', 'awe', or 'beautiful' depending on the angle. Report the closest match "
+    "(use 'other' if none fits)."
+)
+
+
 def _build_user_content(topic: str, avoid_block: str, title_instruction: str = TITLE_INSTRUCTION_NARRATIVE) -> str:
     return (
         avoid_block +
@@ -237,6 +304,7 @@ def _build_user_content(topic: str, avoid_block: str, title_instruction: str = T
         "of specific objects.\n\n"
         "Requirements:\n"
         f"- {title_instruction}\n"
+        f"- {TITLE_OPENER_INSTRUCTION}\n"
         f"- hook_text: a 3-6 word ON-SCREEN hook shown over the first seconds. It must be a "
         "DIFFERENT angle from the spoken first sentence (the eye and the ear deliver two "
         "separate hooks in the first 2 seconds) and NOT a copy of the title. Punchy, in "
@@ -244,6 +312,7 @@ def _build_user_content(topic: str, avoid_block: str, title_instruction: str = T
         f"- hook_template: which opening template the spoken hook uses — exactly one of "
         f"[{', '.join(HOOK_TEMPLATES)}]. Report the closest match (use 'other' if none fits)."
         f"{_hook_preference()}\n"
+        f"- {EMOTIONAL_TONE_INSTRUCTION}\n"
         f"- tags: 6-9 specific YouTube search tags in {CFG['script_language']}, mixing "
         "broad ones (e.g. the channel's equivalent of 'facts'/'did you know') with specific "
         "long-tail ones tied to the exact fact (the specific phenomenon, place, or thing "
@@ -259,8 +328,10 @@ def _build_user_content(topic: str, avoid_block: str, title_instruction: str = T
         f"{CFG['script_language']}.\n\n"
         "Respond strictly in JSON, no markdown wrapper: "
         '{"title": "title text", '
+        '"title_opener": "the-x", '
         '"hook_text": "short on-screen hook", '
         '"hook_template": "vague-ability", '
+        '"emotional_tone": "awe", '
         '"script": "voiceover script ending with the comment-bait line (NO spoken CTA, NO loop line)", '
         '"word_count": 85, '
         '"search_summary": "plain keyword-dense sentence", '
@@ -360,6 +431,7 @@ def generate_script() -> dict:
 
     system_prompt = BASE_SYSTEM_PROMPT + "\n\n" + LOOP_INSTRUCTION + "\n\n" + LENGTH_INSTRUCTION
     title_instruction, title_variant = pick_title_variant()
+    title_instruction += _title_variety_note(past_titles)
     user_content = _build_user_content(topic, avoid_block, title_instruction)
 
     message = client.messages.create(
@@ -408,6 +480,12 @@ def generate_script() -> dict:
     # #2 хук-шаблон: нормализуем к известному id (для тега hook-<id> и аналитики).
     ht = str(data.get("hook_template", "")).strip().lower()
     data["hook_template"] = ht if ht in HOOK_TEMPLATES else "other"
+    # Ротация заголовков + эмоциональный тон (2026-07-03): нормализуем к известным id,
+    # та же логика, что hook_template — неизвестное/пустое значение падает на "other".
+    to = str(data.get("title_opener", "")).strip().lower()
+    data["title_opener"] = to if to in TITLE_OPENERS else "other"
+    et = str(data.get("emotional_tone", "")).strip().lower()
+    data["emotional_tone"] = et if et in EMOTIONAL_TONES else "other"
     # #4 двойной хук: если on-screen hook пуст — падаем на заголовок (хук-плашка не исчезнет).
     if not str(data.get("hook_text", "")).strip():
         data["hook_text"] = data["title"]
