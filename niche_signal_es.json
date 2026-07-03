@@ -1,18 +1,14 @@
 {
   "outlier_counts": {
-    "ancient history": 4,
-    "archaeological discoveries": 2,
-    "ancient civilizations": 5,
-    "historical mysteries": 3,
-    "the human body": 3,
-    "the animal kingdom": 2,
-    "the ocean": 4,
-    "evolution": 2,
-    "volcanoes and earthquakes": 4,
-    "extreme weather": 2,
-    "natural wonders": 4,
-    "space": 5,
-    "future technology": 7
+    "ancient history": 3,
+    "archaeological discoveries": 1,
+    "ancient civilizations": 3,
+    "historical mysteries": 2,
+    "the human body": 1,
+    "the ocean": 2,
+    "evolution": 1,
+    "volcanoes and earthquakes": 2,
+    "future technology": 5
   },
   "updated": "2026-07-03"
 }
