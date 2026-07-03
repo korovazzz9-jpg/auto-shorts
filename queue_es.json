@@ -1,47 +1,5 @@
 [
   {
-    "title": "El tesoro que el mar devolvió… por accidente",
-    "hook_text": "El mar lo guardó 400 años",
-    "hook_template": "sounds-fake",
-    "script": "Este naufragio pagó las deudas de un imperio — y nadie lo buscaba. En 1708, el galeón San José se hundió frente a Cartagena de Indias cargando 11 millones de monedas de oro y plata. España, Colombia y una empresa privada llevan décadas peleando por él en tribunales. Pero aquí viene lo extraño: Colombia lo redescubrió en 2015 — y de inmediato lo volvió a hundir, a propósito, para protegerlo. El tesoro más valioso del mundo sigue en el fondo del mar porque nadie puede tocarlo. Mándale esto a alguien que crea que los tesoros se encuentran para repartirse. Y por eso.",
-    "word_count": 103,
-    "search_summary": "El galeón San José se hundió en 1708 frente a Cartagena con 11 millones de monedas de oro; redescubierto en 2015, sigue sin poderse recuperar por disputas legales.",
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "datos curiosos",
-      "naufragios históricos",
-      "galeón San José",
-      "tesoro hundido Cartagena",
-      "historia de Colombia",
-      "tesoros perdidos",
-      "hechos increíbles",
-      "shorts de historia",
-      "misterios del mar"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#datoscuriosos",
-      "#naufragio",
-      "#tesoroperdido",
-      "#historiareal"
-    ],
-    "video_queries": [
-      "spanish galleon ocean storm",
-      "underwater shipwreck dark ocean",
-      "gold coins treasure pile",
-      "colombia cartagena coast aerial",
-      "lawyers courtroom dispute",
-      "deep sea underwater exploration",
-      "ocean floor darkness submarine"
-    ],
-    "has_loop": true,
-    "topic": "shipwrecks and lost treasures",
-    "hashtag_position": "end"
-  },
-  {
     "title": "El pez que se convirtió en tierra",
     "hook_text": "Tus pulmones fueron branquias",
     "hook_template": "sounds-fake",
