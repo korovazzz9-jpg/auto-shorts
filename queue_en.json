@@ -1,47 +1,5 @@
 [
   {
-    "title": "Your Next Computer Might Be Alive",
-    "hook_text": "COMPUTERS ARE EVOLVING",
-    "hook_template": "sounds-fake",
-    "script": "Your next computer might be alive — and it already exists. In 2024, a Swiss company called FinalSpark plugged real human brain tissue into a working computer. Sixteen tiny organoids — lab-grown clusters of actual neurons — replaced silicon chips entirely. And here's the strange part: this living processor uses one million times less energy than a normal chip. Silicon has dominated computing for 70 years, and biology just made it look wasteful. Send this to someone who still thinks computers and brains are opposites.",
-    "word_count": 82,
-    "search_summary": "FinalSpark's 2024 neuroplatform uses live human brain organoids as computing processors, consuming one million times less energy than silicon chips.",
-    "loop_connectors": [
-      "why",
-      "how",
-      "because"
-    ],
-    "tags": [
-      "future technology facts",
-      "biocomputing",
-      "brain organoid computer",
-      "FinalSpark neuroplatform",
-      "living computer 2024",
-      "facts",
-      "did you know",
-      "tech facts",
-      "human neurons computing"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#techfacts",
-      "#biocomputing",
-      "#futuretech",
-      "#braincomputer"
-    ],
-    "video_queries": [
-      "futuristic computer glowing circuit",
-      "laboratory scientist petri dish",
-      "human brain neuron microscope",
-      "biology lab research technology",
-      "computer chip close up glowing",
-      "scientist working future lab"
-    ],
-    "has_loop": false,
-    "topic": "future technology",
-    "hashtag_position": "end"
-  },
-  {
     "title": "The Immortal Jellyfish That Cheats Death",
     "hook_text": "IT REFUSES TO DIE",
     "hook_template": "sounds-fake",
