@@ -132,12 +132,19 @@ def generate_longform_script() -> dict:
                 f"- hashtags: 3-5 hashtags in {CFG['script_language']} (lowercase, with # prefix).\n"
                 "- search_summary: ONE plain, keyword-dense sentence (max 25 words) stating the "
                 "video's core fact directly for YouTube SEARCH — opposite style from the title "
-                f"(no info gap, name the subject plainly). In {CFG['script_language']}.\n\n"
+                f"(no info gap, name the subject plainly). In {CFG['script_language']}.\n"
+                "- chapters: 4-6 chapter markers for the description (YouTube key moments). "
+                "Each has a short punchy chapter title (3-6 words, in "
+                f"{CFG['script_language']}) and sentence_index — the 0-based index of the "
+                "SENTENCE in your script where that chapter starts. The first chapter MUST "
+                "have sentence_index 0. Indexes must be strictly increasing and spread across "
+                "the whole script (not clustered at the start).\n\n"
                 "Respond strictly in JSON, no markdown wrapper: "
                 '{"title": "title text", '
                 '"thumb_text": "short thumbnail phrase", '
                 '"script": "full voiceover script", '
                 '"search_summary": "plain keyword-dense sentence", '
+                '"chapters": [{"title": "chapter title", "sentence_index": 0}, ...], '
                 '"tags": ["tag1", ...], '
                 '"hashtags": ["#tag1", ...], '
                 '"video_queries": ["query1", ...]}'

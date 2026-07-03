@@ -90,6 +90,7 @@ CONFIGS = {
             "🌎 En español too:",
         ],
         "sister_lang_tags": ["datos curiosos", "hechos curiosos", "sabías que"],
+        "sister_lang_code": "es",  # язык локализации метаданных (localize_metadata.py)
         # Воронка Shorts→лонгформ: фразы перед ссылкой на последний длинный ролик
         # (в описании и закреп-комменте). Тема не важна — продаём формат «глубокий разбор».
         "longform_desc_cta": "Full deep-dives on the channel:",
@@ -191,6 +192,7 @@ CONFIGS = {
             "🌎 In English too:",
         ],
         "sister_lang_tags": ["facts", "did you know", "fun facts"],
+        "sister_lang_code": "en",
         "ig_caption_ctas": [
             "🔗 Sígueme para más datos — link en bio",
             "📌 Un dato nuevo cada día — link en bio",

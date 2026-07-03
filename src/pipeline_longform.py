@@ -54,6 +54,56 @@ def _verify_channel() -> None:
         )
 
 
+def _chapter_lines(script: str, chapters: list, words: list[dict]) -> str:
+    """Главы (key moments) для описания: маппит sentence_index из генерации на РЕАЛЬНЫЕ
+    тайминги TTS (кумулятивный счётчик слов по предложениям → words[i]["start"]). Дрейф
+    ±2-3с не критичен — главам не нужна покадровая точность.
+
+    Требования YouTube: первая метка 0:00, минимум 3 главы, каждая ≥10 сек — иначе главы
+    не подхватятся, поэтому невалидное просто отбрасываем (пустая строка = глав нет,
+    описание как раньше). Любая кривизна данных от модели не должна ронять публикацию."""
+    import re
+    if not isinstance(chapters, list) or not words:
+        return ""
+    sentences = [s for s in re.split(r"(?<=[.!?])\s+", script.strip()) if s]
+    # Стартовый индекс слова для каждого предложения (кумулятивно).
+    starts, cum = [], 0
+    for s in sentences:
+        starts.append(cum)
+        cum += len(s.split())
+
+    entries = []
+    for ch in chapters:
+        if not isinstance(ch, dict):
+            continue
+        title = str(ch.get("title") or "").strip()
+        idx = ch.get("sentence_index")
+        if not title or not isinstance(idx, int) or idx < 0 or idx >= len(sentences):
+            continue
+        word_i = min(starts[idx], len(words) - 1)
+        entries.append((words[word_i]["start"], title[:60]))
+
+    entries.sort(key=lambda e: e[0])
+    if not entries:
+        return ""
+    entries[0] = (0.0, entries[0][1])  # первая глава обязана начинаться с 0:00
+
+    # Отбрасываем главы ближе 10с к предыдущей (требование YouTube).
+    filtered = [entries[0]]
+    for t, title in entries[1:]:
+        if t - filtered[-1][0] >= 10.0:
+            filtered.append((t, title))
+    if len(filtered) < 3:
+        return ""
+
+    label = "Chapters:" if CFG["lang_code"] == "en" else "Capítulos:"
+    lines = [label]
+    for t, title in filtered:
+        m, s = int(t) // 60, int(t) % 60
+        lines.append(f"{m}:{s:02d} {title}")
+    return "\n".join(lines)
+
+
 def run() -> None:
     _verify_channel()
     print("1/4 Генерация сценария-компиляции...")
@@ -76,6 +126,11 @@ def run() -> None:
         search_summary = str(data.get("search_summary", "")).strip()
         if search_summary:  # ключевые слова для YouTube Search — скрипт их почти не содержит
             description = f"{search_summary}\n\n{description}"
+        # Главы (key moments, 2026-07-03): бесплатный SEO-бонус — YouTube показывает главы
+        # в поиске. Тайминги — из реальной озвучки, не оценка. Пусто = глав нет, как раньше.
+        chapters_block = _chapter_lines(data["script"], data.get("chapters", []), words)
+        if chapters_block:
+            description += f"\n\n{chapters_block}"
         # Кросс-промо EN↔ES — та же логика, что в publish.py для Shorts.
         sister_handle = CFG.get("sister_channel_handle", "")
         sister_ctas = CFG.get("sister_desc_ctas", [])
@@ -90,7 +145,15 @@ def run() -> None:
             hashtags=data["hashtags"],
             hashtag_position="end",
             thumbnail_path=thumb_path,
+            default_language=CFG["lang_code"],  # нужен для локализаций метаданных
         )
+
+        # Локализация метаданных на язык сестринского канала — как в publish.py.
+        try:
+            from localize_metadata import add_sister_localization
+            add_sister_localization(video_id, data["title"], description)
+        except Exception as e:
+            _alert("localization", e)
 
         # Субтитры включены (2026-07-03) — квота больше не проблема (videos.insert в своём бакете).
         try:

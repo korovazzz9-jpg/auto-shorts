@@ -12,6 +12,7 @@ def upload_video(
     hashtags: list[str],
     hashtag_position: str = "start",
     thumbnail_path: str | None = None,
+    default_language: str | None = None,
 ) -> str:
     youtube = get_client()
     hashtag_line = " ".join(hashtags)
@@ -31,6 +32,11 @@ def upload_video(
             "selfDeclaredMadeForKids": False,
         },
     }
+    # defaultLanguage обязателен, чтобы потом можно было прикрепить локализации метаданных
+    # (localize_metadata.py) — без него videos.update(part=localizations) отклоняется API.
+    if default_language:
+        body["snippet"]["defaultLanguage"] = default_language
+        body["snippet"]["defaultAudioLanguage"] = default_language
     media = MediaFileUpload(video_path, mimetype="video/mp4", resumable=True)
     request = youtube.videos().insert(part="snippet,status", body=body, media_body=media)
     response = request.execute()

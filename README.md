@@ -209,6 +209,12 @@ python src/rerender.py
 ### Кросс-промо EN↔ES (2026-07-02, `publish.py` + `pipeline_longform.py`)
 В описание каждого Short'а/серии/лонгформа добавляется строка со ссылкой на **сестринский канал на другом языке** (`CFG["sister_channel_handle"]` + пул `CFG["sister_desc_ctas"]`, `random.choice`) — реальная билингвальная аудитория пересекается, переток почти бесплатный. VN-конфиг (`"vi"`) намеренно не участвует — другая аудитория, кросс-промо с EN/ES там не имеет смысла (нет ключей `sister_*` → секция просто не добавляется). Откат: убрать `sister_channel_handle`/`sister_desc_ctas` из `config.py` — секция перестанет добавляться сама (guard на пустые значения).
 
+### Локализация метаданных EN↔ES (2026-07-03, `localize_metadata.py`)
+Глубже, чем кросс-промо-ссылка: к каждому видео прикрепляется **перевод заголовка и описания** на язык сестринского канала (`snippet.localizations` через `videos.update`) — испаноязычный зритель видит EN-ролик с испанским заголовком прямо в своём интерфейсе YouTube (и наоборот), видео само становится находимым на втором языке. Перевод — Claude Haiku (копейки, тот же паттерн, что vi/tl-субтитры), промпт требует сохранять URL/хэндлы/хэштеги/эмодзи как есть — проверено живым вызовом. Требование API: у видео должен стоять `snippet.defaultLanguage` — теперь ставится при каждой загрузке (`upload_youtube.upload_video(default_language=...)`), поэтому локализации работают только для видео, залитых после 2026-07-03. `CFG["sister_lang_code"]` (en↔es); у vi ключа нет → шаг пропускается. Сбой шага — частичный (⚠️ alert), видео уже опубликовано. Квота: `videos.update` = 50 ед (общий пул). Откат: убрать `sister_lang_code` из `config.py`.
+
+### Главы лонгформа / key moments (2026-07-03, `_chapter_lines` в `pipeline_longform.py`)
+Генератор лонгформа дополнительно отдаёт `chapters` (4-6 глав: название + `sentence_index` — индекс предложения скрипта, с которого глава начинается). После озвучки индексы маппятся на **реальные TTS-тайминги** (кумулятивный счётчик слов по предложениям → `words[i]["start"]`, дрейф ±2-3с некритичен) и вставляются в описание блоком `Chapters:`/`Capítulos:` в формате `M:SS Название`. YouTube показывает главы как key moments в поиске — бесплатный SEO/навигация для лонгформа. Требования YouTube соблюдены кодом: первая метка всегда 0:00, главы ближе 10с отбрасываются, меньше 3 валидных глав → блок не вставляется вообще (описание как раньше); любые кривые данные от модели (не список, индекс за пределами, мусор) не роняют публикацию. Откат: убрать вызов `_chapter_lines` из `pipeline_longform.py`.
+
 ### CTA (call-to-action)
 
 Последние 2 сек каждого видео: пульсирующее сердце + pill-бэйдж с текстом.
@@ -362,6 +368,7 @@ src/
   cloudinary_upload.py      # временный хостинг видео/изображений для IG (Cloudinary)
   post_comment.py           # авто-комментарий от канала + само-ответ (мини-тред)
   upload_captions.py        # EN + VI + TL субтитры (авто-перевод через Claude Haiku), включены с 2026-07-03
+  localize_metadata.py      # локализация заголовка/описания на язык сестринского канала (Haiku + videos.update)
   upload_pinterest.py       # генерация карточки PIL + публикация пина Pinterest API v5
   playlists.py              # авто-плейлисты по теме + create_playlist/add_video_to_playlist_by_id (серии)
   recent_titles.py          # последние 100 заголовков + локальный кеш (дедупликация)
@@ -630,6 +637,8 @@ gh secret set PINTEREST_BOARD_ID -b"<board_id>"
 | Ротация опенеров заголовка | Убрать `TITLE_OPENER_INSTRUCTION`/`_title_variety_note()` из `_build_user_content` (`generate_script.py`) |
 | Эмоциональный тон | Убрать `EMOTIONAL_TONE_INSTRUCTION` из `_build_user_content` (`generate_script.py`) |
 | Outlier-анализ по нише | Задизейблить `discover-niche.yml` в Actions — `_load_niche_signal()` вернёт пустой словарь, вес не изменится |
+| Локализация метаданных | Убрать `sister_lang_code` из `config.py` — `add_sister_localization()` выйдет сразу |
+| Главы лонгформа | Убрать вызов `_chapter_lines` из `pipeline_longform.py` |
 | Кросс-промо EN↔ES | Убрать `sister_channel_handle`/`sister_desc_ctas`/`sister_lang_tags` из `config.py` |
 | Instagram caption CTA | Убрать `ig_caption_ctas` из `config.py` (или оставить пустым списком) |
 
