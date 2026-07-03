@@ -1,0 +1,56 @@
+name: Discover Niche Outliers
+
+on:
+  # Ищет видео-выбросы у ЧУЖИХ каналов в тех же темах (search().list — не публикация, не
+  # тратит Claude), поэтому штатный GitHub-cron ок. Раз в неделю, отдельно от weekly-report
+  # (та же логика "не критично ко времени"), чтобы не грузить один воркфлоу.
+  schedule:
+    - cron: "37 9 * * 1"
+  workflow_dispatch: {}
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # коммитит niche_signal_<channel>.json (топ-темы у чужих каналов -> в вес _pick_topic())
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Python deps
+        run: pip install -r requirements.txt
+
+      - name: Discover EN niche outliers
+        working-directory: src
+        env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+        run: python discover_niche_topics.py
+
+      - name: Discover ES niche outliers
+        working-directory: src
+        env:
+          CHANNEL: es
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN_ES }}
+        run: python discover_niche_topics.py
+
+      # generate_script._load_niche_signal() читает эти файлы из репо при каждом выборе
+      # темы — без коммита данные остались бы в эфемерном раннере (тот же паттерн, что
+      # queue_*.json / hook_stats_*.json).
+      - name: Persist niche signal
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          for f in niche_signal_en.json niche_signal_es.json; do
+            if [ -f "$f" ]; then git add "$f"; fi
+          done
+          git commit -m "chore(niche): weekly outlier signal $(date -u +%F)" || { echo "no changes"; exit 0; }
+          git pull --rebase origin master
+          git push

@@ -267,6 +267,15 @@ python src/rerender.py
 
 Модель репортит `emotional_tone` — один из `EMOTIONAL_TONES` (`fear`/`awe`/`creepy`/`beautiful`/`huge`/`impossible`/`disgust`/`humor`/`other`), тегируется `tone-<id>`. Сравнение retention по тону — секция «Эмоциональный тон» в `weekly_report.py`. Пока без активного nudge (в отличие от `_hook_preference()`) — сначала копим данные. Откат: убрать `EMOTIONAL_TONE_INSTRUCTION` из `_build_user_content`.
 
+### Outlier-анализ по нише (2026-07-03, `discover_niche_topics.py` + `discover-niche.yml`)
+Индустриальные данные: каналы, ищущие видео-выбросы у **чужих** каналов в нише (не только свою статистику), растут в 2-3× быстрее — сигнал темы, не факта, без копирования контента. Раз в неделю (Пн 09:37 UTC, GitHub-cron) по каждой теме из `TOPICS_POOL` (14 тем) идёт `search().list()` (10 самых просматриваемых Shorts по запросу вида `"<тема> facts shorts"`/`"<тема> datos curiosos shorts"`, отфильтровано по `relevanceLanguage`), затем дешёвый батч `videos.list`/`channels.list` за просмотрами/подписчиками.
+
+**Метрика "выброс":** `views / subscribers >= 5.0` (и `views >= 5000`, чтобы не ловить шум крошечных каналов) — видео разошлось СИЛЬНО шире собственной аудитории канала. Отличается от «у канала на 20 млн подписчиков и так много просмотров» (это норма для его размера, ratio ~1-2, не выброс) — маленький/средний канал с внезапным хитом (ratio 8-40×) это реально сигнал темы. Проверено живым тестом на теме "the ocean": 4 из 10 найденных видео помечены выбросами, крупные устоявшиеся каналы (20+ млн подписчиков, ratio 1.1-1.7) корректно не попали.
+
+**Как влияет на генерацию:** результат — `{topic: outlier_count}` в `niche_signal_<channel>.json` (коммитится воркфлоу). `_pick_topic()` (`generate_script.py`) добавляет мягкий множитель веса `×(1 + 0.15 × min(count, 3))` — максимум ×1.45 при 3+ выбросах, чтобы один аномальный чужой ролик не перевешивал всю квоту 70/20/10, только подталкивал тему выше в ранжировании. Нет файла/данных — множитель 1.0, поведение как раньше.
+
+Квота: `search().list` = 100 ед/запрос × 14 тем = 1400 ед/канал за прогон (раз в неделю) — безопасно даже при текущем ежедневном расходе на публикацию. Откат: задизейблить `discover-niche.yml` в Actions — `_load_niche_signal()` вернёт пустой словарь, вес не изменится.
+
 ### Пороги retention (2026-07-02, `analytics_retention.retention_threshold`)
 YouTube Shorts работает в режиме "explore-and-exploit": каждый новый Short тестируется на маленькой аудитории, и если retention падает ниже порога — раздача обрывается почти сразу, а не постепенно снижается. Индустриальные 2026-бенчмарки (не официальный YouTube-документ, но воспроизводимая цифра в нескольких независимых источниках): **65% для <30с, 50% для 30-60с**. `weekly_report.py` теперь считает не абстрактное "выше/ниже среднего", а конкретный pass/fail по этому порогу — секция «Порог retention: N/M видео прошли» + список худших с недостающим %.
 
@@ -325,6 +334,7 @@ src/
   prepare_batch.py          # ночной preload очереди через Anthropic Batch API (−50% на script-gen)
   weekly_report.py          # еженедельная retention-сводка (hook/loop/темы/слоты) в Telegram, без Claude; + топ-3 недели с напоминанием: Test & Compare + Related video (Studio, ручные шаги — нет API)
   recycle_winners.py        # еженедельно: топ-факты одного канала пересоздаются для другого (Batch API)
+  discover_niche_topics.py  # еженедельно: outlier-анализ по нише у чужих каналов -> мягкий бонус веса темы
   pipeline_longform.py      # точка входа лонгформа
   pipeline_series.py        # точка входа недельных серий (Part 1/2/3, part по прогрессу)
   publish.py                # ОБЩАЯ публикация (YT→воронка-в-лонгформ→коммент→IG/TikTok→Pinterest); зовут оба пайплайна
@@ -374,6 +384,7 @@ assets/
   prepare-batch.yml     # ночной preload очереди сценариев через Batch API (оба канала)
   recycle-winners.yml   # Чт: кросс-канальное переиспользование победителей (EN↔ES)
   weekly-report.yml     # еженедельная retention-сводка в Telegram (оба канала)
+  discover-niche.yml    # Пн: outlier-анализ по нише у чужих каналов (оба канала)
 ```
 
 ---
@@ -613,6 +624,7 @@ gh secret set PINTEREST_BOARD_ID -b"<board_id>"
 | A/B заголовков (seo/narrative) | `TITLE_SEO_PROBABILITY = 0.0` в `generate_script.py` |
 | Ротация опенеров заголовка | Убрать `TITLE_OPENER_INSTRUCTION`/`_title_variety_note()` из `_build_user_content` (`generate_script.py`) |
 | Эмоциональный тон | Убрать `EMOTIONAL_TONE_INSTRUCTION` из `_build_user_content` (`generate_script.py`) |
+| Outlier-анализ по нише | Задизейблить `discover-niche.yml` в Actions — `_load_niche_signal()` вернёт пустой словарь, вес не изменится |
 | Кросс-промо EN↔ES | Убрать `sister_channel_handle`/`sister_desc_ctas`/`sister_lang_tags` из `config.py` |
 | Instagram caption CTA | Убрать `ig_caption_ctas` из `config.py` (или оставить пустым списком) |
 

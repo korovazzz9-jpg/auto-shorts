@@ -34,6 +34,19 @@ TOPICS_POOL = [
 MIN_TOPICS_WITH_DATA = 5  # не взвешивать, пока статистика не накопилась хотя бы по стольким темам
 
 
+def _load_niche_signal() -> dict[str, int]:
+    """Outlier-сигнал по нише (discover_niche_topics.py, раз в неделю, коммитится
+    воркфлоу) — {topic: outlier_count}, сколько видео-выбросов у ЧУЖИХ каналов нашлось
+    по этой теме. Нет файла/данных — пустой словарь, вес не меняется."""
+    path = os.path.join(os.path.dirname(__file__), "..", f"niche_signal_{CHANNEL}.json")
+    try:
+        with open(path, encoding="utf-8") as f:
+            stats = json.load(f)
+        return stats.get("outlier_counts", {}) if isinstance(stats, dict) else {}
+    except Exception:
+        return {}
+
+
 def _pick_topic() -> str:
     # Исключаем темы последних видео, чтобы не выходило два похожих ролика подряд.
     exclude = set(get_recent_topics(2))
@@ -48,9 +61,12 @@ def _pick_topic() -> str:
         return random.choice(pool)
 
     overall_avg = sum(avg_views.values()) / len(avg_views)
+    niche_counts = _load_niche_signal()
     # Темы без данных получают средний вес — попадают в середину рейтинга и продолжают
-    # исследоваться, не застревая ни в топе, ни в хвосте.
-    weight = lambda t: max(avg_views.get(t, overall_avg), 1.0)
+    # исследоваться, не застревая ни в топе, ни в хвосте. Мягкий бонус от outlier-анализа по
+    # нише (2026-07-03): +15% веса за каждый найденный выброс, максимум ×1.45 (3+ выброса) —
+    # чтобы один аномальный чужой ролик не рвал всю квоту 70/20/10, только подталкивал.
+    weight = lambda t: max(avg_views.get(t, overall_avg), 1.0) * (1.0 + 0.15 * min(niche_counts.get(t, 0), 3))
     ranked = sorted(pool, key=lambda t: -weight(t))
 
     # Квоты 70/20/10 вместо чистого взвешивания по avg_views: взвешивание самоусиливает
