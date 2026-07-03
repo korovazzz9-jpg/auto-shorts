@@ -1,45 +1,5 @@
 [
   {
-    "title": "El volcán que destruyó un ejército entero",
-    "hook_text": "Un volcán eligió al ganador",
-    "hook_template": "sounds-fake",
-    "script": "Un volcán decidió el resultado de una guerra — y nadie lo vio venir. En 43 a.C., durante las Guerras Civiles romanas, el volcán Etna entró en erupción justo antes de la Batalla de Filipos. La erupción bloqueó el sol con ceniza sobre el Mediterráneo durante meses. Las cosechas fallaron. Los ejércitos de Bruto y Casio no pudieron recibir suministros, y colapsaron antes de pelear en serio. Pero aquí viene lo extraño: Octavio — el futuro Augusto — ganó no por estrategia, sino porque su bando sobrevivió el hambre. Mándale esto a alguien que crea que Roma cayó solo por política. Y por eso exactamente.",
-    "word_count": 88,
-    "search_summary": "La erupción del volcán Etna en 43 a.C. afectó el clima y contribuyó a la derrota de Bruto y Casio en la Batalla de Filipos.",
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "datos curiosos",
-      "vulcanología",
-      "volcanes históricos",
-      "historia romana",
-      "batalla de filipos",
-      "erupciones volcánicas",
-      "datos en 30 segundos",
-      "curiosidades históricas"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#datosverdaderos",
-      "#volcanes",
-      "#historiaromana",
-      "#batalladeFilipos"
-    ],
-    "video_queries": [
-      "Mount Etna eruption aerial",
-      "volcanic ash sky dark",
-      "ancient roman soldiers marching",
-      "wheat field drought failure",
-      "Roman army camp ruins",
-      "Julius Caesar era ruins landscape"
-    ],
-    "has_loop": true,
-    "topic": "volcanoes and earthquakes",
-    "hashtag_position": "end"
-  },
-  {
     "title": "El pez que se convirtió en todos los peces del mar",
     "hook_text": "Una sola especie lo originó todo",
     "hook_template": "sounds-fake",
