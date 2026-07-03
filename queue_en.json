@@ -1,46 +1,5 @@
 [
   {
-    "title": "Venus Has a Day Longer Than Its Own Year",
-    "hook_text": "YOUR YEAR ENDS FIRST",
-    "hook_template": "sounds-fake",
-    "script": "Backwards and slow — one planet spins so lazily that its year ends before its day does. That planet is Venus. One Venusian day lasts 243 Earth days. But Venus only takes 225 days to orbit the Sun. So the day outlasts the year — every single time. But here's the wild part: Venus also spins backwards. The Sun rises in the west and sets in the east. Send this to someone who still thinks space is boring.",
-    "word_count": 76,
-    "search_summary": "A day on Venus lasts 243 Earth days, longer than its 225-day year, and Venus rotates backwards making the Sun rise in the west.",
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "space facts",
-      "Venus planet",
-      "solar system facts",
-      "did you know",
-      "planet facts",
-      "Venus day longer than year",
-      "Venus rotation backwards",
-      "space shorts"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#spacefacts",
-      "#venus",
-      "#solarsystem",
-      "#didyouknow"
-    ],
-    "video_queries": [
-      "planet surface alien landscape",
-      "slow spinning globe timelapse",
-      "Venus planet orbit animation",
-      "solar system planets space",
-      "sun rising horizon timelapse",
-      "sun setting west horizon",
-      "person mind blown reaction"
-    ],
-    "has_loop": false,
-    "topic": "space",
-    "hashtag_position": "end"
-  },
-  {
     "title": "The Roman City We're Too Scared to Excavate",
     "hook_text": "BURIED AND FORGOTTEN",
     "hook_template": "sounds-fake",
