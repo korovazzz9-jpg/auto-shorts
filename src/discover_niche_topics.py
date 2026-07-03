@@ -37,11 +37,29 @@ MAX_RESULTS_PER_QUERY = 10
 NICHE_SIGNAL_FILE = os.path.join(os.path.dirname(__file__), "..", f"niche_signal_{CHANNEL}.json")
 
 
+def _topic_query_term(topic: str) -> str:
+    """Термин для поискового запроса на языке канала. EN: тема как есть (уже на английском
+    в TOPICS_POOL). ES: испанский перевод из CFG['playlist_titles'] (естественная фраза,
+    не ALL-CAPS одно слово, как в topic_cta_words), с убранным префиксом 'Datos de/del/en '.
+    Без перевода — фолбэк на английскую тему (смешанный запрос хуже, чем пустой, но лучше,
+    чем совсем ничего не найти)."""
+    if CFG["lang_code"] != "es":
+        return topic
+    title = CFG.get("playlist_titles", {}).get(topic, "")
+    if not title:
+        return topic
+    for prefix in ("Datos de ", "Datos del ", "Datos en "):
+        if title.startswith(prefix):
+            return title[len(prefix):]
+    return title
+
+
 def _search_topic(youtube, topic: str) -> list[dict]:
     """Ищет до MAX_RESULTS_PER_QUERY публичных видео по теме, отсортированных по
     просмотрам. Возвращает [{video_id, channel_id}]. Сбой одного запроса (сеть/квота)
     не должен рушить весь прогон — остальные темы всё равно проверятся."""
-    query = f"{topic} facts shorts" if CFG["lang_code"] == "en" else f"{topic} datos curiosos shorts"
+    query_term = _topic_query_term(topic)
+    query = f"{query_term} facts shorts" if CFG["lang_code"] == "en" else f"{query_term} datos curiosos shorts"
     try:
         resp = youtube.search().list(
             q=query, part="snippet", type="video", order="viewCount",
