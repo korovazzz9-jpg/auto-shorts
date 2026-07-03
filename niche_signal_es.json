@@ -1,4 +1,14 @@
 {
-  "outlier_counts": {},
+  "outlier_counts": {
+    "ancient history": 4,
+    "ancient civilizations": 2,
+    "the human body": 4,
+    "the animal kingdom": 3,
+    "the ocean": 4,
+    "evolution": 6,
+    "extreme weather": 1,
+    "natural wonders": 1,
+    "space": 1
+  },
   "updated": "2026-07-03"
 }
