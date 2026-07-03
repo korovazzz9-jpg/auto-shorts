@@ -1,46 +1,5 @@
 [
   {
-    "title": "El pez que se convirtió en tierra",
-    "hook_text": "Tus pulmones fueron branquias",
-    "hook_template": "sounds-fake",
-    "script": "Tus pulmones empezaron siendo branquias — y hay un pez vivo hoy que está a la mitad del cambio. El pez pulmonado africano, el Protopterus, lleva más de 400 millones de años sin evolucionar. Tiene branquias Y pulmones. Puede sobrevivir dos años enterrado en barro seco, respirando aire. Pero aquí está lo que rompe todo: sus pulmones son homólogos exactos de los tuyos. La misma estructura. El mismo origen. O sea que básicamente tienes los pulmones de un pez. Mándale esto a alguien que crea que los humanos nunca fuimos peces.",
-    "word_count": 88,
-    "search_summary": "El pez pulmonado africano Protopterus tiene pulmones homólogos a los humanos y puede respirar aire fuera del agua.",
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "datos curiosos",
-      "evolución humana",
-      "hechos increíbles",
-      "pez pulmonado africano",
-      "datos en 30 segundos",
-      "ciencia curiosa",
-      "biología evolución",
-      "protopterus pulmones",
-      "sabías que"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#datoscuriosos",
-      "#evolucion",
-      "#ciencia",
-      "#biologiacuriosa"
-    ],
-    "video_queries": [
-      "human lungs anatomy xray",
-      "fish underwater breathing gills",
-      "mudfish buried dry riverbed",
-      "african savanna dry cracked mud",
-      "biology laboratory microscope",
-      "river fish gasping surface air"
-    ],
-    "has_loop": false,
-    "topic": "evolution",
-    "hashtag_position": "end"
-  },
-  {
     "title": "Tu estómago se destruye a sí mismo cada semana",
     "hook_text": "Se come a sí mismo",
     "hook_template": "sounds-fake",
