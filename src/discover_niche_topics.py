@@ -31,8 +31,13 @@ from youtube_auth import get_client
 
 load_dotenv()
 
-OUTLIER_RATIO = 5.0       # views / subscribers — порог "выброса"
-MIN_VIEWS = 5000          # отсекаем шум крошечных каналов/видео
+OUTLIER_RATIO = 15.0      # views / subscribers — порог "выброса"
+# Первый прогон в проде (2026-07-03) на ratio=5.0/min_views=5000: ВСЕ 14 тем на EN упёрлись
+# в потолок бонуса (count>=3 у каждой) — порог оказался слишком мягким для Shorts (там
+# ratio 4-8× — обычное дело даже без реального "выстрела" темы, алгоритм и так раздаёт Shorts
+# widely). Подняли ratio и min_views, чтобы ловить только по-настоящему сильные выбросы и
+# вернуть механизму различающую способность между темами (см. README).
+MIN_VIEWS = 20000         # отсекаем шум крошечных каналов/видео
 MAX_RESULTS_PER_QUERY = 10
 NICHE_SIGNAL_FILE = os.path.join(os.path.dirname(__file__), "..", f"niche_signal_{CHANNEL}.json")
 
