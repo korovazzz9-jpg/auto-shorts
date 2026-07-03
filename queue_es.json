@@ -1,45 +1,5 @@
 [
   {
-    "title": "El pez que se convirtió en todos los peces del mar",
-    "hook_text": "Una sola especie lo originó todo",
-    "hook_template": "sounds-fake",
-    "script": "Casi todos los peces del océano descienden de un solo grupo que casi se extingue hace 252 millones de años. Hablamos de los peces con aletas radiadas — actinopterigios — que sobrevivieron la extinción masiva del Pérmico cuando el 96% de la vida marina murió. Solo un puñado de linajes quedó. Y aquí viene lo que rompe el esquema: esa casi extinción los obligó a diversificarse tan rápido que hoy representan el 99% de todas las especies de peces del planeta. El colapso fue el motor. Mándale esto a alguien que crea que la extinción siempre es el final. Y así es como.",
-    "word_count": 88,
-    "search_summary": "Los peces con aletas radiadas sobrevivieron la extinción masiva del Pérmico y se convirtieron en el 99% de todas las especies de peces actuales.",
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "datos curiosos",
-      "evolución",
-      "extinción masiva",
-      "peces del océano",
-      "historia de la vida",
-      "biología evolutiva",
-      "curiosidades científicas",
-      "datos en 30 segundos"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#datosCuriosos",
-      "#evolucion",
-      "#ciencia",
-      "#extincion"
-    ],
-    "video_queries": [
-      "ocean fish school underwater",
-      "deep sea marine life diversity",
-      "mass extinction volcanic eruption",
-      "underwater fish diversity reef",
-      "prehistoric ocean landscape",
-      "fish swimming open ocean"
-    ],
-    "has_loop": true,
-    "topic": "evolution",
-    "hashtag_position": "end"
-  },
-  {
     "title": "El tesoro que el mar devolvió… por accidente",
     "hook_text": "El mar lo guardó 400 años",
     "hook_template": "sounds-fake",
