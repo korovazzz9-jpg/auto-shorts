@@ -92,11 +92,11 @@ def run() -> None:
             thumbnail_path=thumb_path,
         )
 
-        # Субтитры временно отключены (квота) — как и в Shorts/сериях. Вернуть после увеличения квоты:
-        # try:
-        #     upload_captions(video_id, words)
-        # except Exception as e:
-        #     _alert("captions", e)
+        # Субтитры включены (2026-07-03) — квота больше не проблема (videos.insert в своём бакете).
+        try:
+            upload_captions(video_id, words)
+        except Exception as e:
+            _alert("captions", e)
 
         try:
             add_video_to_playlist(video_id, data["theme"])

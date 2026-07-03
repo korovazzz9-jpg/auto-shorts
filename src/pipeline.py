@@ -79,7 +79,7 @@ def run() -> None:
                 f"opener-{data.get('title_opener', 'other')}",
                 f"tone-{data.get('emotional_tone', 'other')}",
             ],
-            enable_captions=False,  # временно (квота), вернуть после увеличения квоты
+            enable_captions=True,  # 2026-07-03: videos.insert больше не жрёт общий пул (свой бакет), места хватает
             enable_pinterest=True,
         )
 
