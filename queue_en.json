@@ -1,45 +1,5 @@
 [
   {
-    "title": "The Immortal Jellyfish That Cheats Death",
-    "hook_text": "IT REFUSES TO DIE",
-    "hook_template": "sounds-fake",
-    "script": "This creature dies — then decides to come back as a baby. The Turritopsis dohrnii jellyfish, barely 4.5mm wide, can reverse its aging completely. When injured or starving, it sinks to the ocean floor and transforms back into a polyp — its infant stage — restarting life from scratch. It can repeat this cycle forever. But here's the wild part: every ocean on Earth already has them, silently spreading. Send this to someone who still thinks nothing lives forever. And that's exactly how.",
-    "word_count": 87,
-    "search_summary": "Turritopsis dohrnii jellyfish can biologically reverse aging and restart its life cycle indefinitely, making it effectively immortal.",
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "animal facts",
-      "did you know",
-      "immortal jellyfish",
-      "turritopsis dohrnii",
-      "jellyfish facts",
-      "biology facts",
-      "ocean creatures",
-      "weird animals",
-      "facts"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#facts",
-      "#jellyfish",
-      "#oceanlife",
-      "#immortal"
-    ],
-    "video_queries": [
-      "jellyfish floating ocean",
-      "deep ocean dark water",
-      "ocean floor underwater",
-      "jellyfish close up swimming",
-      "vast open ocean surface"
-    ],
-    "has_loop": true,
-    "topic": "the animal kingdom",
-    "hashtag_position": "end"
-  },
-  {
     "title": "The Computer That Runs on Your Body Heat",
     "hook_text": "YOUR BODY POWERS THIS",
     "hook_template": "sounds-fake",
