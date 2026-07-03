@@ -81,16 +81,13 @@ def publish(
         hashtags=data["hashtags"],
         hashtag_position=data["hashtag_position"],
         thumbnail_path=thumb_path,
-        default_language=CFG["lang_code"],  # нужен для локализаций метаданных ниже
+        default_language=CFG["lang_code"],
     )
-
-    # Локализация метаданных на язык сестринского канала (2026-07-03): испаноязычный зритель
-    # видит EN-ролик с испанским заголовком в своём интерфейсе (и наоборот). Перевод — Haiku.
-    try:
-        from localize_metadata import add_sister_localization
-        add_sister_localization(video_id, data["title"], description)
-    except Exception as e:
-        alert("localization", e)
+    # Локализация метаданных (2026-07-03) — СОЗНАТЕЛЬНО только для лонгформа
+    # (pipeline_longform.py), не здесь: риск для Shorts/серий — зритель кликает по знакомому
+    # переведённому заголовку, слышит озвучку на другом языке, отваливается за секунды →
+    # бьёт по retention-порогу (65%/50%, см. analytics_retention.retention_threshold) и
+    # алгоритм обрывает раздачу. На лонгформе зритель терпимее к смене языка ради разбора.
 
     # Плейлисты для Shorts отключены: 0 открытий (Shorts смотрят в ленте, не через
     # плейлисты), а каждый ролик тратил ~50 ед. квоты YouTube. Лонгформ плейлисты сохраняет
