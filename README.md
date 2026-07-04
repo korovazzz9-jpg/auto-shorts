@@ -57,7 +57,7 @@
 | Лонгформ (EN + ES, еженедельно) | ✅ Вс 23:00/23:17 UTC (вечерний прайм, отдельный слот); генератор параметризован под CFG |
 | Серии (EN + ES, 3 части **Пн/Вт/Ср**) | ✅ замещают прайм-слот 00:07/00:17, не добавляются сверху |
 | Watchdog (авторетрай) | ✅ проверяет через 15 мин после каждого слота |
-| Субтитры на видео (caption tracks) | ✅ включены (2026-07-03), 2 языка (основной+vi) с 2026-07-04 — с 3 языками (+tl) ES упирался в дневную квоту (10к ОБЩИЕ на EN+ES, не по 10к на каждый). По Вс (Pacific — день квоты Google) субтитры только у лонгформа: Shorts/серии пропускают (`captions_fit_quota_today()` в `upload_captions.py`), иначе 2 лонгформа + 8-10 Shorts с субтитрами не влезают |
+| Субтитры на видео (caption tracks) | ✅ включены (2026-07-03), только язык канала с 2026-07-04. Переводные дорожки (vi, tl) убраны по гео-данным: VN = 2.4% просмотров EN и 0% ES, PH/IN понимают английский, YouTube сам авто-переводит дорожку зрителю. 550 ед/видео → влезает в квоту (10к ОБЩИЕ на EN+ES) даже в Вс с двумя лонгформами (~6800) |
 | Loop A/B (loop-yes/no тег) | ✅ 50% видео с петлёй (`loop_probability=0.5`); сравнение копится для `analytics_retention.py` |
 | Фоновая музыка | ✅ кастомные лупы от знакомого (`assets/music/*.mp3`), проверены на чистоту (Audd.io + YouTube Content ID 13ч). Громкость `MUSIC_LOOP_VOLUME = 0.12` (~12 дБ под голосом, без клиппинга) |
 | ES YouTube refresh token | ✅ переавторизован (был `invalid_scope`); `python src/get_youtube_token.py es` чинит автоматически |
@@ -375,7 +375,7 @@ src/
   upload_instagram.py       # Instagram Graph API v21.0 (Reels), cover_url поддержка
   cloudinary_upload.py      # временный хостинг видео/изображений для IG (Cloudinary)
   post_comment.py           # авто-комментарий от канала + само-ответ (мини-тред)
-  upload_captions.py        # основной + VI субтитры (авто-перевод через Claude Haiku), включены с 2026-07-03 (TL убран 2026-07-04, квота)
+  upload_captions.py        # субтитры на языке канала (переводные vi/tl убраны 2026-07-04 по гео-данным; механизм перевода сохранён)
   localize_metadata.py      # локализация заголовка/описания на язык сестринского канала (Haiku + videos.update), только лонгформ
   upload_pinterest.py       # генерация карточки PIL + публикация пина Pinterest API v5
   playlists.py              # авто-плейлисты по теме + create_playlist/add_video_to_playlist_by_id (серии)
@@ -624,9 +624,8 @@ gh secret set PINTEREST_BOARD_ID -b"<board_id>"
 | Фича | Как отключить |
 |------|--------------|
 | Серии (Part 1/2/3) | Задизейблить `weekly-series.yml` в Actions |
-| VI субтитры | Убрать `"vi"` из `_EXTRA_CAPTION_LANGS` в `upload_captions.py` (TL уже убран 2026-07-04, квота) |
-| Субтитры целиком (все языки) | `enable_captions=False` в `pipeline.py`/`pipeline_series.py` + вернуть закомментированный блок в `pipeline_longform.py` |
-| Вс-пропуск субтитров Shorts | Вернуть `enable_captions=True` в `pipeline.py`/`pipeline_series.py` вместо `captions_fit_quota_today()` (но тогда в Вс снова quotaExceeded на последних слотах) |
+| Переводные субтитры (вернуть) | Вписать код языка в `_EXTRA_CAPTION_LANGS` (`upload_captions.py`); при 2+ дорожках пересчитать Вс-квоту (в git-истории есть `captions_fit_quota_today()`, коммит `6065db1`) |
+| Субтитры целиком | `enable_captions=False` в `pipeline.py`/`pipeline_series.py` + вернуть закомментированный блок в `pipeline_longform.py` |
 | Авто-комментарий | Убрать `"first_comment"` из конфига канала в `config.py` |
 | Instagram thumbnail | Убрать `cover_url=hosted_thumb["url"]` из вызова `upload_reel` в `pipeline.py` |
 | TikTok | `"post_to_tiktok": False` в `config.py` → EN-конфиг |

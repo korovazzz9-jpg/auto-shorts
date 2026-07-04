@@ -12,7 +12,6 @@ from notify import notify
 from publish import publish
 from script_queue import pop_next
 from tts import text_to_speech
-from upload_captions import captions_fit_quota_today
 from youtube_auth import get_authenticated_channel_title
 
 load_dotenv()
@@ -80,9 +79,9 @@ def run() -> None:
                 f"opener-{data.get('title_opener', 'other')}",
                 f"tone-{data.get('emotional_tone', 'other')}",
             ],
-            # 2026-07-04: кроме Вс (Pacific) — в Вс-день квоты выходят оба лонгформа,
-            # субтитры Shorts + лонгформ в общие 10к не влезают (см. upload_captions).
-            enable_captions=captions_fit_quota_today(),
+            # 2026-07-04: одна дорожка (язык канала) — 550 ед/видео, влезает даже в Вс
+            # с двумя лонгформами. Вс-пропуск снят вместе с удалением переводных дорожек.
+            enable_captions=True,
             enable_pinterest=True,
         )
 
