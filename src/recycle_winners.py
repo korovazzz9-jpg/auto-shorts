@@ -54,7 +54,7 @@ load_dotenv()
 
 SOURCE_LOOKBACK = 40      # сколько последних видео источника смотрим
 MIN_AGE_DAYS = 3          # моложе — просмотры ещё не накопились, рейтинг врёт
-MAX_RECYCLED = 3          # не больше стольких пересозданий за прогон
+MAX_RECYCLED = 5          # 3→5 (2026-07-04): отдача ES от EN-победителей 2×, Batch API тянет
 MAX_SHORT_SECONDS = 65    # отсекаем лонгформ по длительности
 POLL_INTERVAL = 20
 POLL_TIMEOUT = 1800

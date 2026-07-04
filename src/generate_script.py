@@ -341,7 +341,11 @@ def _build_user_content(topic: str, avoid_block: str, title_instruction: str = T
         "gap, no vague noun, name the subject and the claim plainly (e.g. 'Turritopsis "
         "jellyfish can reverse their aging process and effectively avoid death'). This is NOT "
         f"spoken and NOT shown on screen — only used as the first line of the description, in "
-        f"{CFG['script_language']}.\n\n"
+        f"{CFG['script_language']}.\n"
+        f"- comment_question: ONE provocative question about THIS specific fact, in "
+        f"{CFG['script_language']}, for the channel's pinned comment. It must reference the "
+        "concrete subject of the fact and make viewers want to argue, correct you, or confess "
+        "— NOT a generic 'did you know this?'. Max 15 words, may end with an emoji.\n\n"
         "Respond strictly in JSON, no markdown wrapper: "
         '{"title": "title text", '
         '"title_opener": "the-x", '
@@ -351,6 +355,7 @@ def _build_user_content(topic: str, avoid_block: str, title_instruction: str = T
         '"script": "voiceover script ending with the comment-bait line (NO spoken CTA, NO loop line)", '
         '"word_count": 85, '
         '"search_summary": "plain keyword-dense sentence", '
+        '"comment_question": "provocative question about the fact", '
         '"loop_connectors": ["why", "how"], '
         '"tags": ["tag1", "tag2", ...], '
         '"hashtags": ["#tag1", "#tag2", ...], '

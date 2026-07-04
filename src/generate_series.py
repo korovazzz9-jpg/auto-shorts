@@ -33,9 +33,14 @@ SERIES_LENGTH_INSTRUCTION = (
     "Count words before responding — under 85 words is too short."
 )
 
+# Клиффхэнгер (2026-07-04): вместо генерик «follow for Part 2» — конкретный тизер
+# содержания следующей части (curiosity gap про реальную деталь), потом follow-CTA.
 SERIES_CTA = {
-    1: "end with 'Follow so you don't miss Part 2'",
-    2: "end with 'Follow for the conclusion in Part 3'",
+    1: "end with a ONE-sentence cliffhanger teaser naming a SPECIFIC detail Part 2 will "
+       "reveal (a real curiosity gap about the story, e.g. 'Part 2: why all 30 of them "
+       "vanished overnight'), then 'Follow so you don't miss Part 2'",
+    2: "end with a ONE-sentence cliffhanger teaser naming a SPECIFIC detail Part 3 will "
+       "reveal, then 'Follow for the conclusion in Part 3'",
     3: "end with a satisfying payoff that rewards viewers who watched all 3 parts, "
        "then 'Follow for more series like this'",
 }
@@ -84,12 +89,15 @@ def generate_series() -> dict:
         "- video_queries: 3-5 stock footage search queries in English\n"
         "- search_summary: ONE plain, keyword-dense sentence (max 20 words) stating that part's "
         "fact directly for YouTube SEARCH — opposite style from the hook (no info gap, name the "
-        f"subject plainly). NOT spoken, NOT shown on screen. In {CFG['script_language']}.\n\n"
+        f"subject plainly). NOT spoken, NOT shown on screen. In {CFG['script_language']}.\n"
+        f"- comment_question: ONE provocative question about that part's specific fact, in "
+        f"{CFG['script_language']}, for the pinned comment — must reference the concrete "
+        "subject, make viewers argue or confess, NOT a generic 'did you know?'. Max 15 words.\n\n"
         "Respond strictly in JSON:\n"
         '{"topic": "topic name", '
-        '"part1": {"title": "...", "hook_text": "...", "hook_template": "...", "script": "...", "search_summary": "...", "tags": [], "hashtags": [], "video_queries": []}, '
-        '"part2": {"title": "...", "hook_text": "...", "hook_template": "...", "script": "...", "search_summary": "...", "tags": [], "hashtags": [], "video_queries": []}, '
-        '"part3": {"title": "...", "hook_text": "...", "hook_template": "...", "script": "...", "search_summary": "...", "tags": [], "hashtags": [], "video_queries": []}}'
+        '"part1": {"title": "...", "hook_text": "...", "hook_template": "...", "script": "...", "search_summary": "...", "comment_question": "...", "tags": [], "hashtags": [], "video_queries": []}, '
+        '"part2": {"title": "...", "hook_text": "...", "hook_template": "...", "script": "...", "search_summary": "...", "comment_question": "...", "tags": [], "hashtags": [], "video_queries": []}, '
+        '"part3": {"title": "...", "hook_text": "...", "hook_template": "...", "script": "...", "search_summary": "...", "comment_question": "...", "tags": [], "hashtags": [], "video_queries": []}}'
     )
 
     # 3-частный JSON — самый большой пейлоад пайплайна, иногда модель возвращает битый

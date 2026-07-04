@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from build_video import build_video
-from config import CFG
+from config import CFG, CHANNEL
 from fetch_stock_video import fetch_clips, fetch_satisfying_clips
 from generate_rapid_facts import FACTS_PER_VIDEO, generate_rapid_facts
 from generate_script import generate_script
@@ -21,8 +21,26 @@ os.makedirs(OUT_DIR, exist_ok=True)
 # VN-канал в satisfying-режиме: random-facts сценарий + залипательный фон, без хук-плашки.
 SATISFYING = CFG.get("satisfying_mode", False)
 
+# Сценарий сохраняется СРАЗУ после генерации (2026-07-04): раньше упавший на клипах/TTS
+# прогон (сетевой сбой) терял оплаченный вызов Sonnet. Если прошлый прогон упал —
+# переиспользуем его сценарий вместо новой генерации. Удаляется при успешном завершении.
+PENDING_PATH = os.path.join(OUT_DIR, "meta_pending.json")
+
 print("1/4 Генерация сценария...")
-data = generate_rapid_facts() if SATISFYING else generate_script()
+data = None
+if os.path.exists(PENDING_PATH):
+    try:
+        with open(PENDING_PATH, encoding="utf-8") as f:
+            pending = json.load(f)
+        if pending.get("channel") == CHANNEL:  # сценарий другого канала не переиспользуем
+            data = pending["data"]
+            print("  (сценарий из meta_pending.json — прошлый прогон упал после генерации)")
+    except (json.JSONDecodeError, KeyError):
+        pass
+if data is None:
+    data = generate_rapid_facts() if SATISFYING else generate_script()
+    with open(PENDING_PATH, "w", encoding="utf-8") as f:
+        json.dump({"channel": CHANNEL, "data": data}, f, ensure_ascii=False, indent=2)
 print(f"  Тема: {data['topic']}")
 print(f"  Заголовок: {data['title']}")
 
@@ -72,6 +90,9 @@ with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
         json.dump(meta, f, ensure_ascii=False, indent=2)
     with open(os.path.join(OUT_DIR, f"meta_{num}.json"), "w", encoding="utf-8") as f:
         json.dump(meta, f, ensure_ascii=False, indent=2)
+    # Прогон успешен — «страховочный» сценарий больше не нужен.
+    if os.path.exists(PENDING_PATH):
+        os.remove(PENDING_PATH)
 
 print(f"\nГотово!")
 print(f"  Видео:     {os.path.join(OUT_DIR, f'video_{num}.mp4')}")

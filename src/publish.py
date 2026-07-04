@@ -98,6 +98,16 @@ def publish(
         # Выкидываем строки про плейлист — плейлистов у Shorts больше нет.
         lines = [ln for ln in comment_template.split("\n") if "{playlist_url}" not in ln]
         comment = "\n".join(lines).format(channel_url=channel_url).strip()
+        # Фактоспецифичный вопрос (2026-07-04): модель отдаёт comment_question в том же
+        # вызове генерации — вопрос про КОНКРЕТНЫЙ факт собирает больше ответов, чем
+        # генерик «ты это знал?» (comment density — топ-сигнал ранжирования). Заменяет
+        # первую (генерик-провокация) строку шаблона, строка подписки остаётся. Замена
+        # ПОСЛЕ .format() — чтобы случайные фигурные скобки в тексте модели не уронили его.
+        fact_q = str(data.get("comment_question", "")).strip()
+        if fact_q and comment:
+            comment_lines = comment.split("\n")
+            comment_lines[0] = fact_q
+            comment = "\n".join(comment_lines)
         if longform_url:  # та же воронка — ссылка на лонгформ в закреп-комменте
             comment_cta = CFG.get("longform_comment_cta", "Want the full story?")
             comment = (comment + f"\n\n▶ {comment_cta} {longform_url}").strip()
