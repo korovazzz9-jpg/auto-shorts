@@ -23,8 +23,9 @@ VN = timezone(timedelta(hours=7))    # Вьетнам UTC+7
 MSK = timezone(timedelta(hours=3))   # Москва UTC+3
 
 # Слоты публикаций в UTC (часы, минуты). EN — из check_recent_upload.SLOTS_UTC; ES — из cron-job.org.
-EN_SLOTS = [(13, 7), (16, 13), (20, 7), (22, 13), (0, 7)]
-ES_SLOTS = [(13, 17), (20, 17), (0, 17)]
+# 2026-07-01: EN 5→4 (убран 13:07), ES 3→4 (добавлен 16:17) — перелив ресурса на ES.
+EN_SLOTS = [(16, 13), (20, 7), (22, 13), (0, 7)]
+ES_SLOTS = [(13, 17), (16, 17), (20, 17), (0, 17)]
 ALL_SLOTS = sorted(set(EN_SLOTS + ES_SLOTS))
 
 TRIGGERS = ("расписание", "/расписание", "schedule", "/schedule", "/start")

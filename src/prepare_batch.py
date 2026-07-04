@@ -117,6 +117,9 @@ def main() -> None:
         published_signatures = [_signature_from_text(t) for t in get_recent_video_texts(50)]
     except Exception:
         published_signatures = []
+    # 0 = YT-креды не переданы или API недоступен: дедуп против опубликованных выключен,
+    # работает только дедуп внутри очереди. Печатаем явно — молчаливый no-op уже был багом.
+    print(f"  Дедуп против опубликованных: {len(published_signatures)} видео загружено.")
 
     try:
         past_titles = get_recent_titles()

@@ -31,10 +31,16 @@ jobs:
       - name: Install Python deps
         run: pip install -r requirements.txt
 
+      # YT-креды нужны дедупу против уже ОПУБЛИКОВАННЫХ видео (recent_titles.
+      # get_recent_video_texts) — без них проверка молча превращается в no-op
+      # (перегенерация того же факта, реальный случай: медуза 2026-07-04).
       - name: Prepare EN queue
         working-directory: src
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
         run: python prepare_batch.py
 
       - name: Prepare ES queue
@@ -42,6 +48,9 @@ jobs:
         env:
           CHANNEL: es
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN_ES }}
         run: python prepare_batch.py
 
       - name: Persist queue files

@@ -75,10 +75,13 @@ def _source_client():
 
 def _iso_duration_seconds(duration: str) -> int:
     import re
-    m = re.match(r"PT(?:(\d+)M)?(?:(\d+)S)?", duration or "")
+    # Часы обязательны в паттерне: без (\d+)H строка "PT1H..." не матчила ни одну группу
+    # и возвращала 0 сек — часовое видео прошло бы фильтр "только Shorts <= 65с".
+    m = re.match(r"PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?", duration or "")
     if not m:
         return 10 ** 6
-    return int(m.group(1) or 0) * 60 + int(m.group(2) or 0)
+    h, mi, s = (int(x) if x else 0 for x in m.groups())
+    return h * 3600 + mi * 60 + s
 
 
 def _fetch_videos(youtube, max_results: int, with_stats: bool) -> list[dict]:

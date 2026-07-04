@@ -12,7 +12,7 @@ on:
 
 permissions:
   actions: read
-  contents: read
+  contents: write   # ретрай пайплайна берёт сценарий из queue_en.json — его надо закоммитить обратно
 
 jobs:
   check-and-retry:
@@ -86,3 +86,17 @@ jobs:
           PINTEREST_ACCESS_TOKEN: ${{ secrets.PINTEREST_ACCESS_TOKEN }}
           PINTEREST_BOARD_ID: ${{ secrets.PINTEREST_BOARD_ID }}
         run: python pipeline.py
+
+      # Тот же шаг, что в daily.yml: pipeline.py мог взять сценарий из queue_en.json
+      # (Batch API preload) — без коммита следующий запуск увидел бы несдвинутую очередь
+      # и опубликовал бы ТОТ ЖЕ сценарий второй раз.
+      - name: Persist queue state
+        if: always() && steps.guard.outputs.skip == 'false' && steps.check.outputs.missed == 'true'
+        run: |
+          if [ ! -f queue_en.json ]; then echo "queue_en.json ещё не создан — пропускаем"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add queue_en.json
+          git commit -m "chore(queue): EN queue state (watchdog retry) $(date -u +%F)" || { echo "no changes"; exit 0; }
+          git pull --rebase origin master
+          git push

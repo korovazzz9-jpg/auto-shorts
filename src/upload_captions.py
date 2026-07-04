@@ -45,9 +45,11 @@ def _translate_srt(srt_content: str, target_lang: str) -> str:
         "and blank lines between entries. Only translate the text lines.\n\n"
         f"{srt_content}"
     )
+    # 8192, не 2048: SRT лонгформа (550-750 слов ≈ 120+ блоков с таймстампами) в 2048 токенов
+    # не влезает — перевод обрезался на середине, заливались битые субтитры. Shorts влезали.
     response = client.messages.create(
         model="claude-haiku-4-5",
-        max_tokens=2048,
+        max_tokens=8192,
         messages=[{"role": "user", "content": prompt}],
     )
     return response.content[0].text.strip()
