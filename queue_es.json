@@ -1,46 +1,5 @@
 [
   {
-    "title": "El día que el Sol lanzó plasma directo a la Tierra",
-    "hook_text": "Casi nos borra del mapa",
-    "hook_template": "sounds-fake",
-    "script": "Esto suena a ficción, pero en 1859 una explosión solar frió todos los telégrafos del mundo y lanzó auroras hasta Cuba. Se llama el Evento Carrington. El Sol disparó una nube de plasma tan brutal que llegó a la Tierra en solo 17 horas, cuando lo normal son tres días. Y lo peor: si eso pasara hoy, colapsaría toda la red eléctrica global, sin internet, sin hospitales, sin nada. Mándale esto a alguien que cree que el Sol es solo para broncearse. Y por eso exactamente.",
-    "word_count": 87,
-    "search_summary": "El Evento Carrington de 1859 fue una tormenta solar que destruyó redes de telégrafos y podría colapsar la electricidad global si ocurriera hoy.",
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "datos curiosos",
-      "hechos increíbles",
-      "evento Carrington",
-      "tormenta solar 1859",
-      "el sol y la tierra",
-      "datos del espacio",
-      "curiosidades del universo",
-      "apagón global solar",
-      "shorts de ciencia"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#datoscuriosos",
-      "#espacio",
-      "#tormentasolar",
-      "#eventocarrington"
-    ],
-    "video_queries": [
-      "solar flare sun explosion",
-      "aurora borealis night sky",
-      "old telegraph office historical",
-      "massive power grid electricity",
-      "city lights blackout aerial",
-      "sun surface plasma burst"
-    ],
-    "has_loop": true,
-    "topic": "space",
-    "hashtag_position": "end"
-  },
-  {
     "title": "El ejército romano que desapareció en China",
     "title_opener": "the-x",
     "hook_text": "Desaparecieron sin dejar rastro",
