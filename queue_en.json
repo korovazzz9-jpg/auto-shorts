@@ -1,47 +1,5 @@
 [
   {
-    "title": "The Computer That Runs on Your Body Heat",
-    "hook_text": "YOUR BODY POWERS THIS",
-    "hook_template": "sounds-fake",
-    "script": "This sounds fake, but a computer chip needs no battery — your skin runs it. IBM researchers built a thermoelectric processor in 2023 that harvests the 2–3 watts your body constantly radiates as heat and converts it directly into computing power. No charging. No cables. No battery death at 7%. But here's the strange part — the warmer your skin runs, the faster it computes. Your own fever literally overclocks it. Send this to someone who still thinks batteries are unavoidable. And that's how.",
-    "word_count": 87,
-    "search_summary": "IBM thermoelectric chip 2023 harvests body heat to power a computer processor with no battery",
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "future technology",
-      "body heat computer",
-      "thermoelectric chip",
-      "IBM processor 2023",
-      "wearable tech facts",
-      "no battery technology",
-      "tech facts",
-      "did you know tech",
-      "60 second facts"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#techfacts",
-      "#futuretechnology",
-      "#wearabletech",
-      "#nобатарейки"
-    ],
-    "video_queries": [
-      "person working laptop close skin",
-      "wearable technology arm device",
-      "futuristic computer chip close",
-      "human body heat infrared glow",
-      "smartwatch wrist technology",
-      "charging cable phone battery dying",
-      "fever thermometer forehead"
-    ],
-    "has_loop": true,
-    "topic": "future technology",
-    "hashtag_position": "end"
-  },
-  {
     "title": "The Sound That Exists in Outer Space",
     "hook_text": "SPACE ISN'T SILENT",
     "hook_template": "sounds-fake",
