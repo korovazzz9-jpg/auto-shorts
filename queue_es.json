@@ -1,45 +1,5 @@
 [
   {
-    "title": "El volcán que creó una ola de 524 metros",
-    "hook_text": "Una ola imposible de ignorar",
-    "hook_template": "sounds-fake",
-    "script": "Una ola de 524 metros destruyó una costa entera — sin ningún terremoto ni huracán. En 1958, un pedazo de montaña cayó al fiordo de Lituya, en Alaska. El impacto levantó agua más alto que el Empire State. Arrasó árboles, rocas, todo. Pero aquí viene lo extraño: tres botes estaban dentro del fiordo esa noche. Uno los surfió. Los tripulantes sobrevivieron montando esa ola monstruosa hacia mar abierto. Mándale esto a alguien que crea que los volcanes solo matan con lava. Y de esta forma.",
-    "word_count": 82,
-    "search_summary": "En 1958 el desprendimiento de una montaña en Lituya Bay, Alaska, generó la ola más grande registrada en la historia, de 524 metros.",
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "datos curiosos",
-      "volcanes y terremotos",
-      "ola gigante Lituya Bay",
-      "desastres naturales historia",
-      "hechos increíbles",
-      "megatsunami Alaska",
-      "curiosidades científicas",
-      "datos en 30 segundos"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#datoscuriosos",
-      "#desastresnaturales",
-      "#megatsunami",
-      "#alaska"
-    ],
-    "video_queries": [
-      "massive ocean wave coast",
-      "mountain landslide water impact",
-      "Alaska fjord aerial view",
-      "giant wave hitting shore",
-      "small boat rough ocean waves",
-      "survivor rescue open sea"
-    ],
-    "has_loop": true,
-    "topic": "volcanoes and earthquakes",
-    "hashtag_position": "end"
-  },
-  {
     "title": "El día que el Sol lanzó plasma directo a la Tierra",
     "hook_text": "Casi nos borra del mapa",
     "hook_template": "sounds-fake",
