@@ -210,5 +210,49 @@
     "topic": "volcanoes and earthquakes",
     "title_variant": "narrative",
     "hashtag_position": "end"
+  },
+  {
+    "title": "El pulpo que recuerda una evolución que no vivió",
+    "title_opener": "the-x",
+    "hook_text": "Tu memoria viene de otro ser",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "impossible",
+    "script": "Este animal edita su propio ADN en tiempo real — y lo hace sin que ningún gen cambie. El pulpo reescribe su ARN mensajero para adaptarse al frío en minutos, no en generaciones. Científicos lo confirmaron en 2017 estudiando pulpos del Ártico: editan miles de instrucciones genéticas activamente, saltándose por completo el proceso normal de evolución darwiniana. Pero aquí lo extraño: los humanos casi no hacemos eso. Evolutivamente, cedimos esa habilidad hace millones de años para replicarnos más rápido. El pulpo eligió flexibilidad sobre velocidad. Manda esto a alguien que crea que la evolución solo pasa entre generaciones.",
+    "word_count": 88,
+    "search_summary": "Los pulpos editan su ARN mensajero en tiempo real para adaptarse al frío, saltándose la evolución generacional darwiniana.",
+    "comment_question": "¿Preferirías poder editar tu propio ADN al instante o vivir mil años? 🧬",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "datos curiosos",
+      "evolución",
+      "pulpo inteligente",
+      "edición de ARN",
+      "biología sorprendente",
+      "datos en 30 segundos",
+      "ciencia curiosa",
+      "adaptación animal",
+      "pulpo ártico"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#evolución",
+      "#pulpo",
+      "#ciencia"
+    ],
+    "video_queries": [
+      "octopus swimming underwater",
+      "arctic ocean wide shot",
+      "DNA strand animation close",
+      "scientist laboratory research",
+      "deep ocean dark water"
+    ],
+    "has_loop": false,
+    "topic": "evolution",
+    "title_variant": "narrative",
+    "hashtag_position": "end"
   }
 ]

@@ -84,5 +84,51 @@
     "topic": "the animal kingdom",
     "title_variant": "narrative",
     "hashtag_position": "end"
+  },
+  {
+    "title": "Crows Remember Your Face — And Hold Grudges",
+    "title_opener": "other",
+    "hook_text": "THIS BIRD NEVER FORGETS YOU",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "creepy",
+    "script": "One bird recognizes your face, tells its children about you, and passes that grudge down for generations. Crows identify individual human faces — proven in a 2008 University of Washington study where masked researchers who trapped crows got dive-bombed for years afterward. The crows that attacked weren't even the ones originally caught. Their offspring joined in. But here's what's unsettling: crows also remember kindness the same way. They've been documented leaving gifts — bottle caps, shiny objects — for specific humans who fed them. So technically, you already have a reputation with every crow in your neighborhood. And this is how.",
+    "word_count": 97,
+    "search_summary": "Crows recognize and remember individual human faces, hold long-term grudges, and teach their offspring to target specific people.",
+    "comment_question": "Have you ever felt like a crow was specifically watching YOU? 🐦",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "crow intelligence",
+      "animal facts",
+      "crows remember faces",
+      "bird behavior",
+      "animal kingdom facts",
+      "did you know",
+      "crow grudge study",
+      "University of Washington crow experiment",
+      "smart birds"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#animalfacts",
+      "#crowbehavior",
+      "#wildlife",
+      "#didyouknow"
+    ],
+    "video_queries": [
+      "crow perched staring",
+      "crow flock urban street",
+      "researcher outdoors birds",
+      "crow swooping attack",
+      "crow city rooftop",
+      "person feeding birds park",
+      "crow close up watching"
+    ],
+    "has_loop": true,
+    "topic": "the animal kingdom",
+    "title_variant": "narrative",
+    "hashtag_position": "end"
   }
 ]
