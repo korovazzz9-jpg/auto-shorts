@@ -10,7 +10,9 @@ from googleapiclient.http import MediaIoBaseUpload
 from config import CFG
 from youtube_auth import get_client
 
-_EXTRA_CAPTION_LANGS = ["vi", "tl"]  # языки, для которых автоматически генерируется перевод
+# 2026-07-04: убрали tl (Filipino) — на 2 канала (EN+ES) в общей квоте 10к/день, 400 ед./язык
+# на видео была лишней тратой, ES с 3 языками субтитров упирался в лимит на последнем слоте дня.
+_EXTRA_CAPTION_LANGS = ["vi"]  # языки, для которых автоматически генерируется перевод
 
 
 def _format_timestamp(seconds: float) -> str:
