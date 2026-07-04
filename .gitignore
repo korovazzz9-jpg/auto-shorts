@@ -18,3 +18,4 @@ assets/backgrounds/*
 src/titles_cache.json
 src/topics_cache.json
 # series_state_*.json НЕ игнорируем — коммитится в Part 1, читается в Part 2/3 через checkout
+src/vision_cache.json
