@@ -1,45 +1,5 @@
 [
   {
-    "title": "Tu estómago se destruye a sí mismo cada semana",
-    "hook_text": "Se come a sí mismo",
-    "hook_template": "sounds-fake",
-    "script": "Tu estómago te digiere a ti — y lo hace cada dos semanas sin parar. El ácido clorhídrico dentro de tu estómago disuelve metal, pero no te perfora porque produce una capa nueva de moco cada 14 días. Sin esa capa, el ácido abriría un hoyo en tu propia pared estomacal en horas. Pero aquí viene lo raro: cuando tienes úlceras, ese proceso falló — y literalmente te estás comiendo desde adentro. Mándale esto a alguien que dice que tiene el estómago de acero.",
-    "word_count": 86,
-    "search_summary": "El estómago humano produce ácido capaz de disolver metal y renueva su capa protectora de moco cada 14 días para no autodigerirse.",
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "datos curiosos cuerpo humano",
-      "curiosidades del cuerpo",
-      "ácido estomacal",
-      "úlceras estomacales",
-      "datos en segundos",
-      "hechos increíbles",
-      "biología humana curiosidades",
-      "sistema digestivo datos"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#datoscuriosos",
-      "#cuerphumano",
-      "#biologiahumana",
-      "#sabiasque"
-    ],
-    "video_queries": [
-      "human stomach anatomy animation",
-      "acid dissolving metal experiment",
-      "digestive system close up",
-      "person holding stomach pain",
-      "medical stomach ulcer illustration",
-      "friends sharing phone outdoors"
-    ],
-    "has_loop": false,
-    "topic": "the human body",
-    "hashtag_position": "end"
-  },
-  {
     "title": "El volcán que creó una ola de 524 metros",
     "hook_text": "Una ola imposible de ignorar",
     "hook_template": "sounds-fake",
