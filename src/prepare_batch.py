@@ -38,7 +38,7 @@ from generate_script import (
     _validate,
     pick_title_variant,
 )
-from recent_titles import add_title_to_cache, add_topic_to_cache, get_recent_titles
+from recent_titles import add_title_to_cache, add_topic_to_cache, get_recent_titles, get_recent_video_texts
 from script_queue import load_queue, save_queue
 
 load_dotenv()
@@ -63,8 +63,7 @@ _COMMON_CAPITALIZED = {
 }
 
 
-def _signature(data: dict) -> set[str]:
-    text = f"{data.get('script', '')} {data.get('title', '')}"
+def _signature_from_text(text: str) -> set[str]:
     nouns = {
         unicodedata.normalize("NFKD", w.lower())
         for w in _PROPER_NOUN_RE.findall(text)
@@ -73,6 +72,10 @@ def _signature(data: dict) -> set[str]:
     nouns -= _COMMON_CAPITALIZED
     numbers = set(_NUMBER_RE.findall(text))
     return nouns | numbers
+
+
+def _signature(data: dict) -> set[str]:
+    return _signature_from_text(f"{data.get('script', '')} {data.get('title', '')}")
 
 
 def _title_words(title: str) -> set[str]:
@@ -103,6 +106,17 @@ def main() -> None:
 
     print(f"  В очереди {len(queue)}/{QUEUE_TARGET}, готовим ещё {need} через Batch API...")
     client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"], max_retries=5)
+
+    # Дедуп внутри батча (_is_duplicate ниже) видит только очередь — уже ОПУБЛИКОВАННЫЕ видео
+    # из неё выпадают, как только их забрал pipeline.py. Тот случай, что поймал пользователь:
+    # серия про медузу вышла и пропала из очереди, а мягкая LLM-инструкция (avoid_block) её не
+    # удержала — модель выбрала тот же факт снова. Добавляем такую же жёсткую сигнатурную
+    # проверку против последних N реально опубликованных видео (текст скрипта лежит в
+    # description, см. recent_titles.get_recent_video_texts).
+    try:
+        published_signatures = [_signature_from_text(t) for t in get_recent_video_texts(50)]
+    except Exception:
+        published_signatures = []
 
     try:
         past_titles = get_recent_titles()
@@ -209,6 +223,12 @@ def main() -> None:
             if dupe_of:
                 print(f"  item-{i}: похож на уже добавленный «{dupe_of['title']}» — пропускаем "
                       f"(тот же факт, разная формулировка).")
+                continue
+
+            sig = _signature(data)
+            if any(len(sig & ps) >= 2 for ps in published_signatures):
+                print(f"  item-{i}: «{data['title']}» похож на уже ОПУБЛИКОВАННОЕ видео "
+                      f"(совпадение имён/чисел в скрипте) — пропускаем.")
                 continue
 
             add_title_to_cache(data["title"])

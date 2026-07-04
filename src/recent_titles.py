@@ -62,8 +62,10 @@ def add_title_to_cache(title: str) -> None:
     _save_to_cache(title)
 
 
-def get_recent_titles() -> list[str]:
-    yt_titles: list[str] = []
+def _fetch_uploads_snippets(max_n: int) -> list[dict]:
+    """Последние max_n snippet-ов (title, description — там же лежит сам скрипт, см.
+    publish.py: description = data["script"] + ...) из плейлиста uploads канала."""
+    snippets: list[dict] = []
     try:
         youtube = get_client()
         channels_response = youtube.channels().list(part="contentDetails", mine=True).execute()
@@ -71,19 +73,24 @@ def get_recent_titles() -> list[str]:
         if items:
             uploads_playlist_id = items[0]["contentDetails"]["relatedPlaylists"]["uploads"]
             page_token = None
-            while len(yt_titles) < MAX_TITLES:
+            while len(snippets) < max_n:
                 response = youtube.playlistItems().list(
                     part="snippet",
                     playlistId=uploads_playlist_id,
                     maxResults=50,
                     pageToken=page_token,
                 ).execute()
-                yt_titles.extend(item["snippet"]["title"] for item in response.get("items", []))
+                snippets.extend(item["snippet"] for item in response.get("items", []))
                 page_token = response.get("nextPageToken")
                 if not page_token:
                     break
     except Exception:
         pass
+    return snippets[:max_n]
+
+
+def get_recent_titles() -> list[str]:
+    yt_titles = [sn["title"] for sn in _fetch_uploads_snippets(MAX_TITLES)]
 
     cache_titles = _load_cache()
     seen: set[str] = set()
@@ -94,6 +101,16 @@ def get_recent_titles() -> list[str]:
             merged.append(t)
 
     return merged[:MAX_TITLES]
+
+
+def get_recent_video_texts(n: int = 50) -> list[str]:
+    """title + description (содержит исходный скрипт) последних n опубликованных видео —
+    источник для сигнатурной проверки дублей по собственным именам/числам (prepare_batch.py),
+    т.к. очередь batch-дедупа видит только ещё не опубликованные элементы этого же прогона."""
+    return [
+        f"{sn.get('title', '')} {sn.get('description', '')}"
+        for sn in _fetch_uploads_snippets(n)
+    ]
 
 
 if __name__ == "__main__":
