@@ -12,6 +12,7 @@ from notify import notify
 from publish import publish
 from script_queue import pop_next
 from tts import text_to_speech
+from upload_captions import captions_fit_quota_today
 from youtube_auth import get_authenticated_channel_title
 
 load_dotenv()
@@ -79,7 +80,9 @@ def run() -> None:
                 f"opener-{data.get('title_opener', 'other')}",
                 f"tone-{data.get('emotional_tone', 'other')}",
             ],
-            enable_captions=True,  # 2026-07-03: videos.insert больше не жрёт общий пул (свой бакет), места хватает
+            # 2026-07-04: кроме Вс (Pacific) — в Вс-день квоты выходят оба лонгформа,
+            # субтитры Shorts + лонгформ в общие 10к не влезают (см. upload_captions).
+            enable_captions=captions_fit_quota_today(),
             enable_pinterest=True,
         )
 

@@ -3,12 +3,28 @@
 Также автоматически загружает вьетнамский перевод (vi) — вторая по размеру аудитория канала."""
 import io
 import os
+from datetime import datetime, timedelta, timezone
 
 from anthropic import Anthropic
 from googleapiclient.http import MediaIoBaseUpload
 
 from config import CFG
 from youtube_auth import get_client
+
+
+def captions_fit_quota_today() -> bool:
+    """False по воскресеньям — субтитры Shorts/серий пропускаем, лонгформу оставляем.
+
+    Квота Google (10к общие на EN+ES) сбрасывается в полночь PACIFIC, поэтому день недели
+    считаем по Pacific: в Вс-день квоты попадают и слоты Вс 13-22 UTC, и Пн 00:07/00:17 UTC
+    (серии Part 1), и оба лонгформа (Вс 23:00/23:17 UTC). Лонгформ+субтитры всех Shorts
+    в один квотный день не влезают (реальный quotaExceeded 2026-07-04)."""
+    try:
+        from zoneinfo import ZoneInfo
+        now = datetime.now(ZoneInfo("America/Los_Angeles"))
+    except Exception:  # нет tzdata (локальный Windows) — зимний Pacific, ошибка максимум час
+        now = datetime.now(timezone(timedelta(hours=-8)))
+    return now.weekday() != 6  # 6 = воскресенье
 
 # 2026-07-04: убрали tl (Filipino) — на 2 канала (EN+ES) в общей квоте 10к/день, 400 ед./язык
 # на видео была лишней тратой, ES с 3 языками субтитров упирался в лимит на последнем слоте дня.

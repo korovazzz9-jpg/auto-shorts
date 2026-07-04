@@ -18,6 +18,7 @@ from notify import notify
 from playlists import add_video_to_playlist_by_id, create_playlist
 from publish import publish
 from tts import text_to_speech
+from upload_captions import captions_fit_quota_today
 from youtube_auth import get_authenticated_channel_title
 
 load_dotenv()
@@ -139,7 +140,9 @@ def run() -> None:
             alert=lambda step, e: _alert(f"{step} (Part {part})", e),
             extra_tags=[f"hook-{data.get('hook_template', 'other')}"],  # для analytics_retention
             extra_comment=_series_extra_comment(part, state),  # плейлист + ссылки на части
-            enable_captions=True,  # 2026-07-03: квота больше не проблема, как и в обычном пайплайне
+            # Part 1 выходит Пн 00:07/00:17 UTC = ещё Вс по Pacific (день квоты) — в Вс
+            # субтитры только у лонгформа, иначе общие 10к не влезают (см. upload_captions).
+            enable_captions=captions_fit_quota_today(),
             enable_pinterest=False,  # Pinterest только для обычных Shorts
         )
 
