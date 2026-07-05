@@ -54,6 +54,30 @@ def _verify_channel() -> None:
         )
 
 
+def _community_poll_draft(current_theme: str, title: str) -> str:
+    """Черновик community-поста с опросом (2026-07-05): YouTube API не умеет постить в
+    Сообщество (endpoint не существует) — поэтому готовый текст шлётся в Telegram, копипаста
+    в Studio занимает ~30 сек. Варианты опроса — темы из TOPICS_POOL, по которым лонгформ
+    ЕЩЁ НЕ выходил (без повторов с by_topic из longform_state), в формулировках
+    topic_cta_words (обобщённые: «Ocean», не «mantis shrimp»). Пусто при любой проблеме —
+    пост опционален, публикацию не трогает."""
+    try:
+        import random as _random
+        from generate_script import TOPICS_POOL
+        from longform_link import _load as _load_longform_state
+        used = set(_load_longform_state().get("by_topic", {}).keys()) | {current_theme}
+        candidates = [t for t in TOPICS_POOL if t not in used]
+        _random.shuffle(candidates)
+        words = CFG.get("topic_cta_words", {})
+        labels = [words.get(t, t).capitalize() for t in candidates[:4]]
+        intro = CFG.get("community_poll_intro", "").format(title=title)
+        if not intro or len(labels) < 2:
+            return ""
+        return intro + "\n" + "\n".join(f"◻️ {l}" for l in labels)
+    except Exception:
+        return ""
+
+
 def _chapter_lines(script: str, chapters: list, words: list[dict]) -> str:
     """Главы (key moments) для описания: маппит sentence_index из генерации на РЕАЛЬНЫЕ
     тайминги TTS (кумулятивный счётчик слов по предложениям → words[i]["start"]). Дрейф
@@ -195,9 +219,12 @@ def run() -> None:
     # End Screen (Subscribe + похожее видео) доступен только вручную в Studio — API его не
     # даёт. Раз лонгформ выходит 1 раз/неделю — это 2 минуты в Studio, бесплатно и конвертит
     # самого «горячего» зрителя канала (досмотревшего разбор) в подписчика.
+    poll = _community_poll_draft(data["theme"], data["title"])
+    poll_block = f"\n\n📋 Community-пост (Studio → Сообщество → Опрос, скопируй):\n\n{poll}" if poll else ""
     notify(
         f"✅ [{CFG['channel_name']}] лонгформ опубликован:\n{data['title']}\n{url}\n\n"
         f"📌 Не забудь добавить End Screen (Subscribe + похожее видео) вручную в YouTube Studio."
+        f"{poll_block}"
     )
     print(f"Готово: {url}")
 

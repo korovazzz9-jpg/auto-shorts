@@ -59,6 +59,7 @@ CONFIGS = {
             "evolution": "EVOLUTION",
             "natural wonders": "NATURE",
             "shipwrecks and lost treasures": "SHIPWRECK",
+            "future technology": "TECHNOLOGY",
         },
         # Инструкция по CTA внутри сценария. Держим КОРОТКОЙ — иначе раздувает длину видео.
         "cta_instruction": (
@@ -97,6 +98,9 @@ CONFIGS = {
         # «On this day» (2026-07-05): час UTC первого слота дня — по четвергам в этот слот
         # выходит топикал-факт с привязкой к дате (live-генерация мимо очереди).
         "topical_slot_hour": 16,
+        # Community-пост после лонгформа (2026-07-05): API постов не имеет — pipeline_longform
+        # шлёт готовый текст опроса в Telegram, копируется в Studio → Сообщество вручную.
+        "community_poll_intro": "Have you seen the new deep-dive yet: {title}? 👀\n\nWhich topic should next week's video cover? Vote 👇",
         # Префикс источника факта в описании (source_note из генерации).
         "source_label": "Source:",
         # Воронка Shorts→лонгформ: фразы перед ссылкой на последний длинный ролик
@@ -192,6 +196,7 @@ CONFIGS = {
             "evolution": "EVOLUCIÓN",
             "natural wonders": "NATURALEZA",
             "shipwrecks and lost treasures": "NAUFRAGIOS",
+            "future technology": "TECNOLOGÍA",
         },
         "cta_instruction": (
             "ONE short CTA in Spanish, 4-7 words MAX — either \"Sígueme para más.\" or "
@@ -217,6 +222,7 @@ CONFIGS = {
         ],
         "ig_card_slot_hour": 13,  # первый ES-слот дня (13:17 UTC)
         "topical_slot_hour": 13,   # первый ES-слот дня (13:17 UTC) — топикал по четвергам
+        "community_poll_intro": "¿Ya viste el nuevo análisis: {title}? 👀\n\n¿Sobre qué tema quieres el video de la próxima semana? Vota 👇",
         "source_label": "Fuente:",
         "longform_desc_cta": "Análisis completos en el canal:",
         "longform_comment_cta": "¿Quieres la historia completa? Mira el análisis 👉",
