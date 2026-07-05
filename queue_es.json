@@ -1,48 +1,5 @@
 [
   {
-    "title": "El volcán que creó un tsunami sin tocar el mar",
-    "title_opener": "the-x",
-    "hook_text": "Sin agua, sin terremoto",
-    "hook_template": "sounds-fake",
-    "emotional_tone": "impossible",
-    "script": "Un volcán derrumbó media isla en 1888 y generó un tsunami gigante — sin terremoto, sin falla tectónica. La erupción de Ritter Island, en Papua Nueva Guinea, colapsó en segundos y lanzó olas de 15 metros que destruyeron aldeas a 500 kilómetros de distancia. Pero lo más perturbador: hay decenas de volcanes costeros con el mismo potencial hoy. Y nadie los monitorea como debería. Mándale esto a alguien que crea que los tsunamis solo los causan terremotos. Y por eso.",
-    "word_count": 84,
-    "search_summary": "El colapso del volcán Ritter Island en 1888 generó un tsunami de 15 metros sin ningún terremoto.",
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "volcanes",
-      "tsunamis",
-      "datos curiosos",
-      "volcano collapse tsunami",
-      "Ritter Island erupción",
-      "desastres naturales",
-      "geología",
-      "hechos increíbles"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#datosCuriosos",
-      "#volcanes",
-      "#tsunamis",
-      "#desastresNaturales"
-    ],
-    "video_queries": [
-      "volcanic eruption ocean",
-      "island cliff collapsing into sea",
-      "massive ocean waves coastline",
-      "tsunami waves destroying village",
-      "aerial view coastal volcano",
-      "flooded coastal village aftermath"
-    ],
-    "has_loop": true,
-    "topic": "volcanoes and earthquakes",
-    "title_variant": "narrative",
-    "hashtag_position": "end"
-  },
-  {
     "title": "El pulpo que recuerda una evolución que no vivió",
     "title_opener": "the-x",
     "hook_text": "Tu memoria viene de otro ser",
