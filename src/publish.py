@@ -188,10 +188,13 @@ def publish(
                 if datetime.now(timezone.utc).hour == CFG.get("ig_card_slot_hour", -1):
                     hosted_card = None
                     try:
-                        from build_ig_card import build_ig_card, next_fact_number
+                        import re as _re
+                        from build_ig_card import build_ig_card, next_fact_number, save_fact_number
                         from config import CHANNEL
-                        sentences = [s.strip() for s in data["script"].replace("!", ".").replace("?", ".").split(".") if s.strip()]
-                        fact_text = ". ".join(sentences[:2]) + "."
+                        # Сплит по границам предложений С ПРОБЕЛОМ после знака — иначе
+                        # «4.5mm» резался на «4. 5mm» и факт обрывался на середине числа.
+                        sentences = [s.strip() for s in _re.split(r"(?<=[.!?])\s+", data["script"]) if s.strip()]
+                        fact_text = " ".join(sentences[:2])
                         fact_no = next_fact_number(CHANNEL)
                         card_path = build_ig_card(data["title"], fact_text, CFG["channel_handle"], CHANNEL, fact_no)
                         hosted_card = upload_image(card_path)
@@ -200,6 +203,7 @@ def publish(
                             card_caption += f"\n\n{ig_cta}"
                         card_caption += f"\n\n{' '.join(ig_tags)}"
                         upload_photo(hosted_card["url"], card_caption)
+                        save_fact_number(CHANNEL, fact_no)  # номер фиксируется ТОЛЬКО после успеха
                         print("  Instagram: карточка опубликована")
 
                         # Stories (2026-07-05): та же карточка в сторис — ленту видят новые

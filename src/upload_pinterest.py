@@ -146,9 +146,11 @@ def publish_pin(title: str, description: str, image_path: str, video_url: str) -
 
 def upload_pin(title: str, script: str, channel_handle: str, video_id: str) -> str:
     """Точка входа: генерирует карточку и публикует пин."""
-    # Первые 2-3 предложения скрипта как текст карточки
-    sentences = [s.strip() for s in script.replace("!", ".").replace("?", ".").split(".") if s.strip()]
-    fact_text = ". ".join(sentences[:2]) + "."
+    # Первые 2 предложения скрипта как текст карточки. Сплит по границам предложений
+    # С ПРОБЕЛОМ после знака — иначе «4.5mm» резался на «4. 5mm» (тот же баг был в publish).
+    import re
+    sentences = [s.strip() for s in re.split(r"(?<=[.!?])\s+", script) if s.strip()]
+    fact_text = " ".join(sentences[:2])
 
     card_path = build_pin_card(title, fact_text, channel_handle)
     video_url = f"https://www.youtube.com/shorts/{video_id}"

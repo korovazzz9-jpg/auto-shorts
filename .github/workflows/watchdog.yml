@@ -94,10 +94,11 @@ jobs:
       - name: Persist queue state
         if: always() && steps.guard.outputs.skip == 'false' && steps.check.outputs.missed == 'true'
         run: |
-          if [ ! -f queue_en.json ]; then echo "queue_en.json ещё не создан — пропускаем"; exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add queue_en.json
-          git commit -m "chore(queue): EN queue state (watchdog retry) $(date -u +%F)" || { echo "no changes"; exit 0; }
+          [ -f queue_en.json ] && git add queue_en.json
+          [ -f ig_card_counter_en.json ] && git add ig_card_counter_en.json
+          git diff --cached --quiet && { echo "no changes"; exit 0; }
+          git commit -m "chore(queue): EN queue/card state (watchdog retry) $(date -u +%F)" || { echo "no changes"; exit 0; }
           git pull --rebase origin master
           git push

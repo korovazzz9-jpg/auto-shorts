@@ -19,3 +19,6 @@ src/titles_cache.json
 src/topics_cache.json
 # series_state_*.json НЕ игнорируем — коммитится в Part 1, читается в Part 2/3 через checkout
 src/vision_cache.json
+# Аватарки каналов нужны IG-карточкам в CI — исключение из общего игнора *.png
+!manual_thumbs/yt_avatar_en.png
+!manual_thumbs/yt_avatar_es.png

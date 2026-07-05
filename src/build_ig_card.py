@@ -60,19 +60,26 @@ def _get_font(size: int) -> ImageFont.FreeTypeFont:
     return ImageFont.load_default()
 
 
+def _counter_path(channel: str) -> str:
+    return os.path.join(_COUNTER_DIR, "..", f"ig_card_counter_{channel}.json")
+
+
 def next_fact_number(channel: str) -> int:
-    """Счётчик фактов по каналу (карточки — НОВЫЙ формат, нумерация с 1, отдельно от Shorts).
-    Файл коммитится тем же воркфлоу, что queue_<channel>.json (publish.py вызывается из
-    daily.yml/daily-es.yml — persist делает git add на всё, что изменилось)."""
-    path = os.path.join(_COUNTER_DIR, "..", f"ig_card_counter_{channel}.json")
+    """Следующий номер факта (нумерация с 1 — карточки НОВЫЙ формат, не продолжение Shorts).
+    НЕ записывает файл — только читает: сохранение через save_fact_number ПОСЛЕ успешной
+    публикации, иначе сбой аплоада оставлял бы дыру в нумерации."""
     try:
-        with open(path, encoding="utf-8") as f:
-            n = json.load(f).get("last", 0) + 1
+        with open(_counter_path(channel), encoding="utf-8") as f:
+            return json.load(f).get("last", 0) + 1
     except (FileNotFoundError, json.JSONDecodeError, AttributeError):
-        n = 1
-    with open(path, "w", encoding="utf-8") as f:
+        return 1
+
+
+def save_fact_number(channel: str, n: int) -> None:
+    """Фиксирует номер после успешной публикации карточки. Файл коммитится persist-шагом
+    daily.yml/daily-es.yml/watchdog.yml."""
+    with open(_counter_path(channel), "w", encoding="utf-8") as f:
         json.dump({"last": n}, f)
-    return n
 
 
 def _draw_youtube_badge(draw: ImageDraw.ImageDraw, x: float, y: float, w: int = 90, h: int = 64) -> None:

@@ -29,6 +29,7 @@ from generate_script import (
     TITLE_OPENERS,
     _append_loop,
     _build_user_content,
+    _niche_titles_for,
     _parse_response,
     _validate,
     pick_title_variant,
@@ -156,6 +157,7 @@ def main() -> None:
     data["topic"] = target["topic"]
     data["title_variant"] = title_variant
     data["hashtag_position"] = "end"
+    data["niche_styled"] = bool(_niche_titles_for(target["topic"]))  # промпт получал niche-титулы
     data["niche_recreated"] = True          # тег niche-recreation (pipeline.py)
     data["recreated_from_niche"] = target["video_id"]  # маркер происхождения в queue-файле
 
