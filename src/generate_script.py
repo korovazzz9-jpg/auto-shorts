@@ -455,13 +455,26 @@ def generate_script() -> dict:
     title_instruction += _title_variety_note(past_titles)
     user_content = _build_user_content(topic, avoid_block, title_instruction)
 
-    message = client.messages.create(
-        model="claude-sonnet-4-6",
-        max_tokens=1600,
-        system=system_prompt,
-        messages=[{"role": "user", "content": user_content}],
-    )
-    data = _parse_response(message)
+    # Ретрай битого JSON (2026-07-05): в отличие от generate_series.py/generate_longform_script.py
+    # (там добавлено раньше после прод-падений), здесь парсинг падал без права на восстановление —
+    # один сломанный ответ модели ронял весь слот публикации (реальный случай: 2026-07-05 00:07 UTC).
+    data = None
+    last_err = None
+    for attempt in range(3):
+        message = client.messages.create(
+            model="claude-sonnet-4-6",
+            max_tokens=1600,
+            system=system_prompt,
+            messages=[{"role": "user", "content": user_content}],
+        )
+        try:
+            data = _parse_response(message)
+            break
+        except json.JSONDecodeError as e:
+            last_err = e
+            print(f"  Script JSON parse failed (attempt {attempt + 1}/3): {e}; retrying...")
+    if data is None:
+        raise RuntimeError(f"Script JSON невалиден после 3 попыток: {last_err}")
 
     # Validation gate — only pay for a second call if the output is actually bad.
     problems = _validate(data)
