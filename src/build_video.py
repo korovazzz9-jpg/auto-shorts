@@ -106,40 +106,69 @@ def _build_background(clip_paths: list[str], duration: float, visual_loop: bool 
     return CompositeVideoClip([sequence], size=TARGET_SIZE).set_duration(duration)
 
 
-WORD_POP_DURATION = 0.12  # сек scale-анимации появления слова (word-pop, 2026-07-05)
-WORD_POP_SCALE = 1.18     # стартовый масштаб «выпрыгивания»
+# Karaoke-группы (2026-07-05, идея пользователя): на экране сразу НЕСКОЛЬКО слов, активное
+# (произносимое сейчас) — акцентным цветом и крупнее. Классический karaoke-стиль — глаз
+# читает фразу вперёд, подсветка ведёт по ней; живее, чем слово-за-словом.
+KARAOKE_GROUP_SIZE = 3    # слов на экране одновременно
+KARAOKE_GAP = 26          # px между словами
+KARAOKE_FONTSIZE = 88     # базовый размер; группа шире кадра — уменьшается автоматически
+ACTIVE_SCALE = 1.15       # активное слово крупнее на 15%
 
 
 def _karaoke_clips(words: list[dict], cutoff: float) -> list[TextClip]:
     color = _pick_caption_color()
-    # Числа — главные анкоры фактов («100,000 years», «4.5mm») — выделяем контрастным
-    # цветом. Только цифры (не имена): у имён нет надёжного сигнала в верхнем регистре.
-    accent = "yellow" if color != "yellow" else "white"
+    accent = "yellow" if color != "yellow" else "#7CFFCB"  # цвет активного слова
+
+    def _word_clip(text: str, fontsize: int, col: str) -> TextClip:
+        return TextClip(text.upper(), fontsize=fontsize, color=col, font=SUBTITLE_FONT,
+                        stroke_color="black", stroke_width=5, method="label")
+
     clips = []
-    for w in words:
-        if w["start"] >= cutoff:
-            continue
-        end = min(w["end"], cutoff)
-        has_digit = any(ch.isdigit() for ch in w["text"])
-        clip = (
-            TextClip(
-                w["text"].upper(),
-                fontsize=100,
-                color=accent if has_digit else color,
-                font=SUBTITLE_FONT,
-                stroke_color="black",
-                stroke_width=5,
-                size=(TARGET_SIZE[0] - 100, None),
-                method="caption",
-            )
-            .set_position(("center", CAPTION_Y))
-            .set_start(w["start"])
-            .set_duration(max(end - w["start"], 0.05))
-            # Word-pop (2026-07-05): слово «выпрыгивает» при появлении (1.18 → 1.0 за 0.12с) —
-            # стандарт живых вирусных субтитров; после POP_DURATION масштаб стабильно 1.0.
-            .resize(lambda t: max(1.0, WORD_POP_SCALE - (WORD_POP_SCALE - 1.0) * t / WORD_POP_DURATION))
-        )
-        clips.append(clip)
+    visible = [w for w in words if w["start"] < cutoff]
+    for i in range(0, len(visible), KARAOKE_GROUP_SIZE):
+        group = visible[i:i + KARAOKE_GROUP_SIZE]
+        g_start = group[0]["start"]
+        g_end = min(max(w["end"] for w in group), cutoff)
+        g_dur = max(g_end - g_start, 0.05)
+
+        # Базовый ряд: измеряем реальную ширину отрендеренных слов (label-клипы), при
+        # переполнении кадра пересоздаём группу меньшим шрифтом (пропорционально).
+        fontsize = KARAOKE_FONTSIZE
+        base = [_word_clip(w["text"], fontsize, color) for w in group]
+        total_w = sum(c.w for c in base) + KARAOKE_GAP * (len(base) - 1)
+        max_w = TARGET_SIZE[0] - 100
+        if total_w > max_w:
+            fontsize = max(40, int(fontsize * max_w / total_w))
+            base = [_word_clip(w["text"], fontsize, color) for w in group]
+            total_w = sum(c.w for c in base) + KARAOKE_GAP * (len(base) - 1)
+
+        x = (TARGET_SIZE[0] - total_w) / 2
+        centers = []
+        for c in base:
+            centers.append(x + c.w / 2)
+            x += c.w + KARAOKE_GAP
+
+        # Каждое слово ряда: пассивная версия видна ДО и ПОСЛЕ своего произнесения (два
+        # отрезка, а не один на всю группу — иначе она просвечивала бы за активной с
+        # двойным контуром), акцентная крупная — ровно на время произнесения, по тому же
+        # центру (и по вертикали относительно базовой строки).
+        for w, c, cx in zip(group, base, centers):
+            w_start = max(min(w["start"], g_end), g_start)
+            w_end = min(w["end"], g_end)
+            bx = cx - c.w / 2
+            if w_start - g_start > 0.01:  # пассивная до подсветки
+                clips.append(c.set_position((bx, CAPTION_Y))
+                              .set_start(g_start).set_duration(w_start - g_start))
+            if g_end - w_end > 0.01:      # пассивная после подсветки
+                clips.append(c.copy().set_position((bx, CAPTION_Y))
+                              .set_start(w_end).set_duration(g_end - w_end))
+            if w_end <= w_start:
+                continue
+            active = _word_clip(w["text"], max(int(fontsize * ACTIVE_SCALE), fontsize + 4), accent)
+            ax = cx - active.w / 2
+            ay = CAPTION_Y - (active.h - c.h) / 2
+            clips.append(active.set_position((ax, ay))
+                               .set_start(w_start).set_duration(max(w_end - w_start, 0.05)))
     return clips
 
 
