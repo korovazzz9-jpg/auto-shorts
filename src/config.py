@@ -99,6 +99,15 @@ CONFIGS = {
         # СВЕРХУ — комменты/ответы это топ-сигнал алгоритма (engagement density), generic
         # "follow" так не работает. {channel_url} подставляется автоматически.
         "first_comment": "Wait — did you actually already know this one? 👇\nSubscribe for a new fact every day 👉 {channel_url}",
+        # Пул для строки подписки в закреп-комменте (2026-07-05): раньше это была ЕДИНСТВЕННАЯ
+        # фиксированная строка, дословно одинаковая на 100% видео канала — классический
+        # "bot-like pattern" сигнал спам-детекции YouTube. Тот же паттерн, что first_comment_replies.
+        "first_comment_subscribe_ctas": [
+            "Subscribe for a new fact every day 👉 {channel_url}",
+            "New fact drops daily — subscribe 👉 {channel_url}",
+            "Follow along for more like this 👉 {channel_url}",
+            "One fact a day, forever — subscribe 👉 {channel_url}",
+        ],
         # #3 Само-ответ на закреп-коммент → мини-тред (engagement density). Генерик, без доп.
         # токенов. ПУЛ вариантов (random.choice в publish/pipeline_longform): один и тот же
         # текст под каждым видео выглядел ботово.
@@ -201,6 +210,12 @@ CONFIGS = {
         "longform_desc_cta": "Análisis completos en el canal:",
         "longform_comment_cta": "¿Quieres la historia completa? Mira el análisis 👉",
         "first_comment": "Un momento — ¿tú ya sabías esto? 👇\nSuscríbete para un dato nuevo cada día 👉 {channel_url}",
+        "first_comment_subscribe_ctas": [
+            "Suscríbete para un dato nuevo cada día 👉 {channel_url}",
+            "Dato nuevo cada día — suscríbete 👉 {channel_url}",
+            "Sígueme para más datos como este 👉 {channel_url}",
+            "Un dato al día, para siempre — suscríbete 👉 {channel_url}",
+        ],
         "first_comment_replies": [
             "Sé sincero — ¿esto te sorprendió o ya lo sabías? 👀",
             "La mayoría pasa de largo sin creerlo. ¿Tú lo creíste?",

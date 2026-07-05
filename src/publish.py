@@ -108,6 +108,16 @@ def publish(
             comment_lines = comment.split("\n")
             comment_lines[0] = fact_q
             comment = "\n".join(comment_lines)
+        # Строка подписки из пула (2026-07-05): раньше это была ЕДИНСТВЕННАЯ дословно
+        # одинаковая строка на 100% видео канала — "bot-like pattern" сигнал спам-детекции.
+        # Заменяет ВТОРУЮ строку (первая уже заменена fact_q выше). Тот же паттерн, что
+        # first_comment_replies. Пусто в конфиге → строка остаётся как в шаблоне.
+        subscribe_ctas = CFG.get("first_comment_subscribe_ctas", [])
+        if subscribe_ctas and comment:
+            comment_lines = comment.split("\n")
+            if len(comment_lines) >= 2:
+                comment_lines[1] = random.choice(subscribe_ctas).format(channel_url=channel_url)
+                comment = "\n".join(comment_lines)
         if longform_url:  # та же воронка — ссылка на лонгформ в закреп-комменте
             comment_cta = CFG.get("longform_comment_cta", "Want the full story?")
             comment = (comment + f"\n\n▶ {comment_cta} {longform_url}").strip()
