@@ -182,16 +182,16 @@ def publish(
 
                 # IG-карточка факта (2026-07-05): раз в день (первый слот, ig_card_slot_hour)
                 # в ленту постится ещё и СТАТИЧНАЯ карточка — другой формат в той же ленте,
-                # больше касаний без нового контента. Генератор переиспользован из Pinterest
-                # (build_pin_card — чистый PIL, Pinterest API не нужен). Сбой карточки не
-                # роняет остальной кросс-постинг (alert + continue).
+                # больше касаний без нового контента. Свой генератор (build_ig_card, дизайн
+                # выбран пользователем) — НЕ Pinterest-генератор, у того свой проверенный стиль.
+                # Сбой карточки не роняет остальной кросс-постинг (alert + continue).
                 if datetime.now(timezone.utc).hour == CFG.get("ig_card_slot_hour", -1):
                     hosted_card = None
                     try:
-                        from upload_pinterest import build_pin_card
+                        from build_ig_card import build_ig_card
                         sentences = [s.strip() for s in data["script"].replace("!", ".").replace("?", ".").split(".") if s.strip()]
                         fact_text = ". ".join(sentences[:2]) + "."
-                        card_path = build_pin_card(data["title"], fact_text, CFG["channel_handle"])
+                        card_path = build_ig_card(data["title"], fact_text, CFG["channel_handle"])
                         hosted_card = upload_image(card_path)
                         card_caption = data["title"]
                         if ig_cta:

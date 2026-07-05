@@ -70,8 +70,12 @@ CONFIGS = {
         "post_to_instagram": True,
         "post_to_tiktok": False,  # ожидает одобрения TikTok Dev App + токена — вернуть True после
         "post_to_pinterest": False,  # ожидает одобрения Pinterest Dev App — вернуть True после
-        # Хэндл канала без @, нужен для ссылки в первом комментарии.
-        "channel_handle": "60SecFacts",
+        # Хэндл канала без @ — реальный @handle из ссылки (проверено через channels.list().
+        # customUrl), НЕ название канала: они разошлись при регистрации (60SecFacts — имя,
+        # @60factspersecond — хендл). До 2026-07-05 тут стояло имя канала — ссылки в комментах/
+        # описаниях/кросс-промо/IG-карточках месяц вели на потенциально чужой/несуществующий
+        # хендл. Один параметр — правит все места сразу (все строят URL из CFG["channel_handle"]).
+        "channel_handle": "60factspersecond",
         # CTA в подписи Instagram Reel (2026-07-02) — раньше подпись была без единого
         # призыва подписаться/перейти в био, хотя ссылка на YouTube лежит именно в био.
         # Пул — random.choice в publish.py, чтобы не выглядело ботом под каждым постом.
@@ -87,7 +91,7 @@ CONFIGS = {
         # ссылка на сестринский канал в описании — почти нулевая цена, потенциальный переток
         # подписчиков. sister_channel_handle — БЕЗ @, sister_desc_cta — фраза на СВОЁМ языке
         # про сестринский канал НА ДРУГОМ языке. Пул для разнообразия (тот же паттерн, что CTA).
-        "sister_channel_handle": "DatosEn30s",
+        "sister_channel_handle": "DatoEn30Segundo",
         "sister_desc_ctas": [
             "🌎 Also in Spanish:",
             "🌎 We also post in Spanish:",
@@ -206,8 +210,10 @@ CONFIGS = {
         "post_to_instagram": True,
         "post_to_tiktok": False,
         "post_to_pinterest": False,
-        "channel_handle": "DatosEn30s",
-        "sister_channel_handle": "60SecFacts",
+        # Реальный @handle (channels.list().customUrl), не название канала — см. комментарий
+        # в EN-конфиге, тот же баг тут: было "DatosEn30s", реальный хендл — @datoen30segundo.
+        "channel_handle": "DatoEn30Segundo",
+        "sister_channel_handle": "60factspersecond",
         "sister_desc_ctas": [
             "🌎 También en inglés:",
             "🌎 También publicamos en inglés:",
