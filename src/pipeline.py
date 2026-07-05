@@ -41,10 +41,10 @@ def _verify_channel() -> None:
 
 def run() -> None:
     _verify_channel()
-    # «On this day» (2026-07-05): раз в неделю (Ср, первый слот дня) — топикал-факт с привязкой
+    # «On this day» (2026-07-05): раз в неделю (Чт, первый слот дня) — топикал-факт с привязкой
     # к сегодняшней дате. Мимо очереди: batch-заготовки генерятся заранее и дату не знают.
     now = datetime.now(timezone.utc)
-    topical = now.weekday() == 2 and now.hour == CFG.get("topical_slot_hour", -1)
+    topical = now.weekday() == 3 and now.hour == CFG.get("topical_slot_hour", -1)
 
     # Batch API preload (prepare_batch.py) экономит ~50% на этом вызове, если очередь заполнена.
     # Пустая очередь = сценарий генерится вживую, как раньше — отсутствие preload не ломает публикацию.

@@ -94,7 +94,7 @@ CONFIGS = {
         ],
         "sister_lang_tags": ["datos curiosos", "hechos curiosos", "sabías que"],
         "sister_lang_code": "es",  # язык локализации метаданных (localize_metadata.py)
-        # «On this day» (2026-07-05): час UTC первого слота дня — по средам в этот слот
+        # «On this day» (2026-07-05): час UTC первого слота дня — по четвергам в этот слот
         # выходит топикал-факт с привязкой к дате (live-генерация мимо очереди).
         "topical_slot_hour": 16,
         # Префикс источника факта в описании (source_note из генерации).
@@ -216,7 +216,7 @@ CONFIGS = {
             "🔗 Más datos como este — link en bio",
         ],
         "ig_card_slot_hour": 13,  # первый ES-слот дня (13:17 UTC)
-        "topical_slot_hour": 13,   # первый ES-слот дня (13:17 UTC) — топикал по средам
+        "topical_slot_hour": 13,   # первый ES-слот дня (13:17 UTC) — топикал по четвергам
         "source_label": "Fuente:",
         "longform_desc_cta": "Análisis completos en el canal:",
         "longform_comment_cta": "¿Quieres la historia completa? Mira el análisis 👉",
