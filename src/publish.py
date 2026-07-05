@@ -188,10 +188,12 @@ def publish(
                 if datetime.now(timezone.utc).hour == CFG.get("ig_card_slot_hour", -1):
                     hosted_card = None
                     try:
-                        from build_ig_card import build_ig_card
+                        from build_ig_card import build_ig_card, next_fact_number
+                        from config import CHANNEL
                         sentences = [s.strip() for s in data["script"].replace("!", ".").replace("?", ".").split(".") if s.strip()]
                         fact_text = ". ".join(sentences[:2]) + "."
-                        card_path = build_ig_card(data["title"], fact_text, CFG["channel_handle"])
+                        fact_no = next_fact_number(CHANNEL)
+                        card_path = build_ig_card(data["title"], fact_text, CFG["channel_handle"], CHANNEL, fact_no)
                         hosted_card = upload_image(card_path)
                         card_caption = data["title"]
                         if ig_cta:

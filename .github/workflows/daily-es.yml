@@ -90,10 +90,13 @@ jobs:
       - name: Persist queue state
         if: always()
         run: |
-          if [ ! -f queue_es.json ]; then echo "queue_es.json ещё не создан (prepare_batch.py не запускался) — пропускаем"; exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add queue_es.json
-          git commit -m "chore(queue): ES queue state $(date -u +%F)" || { echo "no changes"; exit 0; }
+          # ig_card_counter_es.json меняется только в слот IG-карточки (ig_card_slot_hour) —
+          # на остальных 3 слотах дня файла может не быть/не измениться, это ок.
+          [ -f queue_es.json ] && git add queue_es.json
+          [ -f ig_card_counter_es.json ] && git add ig_card_counter_es.json
+          git diff --cached --quiet && { echo "no changes"; exit 0; }
+          git commit -m "chore(queue): ES queue/card state $(date -u +%F)" || { echo "no changes"; exit 0; }
           git pull --rebase origin master
           git push
