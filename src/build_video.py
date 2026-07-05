@@ -106,18 +106,26 @@ def _build_background(clip_paths: list[str], duration: float, visual_loop: bool 
     return CompositeVideoClip([sequence], size=TARGET_SIZE).set_duration(duration)
 
 
+WORD_POP_DURATION = 0.12  # сек scale-анимации появления слова (word-pop, 2026-07-05)
+WORD_POP_SCALE = 1.18     # стартовый масштаб «выпрыгивания»
+
+
 def _karaoke_clips(words: list[dict], cutoff: float) -> list[TextClip]:
     color = _pick_caption_color()
+    # Числа — главные анкоры фактов («100,000 years», «4.5mm») — выделяем контрастным
+    # цветом. Только цифры (не имена): у имён нет надёжного сигнала в верхнем регистре.
+    accent = "yellow" if color != "yellow" else "white"
     clips = []
     for w in words:
         if w["start"] >= cutoff:
             continue
         end = min(w["end"], cutoff)
+        has_digit = any(ch.isdigit() for ch in w["text"])
         clip = (
             TextClip(
                 w["text"].upper(),
                 fontsize=100,
-                color=color,
+                color=accent if has_digit else color,
                 font=SUBTITLE_FONT,
                 stroke_color="black",
                 stroke_width=5,
@@ -127,6 +135,9 @@ def _karaoke_clips(words: list[dict], cutoff: float) -> list[TextClip]:
             .set_position(("center", CAPTION_Y))
             .set_start(w["start"])
             .set_duration(max(end - w["start"], 0.05))
+            # Word-pop (2026-07-05): слово «выпрыгивает» при появлении (1.18 → 1.0 за 0.12с) —
+            # стандарт живых вирусных субтитров; после POP_DURATION масштаб стабильно 1.0.
+            .resize(lambda t: max(1.0, WORD_POP_SCALE - (WORD_POP_SCALE - 1.0) * t / WORD_POP_DURATION))
         )
         clips.append(clip)
     return clips

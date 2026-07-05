@@ -11,14 +11,58 @@ from topic_stats import get_topic_avg_views
 import random
 
 
+# Для серий предпочитаем богатые темы с историей/наукой
+SERIES_TOPICS = [
+    "ancient history", "archaeological discoveries", "ancient civilizations",
+    "shipwrecks and lost treasures", "historical mysteries",
+    "the human body", "the animal kingdom", "the ocean", "space",
+    "evolution", "natural wonders",
+]
+
+_WINNER_MIN_VIEWS = 100  # ниже — просмотры ещё не накопились, «победитель» случаен
+
+
+def _winner_topic_last_week() -> str | None:
+    """Тема лучшего Short'а за 7 дней (2026-07-05): серия «копает глубже» то, что аудитория
+    УЖЕ подтвердила просмотрами, вместо взвешенной лотереи. None при любой проблеме/нехватке
+    данных — вызывающий код падает на старый взвешенный рандом."""
+    try:
+        import datetime as dt
+        import re
+        from youtube_auth import get_client
+        yt = get_client()
+        ch = yt.channels().list(part="contentDetails", mine=True).execute()
+        uploads = ch["items"][0]["contentDetails"]["relatedPlaylists"]["uploads"]
+        resp = yt.playlistItems().list(part="snippet", playlistId=uploads, maxResults=50).execute()
+        ids = [i["snippet"]["resourceId"]["videoId"] for i in resp.get("items", [])]
+        if not ids:
+            return None
+        vids = yt.videos().list(part="snippet,statistics", id=",".join(ids[:50])).execute()
+        cutoff = (dt.datetime.now(dt.timezone.utc) - dt.timedelta(days=7)).isoformat()
+        best, best_views = None, _WINNER_MIN_VIEWS - 1
+        for v in vids.get("items", []):
+            if v["snippet"]["publishedAt"] < cutoff:
+                continue
+            tags = v["snippet"].get("tags", [])
+            if any(t.startswith("series-part-") for t in tags):
+                continue  # прошлые серии не считаем — иначе серия зациклится на своей же теме
+            topic = next((re.sub(r"^topic-", "", t).replace("_", " ")
+                          for t in tags if t.startswith("topic-")), None)
+            views = int(v["statistics"].get("viewCount", 0))
+            if topic and views > best_views:
+                best, best_views = topic, views
+        return best
+    except Exception:
+        return None
+
+
 def _pick_series_topic() -> str:
-    # Для серий предпочитаем богатые темы с историей/наукой
-    SERIES_TOPICS = [
-        "ancient history", "archaeological discoveries", "ancient civilizations",
-        "shipwrecks and lost treasures", "historical mysteries",
-        "the human body", "the animal kingdom", "the ocean", "space",
-        "evolution", "natural wonders",
-    ]
+    # Победитель недели (2026-07-05) — если его тема подходит для серии, берём её.
+    winner = _winner_topic_last_week()
+    if winner in SERIES_TOPICS:
+        print(f"  Series topic = победитель недели: {winner}")
+        return winner
+
     try:
         avg_views = get_topic_avg_views()
     except Exception:

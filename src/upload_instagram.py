@@ -56,6 +56,17 @@ def upload_photo(image_url: str, caption: str) -> str:
     return publish["id"]
 
 
+def upload_story(image_url: str) -> str:
+    """Публикует изображение в Stories (2026-07-05): карточка факта дублируется в сторис —
+    ленту видят новые люди, сторис — подписчики; двойное касание с той же картинки."""
+    ig_user_id = os.environ["IG_USER_ID"]
+    container = _post(f"{ig_user_id}/media", media_type="STORIES", image_url=image_url)
+    _wait_until_ready(container["id"])
+    publish = _post(f"{ig_user_id}/media_publish", creation_id=container["id"])
+    print(f"Posted story to Instagram: media id {publish['id']}")
+    return publish["id"]
+
+
 def upload_reel(video_url: str, caption: str, cover_url: str | None = None) -> str:
     ig_user_id = os.environ["IG_USER_ID"]
 

@@ -14,7 +14,7 @@ from config import CFG
 from notify import notify
 from post_comment import post_channel_comment, post_comment_reply
 from upload_captions import upload_captions
-from upload_instagram import upload_photo, upload_reel
+from upload_instagram import upload_photo, upload_reel, upload_story
 from upload_pinterest import upload_pin
 from upload_tiktok import upload_video as upload_to_tiktok, wait_for_publish
 from upload_youtube import upload_video as upload_to_youtube
@@ -201,6 +201,24 @@ def publish(
                         card_caption += f"\n\n{' '.join(ig_tags)}"
                         upload_photo(hosted_card["url"], card_caption)
                         print("  Instagram: карточка опубликована")
+
+                        # Stories (2026-07-05): та же карточка в сторис — ленту видят новые
+                        # люди, сторис — подписчики. Отдельный try: сбой сторис ≠ сбой карточки.
+                        try:
+                            upload_story(hosted_card["url"])
+                            print("  Instagram: карточка продублирована в Stories")
+                        except Exception as e:
+                            alert("IG story", e)
+
+                        # Threads (2026-07-05): текст факта + карточка. Требует ОТДЕЛЬНЫЙ токен
+                        # (см. upload_threads.py) — пока его нет, флаг выключен в конфиге.
+                        if CFG.get("post_to_threads") and os.environ.get("THREADS_ACCESS_TOKEN"):
+                            try:
+                                from upload_threads import post_thread
+                                post_thread(f"{data['title']}\n\n{fact_text}", hosted_card["url"])
+                                print("  Threads: опубликовано")
+                            except Exception as e:
+                                alert("Threads", e)
                     except Exception as e:
                         alert("IG card", e)
                     finally:

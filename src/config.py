@@ -70,6 +70,7 @@ CONFIGS = {
         "post_to_instagram": True,
         "post_to_tiktok": False,  # ожидает одобрения TikTok Dev App + токена — вернуть True после
         "post_to_pinterest": False,  # ожидает одобрения Pinterest Dev App — вернуть True после
+        "post_to_threads": False,  # ожидает Threads-токен (THREADS_ACCESS_TOKEN/USER_ID, см. upload_threads.py)
         # Хэндл канала без @ — реальный @handle из ссылки (проверено через channels.list().
         # customUrl), НЕ название канала: они разошлись при регистрации (60SecFacts — имя,
         # @60factspersecond — хендл). До 2026-07-05 тут стояло имя канала — ссылки в комментах/
@@ -210,6 +211,7 @@ CONFIGS = {
         "post_to_instagram": True,
         "post_to_tiktok": False,
         "post_to_pinterest": False,
+        "post_to_threads": False,  # ожидает Threads-токен (см. upload_threads.py)
         # Реальный @handle (channels.list().customUrl), не название канала — см. комментарий
         # в EN-конфиге, тот же баг тут: было "DatosEn30s", реальный хендл — @datoen30segundo.
         "channel_handle": "DatoEn30Segundo",

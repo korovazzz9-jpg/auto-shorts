@@ -1,8 +1,8 @@
 name: Discover Niche Outliers
 
 on:
-  # Ищет видео-выбросы у ЧУЖИХ каналов в тех же темах (search().list — не публикация, не
-  # тратит Claude), поэтому штатный GitHub-cron ок. Раз в неделю, отдельно от weekly-report
+  # Ищет видео-выбросы у ЧУЖИХ каналов в тех же темах (search().list — не публикация),
+  # поэтому штатный GitHub-cron ок. Раз в неделю, отдельно от weekly-report
   # (та же логика "не критично ко времени"), чтобы не грузить один воркфлоу.
   schedule:
     - cron: "37 9 * * 1"
@@ -12,7 +12,7 @@ jobs:
   discover:
     runs-on: ubuntu-latest
     permissions:
-      contents: write   # коммитит niche_signal_<channel>.json (топ-темы у чужих каналов -> в вес _pick_topic())
+      contents: write   # коммитит niche_signal / queue / recreated_niche файлы
     steps:
       - uses: actions/checkout@v4
 
@@ -23,12 +23,15 @@ jobs:
       - name: Install Python deps
         run: pip install -r requirements.txt
 
+      # TELEGRAM_* — для конкурентного дайджеста (топ-5 выбросов недели в Telegram).
       - name: Discover EN niche outliers
         working-directory: src
         env:
           YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
           YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
           YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python discover_niche_topics.py
 
       - name: Discover ES niche outliers
@@ -38,19 +41,44 @@ jobs:
           YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
           YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
           YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN_ES }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python discover_niche_topics.py
 
-      # generate_script._load_niche_signal() читает эти файлы из репо при каждом выборе
-      # темы — без коммита данные остались бы в эфемерном раннере (тот же паттерн, что
-      # queue_*.json / hook_stats_*.json).
-      - name: Persist niche signal
+      # Outlier-recreation (2026-07-05): самый мощный чужой выброс недели пересоздаётся
+      # своим скриптом в начало очереди. YT-креды нужны для дедупа против опубликованных.
+      - name: Recreate top EN outlier
+        if: always()
+        working-directory: src
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+        run: python recreate_outlier.py
+
+      - name: Recreate top ES outlier
+        if: always()
+        working-directory: src
+        env:
+          CHANNEL: es
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN_ES }}
+        run: python recreate_outlier.py
+
+      # generate_script._load_niche_stats() читает niche_signal из репо при каждом выборе
+      # темы; queue пополнилась рекреациями; recreated_niche — память «что уже пересоздано».
+      - name: Persist niche signal + recreated queue
         if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          for f in niche_signal_en.json niche_signal_es.json; do
+          for f in niche_signal_en.json niche_signal_es.json queue_en.json queue_es.json recreated_niche_en.json recreated_niche_es.json; do
             if [ -f "$f" ]; then git add "$f"; fi
           done
-          git commit -m "chore(niche): weekly outlier signal $(date -u +%F)" || { echo "no changes"; exit 0; }
+          git diff --cached --quiet && { echo "no changes"; exit 0; }
+          git commit -m "chore(niche): weekly outlier signal + recreation $(date -u +%F)" || { echo "no changes"; exit 0; }
           git pull --rebase origin master
           git push

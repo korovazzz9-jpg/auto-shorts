@@ -83,6 +83,8 @@ def run() -> None:
             extra_tags.append("topical-onthisday")
         if data.get("niche_styled"):
             extra_tags.append("niche-styled")
+        if data.get("niche_recreated"):
+            extra_tags.append("niche-recreation")
         publish(
             data=data,
             video_path=video_path,

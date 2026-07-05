@@ -103,13 +103,14 @@ def _fetch_stats(youtube, video_ids: list[str], channel_ids: list[str]) -> tuple
     return views, subs
 
 
-def discover() -> tuple[dict[str, int], dict[str, list[str]]]:
-    """Возвращает ({topic: outlier_count}, {topic: [заголовки выбросов]}) — сколько
-    видео-выбросов найдено в нише по каждой теме и их заголовки (до 3 на тему, для
-    стилевой калибровки промпта — см. generate_script._niche_titles_for)."""
+def discover() -> tuple[dict[str, int], dict[str, list[str]], list[dict]]:
+    """Возвращает ({topic: outlier_count}, {topic: [заголовки]}, [все выбросы с метриками]).
+    Заголовки (до 3 на тему) — для стилевой калибровки промпта; полный список выбросов
+    (title/video_id/views/subs/ratio/topic) — для Telegram-дайджеста и outlier-recreation."""
     youtube = get_client()
     outlier_counts: dict[str, int] = {}
     outlier_titles: dict[str, list[str]] = {}
+    all_outliers: list[dict] = []
 
     for topic in TOPICS_POOL:
         results = _search_topic(youtube, topic)
@@ -127,22 +128,47 @@ def discover() -> tuple[dict[str, int], dict[str, list[str]]]:
                 count += 1
                 if r["title"]:
                     titles.append(r["title"])
+                    all_outliers.append({
+                        "topic": topic, "title": r["title"], "video_id": r["video_id"],
+                        "views": v, "subs": s, "ratio": round(v / s, 1),
+                    })
         if count:
             outlier_counts[topic] = count
             outlier_titles[topic] = titles[:3]
         print(f"  {topic}: {count} outlier(s) of {len(results)} searched")
 
-    return outlier_counts, outlier_titles
+    all_outliers.sort(key=lambda o: -o["ratio"])
+    return outlier_counts, outlier_titles, all_outliers
+
+
+def _send_digest(outliers: list[dict]) -> None:
+    """Конкурентный дайджест (2026-07-05): топ-5 чужих выбросов недели в Telegram — тренды
+    ниши глазами, можно вручную скорректировать направление. Сбой не роняет прогон."""
+    if not outliers:
+        return
+    try:
+        from notify import notify
+        lines = [f"🔎 [{CFG['channel_name']}] Топ выбросов ниши за неделю:"]
+        for o in outliers[:5]:
+            lines.append(
+                f"\n{o['ratio']}× — {o['views']:,} views / {o['subs']:,} subs [{o['topic']}]\n"
+                f"«{o['title']}»\nhttps://youtube.com/shorts/{o['video_id']}"
+            )
+        notify("\n".join(lines))
+    except Exception as e:
+        print(f"  digest не отправлен: {e}")
 
 
 def main() -> None:
-    counts, titles = discover()
+    counts, titles, outliers = discover()
     with open(NICHE_SIGNAL_FILE, "w", encoding="utf-8") as f:
         json.dump(
-            {"outlier_counts": counts, "outlier_titles": titles, "updated": date.today().isoformat()},
+            {"outlier_counts": counts, "outlier_titles": titles,
+             "top_outliers": outliers[:10], "updated": date.today().isoformat()},
             f, ensure_ascii=False, indent=2,
         )
     print(f"  niche_signal saved: {counts}")
+    _send_digest(outliers)
 
 
 if __name__ == "__main__":
