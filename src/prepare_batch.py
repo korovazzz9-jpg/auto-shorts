@@ -32,6 +32,7 @@ from generate_script import (
     TITLE_OPENERS,
     _append_loop,
     _build_user_content,
+    _niche_titles_for,
     _parse_response,
     _pick_topic,
     _title_variety_note,
@@ -219,6 +220,7 @@ def main() -> None:
             if not str(data.get("hook_text", "")).strip():
                 data["hook_text"] = data["title"]
             data["topic"] = topic
+            data["niche_styled"] = bool(_niche_titles_for(topic))  # тег niche-styled (pipeline.py)
             data["title_variant"] = title_variants[i][1]
             data["hashtag_position"] = "end"
 

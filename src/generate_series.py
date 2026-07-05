@@ -92,12 +92,14 @@ def generate_series() -> dict:
         f"subject plainly). NOT spoken, NOT shown on screen. In {CFG['script_language']}.\n"
         f"- comment_question: ONE provocative question about that part's specific fact, in "
         f"{CFG['script_language']}, for the pinned comment — must reference the concrete "
-        "subject, make viewers argue or confess, NOT a generic 'did you know?'. Max 15 words.\n\n"
+        "subject, make viewers argue or confess, NOT a generic 'did you know?'. Max 15 words.\n"
+        f"- source_note: origin of that part's fact (institution/journal + year), max 8 words, "
+        f"in {CFG['script_language']}, no URL. ONLY if genuinely known; else \"\".\n\n"
         "Respond strictly in JSON:\n"
         '{"topic": "topic name", '
-        '"part1": {"title": "...", "hook_text": "...", "hook_template": "...", "script": "...", "search_summary": "...", "comment_question": "...", "tags": [], "hashtags": [], "video_queries": []}, '
-        '"part2": {"title": "...", "hook_text": "...", "hook_template": "...", "script": "...", "search_summary": "...", "comment_question": "...", "tags": [], "hashtags": [], "video_queries": []}, '
-        '"part3": {"title": "...", "hook_text": "...", "hook_template": "...", "script": "...", "search_summary": "...", "comment_question": "...", "tags": [], "hashtags": [], "video_queries": []}}'
+        '"part1": {"title": "...", "hook_text": "...", "hook_template": "...", "script": "...", "search_summary": "...", "comment_question": "...", "source_note": "...", "tags": [], "hashtags": [], "video_queries": []}, '
+        '"part2": {"title": "...", "hook_text": "...", "hook_template": "...", "script": "...", "search_summary": "...", "comment_question": "...", "source_note": "...", "tags": [], "hashtags": [], "video_queries": []}, '
+        '"part3": {"title": "...", "hook_text": "...", "hook_template": "...", "script": "...", "search_summary": "...", "comment_question": "...", "source_note": "...", "tags": [], "hashtags": [], "video_queries": []}}'
     )
 
     # 3-частный JSON — самый большой пейлоад пайплайна, иногда модель возвращает битый

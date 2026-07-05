@@ -1,6 +1,7 @@
 """Точка входа: тема -> сценарий -> стоковые клипы -> озвучка -> видео -> загрузка на YouTube + Instagram."""
 import os
 import tempfile
+from datetime import datetime, timezone
 
 from dotenv import load_dotenv
 
@@ -40,14 +41,20 @@ def _verify_channel() -> None:
 
 def run() -> None:
     _verify_channel()
+    # «On this day» (2026-07-05): раз в неделю (Ср, первый слот дня) — топикал-факт с привязкой
+    # к сегодняшней дате. Мимо очереди: batch-заготовки генерятся заранее и дату не знают.
+    now = datetime.now(timezone.utc)
+    topical = now.weekday() == 2 and now.hour == CFG.get("topical_slot_hour", -1)
+
     # Batch API preload (prepare_batch.py) экономит ~50% на этом вызове, если очередь заполнена.
     # Пустая очередь = сценарий генерится вживую, как раньше — отсутствие preload не ломает публикацию.
-    data = pop_next()
+    data = None if topical else pop_next()
     if data is not None:
         print(f"[{CFG['channel_name']}] 1/6 Сценарий из очереди (Batch API preload)...")
     else:
-        print(f"[{CFG['channel_name']}] 1/6 Генерация сценария (вживую)...")
-        data = generate_script()
+        label = "топикал «On this day», мимо очереди" if topical else "вживую"
+        print(f"[{CFG['channel_name']}] 1/6 Генерация сценария ({label})...")
+        data = generate_script(on_this_day=topical)
     print(f"  Тема: {data['topic']} | Заголовок: {data['title']}")
 
     with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
@@ -64,6 +71,18 @@ def run() -> None:
         video_path, thumb_path = build_video(audio_path, clip_paths, words, video_path, topic=data["topic"], title=data["title"], hook_text=data.get("hook_text"))
 
         print("5/6 Публикация...")
+        extra_tags = [
+            f"topic-{data['topic'].replace(' ', '_')}",
+            f"loop-{'yes' if data.get('has_loop') else 'no'}",
+            f"hook-{data.get('hook_template', 'other')}",
+            f"title-{data.get('title_variant', 'narrative')}",
+            f"opener-{data.get('title_opener', 'other')}",
+            f"tone-{data.get('emotional_tone', 'other')}",
+        ]
+        if data.get("topical"):
+            extra_tags.append("topical-onthisday")
+        if data.get("niche_styled"):
+            extra_tags.append("niche-styled")
         publish(
             data=data,
             video_path=video_path,
@@ -71,14 +90,7 @@ def run() -> None:
             words=words,
             topic=data["topic"],
             alert=_alert,
-            extra_tags=[
-                f"topic-{data['topic'].replace(' ', '_')}",
-                f"loop-{'yes' if data.get('has_loop') else 'no'}",
-                f"hook-{data.get('hook_template', 'other')}",
-                f"title-{data.get('title_variant', 'narrative')}",
-                f"opener-{data.get('title_opener', 'other')}",
-                f"tone-{data.get('emotional_tone', 'other')}",
-            ],
+            extra_tags=extra_tags,
             # 2026-07-04: одна дорожка (язык канала) — 550 ед/видео, влезает даже в Вс
             # с двумя лонгформами. Вс-пропуск снят вместе с удалением переводных дорожек.
             enable_captions=True,

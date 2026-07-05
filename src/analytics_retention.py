@@ -30,6 +30,8 @@ HOOK_TAG_RE = re.compile(r"^hook-(.+)$")
 TITLE_VARIANT_TAG_RE = re.compile(r"^title-(seo|narrative)$")  # A/B заголовков, см. generate_script.py
 OPENER_TAG_RE = re.compile(r"^opener-(.+)$")  # ротация заголовков, см. TITLE_OPENERS
 TONE_TAG_RE = re.compile(r"^tone-(.+)$")      # эмоциональный тон, см. EMOTIONAL_TONES
+NICHE_STYLED_TAG = "niche-styled"             # промпт получал заголовки чужих выбросов по теме
+TOPICAL_TAG = "topical-onthisday"             # факт с привязкой к дате публикации
 MAX_VIDEOS = 50  # сколько последних видео анализировать
 
 
@@ -80,7 +82,13 @@ def _recent_videos(youtube) -> list[dict]:
             title_variant = None
             opener = None
             tone = None
+            niche = "plain"
+            topical = "no"
             for tag in v["snippet"].get("tags", []):
+                if tag == NICHE_STYLED_TAG:
+                    niche = "styled"
+                if tag == TOPICAL_TAG:
+                    topical = "yes"
                 mt = TOPIC_TAG_RE.match(tag)
                 if mt:
                     topic = mt.group(1).replace("_", " ")
@@ -111,6 +119,8 @@ def _recent_videos(youtube) -> list[dict]:
                 "title_variant": title_variant or "—",
                 "title_opener": opener or "—",
                 "emotional_tone": tone or "—",
+                "niche": niche,
+                "topical": topical,
             })
     return videos
 

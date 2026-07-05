@@ -34,17 +34,62 @@ TOPICS_POOL = [
 MIN_TOPICS_WITH_DATA = 5  # не взвешивать, пока статистика не накопилась хотя бы по стольким темам
 
 
-def _load_niche_signal() -> dict[str, int]:
-    """Outlier-сигнал по нише (discover_niche_topics.py, раз в неделю, коммитится
-    воркфлоу) — {topic: outlier_count}, сколько видео-выбросов у ЧУЖИХ каналов нашлось
-    по этой теме. Нет файла/данных — пустой словарь, вес не меняется."""
+def _load_niche_stats() -> dict:
+    """Весь niche_signal_<channel>.json (discover_niche_topics.py, раз в неделю, коммитится
+    воркфлоу): outlier_counts {topic: count} для весов + outlier_titles {topic: [titles]}
+    для стилевой калибровки промпта. Нет файла/данных — пустой словарь."""
     path = os.path.join(os.path.dirname(__file__), "..", f"niche_signal_{CHANNEL}.json")
     try:
         with open(path, encoding="utf-8") as f:
             stats = json.load(f)
-        return stats.get("outlier_counts", {}) if isinstance(stats, dict) else {}
+        return stats if isinstance(stats, dict) else {}
     except Exception:
         return {}
+
+
+def _load_niche_signal() -> dict[str, int]:
+    """{topic: outlier_count} — сколько видео-выбросов у ЧУЖИХ каналов нашлось по теме."""
+    return _load_niche_stats().get("outlier_counts", {})
+
+
+def _niche_titles_for(topic: str) -> list[str]:
+    """Заголовки чужих видео-выбросов по теме (2026-07-05) — стилевые примеры для промпта
+    («какие углы сейчас кликаются в нише»). НЕ для копирования фактов — только angle/energy.
+    Добавляются органично: лишь когда _pick_topic() выбрал тему с выбросами (weight-бонус
+    уже подталкивает такие темы, отдельная квота не нужна). Пусто — промпт как раньше."""
+    titles = _load_niche_stats().get("outlier_titles", {})
+    if not isinstance(titles, dict):
+        return []
+    return [t for t in titles.get(topic, []) if isinstance(t, str) and t.strip()][:3]
+
+
+def _dropoff_note() -> str:
+    """Замыкает петлю drop-off-аналитики (2026-07-05): weekly_report.py пишет медианную зону
+    обрыва зрителя по худшим видео недели в dropoff_stats_<channel>.json — здесь она
+    превращается в зонную подсказку модели. Обрывы в концовке (ending) — норма (CTA),
+    подсказка не нужна. Нет файла/мало данных — пустая строка, промпт как раньше."""
+    path = os.path.join(os.path.dirname(__file__), "..", f"dropoff_stats_{CHANNEL}.json")
+    try:
+        with open(path, encoding="utf-8") as f:
+            stats = json.load(f)
+        zone = str(stats.get("zone", ""))
+        n = int(stats.get("videos", 0))
+    except Exception:
+        return ""
+    if n < 3:
+        return ""
+    notes = {
+        "hook": (" Analytics note: on this channel viewers currently drop within the FIRST "
+                 "seconds — the hook is not landing. Make the opening claim even more shocking "
+                 "and concrete; cut anything that delays it."),
+        "reveal": (" Analytics note: on this channel viewers currently drop between the hook "
+                   "and the reveal — name the subject and deliver the core fact FASTER (by the "
+                   "second sentence), no scenic buildup."),
+        "middle": (" Analytics note: on this channel viewers currently drop mid-video — tighten "
+                   "the middle: shorter sentences, place the re-hook earlier, cut one detail "
+                   "instead of trailing."),
+    }
+    return notes.get(zone, "")
 
 
 def _pick_topic() -> str:
@@ -305,8 +350,18 @@ EMOTIONAL_TONE_INSTRUCTION = (
 
 
 def _build_user_content(topic: str, avoid_block: str, title_instruction: str = TITLE_INSTRUCTION_NARRATIVE) -> str:
+    # Стилевая калибровка по нише (2026-07-05): заголовки чужих выбросов на ЭТУ тему.
+    niche_titles = _niche_titles_for(topic)
+    niche_block = ""
+    if niche_titles:
+        niche_block = (
+            "Style calibration — these titles are currently overperforming across the niche on "
+            "this topic (other channels' videos; do NOT copy their facts or wording, only note "
+            "the angle/energy that makes them click):\n"
+            + "\n".join(f"- {t}" for t in niche_titles) + "\n\n"
+        )
     return (
-        avoid_block +
+        avoid_block + niche_block +
         f"Topic: {topic}. Come up with one specific, lesser-known fact on this topic "
         "and write a script for it. Also break the script into visual beats (roughly one "
         "every 4-5 seconds of the script) and for each one write a short stock-footage "
@@ -345,7 +400,12 @@ def _build_user_content(topic: str, avoid_block: str, title_instruction: str = T
         f"- comment_question: ONE provocative question about THIS specific fact, in "
         f"{CFG['script_language']}, for the channel's pinned comment. It must reference the "
         "concrete subject of the fact and make viewers want to argue, correct you, or confess "
-        "— NOT a generic 'did you know this?'. Max 15 words, may end with an emoji.\n\n"
+        "— NOT a generic 'did you know this?'. Max 15 words, may end with an emoji.\n"
+        f"- source_note: where this fact comes from — institution/journal/publication + year "
+        f"(e.g. 'University of Washington study, 2008'), max 8 words, in {CFG['script_language']}, "
+        "no URL. ONLY name a source you genuinely know; if not 100% sure, return \"\" — an "
+        "invented source is worse than none.\n"
+        f"{_dropoff_note()}\n\n"
         "Respond strictly in JSON, no markdown wrapper: "
         '{"title": "title text", '
         '"title_opener": "the-x", '
@@ -356,6 +416,7 @@ def _build_user_content(topic: str, avoid_block: str, title_instruction: str = T
         '"word_count": 85, '
         '"search_summary": "plain keyword-dense sentence", '
         '"comment_question": "provocative question about the fact", '
+        '"source_note": "origin of the fact or empty string", '
         '"loop_connectors": ["why", "how"], '
         '"tags": ["tag1", "tag2", ...], '
         '"hashtags": ["#tag1", "#tag2", ...], '
@@ -434,7 +495,7 @@ def _append_loop(data: dict) -> None:
     data["has_loop"] = True
 
 
-def generate_script() -> dict:
+def generate_script(on_this_day: bool = False) -> dict:
     topic = _pick_topic()
     client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"], max_retries=5)
 
@@ -454,6 +515,21 @@ def generate_script() -> dict:
     title_instruction, title_variant = pick_title_variant()
     title_instruction += _title_variety_note(past_titles)
     user_content = _build_user_content(topic, avoid_block, title_instruction)
+
+    # «On this day» (2026-07-05): раз в неделю факт привязывается к сегодняшней дате —
+    # timely-контент алгоритм тестирует охотнее, дата в скрипте добавляет конкретики.
+    # Только live-генерация (pipeline.py, мимо очереди): batch-заготовки не знают дату выхода.
+    if on_this_day:
+        from datetime import datetime, timezone
+        today = datetime.now(timezone.utc).strftime("%B %d")
+        user_content += (
+            f"\n\nTOPICAL OVERRIDE — today is {today}. Instead of a generic fact, find a real, "
+            "verifiable historical event or discovery tied to THIS calendar date (any year), "
+            "ideally within the topic above — if nothing natural fits the topic, any strong "
+            "date-tied fact works. Weave the anniversary into the script naturally (e.g. "
+            "'Exactly 143 years ago today...'). The date claim must be REAL — if you cannot "
+            "recall a solid dated fact, write the usual fact WITHOUT inventing a date."
+        )
 
     # Ретрай битого JSON (2026-07-05): в отличие от generate_series.py/generate_longform_script.py
     # (там добавлено раньше после прод-падений), здесь парсинг падал без права на восстановление —
@@ -509,6 +585,8 @@ def generate_script() -> dict:
 
     _append_loop(data)  # детерминированно дописываем loop-фразу под помеченный коннектор
     data["topic"] = topic
+    data["topical"] = bool(on_this_day)          # тег topical-onthisday (pipeline.py)
+    data["niche_styled"] = bool(_niche_titles_for(topic))  # тег niche-styled (pipeline.py)
     data["title_variant"] = title_variant  # A/B заголовков: тег title-seo/title-narrative
     data["hashtag_position"] = "end"
     # #2 хук-шаблон: нормализуем к известному id (для тега hook-<id> и аналитики).

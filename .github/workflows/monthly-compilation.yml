@@ -1,0 +1,75 @@
+name: Monthly Compilation
+
+on:
+  # 1-е число месяца, 15:07 UTC (11:07 ET — дневное US-окно). Компиляция за ПРОШЛЫЙ месяц.
+  # Native GitHub-cron ок: опоздание на десятки минут для месячного видео не критично
+  # (в отличие от daily-слотов, где точность = прайм-тайм).
+  schedule:
+    - cron: "7 15 1 * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write   # set_last_longform пишет longform_state_<channel>.json
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install system deps
+        run: sudo apt-get update && sudo apt-get install -y imagemagick
+
+      - name: Allow ImageMagick to read caption text files
+        run: sudo sed -i '/pattern="@\*"/d' /etc/ImageMagick-6/policy.xml
+
+      - name: Install Python deps
+        run: pip install -r requirements.txt
+
+      - name: Compile EN
+        working-directory: src
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+          PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
+          NOVITA_KEY: ${{ secrets.NOVITA_KEY }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python pipeline_compilation.py
+
+      - name: Compile ES
+        if: always()   # сбой EN не должен отменять ES
+        working-directory: src
+        env:
+          CHANNEL: es
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+          PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
+          NOVITA_KEY: ${{ secrets.NOVITA_KEY }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN_ES }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python pipeline_compilation.py
+
+      # set_last_longform обновляет longform_state_*.json — воронка Shorts→лонгформ будет
+      # ссылаться на компиляцию, пока не выйдет следующий тематический лонгформ.
+      - name: Persist longform state
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          for f in longform_state_en.json longform_state_es.json; do
+            if [ -f "$f" ]; then git add "$f"; fi
+          done
+          git commit -m "chore(longform): monthly compilation state $(date -u +%F)" || { echo "no changes"; exit 0; }
+          git pull --rebase origin master
+          git push

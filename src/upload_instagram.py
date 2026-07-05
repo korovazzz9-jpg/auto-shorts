@@ -46,6 +46,16 @@ def _wait_until_ready(container_id: str) -> None:
     raise TimeoutError(f"Instagram container {container_id} did not finish processing in time")
 
 
+def upload_photo(image_url: str, caption: str) -> str:
+    """Публикует статичную фото-карточку в ленту (не Reel) — для IG-карточек фактов."""
+    ig_user_id = os.environ["IG_USER_ID"]
+    container = _post(f"{ig_user_id}/media", image_url=image_url, caption=caption[:2200])
+    _wait_until_ready(container["id"])
+    publish = _post(f"{ig_user_id}/media_publish", creation_id=container["id"])
+    print(f"Posted photo to Instagram: media id {publish['id']}")
+    return publish["id"]
+
+
 def upload_reel(video_url: str, caption: str, cover_url: str | None = None) -> str:
     ig_user_id = os.environ["IG_USER_ID"]
 

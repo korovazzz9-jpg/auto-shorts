@@ -7,12 +7,14 @@
 import os
 import random
 
+from datetime import datetime, timezone
+
 from cloudinary_upload import delete_image, delete_video, upload_image, upload_video as upload_to_cloudinary
 from config import CFG
 from notify import notify
 from post_comment import post_channel_comment, post_comment_reply
 from upload_captions import upload_captions
-from upload_instagram import upload_reel
+from upload_instagram import upload_photo, upload_reel
 from upload_pinterest import upload_pin
 from upload_tiktok import upload_video as upload_to_tiktok, wait_for_publish
 from upload_youtube import upload_video as upload_to_youtube
@@ -54,6 +56,12 @@ def publish(
     search_summary = str(data.get("search_summary", "")).strip()
     if search_summary:
         description = f"{search_summary}\n\n{description}"
+    # Источник факта (2026-07-05): повышает доверие, снижает «это фейк» в комментах, даёт
+    # поисковые ключи. Модель возвращает пусто, если не уверена в происхождении —
+    # выдуманный источник хуже отсутствия (инструкция в generate_script).
+    source_note = str(data.get("source_note", "")).strip()
+    if source_note:
+        description += f"\n\n{CFG.get('source_label', 'Source:')} {source_note}"
     if longform_url:
         desc_cta = CFG.get("longform_desc_cta", "Full deep-dives on the channel:")
         description += f"\n\n▶ {desc_cta} {longform_url}"
@@ -171,6 +179,34 @@ def publish(
                 caption += f"\n\n{' '.join(ig_tags)}"
                 upload_reel(hosted["url"], caption, cover_url=hosted_thumb["url"])
                 print("  Instagram: опубликовано")
+
+                # IG-карточка факта (2026-07-05): раз в день (первый слот, ig_card_slot_hour)
+                # в ленту постится ещё и СТАТИЧНАЯ карточка — другой формат в той же ленте,
+                # больше касаний без нового контента. Генератор переиспользован из Pinterest
+                # (build_pin_card — чистый PIL, Pinterest API не нужен). Сбой карточки не
+                # роняет остальной кросс-постинг (alert + continue).
+                if datetime.now(timezone.utc).hour == CFG.get("ig_card_slot_hour", -1):
+                    hosted_card = None
+                    try:
+                        from upload_pinterest import build_pin_card
+                        sentences = [s.strip() for s in data["script"].replace("!", ".").replace("?", ".").split(".") if s.strip()]
+                        fact_text = ". ".join(sentences[:2]) + "."
+                        card_path = build_pin_card(data["title"], fact_text, CFG["channel_handle"])
+                        hosted_card = upload_image(card_path)
+                        card_caption = data["title"]
+                        if ig_cta:
+                            card_caption += f"\n\n{ig_cta}"
+                        card_caption += f"\n\n{' '.join(ig_tags)}"
+                        upload_photo(hosted_card["url"], card_caption)
+                        print("  Instagram: карточка опубликована")
+                    except Exception as e:
+                        alert("IG card", e)
+                    finally:
+                        if hosted_card:
+                            try:
+                                delete_image(hosted_card["public_id"])
+                            except Exception as e:
+                                print(f"  Не удалось удалить карточку из Cloudinary: {e}")
 
             if CFG.get("post_to_tiktok"):
                 try:

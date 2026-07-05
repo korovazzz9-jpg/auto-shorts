@@ -79,6 +79,9 @@ CONFIGS = {
             "📌 New fact every day — link in bio",
             "🔗 More facts like this — link in bio",
         ],
+        # IG-карточка факта (2026-07-05): в первый слот дня (час UTC) в ленту постится ещё и
+        # статичная карточка (build_pin_card) — 1/день, другой формат в той же ленте.
+        "ig_card_slot_hour": 16,
         # Кросс-промо EN↔ES (2026-07-02): реальная билингвальная аудитория пересекается,
         # ссылка на сестринский канал в описании — почти нулевая цена, потенциальный переток
         # подписчиков. sister_channel_handle — БЕЗ @, sister_desc_cta — фраза на СВОЁМ языке
@@ -91,6 +94,11 @@ CONFIGS = {
         ],
         "sister_lang_tags": ["datos curiosos", "hechos curiosos", "sabías que"],
         "sister_lang_code": "es",  # язык локализации метаданных (localize_metadata.py)
+        # «On this day» (2026-07-05): час UTC первого слота дня — по средам в этот слот
+        # выходит топикал-факт с привязкой к дате (live-генерация мимо очереди).
+        "topical_slot_hour": 16,
+        # Префикс источника факта в описании (source_note из генерации).
+        "source_label": "Source:",
         # Воронка Shorts→лонгформ: фразы перед ссылкой на последний длинный ролик
         # (в описании и закреп-комменте). Тема не важна — продаём формат «глубокий разбор».
         "longform_desc_cta": "Full deep-dives on the channel:",
@@ -207,6 +215,9 @@ CONFIGS = {
             "📌 Un dato nuevo cada día — link en bio",
             "🔗 Más datos como este — link en bio",
         ],
+        "ig_card_slot_hour": 13,  # первый ES-слот дня (13:17 UTC)
+        "topical_slot_hour": 13,   # первый ES-слот дня (13:17 UTC) — топикал по средам
+        "source_label": "Fuente:",
         "longform_desc_cta": "Análisis completos en el canal:",
         "longform_comment_cta": "¿Quieres la historia completa? Mira el análisis 👉",
         "first_comment": "Un momento — ¿tú ya sabías esto? 👇\nSuscríbete para un dato nuevo cada día 👉 {channel_url}",

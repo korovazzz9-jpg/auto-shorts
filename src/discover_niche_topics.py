@@ -75,7 +75,8 @@ def _search_topic(youtube, topic: str) -> list[dict]:
         print(f"  search failed for '{topic}': {e}")
         return []
     return [
-        {"video_id": i["id"]["videoId"], "channel_id": i["snippet"]["channelId"]}
+        {"video_id": i["id"]["videoId"], "channel_id": i["snippet"]["channelId"],
+         "title": i["snippet"].get("title", "")}
         for i in resp.get("items", []) if i.get("id", {}).get("videoId")
     ]
 
@@ -102,11 +103,13 @@ def _fetch_stats(youtube, video_ids: list[str], channel_ids: list[str]) -> tuple
     return views, subs
 
 
-def discover() -> dict[str, int]:
-    """Возвращает {topic: outlier_count} — сколько видео-выбросов найдено в нише
-    по каждой теме нашего TOPICS_POOL за этот прогон."""
+def discover() -> tuple[dict[str, int], dict[str, list[str]]]:
+    """Возвращает ({topic: outlier_count}, {topic: [заголовки выбросов]}) — сколько
+    видео-выбросов найдено в нише по каждой теме и их заголовки (до 3 на тему, для
+    стилевой калибровки промпта — см. generate_script._niche_titles_for)."""
     youtube = get_client()
     outlier_counts: dict[str, int] = {}
+    outlier_titles: dict[str, list[str]] = {}
 
     for topic in TOPICS_POOL:
         results = _search_topic(youtube, topic)
@@ -116,24 +119,27 @@ def discover() -> dict[str, int]:
         channel_ids = [r["channel_id"] for r in results]
         views, subs = _fetch_stats(youtube, video_ids, channel_ids)
 
-        count = 0
+        count, titles = 0, []
         for r in results:
             v = views.get(r["video_id"], 0)
             s = subs.get(r["channel_id"], 0)
             if v >= MIN_VIEWS and s > 0 and v / s >= OUTLIER_RATIO:
                 count += 1
+                if r["title"]:
+                    titles.append(r["title"])
         if count:
             outlier_counts[topic] = count
+            outlier_titles[topic] = titles[:3]
         print(f"  {topic}: {count} outlier(s) of {len(results)} searched")
 
-    return outlier_counts
+    return outlier_counts, outlier_titles
 
 
 def main() -> None:
-    counts = discover()
+    counts, titles = discover()
     with open(NICHE_SIGNAL_FILE, "w", encoding="utf-8") as f:
         json.dump(
-            {"outlier_counts": counts, "updated": date.today().isoformat()},
+            {"outlier_counts": counts, "outlier_titles": titles, "updated": date.today().isoformat()},
             f, ensure_ascii=False, indent=2,
         )
     print(f"  niche_signal saved: {counts}")

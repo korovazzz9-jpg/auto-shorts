@@ -50,7 +50,9 @@ def _videos_with_retention() -> list[dict]:
     return videos
 
 
-DROP_OFF_SAMPLE = 2  # худших видео недели, на которые тратим доп. Analytics-запросы (дёшево, но не для всех 50)
+DROP_OFF_SAMPLE = 5  # худших видео недели, на которые тратим доп. Analytics-запросы (дёшево, но не для всех 50)
+DROPOFF_STATS_FILE = os.path.join(os.path.dirname(__file__), "..", f"dropoff_stats_{CHANNEL}.json")
+MIN_DROPOFF_SAMPLE = 3  # меньше видео с кривыми — сигнал шумный, файл не пишем
 
 
 def _add_drop_offs(analytics, videos: list[dict]) -> None:
@@ -82,6 +84,30 @@ def save_hook_stats(videos: list[dict]) -> None:
         json.dump({"best_template": best_template, "avg_pct": round(avg, 1), "videos": n,
                    "updated": date.today().isoformat()}, f, ensure_ascii=False, indent=2)
     print(f"  hook_stats: {best_template} ({avg:.1f}%, n={n})")
+
+
+def save_dropoff_stats(videos: list[dict]) -> None:
+    """Замыкает петлю drop-off → промпт (2026-07-05): медианная ЗОНА обрыва по худшим видео
+    недели (доля длины видео, где кривая retention падает сильнее всего) пишется в
+    dropoff_stats_<channel>.json (коммитит weekly-report.yml). generate_script._dropoff_note()
+    читает файл и добавляет модели зонную подсказку (слабый хук / затянутый reveal / провал
+    середины). Обрывы в концовке (>70% длины) — норма для Shorts (CTA), подсказка не нужна."""
+    ratios = []
+    for v in videos:
+        d = v.get("drop")
+        # Обрывы слабее 5 п.п. — шум, не сигнал.
+        if d and v.get("length") and d.get("drop_pct", 0) >= 5:
+            ratios.append(min(d["second"] / v["length"], 1.0))
+    if len(ratios) < MIN_DROPOFF_SAMPLE:
+        print(f"  dropoff_stats: <{MIN_DROPOFF_SAMPLE} видео с кривыми — данных мало, файл не трогаем.")
+        return
+    ratios.sort()
+    median = ratios[len(ratios) // 2]
+    zone = "hook" if median < 0.15 else "reveal" if median < 0.40 else "middle" if median < 0.70 else "ending"
+    with open(DROPOFF_STATS_FILE, "w", encoding="utf-8") as f:
+        json.dump({"zone": zone, "median_ratio": round(median, 3), "videos": len(ratios),
+                   "updated": date.today().isoformat()}, f, ensure_ascii=False, indent=2)
+    print(f"  dropoff_stats: zone={zone} (median {median:.0%} длины, n={len(ratios)})")
 
 
 def build_report(videos: list[dict]) -> str:
@@ -127,6 +153,22 @@ def build_report(videos: list[dict]) -> str:
         lines.append("\nЭмоциональный тон:")
         for name, avg, n in tones[:6]:
             lines.append(f"  {avg:5.1f}%  ({n:2})  {name}")
+
+    # Стилевая калибровка по нише (2026-07-05): видео, чей промпт получал заголовки чужих
+    # выбросов (тег niche-styled), против остальных.
+    niche = [(k, a, n) for k, a, n in _avg_by(videos, "niche") if k in ("styled", "plain")]
+    if len(niche) == 2:
+        lines.append("\nНиша-калибровка (styled vs plain):")
+        for name, avg, n in niche:
+            lines.append(f"  {avg:5.1f}%  ({n:2})  {name}")
+
+    # «On this day» (2026-07-05): топикал-факты с привязкой к дате против обычных.
+    topical = [(k, a, n) for k, a, n in _avg_by(videos, "topical") if k in ("yes", "no")]
+    if any(k == "yes" for k, _, _ in topical):
+        lines.append("\n«On this day» (топикал vs обычные):")
+        for name, avg, n in topical:
+            label = "топикал" if name == "yes" else "обычные"
+            lines.append(f"  {avg:5.1f}%  ({n:2})  {label}")
 
     # Пороги retention (2026-07-02, retention_threshold): explore-and-exploit тест YouTube —
     # ниже порога (65% для <30с, 50% для 30-60с) раздача резко сокращается. Не абстрактное
@@ -191,3 +233,4 @@ if __name__ == "__main__":
         print(f"  drop-off анализ пропущен: {e}")
     notify(build_report(videos))
     save_hook_stats(videos)
+    save_dropoff_stats(videos)
