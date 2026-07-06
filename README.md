@@ -161,6 +161,9 @@ python src/rerender.py
 
 **Залить готовое видео с рабочего стола на YouTube+Instagram вручную** (без новой генерации) — `src/upload_from_desktop.py` (читает `video_02.mp4` + `meta.json`; поправь имя файла в скрипте под нужное видео).
 
+### Санитизация метаданных YouTube (2026-07-05, `upload_youtube._sanitize_youtube_text`)
+YouTube отклоняет описания/заголовки с угловыми скобками `<`/`>` (`invalidDescription`) и описания длиннее 5000 символов. Оба лонгформа (EN+ES) упали на загрузке 2026-07-05 именно с `invalidDescription` — вероятно длина: скрипт mystery 550-750 слов + search_summary + главы (добавлены 2026-07-03, ~200 симв) + кросс-промо + хэштеги подошли к 5000. `_sanitize_youtube_text()` теперь чистит `<>/` и обрезает до 4990 (по границе слова) — применяется к title+description во ВСЕХ путях загрузки (`upload_youtube` + локализация метаданных). Откат: убрать обёртки `_sanitize_youtube_text` в `upload_youtube.py`.
+
 ### Watchdog (`watchdog.yml`)
 Запускается через 15 мин после каждого слота Shorts. Если свежего видео нет — перезапускает pipeline. Окно проверки: 70 минут (`LOOKBACK_MINUTES` в `check_recent_upload.py`).
 

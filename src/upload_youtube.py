@@ -4,6 +4,20 @@ from googleapiclient.http import MediaFileUpload
 from youtube_auth import get_client
 
 
+def _sanitize_youtube_text(text: str, max_len: int) -> str:
+    """Приводит текст к требованиям YouTube для title/description: убирает угловые скобки
+    (< и > YouTube отклоняет как invalidDescription/invalidTitle — реальное падение обоих
+    лонгформов 2026-07-05) и обрезает до max_len (лимит описания 5000, title 100). Обрезка
+    по границе слова, чтобы не рвать слово/тег посередине."""
+    cleaned = text.replace("<", "").replace(">", "")
+    if len(cleaned) <= max_len:
+        return cleaned
+    cut = cleaned[:max_len]
+    if " " in cut[-40:]:  # не рвём слово, если недалеко есть пробел
+        cut = cut.rsplit(" ", 1)[0]
+    return cut
+
+
 def upload_video(
     video_path: str,
     title: str,
@@ -22,8 +36,8 @@ def upload_video(
         full_description = f"{hashtag_line}\n\n{description}"
     body = {
         "snippet": {
-            "title": title[:100],
-            "description": full_description,
+            "title": _sanitize_youtube_text(title, 100),
+            "description": _sanitize_youtube_text(full_description, 4990),
             "tags": tags,
             "categoryId": "27",  # Education
         },

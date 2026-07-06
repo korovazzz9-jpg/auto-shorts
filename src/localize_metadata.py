@@ -52,12 +52,18 @@ def add_sister_localization(video_id: str, title: str, description: str) -> None
         return  # канал без сестринской пары (vi) — шаг не применим
 
     loc_title, loc_description = _translate(title, description, target_lang)
+    # Те же лимиты YouTube, что при загрузке (invalidDescription на <>/>5000) — перевод
+    # мог их нарушить не меньше оригинала.
+    from upload_youtube import _sanitize_youtube_text
     get_client().videos().update(
         part="localizations",
         body={
             "id": video_id,
             "localizations": {
-                target_lang: {"title": loc_title, "description": loc_description},
+                target_lang: {
+                    "title": _sanitize_youtube_text(loc_title, 100),
+                    "description": _sanitize_youtube_text(loc_description, 4990),
+                },
             },
         },
     ).execute()
