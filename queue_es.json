@@ -1,51 +1,5 @@
 [
   {
-    "title": "El océano produce el 50% del oxígeno que respiras",
-    "title_opener": "other",
-    "hook_text": "No viene de los árboles",
-    "hook_template": "sounds-fake",
-    "emotional_tone": "impossible",
-    "script": "La mitad del oxígeno que respiras ahora mismo no viene de ningún bosque. Lo produce el océano — específicamente, un organismo llamado Prochlorococcus, descubierto en 1986. Es tan pequeño que un millón caben en una gota de agua. Pero genera más oxígeno que todos los árboles del Amazonas juntos. Aquí viene lo raro: ni siquiera es una planta. Es bacteria. Y si desaparece, en cuestión de años, nosotros también. Mándale esto a alguien que todavía cree que los árboles nos salvan solos.",
-    "word_count": 86,
-    "search_summary": "Prochlorococcus, bacteria marina descubierta en 1986, produce el 50% del oxígeno del planeta, más que el Amazonas.",
-    "comment_question": "¿Sigues creyendo que los árboles son los pulmones del planeta? 🌊",
-    "source_note": "MIT / Penny Chisholm lab, 1986",
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "datos curiosos",
-      "océano",
-      "oxígeno del océano",
-      "Prochlorococcus",
-      "bacterias marinas",
-      "datos en 30 segundos",
-      "ciencia curiosa",
-      "hechos sorprendentes"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#datoscuriosos",
-      "#oceano",
-      "#ciencia",
-      "#oxigeno"
-    ],
-    "video_queries": [
-      "person breathing fresh air outdoors",
-      "aerial view amazon rainforest",
-      "microscopic ocean organisms glowing",
-      "deep blue ocean surface sunlight",
-      "ocean waves aerial drone",
-      "scientist looking through microscope lab"
-    ],
-    "has_loop": false,
-    "topic": "the ocean",
-    "niche_styled": false,
-    "title_variant": "seo",
-    "hashtag_position": "end"
-  },
-  {
     "title": "Este pájaro usa el fuego para cazar",
     "title_opener": "the-x",
     "hook_text": "Usan el fuego a propósito",
