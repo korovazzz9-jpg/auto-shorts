@@ -24,7 +24,10 @@ import textwrap
 
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
-CARD_W, CARD_H = 1000, 1500
+# Instagram-лента режет портретные посты до максимум 4:5 (не наш прежний 2:3, 1000×1500) —
+# всё выше этого соотношения обрезается сверху/снизу (реальный баг: бренд+YouTube-бейдж
+# срезались наполовину). 1080×1350 — рекомендованный IG размер, ровно 4:5.
+CARD_W, CARD_H = 1080, 1350
 
 _AVATAR_DIR = os.path.join(os.path.dirname(__file__), "..", "manual_thumbs")
 
@@ -235,7 +238,7 @@ def build_ig_card(title: str, fact: str, channel_handle: str, channel: str, fact
     ], accent, seed=fact_no)
     draw = ImageDraw.Draw(img)
 
-    draw.text((CARD_W // 2 - 260, fact_y - QUOTE_RESERVE), '"', font=quote_font, fill=accent)
+    draw.text((int(CARD_W * 0.26) - 20, fact_y - QUOTE_RESERVE), '"', font=quote_font, fill=accent)
 
     yy = fact_y
     for line in fact_lines:
@@ -245,7 +248,7 @@ def build_ig_card(title: str, fact: str, channel_handle: str, channel: str, fact
         draw.text(((CARD_W - lw) // 2, yy), line, font=fact_font, fill="white")
         yy += (bbox[3] - bbox[1]) + 20
 
-    draw.text((CARD_W // 2 + 200, fact_y + fact_h + 15), '"', font=quote_font, fill=accent)
+    draw.text((int(CARD_W * 0.70), fact_y + fact_h + 15), '"', font=quote_font, fill=accent)
 
     _divider(draw, CARD_H - 160, CARD_W // 2, accent)
 
