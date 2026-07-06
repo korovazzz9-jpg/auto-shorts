@@ -32,15 +32,27 @@ def _translate(title: str, description: str, target_lang: str) -> tuple[str, str
         '{"title": "translated title", "description": "translated description"}\n\n'
         f"TITLE: {title}\n\nDESCRIPTION:\n{description}"
     )
-    response = client.messages.create(
-        model="claude-haiku-4-5",
-        max_tokens=1500,
-        messages=[{"role": "user", "content": prompt}],
-    )
-    raw = response.content[0].text.strip()
-    start, end = raw.find("{"), raw.rfind("}")
-    data = json.loads(raw[start:end + 1])
-    return str(data["title"])[:100], str(data["description"])
+    # 4096, не 1500: описание лонгформа ~5000 симв ≈ 2000+ токенов только на перевод —
+    # при 1500 ответ обрезался, терялась закрывающая }, срез становился пустым →
+    # «Expecting value char 0» (реальный сбой локализации EN-лонгформа 2026-07-06).
+    last_err = None
+    for _ in range(3):
+        response = client.messages.create(
+            model="claude-haiku-4-5",
+            max_tokens=4096,
+            messages=[{"role": "user", "content": prompt}],
+        )
+        raw = response.content[0].text.strip()
+        start, end = raw.find("{"), raw.rfind("}")
+        if start == -1 or end <= start:
+            last_err = ValueError("в ответе нет JSON-объекта")
+            continue
+        try:
+            data = json.loads(raw[start:end + 1])
+            return str(data["title"])[:100], str(data["description"])
+        except json.JSONDecodeError as e:
+            last_err = e
+    raise RuntimeError(f"Перевод локализации невалиден после 3 попыток: {last_err}")
 
 
 def add_sister_localization(video_id: str, title: str, description: str) -> None:
