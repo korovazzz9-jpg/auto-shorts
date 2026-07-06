@@ -1,14 +1,148 @@
 {
   "outlier_counts": {
-    "ancient history": 3,
-    "archaeological discoveries": 1,
+    "ancient history": 4,
+    "archaeological discoveries": 2,
     "ancient civilizations": 3,
-    "historical mysteries": 2,
+    "historical mysteries": 3,
     "the human body": 1,
+    "the animal kingdom": 1,
     "the ocean": 2,
     "evolution": 1,
     "volcanoes and earthquakes": 2,
-    "future technology": 5
+    "natural wonders": 1,
+    "space": 1,
+    "future technology": 4
   },
-  "updated": "2026-07-03"
+  "outlier_titles": {
+    "ancient history": [
+      "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos",
+      "Tres datos históricos alucinantes #historia #interesante #hechos",
+      "Hallazgo del siglo 5 a.C en aguas Italianas #historia #datoscuriosos #shorts"
+    ],
+    "archaeological discoveries": [
+      "Hallazgo del siglo 5 a.C en aguas Italianas #historia #datoscuriosos #shorts",
+      "La Reina Roja de Palenque🏺 #reelsvideo #shorts #fyp #curiosidades #datoscuriosos"
+    ],
+    "ancient civilizations": [
+      "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos",
+      "Tres datos históricos alucinantes #historia #interesante #hechos",
+      "Datos Curiosos de Cleopatra, una Mujer Exótica #shorts"
+    ],
+    "historical mysteries": [
+      "Tres datos históricos alucinantes #historia #interesante #hechos",
+      "Pruebas de que Jesús existió Realmente? #shorts",
+      "✅ La verdadera historia de los tres cerditos 🐷💀 #short #shortsviral"
+    ],
+    "the human body": [
+      "DATO CURIOSO - LA NIÑA PERRO #shorts"
+    ],
+    "the animal kingdom": [
+      "EL MEGALODÓN... ¿¡ES REAL?! | CLUB DE INVESTIGADORES #shorts | #education for #kids"
+    ],
+    "the ocean": [
+      "Las islas más peligrosas del mundo 🌎🤯 #curiosidades #shorts #estadosunidos",
+      "¿Tienes Talasofobia? 🤯😰 #shorts #talasofobia #fobias #short #mar #oceano"
+    ],
+    "evolution": [
+      "Arbol Familiar de Pokémon en 1 MINUTO #shorts"
+    ],
+    "volcanoes and earthquakes": [
+      "🌍💥 El terremoto más potente #curiosidades #datoscuriosos",
+      "la erupción del volcan vesubio en pompeya"
+    ],
+    "natural wonders": [
+      "Maravillas del Río Amazonas: Naturaleza Exuberante y Vida Salvaje"
+    ],
+    "space": [
+      "Algo se Aproxima a a Tierra #Shorts"
+    ],
+    "future technology": [
+      "Científicos EXPERIMENTOS CASEROS! 😱 #shorts",
+      "3 DATOS del CYBERTRUCK 👀 #datoscuriosos",
+      "EXPERIMENTOS CIENTÍFICOS CASEROS sencillos!!! #shorts #experimentos #caseros #cientificos"
+    ]
+  },
+  "top_outliers": [
+    {
+      "topic": "natural wonders",
+      "title": "Maravillas del Río Amazonas: Naturaleza Exuberante y Vida Salvaje",
+      "video_id": "K5UgjcZPUEc",
+      "views": 699692,
+      "subs": 2820,
+      "ratio": 248.1
+    },
+    {
+      "topic": "historical mysteries",
+      "title": "✅ La verdadera historia de los tres cerditos 🐷💀 #short #shortsviral",
+      "video_id": "QQ0sdApwJ0s",
+      "views": 4491489,
+      "subs": 18500,
+      "ratio": 242.8
+    },
+    {
+      "topic": "the human body",
+      "title": "DATO CURIOSO - LA NIÑA PERRO #shorts",
+      "video_id": "9e82SusaU8c",
+      "views": 14927990,
+      "subs": 75500,
+      "ratio": 197.7
+    },
+    {
+      "topic": "the ocean",
+      "title": "¿Tienes Talasofobia? 🤯😰 #shorts #talasofobia #fobias #short #mar #oceano",
+      "video_id": "GRGBrmHsXdg",
+      "views": 9458180,
+      "subs": 51500,
+      "ratio": 183.7
+    },
+    {
+      "topic": "space",
+      "title": "Algo se Aproxima a a Tierra #Shorts",
+      "video_id": "hOq7uz55_eo",
+      "views": 8373016,
+      "subs": 48800,
+      "ratio": 171.6
+    },
+    {
+      "topic": "the ocean",
+      "title": "Las islas más peligrosas del mundo 🌎🤯 #curiosidades #shorts #estadosunidos",
+      "video_id": "TZHSvTMFYt8",
+      "views": 10590300,
+      "subs": 67000,
+      "ratio": 158.1
+    },
+    {
+      "topic": "volcanoes and earthquakes",
+      "title": "la erupción del volcan vesubio en pompeya",
+      "video_id": "DB7ar9QMUAs",
+      "views": 686835,
+      "subs": 5570,
+      "ratio": 123.3
+    },
+    {
+      "topic": "ancient history",
+      "title": "Hallazgo del siglo 5 a.C en aguas Italianas #historia #datoscuriosos #shorts",
+      "video_id": "XpaYY4Q2zhI",
+      "views": 957097,
+      "subs": 8100,
+      "ratio": 118.2
+    },
+    {
+      "topic": "archaeological discoveries",
+      "title": "Hallazgo del siglo 5 a.C en aguas Italianas #historia #datoscuriosos #shorts",
+      "video_id": "XpaYY4Q2zhI",
+      "views": 957097,
+      "subs": 8100,
+      "ratio": 118.2
+    },
+    {
+      "topic": "volcanoes and earthquakes",
+      "title": "🌍💥 El terremoto más potente #curiosidades #datoscuriosos",
+      "video_id": "A_sPeB3Q9Dk",
+      "views": 4065642,
+      "subs": 38400,
+      "ratio": 105.9
+    }
+  ],
+  "updated": "2026-07-06"
 }
