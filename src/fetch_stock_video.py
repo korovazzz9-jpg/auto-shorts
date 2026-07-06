@@ -218,10 +218,23 @@ def _search_with_fallback(query: str, used_ids: set) -> dict | None:
 # по Pexels-API (отдают 15/15 вертикальных клипов ≥960px). Фон НЕ обязан совпадать с темой
 # факта — берём любой залипательный, он держит completion (главный сигнал TikTok-алгоритма).
 SATISFYING_QUERIES = [
+    # Оригинальный набор (проверен на Pexels).
     "kinetic sand cutting", "slime", "paint mixing", "soap cutting", "fluid art",
     "marble run", "ink in water", "honey pouring", "sand art", "color paint swirl",
     "glass blowing", "water ripple", "lava lamp", "cake icing", "candle making",
     "pottery clay wheel", "powder explosion color", "oddly satisfying", "liquid paint flow",
+    # Расширение 2026-07-06 (пул был мал → фоны повторялись): краски/жидкости,
+    # ремёсла, природа-текстуры, еда-процессы. Все — обобщённые satisfying-запросы,
+    # массово представленные вертикальными клипами на Pexels/Pixabay.
+    "acrylic pour painting", "oil and water macro", "colored smoke", "bubbles macro",
+    "water drop slow motion", "milk swirl", "watercolor bleeding", "resin art pouring",
+    "melting wax", "molten glass", "metal casting", "blacksmith forging",
+    "latte art pouring", "chocolate melting", "caramel drizzle", "dough kneading",
+    "espresso pouring", "icing cookies", "sushi rolling", "knife sharpening",
+    "wood carving", "wood shaving", "leather tooling", "calligraphy writing",
+    "spray paint art", "sand falling", "hydraulic press crushing", "gears turning",
+    "domino falling", "zen sand garden", "flower blooming timelapse", "jelly wobble",
+    "foam texture", "honey dripping macro", "clay sculpting hands", "neon lights bokeh",
 ]
 
 
