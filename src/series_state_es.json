@@ -1,105 +1,111 @@
 {
-  "topic": "space",
+  "topic": "El océano tiene más montañas que toda la tierra combinada",
   "part1": {
-    "title": "El espacio huele a algo que conoces | Part 1",
-    "script": "Huele a esto todos los días y nunca lo relacionaste con el universo. Los astronautas que regresan de caminatas espaciales describen un olor específico en sus trajes: metal quemado, carne a la parrilla, y pólvora. No es su imaginación. El espacio exterior tiene un olor real. Moléculas de hidrógeno, carbono y oxígeno flotan entre las estrellas formando compuestos orgánicos. Algunos de esos compuestos son idénticos a los que produces cuando cocinas carne a fuego alto. El universo entero huele a algo que tú has olido esta semana. Síguenos para no perderte la Parte 2.",
+    "title": "El fondo del mar es más alto que el Everest | Part 1",
+    "hook_text": "El mar esconde esto",
+    "hook_template": "sounds-fake",
+    "script": "Hay montañas bajo el océano más altas que el Everest — y llevan ahí millones de años sin que nadie las vea. El fondo del mar no es una llanura plana y oscura. Esconde más de 100,000 volcanes submarinos, cordilleras gigantes y picos que superan los 8,000 metros desde la base. La Dorsal Mesoatlántica sola mide 65,000 kilómetros de largo — la cadena montañosa más larga del planeta, completamente bajo el agua. Menos del 25% del fondo oceánico ha sido mapeado con detalle. Conocemos mejor la superficie de Marte que el fondo de nuestro propio océano. Parte 2 revela por qué una sola de esas montañas puede apagar el cielo entero. Síguenos para no perderte la Parte 2.",
+    "search_summary": "El fondo del océano tiene más de 100,000 volcanes submarinos y cordilleras más largas que cualquier cadena montañosa terrestre.",
+    "comment_question": "¿Preferirías explorar el fondo del mar o la superficie de Marte?",
+    "source_note": "NOAA Ocean Exploration, 2022",
     "tags": [
-      "espacio exterior",
-      "datos del espacio",
-      "astronautas",
-      "olor del espacio",
-      "curiosidades del universo",
-      "ciencia espacial",
-      "hechos increíbles",
-      "nasa curiosidades",
-      "topic-space",
+      "fondo del mar",
+      "montañas submarinas",
+      "océano profundo",
+      "dorsal mesoatlántica",
+      "volcanes submarinos",
+      "datos del océano",
+      "misterios del mar",
+      "geografía oceánica",
+      "topic-El_océano_tiene_más_montañas_que_toda_la_tierra_combinada",
       "series-part-1"
     ],
     "hashtags": [
-      "#EspacioExterior",
-      "#CienciaEspacial",
-      "#DatosIncreíbles"
+      "#OcéanoProfundo",
+      "#DatosImpactantes",
+      "#CienciaEnCorto"
     ],
     "video_queries": [
-      "astronaut spacewalk returning to space station",
-      "grilling meat fire smoke close up",
-      "outer space nebula stars floating particles",
-      "astronaut removing spacesuit helmet"
+      "deep ocean floor mountains 3D animation",
+      "mid-atlantic ridge underwater drone footage",
+      "ocean floor topography map visualization"
     ],
-    "topic": "space",
+    "topic": "El océano tiene más montañas que toda la tierra combinada",
     "part": 1,
     "total_parts": 3,
     "hashtag_position": "end"
   },
   "part2": {
-    "title": "Por qué el espacio huele a carne quemada | Part 2",
-    "script": "Ya sabes que el espacio huele a algo familiar. Aquí está la razón que nadie te dice. Entre las estrellas existe una nube molecular llamada Sagitario B2, ubicada a 26,000 años luz de aquí, y contiene etil formiato, el mismo compuesto químico que le da sabor a las frambuesas y al ron. Pero también hay policiclicos aromáticos, moléculas que se forman cuando quemas proteína animal. La radiación de las estrellas cocina literalmente materia orgánica flotando en el vacío desde hace millones de años. El universo lleva cocinando desde antes de que existiera la Tierra. Síguenos para la conclusión en la Parte 3.",
+    "title": "Este volcán submarino puede apagar el cielo | Part 2",
+    "hook_text": "Un volcán bajo el agua",
+    "hook_template": "sounds-fake",
+    "script": "En enero de 2022, el volcán submarino Hunga Tonga explotó desde bajo el océano con una fuerza 500 veces mayor que la bomba atómica de Hiroshima. La onda de presión dio la vuelta al planeta completo dos veces. Inyectó tanto vapor de agua a la estratósfera — unos 150 millones de toneladas — que los científicos aún calculan cuánto calentará el clima en los próximos años. El mar no amortigua estas erupciones: las amplifica. El agua fría golpea el magma a cientos de metros de profundidad y genera explosiones que ninguna erupción terrestre puede igualar. Pero aquí viene lo que nadie espera: Parte 3 revela cómo ese mismo proceso en el fondo del mar lleva creando el aire que respiras desde hace 3,500 millones de años. Síguenos para el final en la Parte 3.",
+    "search_summary": "La erupción del volcán submarino Hunga Tonga en 2022 fue 500 veces más potente que la bomba atómica de Hiroshima.",
+    "comment_question": "¿Sabías que una erupción bajo el mar puede ser más destructiva que una en tierra?",
+    "source_note": "NASA Earth Observatory, 2022",
     "tags": [
-      "sagitario b2",
-      "química del espacio",
-      "moléculas en el espacio",
-      "nebulosa interestelar",
-      "compuestos orgánicos espacio",
-      "curiosidades científicas",
-      "datos del universo",
-      "espacio datos",
-      "topic-space",
+      "Hunga Tonga",
+      "volcán submarino",
+      "erupción submarina",
+      "océano peligroso",
+      "catástrofe natural",
+      "datos del océano",
+      "volcanes 2022",
+      "cambio climático océano",
+      "topic-El_océano_tiene_más_montañas_que_toda_la_tierra_combinada",
       "series-part-2"
     ],
     "hashtags": [
-      "#QuímicaEspacial",
-      "#UniversoIncreíble",
-      "#DatosEnciencia",
-      "#EspacioExterior"
+      "#HungaTonga",
+      "#VolcánSubmarino",
+      "#DatosImpactantes"
     ],
     "video_queries": [
-      "Sagittarius B2 nebula space animation",
-      "molecular cloud deep space timelapse",
-      "star radiation energy visualization",
-      "chemical molecules floating animation",
-      "milky way galaxy center zoom"
+      "Hunga Tonga volcano eruption 2022 satellite footage",
+      "underwater volcano explosion slow motion",
+      "shockwave pressure wave atmosphere visualization"
     ],
-    "topic": "space",
+    "topic": "El océano tiene más montañas que toda la tierra combinada",
     "part": 2,
     "total_parts": 3,
     "hashtag_position": "end"
   },
   "part3": {
-    "title": "El universo ya estaba vivo antes que tú | Part 3",
-    "script": "Empezamos con un olor familiar. Después descubriste que las estrellas cocinan materia orgánica desde hace miles de millones de años. Ahora viene lo que cambia todo: los mismos aminoácidos que forman tus proteínas, los que construyen cada célula de tu cuerpo, se han encontrado en meteoritos. No evolucionaron solo en la Tierra. Llegaron del espacio. Eso significa que los bloques básicos de la vida no nacieron aquí, llegaron flotando entre estrellas que olían a pólvora y a carne. No eres un ser de la Tierra que mira el espacio. Eres espacio que aprendió a mirarse a sí mismo. Síguenos para más series como esta.",
+    "title": "El océano lleva 3,500 millones de años creando tu aire | Part 3",
+    "hook_text": "Tu siguiente respiración viene de aquí",
+    "hook_template": "you-experience",
+    "script": "Cada segunda respiración que das la produjo el océano — no los bosques. El fitoplancton marino genera entre el 50 y el 80% del oxígeno del planeta. Organismos microscópicos que no puedes ver sin lentes llevan 3,500 millones de años fabricando el aire que mantiene vivo todo ser vivo en la Tierra. Y ese proceso arranca exactamente en el fondo volcánico que vimos en las partes anteriores: los minerales que escupen esos volcanes submarinos alimentan al fitoplancton desde abajo. El océano no es solo agua. Es una máquina viva que conecta el núcleo del planeta con tus pulmones en un ciclo ininterrumpido. Cada vez que miras el mar, estás mirando la razón por la que sigues vivo. Si llegaste hasta la Parte 3 — ya nunca vas a ver el océano igual. Síguenos para más series como esta.",
+    "search_summary": "El fitoplancton oceánico produce entre el 50 y 80% del oxígeno de la Tierra y lleva haciéndolo 3,500 millones de años.",
+    "comment_question": "¿Te cambia algo saber que el mar produce más oxígeno que todos los bosques juntos?",
+    "source_note": "Smithsonian Ocean, National Geographic, 2021",
     "tags": [
-      "aminoácidos en meteoritos",
-      "origen de la vida",
-      "panspermia",
-      "meteoritos y vida",
-      "curiosidades del universo",
-      "espacio y vida",
-      "datos científicos",
-      "origen del ser humano espacio",
-      "topic-space",
+      "fitoplancton",
+      "oxígeno del océano",
+      "el mar produce oxígeno",
+      "datos del océano",
+      "respiración y mar",
+      "océano profundo",
+      "ciencia del mar",
+      "datos impactantes",
+      "topic-El_océano_tiene_más_montañas_que_toda_la_tierra_combinada",
       "series-part-3"
     ],
     "hashtags": [
-      "#OrigenDeLaVida",
-      "#EspacioExterior",
-      "#UniversoIncreíble",
-      "#CienciaEspacial",
-      "#DatosIncreíbles"
+      "#Fitoplancton",
+      "#OcéanoProfundo",
+      "#DatosEnSegundos"
     ],
     "video_queries": [
-      "meteorite falling through atmosphere slow motion",
-      "DNA strand animation molecules",
-      "human body cells microscope zoom",
-      "meteor impact earth ancient",
-      "person looking up at stars night sky"
+      "phytoplankton microscope close up ocean",
+      "ocean surface sunlight photosynthesis aerial",
+      "deep sea hydrothermal vent minerals underwater"
     ],
-    "topic": "space",
+    "topic": "El océano tiene más montañas que toda la tierra combinada",
     "part": 3,
     "total_parts": 3,
     "hashtag_position": "end"
   },
-  "next_part": 4,
-  "part1_video_id": "UkImpZNAVRU",
-  "part2_video_id": "9v4BkStI0mI",
-  "part3_video_id": "_Cle8w9o5XE"
+  "playlist_id": "PLAKsADanAEfI",
+  "part1_video_id": "jOUk-9XNTC8",
+  "next_part": 2
 }
