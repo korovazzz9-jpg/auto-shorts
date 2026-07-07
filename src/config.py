@@ -228,8 +228,8 @@ CONFIGS = {
             "📌 Un dato nuevo cada día — link en bio",
             "🔗 Más datos como este — link en bio",
         ],
-        "ig_card_slot_hour": 13,  # первый ES-слот дня (13:17 UTC)
-        "topical_slot_hour": 13,   # первый ES-слот дня (13:17 UTC) — топикал по четвергам
+        "ig_card_slot_hour": 3,  # первый ES-слот дня (03:17 UTC = 21:17 Мехико, было 13:17)
+        "topical_slot_hour": 3,   # первый ES-слот дня (03:17 UTC) — топикал по четвергам
         "community_poll_intro": "¿Ya viste el nuevo análisis: {title}? 👀\n\n¿Sobre qué tema quieres el video de la próxima semana? Vota 👇",
         "source_label": "Fuente:",
         "longform_desc_cta": "Análisis completos en el canal:",
