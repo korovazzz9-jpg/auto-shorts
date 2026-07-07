@@ -1,52 +1,5 @@
 [
   {
-    "title": "Tu cerebro fabrica recuerdos falsos mientras duermes",
-    "title_opener": "your-x",
-    "hook_text": "Tus recuerdos son mentira",
-    "hook_template": "sounds-fake",
-    "emotional_tone": "creepy",
-    "script": "Cada noche tu cerebro reescribe lo que viviste — y tú nunca lo notas. Durante el sueño profundo, el hipocampo reproduce memorias y las rearma. En ese proceso, mezcla detalles, inventa conexiones, y borra partes enteras. Un estudio de 2010 en Nature Neuroscience confirmó que los recuerdos se vuelven maleables cada vez que los recuerdas — no solo mientras duermes. Pero aquí viene lo extraño: cuanto más seguro estás de un recuerdo, más veces lo reconstruiste, y más se alejó del original. Manda esto a alguien que jure recordar perfectamente su infancia. Y exactamente así.",
-    "word_count": 88,
-    "search_summary": "El cerebro humano reescribe y altera los recuerdos durante el sueño profundo, según Nature Neuroscience 2010.",
-    "comment_question": "¿Cuál es ese recuerdo del que estás 100% seguro... pero nadie más lo recuerda igual? 👀",
-    "source_note": "Nature Neuroscience, estudio de reconsolidación de memoria, 2010",
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "datos curiosos",
-      "cuerpo humano",
-      "cerebro humano",
-      "memoria falsa",
-      "hechos increíbles",
-      "ciencia en español",
-      "datos en 30 segundos",
-      "reconsolidación de memoria",
-      "recuerdos y sueño"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#datoscuriosos",
-      "#cerebrohumano",
-      "#memoria",
-      "#ciencia"
-    ],
-    "video_queries": [
-      "person sleeping deep sleep dark room",
-      "brain neuron network glowing",
-      "person waking up confused morning",
-      "memory flashback blurred vision",
-      "person thinking remembering close eyes",
-      "brain scan mri hospital"
-    ],
-    "has_loop": true,
-    "topic": "the human body",
-    "niche_styled": false,
-    "title_variant": "seo",
-    "hashtag_position": "end"
-  },
-  {
     "title": "El pulmón que apareció dos veces en la evolución",
     "title_opener": "the-x",
     "hook_text": "La naturaleza se copió a sí misma",
