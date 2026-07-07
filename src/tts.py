@@ -38,13 +38,27 @@ async def _synthesize(text: str, out_path: str, voice: str) -> list[dict]:
 def text_to_speech(text: str, out_path: str) -> list[dict]:
     """Synthesizes speech to out_path, returns per-word timing: [{"text", "start", "end"}, ...]."""
     voice = _pick_voice()
+    words: list[dict] = []
+    last_err: Exception | None = None
     for attempt in range(1, TTS_MAX_RETRIES + 1):
-        words = asyncio.run(_synthesize(text, out_path, voice))
+        # edge-tts иногда бросает исключение (NoAudioReceived — транзиентный сбой сети/
+        # сервиса), а не просто отдаёт короткое аудио — раньше это пробивало retry-цикл
+        # насквозь (исключение прерывало asyncio.run до проверки длины), реальный сбой
+        # на проде 2026-07-06. Теперь оба случая (исключение и короткое аудио) ретраятся.
+        try:
+            words = asyncio.run(_synthesize(text, out_path, voice))
+        except Exception as e:
+            last_err = e
+            print(f"  TTS attempt {attempt}: {e}, retrying...")
+            continue
         duration = words[-1]["end"] if words else 0
         if duration >= TTS_MIN_DURATION:
             return words
         print(f"  TTS attempt {attempt}: audio too short ({duration:.1f}s < {TTS_MIN_DURATION}s), retrying...")
-    # Последняя попытка — возвращаем что есть, pipeline дальше разберётся
+    if not words and last_err is not None:
+        raise last_err
+    # Последняя попытка — возвращаем что есть (в т.ч. пусто, если ловили только
+    # короткое-аудио случаи), pipeline дальше разберётся.
     return words
 
 
