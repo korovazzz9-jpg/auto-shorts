@@ -4,6 +4,8 @@
 как Shorts. Это упрощённый билдер: фон из стоковых клипов + лёгкий зум + караоке-субтитры
 снизу. Без Shorts-фишек (хук-плашка, CTA-пульс, петля, PART-оверлей) — они тут не нужны.
 Переиспользует шрифт/аудио/тумбу из build_video, но со своим размером кадра."""
+import base64
+import io
 import os
 import tempfile
 
@@ -23,6 +25,58 @@ from moviepy.editor import (
 
 TARGET_SIZE = (1920, 1080)
 CAPTION_Y = int(TARGET_SIZE[1] * 0.80)  # субтитры в нижней трети, не перекрывают центр кадра
+
+# Тумба лонгформа — vision-отбор кадра (2026-07-08): раньше кадр брался ВСЕГДА на t=0.5s
+# (фактически случайный момент начала первого стокового клипа, без учёта того, хороший ли
+# это кадр — статичный/смазанный/тёмный). Тот же паттерн, что уже используется для отбора
+# стоковых клипов (fetch_stock_video.py, Haiku-vision) — сэмплируем несколько тайм-кодов,
+# просим Haiku выбрать самый чёткий/выразительный с одним ясным фокусом (см. CTR-гайд:
+# "one clear focal point", "viewer decides in under 1 second"). Дёшево (1 доп. Haiku-вызов
+# на лонгформ, раз в неделю), безопасный фолбэк на старое поведение при любой ошибке.
+_THUMB_CANDIDATE_FRACTIONS = (0.15, 0.35, 0.55, 0.75)
+
+
+def _pick_thumb_frame(background, duration: float):
+    """Возвращает numpy-кадр, выбранный Haiku из нескольких кандидатов по duration.
+    Фолбэк на t=0.5s (старое поведение) при отсутствии ключа/сбое API/некорректном ответе."""
+    fallback = background.get_frame(0.5)
+    if not os.environ.get("ANTHROPIC_API_KEY"):
+        return fallback
+    try:
+        from anthropic import Anthropic
+
+        times = [duration * f for f in _THUMB_CANDIDATE_FRACTIONS if duration * f > 0.3]
+        if len(times) < 2:
+            return fallback
+        frames = [background.get_frame(t) for t in times]
+
+        content = [{"type": "text", "text": (
+            f"Pick the best YouTube thumbnail frame from these {len(frames)} candidates "
+            "(numbered 1 to N) for a fact/deep-dive video. Prefer: one clear focal point, "
+            "sharp (not motion-blurred), good contrast, visually striking. Avoid: near-black "
+            "or near-white frames, cluttered/busy compositions, mid-transition blur. "
+            "Reply with ONLY the number."
+        )}]
+        for idx, frame in enumerate(frames, 1):
+            buf = io.BytesIO()
+            Image.fromarray(frame).convert("RGB").save(buf, format="JPEG", quality=80)
+            b64 = base64.b64encode(buf.getvalue()).decode()
+            content.append({"type": "text", "text": f"Frame {idx}:"})
+            content.append({"type": "image", "source": {
+                "type": "base64", "media_type": "image/jpeg", "data": b64}})
+
+        client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+        response = client.messages.create(
+            model="claude-haiku-4-5-20251001", max_tokens=10,
+            messages=[{"role": "user", "content": content}],
+        )
+        pick = int(response.content[0].text.strip()[0]) - 1
+        pick = max(0, min(pick, len(frames) - 1))
+        print(f"  Vision picked thumb frame {pick + 1}/{len(frames)} (t={times[pick]:.1f}s)")
+        return frames[pick]
+    except Exception as e:
+        print(f"  Vision thumb pick упал, фолбэк на t=0.5s: {e}")
+        return fallback
 
 
 def _save_longform_thumb(img: Image.Image, path: str, hook_text: str | None) -> None:
@@ -161,9 +215,10 @@ def build_longform_video(
         threads=4, preset="medium", logger=None,
     )
 
-    # Тумба — кадр + крупная короткая фраза-хук (thumb_text), не весь заголовок.
+    # Тумба — кадр (vision-отбор, см. _pick_thumb_frame) + крупная короткая фраза-хук
+    # (thumb_text), не весь заголовок.
     thumb_path = os.path.splitext(out_path)[0] + "_thumb.jpg"
-    frame = background.get_frame(0.5)
+    frame = _pick_thumb_frame(background, duration)
     _save_longform_thumb(Image.fromarray(frame), thumb_path, thumb_text or title)
 
     final.close()
