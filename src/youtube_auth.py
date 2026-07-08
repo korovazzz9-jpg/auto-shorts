@@ -12,10 +12,10 @@ SCOPES = [
 ]
 
 
-def _credentials() -> Credentials:
+def _credentials(refresh_token: str | None = None) -> Credentials:
     return Credentials(
         token=None,
-        refresh_token=os.environ["YT_REFRESH_TOKEN"],
+        refresh_token=refresh_token or os.environ["YT_REFRESH_TOKEN"],
         client_id=os.environ["YT_CLIENT_ID"],
         client_secret=os.environ["YT_CLIENT_SECRET"],
         token_uri="https://oauth2.googleapis.com/token",
@@ -23,8 +23,11 @@ def _credentials() -> Credentials:
     )
 
 
-def get_client():
-    return build("youtube", "v3", credentials=_credentials())
+def get_client(refresh_token: str | None = None):
+    """refresh_token: переопределить env YT_REFRESH_TOKEN — нужно comment_agent.py, который в
+    ОДНОМ процессе работает сразу с обоими каналами (EN/ES), а не выбирает канал через CHANNEL
+    env как остальной пайплайн."""
+    return build("youtube", "v3", credentials=_credentials(refresh_token))
 
 
 def get_analytics_client():
