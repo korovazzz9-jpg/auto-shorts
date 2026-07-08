@@ -36,6 +36,12 @@ MIN_VIEWS = 20000
 MAX_RESULTS_PER_QUERY = 15
 CANDIDATES_TO_SEND = 5
 
+# Темы, которые уже РЕАЛЬНО пробовали в TOPICS_POOL и убрали за неуспеваемость (см.
+# generate_script.py, комментарий «Удалены»). Отдельно от BANNED_TOPICS (те banned за
+# сложность для аудитории, не за проверенный неуспех) — 2026-07-08: discover_new_categories.py
+# без этого списка повторно предложил «psychology», уже удалённую с avg 136 просмотров.
+REJECTED_TOPICS = ["psychology", "bizarre records"]
+
 # Generic-запросы про факт-контент БЕЗ привязки к нашим темам — открытый срез ниши.
 _BROAD_QUERIES = {
     "en": [
@@ -86,10 +92,15 @@ def _fetch_stats(youtube, video_ids: list[str], channel_ids: list[str]) -> tuple
 def _collect_outliers() -> list[dict]:
     """Открытый срез ниши: видео-выбросы по generic-запросам (не по нашим темам), с реальными
     цифрами (views/subs/ratio) — 2026-07-08: раньше в Telegram уходил только текст-вывод
-    модели без чисел, пользователь не мог сам оценить силу сигнала."""
+    модели без чисел, пользователь не мог сам оценить силу сигнала.
+
+    2026-07-08: дедуп по video_id — то же видео находится через НЕСКОЛЬКО broad-запросов
+    (например «amazing facts shorts» и «did you know shorts» оба матчат один и тот же ролик),
+    без дедупа модель получала один ролик дважды и засчитывала это как 2 отдельных
+    доказательства («3+ evidence» на деле было 2 уникальных видео + дубль)."""
     youtube = get_client()
     queries = _BROAD_QUERIES.get(CFG["lang_code"], _BROAD_QUERIES["en"])
-    outliers = []
+    outliers: dict[str, dict] = {}
     for q in queries:
         results = _search_broad(youtube, q)
         if not results:
@@ -101,10 +112,11 @@ def _collect_outliers() -> list[dict]:
             v = views.get(r["video_id"], 0)
             s = subs.get(r["channel_id"], 0)
             if v >= MIN_VIEWS and s > 0 and v / s >= OUTLIER_RATIO:
-                outliers.append({"title": r["title"], "video_id": r["video_id"],
-                                  "views": v, "subs": s, "ratio": round(v / s, 1)})
-    outliers.sort(key=lambda o: -o["ratio"])
-    return outliers
+                outliers[r["video_id"]] = {"title": r["title"], "video_id": r["video_id"],
+                                            "views": v, "subs": s, "ratio": round(v / s, 1)}
+    result = list(outliers.values())
+    result.sort(key=lambda o: -o["ratio"])
+    return result
 
 
 def _propose_candidates(outliers: list[dict]) -> list[dict]:
@@ -119,7 +131,18 @@ def _propose_candidates(outliers: list[dict]) -> list[dict]:
     контент с высоким ratio, не только факт-нарратив; (2) промпт не проверял, подходит ли
     НАЙДЕННЫЙ ФОРМАТ под то, что умеет наш пайплайн. Добавлены явный запрет по формату и
     подъём минимума доказательств 2→3 (2 ролика — слишком слабый сигнал на открытом поиске,
-    где шума больше, чем в discover_niche_topics.py с семенами внутри наших тем)."""
+    где шума больше, чем в discover_niche_topics.py с семенами внутри наших тем).
+
+    2026-07-08, второй раунд — ещё 2 бага в реальном проде: EN «psychology and human behavior
+    facts» — категория НЕ описывала 2 из 3 доказательств (survival-факты, animal-факты вообще
+    не про психологию — модель притянула разнородные видео под один правдоподобный ярлык);
+    ES «movies and animated films facts» — 2 из 3 evidence были БУКВАЛЬНО одним и тем же
+    видео (тот же title/views), «3+ доказательства» набрано дублем, а не реальным числом
+    видео. Плюс psychology уже была в TOPICS_POOL и удалена за слабый avg (см. REJECTED_TOPICS
+    выше) — модель не знала об истории. Фиксы: явное требование связности категории с КАЖДЫМ
+    evidence, явный запрет дублей evidence, REJECTED_TOPICS в промпте, требование generic
+    (не привязанной к конкретному фильму/бренду/персонажу) иллюстрируемости, проверка языка
+    аудитории evidence."""
     if not outliers:
         return []
     client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"], max_retries=5)
@@ -131,27 +154,43 @@ def _propose_candidates(outliers: list[dict]) -> list[dict]:
         f"These are videos found via broad search queries in the short-video niche "
         f"(language: {CFG['script_language']}) with real view/subscriber numbers — NOT "
         "pre-verified to be fact-narration content, some may be reaction/challenge/vlog/tutorial "
-        f"videos that just matched the search terms:\n{outliers_json}\n\n"
+        f"videos that just matched the search terms, and some may be in a different language "
+        f"despite the search's language filter being a soft preference:\n{outliers_json}\n\n"
         f"Our channel's format: a SINGLE off-screen narrator voiceover delivering ONE surprising, "
-        "mind-blowing fact per video, over generic stock b-roll footage (no on-camera host, no "
-        "physical demonstration, no live reaction, no step-by-step tutorial — we cannot produce "
-        "footage that requires filming a real demo, experiment, reaction, or challenge).\n"
+        "mind-blowing fact per video, over GENERIC stock b-roll footage sourced from stock "
+        "libraries (no on-camera host, no physical demonstration, no live reaction, no "
+        "step-by-step tutorial — we cannot produce footage that requires filming a real demo, "
+        "experiment, reaction, or challenge, and we cannot source footage of a SPECIFIC named "
+        "film/show/game/character/brand — only generic illustratable concepts like animals, "
+        "space, ocean, history reenactment stock, etc).\n"
         f"Our channel already covers these topic categories: {', '.join(TOPICS_POOL)}.\n"
         f"Banned (never propose): {', '.join(BANNED_TOPICS)} — audience can't follow specialist "
-        "topics requiring technical background.\n\n"
-        "Look for a NEW topic CATEGORY (not already covered above) that fits our EXACT format "
-        "(narrated fact + generic stock footage) and shows up in AT LEAST 3 of the videos above "
-        "as a genuine recurring pattern. REJECT any category whose evidence videos are actually "
+        "topics requiring technical background.\n"
+        f"Already tried and removed for underperformance (never propose again): "
+        f"{', '.join(REJECTED_TOPICS)}.\n\n"
+        "Look for a NEW topic CATEGORY (not already covered or rejected above) that fits our "
+        "EXACT format (narrated fact + generic stock footage) and shows up in AT LEAST 3 of the "
+        "videos above as a genuine recurring pattern. Requirements, check each one:\n"
+        "1. Format — REJECT any category whose evidence videos are actually "
         "reaction/challenge/tutorial/demo/vlog/prank videos, even if topically adjacent — check "
-        "each evidence title's actual format, not just its topic word. When in doubt, reject.\n\n"
+        "each evidence title's actual format, not just its topic word.\n"
+        "2. Coherence — every evidence item you list must GENUINELY belong to the category, not "
+        "just be loosely/topically adjacent. If you can't honestly describe all evidence items "
+        "with the same one-phrase category, don't propose it.\n"
+        "3. Distinctness — evidence items must be 3+ DIFFERENT videos (different titles). Never "
+        "list the same video twice to pad the count.\n"
+        "4. Language/audience — evidence must genuinely be in the target language/audience above, "
+        "not just contain a matching keyword.\n"
+        "5. Footage feasibility — the category must be illustratable with generic stock footage, "
+        "not require footage of one specific named film/show/game/character/brand.\n"
+        "When in doubt on any of these, reject.\n\n"
         "Respond strictly in JSON, no markdown wrapper, a list of 0-3 candidates (0 if nothing "
-        "genuinely new, recurring in 3+ videos, AND format-compatible — do NOT invent a category "
-        "from fewer than 3 videos, and do NOT propose a topic whose only evidence is a "
-        "reaction/demo/tutorial-style video). Copy the title/views/ratio EXACTLY from the input "
+        "passes all 5 checks — do NOT invent a category from fewer than 3 genuinely distinct, "
+        "on-topic, format-compatible videos). Copy the title/views/ratio EXACTLY from the input "
         "for each evidence item — do not paraphrase or invent numbers: "
         '[{"category": "short phrase like existing pool", '
-        '"evidence": [{"title": "...", "views": 0, "ratio": 0.0}, ...] (3+ items), '
-        '"why": "one sentence, in Russian, must also state why the FORMAT fits (narratable as a fact, not a demo)"}]'
+        '"evidence": [{"title": "...", "views": 0, "ratio": 0.0}, ...] (3+ DISTINCT items), '
+        '"why": "one sentence, in Russian, must also state why the FORMAT fits (narratable as a fact, not a demo, not tied to specific media)"}]'
     )
     message = client.messages.create(
         model="claude-sonnet-4-6", max_tokens=1500,
@@ -166,8 +205,16 @@ def _propose_candidates(outliers: list[dict]) -> list[dict]:
         candidates = json.loads(raw[start:end + 1])
     except (json.JSONDecodeError, ValueError):
         return []
-    return [c for c in candidates if isinstance(c, dict) and c.get("category")
-            and len(c.get("evidence", [])) >= 3][:CANDIDATES_TO_SEND]
+    result = []
+    for c in candidates:
+        if not (isinstance(c, dict) and c.get("category")):
+            continue
+        evidence = c.get("evidence", [])
+        titles = {e.get("title") for e in evidence if isinstance(e, dict)}
+        if len(titles) < 3:   # дедуп по title — ловит буквальные дубли-evidence (ES-баг)
+            continue
+        result.append(c)
+    return result[:CANDIDATES_TO_SEND]
 
 
 def _supply_for(youtube, category: str) -> int:
