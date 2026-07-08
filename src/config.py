@@ -13,11 +13,11 @@ CONFIGS = {
         # Язык, на котором Claude пишет сценарий.
         "script_language": "English",
         # Голоса TTS, ротируются между видео ради вариативности.
+        # 2026-07-08: британский (en-GB-RyanNeural) убран по просьбе пользователя.
         "voices": [
             "en-US-GuyNeural",
             "en-US-EricNeural",
             "en-US-ChristopherNeural",
-            "en-GB-RyanNeural",
             "en-AU-WilliamNeural",
         ],
         # Подпись призыва (вариативность) — на языке канала. Генерик-fallback,
