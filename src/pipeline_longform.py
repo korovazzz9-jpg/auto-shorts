@@ -45,7 +45,20 @@ def _longform_tts(script: str, audio_path: str) -> list:
             try:
                 from tts_novita import text_to_speech_novita
                 words = text_to_speech_novita(script, audio_path)
-                print(f"  TTS: novita/{CFG.get('novita_voice')} — {words[-1]['end']:.1f}s")
+                # Санити-проверка результата: novita может вернуть БЕЗ ошибки, но пустые
+                # слова / обрезанное почти-пустое аудио (2026-07-08). Тогда это «не сработала»
+                # так же, как исключение — падаем в тот же фолбэк на edge-tts, а не принимаем
+                # битую озвучку в 4-минутное видео. Ожидаемая длительность ~2.5 слова/сек;
+                # реальная (words[-1]["end"]) должна быть хотя бы половиной от неё и не меньше
+                # абсолютного пола 30с (лонгформ короче не бывает).
+                duration = words[-1]["end"] if words else 0.0
+                expected = len(script.split()) / 2.5
+                audio_ok = os.path.exists(audio_path) and os.path.getsize(audio_path) > 10_000
+                if not words or not audio_ok or duration < max(30.0, expected * 0.5):
+                    raise RuntimeError(
+                        f"подозрительный результат: {len(words)} слов, {duration:.1f}s "
+                        f"(ожидалось ~{expected:.0f}s), audio_ok={audio_ok}")
+                print(f"  TTS: novita/{CFG.get('novita_voice')} — {duration:.1f}s")
                 return words
             except Exception as e:
                 print(f"  novita TTS упал, фолбэк на edge-tts: {e}")
