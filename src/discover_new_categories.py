@@ -77,11 +77,13 @@ def _fetch_stats(youtube, video_ids: list[str], channel_ids: list[str]) -> tuple
     return views, subs
 
 
-def _collect_outlier_titles() -> list[str]:
-    """Открытый срез ниши: заголовки видео-выбросов по generic-запросам (не по нашим темам)."""
+def _collect_outliers() -> list[dict]:
+    """Открытый срез ниши: видео-выбросы по generic-запросам (не по нашим темам), с реальными
+    цифрами (views/subs/ratio) — 2026-07-08: раньше в Telegram уходил только текст-вывод
+    модели без чисел, пользователь не мог сам оценить силу сигнала."""
     youtube = get_client()
     queries = _BROAD_QUERIES.get(CFG["lang_code"], _BROAD_QUERIES["en"])
-    titles = []
+    outliers = []
     for q in queries:
         results = _search_broad(youtube, q)
         if not results:
@@ -93,35 +95,60 @@ def _collect_outlier_titles() -> list[str]:
             v = views.get(r["video_id"], 0)
             s = subs.get(r["channel_id"], 0)
             if v >= MIN_VIEWS and s > 0 and v / s >= OUTLIER_RATIO:
-                titles.append(r["title"])
-    return titles
+                outliers.append({"title": r["title"], "video_id": r["video_id"],
+                                  "views": v, "subs": s, "ratio": round(v / s, 1)})
+    outliers.sort(key=lambda o: -o["ratio"])
+    return outliers
 
 
-def _propose_candidates(titles: list[str]) -> list[dict]:
+def _propose_candidates(outliers: list[dict]) -> list[dict]:
     """Просит Claude сгруппировать заголовки-выбросы в кандидатов-категории, которых нет
     в TOPICS_POOL. Возвращает [] при отсутствии заголовков или отказе модели предложить
-    что-то новое (честно — лучше пусто, чем натянутая категория)."""
-    if not titles:
+    что-то новое (честно — лучше пусто, чем натянутая категория).
+
+    2026-07-08: первый прод-прогон дал 2 ложных срабатывания — EN «food and eating» (пример
+    оказался роликом-РЕАКЦИЕЙ фуд-блогера на еду, не фактом), ES «home science experiments»
+    (формат демо/туториала — мы физически не снимаем эксперименты, наш пайплайн — закадровая
+    озвучка факта поверх стоковых клипов). Обе причины: (1) generic-запросы находят ЛЮБОЙ
+    контент с высоким ratio, не только факт-нарратив; (2) промпт не проверял, подходит ли
+    НАЙДЕННЫЙ ФОРМАТ под то, что умеет наш пайплайн. Добавлены явный запрет по формату и
+    подъём минимума доказательств 2→3 (2 ролика — слишком слабый сигнал на открытом поиске,
+    где шума больше, чем в discover_niche_topics.py с семенами внутри наших тем)."""
+    if not outliers:
         return []
     client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"], max_retries=5)
+    outliers_json = json.dumps(
+        [{"title": o["title"], "views": o["views"], "subs": o["subs"], "ratio": o["ratio"]} for o in outliers],
+        ensure_ascii=False,
+    )
     prompt = (
-        f"These are titles of currently overperforming short fact-videos in the niche "
-        f"(language: {CFG['script_language']}):\n" + "\n".join(f"- {t}" for t in titles) + "\n\n"
+        f"These are videos found via broad search queries in the short-video niche "
+        f"(language: {CFG['script_language']}) with real view/subscriber numbers — NOT "
+        "pre-verified to be fact-narration content, some may be reaction/challenge/vlog/tutorial "
+        f"videos that just matched the search terms:\n{outliers_json}\n\n"
+        f"Our channel's format: a SINGLE off-screen narrator voiceover delivering ONE surprising, "
+        "mind-blowing fact per video, over generic stock b-roll footage (no on-camera host, no "
+        "physical demonstration, no live reaction, no step-by-step tutorial — we cannot produce "
+        "footage that requires filming a real demo, experiment, reaction, or challenge).\n"
         f"Our channel already covers these topic categories: {', '.join(TOPICS_POOL)}.\n"
         f"Banned (never propose): {', '.join(BANNED_TOPICS)} — audience can't follow specialist "
         "topics requiring technical background.\n\n"
-        "Look for a NEW topic CATEGORY (not already covered above) that shows up repeatedly "
-        "among these overperforming titles — a genuine recurring pattern, not a one-off. "
-        "Categories must fit a family-friendly, general-audience 'mind-blowing facts' format "
-        "(like the existing ones: short noun phrases, e.g. 'ancient history', 'the ocean').\n\n"
+        "Look for a NEW topic CATEGORY (not already covered above) that fits our EXACT format "
+        "(narrated fact + generic stock footage) and shows up in AT LEAST 3 of the videos above "
+        "as a genuine recurring pattern. REJECT any category whose evidence videos are actually "
+        "reaction/challenge/tutorial/demo/vlog/prank videos, even if topically adjacent — check "
+        "each evidence title's actual format, not just its topic word. When in doubt, reject.\n\n"
         "Respond strictly in JSON, no markdown wrapper, a list of 0-3 candidates (0 if nothing "
-        "genuinely new and recurring — do NOT invent a category from a single title): "
+        "genuinely new, recurring in 3+ videos, AND format-compatible — do NOT invent a category "
+        "from fewer than 3 videos, and do NOT propose a topic whose only evidence is a "
+        "reaction/demo/tutorial-style video). Copy the title/views/ratio EXACTLY from the input "
+        "for each evidence item — do not paraphrase or invent numbers: "
         '[{"category": "short phrase like existing pool", '
-        '"evidence_titles": ["title1", "title2"], '
-        '"why": "one sentence, in Russian"}]'
+        '"evidence": [{"title": "...", "views": 0, "ratio": 0.0}, ...] (3+ items), '
+        '"why": "one sentence, in Russian, must also state why the FORMAT fits (narratable as a fact, not a demo)"}]'
     )
     message = client.messages.create(
-        model="claude-sonnet-4-6", max_tokens=1200,
+        model="claude-sonnet-4-6", max_tokens=1500,
         messages=[{"role": "user", "content": prompt}],
     )
     raw = message.content[0].text.strip()
@@ -133,21 +160,24 @@ def _propose_candidates(titles: list[str]) -> list[dict]:
         candidates = json.loads(raw[start:end + 1])
     except (json.JSONDecodeError, ValueError):
         return []
-    return [c for c in candidates if isinstance(c, dict) and c.get("category")][:CANDIDATES_TO_SEND]
+    return [c for c in candidates if isinstance(c, dict) and c.get("category")
+            and len(c.get("evidence", [])) >= 3][:CANDIDATES_TO_SEND]
 
 
 def run() -> None:
-    titles = _collect_outlier_titles()
-    print(f"  Собрано {len(titles)} заголовков-выбросов (открытый поиск).")
-    candidates = _propose_candidates(titles)
+    outliers = _collect_outliers()
+    print(f"  Собрано {len(outliers)} видео-выбросов (открытый поиск).")
+    candidates = _propose_candidates(outliers)
     if not candidates:
         print("  Новых категорий не найдено — пропускаем.")
         return
 
     lines = [f"🆕 [{CFG['channel_name']}] Кандидаты на новую тему (проверь и одобри вручную):"]
     for c in candidates:
-        evidence = "; ".join(c.get("evidence_titles", [])[:2])
-        lines.append(f"\n**{c['category']}**\n{c.get('why', '')}\nПример: «{evidence}»")
+        lines.append(f"\n**{c['category']}**\n{c.get('why', '')}")
+        for ev in c.get("evidence", [])[:3]:
+            lines.append(f"  {ev.get('ratio', '?')}× — {ev.get('views', '?'):,} views — «{ev.get('title', '')}»"
+                          if isinstance(ev.get("views"), int) else f"  «{ev.get('title', '')}»")
     lines.append("\n\nЕсли одобряешь — добавь строку в TOPICS_POOL (generate_script.py) вручную.")
     notify("\n".join(lines))
     print(f"  Отправлено {len(candidates)} кандидатов в Telegram.")
