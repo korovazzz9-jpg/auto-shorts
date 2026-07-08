@@ -32,15 +32,24 @@ def _alert(step: str, err: Exception) -> None:
 def _longform_tts(script: str, audio_path: str) -> list:
     """Лонгформ-озвучка: novita (MiniMax) если включено и есть ключ, иначе edge-tts.
     Фолбэк на edge-tts при любой ошибке novita — лонгформ не должен падать из-за TTS."""
-    if CFG.get("longform_use_novita") and os.environ.get("NOVITA_KEY"):
-        try:
-            from tts_novita import text_to_speech_novita
-            words = text_to_speech_novita(script, audio_path)
-            print(f"  TTS: novita/{CFG.get('novita_voice')} — {words[-1]['end']:.1f}s")
-            return words
-        except Exception as e:
-            print(f"  novita TTS упал, фолбэк на edge-tts: {e}")
-            notify(f"⚠️ [{CFG['channel_name']}] лонгформ: novita TTS упал, edge-tts фолбэк:\n{e}")
+    if CFG.get("longform_use_novita"):
+        if not os.environ.get("NOVITA_KEY"):
+            # Раньше этот случай молчал: novita включена в config, но ключа нет в окружении
+            # (в GitHub Actions — repo-secret, не локальный .env), и лонгформ ТИХО уходил на
+            # edge-tts. Так novita не применялась неделями незамеченно (2026-07-08). Теперь
+            # алертим — как и при падении novita ниже.
+            print("  novita включена, но NOVITA_KEY нет в окружении — фолбэк на edge-tts")
+            notify(f"⚠️ [{CFG['channel_name']}] лонгформ: novita включена, но NOVITA_KEY "
+                   "не задан в окружении — озвучка ушла на edge-tts (проверь repo-secret).")
+        else:
+            try:
+                from tts_novita import text_to_speech_novita
+                words = text_to_speech_novita(script, audio_path)
+                print(f"  TTS: novita/{CFG.get('novita_voice')} — {words[-1]['end']:.1f}s")
+                return words
+            except Exception as e:
+                print(f"  novita TTS упал, фолбэк на edge-tts: {e}")
+                notify(f"⚠️ [{CFG['channel_name']}] лонгформ: novita TTS упал, edge-tts фолбэк:\n{e}")
     return text_to_speech(script, audio_path)
 
 
