@@ -156,7 +156,7 @@ CONFIGS = {
         # 30-сек Shorts. Daily остаётся на edge-tts. Фолбэк на edge-tts, если novita упала.
         "longform_use_novita": True,
         "novita_language": "English",   # language_boost для MiniMax
-        "novita_voice": "Wise_Woman",   # voice_id; сменить после прослушивания сэмплов
+        "novita_voice": "Deep_Voice_Man",   # глубокий мужской нарратор под факт/deep-dive
         "playlist_titles": {
             "space": "Space Facts",
             "the ocean": "Ocean Facts",
@@ -275,7 +275,7 @@ CONFIGS = {
         "longform_comment": "¿Qué parte te sorprendió más? 👇\nSuscríbete para un análisis nuevo cada semana 👉 {channel_url}",
         "longform_use_novita": True,
         "novita_language": "Spanish",
-        "novita_voice": "Wise_Woman",
+        "novita_voice": "Deep_Voice_Man",
         "playlist_titles": {
             "space": "Datos del Espacio",
             "the ocean": "Datos del Océano",
