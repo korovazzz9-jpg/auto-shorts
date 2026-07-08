@@ -5,8 +5,11 @@
 // Деплой: см. telegram-bot/README.md. Токен бота кладётся в секрет Worker BOT_TOKEN
 // (НЕ в код). sendMessage продолжает работать у notify.py параллельно — webhook этому не мешает.
 
-const EN_SLOTS = [[13, 7], [16, 13], [20, 7], [22, 13], [0, 7]];
-const ES_SLOTS = [[13, 17], [20, 17], [0, 17]];
+// 2026-07-08: актуализировано под daily.yml/daily-es.yml — EN 5→4 слота (2026-07-01,
+// перелив на ES) + 22:13→23:07 (2026-07-05, US prime time); ES 3→4 слота (2026-07-01)
+// + 13:17→03:17 (2026-07-07, мексиканский вечерний прайм).
+const EN_SLOTS = [[16, 13], [20, 7], [23, 7], [0, 7]];
+const ES_SLOTS = [[16, 17], [20, 17], [0, 17], [3, 17]];
 const TRIGGERS = ["расписание", "/расписание", "schedule", "/schedule", "/start"];
 
 const pad = (n) => String(n).padStart(2, "0");
@@ -28,9 +31,9 @@ function buildSchedule() {
   const dh = Math.floor(delta / 60), dm = delta % 60;
   const [nvn, nmsk] = conv(Math.floor(next / 60), next % 60);
 
-  const lines = ["📅 Расписание выхода роликов", "(🇻🇳 Вьетнам · 🇷🇺 Москва)", "", "EN — 5/день:"];
+  const lines = ["📅 Расписание выхода роликов", "(🇻🇳 Вьетнам · 🇷🇺 Москва)", "", "EN — 4/день:"];
   for (const [h, m] of EN_SLOTS) { const [vn, msk] = conv(h, m); lines.push(`• ${vn} · ${msk}`); }
-  lines.push("", "ES — 3/день:");
+  lines.push("", "ES — 4/день:");
   for (const [h, m] of ES_SLOTS) { const [vn, msk] = conv(h, m); lines.push(`• ${vn} · ${msk}`); }
   lines.push("", `⏭ Следующий через ${dh}ч ${pad(dm)}м (в ${nvn} ВН · ${nmsk} МСК)`);
   lines.push("", "ℹ️ Пн–Ср последний слот — серии (Part 1/2/3).", "Вс ~06:00 ВН / 02:00 МСК — лонгформ.");
