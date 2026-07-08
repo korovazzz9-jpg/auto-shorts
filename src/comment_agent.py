@@ -202,26 +202,36 @@ def _fetch_recent_comments(youtube) -> tuple[list[dict], str]:
     return out, my_channel_id
 
 
-def _fetch_titles(youtube, video_ids: list[str]) -> dict[str, str]:
-    """Заголовки видео батчем (1 юнит за вызов, до 50 id) — для контекста в промпте Claude
-    и в тексте Telegram-сообщения. Отсутствующий/приватный video_id — просто не попадёт в словарь."""
+def _fetch_video_info(youtube, video_ids: list[str]) -> dict[str, dict]:
+    """Заголовок+описание видео батчем (1 юнит за вызов, до 50 id) — для контекста в промпте
+    (описание содержит сам факт/скрипт видео, не только заголовок — без этого модель не
+    понимает, О ЧЁМ вообще видео, только его название) и в тексте Telegram-сообщения.
+    Отсутствующий/приватный video_id — просто не попадёт в словарь. Описание обрезано —
+    в хвосте у нас CTA/ссылки на сестринский канал/лонгформ (см. publish.py), это шум,
+    не контекст, а начало описания (search_summary + сам факт) — то, что нужно."""
     unique = list(dict.fromkeys(video_ids))
-    titles = {}
+    info = {}
     for i in range(0, len(unique), 50):
         batch = unique[i:i + 50]
         resp = youtube.videos().list(part="snippet", id=",".join(batch)).execute()
         for v in resp.get("items", []):
-            titles[v["id"]] = v["snippet"].get("title", "")
-    return titles
+            info[v["id"]] = {
+                "title": v["snippet"].get("title", ""),
+                "description": v["snippet"].get("description", "")[:600],
+            }
+    return info
 
 
-def _draft_replies(comment_text: str, video_title: str) -> dict | None:
+def _draft_replies(comment_text: str, video_title: str, video_description: str) -> dict | None:
     """Возвращает {"comment_ru": str, "replies": [{"text","ru"}, ...]} (0-3 варианта).
     Пусто — комментарий спам/враждебный/бессмысленный, честный отказ вместо натяжки
     (тот же принцип, что source_note/pair_resolved в остальном пайплайне)."""
     client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"], max_retries=3)
+    context = f"title: \"{video_title}\""
+    if video_description:
+        context += f"\ndescription: \"{video_description}\""
     prompt = (
-        f"A viewer left this comment on our YouTube Shorts video (title: \"{video_title}\"):\n"
+        f"A viewer left this comment on our YouTube Shorts video ({context}):\n"
         f"\"{comment_text}\"\n\n"
         "1. Translate the comment to Russian (comment_ru).\n"
         "2. Write up to 3 DIFFERENT short reply variants in the SAME language as the comment — "
@@ -283,14 +293,15 @@ def _check_channel(channel: str, state: dict) -> None:
     for c in comments:
         seen.add(c["comment_id"])
 
-    titles = _fetch_titles(youtube, [c["video_id"] for c in new_comments[:MAX_NEW_PER_RUN]])
+    video_info = _fetch_video_info(youtube, [c["video_id"] for c in new_comments[:MAX_NEW_PER_RUN]])
 
     drafted = 0
     for c in new_comments:
         if drafted >= MAX_NEW_PER_RUN:
             break
-        video_title = titles.get(c["video_id"], "")
-        draft = _draft_replies(c["text"], video_title)
+        info = video_info.get(c["video_id"], {})
+        video_title = info.get("title", "")
+        draft = _draft_replies(c["text"], video_title, info.get("description", ""))
         if not draft or not draft["replies"]:
             continue
         drafted += 1
