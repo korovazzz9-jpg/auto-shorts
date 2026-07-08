@@ -10,7 +10,7 @@ import random
 from datetime import datetime, timezone
 
 from cloudinary_upload import delete_image, delete_video, upload_image, upload_video as upload_to_cloudinary
-from config import CFG
+from config import CFG, CHANNEL
 from notify import notify
 from post_comment import post_channel_comment, post_comment_reply
 from upload_captions import upload_captions
@@ -18,6 +18,7 @@ from upload_instagram import upload_photo, upload_reel, upload_story
 from upload_pinterest import upload_pin
 from upload_tiktok import upload_video as upload_to_tiktok, wait_for_publish
 from upload_youtube import upload_video as upload_to_youtube
+from video_history import record_publish
 
 
 def publish(
@@ -259,6 +260,22 @@ def publish(
             upload_pin(data["title"], data["script"], CFG["channel_handle"], video_id)
         except Exception as e:
             alert("Pinterest", e)
+
+    # Полная история видео (2026-07-06) — flat JSON, дополняет агрегаты (hook_stats/
+    # dropoff_stats/topic_stats) гранулярностью по каждому ролику отдельно. Сбой логирования
+    # не должен ронять публикацию — она уже состоялась.
+    try:
+        record_publish(
+            CHANNEL, video_id,
+            title=data["title"], topic=topic,
+            hook_template=data.get("hook_template"), title_opener=data.get("title_opener"),
+            emotional_tone=data.get("emotional_tone"), title_variant=data.get("title_variant"),
+            has_loop=data.get("has_loop"), niche_styled=data.get("niche_styled"),
+            niche_recreated=data.get("niche_recreated"), topical=data.get("topical"),
+            length_seconds=round(words[-1]["end"], 1) if words else None,
+        )
+    except Exception as e:
+        print(f"  (video_history не записан: {e})")
 
     url = f"https://youtube.com/shorts/{video_id}"
     notify(f"✅ [{CFG['channel_name']}] видео опубликовано:\n{data['title']}\n{url}")

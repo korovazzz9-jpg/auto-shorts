@@ -97,6 +97,7 @@ jobs:
           # на остальных 3 слотах дня файла может не быть/не измениться, это ок.
           [ -f queue_es.json ] && git add queue_es.json
           [ -f ig_card_counter_es.json ] && git add ig_card_counter_es.json
+          [ -f video_history_es.json ] && git add video_history_es.json
           git diff --cached --quiet && { echo "no changes"; exit 0; }
           git commit -m "chore(queue): ES queue/card state $(date -u +%F)" || { echo "no changes"; exit 0; }
           git pull --rebase origin master

@@ -13,6 +13,7 @@ from dotenv import load_dotenv
 from analytics_retention import _recent_videos, _retention, _retention_curve, biggest_drop, retention_threshold
 from config import CFG, CHANNEL
 from notify import notify
+from video_history import enrich_with_performance
 from youtube_auth import get_analytics_client, get_client
 
 load_dotenv()
@@ -234,3 +235,12 @@ if __name__ == "__main__":
     notify(build_report(videos))
     save_hook_stats(videos)
     save_dropoff_stats(videos)
+
+    # Дозаполняем video_history_<channel>.json просмотрами/retention/лайками (2026-07-06) —
+    # эти же данные уже получены выше через _videos_with_retention(), лишних вызовов нет.
+    try:
+        stats_by_id = {v["id"]: {"views": v.get("views"), "pct": v.get("pct")} for v in videos}
+        n = enrich_with_performance(CHANNEL, stats_by_id)
+        print(f"  video_history: дозаполнено {n} записей.")
+    except Exception as e:
+        print(f"  video_history enrich пропущен: {e}")

@@ -51,9 +51,9 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          for f in hook_stats_en.json hook_stats_es.json dropoff_stats_en.json dropoff_stats_es.json; do
+          for f in hook_stats_en.json hook_stats_es.json dropoff_stats_en.json dropoff_stats_es.json video_history_en.json video_history_es.json; do
             if [ -f "$f" ]; then git add "$f"; fi
           done
-          git commit -m "chore(hooks): weekly hook+dropoff stats $(date -u +%F)" || { echo "no changes"; exit 0; }
+          git commit -m "chore(hooks): weekly hook+dropoff stats + video_history enrich $(date -u +%F)" || { echo "no changes"; exit 0; }
           git pull --rebase origin master
           git push

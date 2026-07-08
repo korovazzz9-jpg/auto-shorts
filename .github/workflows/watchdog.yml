@@ -98,6 +98,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           [ -f queue_en.json ] && git add queue_en.json
           [ -f ig_card_counter_en.json ] && git add ig_card_counter_en.json
+          [ -f video_history_en.json ] && git add video_history_en.json
           git diff --cached --quiet && { echo "no changes"; exit 0; }
           git commit -m "chore(queue): EN queue/card state (watchdog retry) $(date -u +%F)" || { echo "no changes"; exit 0; }
           git pull --rebase origin master
