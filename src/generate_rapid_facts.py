@@ -91,8 +91,9 @@ def _build_user_content(history: list[dict]) -> str:
         f"- thumb_text: 3-5 word thumbnail phrase in {CFG['script_language']} (the most intriguing "
         "idea), instantly readable.\n"
         f"- tags: 6-9 Vietnamese TikTok search tags (mix broad 'sự thật' type with specific ones).\n"
-        f"- hashtags: 4-6 Vietnamese hashtags (lowercase, with #), include #suthat and a trending "
-        "one like #xuhuong/#fyp, plus topic-specific ones. Do NOT include #shorts (that's YouTube).\n\n"
+        f"- hashtags: 3-5 Vietnamese hashtags (lowercase, with #), include #suthat and a trending "
+        "one like #xuhuong/#fyp, plus topic-specific ones. TikTok caps hashtags at 5 — never "
+        "exceed 5. Do NOT include #shorts (that's YouTube).\n\n"
         "Respond strictly in JSON, no markdown wrapper: "
         '{"title": "...", "thumb_text": "...", '
         '"script": "the full continuous voiceover of all facts, ending with the comment-bait line", '

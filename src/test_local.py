@@ -103,6 +103,9 @@ with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
 print(f"\nГотово!")
 print(f"  Видео:     {os.path.join(OUT_DIR, f'video_{num}.mp4')}")
 print(f"  Thumbnail: {os.path.join(OUT_DIR, f'thumb_{num}.jpg')}")
+# TikTok режет подпись после 5 хештегов (upload_tiktok.py делает то же для авто-загрузки) —
+# VN постится вручную, печатаем ровно то, что реально влезет в TikTok, а не сырой список модели.
+tiktok_hashtags = data["hashtags"][:5]
 print(f"\nЗаголовок для TikTok: {data['title']}")
-print(f"Хэштеги: {' '.join(data['hashtags'])}")
-print(f"Caption: {data['title']}\n\n{' '.join(data['hashtags'])}")
+print(f"Хэштеги (макс 5 для TikTok): {' '.join(tiktok_hashtags)}")
+print(f"Caption: {data['title']}\n\n{' '.join(tiktok_hashtags)}")
