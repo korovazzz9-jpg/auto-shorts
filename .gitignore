@@ -19,6 +19,10 @@ src/titles_cache.json
 src/topics_cache.json
 # series_state_*.json НЕ игнорируем — коммитится в Part 1, читается в Part 2/3 через checkout
 src/vision_cache.json
+# comment_agent.py теперь запускается локально (Планировщик Windows), не в GitHub Actions —
+# comment_agent_state.json больше не коммитится, живёт только на машине пользователя.
+comment_agent_state.json
+comment_agent.log
 # Аватарки каналов нужны IG-карточкам в CI — исключение из общего игнора *.png
 !manual_thumbs/yt_avatar_en.png
 !manual_thumbs/yt_avatar_es.png
