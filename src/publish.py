@@ -188,9 +188,10 @@ def publish(
                 # Сбой карточки не роняет остальной кросс-постинг (alert + continue).
                 if datetime.now(timezone.utc).hour == CFG.get("ig_card_slot_hour", -1):
                     hosted_card = None
+                    hosted_story = None
                     try:
                         import re as _re
-                        from build_ig_card import build_ig_card, next_fact_number, save_fact_number
+                        from build_ig_card import build_ig_card, build_ig_story_card, next_fact_number, save_fact_number
                         from config import CHANNEL
                         # Сплит по границам предложений С ПРОБЕЛОМ после знака — иначе
                         # «4.5mm» резался на «4. 5mm» и факт обрывался на середине числа.
@@ -207,10 +208,14 @@ def publish(
                         save_fact_number(CHANNEL, fact_no)  # номер фиксируется ТОЛЬКО после успеха
                         print("  Instagram: карточка опубликована")
 
-                        # Stories (2026-07-05): та же карточка в сторис — ленту видят новые
-                        # люди, сторис — подписчики. Отдельный try: сбой сторис ≠ сбой карточки.
+                        # Stories (2026-07-05, фикс 2026-07-08): СВОЯ картинка 1080×1920, не
+                        # URL ленточной карточки — та растягивалась под полноэкранный 9:16 и
+                        # обрезалась по бокам (реальный баг с пользовательского скриншота).
+                        # Отдельный try: сбой сторис ≠ сбой карточки.
                         try:
-                            upload_story(hosted_card["url"])
+                            story_path = build_ig_story_card(data["title"], fact_text, CFG["channel_handle"], CHANNEL, fact_no)
+                            hosted_story = upload_image(story_path)
+                            upload_story(hosted_story["url"])
                             print("  Instagram: карточка продублирована в Stories")
                         except Exception as e:
                             alert("IG story", e)
@@ -227,6 +232,11 @@ def publish(
                     except Exception as e:
                         alert("IG card", e)
                     finally:
+                        if hosted_story:
+                            try:
+                                delete_image(hosted_story["public_id"])
+                            except Exception as e:
+                                print(f"  Не удалось удалить story-картинку из Cloudinary: {e}")
                         if hosted_card:
                             try:
                                 delete_image(hosted_card["public_id"])

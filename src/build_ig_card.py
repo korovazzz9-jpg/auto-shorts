@@ -266,3 +266,27 @@ def build_ig_card(title: str, fact: str, channel_handle: str, channel: str, fact
     path = os.path.join(tmp, "ig_card.jpg")
     img.convert("RGB").save(path, "JPEG", quality=95)
     return path
+
+
+STORY_SIZE = (1080, 1920)  # Instagram Stories — полноэкранные 9:16
+
+
+def build_ig_story_card(title: str, fact: str, channel_handle: str, channel: str, fact_no: int) -> str:
+    """Story-версия карточки (2026-07-08): реальный баг — при публикации в Stories та же
+    карточка 4:5 (1080×1350) растягивалась под полноэкранный 9:16 и обрезалась ПО БОКАМ
+    (видно на скриншоте пользователя: текст факта срезан слева и справа). Переиспользует
+    уже проверенную ленточную карточку (build_ig_card) БЕЗ изменений и вписывает её в
+    1080×1920 letterbox'ом (поля сверху/снизу того же градиента, а не кроп/растяжение) —
+    карточка видна ЦЕЛИКОМ, без искажений."""
+    feed_path = build_ig_card(title, fact, channel_handle, channel, fact_no)
+    feed_img = Image.open(feed_path)
+    fw, fh = feed_img.size
+
+    theme = _THEMES.get(channel, _THEMES["en"])
+    canvas = _gradient(STORY_SIZE, theme["bg_top"], theme["bg_bottom"])
+    canvas.paste(feed_img, ((STORY_SIZE[0] - fw) // 2, (STORY_SIZE[1] - fh) // 2))
+
+    tmp = tempfile.mkdtemp()
+    path = os.path.join(tmp, "ig_story_card.jpg")
+    canvas.save(path, "JPEG", quality=95)
+    return path
