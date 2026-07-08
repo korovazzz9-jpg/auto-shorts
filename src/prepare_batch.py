@@ -134,6 +134,13 @@ def main() -> None:
         )
 
     system_prompt = BASE_SYSTEM_PROMPT + "\n\n" + LOOP_INSTRUCTION + "\n\n" + LENGTH_INSTRUCTION
+    # Prompt caching (2026-07-08): system_prompt ИДЕНТИЧЕН во всех до QUEUE_TARGET=10 запросах
+    # этого батча (не зависит от topic/title_variant) и ~1600 токенов — выше порога кэширования
+    # (1024). Anthropic Batches API поддерживает cache_control по каждому запросу батча — блок
+    # с cache_control должен совпадать байт-в-байт между запросами, чтобы кэш сработал. Экономит
+    # поверх уже имеющейся batch-скидки 50% (найдено при разборе ecc-репозитория, skill
+    # cost-aware-llm-pipeline — до этого система нигде в проекте кэш не использовала).
+    system_cached = [{"type": "text", "text": system_prompt, "cache_control": {"type": "ephemeral"}}]
     variety_note = _title_variety_note(past_titles)  # один расчёт на весь батч — past_titles не меняется внутри батча
 
     # Выбираем темы ПОСЛЕДОВАТЕЛЬНО, тегируя каждую в кеш сразу — иначе _pick_topic() внутри
@@ -153,7 +160,7 @@ def main() -> None:
             params=MessageCreateParamsNonStreaming(
                 model="claude-sonnet-4-6",
                 max_tokens=1600,
-                system=system_prompt,
+                system=system_cached,
                 messages=[{"role": "user", "content": _build_user_content(
                     topics[i], avoid_block, title_variants[i][0] + variety_note)}],
             ),
