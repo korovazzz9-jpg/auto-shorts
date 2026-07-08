@@ -209,10 +209,18 @@ def _propose_candidates(outliers: list[dict]) -> list[dict]:
     for c in candidates:
         if not (isinstance(c, dict) and c.get("category")):
             continue
-        evidence = c.get("evidence", [])
-        titles = {e.get("title") for e in evidence if isinstance(e, dict)}
-        if len(titles) < 3:   # дедуп по title — ловит буквальные дубли-evidence (ES-баг)
+        # Дедуп evidence по title (ES-баг: модель дублировала одно видо, чтобы набрать «3+»).
+        # Дедупим сам список, а не только считаем уникальные — иначе валидация проходила бы по
+        # set, но в Telegram (evidence[:3]) всё равно показывался бы дубль.
+        seen, deduped = set(), []
+        for e in c.get("evidence", []):
+            t = e.get("title") if isinstance(e, dict) else None
+            if t and t not in seen:
+                seen.add(t)
+                deduped.append(e)
+        if len(deduped) < 3:
             continue
+        c["evidence"] = deduped
         result.append(c)
     return result[:CANDIDATES_TO_SEND]
 

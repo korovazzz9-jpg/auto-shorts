@@ -102,7 +102,13 @@ def run() -> None:
             extra_tags.append("niche-styled")
         if data.get("niche_recreated"):
             extra_tags.append("niche-recreation")
-        if pending_pair:
+        # Пара считается закрытой ТОЛЬКО если модель реально нашла честное противоречие
+        # (pair_resolved). При отказе (pair_resolved=False) generate_script вернул ОБЫЧНЫЙ
+        # факт на тему, не связанный с claim части A — тогда это НЕ pair-b: ни тега, ни
+        # callback-коммента на A (иначе под несвязанным видео висела бы ложная ссылка
+        # «помнишь, мы говорили…» — 2026-07-08, баг найден на ревью).
+        pair_resolved = bool(pending_pair and data.get("pair_resolved"))
+        if pair_resolved:
             extra_tags.append("pair-b")
         elif pair_start_mode and data.get("pairable_claim"):
             extra_tags.append("pair-a")
@@ -111,7 +117,7 @@ def run() -> None:
         # (шаблонный пул, не модель — тот же принцип, что first_comment_subscribe_ctas: избежать
         # дословно одинакового текста под каждым видео).
         pair_extra_comment = ""
-        if pending_pair:
+        if pair_resolved:
             callback_pool = CFG.get("pair_callback_ctas", [])
             if callback_pool:
                 a_url = f"https://youtube.com/shorts/{pending_pair['part_a_video_id']}"
@@ -135,7 +141,7 @@ def run() -> None:
         # Video pairs: закрываем открытую пару / открываем новую (после публикации — нужен
         # video_id). Резолюция ТОЛЬКО если модель реально нашла честное противоречие
         # (pair_resolved=True) — иначе оставляем пару открытой для следующей попытки.
-        if pending_pair and data.get("pair_resolved"):
+        if pair_resolved:
             part_a_id = resolve_pair(CHANNEL, pending_pair["id"], video_id)
             if part_a_id:
                 try:
