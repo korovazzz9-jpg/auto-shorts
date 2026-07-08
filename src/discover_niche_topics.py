@@ -59,9 +59,12 @@ def _topic_query_term(topic: str) -> str:
     return title
 
 
-def _search_topic(youtube, topic: str) -> list[dict]:
-    """Ищет до MAX_RESULTS_PER_QUERY публичных видео по теме, отсортированных по
-    просмотрам. Возвращает [{video_id, channel_id}]. Сбой одного запроса (сеть/квота)
+def _search_topic(youtube, topic: str) -> tuple[list[dict], int]:
+    """Ищет до MAX_RESULTS_PER_QUERY публичных видео по теме, отсортированных по просмотрам.
+    Возвращает ([{video_id, channel_id}], total_results). total_results — насыщенность темы
+    (2026-07-08): YouTube отдаёт `pageInfo.totalResults` В ТОМ ЖЕ ответе бесплатно, раньше
+    это поле игнорировалось — сигнал ПРЕДЛОЖЕНИЯ (сколько всего видео конкурирует за тему),
+    в дополнение к уже собираемому сигналу СПРОСА (выбросы). Сбой одного запроса (сеть/квота)
     не должен рушить весь прогон — остальные темы всё равно проверятся."""
     query_term = _topic_query_term(topic)
     query = f"{query_term} facts shorts" if CFG["lang_code"] == "en" else f"{query_term} datos curiosos shorts"
@@ -73,12 +76,14 @@ def _search_topic(youtube, topic: str) -> list[dict]:
         ).execute()
     except Exception as e:
         print(f"  search failed for '{topic}': {e}")
-        return []
-    return [
+        return [], 0
+    results = [
         {"video_id": i["id"]["videoId"], "channel_id": i["snippet"]["channelId"],
          "title": i["snippet"].get("title", "")}
         for i in resp.get("items", []) if i.get("id", {}).get("videoId")
     ]
+    total_results = int(resp.get("pageInfo", {}).get("totalResults", 0) or 0)
+    return results, total_results
 
 
 def _fetch_stats(youtube, video_ids: list[str], channel_ids: list[str]) -> tuple[dict, dict]:
@@ -103,19 +108,24 @@ def _fetch_stats(youtube, video_ids: list[str], channel_ids: list[str]) -> tuple
     return views, subs
 
 
-def discover() -> tuple[dict[str, int], dict[str, list[str]], list[dict]]:
-    """Возвращает ({topic: outlier_count}, {topic: [заголовки]}, [все выбросы с метриками]).
-    Заголовки (до 3 на тему) — для стилевой калибровки промпта; полный список выбросов
-    (title/video_id/views/subs/ratio/topic) — для Telegram-дайджеста и outlier-recreation."""
+def discover() -> tuple[dict[str, int], dict[str, list[str]], list[dict], dict[str, int]]:
+    """Возвращает ({topic: outlier_count}, {topic: [заголовки]}, [все выбросы с метриками],
+    {topic: total_results}). Заголовки (до 3 на тему) — для стилевой калибровки промпта;
+    полный список выбросов — для Telegram-дайджеста и outlier-recreation; total_results —
+    насыщенность темы (сигнал ПРЕДЛОЖЕНИЯ, см. _search_topic), используется в _pick_topic()
+    как противовес чистому спросу — тема с выбросами, но и с гигантской конкуренцией, менее
+    ценна, чем такая же тема с меньшим количеством видео вообще."""
     youtube = get_client()
     outlier_counts: dict[str, int] = {}
     outlier_titles: dict[str, list[str]] = {}
     all_outliers: list[dict] = []
+    saturation: dict[str, int] = {}
 
     for topic in TOPICS_POOL:
-        results = _search_topic(youtube, topic)
+        results, total_results = _search_topic(youtube, topic)
         if not results:
             continue
+        saturation[topic] = total_results
         video_ids = [r["video_id"] for r in results]
         channel_ids = [r["channel_id"] for r in results]
         views, subs = _fetch_stats(youtube, video_ids, channel_ids)
@@ -135,10 +145,10 @@ def discover() -> tuple[dict[str, int], dict[str, list[str]], list[dict]]:
         if count:
             outlier_counts[topic] = count
             outlier_titles[topic] = titles[:3]
-        print(f"  {topic}: {count} outlier(s) of {len(results)} searched")
+        print(f"  {topic}: {count} outlier(s) of {len(results)} searched, saturation={total_results:,}")
 
     all_outliers.sort(key=lambda o: -o["ratio"])
-    return outlier_counts, outlier_titles, all_outliers
+    return outlier_counts, outlier_titles, all_outliers, saturation
 
 
 def _send_digest(outliers: list[dict]) -> None:
@@ -160,11 +170,12 @@ def _send_digest(outliers: list[dict]) -> None:
 
 
 def main() -> None:
-    counts, titles, outliers = discover()
+    counts, titles, outliers, saturation = discover()
     with open(NICHE_SIGNAL_FILE, "w", encoding="utf-8") as f:
         json.dump(
             {"outlier_counts": counts, "outlier_titles": titles,
-             "top_outliers": outliers[:10], "updated": date.today().isoformat()},
+             "top_outliers": outliers[:10], "saturation": saturation,
+             "updated": date.today().isoformat()},
             f, ensure_ascii=False, indent=2,
         )
     print(f"  niche_signal saved: {counts}")

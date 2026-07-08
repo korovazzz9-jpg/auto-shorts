@@ -56,6 +56,58 @@ DROPOFF_STATS_FILE = os.path.join(os.path.dirname(__file__), "..", f"dropoff_sta
 MIN_DROPOFF_SAMPLE = 3  # меньше видео с кривыми — сигнал шумный, файл не пишем
 
 
+SPIKE_DIE_MIN_AGE_DAYS = 6    # младше — рано, day1 ещё не «устоялся»
+SPIKE_DIE_MAX_AGE_DAYS = 10   # старше — не «эта неделя», не показываем повторно
+SPIKE_DIE_SAMPLE = 5          # доп. Analytics-запросы (тот же паттерн, что DROP_OFF_SAMPLE)
+SPIKE_DIE_MIN_DAY1_VIEWS = 100  # отсекаем шум — 3 просмотра в день 1 из 4 не «взлёт»
+SPIKE_DIE_DAY1_SHARE = 0.6    # день 1 даёт ≥60% ВСЕХ просмотров когорты — явный «взлёт и тишина»
+
+
+def _daily_views_curve(analytics, video_id: str, start: str, end: str) -> list[tuple[str, int]]:
+    """День → просмотры для ОДНОГО видео. Тот же принцип, что `_retention_curve` — эндпоинт
+    Analytics не батчится по video==, тянем точечно (см. SPIKE_DIE_SAMPLE)."""
+    try:
+        resp = analytics.reports().query(
+            ids="channel==MINE", startDate=start, endDate=end,
+            metrics="views", dimensions="day", filters=f"video=={video_id}", sort="day",
+        ).execute()
+    except Exception:
+        return []
+    return [(r[0], int(r[1])) for r in resp.get("rows", []) or []]
+
+
+def _age_days(v: dict) -> int:
+    from datetime import datetime
+    published = datetime.fromisoformat(v["published"])
+    return (datetime.now() - published).days
+
+
+def find_spike_and_die(analytics, videos: list[dict]) -> list[dict]:
+    """«Почти вирусные» (2026-07-08): не топ по абсолютным просмотрам и не худшие по retention —
+    отдельная категория: видео резко выросло в день 1 (алгоритм реально протолкнул), а потом
+    рост почти остановился. Отличается от «просто слабого» видео (то никогда и не росло) —
+    здесь явно виден момент, когда алгоритм «разочаровался» (обычно: слабый payoff/середина/
+    длина). Когорта — видео 6-10 дней от роду (данные уже устоялись, но это ещё «эта неделя»),
+    сэмпл ограничен (не батчится, как `_retention_curve`/`_add_drop_offs`)."""
+    cohort = [v for v in videos if SPIKE_DIE_MIN_AGE_DAYS <= _age_days(v) <= SPIKE_DIE_MAX_AGE_DAYS]
+    cohort.sort(key=lambda v: -v.get("views", 0))
+
+    results = []
+    for v in cohort[:SPIKE_DIE_SAMPLE]:
+        curve = _daily_views_curve(analytics, v["id"], v["published"], date.today().isoformat())
+        if len(curve) < 3:
+            continue
+        day1 = curve[0][1]
+        total = sum(c[1] for c in curve)
+        if day1 < SPIKE_DIE_MIN_DAY1_VIEWS or total <= 0:
+            continue
+        day1_share = day1 / total
+        if day1_share >= SPIKE_DIE_DAY1_SHARE:
+            results.append({"title": v["title"], "id": v["id"], "day1": day1,
+                             "total": total, "day1_share": round(day1_share, 2)})
+    return results
+
+
 def _add_drop_offs(analytics, videos: list[dict]) -> None:
     """Для нескольких худших по retention видео недели тянет посекундную кривую
     (analytics_retention._retention_curve — эндпоинт принимает только 1 video== за раз,
@@ -111,7 +163,7 @@ def save_dropoff_stats(videos: list[dict]) -> None:
     print(f"  dropoff_stats: zone={zone} (median {median:.0%} длины, n={len(ratios)})")
 
 
-def build_report(videos: list[dict]) -> str:
+def build_report(videos: list[dict], spike_die: list[dict] | None = None) -> str:
     if not videos:
         return f"📊 [{CFG['channel_name']}] Нет видео для отчёта."
 
@@ -223,16 +275,30 @@ def build_report(videos: list[dict]) -> str:
             d = v["drop"]
             lines.append(f"  «{v['title'][:40]}» — обрыв ~{d['second']}s (−{d['drop_pct']} п.п.)")
 
+    # «Почти вирусные» (2026-07-08, find_spike_and_die) — не топ, не худшие: видео резко
+    # выросло в день 1, потом почти остановилось. Момент, где алгоритм «разочаровался».
+    if spike_die:
+        lines.append("\n🚀📉 Взлетели и затихли (не топ, не худшие — отдельная категория):")
+        for v in spike_die:
+            lines.append(f"  «{v['title'][:40]}» — день 1: {v['day1']} из {v['total']} всего "
+                          f"({v['day1_share']:.0%} просмотров пришлось на первый день)")
+
     return "\n".join(lines)
 
 
 if __name__ == "__main__":
     videos = _videos_with_retention()
+    analytics_client = get_analytics_client()
     try:
-        _add_drop_offs(get_analytics_client(), videos)
+        _add_drop_offs(analytics_client, videos)
     except Exception as e:
         print(f"  drop-off анализ пропущен: {e}")
-    notify(build_report(videos))
+    try:
+        spike_die = find_spike_and_die(analytics_client, videos)
+    except Exception as e:
+        print(f"  spike-and-die анализ пропущен: {e}")
+        spike_die = []
+    notify(build_report(videos, spike_die))
     save_hook_stats(videos)
     save_dropoff_stats(videos)
 

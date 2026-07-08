@@ -125,6 +125,20 @@ CONFIGS = {
             "Follow along for more like this 👉 {channel_url}",
             "One fact a day, forever — subscribe 👉 {channel_url}",
         ],
+        # Video pairs (2026-07-08, см. paired_facts.py): B ссылается на A в своём закреп-
+        # комменте (pair_callback_ctas), A дозаписывается ссылкой на B ПОСЛЕ публикации B
+        # (pair_backlink_ctas, отдельный коммент через post_channel_comment). Пул, не одна
+        # строка — тот же принцип анти-паттерна, что first_comment_subscribe_ctas.
+        "pair_callback_ctas": [
+            "↩️ Remember what we said before:",
+            "↩️ This follows up on an earlier video:",
+            "↩️ Callback to a fact we posted earlier:",
+        ],
+        "pair_backlink_ctas": [
+            "🔄 Update — turns out there's more to this story:",
+            "🔄 Plot twist follow-up just dropped:",
+            "🔄 We found an exception to this one:",
+        ],
         # #3 Само-ответ на закреп-коммент → мини-тред (engagement density). Генерик, без доп.
         # токенов. ПУЛ вариантов (random.choice в publish/pipeline_longform): один и тот же
         # текст под каждым видео выглядел ботово.
@@ -240,6 +254,16 @@ CONFIGS = {
             "Dato nuevo cada día — suscríbete 👉 {channel_url}",
             "Sígueme para más datos como este 👉 {channel_url}",
             "Un dato al día, para siempre — suscríbete 👉 {channel_url}",
+        ],
+        "pair_callback_ctas": [
+            "↩️ Recuerda lo que dijimos antes:",
+            "↩️ Esto continúa un video anterior:",
+            "↩️ Volviendo a un dato que publicamos antes:",
+        ],
+        "pair_backlink_ctas": [
+            "🔄 Actualización — resulta que hay más en esta historia:",
+            "🔄 Acaba de salir la continuación con un giro:",
+            "🔄 Encontramos una excepción a esto:",
         ],
         "first_comment_replies": [
             "Sé sincero — ¿esto te sorprendió o ya lo sabías? 👀",

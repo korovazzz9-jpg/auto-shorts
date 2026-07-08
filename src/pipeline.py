@@ -1,15 +1,18 @@
 """Точка входа: тема -> сценарий -> стоковые клипы -> озвучка -> видео -> загрузка на YouTube + Instagram."""
 import os
+import random
 import tempfile
 from datetime import datetime, timezone
 
 from dotenv import load_dotenv
 
 from build_video import build_video
-from config import CFG
+from config import CFG, CHANNEL
 from fetch_stock_video import fetch_clips
 from generate_script import generate_script
 from notify import notify
+from paired_facts import PAIR_PROBABILITY, find_pending_pair, resolve_pair, start_pair
+from post_comment import post_channel_comment
 from publish import publish
 from script_queue import pop_next
 from tts import text_to_speech
@@ -46,15 +49,29 @@ def run() -> None:
     now = datetime.now(timezone.utc)
     topical = now.weekday() == 3 and now.hour == CFG.get("topical_slot_hour", -1)
 
+    # Video pairs (2026-07-08, см. paired_facts.py): если есть открытая пара, готовая на
+    # резолюцию — пробуем закрыть её; иначе с малой вероятностью пробуем НАЧАТЬ новую. Оба
+    # случая требуют LIVE-генерации мимо очереди (batch-заготовки не знают о парах), тот же
+    # паттерн, что «On this day».
+    pending_pair = None if topical else find_pending_pair(CHANNEL)
+    pair_start_mode = not topical and not pending_pair and random.random() < PAIR_PROBABILITY
+
     # Batch API preload (prepare_batch.py) экономит ~50% на этом вызове, если очередь заполнена.
     # Пустая очередь = сценарий генерится вживую, как раньше — отсутствие preload не ломает публикацию.
-    data = None if topical else pop_next()
+    force_live = topical or pending_pair or pair_start_mode
+    data = None if force_live else pop_next()
     if data is not None:
         print(f"[{CFG['channel_name']}] 1/6 Сценарий из очереди (Batch API preload)...")
     else:
-        label = "топикал «On this day», мимо очереди" if topical else "вживую"
+        label = ("топикал «On this day», мимо очереди" if topical else
+                  "резолюция пары, мимо очереди" if pending_pair else
+                  "старт пары, мимо очереди" if pair_start_mode else "вживую")
         print(f"[{CFG['channel_name']}] 1/6 Генерация сценария ({label})...")
-        data = generate_script(on_this_day=topical)
+        data = generate_script(
+            on_this_day=topical,
+            pair_start=pair_start_mode,
+            pair_resolve_claim=pending_pair["claim"] if pending_pair else None,
+        )
     print(f"  Тема: {data['topic']} | Заголовок: {data['title']}")
 
     with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
@@ -85,7 +102,22 @@ def run() -> None:
             extra_tags.append("niche-styled")
         if data.get("niche_recreated"):
             extra_tags.append("niche-recreation")
-        publish(
+        if pending_pair:
+            extra_tags.append("pair-b")
+        elif pair_start_mode and data.get("pairable_claim"):
+            extra_tags.append("pair-a")
+
+        # Video pairs (2026-07-08): если это резолюция пары, B ссылается на A в закреп-комменте
+        # (шаблонный пул, не модель — тот же принцип, что first_comment_subscribe_ctas: избежать
+        # дословно одинакового текста под каждым видео).
+        pair_extra_comment = ""
+        if pending_pair:
+            callback_pool = CFG.get("pair_callback_ctas", [])
+            if callback_pool:
+                a_url = f"https://youtube.com/shorts/{pending_pair['part_a_video_id']}"
+                pair_extra_comment = f"{random.choice(callback_pool)} {a_url}"
+
+        video_id = publish(
             data=data,
             video_path=video_path,
             thumb_path=thumb_path,
@@ -93,11 +125,31 @@ def run() -> None:
             topic=data["topic"],
             alert=_alert,
             extra_tags=extra_tags,
+            extra_comment=pair_extra_comment,
             # 2026-07-04: одна дорожка (язык канала) — 550 ед/видео, влезает даже в Вс
             # с двумя лонгформами. Вс-пропуск снят вместе с удалением переводных дорожек.
             enable_captions=True,
             enable_pinterest=True,
         )
+
+        # Video pairs: закрываем открытую пару / открываем новую (после публикации — нужен
+        # video_id). Резолюция ТОЛЬКО если модель реально нашла честное противоречие
+        # (pair_resolved=True) — иначе оставляем пару открытой для следующей попытки.
+        if pending_pair and data.get("pair_resolved"):
+            part_a_id = resolve_pair(CHANNEL, pending_pair["id"], video_id)
+            if part_a_id:
+                try:
+                    backlink_pool = CFG.get("pair_backlink_ctas", [])
+                    if backlink_pool:
+                        b_url = f"https://youtube.com/shorts/{video_id}"
+                        post_channel_comment(part_a_id, f"{random.choice(backlink_pool)} {b_url}")
+                except Exception as e:
+                    _alert("pair backlink", e)
+        elif pair_start_mode and data.get("pairable_claim"):
+            try:
+                start_pair(CHANNEL, video_id, data["title"], data["pairable_claim"], data["topic"])
+            except Exception as e:
+                _alert("pair start", e)
 
     print("Готово.")
 

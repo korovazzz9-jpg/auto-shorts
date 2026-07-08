@@ -52,6 +52,31 @@ def _load_niche_signal() -> dict[str, int]:
     return _load_niche_stats().get("outlier_counts", {})
 
 
+def _load_saturation() -> dict[str, int]:
+    """{topic: total_results} — насыщенность темы (2026-07-08): сколько всего видео вообще
+    конкурирует за тему на YouTube (сигнал ПРЕДЛОЖЕНИЯ, из pageInfo.totalResults в
+    discover_niche_topics.py — тот же вызов, что уже ищет выбросы, доп. квота не нужна)."""
+    sat = _load_niche_stats().get("saturation", {})
+    return sat if isinstance(sat, dict) else {}
+
+
+def _saturation_multiplier(topic: str, saturation: dict[str, int]) -> float:
+    """Мягкий противовес чистому спросу: тема с тем же avg_views/outlier-сигналом, но МЕНЬШЕЙ
+    конкуренцией (меньше totalResults) — более «свободная» ниша, получает небольшой бонус;
+    сильно перенасыщенная — небольшой штраф. Специально мягче outlier-бонуса (макс ×1.45) —
+    сигнал шумнее (один снэпшот поиска, произвольный порог), не должен доминировать над
+    реальной статистикой просмотров. Нет данных по теме/вообще — множитель 1.0."""
+    if not saturation or topic not in saturation:
+        return 1.0
+    values = [v for v in saturation.values() if v > 0]
+    if not values:
+        return 1.0
+    median = sorted(values)[len(values) // 2]
+    s = max(saturation.get(topic, median), 1)
+    ratio = median / s  # >1 — тема менее насыщена медианы (бонус), <1 — более (штраф)
+    return min(max(ratio ** 0.3, 0.85), 1.15)
+
+
 def _niche_titles_for(topic: str) -> list[str]:
     """Заголовки чужих видео-выбросов по теме (2026-07-05) — стилевые примеры для промпта
     («какие углы сейчас кликаются в нише»). НЕ для копирования фактов — только angle/energy.
@@ -107,11 +132,16 @@ def _pick_topic() -> str:
 
     overall_avg = sum(avg_views.values()) / len(avg_views)
     niche_counts = _load_niche_signal()
+    saturation = _load_saturation()
     # Темы без данных получают средний вес — попадают в середину рейтинга и продолжают
     # исследоваться, не застревая ни в топе, ни в хвосте. Мягкий бонус от outlier-анализа по
     # нише (2026-07-03): +15% веса за каждый найденный выброс, максимум ×1.45 (3+ выброса) —
     # чтобы один аномальный чужой ролик не рвал всю квоту 70/20/10, только подталкивал.
-    weight = lambda t: max(avg_views.get(t, overall_avg), 1.0) * (1.0 + 0.15 * min(niche_counts.get(t, 0), 3))
+    # Насыщенность темы (2026-07-08, см. _saturation_multiplier) — противовес спросу: та же
+    # тема с меньшей конкуренцией ценнее, множитель мягче (0.85-1.15).
+    weight = lambda t: (max(avg_views.get(t, overall_avg), 1.0)
+                         * (1.0 + 0.15 * min(niche_counts.get(t, 0), 3))
+                         * _saturation_multiplier(t, saturation))
     ranked = sorted(pool, key=lambda t: -weight(t))
 
     # Квоты 70/20/10 вместо чистого взвешивания по avg_views: взвешивание самоусиливает
@@ -349,7 +379,33 @@ EMOTIONAL_TONE_INSTRUCTION = (
 )
 
 
-def _build_user_content(topic: str, avoid_block: str, title_instruction: str = TITLE_INSTRUCTION_NARRATIVE) -> str:
+# Video pairs (2026-07-08, см. paired_facts.py): видео A формулирует опровержимый/дополняемый
+# claim, видео B (через 1-10 дней) находит РЕАЛЬНОЕ противоречие/дополнение к нему. Некликбейт:
+# явный запрет выдумывать натяжку, честный отказ (пустая строка / False) лучше подделки —
+# тот же принцип, что source_note.
+PAIR_START_INSTRUCTION = (
+    "\n- pairable_claim: this fact may have a strong, well-known potential CONTRADICTION or "
+    "surprising EXTENSION that could anchor a follow-up video later. If so, report it as a "
+    "SHORT (under 12 words), precisely falsifiable/extendable statement drawn from this fact "
+    "(e.g. 'Bananas are technically classified as berries'). Only fill this if a genuine "
+    "well-known follow-up angle exists — otherwise return \"\"."
+)
+
+
+def _pair_resolve_note(claim: str) -> str:
+    return (
+        f"\n\nFOLLOW-UP OVERRIDE: A previous video on this channel claimed: \"{claim}\". Try to "
+        "find a REAL, verifiable contradiction, exception, or surprising extension to this "
+        "SPECIFIC claim as THIS video's fact — not invented, not a stretch, not just rephrasing "
+        "it. If you find one, set \"pair_resolved\": true and build the whole script around it "
+        "(the fact must still stand on its own for someone who never saw the previous video). "
+        "If you can't find a genuine one, set \"pair_resolved\": false and pick a normal fact on "
+        "the topic instead — a forced/weak contradiction is worse than skipping the follow-up."
+    )
+
+
+def _build_user_content(topic: str, avoid_block: str, title_instruction: str = TITLE_INSTRUCTION_NARRATIVE,
+                         pair_start: bool = False, pair_resolve_claim: str | None = None) -> str:
     # Стилевая калибровка по нише (2026-07-05): заголовки чужих выбросов на ЭТУ тему.
     niche_titles = _niche_titles_for(topic)
     niche_block = ""
@@ -405,7 +461,9 @@ def _build_user_content(topic: str, avoid_block: str, title_instruction: str = T
         f"(e.g. 'University of Washington study, 2008'), max 8 words, in {CFG['script_language']}, "
         "no URL. ONLY name a source you genuinely know; if not 100% sure, return \"\" — an "
         "invented source is worse than none.\n"
-        f"{_dropoff_note()}\n\n"
+        f"{_dropoff_note()}"
+        f"{PAIR_START_INSTRUCTION if pair_start else ''}"
+        f"{_pair_resolve_note(pair_resolve_claim) if pair_resolve_claim else ''}\n\n"
         "Respond strictly in JSON, no markdown wrapper: "
         '{"title": "title text", '
         '"title_opener": "the-x", '
@@ -417,7 +475,9 @@ def _build_user_content(topic: str, avoid_block: str, title_instruction: str = T
         '"search_summary": "plain keyword-dense sentence", '
         '"comment_question": "provocative question about the fact", '
         '"source_note": "origin of the fact or empty string", '
-        '"loop_connectors": ["why", "how"], '
+        + ('"pairable_claim": "short falsifiable/extendable claim or empty string", ' if pair_start else '')
+        + ('"pair_resolved": true, ' if pair_resolve_claim else '')
+        + '"loop_connectors": ["why", "how"], '
         '"tags": ["tag1", "tag2", ...], '
         '"hashtags": ["#tag1", "#tag2", ...], '
         '"video_queries": ["query1", "query2", ...]}'
@@ -495,7 +555,8 @@ def _append_loop(data: dict) -> None:
     data["has_loop"] = True
 
 
-def generate_script(on_this_day: bool = False) -> dict:
+def generate_script(on_this_day: bool = False, pair_start: bool = False,
+                     pair_resolve_claim: str | None = None) -> dict:
     topic = _pick_topic()
     client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"], max_retries=5)
 
@@ -514,7 +575,8 @@ def generate_script(on_this_day: bool = False) -> dict:
     system_prompt = BASE_SYSTEM_PROMPT + "\n\n" + LOOP_INSTRUCTION + "\n\n" + LENGTH_INSTRUCTION
     title_instruction, title_variant = pick_title_variant()
     title_instruction += _title_variety_note(past_titles)
-    user_content = _build_user_content(topic, avoid_block, title_instruction)
+    user_content = _build_user_content(topic, avoid_block, title_instruction,
+                                        pair_start=pair_start, pair_resolve_claim=pair_resolve_claim)
 
     # «On this day» (2026-07-05): раз в неделю факт привязывается к сегодняшней дате —
     # timely-контент алгоритм тестирует охотнее, дата в скрипте добавляет конкретики.
@@ -587,6 +649,10 @@ def generate_script(on_this_day: bool = False) -> dict:
     data["topic"] = topic
     data["topical"] = bool(on_this_day)          # тег topical-onthisday (pipeline.py)
     data["niche_styled"] = bool(_niche_titles_for(topic))  # тег niche-styled (pipeline.py)
+    # Video pairs (2026-07-08, см. paired_facts.py): нормализуем — модель может вернуть не-строку/
+    # не-bool, пустое значение или молчание (не относится к этому вызову) не должно всплывать.
+    data["pairable_claim"] = str(data.get("pairable_claim", "")).strip() if pair_start else ""
+    data["pair_resolved"] = bool(data.get("pair_resolved")) if pair_resolve_claim else False
     data["title_variant"] = title_variant  # A/B заголовков: тег title-seo/title-narrative
     data["hashtag_position"] = "end"
     # #2 хук-шаблон: нормализуем к известному id (для тега hook-<id> и аналитики).

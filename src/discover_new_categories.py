@@ -1,10 +1,16 @@
-"""Обнаружение НОВЫХ категорий тем (2026-07-08) — раз в месяц.
+"""Обнаружение НОВЫХ категорий тем + «missing niches» (2026-07-08) — раз в месяц.
 
 Отличие от discover_niche_topics.py: тот ищет выбросы ВНУТРИ наших 14 тем (семена поиска —
 TOPICS_POOL), поэтому в принципе не может заметить целую новую категорию, которой у нас
 нет. Этот скрипт делает ОТКРЫТЫЙ поиск (generic-запросы про факт-контент, без привязки к
 нашим темам), смотрит на выбросы среди РЕАЛЬНО топовых по просмотрам роликов ниши и просит
 Claude сгруппировать их в кандидатов-категории — которых ЕЩЁ НЕТ в TOPICS_POOL.
+
+«Missing niches»: для каждого кандидата дополнительно меряется ПРЕДЛОЖЕНИЕ (totalResults по
+названию категории, тот же бесплатный сигнал, что saturation в discover_niche_topics.py) —
+рядом со спросом (заголовки-выбросы) в одном сообщении. Мало видео в нише + сильные выбросы =
+вероятная ниша с спросом, но почти без предложения. Без сторонних API (Trends/Wikipedia и
+т.п.) — только то, что YouTube и так бесплатно отдаёт в уже вызываемом search().list.
 
 НЕ добавляет темы автоматически — только предлагает в Telegram, финальное решение и правка
 TOPICS_POOL (generate_script.py) — вручную. Тот же принцип, что и весь проект: автоматизируем
@@ -164,7 +170,25 @@ def _propose_candidates(outliers: list[dict]) -> list[dict]:
             and len(c.get("evidence", [])) >= 3][:CANDIDATES_TO_SEND]
 
 
+def _supply_for(youtube, category: str) -> int:
+    """«Missing niches» (2026-07-08): для кандидата меряем ПРЕДЛОЖЕНИЕ — totalResults по его
+    же названию (тот же бесплатный сигнал, что saturation в discover_niche_topics.py).
+    Спрос (доказательство-выбросы) уже есть от _propose_candidates; сопоставление обоих чисел
+    в одном сообщении и есть «спрос без предложения» — не нужен отдельный скрипт/API
+    (Trends/Wikipedia и т.п.), тот же search().list, который и так уже вызывается."""
+    try:
+        resp = youtube.search().list(
+            q=category, part="id", type="video", maxResults=1,
+            relevanceLanguage=CFG["lang_code"],
+        ).execute()
+        return int(resp.get("pageInfo", {}).get("totalResults", 0) or 0)
+    except Exception as e:
+        print(f"  supply-check failed for '{category}': {e}")
+        return -1  # -1 = не удалось измерить, отличаем от «реально 0 результатов»
+
+
 def run() -> None:
+    youtube = get_client()
     outliers = _collect_outliers()
     print(f"  Собрано {len(outliers)} видео-выбросов (открытый поиск).")
     candidates = _propose_candidates(outliers)
@@ -174,11 +198,15 @@ def run() -> None:
 
     lines = [f"🆕 [{CFG['channel_name']}] Кандидаты на новую тему (проверь и одобри вручную):"]
     for c in candidates:
-        lines.append(f"\n**{c['category']}**\n{c.get('why', '')}")
+        supply = _supply_for(youtube, c["category"])
+        supply_note = f"~{supply:,} видео в нише" if supply >= 0 else "предложение не измерено"
+        lines.append(f"\n**{c['category']}** ({supply_note})\n{c.get('why', '')}")
         for ev in c.get("evidence", [])[:3]:
             lines.append(f"  {ev.get('ratio', '?')}× — {ev.get('views', '?'):,} views — «{ev.get('title', '')}»"
                           if isinstance(ev.get("views"), int) else f"  «{ev.get('title', '')}»")
-    lines.append("\n\nЕсли одобряешь — добавь строку в TOPICS_POOL (generate_script.py) вручную.")
+    lines.append("\n\nСпрос — заголовки-выбросы выше. Предложение — сколько всего видео уже "
+                  "конкурирует за тему: мало видео + сильные выбросы = вероятная missing niche. "
+                  "Если одобряешь — добавь строку в TOPICS_POOL (generate_script.py) вручную.")
     notify("\n".join(lines))
     print(f"  Отправлено {len(candidates)} кандидатов в Telegram.")
 
