@@ -1,7 +1,13 @@
 """Тестовый прогон: генерирует видео локально без загрузки на YouTube.
 Сохраняет video.mp4, thumb.jpg, audio.mp3 и клипы на рабочий стол
 чтобы можно было перерендерить через rerender.py без нового сюжета."""
-import os, shutil, json
+import os, shutil, json, sys
+
+# Windows-консоль по умолчанию в cp1251 — падает на нелатинских заголовках (VN-канал,
+# диакритика вида "ấ"/"đ"). Без этого print(data['title']) крашится с UnicodeEncodeError
+# уже ПОСЛЕ платной генерации сценария (2026-07-08, поймано на реальном VN-прогоне).
+if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
+    sys.stdout.reconfigure(encoding="utf-8")
 
 from dotenv import load_dotenv
 load_dotenv()
