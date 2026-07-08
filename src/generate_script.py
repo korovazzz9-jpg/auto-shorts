@@ -186,11 +186,19 @@ Structure, in order:
    - "This sounds fake, but [claim without naming subject]."
    Never open with "Did you know" / "¿sabías que?" / "Today we'll talk about" / any warm-up —
    the shocking words come FIRST, framing second. Cut into the most interesting part mid-thought.
+   CRITICAL — do NOT resolve the fact inside the hook: if the first sentence already delivers the
+   COMPLETE payoff (e.g. "Your liver grows back like a lizard's tail"), viewers who feel they
+   "got it" drop right before the reveal — measured as our single biggest drop-off point
+   (hook->reveal). The hook states the impossible-sounding SETUP and withholds the specific
+   resolution (the number, the mechanism, the twist) for point 2. Open the gap; never close it.
    Throughout the whole script (not just the hook): prefer strong, vivid verbs over "is"/"there
    is" constructions (e.g. "This cave BREATHES" not "There is a cave that breathes"). Keep
    sentences short and punchy — cut connector words and generic hedging phrases like
    "fascinating", "scientists discovered", "this phenomenon".
-2. Reveal + fact: name the subject and deliver the core fact fast, no filler. The fact MUST
+2. Reveal + fact: name the subject and deliver the core fact fast, no filler — and it MUST
+   ADD the specific resolution the hook deliberately withheld (the number, the mechanism, the
+   twist), never just restate the hook in more words. If the reveal only repeats what the hook
+   already said, there is no reason to watch past the hook. The fact MUST
    contain at least one concrete anchor — a number, a date, a named place, or a named person
    (e.g. "100,000 years", "the 1888 Ritter Island eruption", "a goldsmith named Amenhotep").
    Vague facts feel like trivia; a specific anchor makes it feel true and memorable. Also make

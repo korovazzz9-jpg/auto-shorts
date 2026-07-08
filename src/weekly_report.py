@@ -141,27 +141,38 @@ def save_hook_stats(videos: list[dict]) -> None:
 
 
 def save_dropoff_stats(videos: list[dict]) -> None:
-    """Замыкает петлю drop-off → промпт (2026-07-05): медианная ЗОНА обрыва по худшим видео
-    недели (доля длины видео, где кривая retention падает сильнее всего) пишется в
-    dropoff_stats_<channel>.json (коммитит weekly-report.yml). generate_script._dropoff_note()
-    читает файл и добавляет модели зонную подсказку (слабый хук / затянутый reveal / провал
-    середины). Обрывы в концовке (>70% длины) — норма для Shorts (CTA), подсказка не нужна."""
-    ratios = []
+    """Замыкает петлю drop-off → промпт (2026-07-05): ЗОНА обрыва по худшим видео недели (доля
+    длины видео, где кривая retention падает сильнее всего) пишется в dropoff_stats_<channel>.json
+    (коммитит weekly-report.yml). generate_script._dropoff_note() читает файл и добавляет модели
+    зонную подсказку (слабый хук / затянутый reveal / провал середины). Обрывы в концовке
+    (>70% длины) — норма для Shorts (CTA), подсказка не нужна.
+
+    2026-07-08: медиана теперь ВЗВЕШЕНА по величине обрыва (drop_pct). Раньше −19 п.п. (реальный
+    провал) и −6 п.п. (пологая убыль) весили одинаково — обычная медиана позиций теряла сигнал о
+    том, где сливаемся СИЛЬНЕЕ всего. Взвешенная медиана находит долю длины, до которой набирается
+    половина всей «массы обрыва»: видео с резкими обрывами тянут зону к своей позиции сильнее."""
+    weighted = []  # (ratio позиции обрыва, вес = drop_pct)
     for v in videos:
         d = v.get("drop")
         # Обрывы слабее 5 п.п. — шум, не сигнал.
         if d and v.get("length") and d.get("drop_pct", 0) >= 5:
-            ratios.append(min(d["second"] / v["length"], 1.0))
-    if len(ratios) < MIN_DROPOFF_SAMPLE:
+            weighted.append((min(d["second"] / v["length"], 1.0), d["drop_pct"]))
+    if len(weighted) < MIN_DROPOFF_SAMPLE:
         print(f"  dropoff_stats: <{MIN_DROPOFF_SAMPLE} видео с кривыми — данных мало, файл не трогаем.")
         return
-    ratios.sort()
-    median = ratios[len(ratios) // 2]
+    weighted.sort()  # по позиции обрыва
+    total_w = sum(w for _, w in weighted)
+    acc, median = 0.0, weighted[-1][0]
+    for ratio, w in weighted:
+        acc += w
+        if acc >= total_w / 2:  # взвешенная медиана: половина суммарной величины обрывов — до сюда
+            median = ratio
+            break
     zone = "hook" if median < 0.15 else "reveal" if median < 0.40 else "middle" if median < 0.70 else "ending"
     with open(DROPOFF_STATS_FILE, "w", encoding="utf-8") as f:
-        json.dump({"zone": zone, "median_ratio": round(median, 3), "videos": len(ratios),
+        json.dump({"zone": zone, "median_ratio": round(median, 3), "videos": len(weighted),
                    "updated": date.today().isoformat()}, f, ensure_ascii=False, indent=2)
-    print(f"  dropoff_stats: zone={zone} (median {median:.0%} длины, n={len(ratios)})")
+    print(f"  dropoff_stats: zone={zone} (взвеш. медиана {median:.0%} длины, n={len(weighted)})")
 
 
 def build_report(videos: list[dict], spike_die: list[dict] | None = None) -> str:
