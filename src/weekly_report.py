@@ -51,7 +51,8 @@ def _videos_with_retention() -> list[dict]:
     return videos
 
 
-DROP_OFF_SAMPLE = 5  # худших видео недели, на которые тратим доп. Analytics-запросы (дёшево, но не для всех 50)
+DROP_OFF_SAMPLE = 10  # худших видео недели (2026-07-08: 5->10 — retention-кривая теперь реально
+# отдаёт данные на видео от ~500 просмотров, не только на единичных случаях, есть смысл смотреть шире)
 DROPOFF_STATS_FILE = os.path.join(os.path.dirname(__file__), "..", f"dropoff_stats_{CHANNEL}.json")
 MIN_DROPOFF_SAMPLE = 3  # меньше видео с кривыми — сигнал шумный, файл не пишем
 
