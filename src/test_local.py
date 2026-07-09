@@ -17,6 +17,7 @@ from config import CFG, CHANNEL
 from fetch_stock_video import fetch_clips, fetch_satisfying_clips
 from generate_rapid_facts import FACTS_PER_VIDEO, generate_rapid_facts
 from generate_script import generate_script
+from notify import send_video
 from tts import text_to_speech
 
 import tempfile
@@ -108,4 +109,12 @@ print(f"  Thumbnail: {os.path.join(OUT_DIR, f'thumb_{num}.jpg')}")
 tiktok_hashtags = data["hashtags"][:5]
 print(f"\nЗаголовок для TikTok: {data['title']}")
 print(f"Хэштеги (макс 5 для TikTok): {' '.join(tiktok_hashtags)}")
-print(f"Caption: {data['title']}\n\n{' '.join(tiktok_hashtags)}")
+caption = f"{data['title']}\n\n{' '.join(tiktok_hashtags)}"
+print(f"Caption: {caption}")
+
+# VN TikTok постится вручную с телефона (2026-07-09) — присылаем готовый файл сразу в
+# Telegram, не нужно вручную идти на Desktop/забирать по кабелю на телефон. Только для
+# satisfying-режима (VN) — EN/ES идут через полный pipeline.py на YouTube, тут не нужно.
+if SATISFYING:
+    print("\nОтправляю видео в Telegram...")
+    send_video(os.path.join(OUT_DIR, f"video_{num}.mp4"), caption)
