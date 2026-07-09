@@ -78,4 +78,5 @@ def run(channel: str) -> None:
 
 if __name__ == "__main__":
     from config import CHANNEL
-    run(CHANNEL)
+    from notify import guard_main
+    guard_main(f"monthly-insights {CHANNEL}", lambda: run(CHANNEL))

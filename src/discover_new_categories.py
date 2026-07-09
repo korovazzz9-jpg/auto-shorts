@@ -267,4 +267,5 @@ def run() -> None:
 
 
 if __name__ == "__main__":
-    run()
+    from notify import guard_main
+    guard_main(f"discover-categories {os.environ.get('CHANNEL', 'en')}", run)

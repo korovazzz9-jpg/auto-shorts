@@ -71,6 +71,22 @@ def send_video(path: str, caption: str = "") -> None:
         print(f"  (Telegram send_video failed: {e})")
 
 
+def guard_main(label: str, fn) -> None:
+    """Запускает фоновую джобу и алертит в Telegram при ПОЛНОМ падении (2026-07-09, аудит
+    надёжности): публикующие пайплайны (pipeline.py/series/longform) давно так делают, а
+    фоновые/аналитические (weekly_report, prepare_batch, discovery, insights, recycle) —
+    падали только в GitHub Actions (email владельцу, легко пропустить), не в Telegram, где
+    пользователь реально следит. Самое опасное — тихая смерть weekly_report: hook/dropoff
+    stats застывают и петли обратной связи в генерацию крутят старые данные незаметно.
+
+    re-raise сохраняет красный статус в Actions (не глотаем ошибку, только дублируем в TG)."""
+    try:
+        fn()
+    except Exception as e:
+        notify(f"🔴 [{label}] джоба УПАЛА:\n{e}")
+        raise
+
+
 if __name__ == "__main__":
     notify("✅ Тест уведомления auto-shorts — бот настроен правильно.")
     print("Отправлено (если TELEGRAM_BOT_TOKEN/CHAT_ID заданы).")

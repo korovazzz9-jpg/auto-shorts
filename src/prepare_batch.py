@@ -255,4 +255,5 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    from notify import guard_main
+    guard_main(f"prepare-batch {os.environ.get('CHANNEL', 'en')}", main)

@@ -298,7 +298,7 @@ def build_report(videos: list[dict], spike_die: list[dict] | None = None) -> str
     return "\n".join(lines)
 
 
-if __name__ == "__main__":
+def main() -> None:
     videos = _videos_with_retention()
     analytics_client = get_analytics_client()
     try:
@@ -322,3 +322,8 @@ if __name__ == "__main__":
         print(f"  video_history: дозаполнено {n} записей.")
     except Exception as e:
         print(f"  video_history enrich пропущен: {e}")
+
+
+if __name__ == "__main__":
+    from notify import guard_main
+    guard_main(f"weekly-report {CHANNEL}", main)

@@ -277,4 +277,5 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    from notify import guard_main
+    guard_main(f"recycle-winners {os.environ.get('CHANNEL', 'en')}", main)
