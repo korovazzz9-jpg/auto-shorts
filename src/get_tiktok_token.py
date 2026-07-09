@@ -9,7 +9,7 @@ import urllib.parse
 import webbrowser
 
 CLIENT_KEY = os.environ.get("TIKTOK_CLIENT_KEY", "awlqkv9gr65hjezw")
-REDIRECT_URI = "https://korovazzz9-jpg.github.io/pages/callback.html"
+REDIRECT_URI = "https://60secfacts.netlify.app/callback.html"
 SCOPES = "video.publish,video.upload"
 
 code_verifier = secrets.token_urlsafe(64)
