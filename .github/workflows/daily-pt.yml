@@ -1,0 +1,74 @@
+name: Daily Shorts (PT)
+
+on:
+  # Триггерится ТОЛЬКО внешним cron-job.org (workflow_dispatch), как daily-es.
+  # 3-й канал (2026-07-09), португальский/Бразилия. Слоты 15:23/19:23/22:23/00:23 UTC
+  # (бразильский lunch+вечер, UTC-3). Только daily Shorts — серий/лонгформа пока нет,
+  # поэтому guard прайм-слота (как в daily-es) не нужен, все 4 слота публикуются каждый день.
+  # ⚠️ Требует секрета YT_REFRESH_TOKEN_PT и настройки 4 триггеров в cron-job.org.
+  workflow_dispatch: {}
+
+concurrency:
+  group: daily-pt
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # коммитит queue_pt.json обратно (Batch API preload)
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Restore titles cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            src/titles_cache.json
+            src/topics_cache.json
+            src/vision_cache.json
+          key: titles-cache-pt-${{ github.run_id }}
+          restore-keys: titles-cache-pt
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install system deps
+        run: sudo apt-get update && sudo apt-get install -y imagemagick
+
+      - name: Allow ImageMagick to read caption text files
+        run: sudo sed -i '/pattern="@\*"/d' /etc/ImageMagick-6/policy.xml
+
+      - name: Install Python deps
+        run: pip install -r requirements.txt
+
+      - name: Run pipeline (Portuguese channel)
+        working-directory: src
+        env:
+          CHANNEL: pt
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+          PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
+          # PT-канал: свой YouTube-токен, те же client_id/secret приложения.
+          # Секрет YT_REFRESH_TOKEN_PT маппится в стандартное имя. IG/TikTok/Pinterest
+          # выключены в config (post_to_* = False), поэтому их секреты тут не нужны.
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN_PT }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python pipeline.py
+
+      - name: Persist queue state
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          [ -f queue_pt.json ] && git add queue_pt.json
+          [ -f paired_facts_pt.json ] && git add paired_facts_pt.json
+          [ -f video_history_pt.json ] && git add video_history_pt.json
+          git diff --cached --quiet && { echo "no changes"; exit 0; }
+          git commit -m "chore(queue): PT queue/card state $(date -u +%F)" || { echo "no changes"; exit 0; }
+          git pull --rebase origin master
+          git push

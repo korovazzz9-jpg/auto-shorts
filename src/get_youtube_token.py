@@ -2,6 +2,7 @@
 Запустить один раз локально:
   python src/get_youtube_token.py       — для EN канала (YT_REFRESH_TOKEN)
   python src/get_youtube_token.py es    — для ES канала (YT_REFRESH_TOKEN_ES)
+  python src/get_youtube_token.py pt    — для PT канала (YT_REFRESH_TOKEN_PT)
 Понадобится client_secret.json, скачанный из Google Cloud Console
 (OAuth client ID, тип "Desktop app", API: YouTube Data API v3).
 """
@@ -17,7 +18,10 @@ CLIENT_SECRET_PATH = os.path.join(os.path.dirname(__file__), "..", "client_secre
 
 def main() -> None:
     channel = sys.argv[1].lower() if len(sys.argv) > 1 else "en"
-    env_key = "YT_REFRESH_TOKEN_ES" if channel == "es" else "YT_REFRESH_TOKEN"
+    # EN использует базовое имя, остальные каналы — суффикс _<CHANNEL> (маппится в
+    # стандартное YT_REFRESH_TOKEN внутри workflow'а канала). 2026-07-09: обобщено с es-only
+    # на любой код канала (нужно под pt/vi/будущие).
+    env_key = "YT_REFRESH_TOKEN" if channel == "en" else f"YT_REFRESH_TOKEN_{channel.upper()}"
 
     print(f"Авторизация для канала: {channel.upper()} (сохранит в {env_key})")
     print("Войдите в браузере под нужным Google аккаунтом.\n")

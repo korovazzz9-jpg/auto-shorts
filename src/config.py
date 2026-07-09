@@ -300,6 +300,121 @@ CONFIGS = {
             "natural wonders": "Maravillas Naturales",
         },
     },
+    # Португальский (Бразилия) — 3-й канал (2026-07-09). Клон ES (доказанно > EN 2×), т.к.
+    # португальский рынок культурно смежен и менее насыщен английской конкуренцией. Старт
+    # только daily Shorts (без серий/лонгформа — сначала проверить канал). loop_probability
+    # НЕЙТРАЛЬНЫЙ 0.3 (у ES петля вредит, у EN помогает — PT свежая аудитория, само подстроится).
+    # ⚠️ ПЕРЕД ЗАПУСКОМ пользователь ДОЛЖЕН: создать YouTube-канал, получить YT_REFRESH_TOKEN_PT
+    #   (get_youtube_token.py pt → gh secret), заполнить channel_handle реальным @хендлом.
+    "pt": {
+        "channel_name": "Fatos em 30s",
+        "lang_code": "pt",
+        "daily_slots_utc": [(15, 23), (19, 23), (22, 23), (0, 23)],  # бразильские lunch+вечер (UTC-3), минута :23 — не бьётся с EN(:07/:13)/ES(:17)
+        "script_language": "Brazilian Portuguese (natural, conversational, NOT European Portuguese)",
+        "voices": [
+            "pt-BR-AntonioNeural",
+            "pt-BR-FranciscaNeural",
+            "pt-BR-ThalitaMultilingualNeural",
+        ],
+        "cta_phrases": [
+            "CURTA E SIGA\npara mais",
+            "SIGA para mais\nfatos como este",
+            "CURTA\nse não sabia",
+        ],
+        "loop_phrases": {
+            "why": ["E é por isso.", "E é exatamente por isso.", "É por isso mesmo.", "É por isso que acontece."],
+            "how": ["E é assim.", "E é exatamente assim.", "É desse jeito."],
+            "when": ["E foi justamente quando.", "E tudo começou quando."],
+            "where": ["E foi bem ali que.", "E tudo aconteceu onde."],
+            "because": ["E tudo por causa disso.", "E é porque."],
+        },
+        "loop_probability": 0.3,
+        "cta_topic_template": "SIGA para mais\nfatos sobre {word}",
+        "topic_cta_words": {
+            "the ocean": "OCEANO",
+            "the animal kingdom": "ANIMAIS",
+            "space": "ESPAÇO",
+            "the human body": "CORPO",
+            "ancient history": "HISTÓRIA",
+            "archaeological discoveries": "ARQUEOLOGIA",
+            "ancient civilizations": "CIVILIZAÇÕES",
+            "volcanoes and earthquakes": "VULCÕES",
+            "extreme weather": "CLIMA",
+            "historical mysteries": "MISTÉRIOS",
+            "evolution": "EVOLUÇÃO",
+            "natural wonders": "NATUREZA",
+            "shipwrecks and lost treasures": "NAUFRÁGIOS",
+            "future technology": "TECNOLOGIA",
+        },
+        "cta_instruction": (
+            "ONE short CTA in Brazilian Portuguese, 4-7 words MAX — either \"Siga para mais.\" or "
+            "\"Comenta se você já sabia.\" Pick one, no embellishment, no extra clauses"
+        ),
+        "post_to_instagram": False,   # нет PT IG-аккаунта — включить после создания
+        "post_to_tiktok": False,
+        "post_to_pinterest": False,
+        "post_to_threads": False,
+        "channel_handle": "",   # ⚠️ TODO: заполнить реальным @хендлом после создания канала (channels.list().customUrl)
+        "sister_channel_handle": "",   # кросс-промо выключено на старте (свежая аудитория)
+        "sister_desc_ctas": [],
+        "sister_lang_tags": [],
+        "sister_lang_code": "",
+        "ig_caption_ctas": [
+            "🔗 Siga para mais fatos — link na bio",
+            "📌 Um fato novo todo dia — link na bio",
+            "🔗 Mais fatos como este — link na bio",
+        ],
+        "ig_card_slot_hour": 15,   # первый PT-слот (не используется пока IG выключен)
+        "topical_slot_hour": 15,   # первый PT-слот (15:23 UTC) — топикал по четвергам
+        "community_poll_intro": "Já viu a nova análise: {title}? 👀\n\nSobre qual tema você quer o vídeo da próxima semana? Vote 👇",
+        "source_label": "Fonte:",
+        "longform_desc_cta": "Análises completas no canal:",
+        "longform_comment_cta": "Quer a história completa? Veja a análise 👉",
+        "first_comment": "Peraí — você já sabia disso? 👇\nInscreva-se para um fato novo todo dia 👉 {channel_url}",
+        "first_comment_subscribe_ctas": [
+            "Inscreva-se para um fato novo todo dia 👉 {channel_url}",
+            "Fato novo todo dia — inscreva-se 👉 {channel_url}",
+            "Siga para mais fatos como este 👉 {channel_url}",
+            "Um fato por dia, pra sempre — inscreva-se 👉 {channel_url}",
+        ],
+        "pair_callback_ctas": [
+            "↩️ Lembra do que a gente falou antes:",
+            "↩️ Isso continua um vídeo anterior:",
+            "↩️ Voltando a um fato que postamos antes:",
+        ],
+        "pair_backlink_ctas": [
+            "🔄 Atualização — tem mais nessa história:",
+            "🔄 Saiu a continuação com uma reviravolta:",
+            "🔄 A gente achou uma exceção pra isso:",
+        ],
+        "first_comment_replies": [
+            "Seja sincero — isso te surpreendeu ou você já sabia? 👀",
+            "A maioria passa reto sem acreditar. Você acreditou?",
+            "De 1 a 10, quão falso soou no começo? 👇",
+            "Se você já sabia, tá no 1% — prova aí embaixo 👇",
+        ],
+        "series_playlist_cta": "📺 Veja todas as partes na ordem 👉",
+        "longform_comment": "Qual parte te surpreendeu mais? 👇\nInscreva-se para uma análise nova toda semana 👉 {channel_url}",
+        "longform_use_novita": True,
+        "novita_language": "Portuguese",
+        "novita_voice": "Deep_Voice_Man",
+        "playlist_titles": {
+            "space": "Fatos do Espaço",
+            "the ocean": "Fatos do Oceano",
+            "ancient history": "Fatos de História Antiga",
+            "the human body": "Fatos do Corpo Humano",
+            "the animal kingdom": "Fatos de Animais",
+            "future technology": "Fatos de Tecnologia",
+            "volcanoes and earthquakes": "Vulcões e Terremotos",
+            "ancient civilizations": "Civilizações Antigas",
+            "evolution": "Fatos de Evolução",
+            "extreme weather": "Clima Extremo",
+            "archaeological discoveries": "Descobertas Arqueológicas",
+            "shipwrecks and lost treasures": "Naufrágios e Tesouros Perdidos",
+            "historical mysteries": "Mistérios Históricos",
+            "natural wonders": "Maravilhas Naturais",
+        },
+    },
     # Вьетнамский TikTok-профиль. Аккаунт TikTok зарегистрирован во Вьетнаме → раздаётся
     # вьетнамской аудитории, поэтому контент на вьетнамском. Публикация ручная (генерим
     # локально через `CHANNEL=vi python test_local.py`), автопостинг выключен.
