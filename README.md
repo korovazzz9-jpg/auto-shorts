@@ -166,10 +166,12 @@ python src/rerender.py
 ### Санитизация метаданных YouTube (2026-07-05, `upload_youtube._sanitize_youtube_text`)
 YouTube отклоняет описания/заголовки с угловыми скобками `<`/`>` (`invalidDescription`) и описания длиннее 5000 символов. Оба лонгформа (EN+ES) упали на загрузке 2026-07-05 именно с `invalidDescription` — вероятно длина: скрипт mystery 550-750 слов + search_summary + главы (добавлены 2026-07-03, ~200 симв) + кросс-промо + хэштеги подошли к 5000. `_sanitize_youtube_text()` теперь чистит `<>/` и обрезает до 4990 (по границе слова) — применяется к title+description во ВСЕХ путях загрузки (`upload_youtube` + локализация метаданных). Откат: убрать обёртки `_sanitize_youtube_text` в `upload_youtube.py`.
 
-### Watchdog (`watchdog.yml`)
-Запускается через 15 мин после каждого слота Shorts. Если свежего видео нет — перезапускает pipeline. Окно проверки: 70 минут (`LOOKBACK_MINUTES` в `check_recent_upload.py`).
+### Watchdog (`watchdog.yml` EN, `watchdog-es.yml` ES)
+Запускается через 15 мин после каждого слота Shorts (EN и ES независимо, свои файлы — по аналогии с `daily.yml`/`daily-es.yml`). Если свежего видео нет — перезапускает pipeline. Окно проверки: 50 минут (`LOOKBACK_MINUTES` в `check_recent_upload.py`). Слоты читаются из `CFG["daily_slots_utc"]` (config.py) — один скрипт работает для обоих каналов через `CHANNEL` env, без дублирования файла.
 
 ⚠️ **Баг, живший до 2026-07-04:** watchdog после ретрая НЕ коммитил `queue_en.json` (и имел только `contents: read`) — сценарий, взятый ретраем из очереди Batch-preload, не вычёркивался в git, и следующий обычный слот публиковал ТОТ ЖЕ сценарий второй раз. Фикс: `contents: write` + шаг «Persist queue state» (идентичный daily.yml). Откат не нужен — шаг просто повторяет логику daily.
+
+⚠️ **У ES не было watchdog до 2026-07-09** — реальный инцидент: ES-слот 03:17 UTC упал (пустой ответ модели на topical-промпте, см. `generate_script.py` fallback) и был потерян без ретрая. Добавлен `watchdog-es.yml`, зеркальный EN-версии (ES-токены/секреты, слоты 16:17/20:17/00:17/03:17+15мин). **Стоимость:** +4 лёгких прогона/день в бюджет GitHub Actions-минут (репо приватный, лимит 2000 мин/мес, запас был ~12% на 2026-07-02) — большинство прогонов ничего не ретраят (только `check_recent_upload.py`, дёшево), тяжёлый retry-путь (moviepy/imagemagick) срабатывает только при реальном пропуске слота.
 
 ### Недельная серия (`pipeline_series.py` + `generate_series.py`)
 

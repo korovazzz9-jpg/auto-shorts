@@ -13,6 +13,7 @@ Exit code 1 — свежего видео нет и мы в окне после 
 import datetime
 import sys
 
+from config import CFG
 from youtube_auth import get_client
 
 # Окно проверки «было ли видео» должно покрывать слот + всё опоздание watchdog.
@@ -25,12 +26,11 @@ from youtube_auth import get_client
 # поэтому окна LOOKBACK/RETRY_WINDOW сужены пропорционально (были 70/(10,60)).
 LOOKBACK_MINUTES = 50
 
-# Слоты публикации (UTC, час:мин). Должны совпадать с cron-job.org / daily.yml.
-# 2026-07-01: EN 5→4 слотов (перелив ресурса на ES, где отдача 2× — см. README).
-# Убран 13:07 UTC (8am ET — худшее US-окно).
-# 2026-07-05: 22:13→23:07 — попадание в US-прайм 19:07 EDT (7-9pm окно), было 18:13 EDT
-# ("мёртвая зона" между дневным и вечерним пиком) — см. README, поиск прайм-таймов.
-SLOTS_UTC = [(16, 13), (20, 7), (23, 7), (0, 7)]
+# Слоты публикации (UTC, час:мин) — из CFG["daily_slots_utc"] (config.py), должны совпадать
+# с cron-job.org / daily.yml (или daily-es.yml для ES). 2026-07-09: вынесено из
+# захардкоженной EN-only константы в CFG — тот же скрипт теперь работает для CHANNEL=es
+# (watchdog-es.yml) без дублирования файла.
+SLOTS_UTC = CFG["daily_slots_utc"]
 # Сколько минут после слота watchdog имеет право доретраивать.
 RETRY_WINDOW = (10, 45)
 

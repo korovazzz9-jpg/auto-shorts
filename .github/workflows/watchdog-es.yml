@@ -1,0 +1,108 @@
+name: Daily Shorts Watchdog (ES)
+
+on:
+  # 15 минут после каждого слота в daily-es.yml (16:17/20:17/00:17/03:17 UTC).
+  # 2026-07-09: добавлен по аналогии с watchdog.yml (EN) — до этого у ES не было
+  # подстраховки на пропущенный/упавший слот (реальный инцидент: ES 03:17 упал
+  # 2026-07-09, слот потерян без возможности ретрая).
+  schedule:
+    - cron: "32 16 * * *"
+    - cron: "32 20 * * *"
+    - cron: "32 0 * * *"
+    - cron: "32 3 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  actions: read
+  contents: write   # ретрай пайплайна берёт сценарий из queue_es.json — его надо закоммитить обратно
+
+jobs:
+  check-and-retry:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Skip if daily-es pipeline is already running
+        id: guard
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          running=$(gh run list --workflow=daily-es.yml --repo=${{ github.repository }} \
+            --status=in_progress --limit=5 --json databaseId --jq 'length')
+          if [ "$running" -gt 0 ]; then
+            echo "Daily-ES pipeline is in progress — skipping watchdog retry."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.guard.outputs.skip == 'false'
+
+      - uses: actions/setup-python@v5
+        if: steps.guard.outputs.skip == 'false'
+        with:
+          python-version: "3.11"
+
+      - name: Install Python deps
+        if: steps.guard.outputs.skip == 'false'
+        run: pip install -r requirements.txt
+
+      - name: Check for recent upload
+        if: steps.guard.outputs.skip == 'false'
+        id: check
+        working-directory: src
+        env:
+          CHANNEL: es
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN_ES }}
+        run: |
+          if python check_recent_upload.py; then
+            echo "missed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "missed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install system deps (only if retry needed)
+        if: steps.guard.outputs.skip == 'false' && steps.check.outputs.missed == 'true'
+        run: sudo apt-get update && sudo apt-get install -y imagemagick
+
+      - name: Allow ImageMagick to read caption text files (only if retry needed)
+        if: steps.guard.outputs.skip == 'false' && steps.check.outputs.missed == 'true'
+        run: sudo sed -i '/pattern="@\*"/d' /etc/ImageMagick-6/policy.xml
+
+      - name: Retry pipeline (scheduled run was missed)
+        if: steps.guard.outputs.skip == 'false' && steps.check.outputs.missed == 'true'
+        working-directory: src
+        env:
+          CHANNEL: es
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+          PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN_ES }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN_ES }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID_ES }}
+          CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
+          CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
+          CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python pipeline.py
+
+      # Тот же шаг, что в daily-es.yml: pipeline.py мог взять сценарий из queue_es.json
+      # (Batch API preload) — без коммита следующий запуск увидел бы несдвинутую очередь
+      # и опубликовал бы ТОТ ЖЕ сценарий второй раз.
+      - name: Persist queue state
+        if: always() && steps.guard.outputs.skip == 'false' && steps.check.outputs.missed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          [ -f queue_es.json ] && git add queue_es.json
+          [ -f ig_card_counter_es.json ] && git add ig_card_counter_es.json
+          [ -f video_history_es.json ] && git add video_history_es.json
+          [ -f paired_facts_es.json ] && git add paired_facts_es.json
+          git diff --cached --quiet && { echo "no changes"; exit 0; }
+          git commit -m "chore(queue): ES queue/card state (watchdog retry) $(date -u +%F)" || { echo "no changes"; exit 0; }
+          git pull --rebase origin master
+          git push

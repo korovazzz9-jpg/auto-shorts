@@ -10,6 +10,9 @@ CONFIGS = {
     "en": {
         "channel_name": "60SecFacts",
         "lang_code": "en",
+        # Слоты публикации (UTC, час:мин) — должны совпадать с cron-job.org / daily.yml.
+        # Читает check_recent_upload.py (watchdog: было ли видео в окне после слота).
+        "daily_slots_utc": [(16, 13), (20, 7), (23, 7), (0, 7)],
         # Язык, на котором Claude пишет сценарий.
         "script_language": "English",
         # Голоса TTS, ротируются между видео ради вариативности.
@@ -180,6 +183,7 @@ CONFIGS = {
     "es": {
         "channel_name": "Datos en 30s",
         "lang_code": "es",
+        "daily_slots_utc": [(16, 17), (20, 17), (0, 17), (3, 17)],
         "script_language": "Spanish (neutral Latin American / Mexican Spanish, NOT European Spanish)",
         "voices": [
             "es-MX-JorgeNeural",
