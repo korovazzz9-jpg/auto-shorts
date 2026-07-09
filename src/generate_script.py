@@ -589,6 +589,15 @@ def generate_script(on_this_day: bool = False, pair_start: bool = False,
     # «On this day» (2026-07-05): раз в неделю факт привязывается к сегодняшней дате —
     # timely-контент алгоритм тестирует охотнее, дата в скрипте добавляет конкретики.
     # Только live-генерация (pipeline.py, мимо очереди): batch-заготовки не знают дату выхода.
+    #
+    # ⚠️ Баг найден 2026-07-09 (реальный прод-инцидент, ES 03:17/03:49): "The date claim must
+    # be REAL" невольно приглашала модель ПРОВЕРЯТЬ СЕБЯ ВСЛУХ — response.stop_reason был
+    # "max_tokens", а content[0].text был заполнен видимым перебором дат ("July 9, 455 AD: the
+    # Vandals sacked Rome (that was June 2)... July 9, 48 BC: Caesar crossed into Greece...")
+    # БЕЗ единого символа "{" — весь бюджет 1600 токенов ушёл на рассуждение, JSON не
+    # начинался вообще. Точно та же болезнь, что уже чинили в word_count (см. «Самопроверка
+    # длины 2026-07-01» в README) — там тоже "count it, trim, recount" в тексте ответа
+    # приводило к видимым рассуждениям и упору в max_tokens. Тот же фикс: явно "молча".
     if on_this_day:
         from datetime import datetime, timezone
         today = datetime.now(timezone.utc).strftime("%B %d")
@@ -597,8 +606,11 @@ def generate_script(on_this_day: bool = False, pair_start: bool = False,
             "verifiable historical event or discovery tied to THIS calendar date (any year), "
             "ideally within the topic above — if nothing natural fits the topic, any strong "
             "date-tied fact works. Weave the anniversary into the script naturally (e.g. "
-            "'Exactly 143 years ago today...'). The date claim must be REAL — if you cannot "
-            "recall a solid dated fact, write the usual fact WITHOUT inventing a date."
+            "'Exactly 143 years ago today...'). Recall and verify the date SILENTLY — do NOT "
+            "show any candidate dates, reasoning, or draft text before the JSON; go straight "
+            "to the final JSON answer. The date claim must be REAL — if you cannot silently "
+            "recall a solid dated fact with real confidence, write the usual fact WITHOUT "
+            "inventing a date, still going straight to JSON with no visible deliberation."
         )
 
     # Ретрай битого JSON (2026-07-05): в отличие от generate_series.py/generate_longform_script.py
