@@ -2,9 +2,14 @@ name: Prepare Batch Queue
 
 on:
   # Не критично ко времени публикации (только пополняет очередь на будущее) — штатный
-  # GitHub-cron ок, в отличие от daily/series/longform. Раз в сутки, ночью по UTC.
+  # GitHub-cron ок, в отличие от daily/series/longform. Раз в сутки.
+  # ⚠️ 2026-07-09: было 03:17 UTC — РОВНО тот же момент, что собственный ES daily-слот
+  # (daily_slots_utc содержит (3,17))! daily-es.yml коммитил queue_es.json в ТУ ЖЕ минуту,
+  # что prepare-batch туда писал — реальный race condition (пойман в проде: git rebase
+  # конфликт, прогон упал). 09:17 UTC — в мёртвой зоне 03:47-16:13, где НЕТ ни одного
+  # daily-слота ни у одного канала (EN/ES/PT).
   schedule:
-    - cron: "17 3 * * *"
+    - cron: "17 9 * * *"
   workflow_dispatch: {}
 
 jobs:
