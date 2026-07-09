@@ -354,7 +354,7 @@ CONFIGS = {
         "post_to_tiktok": False,
         "post_to_pinterest": False,
         "post_to_threads": False,
-        "channel_handle": "",   # ⚠️ TODO: заполнить реальным @хендлом после создания канала (channels.list().customUrl)
+        "channel_handle": "30SegDeFatos",   # @30SegDeFatos (2026-07-09)
         "sister_channel_handle": "",   # кросс-промо выключено на старте (свежая аудитория)
         "sister_desc_ctas": [],
         "sister_lang_tags": [],
