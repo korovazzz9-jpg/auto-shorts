@@ -11,6 +11,14 @@ on:
     - cron: "47 9 * * 4"
   workflow_dispatch: {}
 
+# 2026-07-09: см. concurrency в prepare-batch.yml — та же группа, GitHub-cron может
+# опоздать на часы (пойман: этот воркфлоу реально стартовал в 12:43 вместо 09:47),
+# поэтому "расписание в мёртвой зоне" НЕ гарантирует отсутствие пересечения — только
+# группа гарантирует строгую очерёдность.
+concurrency:
+  group: queue-maintenance
+  cancel-in-progress: false
+
 jobs:
   recycle:
     runs-on: ubuntu-latest

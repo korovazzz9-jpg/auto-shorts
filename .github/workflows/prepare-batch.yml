@@ -12,6 +12,16 @@ on:
     - cron: "17 9 * * *"
   workflow_dispatch: {}
 
+# 2026-07-09: JSON плохо merge-дружелюбен для git — при пересечении по времени с
+# recycle-winners.yml/discover-niche.yml (оба тоже пишут в queue_en/es/pt.json) конфликт
+# СОДЕРЖАТЕЛЬНЫЙ, retry pull/push его не решает (пойман в проде дважды подряд). Общая
+# группа с recycle-winners/discover-niche — GitHub ставит их строго друг за другом, не
+# параллельно. НЕ трогает daily/watchdog (свой лок не нужен — они time-critical, ждать
+# не должны) — риск коллизии с ними уже снят переносом расписания в мёртвую зону.
+concurrency:
+  group: queue-maintenance
+  cancel-in-progress: false
+
 jobs:
   prepare:
     runs-on: ubuntu-latest

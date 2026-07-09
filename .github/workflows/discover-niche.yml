@@ -8,6 +8,14 @@ on:
     - cron: "37 9 * * 1"
   workflow_dispatch: {}
 
+# 2026-07-09: тоже пишет в queue_en/es.json (recreate_outlier) — та же concurrency-группа,
+# что prepare-batch.yml/recycle-winners.yml (см. комментарий там). Реальный прод-инцидент:
+# GitHub-cron развёл эти три джобы во времени на часы от заявленного расписания, они
+# столкнулись и уронили друг другу git rebase (JSON — плохо merge-дружелюбен).
+concurrency:
+  group: queue-maintenance
+  cancel-in-progress: false
+
 jobs:
   discover:
     runs-on: ubuntu-latest
