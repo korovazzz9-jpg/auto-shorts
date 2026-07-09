@@ -26,3 +26,4 @@ comment_agent.log
 # Аватарки каналов нужны IG-карточкам в CI — исключение из общего игнора *.png
 !manual_thumbs/yt_avatar_en.png
 !manual_thumbs/yt_avatar_es.png
+src/tiktok_auth.txt
