@@ -309,7 +309,10 @@ CONFIGS = {
     "pt": {
         "channel_name": "Fatos em 30s",
         "lang_code": "pt",
-        "daily_slots_utc": [(15, 23), (19, 23), (22, 23), (0, 23)],  # бразильские lunch+вечер (UTC-3), минута :23 — не бьётся с EN(:07/:13)/ES(:17)
+        # Бразильские прайм-слоты (UTC-3): 14:23 день / 18:23-22:23 вечерний прайм (главное окно
+        # BR — 7-11pm, смещено позже US/EU, см. ресёрч 2026-07-09). Минута :23 — не бьётся с
+        # EN(:07/:13)/ES(:17). UTC: 17:23=14:23BRT, 21:23=18:23, 23:23=20:23, 01:23=22:23.
+        "daily_slots_utc": [(17, 23), (21, 23), (23, 23), (1, 23)],
         "script_language": "Brazilian Portuguese (natural, conversational, NOT European Portuguese)",
         "voices": [
             "pt-BR-AntonioNeural",

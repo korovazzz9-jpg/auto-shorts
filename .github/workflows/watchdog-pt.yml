@@ -1,14 +1,14 @@
 name: Daily Shorts Watchdog (PT)
 
 on:
-  # 15 минут после каждого слота в daily-pt.yml (15:23/19:23/22:23/00:23 UTC).
+  # 15 минут после каждого слота в daily-pt.yml (17:23/21:23/23:23/01:23 UTC).
   # Зеркало watchdog-es.yml (2026-07-09). Слоты читаются из CFG["daily_slots_utc"]
   # (config.py) — тот же check_recent_upload.py через CHANNEL=pt.
   schedule:
-    - cron: "38 15 * * *"
-    - cron: "38 19 * * *"
-    - cron: "38 22 * * *"
-    - cron: "38 0 * * *"
+    - cron: "38 17 * * *"
+    - cron: "38 21 * * *"
+    - cron: "38 23 * * *"
+    - cron: "38 1 * * *"
   workflow_dispatch: {}
 
 permissions:
