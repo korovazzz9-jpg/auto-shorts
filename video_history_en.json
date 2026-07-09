@@ -13,5 +13,20 @@
     "niche_recreated": null,
     "topical": null,
     "length_seconds": 29.5
+  },
+  {
+    "video_id": "g65EaoRm1dY",
+    "published_at": "2026-07-09T16:20:57.256056+00:00",
+    "title": "The Empire That Paid Soldiers With Salt",
+    "topic": "ancient civilizations",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": true,
+    "length_seconds": 32.5
   }
 ]
