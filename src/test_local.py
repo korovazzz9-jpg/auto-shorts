@@ -17,7 +17,7 @@ from config import CFG, CHANNEL
 from fetch_stock_video import fetch_clips, fetch_satisfying_clips
 from generate_rapid_facts import FACTS_PER_VIDEO, generate_rapid_facts
 from generate_script import generate_script
-from notify import send_video
+from notify import notify, send_video
 from tts import text_to_speech
 
 import tempfile
@@ -115,6 +115,11 @@ print(f"Caption: {caption}")
 # VN TikTok постится вручную с телефона (2026-07-09) — присылаем готовый файл сразу в
 # Telegram, не нужно вручную идти на Desktop/забирать по кабелю на телефон. Только для
 # satisfying-режима (VN) — EN/ES идут через полный pipeline.py на YouTube, тут не нужно.
+# Три ОТДЕЛЬНЫХ сообщения (не общая caption на видео) — по просьбе пользователя: видео
+# без подписи, потом заголовок и теги отдельными сообщениями, чтобы каждое было удобно
+# скопировать по отдельности (общая caption на видео в Telegram неудобно копируется частями).
 if SATISFYING:
-    print("\nОтправляю видео в Telegram...")
-    send_video(os.path.join(OUT_DIR, f"video_{num}.mp4"), caption)
+    print("\nОтправляю видео и текст в Telegram...")
+    send_video(os.path.join(OUT_DIR, f"video_{num}.mp4"))
+    notify(data["title"])
+    notify(" ".join(tiktok_hashtags))
