@@ -604,23 +604,40 @@ def generate_script(on_this_day: bool = False, pair_start: bool = False,
     # Ретрай битого JSON (2026-07-05): в отличие от generate_series.py/generate_longform_script.py
     # (там добавлено раньше после прод-падений), здесь парсинг падал без права на восстановление —
     # один сломанный ответ модели ронял весь слот публикации (реальный случай: 2026-07-05 00:07 UTC).
-    data = None
-    last_err = None
-    for attempt in range(3):
-        message = client.messages.create(
-            model="claude-sonnet-4-6",
-            max_tokens=1600,
-            system=system_prompt,
-            messages=[{"role": "user", "content": user_content}],
-        )
-        try:
-            data = _parse_response(message)
-            break
-        except json.JSONDecodeError as e:
-            last_err = e
-            print(f"  Script JSON parse failed (attempt {attempt + 1}/3): {e}; retrying...")
+    #
+    # on_this_day fallback (2026-07-09): реальный прод-случай — ES 03:17 упал 3/3 попытки с
+    # ПУСТЫМ ответом модели (message.content[0].text == "", не битый JSON, а вообще ничего) на
+    # topical-промпте "On this day". У ES нет watchdog — упавший слот терялся безвозвратно. Если
+    # ВСЕ 3 topical-попытки не распарсились, делаем ЕЩЁ ОДНУ попытку БЕЗ topical override —
+    # честный обычный факт лучше потерянного слота, тот же принцип, что и явная инструкция
+    # модели "if you cannot recall a solid dated fact, write the usual fact" — только на уровне
+    # кода, на случай если сама проблема была в topical-формулировке промпта, а не в факте.
+    def _try_generate(content: str, attempts: int) -> tuple[dict | None, Exception | None]:
+        last_err = None
+        for attempt in range(attempts):
+            message = client.messages.create(
+                model="claude-sonnet-4-6",
+                max_tokens=1600,
+                system=system_prompt,
+                messages=[{"role": "user", "content": content}],
+            )
+            try:
+                return _parse_response(message), None
+            except json.JSONDecodeError as e:
+                last_err = e
+                print(f"  Script JSON parse failed (attempt {attempt + 1}/{attempts}): {e}; retrying...")
+        return None, last_err
+
+    data, last_err = _try_generate(user_content, 3)
+    if data is None and on_this_day:
+        print("  Topical-режим не распарсился 3/3 — пробуем обычную генерацию без даты (fallback).")
+        fallback_content = _build_user_content(topic, avoid_block, title_instruction,
+                                                pair_start=pair_start, pair_resolve_claim=pair_resolve_claim)
+        data, last_err = _try_generate(fallback_content, 2)
+        if data is not None:
+            on_this_day = False  # data["topical"] ниже должен честно отражать, что дата не вошла
     if data is None:
-        raise RuntimeError(f"Script JSON невалиден после 3 попыток: {last_err}")
+        raise RuntimeError(f"Script JSON невалиден после всех попыток: {last_err}")
 
     # Validation gate — only pay for a second call if the output is actually bad.
     problems = _validate(data)
