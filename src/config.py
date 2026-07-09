@@ -111,6 +111,7 @@ CONFIGS = {
         "community_poll_intro": "Have you seen the new deep-dive yet: {title}? 👀\n\nWhich topic should next week's video cover? Vote 👇",
         # Префикс источника факта в описании (source_note из генерации).
         "source_label": "Source:",
+        "chapters_label": "Chapters:",  # заголовок блока глав в описании месячной компиляции
         # Воронка Shorts→лонгформ: фразы перед ссылкой на последний длинный ролик
         # (в описании и закреп-комменте). Тема не важна — продаём формат «глубокий разбор».
         "longform_desc_cta": "Full deep-dives on the channel:",
@@ -250,6 +251,7 @@ CONFIGS = {
         "topical_slot_hour": 3,   # первый ES-слот дня (03:17 UTC) — топикал по четвергам
         "community_poll_intro": "¿Ya viste el nuevo análisis: {title}? 👀\n\n¿Sobre qué tema quieres el video de la próxima semana? Vota 👇",
         "source_label": "Fuente:",
+        "chapters_label": "Capítulos:",
         "longform_desc_cta": "Análisis completos en el canal:",
         "longform_comment_cta": "¿Quieres la historia completa? Mira el análisis 👉",
         "first_comment": "Un momento — ¿tú ya sabías esto? 👇\nSuscríbete para un dato nuevo cada día 👉 {channel_url}",
@@ -367,10 +369,11 @@ CONFIGS = {
             "📌 Um fato novo todo dia — link na bio",
             "🔗 Mais fatos como este — link na bio",
         ],
-        "ig_card_slot_hour": 15,   # первый PT-слот (не используется пока IG выключен)
-        "topical_slot_hour": 15,   # первый PT-слот (15:23 UTC) — топикал по четвергам
+        "ig_card_slot_hour": 17,   # первый PT-слот (не используется пока IG выключен)
+        "topical_slot_hour": 17,   # первый PT-слот (17:23 UTC, поправлено 2026-07-09 под бразильский прайм) — топикал по четвергам
         "community_poll_intro": "Já viu a nova análise: {title}? 👀\n\nSobre qual tema você quer o vídeo da próxima semana? Vote 👇",
         "source_label": "Fonte:",
+        "chapters_label": "Capítulos:",
         "longform_desc_cta": "Análises completas no canal:",
         "longform_comment_cta": "Quer a história completa? Veja a análise 👉",
         "first_comment": "Peraí — você já sabia disso? 👇\nInscreva-se para um fato novo todo dia 👉 {channel_url}",

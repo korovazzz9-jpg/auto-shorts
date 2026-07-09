@@ -158,7 +158,10 @@ def _chapters_block(words: list[dict], boundaries: list[int], titles: list[str])
     """Главы по реальным таймингам TTS. Требования YouTube: 0:00 первая, ≥3 глав, ≥10с между."""
     if not words:
         return ""
-    label = "Chapters:" if CFG["lang_code"] == "en" else "Capítulos:"
+    # 2026-07-09: было бинарным en/else — для PT совпало случайно (по-португальски тоже
+    # "Capítulos"), но конструкция не переживёт следующий язык. per-channel label, как
+    # source_label/остальные локализованные строки.
+    label = CFG.get("chapters_label", "Chapters:")
     entries = [(0.0, "Intro")]
     for wi, title in zip(boundaries, titles):
         t = words[min(wi, len(words) - 1)]["start"]

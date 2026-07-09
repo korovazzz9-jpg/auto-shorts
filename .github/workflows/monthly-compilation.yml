@@ -60,6 +60,22 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python pipeline_compilation.py
 
+      - name: Compile PT
+        if: always()   # сбой EN/ES не должен отменять PT
+        working-directory: src
+        env:
+          CHANNEL: pt
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+          PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
+          NOVITA_KEY: ${{ secrets.NOVITA_KEY }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN_PT }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python pipeline_compilation.py
+
       # set_last_longform обновляет longform_state_*.json — воронка Shorts→лонгформ будет
       # ссылаться на компиляцию, пока не выйдет следующий тематический лонгформ.
       - name: Persist longform state
@@ -67,7 +83,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          for f in longform_state_en.json longform_state_es.json; do
+          for f in longform_state_en.json longform_state_es.json longform_state_pt.json; do
             if [ -f "$f" ]; then git add "$f"; fi
           done
           git commit -m "chore(longform): monthly compilation state $(date -u +%F)" || { echo "no changes"; exit 0; }
