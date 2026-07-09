@@ -3,6 +3,7 @@ import json
 import os
 import random
 
+import requests
 from anthropic import Anthropic
 
 from config import CFG, CHANNEL
@@ -563,6 +564,58 @@ def _append_loop(data: dict) -> None:
     data["has_loop"] = True
 
 
+def _enrich_tags_with_suggestions(tags: list[str]) -> list[str]:
+    """SEO-обогащение тегов (2026-07-09): проверяет первые 3 тега через бесплатный YouTube
+    autocomplete-эндпоинт (suggestqueries.google.com — без ключа, без квоты Data API) и
+    добавляет РЕАЛЬНЫЕ популярные формулировки, которых ещё нет в списке (максимум +3,
+    по одной лучшей на проверяемый тег).
+
+    НЕ трогает хук/заголовок/скрипт — проверено эмпирически: полные заголовки-хуки дают
+    0 совпадений в автокомплите, и это ожидаемо (хук намеренно уникален, скрывает субъект
+    ради интриги — curiosity gap несовместим с keyword-matching по дизайну). Короткие
+    tags-фразы (2-3 слова) — ровно то, для чего этот сигнал полезен.
+
+    Недокументированный эндпоинт Google (не официальный API) — теоретически может
+    измениться без предупреждения. Обвязано в try/except на каждый запрос — сбой/пустой
+    ответ просто пропускается, никогда не роняет генерацию.
+
+    Фильтр релевантности (2026-07-09, после реального теста): автокомплит договаривает по
+    созвучию/популярности, не по смыслу — "octopus dna" дало "octopus oggy" (мультик,
+    вообще не по теме). Принимаем формулировку, только если она содержит ВСЕ значимые
+    слова исходного запроса (не только первое) — иначе автокомплит просто увёл в сторону."""
+    added: list[str] = []
+    existing_lower = {t.lower() for t in tags}
+    # Однословные теги — это generic-якоря промпта ("facts"/"did you know" и т.п.), не
+    # конкретика факта. Проверено эмпирически: автокомплит на них даёт шум ("facts" →
+    # "facts up"), а на 2+ словных long-tail — реальные полезные формулировки.
+    candidates = [t for t in tags if len(t.lstrip("#").split()) >= 2][:3]
+    for tag in candidates:
+        query = tag.lstrip("#").strip()
+        if not query:
+            continue
+        query_words = [w for w in query.lower().split() if len(w) > 2]  # без коротких стоп-слов
+        try:
+            resp = requests.get(
+                "http://suggestqueries.google.com/complete/search",
+                params={"client": "firefox", "ds": "yt", "q": query},
+                timeout=5,
+            )
+            suggestions = resp.json()[1]
+        except Exception:
+            continue
+        for s in suggestions:
+            best = str(s).strip()
+            best_lower = best.lower()
+            if not best or best_lower in existing_lower:
+                continue
+            if query_words and not all(w in best_lower for w in query_words):
+                continue  # автокомплит увёл в сторону — не все слова запроса сохранились
+            added.append(best)
+            existing_lower.add(best_lower)
+            break  # одна лучшая формулировка на тег, не больше
+    return tags + added
+
+
 def generate_script(on_this_day: bool = False, pair_start: bool = False,
                      pair_resolve_claim: str | None = None) -> dict:
     topic = _pick_topic()
@@ -706,6 +759,8 @@ def generate_script(on_this_day: bool = False, pair_start: bool = False,
         data["hook_text"] = data["title"]
     add_title_to_cache(data["title"])
     add_topic_to_cache(topic)
+    if isinstance(data.get("tags"), list):
+        data["tags"] = _enrich_tags_with_suggestions(data["tags"])
     return data
 
 
