@@ -15,7 +15,7 @@ import random
 from anthropic import Anthropic
 
 from config import CFG
-from generate_script import TOPICS_POOL, _parse_response
+from generate_script import TOPICS_POOL, _drop_corrupted, _parse_response
 
 # Чуть больше фактов по желанию; 4 — золотая середина для ~30-40с при быстром темпе.
 FACTS_PER_VIDEO = 4
@@ -127,6 +127,12 @@ def generate_rapid_facts() -> dict:
         print(f"  Rapid-facts JSON parse failed (attempt {attempt + 1}/3): {last_err}; retrying...")
     if data is None:
         raise RuntimeError(f"Rapid-facts JSON невалиден после 3 попыток: {last_err}")
+
+    # Фильтр битых хэштегов/тегов ДО любого дальнейшего использования (см. _drop_corrupted).
+    if isinstance(data.get("hashtags"), list):
+        data["hashtags"] = _drop_corrupted(data["hashtags"])
+    if isinstance(data.get("tags"), list):
+        data["tags"] = _drop_corrupted(data["tags"])
 
     # Совместимость с остальным пайплайном (build_video/test_local ждут эти поля).
     data["topic"] = "random facts"

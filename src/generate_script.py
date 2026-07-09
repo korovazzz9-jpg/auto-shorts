@@ -502,6 +502,17 @@ def _parse_response(message) -> dict:
     return json.loads(raw[start:end + 1])
 
 
+def _drop_corrupted(items: list) -> list:
+    """Фильтрует строки с U+FFFD (2026-07-09: реальный прод-случай на VN-канале — модель
+    отдала битую multi-byte UTF-8 последовательность для вьетнамского слова, "#factbat"
+    превратилось в "#factbat<0xEF><0xBF><0xBD>x3" — редкий, но известный артефакт на границе
+    токенов для языков со сложной диакритикой (VN, потенциально и ES). Не ошибка парсинга —
+    сами байты ответа модели уже битые, json.loads успешно проглатывает как валидный символ.
+    Такой тег/хэштег всё равно бесполезен/может быть отклонён платформой — молча
+    выбрасываем, не роняем генерацию из-за одного плохого элемента среди нескольких."""
+    return [s for s in items if isinstance(s, str) and "�" not in s]
+
+
 def _split_sentences(script: str) -> list[str]:
     import re
     parts = re.split(r"(?<=[.!?])\s+", script.strip())
@@ -760,7 +771,10 @@ def generate_script(on_this_day: bool = False, pair_start: bool = False,
     add_title_to_cache(data["title"])
     add_topic_to_cache(topic)
     if isinstance(data.get("tags"), list):
+        data["tags"] = _drop_corrupted(data["tags"])
         data["tags"] = _enrich_tags_with_suggestions(data["tags"])
+    if isinstance(data.get("hashtags"), list):
+        data["hashtags"] = _drop_corrupted(data["hashtags"])
     return data
 
 
