@@ -270,15 +270,18 @@ SCRIPT_MAX_WORDS = 93  # gate: above this we retry; loop line (~3 words) appende
 # но наш промпт СОЗНАТЕЛЬНО их избегал ("read like a real headline, not a listicle"). Не
 # меняем стратегию вслепую — тегируем title-seo/title-narrative (как hook_template) и
 # сравниваем в weekly_report.py, прежде чем менять соотношение или отказываться от теста.
+# ⚠️ Язык заголовка указан ЯВНО (2026-07-09): базовый промпт говорит «title в {language}»,
+# но детальная суб-инструкция заголовка перебивала контекст, и на новом языке (поймано на PT)
+# модель сваливала ЗАГОЛОВОК в английский, хотя скрипт/хук/хэштеги были на нужном языке.
 TITLE_INSTRUCTION_NARRATIVE = (
-    "title: a punchy narrative hook, under 60 characters. Do NOT append a '| topic facts' "
-    "style keyword suffix — it should read like a real headline, not a listicle."
+    f"title: a punchy narrative hook IN {CFG['script_language']}, under 60 characters. Do NOT "
+    "append a '| topic facts' style keyword suffix — it should read like a real headline, not a listicle."
 )
 TITLE_INSTRUCTION_SEO = (
-    "title: under 60 characters. Name the specific subject plainly (the animal/place/era/"
-    "phenomenon) and include the one concrete keyword a viewer would actually type into "
-    "YouTube search for this fact — but it must still read like a real headline, not a "
-    "listicle or a '| topic facts' keyword-stuffed suffix."
+    f"title: IN {CFG['script_language']}, under 60 characters. Name the specific subject plainly "
+    "(the animal/place/era/phenomenon) and include the one concrete keyword a viewer would actually "
+    f"type into YouTube search for this fact (in {CFG['script_language']}) — but it must still read "
+    "like a real headline, not a listicle or a '| topic facts' keyword-stuffed suffix."
 )
 TITLE_INSTRUCTION = TITLE_INSTRUCTION_NARRATIVE  # обратная совместимость (generate_series.py)
 TITLE_SEO_PROBABILITY = 0.3  # доля видео с keyword-насыщенным заголовком
