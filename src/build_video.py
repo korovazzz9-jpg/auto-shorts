@@ -51,9 +51,16 @@ def _pick_caption_color() -> str:
     return random.choice(CAPTION_COLORS)
 
 
-def _pick_cta_phrase(topic: str | None = None) -> str:
+def _pick_cta_phrase(topic: str | None = None, pair_tease: bool = False) -> str:
     """Topic-aware CTA: если для темы есть слово — персональный призыв
-    («FOLLOW for more OCEAN facts»), иначе генерик-фраза из cta_phrases."""
+    («SUBSCRIBE for more OCEAN facts»), иначе генерик-фраза из cta_phrases.
+    pair_tease (2026-07-10): видео открывает пару (paired_facts, часть A) — вместо
+    генерик-призыва тизер «у факта будет продолжение, подпишись» (pair_cta_phrases):
+    конкретная причина подписаться конвертит сильнее любого «for more»."""
+    if pair_tease:
+        pool = CFG.get("pair_cta_phrases", [])
+        if pool:
+            return random.choice(pool)
     words = CFG.get("topic_cta_words", {})
     template = CFG.get("cta_topic_template")
     if topic and template and topic in words:
@@ -274,7 +281,7 @@ def _draw_cta_badge(path: str, text: str, width: int = 760) -> None:
     img.save(path)
 
 
-def _cta_clips(duration: float, topic: str | None = None) -> list[ImageClip]:
+def _cta_clips(duration: float, topic: str | None = None, pair_tease: bool = False) -> list[ImageClip]:
     cta_duration = min(CTA_DURATION, duration)
     start = max(duration - cta_duration, 0)
     heart_y = int(TARGET_SIZE[1] * 0.24)
@@ -284,7 +291,7 @@ def _cta_clips(duration: float, topic: str | None = None) -> list[ImageClip]:
     badge_png = os.path.join(tmp, "badge.png")
 
     _draw_heart_png(heart_png)  # рендерится в 600px — анимация всегда downscale, без пикселей
-    _draw_cta_badge(badge_png, _pick_cta_phrase(topic), width=700)
+    _draw_cta_badge(badge_png, _pick_cta_phrase(topic, pair_tease), width=700)
 
     BASE = 220  # базовый размер сердца в видео (px)
     # pulse всегда downscale с 600px → 220-251px, пикселей нет
@@ -425,6 +432,7 @@ def build_video(
     total_parts: int = 3,
     title: str | None = None,
     hook_text: str | None = None,
+    pair_tease: bool = False,
     **kwargs,
 ) -> tuple[str, str, str]:
     """Returns (video_path, thumbnail_path, caption_color).
@@ -454,7 +462,7 @@ def build_video(
     background = _build_background(clip_paths, duration, visual_loop=(part is None))
     caption_color = _pick_caption_color()
     caption_clips = _karaoke_clips(words, cutoff=duration, color=caption_color)
-    cta_clips = _cta_clips(duration, topic)
+    cta_clips = _cta_clips(duration, topic, pair_tease)
     part_clips = [_part_label_clip(part, total_parts)] if part else []
     hook_overlay = hook_text or title  # двойной хук: on-screen текст может отличаться от озвучки
     hook_clips = _hook_clips(hook_overlay) if hook_overlay else []

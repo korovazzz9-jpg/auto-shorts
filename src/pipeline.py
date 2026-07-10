@@ -85,7 +85,11 @@ def run() -> None:
         words, voice = text_to_speech(data["script"], audio_path)
 
         print("4/6 Сборка видео...")
-        video_path, thumb_path, caption_color = build_video(audio_path, clip_paths, words, video_path, topic=data["topic"], title=data["title"], hook_text=data.get("hook_text"))
+        # Пара, часть A (2026-07-10): видео реально откроет пару (claim непустой) → финальный
+        # CTA-бейдж заменяется тизером «у факта будет продолжение — подпишись» (см.
+        # pair_cta_phrases в config). Только визуально: озвучка/петля не трогаются.
+        pair_tease = bool(pair_start_mode and str(data.get("pairable_claim", "")).strip())
+        video_path, thumb_path, caption_color = build_video(audio_path, clip_paths, words, video_path, topic=data["topic"], title=data["title"], hook_text=data.get("hook_text"), pair_tease=pair_tease)
 
         print("5/6 Публикация...")
         extra_tags = [

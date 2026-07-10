@@ -51,6 +51,14 @@ CONFIGS = {
         "loop_probability": 0.5,
         # Topic-aware CTA: персональный призыв под тему видео конвертит лучше генерика.
         "cta_topic_template": "SUBSCRIBE for more\n{word} facts",
+        # Пары, часть A (2026-07-10): у факта БУДЕТ продолжение (paired_facts) — бейдж-CTA
+        # в конце заменяется тизером. Единственный момент, где у зрителя есть КОНКРЕТНАЯ
+        # причина подписаться прямо сейчас (не пропустить ответ), а не генерик «for more».
+        "pair_cta_phrases": [
+            "SUBSCRIBE — this fact\nhas a twist coming",
+            "THE FOLLOW-UP DROPS SOON\nSUBSCRIBE to catch it",
+            "THIS FACT HAS A SEQUEL\nSUBSCRIBE to see it",
+        ],
         "topic_cta_words": {
             "the ocean": "OCEAN",
             "the animal kingdom": "ANIMAL",
@@ -215,6 +223,12 @@ CONFIGS = {
         },
         "loop_probability": 0.5,
         "cta_topic_template": "SUSCRÍBETE para más\ndatos de {word}",
+        # Пары, часть A — см. комментарий в EN-конфиге.
+        "pair_cta_phrases": [
+            "SUSCRÍBETE — este dato\ntiene continuación",
+            "ESTE DATO TIENE SECUELA\nSUSCRÍBETE para verla",
+            "EL GIRO VIENE PRONTO\nSUSCRÍBETE para verlo",
+        ],
         "topic_cta_words": {
             "the ocean": "OCÉANO",
             "the animal kingdom": "ANIMALES",
@@ -348,6 +362,12 @@ CONFIGS = {
         },
         "loop_probability": 0.3,
         "cta_topic_template": "INSCREVA-SE para mais\nfatos sobre {word}",
+        # Пары, часть A — см. комментарий в EN-конфиге.
+        "pair_cta_phrases": [
+            "INSCREVA-SE — este fato\ntem continuação",
+            "ESTE FATO TEM SEQUÊNCIA\nINSCREVA-SE para ver",
+            "A REVIRAVOLTA VEM AÍ\nINSCREVA-SE para ver",
+        ],
         "topic_cta_words": {
             "the ocean": "OCEANO",
             "the animal kingdom": "ANIMAIS",
