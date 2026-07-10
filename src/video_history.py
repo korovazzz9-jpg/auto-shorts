@@ -69,6 +69,10 @@ def enrich_with_performance(channel: str, stats_by_id: dict[str, dict]) -> int:
             continue
         entry["views"] = stats.get("views")
         entry["retention_pct"] = stats.get("pct")
+        # Подписки с этого видео (2026-07-10) — для оценки подписного тизера пар и
+        # любых будущих срезов «что реально конвертит зрителя в подписчика».
+        if stats.get("subs") is not None:
+            entry["subs_gained"] = stats.get("subs")
         updated += 1
     if updated:
         _save(channel, history)

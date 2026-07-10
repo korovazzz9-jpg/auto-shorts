@@ -48,6 +48,7 @@ def _videos_with_retention() -> list[dict]:
         r = ret.get(v["id"], {})
         v["pct"] = float(r.get("pct", 0) or 0)
         v["views"] = int(r.get("views", 0) or 0)
+        v["subs"] = int(r.get("subs", 0) or 0)  # subscribersGained — подписки С этого видео
     return videos
 
 
@@ -234,6 +235,23 @@ def build_report(videos: list[dict], spike_die: list[dict] | None = None) -> str
         for name, avg, n in voices:
             lines.append(f"  {avg:5.1f}%  ({n:2})  {name}")
 
+    # Пары (2026-07-10): часть A с этой даты несёт подписной тизер (pair_cta_phrases в
+    # config) — меряем, что он реально даёт: retention + сколько подписок принесли pair-a
+    # видео против остальных. ⚠️ pair-a-видео, вышедшие ДО 2026-07-10, тизера не имели —
+    # первые пару недель сравнение смешанное, честным станет по мере обновления выборки.
+    pair_groups = (("часть A (тизер)", [v for v in videos if v.get("pair") == "a"]),
+                   ("часть B", [v for v in videos if v.get("pair") == "b"]),
+                   ("без пары", [v for v in videos if v.get("pair") == "no"]))
+    if any(g for label, g in pair_groups[:2]):
+        lines.append("\nПары (подписной тизер на A):")
+        for label, group in pair_groups:
+            if not group:
+                continue
+            with_pct = [v["pct"] for v in group if v.get("pct", 0) > 0]
+            avg_pct = sum(with_pct) / len(with_pct) if with_pct else 0.0
+            subs = sum(v.get("subs", 0) for v in group)
+            lines.append(f"  {avg_pct:5.1f}%  ({len(group):2})  {label} — подписок: +{subs}")
+
     # Стилевая калибровка по нише (2026-07-05): видео, чей промпт получал заголовки чужих
     # выбросов (тег niche-styled), против остальных.
     niche = [(k, a, n) for k, a, n in _avg_by(videos, "niche") if k in ("styled", "plain")]
@@ -332,7 +350,8 @@ def main() -> None:
     # Дозаполняем video_history_<channel>.json просмотрами/retention/лайками (2026-07-06) —
     # эти же данные уже получены выше через _videos_with_retention(), лишних вызовов нет.
     try:
-        stats_by_id = {v["id"]: {"views": v.get("views"), "pct": v.get("pct")} for v in videos}
+        stats_by_id = {v["id"]: {"views": v.get("views"), "pct": v.get("pct"),
+                                  "subs": v.get("subs")} for v in videos}
         n = enrich_with_performance(CHANNEL, stats_by_id)
         print(f"  video_history: дозаполнено {n} записей.")
     except Exception as e:

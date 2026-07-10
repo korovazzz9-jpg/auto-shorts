@@ -304,6 +304,8 @@ def publish(
             niche_recreated=data.get("niche_recreated"), topical=data.get("topical"),
             length_seconds=round(words[-1]["end"], 1) if words else None,
             voice=voice, caption_color=caption_color,
+            # Роль в паре (2026-07-10): a = открыла пару (несёт подписной тизер), b = резолюция.
+            pair_role=("a" if "pair-a" in extra_tags else "b" if "pair-b" in extra_tags else None),
         )
     except Exception as e:
         print(f"  (video_history не записан: {e})")
