@@ -25,9 +25,12 @@ CONFIGS = {
         ],
         # Подпись призыва (вариативность) — на языке канала. Генерик-fallback,
         # когда тема не маппится (см. topic_cta_words ниже).
+        # 2026-07-10: "FOLLOW" -> "SUBSCRIBE" — на YouTube нет действия Follow, только Subscribe
+        # (кнопка под видео буквально так называется); FOLLOW — терминология IG/TikTok,
+        # рассинхрон с реальной кнопкой мог резать конверсию просмотр->подписка.
         "cta_phrases": [
-            "LIKE & FOLLOW\nfor more",
-            "FOLLOW for more\nfacts like this",
+            "LIKE & SUBSCRIBE\nfor more",
+            "SUBSCRIBE for more\nfacts like this",
             # Было "DOUBLE TAP if you knew this" — это Instagram-жест, на YouTube (основная
             # площадка) двойного тапа нет. Коммент-CTA работает на обеих платформах и
             # усиливает главный сигнал ранжирования (comment density).
@@ -47,7 +50,7 @@ CONFIGS = {
         # формулой и чтобы было с чем сравнить в analytics_retention.py (тег loop-yes/loop-no).
         "loop_probability": 0.5,
         # Topic-aware CTA: персональный призыв под тему видео конвертит лучше генерика.
-        "cta_topic_template": "FOLLOW for more\n{word} facts",
+        "cta_topic_template": "SUBSCRIBE for more\n{word} facts",
         "topic_cta_words": {
             "the ocean": "OCEAN",
             "the animal kingdom": "ANIMAL",
@@ -66,7 +69,7 @@ CONFIGS = {
         },
         # Инструкция по CTA внутри сценария. Держим КОРОТКОЙ — иначе раздувает длину видео.
         "cta_instruction": (
-            "ONE short CTA, 4-7 words MAX — either \"Follow for more.\" or "
+            "ONE short CTA, 4-7 words MAX — either \"Subscribe for more.\" or "
             "\"Comment if you knew this.\" Pick one, no embellishment, no extra clauses"
         ),
         # Используется ли кросс-постинг в Instagram для этого канала.
@@ -192,9 +195,11 @@ CONFIGS = {
             "es-US-AlonsoNeural",
             "es-CO-GonzaloNeural",
         ],
+        # 2026-07-10: "SÍGUEME" (follow) -> "SUSCRÍBETE" (subscribe) — misma razón que EN,
+        # YouTube no tiene "Follow", el botón real dice "Suscribirse".
         "cta_phrases": [
-            "DALE LIKE Y SÍGUEME\npara más",
-            "SÍGUEME para más\ndatos como este",
+            "DALE LIKE Y SUSCRÍBETE\npara más",
+            "SUSCRÍBETE para más\ndatos como este",
             "DALE LIKE\nsi no lo sabías",
         ],
         "loop_phrases": {
@@ -205,7 +210,7 @@ CONFIGS = {
             "because": ["Y todo porque.", "Y es porque."],
         },
         "loop_probability": 0.5,
-        "cta_topic_template": "SÍGUEME para más\ndatos de {word}",
+        "cta_topic_template": "SUSCRÍBETE para más\ndatos de {word}",
         "topic_cta_words": {
             "the ocean": "OCÉANO",
             "the animal kingdom": "ANIMALES",
@@ -223,7 +228,7 @@ CONFIGS = {
             "future technology": "TECNOLOGÍA",
         },
         "cta_instruction": (
-            "ONE short CTA in Spanish, 4-7 words MAX — either \"Sígueme para más.\" or "
+            "ONE short CTA in Spanish, 4-7 words MAX — either \"Suscríbete para más.\" or "
             "\"Comenta si lo sabías.\" Pick one, no embellishment, no extra clauses"
         ),
         # Instagram ES (2026-07-01): @datosen30s, свой Business-аккаунт/токен (см. daily-es.yml).
@@ -321,9 +326,11 @@ CONFIGS = {
             "pt-BR-FranciscaNeural",
             "pt-BR-ThalitaMultilingualNeural",
         ],
+        # 2026-07-10: "SIGA" (follow) -> "INSCREVA-SE" (subscribe) — mesmo motivo do EN/ES,
+        # no YouTube não existe "Follow", o botão real diz "Inscrever-se".
         "cta_phrases": [
-            "CURTA E SIGA\npara mais",
-            "SIGA para mais\nfatos como este",
+            "CURTA E INSCREVA-SE\npara mais",
+            "INSCREVA-SE para mais\nfatos como este",
             "CURTA\nse não sabia",
         ],
         "loop_phrases": {
@@ -334,7 +341,7 @@ CONFIGS = {
             "because": ["E tudo por causa disso.", "E é porque."],
         },
         "loop_probability": 0.3,
-        "cta_topic_template": "SIGA para mais\nfatos sobre {word}",
+        "cta_topic_template": "INSCREVA-SE para mais\nfatos sobre {word}",
         "topic_cta_words": {
             "the ocean": "OCEANO",
             "the animal kingdom": "ANIMAIS",
@@ -352,7 +359,7 @@ CONFIGS = {
             "future technology": "TECNOLOGIA",
         },
         "cta_instruction": (
-            "ONE short CTA in Brazilian Portuguese, 4-7 words MAX — either \"Siga para mais.\" or "
+            "ONE short CTA in Brazilian Portuguese, 4-7 words MAX — either \"Inscreva-se para mais.\" or "
             "\"Comenta se você já sabia.\" Pick one, no embellishment, no extra clauses"
         ),
         "post_to_instagram": False,   # нет PT IG-аккаунта — включить после создания
