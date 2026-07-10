@@ -32,6 +32,8 @@ from generate_script import (
     TITLE_OPENERS,
     _append_loop,
     _build_user_content,
+    _drop_corrupted,
+    _enrich_tags_with_suggestions,
     _niche_titles_for,
     _parse_response,
     _pick_topic,
@@ -230,6 +232,14 @@ def main() -> None:
             data["niche_styled"] = bool(_niche_titles_for(topic))  # тег niche-styled (pipeline.py)
             data["title_variant"] = title_variants[i][1]
             data["hashtag_position"] = "end"
+            # Та же пост-обработка тегов, что в live-пути generate_script (2026-07-10, фикс
+            # с ревью): фильтр битых U+FFFD-строк + SEO-обогащение через YouTube autocomplete.
+            # Раньше применялась только к live-генерации, а большинство публикаций идёт
+            # через эту очередь — реальный прод-фикс (VN-артефакт) очередь не покрывал.
+            if isinstance(data.get("tags"), list):
+                data["tags"] = _enrich_tags_with_suggestions(_drop_corrupted(data["tags"]))
+            if isinstance(data.get("hashtags"), list):
+                data["hashtags"] = _drop_corrupted(data["hashtags"])
 
             dupe_of = next((q for q in queue if _is_duplicate(data, q)), None)
             if dupe_of:

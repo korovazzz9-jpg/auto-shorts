@@ -29,6 +29,8 @@ from generate_script import (
     TITLE_OPENERS,
     _append_loop,
     _build_user_content,
+    _drop_corrupted,
+    _enrich_tags_with_suggestions,
     _niche_titles_for,
     _parse_response,
     _validate,
@@ -160,6 +162,11 @@ def main() -> None:
     data["niche_styled"] = bool(_niche_titles_for(target["topic"]))  # промпт получал niche-титулы
     data["niche_recreated"] = True          # тег niche-recreation (pipeline.py)
     data["recreated_from_niche"] = target["video_id"]  # маркер происхождения в queue-файле
+    # Пост-обработка тегов как в live-пути (2026-07-10): U+FFFD-фильтр + автокомплит.
+    if isinstance(data.get("tags"), list):
+        data["tags"] = _enrich_tags_with_suggestions(_drop_corrupted(data["tags"]))
+    if isinstance(data.get("hashtags"), list):
+        data["hashtags"] = _drop_corrupted(data["hashtags"])
 
     # Дедуп ПОСЛЕ генерации — полной сигнатурой сгенерированного скрипта.
     sig = _signature(data)

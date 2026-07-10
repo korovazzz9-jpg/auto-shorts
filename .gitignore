@@ -15,8 +15,10 @@ assets/backgrounds/*
 !assets/backgrounds/.gitkeep
 # Фоновая музыка и шрифты нужны в CI — исключаем из общего игнора *.mp3
 !assets/music/*.mp3
-src/titles_cache.json
-src/topics_cache.json
+# titles/topics-кэши: legacy-имя без суффикса + канальные (titles_cache_en.json и т.д.,
+# см. recent_titles.py 2026-07-10) — живут в actions/cache, не в git.
+src/titles_cache*.json
+src/topics_cache*.json
 # series_state_*.json НЕ игнорируем — коммитится в Part 1, читается в Part 2/3 через checkout
 src/vision_cache.json
 # comment_agent.py теперь запускается локально (Планировщик Windows), не в GitHub Actions —

@@ -539,6 +539,16 @@ def _validate(data: dict) -> list[str]:
             f"Cut it to 70-88 words while keeping the hook, the core fact, the comment bait "
             f"and the CTA as the last sentence. Tighten the middle."
         )
+    # Нижняя граница (2026-07-10, фикс с ревью): SCRIPT_MIN_WORDS раньше нигде не проверялся —
+    # слишком короткий скрипт (<~25с озвучки) проходил валидацию, затем впустую гонял 3 ретрая
+    # TTS (эвристика TTS_MIN_DURATION в tts.py не отличает «короткий текст» от «оборванного
+    # стрима») и публиковался как есть.
+    if word_count < SCRIPT_MIN_WORDS:
+        problems.append(
+            f"The script is only {word_count} words — too short (target 70-88 words, ~28-35s). "
+            f"Expand it to 70-88 words: add one concrete detail or a short re-hook, keeping the "
+            f"hook first and the comment bait as the last sentence."
+        )
 
     connectors = [c.lower() for c in data.get("loop_connectors", []) if isinstance(c, str)]
     if not any(c in _LOOP_END_WORDS for c in connectors):

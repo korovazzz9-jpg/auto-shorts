@@ -253,7 +253,15 @@ def fetch_clips(queries: list[str], out_dir: str, landscape: bool = False) -> li
     paths = []
     used_ids: set = set()
     for i, query in enumerate(queries):
-        file_info = _search_with_fallback(query, used_ids)
+        # Поиск изолирован так же, как скачивание ниже (2026-07-10, фикс с ревью): раньше
+        # транзиентный 429/5xx от Pexels/Pixabay (raise_for_status в _search_*) пролетал
+        # наверх и ронял ВЕСЬ слот публикации из-за одного неудачного запроса. Пустой
+        # итоговый список по-прежнему ловит guard в build_video/_build_background.
+        try:
+            file_info = _search_with_fallback(query, used_ids)
+        except Exception as e:
+            print(f"  (поиск стока для '{query}' упал: {e}, пропускаем запрос)")
+            continue
         if not file_info:
             print(f"  (no clip found for '{query}', skipping)")
             continue

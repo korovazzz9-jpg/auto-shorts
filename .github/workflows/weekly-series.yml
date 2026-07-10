@@ -26,8 +26,8 @@ jobs:
         uses: actions/cache@v4
         with:
           path: |
-            src/titles_cache.json
-            src/topics_cache.json
+            src/titles_cache_en.json
+            src/topics_cache_en.json
             src/vision_cache.json
           key: titles-cache-en-${{ github.run_id }}
           restore-keys: titles-cache-en

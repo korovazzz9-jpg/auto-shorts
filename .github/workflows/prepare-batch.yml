@@ -30,14 +30,34 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Restore titles cache
+      # Кэш титулов/тем — ПО-КАНАЛЬНО (2026-07-10, фикс с ревью): раньше один общий файл
+      # под EN-ключом делили все три шага (EN/ES/PT) — темы/заголовки каналов перемешивались
+      # (см. recent_titles.py, канальный суффикс). Три cache-step'а в одном job: каждый
+      # сохраняет свой файл под своим ключом, и его же восстанавливают daily-воркфлоу.
+      - name: Restore titles cache (EN)
         uses: actions/cache@v4
         with:
           path: |
-            src/titles_cache.json
-            src/topics_cache.json
+            src/titles_cache_en.json
+            src/topics_cache_en.json
           key: titles-cache-en-${{ github.run_id }}
           restore-keys: titles-cache-en
+      - name: Restore titles cache (ES)
+        uses: actions/cache@v4
+        with:
+          path: |
+            src/titles_cache_es.json
+            src/topics_cache_es.json
+          key: titles-cache-es-${{ github.run_id }}
+          restore-keys: titles-cache-es
+      - name: Restore titles cache (PT)
+        uses: actions/cache@v4
+        with:
+          path: |
+            src/titles_cache_pt.json
+            src/topics_cache_pt.json
+          key: titles-cache-pt-${{ github.run_id }}
+          restore-keys: titles-cache-pt
 
       - uses: actions/setup-python@v5
         with:

@@ -18,7 +18,11 @@ from anthropic import Anthropic
 from config import CFG
 from youtube_auth import get_client
 
-_LANG_NAMES = {"en": "English", "es": "Spanish (neutral Latin American)"}
+_LANG_NAMES = {
+    "en": "English",
+    "es": "Spanish (neutral Latin American)",
+    "pt": "Brazilian Portuguese",  # 2026-07-10: добавлен с запуском PT-канала
+}
 
 
 def _translate(title: str, description: str, target_lang: str) -> tuple[str, str]:

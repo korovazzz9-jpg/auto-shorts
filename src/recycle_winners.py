@@ -41,6 +41,8 @@ from generate_script import (
     TITLE_OPENERS,
     _append_loop,
     _build_user_content,
+    _drop_corrupted,
+    _enrich_tags_with_suggestions,
     _parse_response,
     _validate,
     pick_title_variant,
@@ -260,6 +262,11 @@ def main() -> None:
             data["title_variant"] = title_variants[i]
             data["hashtag_position"] = "end"
             data["recycled_from"] = w["id"]  # маркер происхождения (виден в queue-файле)
+            # Пост-обработка тегов как в live-пути (2026-07-10): U+FFFD-фильтр + автокомплит.
+            if isinstance(data.get("tags"), list):
+                data["tags"] = _enrich_tags_with_suggestions(_drop_corrupted(data["tags"]))
+            if isinstance(data.get("hashtags"), list):
+                data["hashtags"] = _drop_corrupted(data["hashtags"])
 
             if any(_is_duplicate(data, q) for q in queue):
                 print(f"  recycle-{i}: дубль с очередью после генерации — пропускаем.")

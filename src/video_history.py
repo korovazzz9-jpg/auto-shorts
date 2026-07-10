@@ -61,7 +61,11 @@ def enrich_with_performance(channel: str, stats_by_id: dict[str, dict]) -> int:
         if entry.get("views") is not None:
             continue
         stats = stats_by_id.get(entry["video_id"])
-        if not stats:
+        # Нулевые значения НЕ пишем (2026-07-10, найдено на ревью): у видео младше ~48ч
+        # Analytics ещё не отдал данные — weekly_report присылает views=0/pct=0, и правило
+        # «не трогать заполненные» выше навсегда блокировало бы честное дозаполнение.
+        # Пропускаем — запись дозаполнится следующим отчётом, когда появятся реальные числа.
+        if not stats or not stats.get("views"):
             continue
         entry["views"] = stats.get("views")
         entry["retention_pct"] = stats.get("pct")
