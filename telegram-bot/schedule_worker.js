@@ -8,8 +8,11 @@
 // 2026-07-08: актуализировано под daily.yml/daily-es.yml — EN 5→4 слота (2026-07-01,
 // перелив на ES) + 22:13→23:07 (2026-07-05, US prime time); ES 3→4 слота (2026-07-01)
 // + 13:17→03:17 (2026-07-07, мексиканский вечерний прайм).
+// 2026-07-09: добавлен PT (daily-pt.yml, cron-job.org), слоты 17:23/21:23/23:23/01:23 UTC
+// (см. config.py daily_slots_utc).
 const EN_SLOTS = [[16, 13], [20, 7], [23, 7], [0, 7]];
 const ES_SLOTS = [[16, 17], [20, 17], [0, 17], [3, 17]];
+const PT_SLOTS = [[17, 23], [21, 23], [23, 23], [1, 23]];
 const TRIGGERS = ["расписание", "/расписание", "schedule", "/schedule", "/start"];
 
 const pad = (n) => String(n).padStart(2, "0");
@@ -22,7 +25,7 @@ function conv(h, m) {
 function buildSchedule() {
   const now = new Date();
   const nowMin = now.getUTCHours() * 60 + now.getUTCMinutes();
-  const all = [...new Set([...EN_SLOTS, ...ES_SLOTS].map(([h, m]) => h * 60 + m))].sort((a, b) => a - b);
+  const all = [...new Set([...EN_SLOTS, ...ES_SLOTS, ...PT_SLOTS].map(([h, m]) => h * 60 + m))].sort((a, b) => a - b);
 
   let next = all.find((s) => s > nowMin);
   let delta;
@@ -35,6 +38,8 @@ function buildSchedule() {
   for (const [h, m] of EN_SLOTS) { const [vn, msk] = conv(h, m); lines.push(`• ${vn} · ${msk}`); }
   lines.push("", "ES — 4/день:");
   for (const [h, m] of ES_SLOTS) { const [vn, msk] = conv(h, m); lines.push(`• ${vn} · ${msk}`); }
+  lines.push("", "PT — 4/день:");
+  for (const [h, m] of PT_SLOTS) { const [vn, msk] = conv(h, m); lines.push(`• ${vn} · ${msk}`); }
   lines.push("", `⏭ Следующий через ${dh}ч ${pad(dm)}м (в ${nvn} ВН · ${nmsk} МСК)`);
   lines.push("", "ℹ️ Пн–Ср последний слот — серии (Part 1/2/3).", "Вс ~06:00 ВН / 02:00 МСК — лонгформ.");
   return lines.join("\n");
