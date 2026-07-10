@@ -81,6 +81,9 @@ jobs:
           # секрет с суффиксом _ES маппится в стандартное имя, которое читает upload_instagram.py.
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN_ES }}
           IG_USER_ID: ${{ secrets.IG_USER_ID_ES }}
+          # FB Reels (2026-07-10) — активируется, когда post_to_facebook=True в config + секреты заданы.
+          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID_ES }}
+          FB_PAGE_ACCESS_TOKEN: ${{ secrets.FB_PAGE_ACCESS_TOKEN_ES }}
           CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
           CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
           CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}

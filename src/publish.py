@@ -14,6 +14,7 @@ from config import CFG, CHANNEL
 from notify import notify
 from post_comment import post_channel_comment, post_comment_reply
 from upload_captions import upload_captions
+from upload_facebook import upload_reel as upload_fb_reel
 from upload_instagram import upload_photo, upload_reel, upload_story
 from upload_pinterest import upload_pin
 from upload_tiktok import upload_video as upload_to_tiktok, wait_for_publish
@@ -155,7 +156,7 @@ def publish(
         except Exception as e:
             alert("captions", e)
 
-    need_cloudinary = CFG["post_to_instagram"] or CFG.get("post_to_tiktok")
+    need_cloudinary = CFG["post_to_instagram"] or CFG.get("post_to_facebook") or CFG.get("post_to_tiktok")
     if need_cloudinary:
         print("Загрузка в облако (Cloudinary) и публикация...")
         hosted = None
@@ -244,6 +245,23 @@ def publish(
                                 delete_image(hosted_card["public_id"])
                             except Exception as e:
                                 print(f"  Не удалось удалить карточку из Cloudinary: {e}")
+
+            # Facebook Reels (2026-07-10): тот же готовый ролик из уже залитого Cloudinary-URL —
+            # доп. заливки/затрат нет. Свой Page-токен (FB_PAGE_ACCESS_TOKEN). Сбой FB не роняет
+            # остальной кросс-постинг (alert + continue), как и у IG/TikTok.
+            if CFG.get("post_to_facebook"):
+                try:
+                    fb_ctas = CFG.get("ig_caption_ctas", [])
+                    fb_cta = random.choice(fb_ctas) if fb_ctas else ""
+                    fb_caption = f"{data['title']}\n\n{data['script']}"
+                    if fb_cta:
+                        fb_caption += f"\n\n{fb_cta}"
+                    if data.get("hashtags"):
+                        fb_caption += f"\n\n{' '.join(data['hashtags'])}"
+                    upload_fb_reel(hosted["url"], fb_caption)
+                    print("  Facebook: опубликовано")
+                except Exception as e:
+                    alert("Facebook", e)
 
             if CFG.get("post_to_tiktok"):
                 try:

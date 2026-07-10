@@ -74,6 +74,10 @@ CONFIGS = {
         ),
         # Используется ли кросс-постинг в Instagram для этого канала.
         "post_to_instagram": True,
+        # FB Reels (2026-07-10): тот же готовый ролик на страницу Facebook. Постинг бесплатен,
+        # переиспользует уже залитый в Cloudinary URL. Включить True после создания FB-страницы
+        # и добавления секретов FB_PAGE_ID / FB_PAGE_ACCESS_TOKEN (Page-токен, pages_manage_posts).
+        "post_to_facebook": False,
         "post_to_tiktok": False,  # ожидает одобрения TikTok Dev App + токена — вернуть True после
         "post_to_pinterest": False,  # ожидает одобрения Pinterest Dev App — вернуть True после
         "post_to_threads": False,  # ожидает Threads-токен (THREADS_ACCESS_TOKEN/USER_ID, см. upload_threads.py)
@@ -233,6 +237,8 @@ CONFIGS = {
         ),
         # Instagram ES (2026-07-01): @datosen30s, свой Business-аккаунт/токен (см. daily-es.yml).
         "post_to_instagram": True,
+        # FB Reels: включить True после FB-страницы ES + секретов FB_PAGE_ID/FB_PAGE_ACCESS_TOKEN.
+        "post_to_facebook": False,
         "post_to_tiktok": False,
         "post_to_pinterest": False,
         "post_to_threads": False,  # ожидает Threads-токен (см. upload_threads.py)
@@ -363,6 +369,7 @@ CONFIGS = {
             "\"Comenta se você já sabia.\" Pick one, no embellishment, no extra clauses"
         ),
         "post_to_instagram": False,   # нет PT IG-аккаунта — включить после создания
+        "post_to_facebook": False,    # нет PT FB-страницы — включить после создания
         "post_to_tiktok": False,
         "post_to_pinterest": False,
         "post_to_threads": False,
@@ -468,6 +475,7 @@ CONFIGS = {
             "\"Bình luận nếu bạn đã biết.\" Pick one, no embellishment, no extra clauses"
         ),
         "post_to_instagram": False,
+        "post_to_facebook": False,
         "post_to_tiktok": False,
         "post_to_pinterest": False,
         # VN TikTok-формат: random-facts (3-4 коротких факта) поверх залипательного фона,
