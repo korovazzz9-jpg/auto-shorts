@@ -1,50 +1,5 @@
 [
   {
-    "title": "O chip que vai substituir sua senha por seu cérebro",
-    "title_opener": "the-x",
-    "hook_text": "Sua memória vira senha",
-    "hook_template": "sounds-fake",
-    "emotional_tone": "impossible",
-    "script": "Seu próprio pensamento já pode desbloquear um dispositivo — e ninguém precisaria roubar nada de você. Interfaces neurais como o BrainGate, desenvolvidas desde 2004, leem padrões elétricos únicos do seu cérebro em milissegundos. Cada pessoa pensa de forma diferente — então o sinal do seu cérebro ao imaginar uma palavra é impossível de copiar. Mas aqui vem o problema: quem controla os servidores que guardam esses padrões, controla sua identidade inteira. Manda isso pra alguém que acha que senha forte é proteção suficiente. É desse jeito.",
-    "word_count": 85,
-    "search_summary": "Interfaces neurais como BrainGate leem padrões elétricos únicos do cérebro para autenticação digital impossível de copiar.",
-    "comment_question": "Você confiaria sua senha mental a uma empresa privada? 🧠",
-    "source_note": "BrainGate Consortium, Massachusetts General Hospital, 2004",
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "tecnologia do futuro",
-      "interface neural",
-      "BrainGate",
-      "chip cerebral",
-      "segurança digital",
-      "fatos curiosos tecnologia",
-      "autenticação cerebral",
-      "inteligência artificial corpo humano"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#tecnologia",
-      "#chipcerebral",
-      "#interfaceneural",
-      "#fatoschocantes"
-    ],
-    "video_queries": [
-      "person unlocking device futuristic",
-      "brain scan neural activity lab",
-      "scientist monitoring brain waves",
-      "server room data center glowing",
-      "person looking worried at screen"
-    ],
-    "has_loop": true,
-    "topic": "future technology",
-    "niche_styled": false,
-    "title_variant": "seo",
-    "hashtag_position": "end"
-  },
-  {
     "title": "Seu cérebro inventa metade do que você vê",
     "title_opener": "your-x",
     "hook_text": "Seus olhos mentem pra você",
