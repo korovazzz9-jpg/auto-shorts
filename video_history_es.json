@@ -13,5 +13,20 @@
     "niche_recreated": null,
     "topical": false,
     "length_seconds": 30.0
+  },
+  {
+    "video_id": "tQgF28-ApFE",
+    "published_at": "2026-07-10T03:23:02.348485+00:00",
+    "title": "El fondo del mar hace crecer metal solo",
+    "topic": "the ocean",
+    "hook_template": "sounds-fake",
+    "title_opener": "shouldnt-exist",
+    "emotional_tone": "awe",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": null,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 27.6
   }
 ]
