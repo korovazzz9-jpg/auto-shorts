@@ -327,5 +327,103 @@
     "niche_styled": false,
     "title_variant": "narrative",
     "hashtag_position": "end"
+  },
+  {
+    "title": "A cidade inteira que foi enterrada de propósito",
+    "title_opener": "other",
+    "hook_text": "Eles esconderam uma cidade viva",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "impossible",
+    "script": "Uma cidade inteira foi soterrada propositalmente — e ficou oculta por dois mil anos sem ninguém procurar. Çatalhöyük, na Turquia, abrigou até dez mil pessoas por volta de 7500 a.C. Mas aqui está o detalhe impossível: não havia ruas, nem portas. As pessoas entravam pelas casas pelo teto e caminhavam sobre os telhados dos vizinhos. E o mais perturbador — elas enterravam os mortos diretamente sob o chão da própria sala. Metade de vocês vai achar que isso é invenção.",
+    "word_count": 84,
+    "search_summary": "Çatalhöyük era uma cidade neolítica na Turquia onde as pessoas viviam sem ruas e enterravam mortos dentro de casa.",
+    "comment_question": "Você conseguiria dormir sabendo que tem um esqueleto embaixo da sua sala? 💀",
+    "source_note": "Escavações de James Mellaart, 1958; projeto contínuo Universidade de Stanford",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "arqueologia",
+      "descobertas arqueológicas",
+      "fatos curiosos",
+      "história antiga",
+      "Çatalhöyük",
+      "cidade neolítica",
+      "civilizações antigas",
+      "fatos em 30 segundos",
+      "mistérios da história",
+      "descobertas arqueológicas bíblicas",
+      "fatos curiosos do mundo",
+      "história antiga enem"
+    ],
+    "hashtags": [
+      "#shorts",
+      "arqueologia",
+      "#historiaantiga",
+      "#descobertas",
+      "#fatoscuriosos"
+    ],
+    "video_queries": [
+      "ancient ruins excavation Turkey",
+      "archaeologist digging ancient site",
+      "rooftop ancient settlement aerial view",
+      "underground burial ancient civilization",
+      "neolithic village reconstruction"
+    ],
+    "has_loop": false,
+    "topic": "archaeological discoveries",
+    "niche_styled": false,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "O naufrágio que esconde mais ouro que o Titanic",
+    "title_opener": "the-x",
+    "hook_text": "Isso afundou com mais ouro que o Titanic",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "awe",
+    "script": "Um navio afundou carregando uma fortuna que nenhum governo consegue recuperar — e todo mundo conhece o nome errado. O San José, afundado em 1708 pela Marinha britânica perto de Cartagena, na Colômbia, carrega estimados 17 bilhões de dólares em ouro, prata e esmeraldas. Mas aqui está o problema: três países — Colômbia, Espanha e a tribo indígena Qhara Qhara — reclamam o tesouro. Então o navio apodreceu no fundo do mar por mais de 300 anos sem ninguém poder tocar. Manda isso pra quem acha que achar tesouro é fácil.",
+    "word_count": 88,
+    "search_summary": "Naufrágio San José de 1708 carrega 17 bilhões em ouro perto de Cartagena, Colômbia, disputado por três países.",
+    "comment_question": "Colômbia, Espanha ou os indígenas — quem você acha que deveria ficar com o tesouro? 👇",
+    "source_note": "UNESCO e governo da Colômbia, 2015",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "naufrágio",
+      "tesouro perdido",
+      "San José naufrágio",
+      "ouro no fundo do mar",
+      "fatos curiosos",
+      "tesouros históricos",
+      "Cartagena Colômbia tesouro",
+      "navio afundado tesouro bilhões",
+      "tesouro perdido dalvin la melodia",
+      "a barra de ouro mais rara encontrada no fundo do mar"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#fatosinusitados",
+      "#tesouропerdido",
+      "#naufrágios",
+      "#históriamundial"
+    ],
+    "video_queries": [
+      "deep ocean shipwreck underwater",
+      "colonial era sailing ship ocean",
+      "underwater treasure dive exploration",
+      "gold coins ancient artifacts museum",
+      "Colombia Cartagena coastline aerial",
+      "legal dispute courtroom gavel",
+      "ocean floor dark deep sea"
+    ],
+    "has_loop": false,
+    "topic": "shipwrecks and lost treasures",
+    "niche_styled": false,
+    "title_variant": "seo",
+    "hashtag_position": "end"
   }
 ]
