@@ -35,8 +35,9 @@ async def _synthesize(text: str, out_path: str, voice: str) -> list[dict]:
     return words
 
 
-def text_to_speech(text: str, out_path: str) -> list[dict]:
-    """Synthesizes speech to out_path, returns per-word timing: [{"text", "start", "end"}, ...]."""
+def text_to_speech(text: str, out_path: str) -> tuple[list[dict], str]:
+    """Synthesizes speech to out_path, returns (per-word timing, voice used) —
+    voice нужен вызывающему для тега в аналитику (2026-07-10, см. weekly_report.py)."""
     voice = _pick_voice()
     words: list[dict] = []
     last_err: Exception | None = None
@@ -53,13 +54,13 @@ def text_to_speech(text: str, out_path: str) -> list[dict]:
             continue
         duration = words[-1]["end"] if words else 0
         if duration >= TTS_MIN_DURATION:
-            return words
+            return words, voice
         print(f"  TTS attempt {attempt}: audio too short ({duration:.1f}s < {TTS_MIN_DURATION}s), retrying...")
     if not words and last_err is not None:
         raise last_err
     # Последняя попытка — возвращаем что есть (в т.ч. пусто, если ловили только
     # короткое-аудио случаи), pipeline дальше разберётся.
-    return words
+    return words, voice
 
 
 if __name__ == "__main__":

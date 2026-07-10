@@ -33,6 +33,8 @@ def publish(
     extra_comment: str = "",
     enable_captions: bool = False,
     enable_pinterest: bool = False,
+    voice: str | None = None,
+    caption_color: str | None = None,
 ) -> str:
     """Заливает видео на YouTube и кросс-постит. Возвращает video_id.
 
@@ -283,6 +285,7 @@ def publish(
             has_loop=data.get("has_loop"), niche_styled=data.get("niche_styled"),
             niche_recreated=data.get("niche_recreated"), topical=data.get("topical"),
             length_seconds=round(words[-1]["end"], 1) if words else None,
+            voice=voice, caption_color=caption_color,
         )
     except Exception as e:
         print(f"  (video_history не записан: {e})")

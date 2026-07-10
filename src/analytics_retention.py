@@ -30,6 +30,8 @@ HOOK_TAG_RE = re.compile(r"^hook-(.+)$")
 TITLE_VARIANT_TAG_RE = re.compile(r"^title-(seo|narrative)$")  # A/B заголовков, см. generate_script.py
 OPENER_TAG_RE = re.compile(r"^opener-(.+)$")  # ротация заголовков, см. TITLE_OPENERS
 TONE_TAG_RE = re.compile(r"^tone-(.+)$")      # эмоциональный тон, см. EMOTIONAL_TONES
+COLOR_TAG_RE = re.compile(r"^color-(.+)$")    # цвет субтитров, см. CAPTION_COLORS в build_video.py
+VOICE_TAG_RE = re.compile(r"^voice-(.+)$")    # TTS-голос, см. voices в config.py
 NICHE_STYLED_TAG = "niche-styled"             # промпт получал заголовки чужих выбросов по теме
 TOPICAL_TAG = "topical-onthisday"             # факт с привязкой к дате публикации
 MAX_VIDEOS = 50  # сколько последних видео анализировать
@@ -82,6 +84,8 @@ def _recent_videos(youtube) -> list[dict]:
             title_variant = None
             opener = None
             tone = None
+            color = None
+            voice = None
             niche = "plain"
             topical = "no"
             for tag in v["snippet"].get("tags", []):
@@ -107,6 +111,12 @@ def _recent_videos(youtube) -> list[dict]:
                 mtone = TONE_TAG_RE.match(tag)
                 if mtone:
                     tone = mtone.group(1)
+                mcolor = COLOR_TAG_RE.match(tag)
+                if mcolor:
+                    color = mcolor.group(1)
+                mvoice = VOICE_TAG_RE.match(tag)
+                if mvoice:
+                    voice = mvoice.group(1)
             videos.append({
                 "id": v["id"],
                 "title": v["snippet"]["title"],
@@ -119,6 +129,8 @@ def _recent_videos(youtube) -> list[dict]:
                 "title_variant": title_variant or "—",
                 "title_opener": opener or "—",
                 "emotional_tone": tone or "—",
+                "caption_color": color or "—",
+                "voice": voice or "—",
                 "niche": niche,
                 "topical": topical,
             })

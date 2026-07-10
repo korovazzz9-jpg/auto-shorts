@@ -82,10 +82,10 @@ def run() -> None:
         clip_paths = fetch_clips(data["video_queries"], tmp)
 
         print("3/6 Озвучка...")
-        words = text_to_speech(data["script"], audio_path)
+        words, voice = text_to_speech(data["script"], audio_path)
 
         print("4/6 Сборка видео...")
-        video_path, thumb_path = build_video(audio_path, clip_paths, words, video_path, topic=data["topic"], title=data["title"], hook_text=data.get("hook_text"))
+        video_path, thumb_path, caption_color = build_video(audio_path, clip_paths, words, video_path, topic=data["topic"], title=data["title"], hook_text=data.get("hook_text"))
 
         print("5/6 Публикация...")
         extra_tags = [
@@ -95,6 +95,8 @@ def run() -> None:
             f"title-{data.get('title_variant', 'narrative')}",
             f"opener-{data.get('title_opener', 'other')}",
             f"tone-{data.get('emotional_tone', 'other')}",
+            f"color-{caption_color}",
+            f"voice-{voice}",
         ]
         if data.get("topical"):
             extra_tags.append("topical-onthisday")
@@ -132,6 +134,8 @@ def run() -> None:
             alert=_alert,
             extra_tags=extra_tags,
             extra_comment=pair_extra_comment,
+            voice=voice,
+            caption_color=caption_color,
             # 2026-07-04: одна дорожка (язык канала) — 550 ед/видео, влезает даже в Вс
             # с двумя лонгформами. Вс-пропуск снят вместе с удалением переводных дорожек.
             enable_captions=True,

@@ -88,8 +88,8 @@ def main() -> None:
         clip_paths = fetch_clips(data["video_queries"], tmp)
 
         print("3/4 Озвучка и сборка видео...")
-        words = text_to_speech(data["script"], audio_path)
-        video_path, _ = build_video(audio_path, clip_paths, words, video_path)
+        words, _voice = text_to_speech(data["script"], audio_path)
+        video_path, _thumb, _color = build_video(audio_path, clip_paths, words, video_path)
 
         print("4/4 Загрузка на YouTube...")
         video_id = upload_video(

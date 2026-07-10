@@ -63,7 +63,8 @@ def _longform_tts(script: str, audio_path: str) -> list:
             except Exception as e:
                 print(f"  novita TTS упал, фолбэк на edge-tts: {e}")
                 notify(f"⚠️ [{CFG['channel_name']}] лонгформ: novita TTS упал, edge-tts фолбэк:\n{e}")
-    return text_to_speech(script, audio_path)
+    words, _voice = text_to_speech(script, audio_path)
+    return words
 
 
 def _verify_channel() -> None:

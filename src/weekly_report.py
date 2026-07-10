@@ -219,6 +219,21 @@ def build_report(videos: list[dict], spike_die: list[dict] | None = None) -> str
         for name, avg, n in tones[:6]:
             lines.append(f"  {avg:5.1f}%  ({n:2})  {name}")
 
+    # Цвет субтитров (2026-07-10, см. CAPTION_COLORS в build_video.py) — независимая от
+    # контента ось оформления, ротируется случайно ради вариативности между видео.
+    colors = [(k, a, n) for k, a, n in _avg_by(videos, "caption_color") if k != "—"]
+    if colors:
+        lines.append("\nЦвет субтитров:")
+        for name, avg, n in colors:
+            lines.append(f"  {avg:5.1f}%  ({n:2})  {name}")
+
+    # TTS-голос (2026-07-10, см. voices в config.py) — ротируется случайно между видео.
+    voices = [(k, a, n) for k, a, n in _avg_by(videos, "voice") if k != "—"]
+    if voices:
+        lines.append("\nГолос озвучки:")
+        for name, avg, n in voices:
+            lines.append(f"  {avg:5.1f}%  ({n:2})  {name}")
+
     # Стилевая калибровка по нише (2026-07-05): видео, чей промпт получал заголовки чужих
     # выбросов (тег niche-styled), против остальных.
     niche = [(k, a, n) for k, a, n in _avg_by(videos, "niche") if k in ("styled", "plain")]

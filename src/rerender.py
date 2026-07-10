@@ -26,7 +26,7 @@ from build_video import build_video
 
 with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
     video_path = os.path.join(tmp, "video.mp4")
-    video_path, thumb_path = build_video(
+    video_path, thumb_path, _color = build_video(
         audio_path, clip_paths, words, video_path,
         topic=data["topic"],
         title=data["title"],

@@ -116,11 +116,11 @@ def run() -> None:
         clip_paths = fetch_clips(data["video_queries"], tmp)
 
         print("Synthesizing TTS...")
-        words = text_to_speech(data["script"], audio_path)
+        words, voice = text_to_speech(data["script"], audio_path)
         print(f"  Audio: {words[-1]['end']:.1f}s, {len(words)} words")
 
         print("Building video...")
-        video_path, thumb_path = build_video(
+        video_path, thumb_path, caption_color = build_video(
             audio_path, clip_paths, words, video_path,
             topic=data.get("topic", state.get("topic")),
             part=part,
@@ -137,10 +137,16 @@ def run() -> None:
             words=words,
             topic=data.get("topic", state.get("topic", "")),
             alert=lambda step, e: _alert(f"{step} (Part {part})", e),
-            extra_tags=[f"hook-{data.get('hook_template', 'other')}"],  # для analytics_retention
+            extra_tags=[
+                f"hook-{data.get('hook_template', 'other')}",  # для analytics_retention
+                f"color-{caption_color}",
+                f"voice-{voice}",
+            ],
             extra_comment=_series_extra_comment(part, state),  # плейлист + ссылки на части
             enable_captions=True,  # одна дорожка (550 ед/видео) влезает в любой день, см. upload_captions
             enable_pinterest=False,  # Pinterest только для обычных Shorts
+            voice=voice,
+            caption_color=caption_color,
         )
 
     # Добавляем часть в плейлист серии и запоминаем её id (для ссылок в Part 3 и навигации).

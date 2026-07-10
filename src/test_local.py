@@ -63,11 +63,11 @@ with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
         clip_paths = fetch_clips(data["video_queries"], tmp)
 
     print("3/4 Озвучка...")
-    words = text_to_speech(data["script"], audio_path)
+    words, _voice = text_to_speech(data["script"], audio_path)
     print(f"  Длина: {words[-1]['end']:.1f}s")
 
     print("4/4 Сборка видео...")
-    video_path, thumb_path = build_video(
+    video_path, thumb_path, _color = build_video(
         audio_path, clip_paths, words, video_path,
         topic=None if SATISFYING else data["topic"],   # None → общий VN CTA-бейдж
         title=None if SATISFYING else data["title"],   # None → без EN-хук-плашки
