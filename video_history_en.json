@@ -46,5 +46,23 @@
     "voice": "en-US-ChristopherNeural",
     "caption_color": "yellow",
     "pair_role": null
+  },
+  {
+    "video_id": "CzY3Z4VZx6I",
+    "published_at": "2026-07-11T16:19:33.665253+00:00",
+    "title": "Dolphins Sleep With One Eye Open — Literally",
+    "topic": "the animal kingdom",
+    "hook_template": "sounds-fake",
+    "title_opener": "other",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 30.7,
+    "voice": "en-US-ChristopherNeural",
+    "caption_color": "#7CFFCB",
+    "pair_role": null
   }
 ]
