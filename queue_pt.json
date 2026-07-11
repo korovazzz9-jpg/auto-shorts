@@ -425,5 +425,55 @@
     "niche_styled": false,
     "title_variant": "seo",
     "hashtag_position": "end"
+  },
+  {
+    "title": "O oceano tem sons que ninguém consegue explicar",
+    "title_opener": "other",
+    "hook_text": "O mar está gritando",
+    "hook_template": "authority-cant-explain",
+    "emotional_tone": "creepy",
+    "script": "Algo no fundo do oceano emitiu um som tão alto que foi captado a mais de 5.000 quilômetros de distância — e ninguém sabe o que foi. Em 1997, hidrofones da NOAA registraram o que chamaram de 'The Bloop': um ruído de baixa frequência, mais potente que qualquer animal conhecido. Mas aqui está o detalhe perturbador: o perfil sonoro não combinava com nenhuma fonte geológica ou biológica catalogada. O oceano tem mais de 80% inexplorado. O que gritou lá embaixo pode ainda estar lá. Manda esse vídeo pra quem acha que já conhecemos o mar.",
+    "word_count": 88,
+    "search_summary": "O som 'The Bloop' registrado pela NOAA em 1997 no oceano Pacífico nunca foi completamente explicado por cientistas.",
+    "comment_question": "Se o Bloop ainda não tem explicação, o que você acha que está lá no fundo? 👀",
+    "source_note": "NOAA – National Oceanic and Atmospheric Administration, 1997",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "fatos curiosos",
+      "oceano profundo",
+      "mistérios do mar",
+      "the bloop som oceano",
+      "NOAA mistério",
+      "sons inexplicáveis oceano",
+      "fundo do mar desconhecido",
+      "fatos em 30 segundos",
+      "fatos curiosos do mundo",
+      "oceano profundo slowed",
+      "mistérios do mar oceano"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#fatosinusitados",
+      "#oceano",
+      "#misteriosdomar",
+      "#thebloop"
+    ],
+    "video_queries": [
+      "deep ocean dark underwater",
+      "ocean waves surface aerial",
+      "underwater sonar waves visualization",
+      "scientist listening ocean equipment",
+      "deep sea exploration submarine",
+      "dark ocean abyss unknown",
+      "person scared shocked reaction"
+    ],
+    "has_loop": false,
+    "topic": "the ocean",
+    "niche_styled": false,
+    "title_variant": "seo",
+    "hashtag_position": "end"
   }
 ]

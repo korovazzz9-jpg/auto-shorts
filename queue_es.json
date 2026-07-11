@@ -96,5 +96,101 @@
     "niche_styled": true,
     "title_variant": "narrative",
     "hashtag_position": "end"
+  },
+  {
+    "title": "El terremoto que un volcán disparó desde adentro",
+    "title_opener": "the-x",
+    "hook_text": "El suelo explotó sin aviso",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "fear",
+    "script": "Un volcán disparó un terremoto de magnitud 8 sin erupcionarse — y nadie lo vio venir. En 1700, la Cascadia Subduction Zone colapsó en segundos: magma atrapado bajo la corteza acumuló presión durante siglos hasta fracturar una falla entera. El tsunami que generó cruzó el Pacífico y destruyó aldeas en Japón. Pero lo más perturbador: esa misma zona hoy acumula presión de nuevo. Los geólogos calculan que el siguiente evento puede superar magnitud 9. La mitad de ustedes vive cerca de una falla activa y ni lo sabe. Y de esta forma.",
+    "word_count": 88,
+    "search_summary": "La Cascadia Subduction Zone generó un terremoto de magnitud 8 en 1700 sin erupción volcánica visible, causando un tsunami que llegó a Japón.",
+    "comment_question": "¿Vives cerca de una falla sísmica activa y nunca te lo dijeron? 😬",
+    "source_note": "USGS y Universidad de Washington, 2005",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "terremotos curiosidades",
+      "volcanes y terremotos",
+      "Cascadia zona de subducción",
+      "tsunami Pacífico 1700",
+      "datos curiosos geología",
+      "terremotos más fuertes historia",
+      "fallas sísmicas activas",
+      "datos en 30 segundos",
+      "curiosidades ciencia",
+      "volcanes y terremotos para niños"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#terremotos",
+      "#volcanes",
+      "#tsunami"
+    ],
+    "video_queries": [
+      "earthquake ground cracking aerial",
+      "volcanic magma underground pressure",
+      "massive tsunami ocean waves destruction",
+      "Japan coastal village flooding",
+      "seismic fault map tectonic plates",
+      "earthquake devastation city ruins"
+    ],
+    "has_loop": true,
+    "topic": "volcanoes and earthquakes",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "Este pez puede congelar su propio corazón y sobrevivir",
+    "title_opener": "the-x",
+    "hook_text": "Su corazón se detiene... y vive",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "impossible",
+    "script": "Este animal detiene su propio corazón durante meses — y despierta como si nada. El pez de hielo antártico, el Notothenioid, sobrevive a menos 2°C sin hemoglobina ni glóbulos rojos. Su sangre es literalmente transparente. A esa temperatura, cualquier otro vertebrado muere en minutos. Pero aquí viene lo extraño: su corazón no bombea sangre — la deja fluir sola, empujada por el frío. Lleva 8 millones de años perfeccionando esto. Mándalo a alguien que todavía cree que el frío siempre mata.",
+    "word_count": 84,
+    "search_summary": "El pez de hielo antártico Notothenioid sobrevive sin hemoglobina con sangre transparente a temperaturas bajo cero.",
+    "comment_question": "¿Sangre transparente y sin corazón activo — eso es vida o algo más? 🧊",
+    "source_note": "Journal of Experimental Biology, 2006",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "datos curiosos animales",
+      "pez de hielo antártico",
+      "animales extremos",
+      "datos en 30 segundos",
+      "biología marina",
+      "sangre transparente pez",
+      "animales increíbles",
+      "datos que no sabías",
+      "notothenioid antártico",
+      "datos curiosos animales para niños",
+      "animales extremos animal planet"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#animalesincreíbles",
+      "#biologiamarina"
+    ],
+    "video_queries": [
+      "antarctic ice underwater",
+      "frozen ocean polar landscape",
+      "transparent fish underwater",
+      "deep sea fish swimming",
+      "arctic ice cold water",
+      "scientist examining fish lab"
+    ],
+    "has_loop": false,
+    "topic": "the animal kingdom",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
   }
 ]
