@@ -1,52 +1,5 @@
 [
   {
-    "title": "La tormenta que enciende el suelo, no el cielo",
-    "title_opener": "the-x",
-    "hook_text": "El rayo que nace abajo",
-    "hook_template": "sounds-fake",
-    "emotional_tone": "impossible",
-    "script": "Este fenómeno dispara rayos desde el suelo hacia arriba — y los científicos apenas lo documentaron en 2001. Se llama rayo ascendente, y no lo produce una nube: lo genera una torre, una montaña, o un edificio alto al acumular tanta carga eléctrica que perfora el cielo desde abajo. El rayo más largo registrado ascendió 70 kilómetros. Pero lo más perturbador: puedes estar parado sobre el punto de origen. Si vives cerca de una antena o rascacielos, mándalo a alguien que crea que los rayos solo caen.",
-    "word_count": 87,
-    "search_summary": "Los rayos ascendentes se originan en el suelo o estructuras altas, no en nubes, y fueron documentados científicamente en 2001.",
-    "comment_question": "¿Sabías que un edificio cerca de ti podría lanzar un rayo al cielo? 😱",
-    "source_note": "Journal of Geophysical Research, 2001",
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "datos curiosos",
-      "clima extremo",
-      "rayos ascendentes",
-      "fenómenos naturales",
-      "tormentas eléctricas",
-      "datos en 30 segundos",
-      "ciencia explicada",
-      "rayos raros",
-      "meteorología extrema"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#datoscuriosos",
-      "#tormentas",
-      "#rayos",
-      "#fenomenosnaturales"
-    ],
-    "video_queries": [
-      "lightning strike building night",
-      "thunderstorm city skyline",
-      "lightning bolt upward tower",
-      "storm clouds dark sky",
-      "skyscraper lightning storm aerial",
-      "electric storm mountain peak"
-    ],
-    "has_loop": false,
-    "topic": "extreme weather",
-    "niche_styled": false,
-    "title_variant": "narrative",
-    "hashtag_position": "end"
-  },
-  {
     "title": "Este chip vive dentro de tu cerebro y te reescribe",
     "title_opener": "the-x",
     "hook_text": "Tu mente, hackeada desde adentro",

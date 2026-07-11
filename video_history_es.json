@@ -28,5 +28,23 @@
     "niche_recreated": null,
     "topical": null,
     "length_seconds": 27.6
+  },
+  {
+    "video_id": "f7D2Bo198mI",
+    "published_at": "2026-07-11T03:23:22.264187+00:00",
+    "title": "La tormenta que enciende el suelo, no el cielo",
+    "topic": "extreme weather",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": false,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 33.3,
+    "voice": "es-US-AlonsoNeural",
+    "caption_color": "white",
+    "pair_role": null
   }
 ]
