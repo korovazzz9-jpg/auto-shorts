@@ -46,5 +46,23 @@
     "voice": "es-US-AlonsoNeural",
     "caption_color": "white",
     "pair_role": null
+  },
+  {
+    "video_id": "R43XLUuzZ8I",
+    "published_at": "2026-07-12T03:25:03.192951+00:00",
+    "title": "Este pez puede congelar su propio corazón y sobrevivir",
+    "topic": "the animal kingdom",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 33.3,
+    "voice": "es-MX-JorgeNeural",
+    "caption_color": "#7CFFCB",
+    "pair_role": null
   }
 ]
