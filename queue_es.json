@@ -1,53 +1,5 @@
 [
   {
-    "title": "El terremoto que un volcán disparó desde adentro",
-    "title_opener": "the-x",
-    "hook_text": "El suelo explotó sin aviso",
-    "hook_template": "sounds-fake",
-    "emotional_tone": "fear",
-    "script": "Un volcán disparó un terremoto de magnitud 8 sin erupcionarse — y nadie lo vio venir. En 1700, la Cascadia Subduction Zone colapsó en segundos: magma atrapado bajo la corteza acumuló presión durante siglos hasta fracturar una falla entera. El tsunami que generó cruzó el Pacífico y destruyó aldeas en Japón. Pero lo más perturbador: esa misma zona hoy acumula presión de nuevo. Los geólogos calculan que el siguiente evento puede superar magnitud 9. La mitad de ustedes vive cerca de una falla activa y ni lo sabe. Y de esta forma.",
-    "word_count": 88,
-    "search_summary": "La Cascadia Subduction Zone generó un terremoto de magnitud 8 en 1700 sin erupción volcánica visible, causando un tsunami que llegó a Japón.",
-    "comment_question": "¿Vives cerca de una falla sísmica activa y nunca te lo dijeron? 😬",
-    "source_note": "USGS y Universidad de Washington, 2005",
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "terremotos curiosidades",
-      "volcanes y terremotos",
-      "Cascadia zona de subducción",
-      "tsunami Pacífico 1700",
-      "datos curiosos geología",
-      "terremotos más fuertes historia",
-      "fallas sísmicas activas",
-      "datos en 30 segundos",
-      "curiosidades ciencia",
-      "volcanes y terremotos para niños"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#datoscuriosos",
-      "#terremotos",
-      "#volcanes",
-      "#tsunami"
-    ],
-    "video_queries": [
-      "earthquake ground cracking aerial",
-      "volcanic magma underground pressure",
-      "massive tsunami ocean waves destruction",
-      "Japan coastal village flooding",
-      "seismic fault map tectonic plates",
-      "earthquake devastation city ruins"
-    ],
-    "has_loop": true,
-    "topic": "volcanoes and earthquakes",
-    "niche_styled": true,
-    "title_variant": "narrative",
-    "hashtag_position": "end"
-  },
-  {
     "title": "Este pez puede congelar su propio corazón y sobrevivir",
     "title_opener": "the-x",
     "hook_text": "Su corazón se detiene... y vive",
