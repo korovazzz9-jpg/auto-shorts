@@ -8,5 +8,15 @@
     "part_b_video_id": null,
     "status": "awaiting_b",
     "created_at": 1783873361.3127236
+  },
+  {
+    "id": "Dv4i-wO5638-1783887722",
+    "topic": "ancient civilizations",
+    "part_a_video_id": "Dv4i-wO5638",
+    "part_a_title": "Los romanos copiaron su religión de un pueblo que borraron",
+    "claim": "El idioma etrusco aún no ha sido descifrado completamente.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1783887722.779879
   }
 ]
