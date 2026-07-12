@@ -1,1 +1,51 @@
-[]
+[
+  {
+    "title": "Esta computadora vive dentro de tus células vivas",
+    "title_opener": "the-x",
+    "hook_text": "¿Computadora... en tu cuerpo?",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "impossible",
+    "script": "Algo dentro de ti puede recibir instrucciones, calcular, y ejecutar comandos — sin silicio, sin electricidad. Eso ya existe. Se llaman biocomputadoras de ADN: circuitos programados directamente dentro de células vivas. En 2023, investigadores del MIT lograron que células humanas ejecutaran operaciones lógicas — como un procesador — usando solo moléculas de ARN. Sin chips. Sin cables. Pero aquí viene lo raro: estas células pueden detectar cáncer desde adentro y activar un tratamiento en segundos. Mándales esto a los que piensan que la tecnología solo vive en pantallas.",
+    "word_count": 87,
+    "search_summary": "Biocomputadoras de ADN programadas dentro de células humanas vivas ejecutan operaciones lógicas usando moléculas de ARN, según MIT 2023.",
+    "comment_question": "¿Aceptarías tener una computadora viva dentro de tus células? 🧬",
+    "source_note": "MIT, Nature Chemical Biology, 2023",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "tecnología del futuro",
+      "biocomputadora ADN",
+      "datos curiosos",
+      "ciencia increíble",
+      "computadora en células",
+      "MIT tecnología",
+      "ingeniería genética",
+      "datos en 30 segundos",
+      "avances científicos",
+      "tecnología del futuro 2050 la era digital",
+      "datos curiosos que no sabías"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#tecnología",
+      "#biocomputadora",
+      "#ciencia"
+    ],
+    "video_queries": [
+      "glowing digital particles abstract",
+      "scientist working laboratory cells",
+      "DNA strand animation microscope",
+      "researcher lab medical technology",
+      "futuristic medical science concept",
+      "person holding smartphone technology future"
+    ],
+    "has_loop": false,
+    "topic": "future technology",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
+  }
+]
