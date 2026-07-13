@@ -201,7 +201,10 @@ def _pick_best_clip(candidates: list[dict], query: str) -> dict | None:
         return with_preview[0]
 
 
-def _search_with_fallback(query: str, used_ids: set) -> dict | None:
+def _search_with_fallback(query: str, used_ids: set) -> list[dict]:
+    """Возвращает кандидатов В ПОРЯДКЕ ПРЕДПОЧТЕНИЯ: победитель vision-отбора первым,
+    остальные — запасные (2026-07-13: раньше возвращался только победитель — если его
+    файл оказывался битым на CDN, запасных уже не было и слот публикации терялся)."""
     candidates = _get_candidates(query, used_ids)
     if not candidates:
         short = " ".join(query.split()[:2])
@@ -210,8 +213,26 @@ def _search_with_fallback(query: str, used_ids: set) -> dict | None:
             if candidates:
                 print(f"  (simplified query '{query}' → '{short}')")
     if not candidates:
-        return None
-    return _pick_best_clip(candidates, query)
+        return []
+    winner = _pick_best_clip(candidates, query)
+    return [winner] + [c for c in candidates if c["id"] != winner["id"]]
+
+
+def _is_valid_clip(path: str) -> bool:
+    """Проверяет, что скачанный файл — читаемое видео (2026-07-13, реальный прод-случай:
+    CDN отдал битый mp4, HTTP 200 — скачивание «успешно», а MoviePy упал на первом кадре
+    уже в сборке, потеряв слот публикации). Открытие VideoFileClip читает первый кадр —
+    ровно та же проверка, на которой падала сборка, только теперь в момент скачивания,
+    пока ещё есть запасные кандидаты."""
+    try:
+        from moviepy.editor import VideoFileClip
+        clip = VideoFileClip(path)
+        ok = (clip.duration or 0) > 0.1
+        clip.close()
+        return ok
+    except Exception as e:
+        print(f"  (клип не читается: {e})")
+        return False
 
 
 # Залипательные («satisfying») фоны для VN-формата random-facts. Все запросы проверены
@@ -258,27 +279,41 @@ def fetch_clips(queries: list[str], out_dir: str, landscape: bool = False) -> li
         # наверх и ронял ВЕСЬ слот публикации из-за одного неудачного запроса. Пустой
         # итоговый список по-прежнему ловит guard в build_video/_build_background.
         try:
-            file_info = _search_with_fallback(query, used_ids)
+            ranked = _search_with_fallback(query, used_ids)
         except Exception as e:
             print(f"  (поиск стока для '{query}' упал: {e}, пропускаем запрос)")
             continue
-        if not file_info:
+        if not ranked:
             print(f"  (no clip found for '{query}', skipping)")
             continue
-        used_ids.add(file_info["id"])
         out_path = os.path.join(out_dir, f"clip_{i}.mp4")
-        # Скачивание одного клипа изолировано: транзиентный сбой CDN на одном клипе не должен
-        # ронять весь fetch_clips (иначе теряется всё видео из-за одного битого клипа). Пустой
-        # итоговый список ловит guard в build_video/_build_background с понятной ошибкой.
-        try:
-            video_response = requests.get(file_info["link"], timeout=60)
-            video_response.raise_for_status()
-            with open(out_path, "wb") as f:
-                f.write(video_response.content)
+        # Кандидаты пробуются по порядку (победитель vision → запасные), каждый скачанный
+        # файл валидируется чтением первого кадра (2026-07-13): битый файл от CDN больше
+        # не долетает до сборки — берём следующего кандидата. id заносится в used_ids для
+        # КАЖДОГО испробованного (битый клип не должен достаться другому запросу).
+        for n, file_info in enumerate(ranked):
+            used_ids.add(file_info["id"])
+            try:
+                video_response = requests.get(file_info["link"], timeout=60)
+                video_response.raise_for_status()
+                with open(out_path, "wb") as f:
+                    f.write(video_response.content)
+            except Exception as e:
+                print(f"  (не скачался клип для '{query}': {e}, пробуем следующего кандидата)")
+                continue
+            if not _is_valid_clip(out_path):
+                print(f"  (битый файл клипа {file_info['id']} для '{query}' — пробуем следующего кандидата)")
+                try:
+                    os.remove(out_path)
+                except OSError:
+                    pass
+                continue
+            if n > 0:
+                print(f"  ('{query}': победитель не годился, взят запасной кандидат #{n + 1})")
             paths.append(out_path)
-        except Exception as e:
-            print(f"  (не скачался клип для '{query}': {e}, пропускаем)")
-            continue
+            break
+        else:
+            print(f"  (все кандидаты для '{query}' не скачались/битые, пропускаем запрос)")
     return paths
 
 
