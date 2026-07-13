@@ -220,6 +220,14 @@ def build_report(videos: list[dict], spike_die: list[dict] | None = None) -> str
         for name, avg, n in tones[:6]:
             lines.append(f"  {avg:5.1f}%  ({n:2})  {name}")
 
+    # Тип структуры скрипта (2026-07-13, ротация против «mass-produced»-паттерна — см.
+    # STRUCTURES в generate_script.py): какой формат лучше удерживает на ЭТОМ канале.
+    formats = [(k, a, n) for k, a, n in _avg_by(videos, "structure") if k != "—"]
+    if formats:
+        lines.append("\nТип структуры:")
+        for name, avg, n in formats:
+            lines.append(f"  {avg:5.1f}%  ({n:2})  {name}")
+
     # Цвет субтитров (2026-07-10, см. CAPTION_COLORS в build_video.py) — независимая от
     # контента ось оформления, ротируется случайно ради вариативности между видео.
     colors = [(k, a, n) for k, a, n in _avg_by(videos, "caption_color") if k != "—"]

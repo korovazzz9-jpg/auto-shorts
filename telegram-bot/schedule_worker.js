@@ -11,7 +11,8 @@
 // 2026-07-09: добавлен PT (daily-pt.yml, cron-job.org), слоты 17:23/21:23/23:23/01:23 UTC
 // (см. config.py daily_slots_utc).
 const EN_SLOTS = [[16, 13], [20, 7], [23, 7], [0, 7]];
-const ES_SLOTS = [[16, 17], [20, 17], [0, 17], [3, 17]];
+// 2026-07-13: слот 16:17 убран (4→3/день, ответ на подавление раздачи ES).
+const ES_SLOTS = [[20, 17], [0, 17], [3, 17]];
 const PT_SLOTS = [[17, 23], [21, 23], [23, 23], [1, 23]];
 const TRIGGERS = ["расписание", "/расписание", "schedule", "/schedule", "/start"];
 
@@ -36,7 +37,7 @@ function buildSchedule() {
 
   const lines = ["📅 Расписание выхода роликов", "(🇻🇳 Вьетнам · 🇷🇺 Москва)", "", "EN — 4/день:"];
   for (const [h, m] of EN_SLOTS) { const [vn, msk] = conv(h, m); lines.push(`• ${vn} · ${msk}`); }
-  lines.push("", "ES — 4/день:");
+  lines.push("", "ES — 3/день:");
   for (const [h, m] of ES_SLOTS) { const [vn, msk] = conv(h, m); lines.push(`• ${vn} · ${msk}`); }
   lines.push("", "PT — 4/день:");
   for (const [h, m] of PT_SLOTS) { const [vn, msk] = conv(h, m); lines.push(`• ${vn} · ${msk}`); }

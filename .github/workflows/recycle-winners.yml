@@ -35,7 +35,13 @@ jobs:
         run: pip install -r requirements.txt
 
       # Цель = ES, источник = EN: победители EN пересоздаются на испанском.
+      # ⏸ ПРИОСТАНОВЛЕНО 2026-07-13 (if: false): ES под подавлением раздачи (inauthentic-
+      # classifier, см. память проекта). Пересозданные дубли EN-фактов — прямой паттерн из
+      # политики («видео, идентичные во всём кроме заголовка»); по таймингу подавление
+      # началось сразу после публикации последней recycled-партии. Вернуть шаг после
+      # восстановления раздачи ES (убрать if: false).
       - name: Recycle EN winners into ES queue
+        if: false
         working-directory: src
         env:
           CHANNEL: es

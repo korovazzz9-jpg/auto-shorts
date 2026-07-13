@@ -80,6 +80,15 @@ CONFIGS = {
             "ONE short CTA, 4-7 words MAX — either \"Subscribe for more.\" or "
             "\"Comment if you knew this.\" Pick one, no embellishment, no extra clauses"
         ),
+        # Ротация структур (2026-07-13, см. STRUCTURES в generate_script.py) — против
+        # «mass-produced»-однотипности. EN раздача здорова — мягкая доля новых типов,
+        # чтобы не дестабилизировать работающий канал резко.
+        "structure_weights": {
+            "myth-debunk": 0.5,
+            "unsolved-mystery": 0.17,
+            "happening-now": 0.17,
+            "historical-story": 0.16,
+        },
         # Используется ли кросс-постинг в Instagram для этого канала.
         "post_to_instagram": True,
         # FB Reels (2026-07-10): тот же готовый ролик на страницу Facebook. Постинг бесплатен,
@@ -199,7 +208,11 @@ CONFIGS = {
     "es": {
         "channel_name": "Datos en 30s",
         "lang_code": "es",
-        "daily_slots_utc": [(16, 17), (20, 17), (0, 17), (3, 17)],
+        # 2026-07-13: слот 16:17 УБРАН (4→3/день) — ответ на подавление раздачи ES
+        # (inauthentic-classifier, см. память): реже постим шаблонный контент + это был
+        # слабейший слот по данным (951 ср. против 1108-1260; 10:17 утра Мехико — не прайм).
+        # ⚠️ Требует РУЧНОГО отключения триггера ES-1617 в cron-job.org.
+        "daily_slots_utc": [(20, 17), (0, 17), (3, 17)],
         "script_language": "Spanish (neutral Latin American / Mexican Spanish, NOT European Spanish)",
         "voices": [
             "es-MX-JorgeNeural",
@@ -249,6 +262,14 @@ CONFIGS = {
             "ONE short CTA in Spanish, 4-7 words MAX — either \"Suscríbete para más.\" or "
             "\"Comenta si lo sabías.\" Pick one, no embellishment, no extra clauses"
         ),
+        # Ротация структур: ES под подавлением раздачи (inauthentic-classifier, 2026-07-10) —
+        # агрессивная равномерная ротация всех 4 типов, максимальная дифференциация паттерна.
+        "structure_weights": {
+            "myth-debunk": 0.25,
+            "unsolved-mystery": 0.25,
+            "happening-now": 0.25,
+            "historical-story": 0.25,
+        },
         # Instagram ES (2026-07-01): @datosen30s, свой Business-аккаунт/токен (см. daily-es.yml).
         "post_to_instagram": True,
         # FB Reels: включить True после FB-страницы ES + секретов FB_PAGE_ID/FB_PAGE_ACCESS_TOKEN.
@@ -388,6 +409,13 @@ CONFIGS = {
             "ONE short CTA in Brazilian Portuguese, 4-7 words MAX — either \"Inscreva-se para mais.\" or "
             "\"Comenta se você já sabia.\" Pick one, no embellishment, no extra clauses"
         ),
+        # Ротация структур: как у EN (мягкая) — канал молодой, но профиль риска тот же.
+        "structure_weights": {
+            "myth-debunk": 0.5,
+            "unsolved-mystery": 0.17,
+            "happening-now": 0.17,
+            "historical-story": 0.16,
+        },
         "post_to_instagram": False,   # нет PT IG-аккаунта — включить после создания
         "post_to_facebook": False,    # нет PT FB-страницы — включить после создания
         "post_to_tiktok": False,

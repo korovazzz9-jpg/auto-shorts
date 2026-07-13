@@ -162,17 +162,34 @@ def _pick_topic() -> str:
     print(f"  Topic weights top-5: {top5} | tier={label}")
     return random.choice(tier)
 
-BASE_SYSTEM_PROMPT = """You are a scriptwriter for short fact videos on YouTube Shorts (channel: {channel}).
+PROMPT_INTRO = """You are a scriptwriter for short fact videos on YouTube Shorts (channel: {channel}).
 Write the TITLE, SCRIPT and HASHTAGS in {language}, conversational, punchy, no filler. (Keep the
 stock-footage search queries in English regardless — they are only used to search a stock video site.)
 
-The fact MUST overturn a common intuitive assumption — something most people would confidently
+Universal quality bar (applies to EVERY structure): the fact MUST contain at least one concrete
+anchor — a number, a date, a named place, or a named person. Vague facts feel like trivia; a
+specific anchor makes it feel true and memorable. Prefer strong, vivid verbs over "is"/"there is"
+constructions. Keep sentences short and punchy — cut connector words and generic hedging phrases
+like "fascinating", "scientists discovered", "this phenomenon". Avoid abstract or purely technical
+facts that require specialist background to feel surprising (e.g. quantum mechanics, relativity,
+advanced math) — the impact has to land for a general audience in one watch. Physics and quantum
+physics are strictly off-limits as topics.""".format(
+    channel=CFG["channel_name"],
+    language=CFG["script_language"],
+)
+
+PROMPT_TAIL = 'No "today I\'ll tell you about" style intros.'
+
+# Ротация структур (2026-07-13, активирован отложенный план): один и тот же скелет
+# «разворот заблуждения» на каждом видео — это ровно паттерн «mass-produced/inauthentic
+# content», за который YouTube душит раздачу (реальный кейс: подавление ES с 10.07).
+# 4 РАЗНЫХ типа видео, каждый со своей драматургией и своим типом хука/концовки.
+# Доли на канал — CFG["structure_weights"]; выбор — pick_structure(); тег format-<id>
+# идёт в аналитику (analytics_retention/weekly_report), петля данных как у hook/tone.
+STRUCTURE_MYTH_DEBUNK = """The fact MUST overturn a common intuitive assumption — something most people would confidently
 believe is true (or would never think to question) until this fact breaks it. Not just "an
 interesting detail about X," but "X is the opposite of what you'd assume." Body-related, historical,
-or sensory facts with a clear before/after contrast in understanding work best. Avoid abstract or
-purely technical facts that require specialist background to feel surprising (e.g. quantum
-mechanics, relativity, advanced math) — the shock has to land for a general audience in one watch.
-Physics and quantum physics are strictly off-limits as topics.
+or sensory facts with a clear before/after contrast in understanding work best.
 
 Structure, in order:
 1. Hook (the FIRST sentence, max ~12 words): the swipe-away decision is instant, so the single
@@ -221,12 +238,95 @@ Structure, in order:
    d) Unfinished "actually": leave a deliberate, baitable gap that begs an "actually..." reply.
    e) Share trigger: phrase it so the viewer wants to SEND it to a specific person — name the
       type of person who needs to see it ("Send this to someone who still thinks [belief]").
-      Shares and share-to-DM are a top distribution signal on both YouTube and TikTok.
+      Shares and share-to-DM are a top distribution signal on both YouTube and TikTok."""
 
-No "today I'll tell you about" style intros.""".format(
-    channel=CFG["channel_name"],
-    language=CFG["script_language"],
-)
+STRUCTURE_UNSOLVED_MYSTERY = """This video is an UNSOLVED MYSTERY — a real, documented phenomenon or event that experts
+still cannot fully explain. The tension is NOT "you believed wrong" but "nobody knows — and
+that should bother you". Pick facts with a genuine open question (disappearances, unexplained
+signals, anomalies, lost knowledge) — never invent mystery where science has a settled answer.
+
+Structure, in order:
+1. Hook (FIRST sentence, max ~12 words): open on the unresolved tension itself — what happened
+   is verifiable, WHY/HOW is not. Don't name the subject yet. First 3-4 words must stop the
+   scroll. Good shapes: "No one can explain what happened here in [year]." / "Experts have
+   tried for [N] years — and failed." / "Something [did impossible thing], and then vanished."
+2. The setup: name the subject, place, date — establish that this is REAL and documented, with
+   a concrete anchor. Lay out what IS known, fast and vivid.
+3. The deepening: give the best explanation people usually offer — then show, with one concrete
+   detail, why it doesn't hold up. This is the "wait, seriously?" beat: the obvious answer dies.
+4. The open end + comment bait (one sentence, the LAST sentence): do NOT fake a resolution —
+   the honest absence of an answer IS the payoff. End by throwing the mystery at the viewer so
+   they HAVE to reply: invite their theory ("What's YOUR explanation — because the official one
+   doesn't work"), or split the audience over the likeliest answer, or dare someone to explain
+   it ("Send this to the smartest person you know. Watch them fail")."""
+
+STRUCTURE_HAPPENING_NOW = """This video is a "THIS IS HAPPENING RIGHT NOW" fact — an ongoing, present-tense process the
+viewer doesn't realize is occurring at this very moment (in their body, above their head, under
+their feet, somewhere on Earth). The tension is immediacy: not "did you know" but "this is
+happening to/around you AS YOU WATCH". Pick genuinely continuous/current phenomena — never
+force present tense onto a one-time historical event.
+
+Structure, in order:
+1. Hook (FIRST sentence, max ~12 words): present tense, directly tied to the viewer's NOW.
+   Don't name the subject yet. Good shapes: "Right now, something inside you is [shocking
+   activity]." / "While you watch this, [X] is happening [N] times." / "You are [doing
+   something remarkable] at this exact second — and can't feel it."
+2. The reveal: name the process and deliver the scale with a concrete anchor (rate, count,
+   speed, size — numbers make "right now" real). Keep it tied to the viewer's own timeframe:
+   per second, per minute, by the time this video ends.
+3. The zoom-out twist: one level bigger or stranger — what this continuous process adds up to
+   over a lifetime / across the planet, or the counterintuitive reason it never stops.
+4. Comment bait (one sentence, the LAST sentence): make the viewer verify or confess in the
+   comments — a bet about their own body/surroundings they can check right now ("Try it —
+   then tell me I'm wrong"), or a camps-split about who feels it and who doesn't, or a share
+   dare ("Send this to someone who's doing it right now without knowing")."""
+
+STRUCTURE_HISTORICAL_STORY = """This video is a MICRO-STORY from history — one real person or event, told as a tiny narrative
+arc (setup → turn → consequence), not as a fact-reversal. The tension is "what happens next",
+not "you believed wrong". Pick stories with a named protagonist or specific event and a genuine
+twist of fate — obscure enough that the ending isn't common knowledge.
+
+Structure, in order:
+1. Hook (FIRST sentence, max ~12 words): drop the viewer INTO the decisive moment of the story,
+   mid-action, without naming names or year yet. Good shapes: "One man's mistake erased an
+   entire city from every map." / "A single letter, sent 3 weeks late, ended an empire." /
+   "They laughed at him — right up until [consequence]."
+2. The setup: now name who, where, when (concrete anchor mandatory: name + year/place). Two or
+   three fast, vivid sentences establishing the situation and what was at stake.
+3. The turn: the moment everything flipped — one clear pivot, told plainly. Then the
+   consequence, with one concrete detail that makes it land (a number, what survives today,
+   what changed forever).
+4. Comment bait (one sentence, the LAST sentence): put the viewer INSIDE the dilemma — "What
+   would YOU have done?" grounded in the story's specific choice, or a correction trap on the
+   story's most debatable claim, or a share dare naming who needs to hear this story."""
+
+STRUCTURES = {
+    "myth-debunk": STRUCTURE_MYTH_DEBUNK,
+    "unsolved-mystery": STRUCTURE_UNSOLVED_MYSTERY,
+    "happening-now": STRUCTURE_HAPPENING_NOW,
+    "historical-story": STRUCTURE_HISTORICAL_STORY,
+}
+
+
+def pick_structure() -> str:
+    """Выбирает тип структуры по весам канала (CFG["structure_weights"]). Нет весов в
+    конфиге — всегда легаси myth-debunk (обратная совместимость: vi и любой новый канал)."""
+    weights = CFG.get("structure_weights") or {"myth-debunk": 1.0}
+    ids = [s for s in weights if s in STRUCTURES]
+    if not ids:
+        return "myth-debunk"
+    return random.choices(ids, weights=[weights[s] for s in ids])[0]
+
+
+def build_system_prompt(structure: str) -> str:
+    """Собирает системный промпт под конкретный тип структуры (без LOOP/LENGTH — их
+    добавляет вызывающий код, как и раньше)."""
+    return PROMPT_INTRO + "\n\n" + STRUCTURES.get(structure, STRUCTURE_MYTH_DEBUNK) + "\n\n" + PROMPT_TAIL
+
+
+# Обратная совместимость: series/longform/recycle/recreate собирают промпт из
+# BASE_SYSTEM_PROMPT — для них остаётся легаси-структура (myth-debunk).
+BASE_SYSTEM_PROMPT = build_system_prompt("myth-debunk")
 
 # Loop-специфичная концовка — добавляется ТОЛЬКО к ежедневным Shorts (generate_script).
 # Series и longform используют BASE_SYSTEM_PROMPT без неё: у них своя концовка/CTA и нет петли.
@@ -417,7 +517,8 @@ def _pair_resolve_note(claim: str) -> str:
 
 
 def _build_user_content(topic: str, avoid_block: str, title_instruction: str = TITLE_INSTRUCTION_NARRATIVE,
-                         pair_start: bool = False, pair_resolve_claim: str | None = None) -> str:
+                         pair_start: bool = False, pair_resolve_claim: str | None = None,
+                         structure: str = "myth-debunk") -> str:
     # Стилевая калибровка по нише (2026-07-05): заголовки чужих выбросов на ЭТУ тему.
     niche_titles = _niche_titles_for(topic)
     niche_block = ""
@@ -450,7 +551,9 @@ def _build_user_content(topic: str, avoid_block: str, title_instruction: str = T
         f"{CFG['script_language']}, no ending period.\n"
         f"- hook_template: which opening template the spoken hook uses — exactly one of "
         f"[{', '.join(HOOK_TEMPLATES)}]. Report the closest match (use 'other' if none fits)."
-        f"{_hook_preference()}\n"
+        # Хук-подсказка из аналитики натренирована на myth-debunk шаблонах — для других
+        # структур (свои формы хука) она бы тянула модель обратно в старый скелет.
+        f"{_hook_preference() if structure == 'myth-debunk' else ''}\n"
         f"- {EMOTIONAL_TONE_INSTRUCTION}\n"
         f"- tags: 6-9 specific YouTube search tags in {CFG['script_language']}, mixing "
         "broad ones (e.g. the channel's equivalent of 'facts'/'did you know') with specific "
@@ -673,11 +776,15 @@ def generate_script(on_this_day: bool = False, pair_start: bool = False,
             "not a variation of any of these:\n" + "\n".join(f"- {t}" for t in past_titles) + "\n\n"
         )
 
-    system_prompt = BASE_SYSTEM_PROMPT + "\n\n" + LOOP_INSTRUCTION + "\n\n" + LENGTH_INSTRUCTION
+    # Ротация структур (2026-07-13): тип видео выбирается по весам канала — против
+    # «mass-produced» однотипности (см. STRUCTURES выше).
+    structure = pick_structure()
+    system_prompt = build_system_prompt(structure) + "\n\n" + LOOP_INSTRUCTION + "\n\n" + LENGTH_INSTRUCTION
     title_instruction, title_variant = pick_title_variant()
     title_instruction += _title_variety_note(past_titles)
     user_content = _build_user_content(topic, avoid_block, title_instruction,
-                                        pair_start=pair_start, pair_resolve_claim=pair_resolve_claim)
+                                        pair_start=pair_start, pair_resolve_claim=pair_resolve_claim,
+                                        structure=structure)
 
     # «On this day» (2026-07-05): раз в неделю факт привязывается к сегодняшней дате —
     # timely-контент алгоритм тестирует охотнее, дата в скрипте добавляет конкретики.
@@ -737,7 +844,8 @@ def generate_script(on_this_day: bool = False, pair_start: bool = False,
     if data is None and on_this_day:
         print("  Topical-режим не распарсился 3/3 — пробуем обычную генерацию без даты (fallback).")
         fallback_content = _build_user_content(topic, avoid_block, title_instruction,
-                                                pair_start=pair_start, pair_resolve_claim=pair_resolve_claim)
+                                                pair_start=pair_start, pair_resolve_claim=pair_resolve_claim,
+                                                structure=structure)
         data, last_err = _try_generate(fallback_content, 2)
         if data is not None:
             on_this_day = False  # data["topical"] ниже должен честно отражать, что дата не вошла
@@ -777,6 +885,7 @@ def generate_script(on_this_day: bool = False, pair_start: bool = False,
 
     _append_loop(data)  # детерминированно дописываем loop-фразу под помеченный коннектор
     data["topic"] = topic
+    data["structure"] = structure                # тег format-<id> (pipeline.py) + аналитика
     data["topical"] = bool(on_this_day)          # тег topical-onthisday (pipeline.py)
     data["niche_styled"] = bool(_niche_titles_for(topic))  # тег niche-styled (pipeline.py)
     # Video pairs (2026-07-08, см. paired_facts.py): нормализуем — модель может вернуть не-строку/

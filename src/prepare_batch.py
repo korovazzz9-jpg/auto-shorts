@@ -24,7 +24,6 @@ from anthropic.types.messages.batch_create_params import Request
 from dotenv import load_dotenv
 
 from generate_script import (
-    BASE_SYSTEM_PROMPT,
     EMOTIONAL_TONES,
     HOOK_TEMPLATES,
     LENGTH_INSTRUCTION,
@@ -39,6 +38,8 @@ from generate_script import (
     _pick_topic,
     _title_variety_note,
     _validate,
+    build_system_prompt,
+    pick_structure,
     pick_title_variant,
 )
 from recent_titles import add_title_to_cache, add_topic_to_cache, get_recent_titles, get_recent_video_texts
@@ -135,26 +136,23 @@ def main() -> None:
             "not a variation of any of these:\n" + "\n".join(f"- {t}" for t in past_titles) + "\n\n"
         )
 
-    system_prompt = BASE_SYSTEM_PROMPT + "\n\n" + LOOP_INSTRUCTION + "\n\n" + LENGTH_INSTRUCTION
-    # Prompt caching (2026-07-08): system_prompt ИДЕНТИЧЕН во всех до QUEUE_TARGET=10 запросах
-    # этого батча (не зависит от topic/title_variant) и ~1600 токенов — выше порога кэширования
-    # (1024). Anthropic Batches API поддерживает cache_control по каждому запросу батча — блок
-    # с cache_control должен совпадать байт-в-байт между запросами, чтобы кэш сработал. Экономит
-    # поверх уже имеющейся batch-скидки 50% (найдено при разборе ecc-репозитория, skill
-    # cost-aware-llm-pipeline — до этого система нигде в проекте кэш не использовала).
-    system_cached = [{"type": "text", "text": system_prompt, "cache_control": {"type": "ephemeral"}}]
+    # Prompt caching (2026-07-08): system_prompt для ОДНОЙ структуры идентичен между её
+    # запросами (~1600 токенов — выше порога 1024); cache_control-блок должен совпадать
+    # байт-в-байт. С ротацией структур (2026-07-13) в батче до 4 разных системных промптов —
+    # кэш работает внутри каждой группы (кэш префиксный и глобальный, соседство не важно).
     variety_note = _title_variety_note(past_titles)  # один расчёт на весь батч — past_titles не меняется внутри батча
 
     # Выбираем темы ПОСЛЕДОВАТЕЛЬНО, тегируя каждую в кеш сразу — иначе _pick_topic() внутри
     # этого же батча не увидит темы, выбранные парой строк выше, и может задвоить.
-    # title_variant роллится ЗДЕСЬ (не внутри _build_user_content) — иначе после парсинга
-    # ответа неоткуда было бы узнать, какой вариант ушёл в конкретный запрос батча.
-    topics, title_variants = [], []
+    # title_variant/structure роллятся ЗДЕСЬ (не внутри _build_user_content) — иначе после
+    # парсинга ответа неоткуда было бы узнать, какой вариант ушёл в конкретный запрос батча.
+    topics, title_variants, structures = [], [], []
     for _ in range(need):
         t = _pick_topic()
         topics.append(t)
         add_topic_to_cache(t)
         title_variants.append(pick_title_variant())
+        structures.append(pick_structure())
 
     requests_ = [
         Request(
@@ -162,9 +160,12 @@ def main() -> None:
             params=MessageCreateParamsNonStreaming(
                 model="claude-sonnet-4-6",
                 max_tokens=1600,
-                system=system_cached,
+                system=[{"type": "text",
+                         "text": build_system_prompt(structures[i]) + "\n\n" + LOOP_INSTRUCTION + "\n\n" + LENGTH_INSTRUCTION,
+                         "cache_control": {"type": "ephemeral"}}],
                 messages=[{"role": "user", "content": _build_user_content(
-                    topics[i], avoid_block, title_variants[i][0] + variety_note)}],
+                    topics[i], avoid_block, title_variants[i][0] + variety_note,
+                    structure=structures[i])}],
             ),
         )
         for i in range(need)
@@ -229,6 +230,7 @@ def main() -> None:
             if not str(data.get("hook_text", "")).strip():
                 data["hook_text"] = data["title"]
             data["topic"] = topic
+            data["structure"] = structures[i]  # тег format-<id> (pipeline.py) + аналитика
             data["niche_styled"] = bool(_niche_titles_for(topic))  # тег niche-styled (pipeline.py)
             data["title_variant"] = title_variants[i][1]
             data["hashtag_position"] = "end"
