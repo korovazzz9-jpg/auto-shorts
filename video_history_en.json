@@ -82,5 +82,23 @@
     "voice": "en-AU-WilliamNeural",
     "caption_color": "white",
     "pair_role": null
+  },
+  {
+    "video_id": "XCRQEZ2M-nA",
+    "published_at": "2026-07-13T16:24:59.814814+00:00",
+    "title": "Goosebumps Serve Zero Purpose on Human Skin",
+    "topic": "the human body",
+    "hook_template": "you-experience",
+    "title_opener": "other",
+    "emotional_tone": "impossible",
+    "title_variant": "seo",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 31.7,
+    "voice": "en-AU-WilliamNeural",
+    "caption_color": "#7CFFCB",
+    "pair_role": "a"
   }
 ]
