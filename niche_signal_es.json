@@ -1,23 +1,23 @@
 {
   "outlier_counts": {
-    "ancient history": 4,
+    "ancient history": 5,
     "archaeological discoveries": 2,
     "ancient civilizations": 3,
-    "historical mysteries": 3,
-    "the human body": 1,
+    "historical mysteries": 4,
+    "the human body": 3,
     "the animal kingdom": 1,
-    "the ocean": 2,
+    "the ocean": 3,
     "evolution": 1,
     "volcanoes and earthquakes": 2,
     "natural wonders": 1,
-    "space": 1,
-    "future technology": 4
+    "space": 2,
+    "future technology": 5
   },
   "outlier_titles": {
     "ancient history": [
-      "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos",
-      "Tres datos históricos alucinantes #historia #interesante #hechos",
-      "Hallazgo del siglo 5 a.C en aguas Italianas #historia #datoscuriosos #shorts"
+      "¿Por qué falta la mitad del Coliseo romano? 😱",
+      "Los Mayas Nunca Desaparecieron #Mayas  #maya #mexico #historia #curiosidadeshistoricas",
+      "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos"
     ],
     "archaeological discoveries": [
       "Hallazgo del siglo 5 a.C en aguas Italianas #historia #datoscuriosos #shorts",
@@ -29,17 +29,20 @@
       "Datos Curiosos de Cleopatra, una Mujer Exótica #shorts"
     ],
     "historical mysteries": [
+      "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos",
       "Tres datos históricos alucinantes #historia #interesante #hechos",
-      "Pruebas de que Jesús existió Realmente? #shorts",
       "✅ La verdadera historia de los tres cerditos 🐷💀 #short #shortsviral"
     ],
     "the human body": [
-      "DATO CURIOSO - LA NIÑA PERRO #shorts"
+      "DATO CURIOSO - LA NIÑA PERRO #shorts",
+      "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos",
+      "¿Qué pasaría si tu cuerpo estuviera hecho de estos elementos? #shorts #curiosidades"
     ],
     "the animal kingdom": [
       "EL MEGALODÓN... ¿¡ES REAL?! | CLUB DE INVESTIGADORES #shorts | #education for #kids"
     ],
     "the ocean": [
+      "Las profundidades del Oceano #shorts",
       "Las islas más peligrosas del mundo 🌎🤯 #curiosidades #shorts #estadosunidos",
       "¿Tienes Talasofobia? 🤯😰 #shorts #talasofobia #fobias #short #mar #oceano"
     ],
@@ -54,60 +57,77 @@
       "Maravillas del Río Amazonas: Naturaleza Exuberante y Vida Salvaje"
     ],
     "space": [
-      "Algo se Aproxima a a Tierra #Shorts"
+      "Algo se Aproxima a a Tierra #Shorts",
+      "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos"
     ],
     "future technology": [
       "Científicos EXPERIMENTOS CASEROS! 😱 #shorts",
-      "3 DATOS del CYBERTRUCK 👀 #datoscuriosos",
-      "EXPERIMENTOS CIENTÍFICOS CASEROS sencillos!!! #shorts #experimentos #caseros #cientificos"
+      "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos",
+      "El mejor teléfono del mundo😱🌎#datoscuriosos #top5 #shorts"
     ]
   },
   "top_outliers": [
     {
+      "topic": "future technology",
+      "title": "El mejor teléfono del mundo😱🌎#datoscuriosos #top5 #shorts",
+      "video_id": "_Wmiv1gALNw",
+      "views": 8613485,
+      "subs": 13400,
+      "ratio": 642.8
+    },
+    {
+      "topic": "ancient history",
+      "title": "¿Por qué falta la mitad del Coliseo romano? 😱",
+      "video_id": "k18cQG9VuUw",
+      "views": 14120200,
+      "subs": 54800,
+      "ratio": 257.7
+    },
+    {
       "topic": "natural wonders",
       "title": "Maravillas del Río Amazonas: Naturaleza Exuberante y Vida Salvaje",
       "video_id": "K5UgjcZPUEc",
-      "views": 699692,
-      "subs": 2820,
-      "ratio": 248.1
+      "views": 714041,
+      "subs": 2840,
+      "ratio": 251.4
     },
     {
       "topic": "historical mysteries",
       "title": "✅ La verdadera historia de los tres cerditos 🐷💀 #short #shortsviral",
       "video_id": "QQ0sdApwJ0s",
-      "views": 4491489,
-      "subs": 18500,
-      "ratio": 242.8
+      "views": 4534945,
+      "subs": 18600,
+      "ratio": 243.8
     },
     {
       "topic": "the human body",
       "title": "DATO CURIOSO - LA NIÑA PERRO #shorts",
       "video_id": "9e82SusaU8c",
-      "views": 14927990,
-      "subs": 75500,
-      "ratio": 197.7
+      "views": 15044553,
+      "subs": 75800,
+      "ratio": 198.5
     },
     {
       "topic": "the ocean",
       "title": "¿Tienes Talasofobia? 🤯😰 #shorts #talasofobia #fobias #short #mar #oceano",
       "video_id": "GRGBrmHsXdg",
-      "views": 9458180,
+      "views": 9469211,
       "subs": 51500,
-      "ratio": 183.7
+      "ratio": 183.9
     },
     {
       "topic": "space",
       "title": "Algo se Aproxima a a Tierra #Shorts",
       "video_id": "hOq7uz55_eo",
-      "views": 8373016,
+      "views": 8385106,
       "subs": 48800,
-      "ratio": 171.6
+      "ratio": 171.8
     },
     {
       "topic": "the ocean",
       "title": "Las islas más peligrosas del mundo 🌎🤯 #curiosidades #shorts #estadosunidos",
       "video_id": "TZHSvTMFYt8",
-      "views": 10590300,
+      "views": 10595002,
       "subs": 67000,
       "ratio": 158.1
     },
@@ -115,17 +135,9 @@
       "topic": "volcanoes and earthquakes",
       "title": "la erupción del volcan vesubio en pompeya",
       "video_id": "DB7ar9QMUAs",
-      "views": 686835,
-      "subs": 5570,
-      "ratio": 123.3
-    },
-    {
-      "topic": "ancient history",
-      "title": "Hallazgo del siglo 5 a.C en aguas Italianas #historia #datoscuriosos #shorts",
-      "video_id": "XpaYY4Q2zhI",
-      "views": 957097,
-      "subs": 8100,
-      "ratio": 118.2
+      "views": 697851,
+      "subs": 5580,
+      "ratio": 125.1
     },
     {
       "topic": "archaeological discoveries",
@@ -134,15 +146,23 @@
       "views": 957097,
       "subs": 8100,
       "ratio": 118.2
-    },
-    {
-      "topic": "volcanoes and earthquakes",
-      "title": "🌍💥 El terremoto más potente #curiosidades #datoscuriosos",
-      "video_id": "A_sPeB3Q9Dk",
-      "views": 4065642,
-      "subs": 38400,
-      "ratio": 105.9
     }
   ],
-  "updated": "2026-07-06"
+  "saturation": {
+    "ancient history": 644451,
+    "archaeological discoveries": 42645,
+    "ancient civilizations": 144434,
+    "shipwrecks and lost treasures": 123,
+    "historical mysteries": 334681,
+    "the human body": 456598,
+    "the animal kingdom": 855731,
+    "the ocean": 504140,
+    "evolution": 687371,
+    "volcanoes and earthquakes": 5084,
+    "extreme weather": 138010,
+    "natural wonders": 196844,
+    "space": 322857,
+    "future technology": 676801
+  },
+  "updated": "2026-07-13"
 }

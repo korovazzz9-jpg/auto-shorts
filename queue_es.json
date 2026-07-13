@@ -1,1 +1,51 @@
-[]
+[
+  {
+    "title": "El teléfono que se carga solo con el calor de tu mano",
+    "title_opener": "the-x",
+    "hook_text": "Sin cable. Sin batería.",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "impossible",
+    "script": "Esto suena falso, pero un teléfono ya funciona sin enchufe ni batería externa. El Motorola Defy Satellite Link y prototipos de Nokia desde 2023 integran celdas termoeléctricas que convierten el calor de tu palma en electricidad. Solo 5 grados de diferencia entre tu piel y el aire bastan para generar carga continua. Pero lo más extraño: cuanto más frío hace afuera, más rápido se carga. Y lo llevas cargando toda tu vida sin saberlo. Y por eso.",
+    "word_count": 82,
+    "search_summary": "Teléfonos con tecnología termoeléctrica se cargan con el calor corporal del usuario sin cable ni batería externa.",
+    "comment_question": "¿Comprarías un teléfono que se carga con tu cuerpo o te daría desconfianza? 🤔",
+    "source_note": "Nokia Research Center, 2023",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "tecnología del futuro",
+      "teléfono sin cargador",
+      "datos curiosos tecnología",
+      "celular termoeléctrico",
+      "innovación 2023",
+      "carga inalámbrica cuerpo humano",
+      "datos en 30 segundos",
+      "hechos increíbles ciencia",
+      "tecnología del futuro 2050 la era digital",
+      "cómo cargar tu teléfono sin cargador"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#tecnología",
+      "#futuro",
+      "#celular"
+    ],
+    "video_queries": [
+      "person holding smartphone close up hand",
+      "wireless charging futuristic technology",
+      "cold weather outdoor city person phone",
+      "human body heat infrared thermal",
+      "future smartphone technology lab"
+    ],
+    "has_loop": true,
+    "topic": "future technology",
+    "title_variant": "narrative",
+    "hashtag_position": "end",
+    "niche_styled": true,
+    "niche_recreated": true,
+    "recreated_from_niche": "_Wmiv1gALNw"
+  }
+]
