@@ -12,7 +12,10 @@
     "niche_styled": true,
     "niche_recreated": null,
     "topical": false,
-    "length_seconds": 30.0
+    "length_seconds": 30.0,
+    "views": 626,
+    "retention_pct": 74.69,
+    "subs_gained": 1
   },
   {
     "video_id": "tQgF28-ApFE",
@@ -27,7 +30,10 @@
     "niche_styled": null,
     "niche_recreated": null,
     "topical": null,
-    "length_seconds": 27.6
+    "length_seconds": 27.6,
+    "views": 764,
+    "retention_pct": 76.72,
+    "subs_gained": 0
   },
   {
     "video_id": "f7D2Bo198mI",
