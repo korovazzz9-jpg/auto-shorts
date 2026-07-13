@@ -115,9 +115,10 @@ def _generate_glue(facts: list[dict]) -> dict:
         if raw.startswith("```"):
             raw = raw.strip("`")
             raw = raw.split("\n", 1)[1] if "\n" in raw else raw
-        start, end = raw.find("{"), raw.rfind("}")
         try:
-            candidate = json.loads(raw[start:end + 1])
+            # extract_first_json (2026-07-13): защита от двух JSON подряд («Extra data»).
+            from generate_script import extract_first_json
+            candidate = extract_first_json(raw)
             missing = [k for k in ("intro", "transitions", "outro", "title", "video_queries")
                        if not candidate.get(k)]
             if missing:

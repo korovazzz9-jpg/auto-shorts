@@ -19,15 +19,27 @@ jobs:
   check-and-retry:
     runs-on: ubuntu-latest
     steps:
-      - name: Skip if daily pipeline is already running
+      # 2026-07-13: раньше «daily в процессе» = немедленный skip. Реальный промах 12.07:
+      # watchdog пришёл в 20:08:43, а ПАДАЮЩИЙ прогон daily завершился в 20:08:48 — guard
+      # увидел in_progress, пропустил всё, слот потерялся до ручного вмешательства. Теперь
+      # ЖДЁМ завершения живого прогона (до ~8 мин) и лишь потом решаем по факту наличия
+      # свежего видео: успешный прогон -> has_recent_upload увидит ролик и ретрая не будет;
+      # упавший -> ретрай отработает. Skip остаётся только если daily висит дольше 8 минут
+      # (значит он реально публикует длинный рендер — мешать нельзя).
+      - name: Wait for in-flight daily run, then decide
         id: guard
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          running=$(gh run list --workflow=daily.yml --repo=${{ github.repository }} \
-            --status=in_progress --limit=5 --json databaseId --jq 'length')
+          for i in $(seq 1 16); do
+            running=$(gh run list --workflow=daily.yml --repo=${{ github.repository }} \
+              --status=in_progress --limit=5 --json databaseId --jq 'length')
+            [ "$running" -eq 0 ] && break
+            echo "Daily pipeline is in progress — waiting 30s ($i/16)..."
+            sleep 30
+          done
           if [ "$running" -gt 0 ]; then
-            echo "Daily pipeline is in progress — skipping watchdog retry."
+            echo "Daily still running after 8 min — real long render, skipping."
             echo "skip=true" >> "$GITHUB_OUTPUT"
           else
             echo "skip=false" >> "$GITHUB_OUTPUT"

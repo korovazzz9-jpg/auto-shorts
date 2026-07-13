@@ -496,13 +496,29 @@ def _build_user_content(topic: str, avoid_block: str, title_instruction: str = T
     )
 
 
+def extract_first_json(raw: str, opener: str = "{"):
+    """Достаёт ПЕРВОЕ валидное JSON-значение из текста ответа модели (2026-07-13, реальные
+    падения 12-13.07): модель изредка отдаёт ДВА JSON-объекта подряд — прежний срез
+    find("{")..rfind("}") захватывал оба и json.loads падал «Extra data» на ВСЕХ ретраях
+    (модель в таком «настроении» повторяет паттерн), слот публикации терялся. raw_decode
+    берёт первый валидный объект/массив и игнорирует любой хвост (второй объект, ```-фенс,
+    комментарий модели). opener="[" — для ответов-массивов (discover_new_categories)."""
+    start = raw.find(opener)
+    if start == -1:
+        raise json.JSONDecodeError(f"в ответе модели нет JSON, начинающегося с '{opener}'", raw or " ", 0)
+    obj, _ = json.JSONDecoder().raw_decode(raw[start:])
+    return obj
+
+
 def _parse_response(message) -> dict:
     raw = message.content[0].text.strip()
     if raw.startswith("```"):
         raw = raw.strip("`")
         raw = raw.split("\n", 1)[1] if "\n" in raw else raw
-    start, end = raw.find("{"), raw.rfind("}")
-    return json.loads(raw[start:end + 1])
+    obj = extract_first_json(raw)
+    if not isinstance(obj, dict):
+        raise json.JSONDecodeError("первый JSON в ответе — не объект", raw, 0)
+    return obj
 
 
 def _drop_corrupted(items: list) -> list:

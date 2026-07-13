@@ -200,9 +200,10 @@ def _propose_candidates(outliers: list[dict]) -> list[dict]:
     if raw.startswith("```"):
         raw = raw.strip("`")
         raw = raw.split("\n", 1)[1] if "\n" in raw else raw
-    start, end = raw.find("["), raw.rfind("]")
     try:
-        candidates = json.loads(raw[start:end + 1])
+        # extract_first_json (2026-07-13): защита от двух JSON подряд («Extra data»).
+        from generate_script import extract_first_json
+        candidates = extract_first_json(raw, opener="[")
     except (json.JSONDecodeError, ValueError):
         return []
     result = []

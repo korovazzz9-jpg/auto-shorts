@@ -10,7 +10,7 @@ import random
 from anthropic import Anthropic
 
 from config import CFG, CHANNEL
-from generate_script import TOPICS_POOL as THEMES
+from generate_script import TOPICS_POOL as THEMES, extract_first_json
 from recent_titles import get_recent_titles
 
 # Порядок ротации форматов
@@ -166,9 +166,9 @@ def generate_longform_script() -> dict:
         if raw.startswith("```"):
             raw = raw.strip("`")
             raw = raw.split("\n", 1)[1] if "\n" in raw else raw
-        start, end = raw.find("{"), raw.rfind("}")
         try:
-            candidate = json.loads(raw[start:end + 1])
+            # extract_first_json (2026-07-13): защита от двух JSON подряд («Extra data»).
+            candidate = extract_first_json(raw)
             missing = [k for k in ("title", "script", "video_queries") if not candidate.get(k)]
             if missing:
                 raise ValueError(f"в JSON нет полей {missing}")

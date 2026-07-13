@@ -5,7 +5,7 @@ import os
 from anthropic import Anthropic
 
 from config import CFG
-from generate_script import BASE_SYSTEM_PROMPT, HOOK_TEMPLATES, TITLE_INSTRUCTION, TOPICS_POOL, BANNED_TOPICS
+from generate_script import BASE_SYSTEM_PROMPT, HOOK_TEMPLATES, TITLE_INSTRUCTION, TOPICS_POOL, BANNED_TOPICS, extract_first_json
 from recent_titles import add_title_to_cache, add_topic_to_cache, get_recent_titles
 from topic_stats import get_topic_avg_views
 import random
@@ -162,9 +162,10 @@ def generate_series() -> dict:
         if raw.startswith("```"):
             raw = raw.strip("`")
             raw = raw.split("\n", 1)[1] if "\n" in raw else raw
-        start, end = raw.find("{"), raw.rfind("}")
         try:
-            candidate = json.loads(raw[start:end + 1])
+            # extract_first_json (2026-07-13): модель изредка отдаёт два JSON подряд —
+            # старый срез до ПОСЛЕДНЕЙ "}" падал «Extra data» на всех ретраях.
+            candidate = extract_first_json(raw)
             # Структуру проверяем ЗДЕСЬ же: валидный JSON без part2/title раньше падал
             # KeyError уже ПОСЛЕ цикла ретраев — серия недели терялась без второй попытки.
             if "topic" not in candidate:

@@ -47,14 +47,12 @@ def _translate(title: str, description: str, target_lang: str) -> tuple[str, str
             messages=[{"role": "user", "content": prompt}],
         )
         raw = response.content[0].text.strip()
-        start, end = raw.find("{"), raw.rfind("}")
-        if start == -1 or end <= start:
-            last_err = ValueError("в ответе нет JSON-объекта")
-            continue
         try:
-            data = json.loads(raw[start:end + 1])
+            # extract_first_json (2026-07-13): защита от двух JSON подряд («Extra data»).
+            from generate_script import extract_first_json
+            data = extract_first_json(raw)
             return str(data["title"])[:100], str(data["description"])
-        except json.JSONDecodeError as e:
+        except (json.JSONDecodeError, KeyError, TypeError) as e:
             last_err = e
     raise RuntimeError(f"Перевод локализации невалиден после 3 попыток: {last_err}")
 

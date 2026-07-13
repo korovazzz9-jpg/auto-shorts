@@ -19,15 +19,22 @@ jobs:
   check-and-retry:
     runs-on: ubuntu-latest
     steps:
-      - name: Skip if daily-pt pipeline is already running
+      # 2026-07-13: ждём завершения живого прогона вместо немедленного skip — см. watchdog.yml
+      # (реальный промах 12.07: guard пришёл за 5 секунд до конца ПАДАЮЩЕГО прогона).
+      - name: Wait for in-flight daily-pt run, then decide
         id: guard
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          running=$(gh run list --workflow=daily-pt.yml --repo=${{ github.repository }} \
-            --status=in_progress --limit=5 --json databaseId --jq 'length')
+          for i in $(seq 1 16); do
+            running=$(gh run list --workflow=daily-pt.yml --repo=${{ github.repository }} \
+              --status=in_progress --limit=5 --json databaseId --jq 'length')
+            [ "$running" -eq 0 ] && break
+            echo "Daily-PT pipeline is in progress — waiting 30s ($i/16)..."
+            sleep 30
+          done
           if [ "$running" -gt 0 ]; then
-            echo "Daily-PT pipeline is in progress — skipping watchdog retry."
+            echo "Daily-PT still running after 8 min — real long render, skipping."
             echo "skip=true" >> "$GITHUB_OUTPUT"
           else
             echo "skip=false" >> "$GITHUB_OUTPUT"

@@ -1,0 +1,35 @@
+name: Token Health Check
+
+on:
+  # Ежедневная проверка живости YouTube OAuth-токенов (2026-07-13): реальные случаи —
+  # ES-токен умер 10.07, EN 12.07, оба раза узнавали по упавшей публикации (слот терялся).
+  # 08:13 UTC — задолго до первого дневного блока слотов (EN 16:13); тайминг некритичен,
+  # штатный GitHub-cron ок. Квота: 3 юнита/день (channels.list по каналу) — ничто.
+  schedule:
+    - cron: "13 8 * * *"
+  workflow_dispatch: {}
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Python deps
+        run: pip install -r requirements.txt
+
+      - name: Check all channel tokens
+        working-directory: src
+        env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          YT_REFRESH_TOKEN_ES: ${{ secrets.YT_REFRESH_TOKEN_ES }}
+          YT_REFRESH_TOKEN_PT: ${{ secrets.YT_REFRESH_TOKEN_PT }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python check_tokens.py
