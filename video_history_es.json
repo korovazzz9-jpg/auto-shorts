@@ -64,5 +64,23 @@
     "voice": "es-MX-JorgeNeural",
     "caption_color": "#7CFFCB",
     "pair_role": null
+  },
+  {
+    "video_id": "nUBhwP0qHM0",
+    "published_at": "2026-07-13T03:24:51.444369+00:00",
+    "title": "Esta computadora vive dentro de tus células vivas",
+    "topic": "future technology",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 41.8,
+    "voice": "es-US-AlonsoNeural",
+    "caption_color": "#7CFFCB",
+    "pair_role": null
   }
 ]
