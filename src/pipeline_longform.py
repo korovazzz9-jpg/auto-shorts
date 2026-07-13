@@ -173,16 +173,29 @@ def run() -> None:
         search_summary = str(data.get("search_summary", "")).strip()
         if search_summary:  # ключевые слова для YouTube Search — скрипт их почти не содержит
             description = f"{search_summary}\n\n{description}"
-        # Главы (key moments, 2026-07-03): бесплатный SEO-бонус — YouTube показывает главы
-        # в поиске. Тайминги — из реальной озвучки, не оценка. Пусто = глав нет, как раньше.
+
+        # Хвост (главы + кросс-промо) собираем ОТДЕЛЬНО от основного текста (2026-07-13,
+        # реальный прод-баг): раньше всё склеивалось в одну строку и обрезалось по лимиту
+        # 4990 символов ЦЕЛИКОМ с конца — у длинного лонгформа (4955/4990 символов) это
+        # молча снесло и ссылку на сестринский канал, и все хештеги, потому что они шли
+        # последними. Теперь при нехватке места обрезается только script — самая длинная
+        # и наименее критичная к целостности часть, хвост переживает всегда.
         chapters_block = _chapter_lines(data["script"], data.get("chapters", []), words)
-        if chapters_block:
-            description += f"\n\n{chapters_block}"
-        # Кросс-промо EN↔ES — та же логика, что в publish.py для Shorts.
+        tail = f"\n\n{chapters_block}" if chapters_block else ""
         sister_handle = CFG.get("sister_channel_handle", "")
         sister_ctas = CFG.get("sister_desc_ctas", [])
         if sister_handle and sister_ctas:
-            description += f"\n\n{random.choice(sister_ctas)} https://www.youtube.com/@{sister_handle}"
+            tail += f"\n\n{random.choice(sister_ctas)} https://www.youtube.com/@{sister_handle}"
+
+        hashtag_budget = len(" ".join(data["hashtags"])) + 2 if data["hashtags"] else 0
+        max_body = 4990 - len(tail) - hashtag_budget
+        if len(description) > max_body:
+            cut = description[:max_body - 1]  # -1: резерв под добавляемое "…"
+            if " " in cut[-40:]:
+                cut = cut.rsplit(" ", 1)[0]
+            description = cut.rstrip() + "…"
+        description += tail
+
         tags = list(data["tags"]) + list(CFG.get("sister_lang_tags", []))
         video_id = upload_to_youtube(
             video_path,

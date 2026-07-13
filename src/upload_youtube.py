@@ -30,10 +30,17 @@ def upload_video(
 ) -> str:
     youtube = get_client()
     hashtag_line = " ".join(hashtags)
+    # Резервируем место под хештеги (2026-07-13, реальный прод-баг): раньше description+
+    # hashtag_line склеивались в одну строку и обрезались ЦЕЛИКОМ по хвосту — у длинного
+    # лонгформ-скрипта (4955/4990 символов) это молча снесло и ссылку на сестринский канал,
+    # и все хештеги, т.к. они шли последними. Теперь хештеги гарантированно переживают —
+    # обрезается только description, если места не хватает.
+    reserved = len(hashtag_line) + 2 if hashtag_line else 0  # +2 = "\n\n"
+    safe_description = _sanitize_youtube_text(description, max(4990 - reserved, 0))
     if hashtag_position == "end":
-        full_description = f"{description}\n\n{hashtag_line}"
+        full_description = f"{safe_description}\n\n{hashtag_line}" if hashtag_line else safe_description
     else:
-        full_description = f"{hashtag_line}\n\n{description}"
+        full_description = f"{hashtag_line}\n\n{safe_description}" if hashtag_line else safe_description
     body = {
         "snippet": {
             "title": _sanitize_youtube_text(title, 100),

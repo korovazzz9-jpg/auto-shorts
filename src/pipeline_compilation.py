@@ -221,21 +221,35 @@ def run() -> None:
         search_summary = str(glue.get("search_summary", "")).strip()
         if search_summary:
             description = f"{search_summary}\n\n{description}"
+
+        # Хвост (главы + кросс-промо) отдельно от script — та же защита, что в
+        # pipeline_longform.py (2026-07-13, реальный прод-баг: цельная обрезка по 4990
+        # символам молча срезала ссылку на сестринский канал и все хештеги у длинного
+        # скрипта). Обрезается только script, хвост+хештеги переживают всегда.
+        import random
         chapters = _chapters_block(words, boundaries, [f["title"] for f in facts])
-        if chapters:
-            description += f"\n\n{chapters}"
+        tail = f"\n\n{chapters}" if chapters else ""
         sister_handle = CFG.get("sister_channel_handle", "")
         sister_ctas = CFG.get("sister_desc_ctas", [])
         if sister_handle and sister_ctas:
-            import random
-            description += f"\n\n{random.choice(sister_ctas)} https://www.youtube.com/@{sister_handle}"
+            tail += f"\n\n{random.choice(sister_ctas)} https://www.youtube.com/@{sister_handle}"
+
+        hashtags = glue.get("hashtags", [])
+        hashtag_budget = len(" ".join(hashtags)) + 2 if hashtags else 0
+        max_body = 4990 - len(tail) - hashtag_budget
+        if len(description) > max_body:
+            cut = description[:max_body - 1]  # -1: резерв под добавляемое "…"
+            if " " in cut[-40:]:
+                cut = cut.rsplit(" ", 1)[0]
+            description = cut.rstrip() + "…"
+        description += tail
 
         video_id = upload_to_youtube(
             video_path,
             title=glue["title"],
             description=description,
             tags=list(glue.get("tags", [])) + list(CFG.get("sister_lang_tags", [])),
-            hashtags=glue.get("hashtags", []),
+            hashtags=hashtags,
             hashtag_position="end",
             thumbnail_path=thumb_path,
             default_language=CFG["lang_code"],
