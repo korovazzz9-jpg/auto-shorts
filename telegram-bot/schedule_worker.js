@@ -12,7 +12,9 @@
 // (см. config.py daily_slots_utc).
 const EN_SLOTS = [[16, 13], [20, 7], [23, 7], [0, 7]];
 // 2026-07-13: слот 16:17 убран (4→3/день, ответ на подавление раздачи ES).
-const ES_SLOTS = [[20, 17], [0, 17], [3, 17]];
+// 2026-07-14: слот 20:17 убран (3→2/день) — во время подавления меньше, но качественнее;
+// оставлены 00:17 (прайм, серии замещают) и 03:17 (вечерний пик Мехико).
+const ES_SLOTS = [[0, 17], [3, 17]];
 const PT_SLOTS = [[17, 23], [21, 23], [23, 23], [1, 23]];
 const TRIGGERS = ["расписание", "/расписание", "schedule", "/schedule", "/start"];
 
@@ -37,7 +39,7 @@ function buildSchedule() {
 
   const lines = ["📅 Расписание выхода роликов", "(🇻🇳 Вьетнам · 🇷🇺 Москва)", "", "EN — 4/день:"];
   for (const [h, m] of EN_SLOTS) { const [vn, msk] = conv(h, m); lines.push(`• ${vn} · ${msk}`); }
-  lines.push("", "ES — 3/день:");
+  lines.push("", "ES — 2/день:");
   for (const [h, m] of ES_SLOTS) { const [vn, msk] = conv(h, m); lines.push(`• ${vn} · ${msk}`); }
   lines.push("", "PT — 4/день:");
   for (const [h, m] of PT_SLOTS) { const [vn, msk] = conv(h, m); lines.push(`• ${vn} · ${msk}`); }
