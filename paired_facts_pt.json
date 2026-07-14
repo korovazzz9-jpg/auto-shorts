@@ -8,5 +8,15 @@
     "part_b_video_id": "vrs2B55kkz0",
     "status": "resolved",
     "created_at": 1783632517.0210874
+  },
+  {
+    "id": "bw1cLQeNqkM-1784071732",
+    "topic": "ancient history",
+    "part_a_video_id": "bw1cLQeNqkM",
+    "part_a_title": "O escravo que virou faraó e reescreveu o Egito",
+    "claim": "Tutancâmon's monuments were largely stolen by later pharaohs.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1784071732.3357036
   }
 ]
