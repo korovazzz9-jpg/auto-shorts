@@ -4,6 +4,30 @@ from googleapiclient.http import MediaFileUpload
 from youtube_auth import get_client
 
 
+MAX_TAGS_TOTAL = 460  # запас от жёсткого лимита YouTube 500 симв. (см. _sanitize_tags)
+
+
+def _sanitize_tags(tags: list[str]) -> list[str]:
+    """Обрезает список тегов под суммарный лимит YouTube (2026-07-14, реальное падение:
+    invalidTags — «The request metadata specifies invalid video keywords»). YouTube считает
+    сумму длин ВСЕХ тегов (многословные — в кавычках, +2 символа) не более 500; с ростом
+    числа служебных тегов (topic-/hook-/tone-/color-/voice-/format-/sister_lang_tags) лимит
+    стало реально достижимо превысить. Отбрасываем "<"/">" (как в тексте) и теги сверх
+    бюджета — приоритет у тегов, добавленных РАНЬШЕ в списке (они содержательнее, служебные
+    идут в конце), лишние просто не попадают в запрос вместо падения всей публикации."""
+    cleaned, total = [], 0
+    for t in tags:
+        t = str(t).replace("<", "").replace(">", "").strip()
+        if not t:
+            continue
+        cost = len(t) + (2 if " " in t else 0)
+        if total + cost > MAX_TAGS_TOTAL:
+            continue
+        cleaned.append(t)
+        total += cost
+    return cleaned
+
+
 def _sanitize_youtube_text(text: str, max_len: int) -> str:
     """Приводит текст к требованиям YouTube для title/description: убирает угловые скобки
     (< и > YouTube отклоняет как invalidDescription/invalidTitle — реальное падение обоих
@@ -45,7 +69,7 @@ def upload_video(
         "snippet": {
             "title": _sanitize_youtube_text(title, 100),
             "description": _sanitize_youtube_text(full_description, 4990),
-            "tags": tags,
+            "tags": _sanitize_tags(tags),
             "categoryId": "27",  # Education
         },
         "status": {
