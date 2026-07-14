@@ -88,5 +88,24 @@
     "voice": "es-US-AlonsoNeural",
     "caption_color": "#7CFFCB",
     "pair_role": null
+  },
+  {
+    "video_id": "mBnSG4WYx5M",
+    "published_at": "2026-07-14T03:23:01.674054+00:00",
+    "title": "El volcán que construye tierra nueva cada día",
+    "topic": "natural wonders",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "awe",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 33.9,
+    "voice": "es-MX-DaliaNeural",
+    "caption_color": "#7CFFCB",
+    "structure": "myth-debunk",
+    "pair_role": null
   }
 ]
