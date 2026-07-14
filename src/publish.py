@@ -104,50 +104,54 @@ def publish(
     # Плейлисты для Shorts отключены: 0 открытий (Shorts смотрят в ленте, не через
     # плейлисты), а каждый ролик тратил ~50 ед. квоты YouTube. Лонгформ плейлисты сохраняет
     # (свой pipeline_longform).
-    try:
-        channel_url = f"https://www.youtube.com/@{CFG['channel_handle']}" if CFG.get("channel_handle") else ""
-        comment_template = CFG.get("first_comment", "")
-        # Выкидываем строки про плейлист — плейлистов у Shorts больше нет.
-        lines = [ln for ln in comment_template.split("\n") if "{playlist_url}" not in ln]
-        comment = "\n".join(lines).format(channel_url=channel_url).strip()
-        # Фактоспецифичный вопрос (2026-07-04): модель отдаёт comment_question в том же
-        # вызове генерации — вопрос про КОНКРЕТНЫЙ факт собирает больше ответов, чем
-        # генерик «ты это знал?» (comment density — топ-сигнал ранжирования). Заменяет
-        # первую (генерик-провокация) строку шаблона, строка подписки остаётся. Замена
-        # ПОСЛЕ .format() — чтобы случайные фигурные скобки в тексте модели не уронили его.
-        fact_q = str(data.get("comment_question", "")).strip()
-        if fact_q and comment:
-            comment_lines = comment.split("\n")
-            comment_lines[0] = fact_q
-            comment = "\n".join(comment_lines)
-        # Строка подписки из пула (2026-07-05): раньше это была ЕДИНСТВЕННАЯ дословно
-        # одинаковая строка на 100% видео канала — "bot-like pattern" сигнал спам-детекции.
-        # Заменяет ВТОРУЮ строку (первая уже заменена fact_q выше). Тот же паттерн, что
-        # first_comment_replies. Пусто в конфиге → строка остаётся как в шаблоне.
-        subscribe_ctas = CFG.get("first_comment_subscribe_ctas", [])
-        if subscribe_ctas and comment:
-            comment_lines = comment.split("\n")
-            if len(comment_lines) >= 2:
-                comment_lines[1] = random.choice(subscribe_ctas).format(channel_url=channel_url)
+    # post_first_comment (2026-07-14): временный рубильник для ES — под подавлением раздачи
+    # (inauthentic-classifier) решили на всякий случай убрать авто-коммент, вдруг он тоже
+    # часть шаблонного "bot-like" сигнала. Обратимо одной строкой в config.py.
+    if CFG.get("post_first_comment", True):
+        try:
+            channel_url = f"https://www.youtube.com/@{CFG['channel_handle']}" if CFG.get("channel_handle") else ""
+            comment_template = CFG.get("first_comment", "")
+            # Выкидываем строки про плейлист — плейлистов у Shorts больше нет.
+            lines = [ln for ln in comment_template.split("\n") if "{playlist_url}" not in ln]
+            comment = "\n".join(lines).format(channel_url=channel_url).strip()
+            # Фактоспецифичный вопрос (2026-07-04): модель отдаёт comment_question в том же
+            # вызове генерации — вопрос про КОНКРЕТНЫЙ факт собирает больше ответов, чем
+            # генерик «ты это знал?» (comment density — топ-сигнал ранжирования). Заменяет
+            # первую (генерик-провокация) строку шаблона, строка подписки остаётся. Замена
+            # ПОСЛЕ .format() — чтобы случайные фигурные скобки в тексте модели не уронили его.
+            fact_q = str(data.get("comment_question", "")).strip()
+            if fact_q and comment:
+                comment_lines = comment.split("\n")
+                comment_lines[0] = fact_q
                 comment = "\n".join(comment_lines)
-        if longform_url:  # та же воронка — ссылка на лонгформ в закреп-комменте
-            comment_cta = CFG.get("longform_comment_cta", "Want the full story?")
-            comment = (comment + f"\n\n▶ {comment_cta} {longform_url}").strip()
-        if extra_comment:  # серии: ссылка на плейлист (+ прямые ссылки на части в Part 3)
-            comment = (comment + "\n\n" + extra_comment).strip()
-        if comment:
-            comment_id = post_channel_comment(video_id, comment)
-            # #3 Само-ответ → мини-тред (engagement density). Пул вариантов из CFG — один и
-            # тот же текст под каждым видео выглядел ботово.
-            replies = CFG.get("first_comment_replies", [])
-            reply = random.choice(replies) if replies else ""
-            if reply:
-                try:
-                    post_comment_reply(comment_id, reply)
-                except Exception as e:
-                    alert("comment reply", e)
-    except Exception as e:
-        alert("first comment", e)
+            # Строка подписки из пула (2026-07-05): раньше это была ЕДИНСТВЕННАЯ дословно
+            # одинаковая строка на 100% видео канала — "bot-like pattern" сигнал спам-детекции.
+            # Заменяет ВТОРУЮ строку (первая уже заменена fact_q выше). Тот же паттерн, что
+            # first_comment_replies. Пусто в конфиге → строка остаётся как в шаблоне.
+            subscribe_ctas = CFG.get("first_comment_subscribe_ctas", [])
+            if subscribe_ctas and comment:
+                comment_lines = comment.split("\n")
+                if len(comment_lines) >= 2:
+                    comment_lines[1] = random.choice(subscribe_ctas).format(channel_url=channel_url)
+                    comment = "\n".join(comment_lines)
+            if longform_url:  # та же воронка — ссылка на лонгформ в закреп-комменте
+                comment_cta = CFG.get("longform_comment_cta", "Want the full story?")
+                comment = (comment + f"\n\n▶ {comment_cta} {longform_url}").strip()
+            if extra_comment:  # серии: ссылка на плейлист (+ прямые ссылки на части в Part 3)
+                comment = (comment + "\n\n" + extra_comment).strip()
+            if comment:
+                comment_id = post_channel_comment(video_id, comment)
+                # #3 Само-ответ → мини-тред (engagement density). Пул вариантов из CFG — один и
+                # тот же текст под каждым видео выглядел ботово.
+                replies = CFG.get("first_comment_replies", [])
+                reply = random.choice(replies) if replies else ""
+                if reply:
+                    try:
+                        post_comment_reply(comment_id, reply)
+                    except Exception as e:
+                        alert("comment reply", e)
+        except Exception as e:
+            alert("first comment", e)
 
     # Субтитры жгут ~1200 ед. квоты YouTube/видео — включать только когда квота позволяет.
     if enable_captions:

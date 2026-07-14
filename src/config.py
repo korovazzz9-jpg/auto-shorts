@@ -300,6 +300,10 @@ CONFIGS = {
         "chapters_label": "Capítulos:",
         "longform_desc_cta": "Análisis completos en el canal:",
         "longform_comment_cta": "¿Quieres la historia completa? Mira el análisis 👉",
+        # 2026-07-14: ВРЕМЕННО выключен авто-коммент под канал (post_first_comment) —
+        # ES под подавлением раздачи (inauthentic-classifier), на всякий случай убираем
+        # ещё один потенциально "шаблонный/bot-like" сигнал. Вернуть True после восстановления.
+        "post_first_comment": False,
         "first_comment": "Un momento — ¿tú ya sabías esto? 👇\nSuscríbete para un dato nuevo cada día 👉 {channel_url}",
         "first_comment_subscribe_ctas": [
             "Suscríbete para un dato nuevo cada día 👉 {channel_url}",
