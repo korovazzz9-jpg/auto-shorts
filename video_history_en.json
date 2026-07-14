@@ -109,5 +109,24 @@
     "voice": "en-AU-WilliamNeural",
     "caption_color": "#7CFFCB",
     "pair_role": "a"
+  },
+  {
+    "video_id": "myXmS_P5D5E",
+    "published_at": "2026-07-14T16:21:37.322149+00:00",
+    "title": "Nobody Expected a Volcano to Erupt Sideways",
+    "topic": "volcanoes and earthquakes",
+    "hook_template": "sounds-fake",
+    "title_opener": "nobody-expected",
+    "emotional_tone": "awe",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 33.3,
+    "voice": "en-US-GuyNeural",
+    "caption_color": "yellow",
+    "structure": "historical-story",
+    "pair_role": null
   }
 ]
