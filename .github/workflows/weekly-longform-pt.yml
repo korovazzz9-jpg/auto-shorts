@@ -1,0 +1,64 @@
+name: Weekly Longform Compilation (PT)
+
+on:
+  # Раз в неделю, воскресенье 22:23 UTC (19:23 BRT, ранний вечер) — ОТДЕЛЬНЫЙ слот, не
+  # забирает шортс: PT-слоты идут 17:23 / 21:23 / 23:23 / 01:23 UTC, 22:23 попадает ровно в
+  # разрыв между 21:23 и 23:23. Минута :23 — общий паттерн PT-канала.
+  # Триггерится cron-job.org (workflow_dispatch); GitHub-cron не используем — опаздывает.
+  # ⚠️ Требует настройки триггера в cron-job.org (вс 22:23 UTC), иначе не запустится.
+  #
+  # 2026-07-15, создан по решению пользователя. Честная оговорка на будущее: замер отдачи
+  # лонгформа на здоровых каналах — EN медиана 6 просмотров (12/6/3/6) против 900-1000 у
+  # шортсов, ES 16. Причина структурная: канал Shorts-нативный, у длинного видео нет
+  # browse/suggested-раздачи. EN-лонгформ по этой причине заглушен (weekly-longform.yml).
+  # PT запущен как проверка гипотезы, что на самом сильном канале (1000-1728 на ролик)
+  # лонгформ поведёт себя иначе. Оценивать через 3-4 недели (n≥4). Пауза: `if: false`
+  # перед `runs-on` в job ниже.
+  workflow_dispatch: {}
+
+permissions:
+  contents: write   # коммитит longform_state_pt.json для ротации форматов
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install system deps
+        run: sudo apt-get update && sudo apt-get install -y imagemagick
+
+      - name: Allow ImageMagick to read caption text files
+        run: sudo sed -i '/pattern="@\*"/d' /etc/ImageMagick-6/policy.xml
+
+      - name: Install Python deps
+        run: pip install -r requirements.txt
+
+      - name: Run longform pipeline (Portuguese channel)
+        working-directory: src
+        env:
+          CHANNEL: pt
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+          PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
+          NOVITA_KEY: ${{ secrets.NOVITA_KEY }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          # Секрет YT_REFRESH_TOKEN_PT маппится в стандартное имя (как в daily-pt.yml).
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN_PT }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python pipeline_longform.py
+
+      - name: Commit longform state (format rotation)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add longform_state_pt.json
+          git commit -m "chore: longform_state_pt format rotation" || { echo "no changes"; exit 0; }
+          git pull --rebase origin master
+          git push
