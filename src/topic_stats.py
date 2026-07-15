@@ -7,7 +7,15 @@ from youtube_auth import get_client
 TOPIC_TAG_RE = re.compile(r"^topic-(.+)$")
 
 
-def get_topic_avg_views() -> dict[str, float]:
+def get_topic_avg_views(known_topics: set[str] | None = None) -> dict[str, float]:
+    """known_topics (2026-07-15) — вернуть только темы из этого набора. Нужно, потому что в
+    тегах живут не только темы из пула: `generate_series.py` тегирует `topic-<конкретная тема
+    серии>` (LLM-строка вроде «Immortal Animals» / «The Ancient City That Voted to Destroy
+    Itself» — по одной на серию, n=3 по числу частей), плюс остаются легаси-темы, удалённые
+    из пула (psychology, bizarre records). Такой мусор не совпадает ни с одной темой пула, но
+    у вызывающих он ПОРТИЛ `overall_avg` (по нему считается вес тем БЕЗ данных) и накручивал
+    счётчик в гейте `MIN_TOPICS_WITH_DATA`. Без аргумента поведение прежнее — полная картина
+    (нужна для диагностики через __main__)."""
     youtube = get_client()
 
     channels = youtube.channels().list(part="contentDetails", mine=True).execute()
@@ -40,6 +48,8 @@ def get_topic_avg_views() -> dict[str, float]:
                     topic = match.group(1).replace("_", " ")
                     break
             if not topic:
+                continue
+            if known_topics is not None and topic not in known_topics:
                 continue
             views = int(video["statistics"].get("viewCount", 0))
             views_by_topic.setdefault(topic, []).append(views)

@@ -124,7 +124,10 @@ def _pick_topic() -> str:
     pool = [t for t in TOPICS_POOL if t not in exclude] or TOPICS_POOL
 
     try:
-        avg_views = get_topic_avg_views()
+        # Только темы пула: тег topic- носят и серии (там LLM-тема серии, не категория пула),
+        # и легаси-темы, убранные из пула — они не совпадают ни с чем в pool, но искажали
+        # overall_avg ниже и накручивали гейт MIN_TOPICS_WITH_DATA (см. topic_stats).
+        avg_views = get_topic_avg_views(set(TOPICS_POOL))
     except Exception:
         avg_views = {}
 

@@ -64,7 +64,9 @@ def _pick_series_topic() -> str:
         return winner
 
     try:
-        avg_views = get_topic_avg_views()
+        # Только темы из SERIES_TOPICS — иначе overall_avg ниже (вес тем БЕЗ данных) считался
+        # бы вместе с мусорными topic-тегами: темами самих серий и легаси-темами вне пула.
+        avg_views = get_topic_avg_views(set(SERIES_TOPICS))
     except Exception:
         avg_views = {}
     overall_avg = sum(avg_views.values()) / len(avg_views) if avg_views else 100
