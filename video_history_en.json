@@ -128,5 +128,24 @@
     "caption_color": "yellow",
     "structure": "historical-story",
     "pair_role": null
+  },
+  {
+    "video_id": "9bx4_S8i0rk",
+    "published_at": "2026-07-15T16:21:04.032513+00:00",
+    "title": "Your Jaw Bone Used to Be Your Ear",
+    "topic": "evolution",
+    "hook_template": "you-experience",
+    "title_opener": "your-x",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 26.8,
+    "voice": "en-AU-WilliamNeural",
+    "caption_color": "yellow",
+    "structure": "happening-now",
+    "pair_role": null
   }
 ]
