@@ -394,5 +394,55 @@
     "niche_styled": true,
     "title_variant": "narrative",
     "hashtag_position": "end"
+  },
+  {
+    "title": "El guerrero que encontraron con su armadura puesta",
+    "title_opener": "the-x",
+    "hook_text": "3,000 años bajo tierra, intacto",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "awe",
+    "script": "They pulled him out of the ground exactly as he fell. En 2001, arqueólogos en Salamina, Chipre, desenterraron a un guerrero de la Edad del Hierro sepultado alrededor del año 700 a.C., con su armadura de bronce todavía puesta, su lanza al lado, y su caballo sacrificado encima. Nadie había tocado esa tumba en 2,700 años. La armadura estaba tan bien preservada que los investigadores pudieron reconstruir cómo se la ponían antes de la batalla. ¿Qué harías si encontraras una tumba así y pudieras abrirla o dejarla sellada para siempre?",
+    "word_count": 88,
+    "search_summary": "Guerrero de la Edad del Hierro encontrado en Salamina, Chipre, con armadura de bronce intacta después de 2,700 años.",
+    "comment_question": "¿Abrirías esa tumba o la dejarías sellada para siempre? ⚔️",
+    "source_note": "Departamento de Antigüedades de Chipre, 2001",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "descubrimiento arqueológico",
+      "datos curiosos",
+      "historia antigua",
+      "armadura de bronce",
+      "Chipre arqueología",
+      "guerrero antiguo",
+      "Edad del Hierro",
+      "tumbas antiguas",
+      "descubrimiento arqueológico en oaxaca",
+      "datos curiosos del mundo",
+      "historia antigua del mundo"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#arqueología",
+      "#historiaantigua",
+      "#descubrimiento"
+    ],
+    "video_queries": [
+      "archaeologist excavation dig site",
+      "ancient ruins Cyprus landscape",
+      "archaeologist brushing artifacts",
+      "ancient bronze armor museum",
+      "underground tomb excavation",
+      "ancient burial site dig"
+    ],
+    "has_loop": false,
+    "topic": "archaeological discoveries",
+    "structure": "historical-story",
+    "niche_styled": true,
+    "title_variant": "seo",
+    "hashtag_position": "end"
   }
 ]
