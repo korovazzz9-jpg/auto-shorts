@@ -1,52 +1,5 @@
 [
   {
-    "title": "O computador que funciona a 0°C absoluto",
-    "title_opener": "the-x",
-    "hook_text": "Isso não deveria existir",
-    "hook_template": "sounds-fake",
-    "emotional_tone": "impossible",
-    "script": "Um computador fica mais poderoso quanto mais frio ele fica — e o limite físico disso vai destruir tudo que você sabe sobre processamento. Computadores quânticos operam a 0,015 Kelvin, mais frio que o espaço sideral, para manter os qubits estáveis. A 273°C negativos, partículas param de vibrar e a informação pode existir em dois estados ao mesmo tempo. Mas o detalhe insano: um único qubit errado apaga o cálculo inteiro. Manda isso pra quem acha que computador potente é só questão de ter mais núcleos.",
-    "word_count": 86,
-    "search_summary": "Computadores quânticos operam a 0,015 Kelvin, mais frio que o espaço sideral, para manter qubits estáveis.",
-    "comment_question": "Se um qubit errado apaga tudo, como eles confiam nessa tecnologia? 🤯",
-    "source_note": "IBM Quantum, relatório técnico, 2023",
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "fatos curiosos",
-      "tecnologia do futuro",
-      "computador quântico",
-      "qubits explicados",
-      "inteligência artificial",
-      "ciência de dados",
-      "fatos em 30 segundos",
-      "tecnologia incrível",
-      "física quântica aplicada"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#fatoscuriosos",
-      "#computadorquantico",
-      "#tecnologia",
-      "#ciencia"
-    ],
-    "video_queries": [
-      "futuristic server room cold",
-      "liquid nitrogen laboratory cooling",
-      "quantum computing research lab",
-      "scientist working cryogenic chamber",
-      "extreme cold laboratory experiment",
-      "data center glowing blue lights"
-    ],
-    "has_loop": false,
-    "topic": "future technology",
-    "niche_styled": false,
-    "title_variant": "narrative",
-    "hashtag_position": "end"
-  },
-  {
     "title": "A caverna que respira de verdade",
     "title_opener": "the-x",
     "hook_text": "Essa caverna está viva",
