@@ -18,5 +18,15 @@
     "part_b_video_id": "5mB8rTTJ0xc",
     "status": "resolved",
     "created_at": 1784160806.1978295
+  },
+  {
+    "id": "XV9-KYbNxm8-1784243588",
+    "topic": "historical mysteries",
+    "part_a_video_id": "XV9-KYbNxm8",
+    "part_a_title": "The Letter That Killed 10,000 Soldiers",
+    "claim": "Tennyson wrote 'Charge of the Light Brigade' within minutes of reading the news.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1784243588.300981
   }
 ]
