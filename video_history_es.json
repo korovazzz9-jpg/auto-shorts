@@ -126,5 +126,24 @@
     "caption_color": "#7CFFCB",
     "structure": "myth-debunk",
     "pair_role": "b"
+  },
+  {
+    "video_id": "CjcxTnYEVgA",
+    "published_at": "2026-07-16T03:24:05.303819+00:00",
+    "title": "La computadora que predijo el fin del mundo en 1945",
+    "topic": "future technology",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "impossible",
+    "title_variant": "seo",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": true,
+    "length_seconds": 30.5,
+    "voice": "es-CO-GonzaloNeural",
+    "caption_color": "yellow",
+    "structure": "myth-debunk",
+    "pair_role": null
   }
 ]
