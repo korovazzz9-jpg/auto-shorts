@@ -147,5 +147,24 @@
     "caption_color": "yellow",
     "structure": "happening-now",
     "pair_role": null
+  },
+  {
+    "video_id": "DtOr1dv1Tr0",
+    "published_at": "2026-07-16T16:22:28.843646+00:00",
+    "title": "The Volcano That Swallowed a Town Whole",
+    "topic": "volcanoes and earthquakes",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "fear",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": true,
+    "length_seconds": 35.2,
+    "voice": "en-US-GuyNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": null
   }
 ]
