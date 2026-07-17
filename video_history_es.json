@@ -145,5 +145,24 @@
     "caption_color": "yellow",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "YSlN0A4o-Ok",
+    "published_at": "2026-07-17T03:24:08.810932+00:00",
+    "title": "Tu médula fabrica 2 millones de células cada segundo",
+    "topic": "the human body",
+    "hook_template": "you-experience",
+    "title_opener": "your-x",
+    "emotional_tone": "awe",
+    "title_variant": "seo",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 30.6,
+    "voice": "es-US-AlonsoNeural",
+    "caption_color": "#7CFFCB",
+    "structure": "happening-now",
+    "pair_role": null
   }
 ]
