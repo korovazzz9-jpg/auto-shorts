@@ -1,54 +1,5 @@
 [
   {
-    "title": "El océano tiene una zona donde nada puede morir",
-    "title_opener": "the-x",
-    "hook_text": "Ni bacterias sobreviven aquí",
-    "hook_template": "sounds-fake",
-    "emotional_tone": "creepy",
-    "script": "Una nave de investigación sacó agua del Pacífico... y dentro no había nada vivo. En 1997, oceanógrafos estudiando el Giro del Pacífico Norte descubrieron que ese remolino oceánico atrapa agua tan estancada y sin nutrientes que hasta las bacterias mueren. El agua circula ahí dentro durante décadas sin renovarse. Hoy lo llaman el 'desierto oceánico': más de 20 millones de kilómetros cuadrados donde el océano está técnicamente vivo pero funcionalmente muerto. Si cayeras ahí, estarías rodeado de agua... y absolutamente solo. ¿Cuál crees que es el lugar más muerto de la Tierra: ese giro... o el desierto del Sahara?",
-    "word_count": 103,
-    "search_summary": "El Giro del Pacífico Norte es un desierto oceánico de 20 millones de km² sin vida detectable.",
-    "comment_question": "¿Preferirías perderte en el Sahara o en el Giro del Pacífico Norte? 🌊",
-    "source_note": "NOAA North Pacific Gyre studies, 1997",
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "océano",
-      "datos curiosos",
-      "curiosidades del mar",
-      "giro del pacífico",
-      "desierto oceánico",
-      "zonas muertas del océano",
-      "datos en 30 segundos",
-      "hechos increíbles",
-      "datos curiosos que no sabías",
-      "curiosidades del mar muerto"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#curiosidades",
-      "#oceano",
-      "#datoscuriosos",
-      "#mar"
-    ],
-    "video_queries": [
-      "ocean research vessel open sea",
-      "deep ocean water sample scientist",
-      "vast empty ocean surface aerial",
-      "ocean gyre satellite view",
-      "lonely diver empty ocean water",
-      "desert aerial vast empty landscape"
-    ],
-    "has_loop": false,
-    "topic": "the ocean",
-    "structure": "historical-story",
-    "niche_styled": true,
-    "title_variant": "seo",
-    "hashtag_position": "end"
-  },
-  {
     "title": "Tu médula fabrica 2 millones de células cada segundo",
     "title_opener": "your-x",
     "hook_text": "Esto pasa dentro de ti AHORA",
