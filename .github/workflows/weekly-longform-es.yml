@@ -43,6 +43,11 @@ jobs:
           NOVITA_KEY: ${{ secrets.NOVITA_KEY }}
           YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
           YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          # 2026-07-17: свой OAuth-клиент на канал (лимит Google — 50 живых токенов
+          # на client_id+аккаунт; общий client_id вытеснял чужие токены).
+          # Секрет не заведён => _client_pair() падает на общие выше.
+          YT_CLIENT_ID_ES: ${{ secrets.YT_CLIENT_ID_ES }}
+          YT_CLIENT_SECRET_ES: ${{ secrets.YT_CLIENT_SECRET_ES }}
           YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN_ES }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}

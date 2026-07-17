@@ -48,6 +48,11 @@ jobs:
           NOVITA_KEY: ${{ secrets.NOVITA_KEY }}
           YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
           YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          # 2026-07-17: свой OAuth-клиент на канал (лимит Google — 50 живых токенов
+          # на client_id+аккаунт; общий client_id вытеснял чужие токены).
+          # Секрет не заведён => _client_pair() падает на общие выше.
+          YT_CLIENT_ID_PT: ${{ secrets.YT_CLIENT_ID_PT }}
+          YT_CLIENT_SECRET_PT: ${{ secrets.YT_CLIENT_SECRET_PT }}
           # Секрет YT_REFRESH_TOKEN_PT маппится в стандартное имя (как в daily-pt.yml).
           YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN_PT }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}

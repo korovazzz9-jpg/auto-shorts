@@ -25,22 +25,45 @@ def _default_refresh_token() -> str:
     return suffixed or os.environ["YT_REFRESH_TOKEN"]
 
 
-def _credentials(refresh_token: str | None = None) -> Credentials:
+def _client_pair(channel: str | None = None) -> tuple[str, str]:
+    """(client_id, client_secret) для канала. 2026-07-17: у каждого канала СВОЙ OAuth-клиент.
+
+    Причина: лимит Google — 50 живых refresh-токенов на пару (client_id + Google-аккаунт);
+    при превышении САМЫЙ СТАРЫЙ токен молча инвалидируется. Все 3 канала висели на одном
+    client_id и одном аккаунте, то есть делили один счётчик — каждый перевыпуск приближал
+    вытеснение чужого рабочего токена. Отсюда серия `invalid_grant` без всякой периодичности
+    (ES 10.07, EN 12.07, EN 17.07). Отдельный client_id = отдельный счётчик на канал.
+
+    Фолбэк на общие YT_CLIENT_ID/SECRET оставлен намеренно: позволяет переводить каналы по
+    одному и не ломает GH Actions, где ещё не заведены суффиксные секреты."""
+    ch = (channel or CHANNEL).upper()
+    cid = os.environ.get(f"YT_CLIENT_ID_{ch}") or os.environ["YT_CLIENT_ID"]
+    sec = os.environ.get(f"YT_CLIENT_SECRET_{ch}") or os.environ["YT_CLIENT_SECRET"]
+    return cid, sec
+
+
+def _credentials(refresh_token: str | None = None, channel: str | None = None) -> Credentials:
+    cid, sec = _client_pair(channel)
     return Credentials(
         token=None,
         refresh_token=refresh_token or _default_refresh_token(),
-        client_id=os.environ["YT_CLIENT_ID"],
-        client_secret=os.environ["YT_CLIENT_SECRET"],
+        client_id=cid,
+        client_secret=sec,
         token_uri="https://oauth2.googleapis.com/token",
         scopes=SCOPES,
     )
 
 
-def get_client(refresh_token: str | None = None):
+def get_client(refresh_token: str | None = None, channel: str | None = None):
     """refresh_token: переопределить авто-выбор по CHANNEL — нужно comment_agent.py, который в
     ОДНОМ процессе работает сразу с обоими каналами (EN/ES), а не выбирает канал через CHANNEL
-    env как остальной пайплайн."""
-    return build("youtube", "v3", credentials=_credentials(refresh_token))
+    env как остальной пайплайн.
+
+    channel: ОБЯЗАТЕЛЕН вместе с чужим refresh_token (2026-07-17, отдельный client_id на канал) —
+    токен канала X валиден только для client_id канала X. Без него взялся бы client_id текущего
+    CHANNEL и Google отбил бы `invalid_grant`. Затрагивает comment_agent.py и recycle_winners.py,
+    которые ходят в два канала из одного процесса."""
+    return build("youtube", "v3", credentials=_credentials(refresh_token, channel))
 
 
 def get_analytics_client():

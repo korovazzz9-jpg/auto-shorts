@@ -48,8 +48,18 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
           YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          # 2026-07-17: свой OAuth-клиент на канал (лимит Google — 50 живых токенов
+          # на client_id+аккаунт; общий client_id вытеснял чужие токены).
+          # Секрет не заведён => _client_pair() падает на общие выше.
+          YT_CLIENT_ID_ES: ${{ secrets.YT_CLIENT_ID_ES }}
+          YT_CLIENT_SECRET_ES: ${{ secrets.YT_CLIENT_SECRET_ES }}
           YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN_ES }}
           SOURCE_YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          # 2026-07-17: токен источника валиден только с client_id источника (свой OAuth-клиент
+          # на канал) — _source_client() берёт пару по SOURCE_CHANNEL.
+          SOURCE_CHANNEL: en
+          YT_CLIENT_ID_EN: ${{ secrets.YT_CLIENT_ID_EN }}
+          YT_CLIENT_SECRET_EN: ${{ secrets.YT_CLIENT_SECRET_EN }}
         run: python recycle_winners.py
 
       # Цель = EN, источник = ES: и в обратную сторону.
@@ -59,8 +69,16 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
           YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          # 2026-07-17: свой OAuth-клиент на канал (лимит Google — 50 живых токенов
+          # на client_id+аккаунт; общий client_id вытеснял чужие токены).
+          # Секрет не заведён => _client_pair() падает на общие выше.
+          YT_CLIENT_ID_EN: ${{ secrets.YT_CLIENT_ID_EN }}
+          YT_CLIENT_SECRET_EN: ${{ secrets.YT_CLIENT_SECRET_EN }}
           YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
           SOURCE_YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN_ES }}
+          SOURCE_CHANNEL: es
+          YT_CLIENT_ID_ES: ${{ secrets.YT_CLIENT_ID_ES }}
+          YT_CLIENT_SECRET_ES: ${{ secrets.YT_CLIENT_SECRET_ES }}
         run: python recycle_winners.py
 
       - name: Persist queue files

@@ -16,6 +16,7 @@ from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 
 from notify import notify
+from youtube_auth import _client_pair
 
 load_dotenv()
 
@@ -26,12 +27,15 @@ TOKENS = {
 }
 
 
-def _check(refresh_token: str) -> None:
+def _check(refresh_token: str, channel: str) -> None:
+    # 2026-07-17: свой client_id на канал (лимит Google 50 токенов на client_id+аккаунт,
+    # см. youtube_auth._client_pair) — токен канала валиден только со своей парой.
+    cid, sec = _client_pair(channel)
     creds = Credentials(
         token=None,
         refresh_token=refresh_token,
-        client_id=os.environ["YT_CLIENT_ID"],
-        client_secret=os.environ["YT_CLIENT_SECRET"],
+        client_id=cid,
+        client_secret=sec,
         token_uri="https://oauth2.googleapis.com/token",
     )
     build("youtube", "v3", credentials=creds).channels().list(part="id", mine=True).execute()
@@ -45,7 +49,7 @@ def main() -> None:
             print(f"  {label}: токен не задан в окружении — пропускаем.")
             continue
         try:
-            _check(token)
+            _check(token, label)
             print(f"  {label}: OK")
         except Exception as e:
             print(f"  {label}: МЁРТВ — {e}")

@@ -77,6 +77,11 @@ jobs:
           # client_id/secret приложения. Секрет YT_REFRESH_TOKEN_ES маппится в стандартное имя.
           YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
           YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          # 2026-07-17: свой OAuth-клиент на канал (лимит Google — 50 живых токенов
+          # на client_id+аккаунт; общий client_id вытеснял чужие токены).
+          # Секрет не заведён => _client_pair() падает на общие выше.
+          YT_CLIENT_ID_ES: ${{ secrets.YT_CLIENT_ID_ES }}
+          YT_CLIENT_SECRET_ES: ${{ secrets.YT_CLIENT_SECRET_ES }}
           YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN_ES }}
           # Instagram ES (2026-07-01): свой Business-аккаунт/токен, тот же паттерн, что YT выше —
           # секрет с суффиксом _ES маппится в стандартное имя, которое читает upload_instagram.py.

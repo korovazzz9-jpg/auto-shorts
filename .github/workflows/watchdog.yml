@@ -64,6 +64,11 @@ jobs:
         env:
           YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
           YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          # 2026-07-17: свой OAuth-клиент на канал (лимит Google — 50 живых токенов
+          # на client_id+аккаунт; общий client_id вытеснял чужие токены).
+          # Секрет не заведён => _client_pair() падает на общие выше.
+          YT_CLIENT_ID_EN: ${{ secrets.YT_CLIENT_ID_EN }}
+          YT_CLIENT_SECRET_EN: ${{ secrets.YT_CLIENT_SECRET_EN }}
           YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
         run: |
           if python check_recent_upload.py; then
@@ -88,6 +93,11 @@ jobs:
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
           YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
           YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          # 2026-07-17: свой OAuth-клиент на канал (лимит Google — 50 живых токенов
+          # на client_id+аккаунт; общий client_id вытеснял чужие токены).
+          # Секрет не заведён => _client_pair() падает на общие выше.
+          YT_CLIENT_ID_EN: ${{ secrets.YT_CLIENT_ID_EN }}
+          YT_CLIENT_SECRET_EN: ${{ secrets.YT_CLIENT_SECRET_EN }}
           YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
           CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
           CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}

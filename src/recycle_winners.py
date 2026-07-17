@@ -50,7 +50,7 @@ from generate_script import (
 from prepare_batch import _is_duplicate
 from recent_titles import add_title_to_cache
 from script_queue import load_queue, save_queue
-from youtube_auth import SCOPES, get_client
+from youtube_auth import SCOPES, _client_pair, get_client
 
 load_dotenv()
 
@@ -63,12 +63,20 @@ POLL_TIMEOUT = 1800
 
 
 def _source_client():
-    """YouTube-клиент канала-ИСТОЧНИКА (отдельный refresh token, те же client id/secret)."""
+    """YouTube-клиент канала-ИСТОЧНИКА (свой refresh token + СВОЙ OAuth-клиент).
+
+    2026-07-17: у каждого канала свой client_id (лимит Google 50 токенов на client_id+аккаунт,
+    см. youtube_auth._client_pair). Токен источника валиден ТОЛЬКО с client_id источника —
+    поэтому берём пару по SOURCE_CHANNEL, а не по CHANNEL (это канал-ЦЕЛЬ). Фолбэк на общие
+    YT_CLIENT_ID/SECRET сохранён: пока суффиксных секретов нет, работает как раньше."""
+    source_channel = os.environ.get("SOURCE_CHANNEL")
+    cid, sec = _client_pair(source_channel) if source_channel else (
+        os.environ["YT_CLIENT_ID"], os.environ["YT_CLIENT_SECRET"])
     creds = Credentials(
         token=None,
         refresh_token=os.environ["SOURCE_YT_REFRESH_TOKEN"],
-        client_id=os.environ["YT_CLIENT_ID"],
-        client_secret=os.environ["YT_CLIENT_SECRET"],
+        client_id=cid,
+        client_secret=sec,
         token_uri="https://oauth2.googleapis.com/token",
         scopes=SCOPES,
     )

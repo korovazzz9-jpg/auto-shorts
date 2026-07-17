@@ -143,7 +143,8 @@ def _process_approvals(state: dict) -> None:
             token = CHANNEL_TOKENS.get(channel)
             if not token:
                 raise RuntimeError(f"нет YT-токена для канала {channel}")
-            youtube = get_client(refresh_token=token)
+            # channel обязателен: у каждого канала свой client_id (2026-07-17)
+            youtube = get_client(refresh_token=token, channel=channel)
             youtube.comments().insert(
                 part="snippet",
                 body={"snippet": {"parentId": item["comment_id"], "textOriginal": reply_text}},
@@ -279,7 +280,7 @@ def _check_channel(channel: str, state: dict) -> None:
     for sid in stale:
         ch_state["pending"].pop(sid, None)
 
-    youtube = get_client(refresh_token=token)
+    youtube = get_client(refresh_token=token, channel=channel)  # свой client_id на канал
     try:
         comments, my_channel_id = _fetch_recent_comments(youtube)
     except Exception as e:

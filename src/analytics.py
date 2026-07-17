@@ -81,7 +81,9 @@ def fmt_time_ago(iso_str):
 def print_channel(label, refresh_token):
     print()
     print("=" * 58)
-    yt = get_client(refresh_token)
+    # channel=label: у каждого канала свой client_id (2026-07-17), токен канала валиден
+    # только со своим client_id — иначе invalid_grant.
+    yt = get_client(refresh_token, channel=label.lower())
     info = fetch_channel_info(yt)
     print(f"  {info['name']}  ({label})")
     print("=" * 58)
@@ -125,6 +127,7 @@ def print_channel(label, refresh_token):
 channels = [
     ("EN", os.environ.get("YT_REFRESH_TOKEN", "")),
     ("ES", os.environ.get("YT_REFRESH_TOKEN_ES", "")),
+    ("PT", os.environ.get("YT_REFRESH_TOKEN_PT", "")),  # 2026-07-17: PT отсутствовал
 ]
 
 for label, token in channels:
