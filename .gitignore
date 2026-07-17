@@ -1,5 +1,7 @@
 .env
-client_secret.json
+# 2026-07-17: glob вместо точного имени — свой OAuth-клиент на канал
+# (client_secret_en/es/pt.json). Git НЕ понимает inline-комментарии в строке паттерна.
+client_secret*.json
 __pycache__/
 *.pyc
 .venv/
