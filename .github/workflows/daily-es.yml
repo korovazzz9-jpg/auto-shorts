@@ -25,14 +25,11 @@ jobs:
     steps:
       - id: check
         run: |
-          DOW=$(date -u +%u)    # 1=Mon ... 7=Sun
-          HOUR=$(date -u +%H)
-          if [ "$DOW" -le 3 ] && [ "$HOUR" = "00" ]; then
-            echo "Серия (Part $DOW) замещает прайм-слот 00:17 сегодня — обычное видео пропускаем."
-            echo "skip=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "skip=false" >> "$GITHUB_OUTPUT"
-          fi
+          # 2026-07-17: серии ES заглушены (weekly-series-es.yml, if:false — данные: 347 просм/
+          # 0.88 подп против 743/1.39). Прайм-слот 00:17 Пн/Вт/Ср больше НЕ замещается серией.
+          # Guard всегда skip=false. Откат вместе с сериями: вернуть условие DOW<=3 && HOUR=00.
+          DOW=$(date -u +%u); HOUR=$(date -u +%H)
+          echo "skip=false" >> "$GITHUB_OUTPUT"
 
   publish:
     needs: guard

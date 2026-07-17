@@ -26,14 +26,12 @@ jobs:
     steps:
       - id: check
         run: |
-          DOW=$(date -u +%u)    # 1=Mon ... 7=Sun
-          HOUR=$(date -u +%H)
-          if [ "$DOW" -le 3 ] && [ "$HOUR" = "00" ]; then
-            echo "Серия (Part $DOW) замещает прайм-слот 00:07 сегодня — обычное видео пропускаем."
-            echo "skip=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "skip=false" >> "$GITHUB_OUTPUT"
-          fi
+          # 2026-07-17: серии заглушены (weekly-series.yml, if:false — данные: 58 просм/0 подп
+          # против 547/0.74). Прайм-слот 00:07 Пн/Вт/Ср больше НЕ замещается серией — обычный
+          # ролик выходит все 7 дней. Guard всегда skip=false. Откат вместе с сериями: вернуть
+          # условие `[ "$DOW" -le 3 ] && [ "$HOUR" = "00" ]` ниже.
+          DOW=$(date -u +%u); HOUR=$(date -u +%H)
+          echo "skip=false" >> "$GITHUB_OUTPUT"
 
   publish:
     needs: guard
