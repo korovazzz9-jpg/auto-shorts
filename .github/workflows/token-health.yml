@@ -29,9 +29,15 @@ jobs:
           YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
           # 2026-07-17: свой OAuth-клиент на канал (лимит Google — 50 живых токенов
           # на client_id+аккаунт; общий client_id вытеснял чужие токены).
-          # Секрет не заведён => _client_pair() падает на общие выше.
+          # Этот шаг — ЕДИНСТВЕННЫЙ, что читает токены ВСЕХ каналов в одном процессе,
+          # поэтому нужны все три пары (иначе ES/PT уходят со старым общим client_id
+          # и Google отвечает unauthorized_client — реально поймано на прогоне 17.07).
           YT_CLIENT_ID_EN: ${{ secrets.YT_CLIENT_ID_EN }}
           YT_CLIENT_SECRET_EN: ${{ secrets.YT_CLIENT_SECRET_EN }}
+          YT_CLIENT_ID_ES: ${{ secrets.YT_CLIENT_ID_ES }}
+          YT_CLIENT_SECRET_ES: ${{ secrets.YT_CLIENT_SECRET_ES }}
+          YT_CLIENT_ID_PT: ${{ secrets.YT_CLIENT_ID_PT }}
+          YT_CLIENT_SECRET_PT: ${{ secrets.YT_CLIENT_SECRET_PT }}
           YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
           YT_REFRESH_TOKEN_ES: ${{ secrets.YT_REFRESH_TOKEN_ES }}
           YT_REFRESH_TOKEN_PT: ${{ secrets.YT_REFRESH_TOKEN_PT }}
