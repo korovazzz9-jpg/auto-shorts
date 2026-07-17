@@ -96,7 +96,7 @@ CONFIGS = {
         # и добавления секретов FB_PAGE_ID / FB_PAGE_ACCESS_TOKEN (Page-токен, pages_manage_posts).
         "post_to_facebook": False,
         "post_to_tiktok": False,  # ожидает одобрения TikTok Dev App + токена — вернуть True после
-        "post_to_pinterest": False,  # ожидает одобрения Pinterest Dev App — вернуть True после
+        "post_to_pinterest": True,  # 2026-07-17: app одобрен, OAuth пройден (get_pinterest_token.py), доска 1085086172660968792
         "post_to_threads": False,  # ожидает Threads-токен (THREADS_ACCESS_TOKEN/USER_ID, см. upload_threads.py)
         # Хэндл канала без @ — реальный @handle из ссылки (проверено через channels.list().
         # customUrl), НЕ название канала: они разошлись при регистрации (60SecFacts — имя,
