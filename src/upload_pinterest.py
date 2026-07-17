@@ -72,14 +72,14 @@ def build_pin_card(title: str, fact: str, channel_handle: str) -> str:
 
     # Брендинг внизу
     brand_font = _get_font(38)
-    brand_text = f"@{channel_handle}"
+    brand_text = channel_handle if channel_handle.startswith("@") else f"@{channel_handle}"
     bbox = draw.textbbox((0, 0), brand_text, font=brand_font)
     bw = bbox[2] - bbox[0]
     draw.text(((CARD_W - bw) // 2, CARD_H - 100), brand_text, font=brand_font, fill=(255, 60, 60))
 
     # YouTube иконка-плашка
     yt_font = _get_font(30)
-    yt_text = "▶ YouTube"
+    yt_text = "YouTube"  # был "▶ YouTube" — глиф ▶ отсутствует в шрифте, рисовался квадратом
     bbox = draw.textbbox((0, 0), yt_text, font=yt_font)
     yw = bbox[2] - bbox[0]
     draw.text(((CARD_W - yw) // 2, CARD_H - 55), yt_text, font=yt_font, fill=(160, 160, 160))
