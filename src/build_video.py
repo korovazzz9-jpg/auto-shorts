@@ -485,11 +485,15 @@ MUSIC_LOOP_VOLUME = 0.12  # фоновый луп под голосом — ти
 # промпт прямо просил "mysterious, intelligent atmosphere").
 # Старые лупы (drum.mp3, no_drum.mp3 и любые другие вне этого маппинга) НЕ привязаны к
 # структуре — остаются общим фолбэком для generic-выбора и для серий (structure не задан).
+# 2026-07-17: drum.mp3/no_drum.mp3 (кастомные лупы от знакомого) добавлены во ВСЕ структуры —
+# в отличие от AI-треков они не привязаны к конкретному настроению, годятся как нейтральная
+# добавка в любую категорию.
+_UNIVERSAL = ["drum.mp3", "no_drum.mp3"]
 MUSIC_BY_STRUCTURE = {
-    "myth-debunk": ["ambient_calm.mp3", "calm_v3.mp3"],
-    "unsolved-mystery": ["mystery_v2.mp3", "custom_v4.mp3"],
-    "happening-now": ["custom_v1.mp3", "custom_v5.mp3"],
-    "historical-story": ["calm_drums.mp3", "uplifting_v2.mp3"],
+    "myth-debunk": ["ambient_calm.mp3", "calm_v3.mp3"] + _UNIVERSAL,
+    "unsolved-mystery": ["mystery_v2.mp3", "custom_v4.mp3"] + _UNIVERSAL,
+    "happening-now": ["custom_v1.mp3", "custom_v5.mp3"] + _UNIVERSAL,
+    "historical-story": ["calm_drums.mp3", "uplifting_v2.mp3"] + _UNIVERSAL,
 }
 
 
