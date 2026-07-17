@@ -7,6 +7,7 @@
 (OAuth client ID, тип "Desktop app", API: YouTube Data API v3).
 """
 import os
+import subprocess
 import sys
 
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -29,7 +30,9 @@ def main() -> None:
     flow = InstalledAppFlow.from_client_secrets_file(CLIENT_SECRET_PATH, SCOPES)
     creds = flow.run_local_server(port=0)
 
-    print(f"\n{env_key}={creds.refresh_token}")
+    # 2026-07-17: НЕ печатаем сам токен — он утекал в лог/историю терминала (реальный случай:
+    # попал в файл фоновой задачи). Значение и так уходит в .env + gh secret ниже.
+    print(f"\nТокен получен ({env_key}), длина {len(creds.refresh_token)} симв.")
 
     env_path = os.path.join(os.path.dirname(__file__), "..", ".env")
     if os.path.exists(env_path):
@@ -53,10 +56,15 @@ def main() -> None:
 
         print(f"\n.env обновлён: {env_key} записан автоматически.")
 
-    # Обновляем GitHub Secret
+    # Обновляем GitHub Secret. 2026-07-17: через stdin, а не --body в командной строке —
+    # аргументы процесса видны любому процессу в системе (tasklist/ps), токен туда попадать
+    # не должен. Заодно ушёл os.system с интерполяцией строки.
     print(f"\nОбновляем GitHub Secret {env_key}...")
-    ret = os.system(f'gh secret set {env_key} --body "{creds.refresh_token}" --repo korovazzz9-jpg/auto-shorts')
-    if ret == 0:
+    proc = subprocess.run(
+        ["gh", "secret", "set", env_key, "--repo", "korovazzz9-jpg/auto-shorts"],
+        input=creds.refresh_token, text=True,
+    )
+    if proc.returncode == 0:
         print(f"GitHub Secret {env_key} обновлён.")
     else:
         print(f"GitHub Secret не обновлён автоматически — обновите вручную.")
