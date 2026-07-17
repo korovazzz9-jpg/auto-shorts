@@ -376,15 +376,26 @@ SCRIPT_MAX_WORDS = 93  # gate: above this we retry; loop line (~3 words) appende
 # ⚠️ Язык заголовка указан ЯВНО (2026-07-09): базовый промпт говорит «title в {language}»,
 # но детальная суб-инструкция заголовка перебивала контекст, и на новом языке (поймано на PT)
 # модель сваливала ЗАГОЛОВОК в английский, хотя скрипт/хук/хэштеги были на нужном языке.
+# 2026-07-17: два приёма подсмотрены у топовых facts-каналов (Zack D. Films, FactoHolic,
+# Facts' Mine — все 10-27M подписчиков) через анализ их последних роликов:
+#   (1) заголовок = ОТКРЫТАЯ петля/вопрос, на который надо кликнуть, а НЕ готовый факт-ответ.
+#       У них: "Police Gave A Mother The Wrong Child", "What If You Dug Through The Earth".
+#       У нас было: "Ugarit's Alphabet Never Reached Rome Directly" (ответ + требует контекста).
+#   (2) один эмоциональный эмодзи в КОНЦЕ заголовка (😨😱😵🤯) — топы делают поголовно, дешёвый CTR.
+_TITLE_HOOK_RULE = (
+    "Frame it as an OPEN curiosity gap — a question or an unresolved tension the viewer must tap to "
+    "resolve, NOT the finished fact spelled out. End the title with ONE emotional emoji (😱/😨/🤯/😳/💀 — "
+    "pick what fits the tone). "
+)
 TITLE_INSTRUCTION_NARRATIVE = (
-    f"title: a punchy narrative hook IN {CFG['script_language']}, under 60 characters. Do NOT "
-    "append a '| topic facts' style keyword suffix — it should read like a real headline, not a listicle."
+    f"title: a punchy narrative hook IN {CFG['script_language']}, under 60 characters. {_TITLE_HOOK_RULE}"
+    "Do NOT append a '| topic facts' style keyword suffix — it should read like a real headline, not a listicle."
 )
 TITLE_INSTRUCTION_SEO = (
     f"title: IN {CFG['script_language']}, under 60 characters. Name the specific subject plainly "
     "(the animal/place/era/phenomenon) and include the one concrete keyword a viewer would actually "
-    f"type into YouTube search for this fact (in {CFG['script_language']}) — but it must still read "
-    "like a real headline, not a listicle or a '| topic facts' keyword-stuffed suffix."
+    f"type into YouTube search for this fact (in {CFG['script_language']}). {_TITLE_HOOK_RULE}"
+    "It must still read like a real headline, not a listicle or a '| topic facts' keyword-stuffed suffix."
 )
 TITLE_INSTRUCTION = TITLE_INSTRUCTION_NARRATIVE  # обратная совместимость (generate_series.py)
 TITLE_SEO_PROBABILITY = 0.3  # доля видео с keyword-насыщенным заголовком

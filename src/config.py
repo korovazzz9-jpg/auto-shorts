@@ -98,6 +98,11 @@ CONFIGS = {
         "post_to_tiktok": False,  # ожидает одобрения TikTok Dev App + токена — вернуть True после
         "post_to_pinterest": True,  # 2026-07-17: app одобрен, OAuth пройден (get_pinterest_token.py), доска 1085086172660968792
         "post_to_threads": False,  # ожидает Threads-токен (THREADS_ACCESS_TOKEN/USER_ID, см. upload_threads.py)
+        # 2026-07-17: «тощие» метаданные под EN как эксперимент (топы ниши держат 0 тегов и
+        # почти пустое описание — см. publish.py). Без search_summary в описании и без
+        # контентных тегов LLM; служебные extra_tags + воронка в описании остаются. Только
+        # EN — сравним CTR/удержание против ES/PT со «старыми» метаданными. Откат: False.
+        "lean_metadata": True,
         # Хэндл канала без @ — реальный @handle из ссылки (проверено через channels.list().
         # customUrl), НЕ название канала: они разошлись при регистрации (60SecFacts — имя,
         # @60factspersecond — хендл). До 2026-07-05 тут стояло имя канала — ссылки в комментах/

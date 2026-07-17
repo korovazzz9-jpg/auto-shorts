@@ -53,12 +53,15 @@ def publish(
     except Exception:
         longform_url = ""
 
-    # SEO-строка первой: разговорный скрипт (хук специально скрывает субъект) почти не
-    # содержит ключевых слов, по которым ищут в YouTube Search — search_summary называет
-    # факт прямо, для находимости. Не озвучивается и не показывается на экране.
+    # 2026-07-17: search_summary БОЛЬШЕ НЕ подмешиваем в начало описания под флагом
+    # lean_metadata. Причина — анализ топов ниши (Zack D. Films, FactoHolic, Facts' Mine,
+    # 10-27M подписчиков): у всех описание почти пустое (0-52 симв.), никакой SEO-набивки.
+    # Современный Shorts ранжируется по аудио/видео+удержанию, не по ключам в описании.
+    # Поле search_summary в data остаётся (нужно comment_agent + сериям) — не выпиливаем.
+    # Откат: lean_metadata=False в config.py.
     description = data["script"]
     search_summary = str(data.get("search_summary", "")).strip()
-    if search_summary:
+    if search_summary and not CFG.get("lean_metadata"):
         description = f"{search_summary}\n\n{description}"
     # Источник факта (2026-07-05): повышает доверие, снижает «это фейк» в комментах, даёт
     # поисковые ключи. Модель возвращает пусто, если не уверена в происхождении —
@@ -82,7 +85,12 @@ def publish(
     # Билингвальные теги (2026-07-02): пара generic discovery-тегов НА ДРУГОМ языке —
     # шанс попасть в рекомендации зрителю, который смотрит на двух языках. Не топик-
     # специфичные (те и так на языке канала), а самые общие ("facts"/"datos curiosos").
-    tags = list(data["tags"]) + list(extra_tags) + list(CFG.get("sister_lang_tags", []))
+    # 2026-07-17 lean_metadata: контентные теги от LLM (data["tags"]) НЕ добавляем — топы ниши
+    # держат 0 тегов, для Shorts теги мертвы как фактор ранжирования (+ ловили invalidTags).
+    # Служебные extra_tags (topic-/hook-/format-/color-/voice-) ОСТАЮТСЯ — скрытая телеметрия
+    # для weekly_report, не SEO, зритель их не видит. Откат: lean_metadata=False в config.py.
+    content_tags = [] if CFG.get("lean_metadata") else list(data["tags"])
+    tags = content_tags + list(extra_tags) + list(CFG.get("sister_lang_tags", []))
 
     print("Загрузка на YouTube...")
     video_id = upload_to_youtube(
