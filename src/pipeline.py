@@ -89,7 +89,7 @@ def run() -> None:
         # CTA-бейдж заменяется тизером «у факта будет продолжение — подпишись» (см.
         # pair_cta_phrases в config). Только визуально: озвучка/петля не трогаются.
         pair_tease = bool(pair_start_mode and str(data.get("pairable_claim", "")).strip())
-        video_path, thumb_path, caption_color = build_video(audio_path, clip_paths, words, video_path, topic=data["topic"], title=data["title"], hook_text=data.get("hook_text"), pair_tease=pair_tease)
+        video_path, thumb_path, caption_color = build_video(audio_path, clip_paths, words, video_path, topic=data["topic"], title=data["title"], hook_text=data.get("hook_text"), pair_tease=pair_tease, structure=data.get("structure"))
 
         print("5/6 Публикация...")
         extra_tags = [

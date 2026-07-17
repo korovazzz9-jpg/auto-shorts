@@ -477,12 +477,41 @@ def _draw_part_badge(thumb_path: str, part: int, total: int) -> None:
 MUSIC_DIR = os.path.join(os.path.dirname(__file__), "..", "assets", "music")
 MUSIC_LOOP_VOLUME = 0.12  # фоновый луп под голосом — тихо, но слышно
 
+# 2026-07-17: привязка AI-сгенерированных (Stable Audio Open, проверены Content ID — чисто)
+# треков к структуре сценария (см. STRUCTURES в generate_script.py) — осмысленнее чистой
+# случайности: настроение музыки соответствует настроению текста. По 2 трека на структуру,
+# подбор по формулировке ИСХОДНОГО промпта генерации (не по пересказу стороннего сервиса —
+# тот местами расходился с промптом, напр. звал custom_v4 "магией с колокольчиками", хотя
+# промпт прямо просил "mysterious, intelligent atmosphere").
+# Старые лупы (drum.mp3, no_drum.mp3 и любые другие вне этого маппинга) НЕ привязаны к
+# структуре — остаются общим фолбэком для generic-выбора и для серий (structure не задан).
+MUSIC_BY_STRUCTURE = {
+    "myth-debunk": ["ambient_calm.mp3", "calm_v3.mp3"],
+    "unsolved-mystery": ["mystery_v2.mp3", "custom_v4.mp3"],
+    "happening-now": ["custom_v1.mp3", "custom_v5.mp3"],
+    "historical-story": ["calm_drums.mp3", "uplifting_v2.mp3"],
+}
 
-def _music_layer(duration: float):
-    """Случайный фоновый луп из assets/music/ (ротация против шаблонности),
-    нормализован, зациклен под длину видео, тихо под голосом."""
+
+def _music_layer(duration: float, music_path: str | None = None, structure: str | None = None):
+    """Фоновый луп. Приоритет источника:
+    1. music_path — конкретный файл (2026-07-17, ручной A/B-тест через rerender.py, обходит
+       остальную логику одним прогоном на трек).
+    2. structure — случайный трек из MUSIC_BY_STRUCTURE[structure], если структура известна
+       и замаплена (2026-07-17, музыка под настроение сценария).
+    3. иначе — случайный из ВСЕХ assets/music/*.mp3 (старое поведение, фолбэк для серий/
+       структур без маппинга).
+    Нормализован, зациклен под длину видео, тихо под голосом."""
     try:
-        tracks = glob.glob(os.path.join(MUSIC_DIR, "*.mp3"))
+        if music_path:
+            tracks = [music_path]
+        elif structure and structure in MUSIC_BY_STRUCTURE:
+            tracks = [os.path.join(MUSIC_DIR, f) for f in MUSIC_BY_STRUCTURE[structure]]
+            tracks = [t for t in tracks if os.path.exists(t)]
+        else:
+            tracks = []
+        if not tracks:
+            tracks = glob.glob(os.path.join(MUSIC_DIR, "*.mp3"))
         if not tracks:
             return None
         m = AudioFileClip(random.choice(tracks))
@@ -493,9 +522,10 @@ def _music_layer(duration: float):
         return None
 
 
-def _build_audio(voice, words: list[dict], duration: float):
+def _build_audio(voice, words: list[dict], duration: float,
+                  music_path: str | None = None, structure: str | None = None):
     """Финальная дорожка: голос + фоновый луп. Если музыки нет — только голос."""
-    music = _music_layer(duration)
+    music = _music_layer(duration, music_path, structure)
     return CompositeAudioClip([voice, music]) if music is not None else voice
 
 
@@ -510,6 +540,8 @@ def build_video(
     title: str | None = None,
     hook_text: str | None = None,
     pair_tease: bool = False,
+    music_path: str | None = None,
+    structure: str | None = None,
     **kwargs,
 ) -> tuple[str, str, str]:
     """Returns (video_path, thumbnail_path, caption_color).
@@ -545,7 +577,7 @@ def build_video(
     hook_clips = _hook_clips(hook_overlay) if hook_overlay else []
     final = CompositeVideoClip(
         [background, *caption_clips, *cta_clips, *part_clips, *hook_clips], size=TARGET_SIZE
-    ).set_audio(_build_audio(audio, words, duration))
+    ).set_audio(_build_audio(audio, words, duration, music_path, structure))
     final.write_videofile(out_path, fps=30, codec="libx264", audio_codec="aac", logger=None)
 
     # Тумба = самый первый кадр: виден только текст-хук, первое слово субтитров ещё
