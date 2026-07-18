@@ -382,10 +382,19 @@ SCRIPT_MAX_WORDS = 93  # gate: above this we retry; loop line (~3 words) appende
 #       У них: "Police Gave A Mother The Wrong Child", "What If You Dug Through The Earth".
 #       У нас было: "Ugarit's Alphabet Never Reached Rome Directly" (ответ + требует контекста).
 #   (2) один эмоциональный эмодзи в КОНЦЕ заголовка (😨😱😵🤯) — топы делают поголовно, дешёвый CTR.
+# 2026-07-18: CurioShock (17.5к подписчиков, тот же контент — конкретные ист. факты, ровесник
+# ES-канала) — outlier-анализ по 100 роликам: title_style question vs statement НЕ трогаем (юзер
+# решил измерять на своей аудитории, не копировать вслепую), но усиливаем СИЛУ НЕОЖИДАННОСТИ
+# действия/детали — у CurioShock в топах всегда шоковое конкретное действие ("el zapato que
+# Tutankamón usó para pisotear a sus enemigos", "el arma de otro mundo"), у нас формула та же
+# ("El [subject] que [action]"), но действие часто мягче/абстрактнее.
 _TITLE_HOOK_RULE = (
     "Frame it as an OPEN curiosity gap — a question or an unresolved tension the viewer must tap to "
-    "resolve, NOT the finished fact spelled out. End the title with ONE emotional emoji (😱/😨/🤯/😳/💀 — "
-    "pick what fits the tone). "
+    "resolve, NOT the finished fact spelled out. The subject's action/detail must be the MOST "
+    "shocking, impossible-sounding, or visceral one in the fact — not a mild or generic description "
+    "of it (e.g. not 'used it in battles' but 'used it to trample his enemies'). If the fact has a "
+    "concrete number/date anchor, prefer including it — it makes the impossible claim feel true. "
+    "End the title with ONE emotional emoji (😱/😨/🤯/😳/💀 — pick what fits the tone). "
 )
 TITLE_INSTRUCTION_NARRATIVE = (
     f"title: a punchy narrative hook IN {CFG['script_language']}, under 60 characters. {_TITLE_HOOK_RULE}"
