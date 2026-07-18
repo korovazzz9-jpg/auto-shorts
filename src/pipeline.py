@@ -11,7 +11,7 @@ from config import CFG, CHANNEL
 from fetch_stock_video import fetch_clips
 from generate_script import generate_script
 from notify import notify
-from paired_facts import PAIR_PROBABILITY, find_pending_pair, resolve_pair, start_pair
+from paired_facts import find_pending_pair, resolve_pair, start_pair
 from post_comment import post_channel_comment
 from publish import publish
 from script_queue import pop_next
@@ -49,12 +49,17 @@ def run() -> None:
     now = datetime.now(timezone.utc)
     topical = now.weekday() == 3 and now.hour == CFG.get("topical_slot_hour", -1)
 
-    # Video pairs (2026-07-08, см. paired_facts.py): если есть открытая пара, готовая на
-    # резолюцию — пробуем закрыть её; иначе с малой вероятностью пробуем НАЧАТЬ новую. Оба
-    # случая требуют LIVE-генерации мимо очереди (batch-заготовки не знают о парах), тот же
-    # паттерн, что «On this day».
-    pending_pair = None if topical else find_pending_pair(CHANNEL)
-    pair_start_mode = not topical and not pending_pair and random.random() < PAIR_PROBABILITY
+    # Video pairs ПО РАСПИСАНИЮ (2026-07-18, замена заглушенным сериям ece6b5b): Пн-Чт в
+    # прайм-слот канала (CFG pair_slot_hour_utc) выходят парные ролики — Пн/Ср часть A
+    # (старт пары), Вт/Чт часть B (резолюция вчерашней A). Прежний случайный механизм
+    # (PAIR_PROBABILITY на любом слоте) ОТКЛЮЧЁН: случайный слот того же дня резолвил бы
+    # B уже через 18ч (MIN_AGE_HOURS) — раньше планового Вт/Чт. Нет открытой пары во
+    # Вт/Чт (часть A упала) — обычный ролик, без каскадного сдвига. Live-генерация мимо
+    # очереди, тот же паттерн, что «On this day».
+    pair_hour = CFG.get("pair_slot_hour_utc", -1)
+    in_pair_window = not topical and now.hour == pair_hour and now.weekday() <= 3
+    pending_pair = find_pending_pair(CHANNEL) if in_pair_window and now.weekday() in (1, 3) else None
+    pair_start_mode = in_pair_window and now.weekday() in (0, 2)
 
     # Batch API preload (prepare_batch.py) экономит ~50% на этом вызове, если очередь заполнена.
     # Пустая очередь = сценарий генерится вживую, как раньше — отсутствие preload не ломает публикацию.

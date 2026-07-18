@@ -135,6 +135,9 @@ CONFIGS = {
         # «On this day» (2026-07-05): час UTC первого слота дня — по четвергам в этот слот
         # выходит топикал-факт с привязкой к дате (live-генерация мимо очереди).
         "topical_slot_hour": 16,
+        # Парные ролики по расписанию (2026-07-18, замена заглушенным сериям): час UTC
+        # прайм-слота — Пн/Ср в него выходит часть A (старт пары), Вт/Чт — часть B (резолюция).
+        "pair_slot_hour_utc": 0,   # 00:07 UTC — бывший прайм серий (20:07 ET)
         # Community-пост после лонгформа (2026-07-05): API постов не имеет — pipeline_longform
         # шлёт готовый текст опроса в Telegram, копируется в Studio → Сообщество вручную.
         "community_poll_intro": "Have you seen the new deep-dive yet: {title}? 👀\n\nWhich topic should next week's video cover? Vote 👇",
@@ -308,6 +311,7 @@ CONFIGS = {
         ],
         "ig_card_slot_hour": 3,  # первый ES-слот дня (03:17 UTC = 21:17 Мехико, было 13:17)
         "topical_slot_hour": 3,   # первый ES-слот дня (03:17 UTC) — топикал по четвергам
+        "pair_slot_hour_utc": 0,  # пары Пн-Чт: 00:17 UTC (18:17 Мехико) — бывший прайм серий
         "community_poll_intro": "¿Ya viste el nuevo análisis: {title}? 👀\n\n¿Sobre qué tema quieres el video de la próxima semana? Vota 👇",
         "source_label": "Fuente:",
         "chapters_label": "Capítulos:",
@@ -450,6 +454,7 @@ CONFIGS = {
         ],
         "ig_card_slot_hour": 17,   # первый PT-слот (не используется пока IG выключен)
         "topical_slot_hour": 17,   # первый PT-слот (17:23 UTC, поправлено 2026-07-09 под бразильский прайм) — топикал по четвергам
+        "pair_slot_hour_utc": 23,  # пары Пн-Чт: 23:23 UTC (20:23 BRT, вечерний бразильский прайм)
         "community_poll_intro": "Já viu a nova análise: {title}? 👀\n\nSobre qual tema você quer o vídeo da próxima semana? Vote 👇",
         "source_label": "Fonte:",
         "chapters_label": "Capítulos:",
