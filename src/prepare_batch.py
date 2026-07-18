@@ -28,6 +28,7 @@ from generate_script import (
     HOOK_TEMPLATES,
     LENGTH_INSTRUCTION,
     LOOP_INSTRUCTION,
+    TITLE_INTENSITIES,
     TITLE_OPENERS,
     _append_loop,
     _build_user_content,
@@ -225,6 +226,8 @@ def main() -> None:
             data["hook_template"] = ht if ht in HOOK_TEMPLATES else "other"
             to = str(data.get("title_opener", "")).strip().lower()
             data["title_opener"] = to if to in TITLE_OPENERS else "other"
+            ti = str(data.get("title_intensity", "")).strip().lower()
+            data["title_intensity"] = ti if ti in TITLE_INTENSITIES else "other"
             et = str(data.get("emotional_tone", "")).strip().lower()
             data["emotional_tone"] = et if et in EMOTIONAL_TONES else "other"
             if not str(data.get("hook_text", "")).strip():

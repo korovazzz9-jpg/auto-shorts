@@ -102,7 +102,10 @@ def run() -> None:
             f"color-{caption_color}",
             f"voice-{voice}",
             f"format-{data.get('structure', 'myth-debunk')}",  # ротация структур (2026-07-13)
-            f"titlestyle-{data.get('title_style', 'statement')}",  # вопрос vs утверждение (2026-07-17)
+            # Вопрос vs утверждение (2026-07-17): вычисляем ЗДЕСЬ по самому заголовку, а не
+            # берём data["title_style"] — сценарии из очереди (prepare_batch) это поле не
+            # заполняют, и дефолт 'statement' мечал бы вопросы как утверждения, портя сравнение.
+            f"titlestyle-{'question' if ('?' in data['title'] or '¿' in data['title']) else 'statement'}",
             f"titleintensity-{data.get('title_intensity', 'other')}",  # сила неожиданности (2026-07-18)
         ]
         if data.get("topical"):
