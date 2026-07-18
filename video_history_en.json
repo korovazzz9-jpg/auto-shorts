@@ -185,5 +185,24 @@
     "caption_color": "#7CFFCB",
     "structure": null,
     "pair_role": null
+  },
+  {
+    "video_id": "Jl0HYKOPhUA",
+    "published_at": "2026-07-18T16:20:23.136295+00:00",
+    "title": "The Eye That Sees Everything But Understands Nothing",
+    "topic": "the animal kingdom",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": null,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 31.5,
+    "voice": "en-US-ChristopherNeural",
+    "caption_color": "white",
+    "structure": null,
+    "pair_role": null
   }
 ]
