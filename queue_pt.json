@@ -1,56 +1,5 @@
 [
   {
-    "title": "O oceano que funciona como uma impressora de sal",
-    "title_opener": "the-x",
-    "hook_text": "O mar fabrica sal do zero",
-    "hook_template": "vague-ability",
-    "emotional_tone": "awe",
-    "script": "Um navio afundou em 1917 — e o mar ao redor ficou salgado por décadas. No Golfo do México existem lagos no fundo do oceano com salinidade cinco vezes maior que a água ao redor. São chamados de brine pools, descobertos em 1990, e qualquer animal que cai dentro morre instantaneamente. A água hipersalina é tão densa que forma ondas próprias — ondas no fundo do mar. O que te assusta mais: que o oceano esconde mares dentro dele, ou que ainda nem mapeamos metade?",
-    "word_count": 85,
-    "search_summary": "Brine pools são lagos hipersalinos no fundo do Golfo do México com salinidade cinco vezes maior que o oceano, descobertos em 1990.",
-    "comment_question": "Se um brine pool mata qualquer animal que cai, o que será que já morreu lá? 🌊",
-    "source_note": "NOAA Ocean Exploration, 1990",
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "fatos do oceano",
-      "oceano profundo",
-      "brine pools",
-      "lagos no fundo do mar",
-      "golfo do méxico",
-      "fatos curiosos",
-      "mundo submarino",
-      "fenômenos naturais",
-      "oceano mistério",
-      "fatos bizarros do oceano",
-      "oceano profundo slowed",
-      "brine pools at the bottom of the ocean"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#fatoscuriosos",
-      "#oceano",
-      "#brinepools",
-      "#fundodomar"
-    ],
-    "video_queries": [
-      "deep ocean dark water",
-      "underwater landscape deep sea",
-      "ocean floor exploration submarine",
-      "dense saltwater underwater lake",
-      "deep sea waves movement",
-      "ocean research vessel surface"
-    ],
-    "has_loop": false,
-    "topic": "the ocean",
-    "structure": "historical-story",
-    "niche_styled": false,
-    "title_variant": "seo",
-    "hashtag_position": "end"
-  },
-  {
     "title": "O exército que desapareceu no deserto sem rastro",
     "title_opener": "the-x",
     "hook_text": "50 mil soldados. Sumidos.",
