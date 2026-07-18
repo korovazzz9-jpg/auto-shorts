@@ -36,7 +36,8 @@ FORMAT_TAG_RE = re.compile(r"^format-(.+)$")  # тип структуры скр
 TITLESTYLE_TAG_RE = re.compile(r"^titlestyle-(question|statement)$")  # вопрос vs утверждение, 2026-07-17
 TITLEINTENSITY_TAG_RE = re.compile(r"^titleintensity-(mild|extreme)$")  # сила неожиданности, 2026-07-18
 HOOKSTYLE_TAG_RE = re.compile(r"^hookstyle-(color|plain)$")  # раскраска хук-плашки, 2026-07-18
-CTA_TAG_RE = re.compile(r"^cta-(schedule|topic|pair|generic)$")  # тип CTA-фразы, 2026-07-18
+CTA_TAG_RE = re.compile(r"^cta-(schedule|milestone|topic|pair|generic)$")  # тип CTA-фразы, 2026-07-18
+MIDCTA_TAG_RE = re.compile(r"^midcta-(yes|no)$")  # микро-CTA в середине ролика, 2026-07-18
 PAIR_A_TAG = "pair-a"  # часть A пары (несёт подписной тизер с 2026-07-10, см. paired_facts)
 PAIR_B_TAG = "pair-b"  # часть B (резолюция пары)
 NICHE_STYLED_TAG = "niche-styled"             # промпт получал заголовки чужих выбросов по теме
@@ -98,6 +99,7 @@ def _recent_videos(youtube) -> list[dict]:
             title_intensity = None
             hook_style = None
             cta_kind = None
+            mid_cta = None
             niche = "plain"
             topical = "no"
             pair = "no"
@@ -149,6 +151,9 @@ def _recent_videos(youtube) -> list[dict]:
                 mcta = CTA_TAG_RE.match(tag)
                 if mcta:
                     cta_kind = mcta.group(1)
+                mmid = MIDCTA_TAG_RE.match(tag)
+                if mmid:
+                    mid_cta = mmid.group(1)
             videos.append({
                 "id": v["id"],
                 "title": v["snippet"]["title"],
@@ -168,6 +173,7 @@ def _recent_videos(youtube) -> list[dict]:
                 "title_intensity": title_intensity or "—",
                 "hook_style": hook_style or "—",
                 "cta_kind": cta_kind or "—",
+                "mid_cta": mid_cta or "—",
                 "niche": niche,
                 "topical": topical,
                 "pair": pair,

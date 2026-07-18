@@ -100,7 +100,9 @@ def run() -> None:
         # CTA-фразу роллим здесь, а не внутри build_video — pipeline должен знать её ТИП
         # (schedule/topic/pair/generic) для тега cta-<...> и сравнения конверсии в подписку.
         cta_text, cta_kind = pick_cta_phrase(data["topic"], pair_tease)
-        video_path, thumb_path, caption_color = build_video(audio_path, clip_paths, words, video_path, topic=data["topic"], title=data["title"], hook_text=data.get("hook_text"), pair_tease=pair_tease, structure=data.get("structure"), hook_style=hook_style, cta_text=cta_text)
+        # A/B микро-CTA в середине ролика (2026-07-18): может резать retention — меряем.
+        mid_cta = random.random() < 0.5
+        video_path, thumb_path, caption_color = build_video(audio_path, clip_paths, words, video_path, topic=data["topic"], title=data["title"], hook_text=data.get("hook_text"), pair_tease=pair_tease, structure=data.get("structure"), hook_style=hook_style, cta_text=cta_text, mid_cta=mid_cta)
 
         print("5/6 Публикация...")
         extra_tags = [
@@ -119,7 +121,8 @@ def run() -> None:
             f"titlestyle-{'question' if ('?' in data['title'] or '¿' in data['title']) else 'statement'}",
             f"titleintensity-{data.get('title_intensity', 'other')}",  # сила неожиданности (2026-07-18)
             f"hookstyle-{hook_style}",  # раскраска хук-плашки: color vs plain (2026-07-18)
-            f"cta-{cta_kind}",  # тип CTA-фразы: schedule/topic/pair/generic (2026-07-18)
+            f"cta-{cta_kind}",  # тип CTA-фразы: schedule/milestone/topic/pair/generic (2026-07-18)
+            f"midcta-{'yes' if mid_cta else 'no'}",  # микро-CTA в середине (2026-07-18)
         ]
         if data.get("topical"):
             extra_tags.append("topical-onthisday")

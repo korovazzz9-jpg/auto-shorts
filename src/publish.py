@@ -142,6 +142,14 @@ def publish(
                 if len(comment_lines) >= 2:
                     comment_lines[1] = random.choice(subscribe_ctas).format(channel_url=channel_url)
                     comment = "\n".join(comment_lines)
+            # Строка-«голосование» (2026-07-18): «👍 если знал / ответь если нет» — действие
+            # в один тап втягивает пассивных, несогласные идут в реплаи. 50/50, вставляется
+            # между вопросом и строкой подписки. Пул фраз — против bot-like однообразия.
+            vote_lines = CFG.get("first_comment_vote_lines", [])
+            if vote_lines and comment and random.random() < 0.5:
+                comment_lines = comment.split("\n")
+                comment_lines.insert(1, random.choice(vote_lines))
+                comment = "\n".join(comment_lines)
             if longform_url:  # та же воронка — ссылка на лонгформ в закреп-комменте
                 comment_cta = CFG.get("longform_comment_cta", "Want the full story?")
                 comment = (comment + f"\n\n▶ {comment_cta} {longform_url}").strip()

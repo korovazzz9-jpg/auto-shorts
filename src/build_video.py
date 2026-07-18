@@ -118,21 +118,32 @@ def pick_cta_phrase(topic: str | None = None, pair_tease: bool = False) -> tuple
     - pair: видео открывает пару (paired_facts, часть A) — тизер «у факта будет продолжение,
       подпишись»: конкретная причина подписаться конвертит сильнее любого «for more».
     - schedule: обещание расписания («4 NEW FACTS DAILY») — конкретика «что и когда получу».
+    - milestone: «помоги добить 1000» (2026-07-18) — честная цель, зритель = участник.
     - topic: персональный призыв под тему («SUBSCRIBE for more OCEAN facts»).
     - generic: фраза из cta_phrases (фолбэк — покрытие topic_cta_words 100%, так что
       сюда попадаем только если тема не передана).
-    topic vs schedule — 50/50: покрытие тем полное, без явного ролла schedule-фразы
-    не показывались бы никогда. Конверсию сравнивает weekly_report (подписки/1000 просм)."""
+    schedule/milestone/topic роллятся равновероятно: покрытие тем полное, без явного
+    ролла новые типы не показывались бы никогда. Конверсию сравнивает weekly_report
+    (подписки/1000 просм)."""
     if pair_tease:
         pool = CFG.get("pair_cta_phrases", [])
         if pool:
             return random.choice(pool), "pair"
-    schedule_pool = CFG.get("cta_schedule_phrases", [])
-    if schedule_pool and random.random() < 0.5:
-        return random.choice(schedule_pool), "schedule"
+    kinds = []
+    if CFG.get("cta_schedule_phrases"):
+        kinds.append("schedule")
+    if CFG.get("cta_milestone_phrases"):
+        kinds.append("milestone")
     words = CFG.get("topic_cta_words", {})
     template = CFG.get("cta_topic_template")
     if topic and template and topic in words:
+        kinds.append("topic")
+    kind = random.choice(kinds) if kinds else "generic"
+    if kind == "schedule":
+        return random.choice(CFG["cta_schedule_phrases"]), "schedule"
+    if kind == "milestone":
+        return random.choice(CFG["cta_milestone_phrases"]), "milestone"
+    if kind == "topic":
         return template.format(word=words[topic]), "topic"
     return random.choice(CFG["cta_phrases"]), "generic"
 
@@ -363,6 +374,31 @@ def _draw_cta_badge(path: str, text: str, width: int = 760) -> None:
         y += line_h
 
     img.save(path)
+
+
+MID_CTA_DURATION = 1.4   # сек показа микро-CTA в середине ролика
+MID_CTA_AT = 0.45        # доля длительности: сразу после reveal — пик «купился»
+
+
+def _mid_cta_clip(duration: float) -> list[ImageClip]:
+    """Микро-плашка «SUBSCRIBE» в пике интереса (2026-07-18): маленький бейдж вверху экрана
+    на ~1.4с в середине ролика. A/B midcta-yes/no — может резать retention, меряем."""
+    text = CFG.get("mid_cta_text", "")
+    if not text or duration < 10:  # на совсем коротких видео середина = уже почти CTA-концовка
+        return []
+    tmp = tempfile.mkdtemp()
+    badge_png = os.path.join(tmp, "midcta.png")
+    _draw_cta_badge(badge_png, text, width=430)
+    start = duration * MID_CTA_AT
+    badge = (
+        ImageClip(badge_png)
+        .set_position(("center", int(TARGET_SIZE[1] * 0.10)))
+        .set_start(start)
+        .set_duration(min(MID_CTA_DURATION, max(duration - start, 0.1)))
+        .crossfadein(0.25)
+        .crossfadeout(0.25)
+    )
+    return [badge]
 
 
 def _cta_clips(duration: float, topic: str | None = None, pair_tease: bool = False,
@@ -621,6 +657,7 @@ def build_video(
     structure: str | None = None,
     hook_style: str = "color",  # "color" (Noxterra-раскраска) | "plain" (белый) — ротация в pipeline
     cta_text: str | None = None,  # готовая CTA-фраза от pipeline (pick_cta_phrase) для тега cta-<...>
+    mid_cta: bool = False,  # микро-«SUBSCRIBE» в середине ролика — A/B midcta-yes/no в pipeline
     **kwargs,
 ) -> tuple[str, str, str]:
     """Returns (video_path, thumbnail_path, caption_color).
@@ -651,6 +688,8 @@ def build_video(
     caption_color = _pick_caption_color()
     caption_clips = _karaoke_clips(words, cutoff=duration, color=caption_color)
     cta_clips = _cta_clips(duration, topic, pair_tease, cta_text)
+    if mid_cta:
+        cta_clips = cta_clips + _mid_cta_clip(duration)
     part_clips = [_part_label_clip(part, total_parts)] if part else []
     hook_overlay = hook_text or title  # двойной хук: on-screen текст может отличаться от озвучки
     hook_clips = _hook_clips(hook_overlay, style=hook_style) if hook_overlay else []

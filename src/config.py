@@ -44,6 +44,24 @@ CONFIGS = {
             "4 NEW FACTS DAILY\nSUBSCRIBE",
             "SUBSCRIBE — new facts\nevery single day",
         ],
+        # «Road to 1000» (2026-07-18): честная цель-майлстоун — для маленького канала
+        # «помоги добить 1000» конвертит лучше абстрактного subscribe (зритель = участник).
+        # 1000 = порог YPP. Когда доберём — обновить или убрать. Тег cta-milestone.
+        "cta_milestone_phrases": [
+            "HELP US REACH\n1,000 SUBSCRIBERS",
+            "GOAL: 1,000 SUBS\nBE ONE OF THEM",
+        ],
+        # Микро-CTA в пике интереса (2026-07-18): маленькая плашка на ~1.4с сразу после
+        # reveal (середина ролика) — момент, когда зритель максимально «купился». A/B
+        # midcta-yes/no 50/50 (может резать retention — проверяем данными).
+        "mid_cta_text": "SUBSCRIBE",
+        # Строка-«голосование» в закрепе (2026-07-18): лайк коммента = действие в один тап,
+        # втягивает пассивных + провоцирует реплаи несогласных. Вставляется 50/50 после
+        # вопроса. Пул — против bot-like однообразия (тот же паттерн, что subscribe_ctas).
+        "first_comment_vote_lines": [
+            "👍 this comment if you knew — reply if it blew your mind",
+            "👍 = already knew it | reply = had no idea",
+        ],
         # Фразы-петли (loop): дописываются в конец скрипта детерминированно. Ключ = коннектор,
         # который Claude пометил как подходящий по смыслу к хуку. На стыке петли
         # "<фраза> <хук>" читается как одно связное предложение ("This is why <хук>").
@@ -257,6 +275,15 @@ CONFIGS = {
             "DATOS NUEVOS CADA DÍA\nSUSCRÍBETE",
             "SUSCRÍBETE — un dato nuevo\ntodos los días",
         ],
+        "cta_milestone_phrases": [
+            "AYÚDANOS A LLEGAR\nA 1,000 SUSCRIPTORES",
+            "META: 1,000 SUSCRIPTORES\nSÉ UNO DE ELLOS",
+        ],
+        "mid_cta_text": "SUSCRÍBETE",
+        "first_comment_vote_lines": [
+            "👍 este comentario si ya lo sabías — responde si te sorprendió",
+            "👍 = ya lo sabía | responde = no tenía idea",
+        ],
         "loop_phrases": {
             "why": ["Y por eso.", "Y por eso exactamente.", "Y por eso pasa.", "Por eso mismo."],
             "how": ["Y así es como.", "Y exactamente así.", "Y de esta forma."],
@@ -413,6 +440,15 @@ CONFIGS = {
         "cta_schedule_phrases": [
             "4 FATOS NOVOS POR DIA\nINSCREVA-SE",
             "INSCREVA-SE — fatos novos\ntodos os dias",
+        ],
+        "cta_milestone_phrases": [
+            "AJUDE A CHEGAR\nA 1.000 INSCRITOS",
+            "META: 1.000 INSCRITOS\nSEJA UM DELES",
+        ],
+        "mid_cta_text": "INSCREVA-SE",
+        "first_comment_vote_lines": [
+            "👍 este comentário se você já sabia — responda se te surpreendeu",
+            "👍 = já sabia | responda = não fazia ideia",
         ],
         "loop_phrases": {
             "why": ["E é por isso.", "E é exatamente por isso.", "É por isso mesmo.", "É por isso que acontece."],
