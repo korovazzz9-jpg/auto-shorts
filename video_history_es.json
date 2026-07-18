@@ -183,5 +183,24 @@
     "caption_color": "yellow",
     "structure": "unsolved-mystery",
     "pair_role": null
+  },
+  {
+    "video_id": "0XBjuadvN2o",
+    "published_at": "2026-07-18T13:24:33.594307+00:00",
+    "title": "Tu cuerpo lleva un reloj que nunca para",
+    "topic": "the human body",
+    "hook_template": "sounds-fake",
+    "title_opener": "your-x",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 31.5,
+    "voice": "es-CO-GonzaloNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": null
   }
 ]
