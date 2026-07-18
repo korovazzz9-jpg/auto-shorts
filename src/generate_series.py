@@ -5,7 +5,7 @@ import os
 from anthropic import Anthropic
 
 from config import CFG
-from generate_script import BASE_SYSTEM_PROMPT, HOOK_TEMPLATES, TITLE_INSTRUCTION, TOPICS_POOL, BANNED_TOPICS, extract_first_json
+from generate_script import BASE_SYSTEM_PROMPT, HOOK_TEMPLATES, TOPICS_POOL, BANNED_TOPICS, extract_first_json, _title_instruction_narrative
 from recent_titles import add_title_to_cache, add_topic_to_cache, get_recent_titles
 from topic_stats import get_topic_avg_views
 import random
@@ -124,7 +124,7 @@ def generate_series() -> dict:
         "- Part 3: The biggest payoff — the implication that changes how you see everything. "
         f"{SERIES_CTA[3]}.\n\n"
         "Requirements for EACH part:\n"
-        f"- {TITLE_INSTRUCTION} — append ' | Part 1', ' | Part 2', ' | Part 3' to each title\n"
+        f"- {_title_instruction_narrative()} — append ' | Part 1', ' | Part 2', ' | Part 3' to each title\n"
         f"- hook_text: a SHORT on-screen hook (3-6 words) for that part, a DIFFERENT angle from "
         "the spoken first sentence (eye and ear give two separate hooks in the first 2 seconds) "
         f"and NOT a copy of the title. Punchy, in {CFG['script_language']}, no ending period.\n"

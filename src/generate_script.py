@@ -383,12 +383,16 @@ SCRIPT_MAX_WORDS = 93  # gate: above this we retry; loop line (~3 words) appende
 #       У нас было: "Ugarit's Alphabet Never Reached Rome Directly" (ответ + требует контекста).
 #   (2) один эмоциональный эмодзи в КОНЦЕ заголовка (😨😱😵🤯) — топы делают поголовно, дешёвый CTR.
 # 2026-07-18: CurioShock (17.5к подписчиков, тот же контент — конкретные ист. факты, ровесник
-# ES-канала) — outlier-анализ по 100 роликам: title_style question vs statement НЕ трогаем (юзер
-# решил измерять на своей аудитории, не копировать вслепую), но усиливаем СИЛУ НЕОЖИДАННОСТИ
-# действия/детали — у CurioShock в топах всегда шоковое конкретное действие ("el zapato que
-# Tutankamón usó para pisotear a sus enemigos", "el arma de otro mundo"), у нас формула та же
-# ("El [subject] que [action]"), но действие часто мягче/абстрактнее.
-_TITLE_HOOK_RULE = (
+# ES-канала) — outlier-анализ по 100 роликам: "El/La [subject] que [action]" statement беспощадно
+# обгоняет open-question заголовки (44.2к vs 25.3к ср. просмотров; вопрос "¿...?" отдельно — 7.5к
+# vs 32.4к). Раньше правило было ЕДИНСТВЕННОЕ и требовало open curiosity gap (де-факто почти
+# всегда выливалось в вопрос, title_style="question" доминировал) — теперь РАЗБАВЛЯЕМ statement-
+# формулой CurioShock, вместо слепой замены, чтобы продолжать сравнивать title_style в
+# weekly_report на своей аудитории. Действие в title должно быть САМЫМ шоковым/конкретным в
+# факте ("el zapato que Tutankamón usó para pisotear a sus enemigos", не мягкая формулировка).
+TITLE_STATEMENT_PROBABILITY = 0.5  # доля заголовков по statement-формуле CurioShock (vs open-question)
+
+_TITLE_HOOK_RULE_QUESTION = (
     "Frame it as an OPEN curiosity gap — a question or an unresolved tension the viewer must tap to "
     "resolve, NOT the finished fact spelled out. The subject's action/detail must be the MOST "
     "shocking, impossible-sounding, or visceral one in the fact — not a mild or generic description "
@@ -396,17 +400,43 @@ _TITLE_HOOK_RULE = (
     "concrete number/date anchor, prefer including it — it makes the impossible claim feel true. "
     "End the title with ONE emotional emoji (😱/😨/🤯/😳/💀 — pick what fits the tone). "
 )
-TITLE_INSTRUCTION_NARRATIVE = (
-    f"title: a punchy narrative hook IN {CFG['script_language']}, under 60 characters. {_TITLE_HOOK_RULE}"
-    "Do NOT append a '| topic facts' style keyword suffix — it should read like a real headline, not a listicle."
+_TITLE_HOOK_RULE_STATEMENT = (
+    "Use the formula '[Subject] that/who [action]' — a STATEMENT, not a question. Name the "
+    "specific subject (the person/animal/place/object), then state the single most shocking, "
+    "impossible-sounding, or visceral action or detail about it — the MOST extreme one in the "
+    "fact, not a mild or generic description (e.g. not 'used it in battles' but 'used it to "
+    "trample his enemies'). Do NOT phrase the title as a question. If the fact has a concrete "
+    "number/date anchor, include it — it makes the impossible claim feel true. End the title "
+    "with ONE emotional emoji (😱/😨/🤯/😳/💀 — pick what fits the tone). "
 )
-TITLE_INSTRUCTION_SEO = (
-    f"title: IN {CFG['script_language']}, under 60 characters. Name the specific subject plainly "
-    "(the animal/place/era/phenomenon) and include the one concrete keyword a viewer would actually "
-    f"type into YouTube search for this fact (in {CFG['script_language']}). {_TITLE_HOOK_RULE}"
-    "It must still read like a real headline, not a listicle or a '| topic facts' keyword-stuffed suffix."
-)
-TITLE_INSTRUCTION = TITLE_INSTRUCTION_NARRATIVE  # обратная совместимость (generate_series.py)
+
+
+def _pick_title_hook_rule() -> str:
+    """Рандомно чередует open-question и statement-формулу CurioShock — держит оба режима
+    живыми, чтобы title_style (analytics_retention/weekly_report) продолжал сравнение на
+    своей аудитории, а не переключался вслепую на данные чужого канала."""
+    if random.random() < TITLE_STATEMENT_PROBABILITY:
+        return _TITLE_HOOK_RULE_STATEMENT
+    return _TITLE_HOOK_RULE_QUESTION
+
+
+def _title_instruction_narrative() -> str:
+    return (
+        f"title: a punchy narrative hook IN {CFG['script_language']}, under 60 characters. "
+        f"{_pick_title_hook_rule()}"
+        "Do NOT append a '| topic facts' style keyword suffix — it should read like a real headline, not a listicle."
+    )
+
+
+def _title_instruction_seo() -> str:
+    return (
+        f"title: IN {CFG['script_language']}, under 60 characters. Name the specific subject plainly "
+        "(the animal/place/era/phenomenon) and include the one concrete keyword a viewer would actually "
+        f"type into YouTube search for this fact (in {CFG['script_language']}). {_pick_title_hook_rule()}"
+        "It must still read like a real headline, not a listicle or a '| topic facts' keyword-stuffed suffix."
+    )
+
+
 TITLE_SEO_PROBABILITY = 0.3  # доля видео с keyword-насыщенным заголовком
 
 
@@ -414,8 +444,8 @@ def pick_title_variant() -> tuple[str, str]:
     """Возвращает (текст инструкции, тег 'seo'|'narrative') — вызывающий код передаёт текст в
     _build_user_content и должен сохранить тег в data["title_variant"] после парсинга."""
     if random.random() < TITLE_SEO_PROBABILITY:
-        return TITLE_INSTRUCTION_SEO, "seo"
-    return TITLE_INSTRUCTION_NARRATIVE, "narrative"
+        return _title_instruction_seo(), "seo"
+    return _title_instruction_narrative(), "narrative"
 
 # Хук-шаблоны: модель сообщает, какой использовала; пайплайн тегирует видео hook-<id>,
 # а analytics_retention меряет % досмотра по типу хука — чтобы взвешивать сильнейшие.
@@ -539,9 +569,11 @@ def _pair_resolve_note(claim: str) -> str:
     )
 
 
-def _build_user_content(topic: str, avoid_block: str, title_instruction: str = TITLE_INSTRUCTION_NARRATIVE,
+def _build_user_content(topic: str, avoid_block: str, title_instruction: str | None = None,
                          pair_start: bool = False, pair_resolve_claim: str | None = None,
                          structure: str = "myth-debunk") -> str:
+    if title_instruction is None:
+        title_instruction = _title_instruction_narrative()
     # Стилевая калибровка по нише (2026-07-05): заголовки чужих выбросов на ЭТУ тему.
     niche_titles = _niche_titles_for(topic)
     niche_block = ""
