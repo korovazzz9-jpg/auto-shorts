@@ -240,20 +240,32 @@ def _karaoke_clips(words: list[dict], cutoff: float, color: str) -> list[TextCli
 
         # Базовый ряд: измеряем реальную ширину отрендеренных слов (label-клипы), при
         # переполнении кадра пересоздаём группу меньшим шрифтом (пропорционально).
+        # 2026-07-18 (скрин юзера): ширину меряем ПО СЛОТАМ АКТИВНОЙ версии (базовая ×1.15
+        # + запас), а не по базовой — иначе широкое слово при подсветке вылезало за края
+        # кадра и наезжало на соседей (прирост ±40px при зазоре 26px).
         fontsize = KARAOKE_FONTSIZE
-        base = [_word_clip(w["text"], fontsize, color) for w in group]
-        total_w = sum(c.w for c in base) + KARAOKE_GAP * (len(base) - 1)
         max_w = TARGET_SIZE[0] - 100
-        if total_w > max_w:
-            fontsize = max(40, int(fontsize * max_w / total_w))
-            base = [_word_clip(w["text"], fontsize, color) for w in group]
-            total_w = sum(c.w for c in base) + KARAOKE_GAP * (len(base) - 1)
+
+        def _layout(fs: int):
+            base_clips = [_word_clip(w["text"], fs, color) for w in group]
+            # слот = ширина слова в момент подсветки (+6px страховка на округление шрифта)
+            slots = [c.w * ACTIVE_SCALE + 6 for c in base_clips]
+            return base_clips, slots, sum(slots) + KARAOKE_GAP * (len(base_clips) - 1)
+
+        # Итеративно: пропорциональная оценка неточна (метрики шрифта нелинейны по кеглю),
+        # одна итерация оставляла до ~100px перелива на длинных испанских словах. Floor 40
+        # тоже переливал («inexplicablemente completamente...») — опущен до 24, переполнение
+        # хуже мелкого кегля.
+        base, slot_w, total_w = _layout(fontsize)
+        while total_w > max_w and fontsize > 24:
+            fontsize = max(24, int(fontsize * max_w / total_w) - 1)
+            base, slot_w, total_w = _layout(fontsize)
 
         x = (TARGET_SIZE[0] - total_w) / 2
         centers = []
-        for c in base:
-            centers.append(x + c.w / 2)
-            x += c.w + KARAOKE_GAP
+        for sw in slot_w:
+            centers.append(x + sw / 2)
+            x += sw + KARAOKE_GAP
 
         # Каждое слово ряда: пассивная версия видна ДО и ПОСЛЕ своего произнесения (два
         # отрезка, а не один на всю группу — иначе она просвечивала бы за активной с
