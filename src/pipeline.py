@@ -102,6 +102,7 @@ def run() -> None:
             f"color-{caption_color}",
             f"voice-{voice}",
             f"format-{data.get('structure', 'myth-debunk')}",  # ротация структур (2026-07-13)
+            f"titlestyle-{data.get('title_style', 'statement')}",  # вопрос vs утверждение (2026-07-17)
         ]
         if data.get("topical"):
             extra_tags.append("topical-onthisday")

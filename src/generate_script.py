@@ -907,6 +907,12 @@ def generate_script(on_this_day: bool = False, pair_start: bool = False,
     data["pairable_claim"] = str(data.get("pairable_claim", "")).strip() if pair_start else ""
     data["pair_resolved"] = bool(data.get("pair_resolved")) if pair_resolve_claim else False
     data["title_variant"] = title_variant  # A/B заголовков: тег title-seo/title-narrative
+    # 2026-07-17: ось «вопрос vs утверждение» в заголовке — определяется ПО ФАКТУ (наличие
+    # ?/¿), а не по инструкции, т.к. модель не всегда слушается. Повод: анализ CurioShock
+    # (сосед ES, тот же контент) — у НЕГО вопросы в заголовке дали 7.5к против 32к у
+    # утверждений (в 4× хуже). Проверяем, так ли на НАШЕЙ аудитории — тег titlestyle-*,
+    # срез в weekly_report. Правку промпта (вопрос-крючок, 16.07) НЕ откатываем — измеряем.
+    data["title_style"] = "question" if ("?" in data.get("title", "") or "¿" in data.get("title", "")) else "statement"
     data["hashtag_position"] = "end"
     # #2 хук-шаблон: нормализуем к известному id (для тега hook-<id> и аналитики).
     ht = str(data.get("hook_template", "")).strip().lower()
