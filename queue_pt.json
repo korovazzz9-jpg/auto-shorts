@@ -1,53 +1,5 @@
 [
   {
-    "title": "A lama que cria relâmpagos de dentro pra fora",
-    "title_opener": "the-x",
-    "hook_text": "Relâmpago nasce debaixo da terra?",
-    "hook_template": "sounds-fake",
-    "emotional_tone": "impossible",
-    "script": "Tem um lugar no mundo onde relâmpagos brotam do chão — não caem do céu. O Lago Maracaibo, na Venezuela, dispara até 28 raios por minuto, toda noite, por quase 300 noites por ano. É o ponto com mais raios do planeta inteiro. Mas o estranho: os raios ficam em silêncio — quase sem trovão. A eletricidade acumula tão rápido que descarrega antes do som se formar. Então da próxima vez que ouvir trovão, lembre: no Maracaibo, ninguém ouve nada.",
-    "word_count": 85,
-    "search_summary": "Lago Maracaibo na Venezuela dispara até 28 raios por minuto e é o lugar com mais relâmpagos do mundo.",
-    "comment_question": "Relâmpago sem trovão parece impossível — alguém aí acredita mesmo? ⚡",
-    "source_note": "NASA Lightning Imaging Sensor data, 2016",
-    "loop_connectors": [
-      "why",
-      "where"
-    ],
-    "tags": [
-      "fatos incríveis",
-      "maravilhas naturais",
-      "lago maracaibo",
-      "relâmpago venezuela",
-      "lugar com mais raios do mundo",
-      "fenômenos naturais",
-      "curiosidades do mundo",
-      "relâmpago sem trovão",
-      "fatos incríveis do mundo",
-      "lago maracaibo petroleo"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#fatosincríveis",
-      "#maravilhasnaturais",
-      "#relâmpago",
-      "#maracaibo"
-    ],
-    "video_queries": [
-      "lightning storm night lake",
-      "lightning bolts striking water",
-      "tropical storm Venezuela landscape",
-      "silent lightning timelapse sky",
-      "electric storm no thunder night"
-    ],
-    "has_loop": false,
-    "topic": "natural wonders",
-    "structure": "myth-debunk",
-    "niche_styled": false,
-    "title_variant": "seo",
-    "hashtag_position": "end"
-  },
-  {
     "title": "O oceano que funciona como uma impressora de sal",
     "title_opener": "the-x",
     "hook_text": "O mar fabrica sal do zero",
