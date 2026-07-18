@@ -122,7 +122,12 @@ CONFIGS = {
         # и добавления секретов FB_PAGE_ID / FB_PAGE_ACCESS_TOKEN (Page-токен, pages_manage_posts).
         "post_to_facebook": False,
         "post_to_tiktok": False,  # ожидает одобрения TikTok Dev App + токена — вернуть True после
-        "post_to_pinterest": True,  # 2026-07-17: app одобрен, OAuth пройден (get_pinterest_token.py), доска 1085086172660968792
+        # 2026-07-18: ВЫКЛЮЧЕНО — app в TRIAL-режиме, Pinterest не даёт создавать пины в
+        # проде вообще (код 29, «use API Sandbox»), каждый прогон спамил алертом. Код починен
+        # (был 500: /v5/media только для видео → теперь image_base64 прямо в POST /pins,
+        # схема проверена вживую). Вернуть True ПОСЛЕ одобрения Standard access
+        # (developers.pinterest.com → My apps → Request standard access).
+        "post_to_pinterest": False,  # OAuth пройден (get_pinterest_token.py), доска 1085086172660968792
         "post_to_threads": False,  # ожидает Threads-токен (THREADS_ACCESS_TOKEN/USER_ID, см. upload_threads.py)
         # 2026-07-17: «тощие» метаданные под EN как эксперимент (топы ниши держат 0 тегов и
         # почти пустое описание — см. publish.py). Без search_summary в описании и без

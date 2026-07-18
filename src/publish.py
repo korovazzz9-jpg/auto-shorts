@@ -214,8 +214,11 @@ def publish(
                     hosted_story = None
                     try:
                         import re as _re
+                        # НЕ импортировать CHANNEL здесь повторно: локальный импорт делает имя
+                        # локальным для ВСЕЙ функции, и когда эта ветка не выполнялась,
+                        # record_publish в конце падал UnboundLocalError (video_history
+                        # молча не писался — реальный прод-баг, пойман 2026-07-18).
                         from build_ig_card import build_ig_card, build_ig_story_card, next_fact_number, save_fact_number
-                        from config import CHANNEL
                         # Сплит по границам предложений С ПРОБЕЛОМ после знака — иначе
                         # «4.5mm» резался на «4. 5mm» и факт обрывался на середине числа.
                         sentences = [s.strip() for s in _re.split(r"(?<=[.!?])\s+", data["script"]) if s.strip()]

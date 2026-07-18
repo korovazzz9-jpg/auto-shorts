@@ -90,36 +90,17 @@ def build_pin_card(title: str, fact: str, channel_handle: str) -> str:
     return path
 
 
-def _upload_image_to_pinterest(token: str, image_path: str) -> str:
-    """Загружает изображение через media upload endpoint, возвращает media_id."""
-    with open(image_path, "rb") as f:
-        data = f.read()
-
-    resp = requests.post(
-        f"{PINTEREST_API}/media",
-        headers={"Authorization": f"Bearer {token}"},
-        json={"media_type": "image"},
-        timeout=30,
-    )
-    resp.raise_for_status()
-    upload_info = resp.json()
-
-    # Загружаем напрямую в S3 через presigned URL
-    upload_url = upload_info["upload_url"]
-    upload_params = upload_info.get("upload_parameters", {})
-    files = {"file": ("pin_card.jpg", data, "image/jpeg")}
-    s3_resp = requests.post(upload_url, data=upload_params, files=files, timeout=60)
-    s3_resp.raise_for_status()
-
-    return upload_info["media_id"]
-
-
 def publish_pin(title: str, description: str, image_path: str, video_url: str) -> str:
-    """Публикует пин. Возвращает pin_id."""
+    """Публикует пин. Возвращает pin_id.
+
+    2026-07-18: был 500 на КАЖДОЙ публикации (ни одного пина с включения 07-17) —
+    эндпоинт /v5/media у Pinterest только для ВИДЕО; для картинок media_id не
+    поддерживается, картинка передаётся прямо в POST /pins как image_base64."""
     token = os.environ["PINTEREST_ACCESS_TOKEN"]
     board_id = os.environ["PINTEREST_BOARD_ID"]
 
-    media_id = _upload_image_to_pinterest(token, image_path)
+    with open(image_path, "rb") as f:
+        image_b64 = base64.b64encode(f.read()).decode("ascii")
 
     body = {
         "board_id": board_id,
@@ -127,8 +108,9 @@ def publish_pin(title: str, description: str, image_path: str, video_url: str) -
         "description": description[:500],
         "link": video_url,
         "media_source": {
-            "source_type": "media_id",
-            "media_id": media_id,
+            "source_type": "image_base64",
+            "content_type": "image/jpeg",
+            "data": image_b64,
         },
     }
 
