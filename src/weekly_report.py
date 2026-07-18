@@ -236,6 +236,14 @@ def build_report(videos: list[dict], spike_die: list[dict] | None = None) -> str
         for name, avg, n in title_styles:
             lines.append(f"  {avg:5.1f}%  ({n:2})  {name}")
 
+    # Сила неожиданности действия в заголовке (2026-07-18, CurioShock-инсайт: топы всегда
+    # берут самое шоковое/конкретное действие, не мягкую формулировку) — self-report модели.
+    title_intensities = [(k, a, n) for k, a, n in _avg_by(videos, "title_intensity") if k != "—"]
+    if title_intensities:
+        lines.append("\nСила заголовка:")
+        for name, avg, n in title_intensities:
+            lines.append(f"  {avg:5.1f}%  ({n:2})  {name}")
+
     # Цвет субтитров (2026-07-10, см. CAPTION_COLORS в build_video.py) — независимая от
     # контента ось оформления, ротируется случайно ради вариативности между видео.
     colors = [(k, a, n) for k, a, n in _avg_by(videos, "caption_color") if k != "—"]

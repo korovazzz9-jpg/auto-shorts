@@ -500,6 +500,18 @@ TITLE_OPENER_INSTRUCTION = (
     "match (use 'other' if none fits)."
 )
 
+# Сила неожиданности действия/детали в title (2026-07-18, CurioShock-инсайт) — модель
+# сама отчитывается, насколько ЭКСТРЕМАЛЬНОЕ действие/деталь она выбрала для заголовка, тег
+# title-intensity-<id> идёт в analytics_retention/weekly_report тем же паттерном, что hook_template.
+TITLE_INTENSITIES = ["mild", "extreme"]
+
+TITLE_INTENSITY_INSTRUCTION = (
+    "title_intensity: self-rate the action/detail you put in the title — 'extreme' if it's the "
+    "single most shocking, visceral, or impossible-sounding action/detail in the fact (e.g. "
+    "'used it to trample his enemies'), 'mild' if it's a calmer or more generic description "
+    "(e.g. 'used it in battles'). Report honestly — this is tracked to see which performs better."
+)
+
 
 def _title_variety_note(past_titles: list[str]) -> str:
     """Считает, сколько из последних заголовков начинаются с The/Your/This (без доступа к
@@ -600,6 +612,7 @@ def _build_user_content(topic: str, avoid_block: str, title_instruction: str | N
         "Requirements:\n"
         f"- {title_instruction}\n"
         f"- {TITLE_OPENER_INSTRUCTION}\n"
+        f"- {TITLE_INTENSITY_INSTRUCTION}\n"
         f"- hook_text: a 3-6 word ON-SCREEN hook shown over the first seconds. It must be a "
         "DIFFERENT angle from the spoken first sentence (the eye and the ear deliver two "
         "separate hooks in the first 2 seconds) and NOT a copy of the title. Punchy, in "
@@ -637,6 +650,7 @@ def _build_user_content(topic: str, avoid_block: str, title_instruction: str | N
         "Respond strictly in JSON, no markdown wrapper: "
         '{"title": "title text", '
         '"title_opener": "the-x", '
+        '"title_intensity": "extreme", '
         '"hook_text": "short on-screen hook", '
         '"hook_template": "vague-ability", '
         '"emotional_tone": "awe", '
@@ -962,6 +976,8 @@ def generate_script(on_this_day: bool = False, pair_start: bool = False,
     # та же логика, что hook_template — неизвестное/пустое значение падает на "other".
     to = str(data.get("title_opener", "")).strip().lower()
     data["title_opener"] = to if to in TITLE_OPENERS else "other"
+    ti = str(data.get("title_intensity", "")).strip().lower()
+    data["title_intensity"] = ti if ti in TITLE_INTENSITIES else "other"
     et = str(data.get("emotional_tone", "")).strip().lower()
     data["emotional_tone"] = et if et in EMOTIONAL_TONES else "other"
     # #4 двойной хук: если on-screen hook пуст — падаем на заголовок (хук-плашка не исчезнет).
