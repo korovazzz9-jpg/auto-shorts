@@ -36,6 +36,14 @@ CONFIGS = {
             # усиливает главный сигнал ранжирования (comment density).
             "COMMENT\nif you knew this",
         ],
+        # Обещание расписания (2026-07-18): конкретика «что и когда получу» конвертит в
+        # подписку лучше генерик-«for more». Цифра = РЕАЛЬНОЕ число слотов/день — при
+        # смене расписания обновить (EN 4/день с 01.07). A/B против topic-CTA: тег
+        # cta-<schedule|topic|pair>, конверсия в weekly_report.
+        "cta_schedule_phrases": [
+            "4 NEW FACTS DAILY\nSUBSCRIBE",
+            "SUBSCRIBE — new facts\nevery single day",
+        ],
         # Фразы-петли (loop): дописываются в конец скрипта детерминированно. Ключ = коннектор,
         # который Claude пометил как подходящий по смыслу к хуку. На стыке петли
         # "<фраза> <хук>" читается как одно связное предложение ("This is why <хук>").
@@ -243,6 +251,12 @@ CONFIGS = {
             "SUSCRÍBETE para más\ndatos como este",
             "DALE LIKE\nsi no lo sabías",
         ],
+        # Обещание расписания (2026-07-18). ES сейчас 2 слота/день (срез 14.07) — цифру
+        # не пишем (2 звучит слабо), честное «каждый день».
+        "cta_schedule_phrases": [
+            "DATOS NUEVOS CADA DÍA\nSUSCRÍBETE",
+            "SUSCRÍBETE — un dato nuevo\ntodos los días",
+        ],
         "loop_phrases": {
             "why": ["Y por eso.", "Y por eso exactamente.", "Y por eso pasa.", "Por eso mismo."],
             "how": ["Y así es como.", "Y exactamente así.", "Y de esta forma."],
@@ -394,6 +408,11 @@ CONFIGS = {
             "CURTA E INSCREVA-SE\npara mais",
             "INSCREVA-SE para mais\nfatos como este",
             "CURTA\nse não sabia",
+        ],
+        # Обещание расписания (2026-07-18): PT 4 слота/день.
+        "cta_schedule_phrases": [
+            "4 FATOS NOVOS POR DIA\nINSCREVA-SE",
+            "INSCREVA-SE — fatos novos\ntodos os dias",
         ],
         "loop_phrases": {
             "why": ["E é por isso.", "E é exatamente por isso.", "É por isso mesmo.", "É por isso que acontece."],

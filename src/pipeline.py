@@ -6,7 +6,7 @@ from datetime import datetime, timezone
 
 from dotenv import load_dotenv
 
-from build_video import build_video
+from build_video import build_video, pick_cta_phrase
 from config import CFG, CHANNEL
 from fetch_stock_video import fetch_clips
 from generate_script import generate_script
@@ -97,7 +97,10 @@ def run() -> None:
         # A/B хук-плашки (2026-07-18): Noxterra-раскраска (жёлтый→белый→красный) vs прежний
         # белый текст. Ротация 50/50, тег hookstyle-<...> — сравнение в weekly_report.
         hook_style = random.choice(["color", "plain"])
-        video_path, thumb_path, caption_color = build_video(audio_path, clip_paths, words, video_path, topic=data["topic"], title=data["title"], hook_text=data.get("hook_text"), pair_tease=pair_tease, structure=data.get("structure"), hook_style=hook_style)
+        # CTA-фразу роллим здесь, а не внутри build_video — pipeline должен знать её ТИП
+        # (schedule/topic/pair/generic) для тега cta-<...> и сравнения конверсии в подписку.
+        cta_text, cta_kind = pick_cta_phrase(data["topic"], pair_tease)
+        video_path, thumb_path, caption_color = build_video(audio_path, clip_paths, words, video_path, topic=data["topic"], title=data["title"], hook_text=data.get("hook_text"), pair_tease=pair_tease, structure=data.get("structure"), hook_style=hook_style, cta_text=cta_text)
 
         print("5/6 Публикация...")
         extra_tags = [
@@ -116,6 +119,7 @@ def run() -> None:
             f"titlestyle-{'question' if ('?' in data['title'] or '¿' in data['title']) else 'statement'}",
             f"titleintensity-{data.get('title_intensity', 'other')}",  # сила неожиданности (2026-07-18)
             f"hookstyle-{hook_style}",  # раскраска хук-плашки: color vs plain (2026-07-18)
+            f"cta-{cta_kind}",  # тип CTA-фразы: schedule/topic/pair/generic (2026-07-18)
         ]
         if data.get("topical"):
             extra_tags.append("topical-onthisday")

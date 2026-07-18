@@ -244,6 +244,24 @@ def build_report(videos: list[dict], spike_die: list[dict] | None = None) -> str
         for name, avg, n in title_intensities:
             lines.append(f"  {avg:5.1f}%  ({n:2})  {name}")
 
+    # Тип CTA-фразы → КОНВЕРСИЯ В ПОДПИСКУ (2026-07-18): сравниваем schedule («4 факта в
+    # день») / topic («more OCEAN facts») / pair (тизер продолжения) / generic. Метрика —
+    # подписки на 1000 просмотров, СУММАРНО по группе (среднее отношений на малых числах —
+    # чистый шум: у ролика 0-2 подписки). Видео без просмотров исключены (лаг Analytics).
+    cta_groups: dict[str, list[dict]] = {}
+    for v in videos:
+        if v.get("views", 0) > 0 and v.get("cta_kind", "—") != "—":
+            cta_groups.setdefault(v["cta_kind"], []).append(v)
+    if cta_groups:
+        lines.append("\nCTA → подписки/1000 просм:")
+        rows = []
+        for kind, vs in cta_groups.items():
+            views = sum(v["views"] for v in vs)
+            subs = sum(v.get("subs", 0) for v in vs)
+            rows.append((subs / views * 1000 if views else 0.0, subs, views, len(vs), kind))
+        for conv, subs, views, n, kind in sorted(rows, reverse=True):
+            lines.append(f"  {conv:5.2f}  ({subs:2} подп / {views:5} просм, {n:2} видео)  {kind}")
+
     # Раскраска хук-плашки (2026-07-18, Noxterra-стиль: жёлтый→белый→красный vs белый).
     hook_styles = [(k, a, n) for k, a, n in _avg_by(videos, "hook_style") if k != "—"]
     if hook_styles:

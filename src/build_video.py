@@ -113,21 +113,28 @@ def _pick_caption_color() -> str:
     return random.choice(CAPTION_COLORS)
 
 
-def _pick_cta_phrase(topic: str | None = None, pair_tease: bool = False) -> str:
-    """Topic-aware CTA: если для темы есть слово — персональный призыв
-    («SUBSCRIBE for more OCEAN facts»), иначе генерик-фраза из cta_phrases.
-    pair_tease (2026-07-10): видео открывает пару (paired_facts, часть A) — вместо
-    генерик-призыва тизер «у факта будет продолжение, подпишись» (pair_cta_phrases):
-    конкретная причина подписаться конвертит сильнее любого «for more»."""
+def pick_cta_phrase(topic: str | None = None, pair_tease: bool = False) -> tuple[str, str]:
+    """Возвращает (фраза, тип) для CTA-бейджа. Типы (тег cta-<тип> в аналитике, 2026-07-18):
+    - pair: видео открывает пару (paired_facts, часть A) — тизер «у факта будет продолжение,
+      подпишись»: конкретная причина подписаться конвертит сильнее любого «for more».
+    - schedule: обещание расписания («4 NEW FACTS DAILY») — конкретика «что и когда получу».
+    - topic: персональный призыв под тему («SUBSCRIBE for more OCEAN facts»).
+    - generic: фраза из cta_phrases (фолбэк — покрытие topic_cta_words 100%, так что
+      сюда попадаем только если тема не передана).
+    topic vs schedule — 50/50: покрытие тем полное, без явного ролла schedule-фразы
+    не показывались бы никогда. Конверсию сравнивает weekly_report (подписки/1000 просм)."""
     if pair_tease:
         pool = CFG.get("pair_cta_phrases", [])
         if pool:
-            return random.choice(pool)
+            return random.choice(pool), "pair"
+    schedule_pool = CFG.get("cta_schedule_phrases", [])
+    if schedule_pool and random.random() < 0.5:
+        return random.choice(schedule_pool), "schedule"
     words = CFG.get("topic_cta_words", {})
     template = CFG.get("cta_topic_template")
     if topic and template and topic in words:
-        return template.format(word=words[topic])
-    return random.choice(CFG["cta_phrases"])
+        return template.format(word=words[topic]), "topic"
+    return random.choice(CFG["cta_phrases"]), "generic"
 
 
 def _fit_clip(clip: VideoFileClip, duration: float, zoom_factor: float, loop: bool = False) -> VideoFileClip:
@@ -358,7 +365,8 @@ def _draw_cta_badge(path: str, text: str, width: int = 760) -> None:
     img.save(path)
 
 
-def _cta_clips(duration: float, topic: str | None = None, pair_tease: bool = False) -> list[ImageClip]:
+def _cta_clips(duration: float, topic: str | None = None, pair_tease: bool = False,
+               cta_text: str | None = None) -> list[ImageClip]:
     cta_duration = min(CTA_DURATION, duration)
     start = max(duration - cta_duration, 0)
     heart_y = int(TARGET_SIZE[1] * 0.24)
@@ -368,7 +376,9 @@ def _cta_clips(duration: float, topic: str | None = None, pair_tease: bool = Fal
     badge_png = os.path.join(tmp, "badge.png")
 
     _draw_heart_png(heart_png)  # рендерится в 600px — анимация всегда downscale, без пикселей
-    _draw_cta_badge(badge_png, _pick_cta_phrase(topic, pair_tease), width=700)
+    # cta_text передан pipeline-ом (он знает тип фразы для тега cta-<...>), иначе роллим сами
+    # (rerender/series/старые вызовы — поведение прежнее, только без тега).
+    _draw_cta_badge(badge_png, cta_text or pick_cta_phrase(topic, pair_tease)[0], width=700)
 
     BASE = 220  # базовый размер сердца в видео (px)
     # pulse всегда downscale с 600px → 220-251px, пикселей нет
@@ -610,6 +620,7 @@ def build_video(
     music_path: str | None = None,
     structure: str | None = None,
     hook_style: str = "color",  # "color" (Noxterra-раскраска) | "plain" (белый) — ротация в pipeline
+    cta_text: str | None = None,  # готовая CTA-фраза от pipeline (pick_cta_phrase) для тега cta-<...>
     **kwargs,
 ) -> tuple[str, str, str]:
     """Returns (video_path, thumbnail_path, caption_color).
@@ -639,7 +650,7 @@ def build_video(
     background = _build_background(clip_paths, duration, visual_loop=(part is None))
     caption_color = _pick_caption_color()
     caption_clips = _karaoke_clips(words, cutoff=duration, color=caption_color)
-    cta_clips = _cta_clips(duration, topic, pair_tease)
+    cta_clips = _cta_clips(duration, topic, pair_tease, cta_text)
     part_clips = [_part_label_clip(part, total_parts)] if part else []
     hook_overlay = hook_text or title  # двойной хук: on-screen текст может отличаться от озвучки
     hook_clips = _hook_clips(hook_overlay, style=hook_style) if hook_overlay else []
