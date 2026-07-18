@@ -94,7 +94,10 @@ def run() -> None:
         # CTA-бейдж заменяется тизером «у факта будет продолжение — подпишись» (см.
         # pair_cta_phrases в config). Только визуально: озвучка/петля не трогаются.
         pair_tease = bool(pair_start_mode and str(data.get("pairable_claim", "")).strip())
-        video_path, thumb_path, caption_color = build_video(audio_path, clip_paths, words, video_path, topic=data["topic"], title=data["title"], hook_text=data.get("hook_text"), pair_tease=pair_tease, structure=data.get("structure"))
+        # A/B хук-плашки (2026-07-18): Noxterra-раскраска (жёлтый→белый→красный) vs прежний
+        # белый текст. Ротация 50/50, тег hookstyle-<...> — сравнение в weekly_report.
+        hook_style = random.choice(["color", "plain"])
+        video_path, thumb_path, caption_color = build_video(audio_path, clip_paths, words, video_path, topic=data["topic"], title=data["title"], hook_text=data.get("hook_text"), pair_tease=pair_tease, structure=data.get("structure"), hook_style=hook_style)
 
         print("5/6 Публикация...")
         extra_tags = [
@@ -112,6 +115,7 @@ def run() -> None:
             # заполняют, и дефолт 'statement' мечал бы вопросы как утверждения, портя сравнение.
             f"titlestyle-{'question' if ('?' in data['title'] or '¿' in data['title']) else 'statement'}",
             f"titleintensity-{data.get('title_intensity', 'other')}",  # сила неожиданности (2026-07-18)
+            f"hookstyle-{hook_style}",  # раскраска хук-плашки: color vs plain (2026-07-18)
         ]
         if data.get("topical"):
             extra_tags.append("topical-onthisday")

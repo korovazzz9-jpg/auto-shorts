@@ -244,6 +244,13 @@ def build_report(videos: list[dict], spike_die: list[dict] | None = None) -> str
         for name, avg, n in title_intensities:
             lines.append(f"  {avg:5.1f}%  ({n:2})  {name}")
 
+    # Раскраска хук-плашки (2026-07-18, Noxterra-стиль: жёлтый→белый→красный vs белый).
+    hook_styles = [(k, a, n) for k, a, n in _avg_by(videos, "hook_style") if k != "—"]
+    if hook_styles:
+        lines.append("\nХук-плашка:")
+        for name, avg, n in hook_styles:
+            lines.append(f"  {avg:5.1f}%  ({n:2})  {name}")
+
     # Цвет субтитров (2026-07-10, см. CAPTION_COLORS в build_video.py) — независимая от
     # контента ось оформления, ротируется случайно ради вариативности между видео.
     colors = [(k, a, n) for k, a, n in _avg_by(videos, "caption_color") if k != "—"]

@@ -35,6 +35,7 @@ VOICE_TAG_RE = re.compile(r"^voice-(.+)$")    # TTS-голос, см. voices в 
 FORMAT_TAG_RE = re.compile(r"^format-(.+)$")  # тип структуры скрипта, см. STRUCTURES в generate_script.py
 TITLESTYLE_TAG_RE = re.compile(r"^titlestyle-(question|statement)$")  # вопрос vs утверждение, 2026-07-17
 TITLEINTENSITY_TAG_RE = re.compile(r"^titleintensity-(mild|extreme)$")  # сила неожиданности, 2026-07-18
+HOOKSTYLE_TAG_RE = re.compile(r"^hookstyle-(color|plain)$")  # раскраска хук-плашки, 2026-07-18
 PAIR_A_TAG = "pair-a"  # часть A пары (несёт подписной тизер с 2026-07-10, см. paired_facts)
 PAIR_B_TAG = "pair-b"  # часть B (резолюция пары)
 NICHE_STYLED_TAG = "niche-styled"             # промпт получал заголовки чужих выбросов по теме
@@ -94,6 +95,7 @@ def _recent_videos(youtube) -> list[dict]:
             structure = None
             title_style = None
             title_intensity = None
+            hook_style = None
             niche = "plain"
             topical = "no"
             pair = "no"
@@ -139,6 +141,9 @@ def _recent_videos(youtube) -> list[dict]:
                 mti = TITLEINTENSITY_TAG_RE.match(tag)
                 if mti:
                     title_intensity = mti.group(1)
+                mhs = HOOKSTYLE_TAG_RE.match(tag)
+                if mhs:
+                    hook_style = mhs.group(1)
             videos.append({
                 "id": v["id"],
                 "title": v["snippet"]["title"],
@@ -156,6 +161,7 @@ def _recent_videos(youtube) -> list[dict]:
                 "structure": structure or "—",
                 "title_style": title_style or "—",
                 "title_intensity": title_intensity or "—",
+                "hook_style": hook_style or "—",
                 "niche": niche,
                 "topical": topical,
                 "pair": pair,

@@ -408,18 +408,81 @@ def _hook_box_png(w: int, h: int, path: str) -> None:
     img.save(path)
 
 
-def _hook_clips(title: str) -> list:
-    """Текст-хук на полупрозрачной тёмной плашке от края до края."""
-    txt = TextClip(
-        title.upper(),
-        fontsize=120,
-        color="white",
-        font=SUBTITLE_FONT,
-        size=(TARGET_SIZE[0] - 140, None),
-        method="caption",
-    )
-    tw, th = txt.size
-    box_png = os.path.join(tempfile.mkdtemp(), "hookbox.png")
+# Цвета хук-плашки (2026-07-18, стиль Noxterra: жёлтый вход → белое тело → красный якорь):
+# первые 1-2 слова жёлтые, последнее слово красное, остальное белое. A/B против одноцветной
+# белой плашки — ротация в pipeline.py, тег hookstyle-<color|plain> в аналитике.
+HOOK_COLOR_YELLOW = (255, 212, 0, 255)
+HOOK_COLOR_RED = (255, 59, 48, 255)
+HOOK_COLOR_WHITE = (255, 255, 255, 255)
+
+
+def _hook_text_png(text: str, path: str, max_width: int = TARGET_SIZE[0] - 140,
+                   font_size: int = 120) -> tuple[int, int]:
+    """Рендерит текст хука через PIL с пословной раскраской (TextClip не умеет несколько
+    цветов в одном клипе). Возвращает (w, h) готового PNG."""
+    from PIL import ImageFont
+
+    try:
+        font = ImageFont.truetype(SUBTITLE_FONT, font_size)
+    except Exception:
+        font = ImageFont.load_default()
+
+    words = text.upper().split()
+    n_yellow = 2 if len(words) >= 4 else 1  # короткий хук — жёлтым только первое слово
+    def word_color(i: int) -> tuple[int, int, int, int]:
+        if i == len(words) - 1 and len(words) > 1:
+            return HOOK_COLOR_RED
+        if i < n_yellow:
+            return HOOK_COLOR_YELLOW
+        return HOOK_COLOR_WHITE
+
+    dummy = ImageDraw.Draw(Image.new("RGBA", (1, 1)))
+    space_w = dummy.textlength(" ", font=font)
+    line_h = int(font_size * 1.18)
+
+    # Жадный перенос слов по ширине (method="caption" у TextClip делал то же самое).
+    lines: list[list[int]] = [[]]  # индексы слов по строкам
+    cur_w = 0.0
+    for i, w in enumerate(words):
+        ww = dummy.textlength(w, font=font)
+        if lines[-1] and cur_w + space_w + ww > max_width:
+            lines.append([])
+            cur_w = 0.0
+        cur_w += (space_w if lines[-1] else 0) + ww
+        lines[-1].append(i)
+
+    img_h = line_h * len(lines)
+    img = Image.new("RGBA", (max_width, img_h), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(img)
+    for row, idxs in enumerate(lines):
+        row_w = sum(dummy.textlength(words[i], font=font) for i in idxs) + space_w * (len(idxs) - 1)
+        x = (max_width - row_w) / 2
+        for i in idxs:
+            draw.text((x, row * line_h), words[i], font=font, fill=word_color(i))
+            x += dummy.textlength(words[i], font=font) + space_w
+    img.save(path)
+    return img.size
+
+
+def _hook_clips(title: str, style: str = "color") -> list:
+    """Текст-хук на полупрозрачной тёмной плашке от края до края.
+    style="color" — пословная раскраска (Noxterra), "plain" — прежний одноцветный белый."""
+    tmp = tempfile.mkdtemp()
+    if style == "color":
+        text_png = os.path.join(tmp, "hooktext.png")
+        tw, th = _hook_text_png(title, text_png)
+        txt = ImageClip(text_png)
+    else:
+        txt = TextClip(
+            title.upper(),
+            fontsize=120,
+            color="white",
+            font=SUBTITLE_FONT,
+            size=(TARGET_SIZE[0] - 140, None),
+            method="caption",
+        )
+        tw, th = txt.size
+    box_png = os.path.join(tmp, "hookbox.png")
     _hook_box_png(TARGET_SIZE[0], th + 2 * HOOK_BOX_PAD_Y, box_png)
 
     y = int(TARGET_SIZE[1] * 0.30)
@@ -546,6 +609,7 @@ def build_video(
     pair_tease: bool = False,
     music_path: str | None = None,
     structure: str | None = None,
+    hook_style: str = "color",  # "color" (Noxterra-раскраска) | "plain" (белый) — ротация в pipeline
     **kwargs,
 ) -> tuple[str, str, str]:
     """Returns (video_path, thumbnail_path, caption_color).
@@ -578,7 +642,7 @@ def build_video(
     cta_clips = _cta_clips(duration, topic, pair_tease)
     part_clips = [_part_label_clip(part, total_parts)] if part else []
     hook_overlay = hook_text or title  # двойной хук: on-screen текст может отличаться от озвучки
-    hook_clips = _hook_clips(hook_overlay) if hook_overlay else []
+    hook_clips = _hook_clips(hook_overlay, style=hook_style) if hook_overlay else []
     final = CompositeVideoClip(
         [background, *caption_clips, *cta_clips, *part_clips, *hook_clips], size=TARGET_SIZE
     ).set_audio(_build_audio(audio, words, duration, music_path, structure))
