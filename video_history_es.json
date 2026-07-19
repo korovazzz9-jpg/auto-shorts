@@ -259,5 +259,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "TvPeUFuqiQI",
+    "published_at": "2026-07-19T13:27:46.497681+00:00",
+    "title": "El pájaro que finge su propia muerte para cazar",
+    "topic": "the animal kingdom",
+    "hook_template": "authority-cant-explain",
+    "title_opener": "the-x",
+    "emotional_tone": "creepy",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 39.0,
+    "voice": "es-MX-JorgeNeural",
+    "caption_color": "white",
+    "structure": "unsolved-mystery",
+    "pair_role": null
   }
 ]
