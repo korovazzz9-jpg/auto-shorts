@@ -1,1 +1,54 @@
-[]
+[
+  {
+    "title": "The Earthquake That Flipped a River Upstream for Days 😱",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "A river ran backwards",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "impossible",
+    "script": "A massive earthquake forced an entire river to run backwards — for three days straight. The New Madrid earthquake of 1811 struck the Mississippi Valley so violently it reversed the flow of the Mississippi River itself. Geysers of sand exploded through frozen ground, new lakes appeared overnight, and church bells rang in Boston — 1,500 miles away — from the shaking alone. The quake hit before seismographs existed, so its true magnitude was only calculated in the 1980s: estimated at 7.5 to 8.0. If the same quake hit today, Memphis sits directly on the fault. Would you stay or run? And that's exactly how.",
+    "word_count": 99,
+    "search_summary": "1811 New Madrid earthquake reversed Mississippi River flow and rang bells 1500 miles away in Boston",
+    "comment_question": "If Memphis sits on that fault today, why are millions still living there? 😳",
+    "source_note": "USGS New Madrid Seismic Zone reports, 1980s",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "New Madrid earthquake",
+      "Mississippi River reversed",
+      "1811 earthquake",
+      "biggest earthquake USA history",
+      "earthquake facts",
+      "volcano and earthquake facts",
+      "did you know",
+      "short facts",
+      "geology facts",
+      "new madrid earthquake simulation",
+      "1811 earthquake ai"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#facts",
+      "#earthquake",
+      "#mississippiriver",
+      "#newmadrid"
+    ],
+    "video_queries": [
+      "river flowing fast wide aerial",
+      "earthquake ground shaking destruction",
+      "Mississippi River aerial landscape",
+      "sand erupting ground geyser",
+      "church bell tower historic",
+      "city near fault line aerial",
+      "person running from danger outdoor"
+    ],
+    "has_loop": true,
+    "topic": "volcanoes and earthquakes",
+    "structure": "historical-story",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
+  }
+]

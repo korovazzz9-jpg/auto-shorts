@@ -1,1 +1,103 @@
-[]
+[
+  {
+    "title": "A lua que chove pra cima e cobre tudo de branco 🤯",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "Isso não deveria ser possível",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "impossible",
+    "script": "Existe uma lua no sistema solar onde a neve cai pra cima — e isso acontece toda hora. É Encélado, lua de Saturno, com apenas 500 km de diâmetro. Ela expele jatos de vapor d'água a mais de 1.400 km/h por rachaduras no polo sul. A maioria dessa neve sobe, escapa da gravidade fraca, e cobre Encélado inteiro de branco — tornando ela a superfície mais reflexiva do sistema solar. Mas o detalhe insano é esse: parte desse vapor alimenta um dos anéis de Saturno diretamente. Você aceitaria que a neve de uma lua está construindo os anéis do planeta vizinho agora mesmo?",
+    "word_count": 103,
+    "search_summary": "Encélado lua de Saturno expele jatos de gelo que formam o anel E de Saturno e cobrem sua superfície de neve.",
+    "comment_question": "Você acreditaria que a neve de Encélado está construindo os anéis de Saturno agora? 🪐",
+    "source_note": "NASA Cassini mission, 2005–2017",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "fatos do espaço",
+      "lua de saturno",
+      "encélado",
+      "sistema solar",
+      "fatos incríveis",
+      "saturno anéis",
+      "espaço curiosidades",
+      "fatos em 30 segundos",
+      "fatos assustadores do espaço",
+      "lua de saturno titã",
+      "sistema solar para niños"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#fatosincríveis",
+      "#espaço",
+      "#saturno",
+      "#encélado"
+    ],
+    "video_queries": [
+      "Saturn rings space close up",
+      "icy moon surface cracked",
+      "space geyser water vapor jets",
+      "snow falling upward slow motion",
+      "Saturn planet wide landscape",
+      "spacecraft flying past planet",
+      "ice crystals floating space"
+    ],
+    "has_loop": false,
+    "topic": "space",
+    "structure": "myth-debunk",
+    "niche_styled": false,
+    "title_variant": "seo",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "O oceano está derretendo por baixo — agora mesmo 😱",
+    "title_opener": "other",
+    "title_intensity": "extreme",
+    "hook_text": "Acontece enquanto você respira",
+    "hook_template": "you-experience",
+    "emotional_tone": "awe",
+    "script": "Agora mesmo, embaixo do oceano Antártico, gelo está derretendo de baixo pra cima. As correntes quentes do fundo do mar raspam a base das plataformas de gelo, consumindo até 25 metros por ano — sem que nenhuma onda toque a superfície. Até o fim desse vídeo, alguns centímetros já sumiram. E o mais assustador: esse derretimento acelera quanto mais avança, porque abre espaço pra água quente entrar mais fundo. Você sentiria diferença se o processo parasse agora?",
+    "word_count": 84,
+    "search_summary": "Correntes oceânicas quentes derretem a base das plataformas de gelo da Antártica em até 25 metros por ano pelo lado de baixo.",
+    "comment_question": "Se esse derretimento não para nunca, por que ainda não sentimos? 🌊",
+    "source_note": "British Antarctic Survey, 2023",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "fatos curiosos",
+      "oceano antártico",
+      "derretimento do gelo antártico",
+      "plataforma de gelo",
+      "mudanças climáticas oceano",
+      "curiosidades sobre o mar",
+      "fatos incríveis",
+      "gelo derretendo embaixo do mar",
+      "fatos curiosos do mundo",
+      "oceano glacial antártico"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#fatoscuriosos",
+      "#oceano",
+      "#antártica",
+      "#climaurgente"
+    ],
+    "video_queries": [
+      "antarctica ice shelf aerial view",
+      "underwater ocean current dark",
+      "melting glacier underwater timelapse",
+      "antarctic ocean waves wide",
+      "ice cliff collapsing ocean"
+    ],
+    "has_loop": false,
+    "topic": "the ocean",
+    "structure": "happening-now",
+    "niche_styled": false,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
+  }
+]
