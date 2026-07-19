@@ -93,5 +93,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "0rZGZ_wIDJk",
+    "published_at": "2026-07-19T21:28:58.696503+00:00",
+    "title": "O oceano está derretendo por baixo — agora mesmo 😱",
+    "topic": "the ocean",
+    "hook_template": "you-experience",
+    "title_opener": "other",
+    "emotional_tone": "awe",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": false,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 27.3,
+    "voice": "pt-BR-ThalitaMultilingualNeural",
+    "caption_color": "white",
+    "structure": "happening-now",
+    "pair_role": null
   }
 ]
