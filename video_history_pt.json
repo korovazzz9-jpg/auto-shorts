@@ -112,5 +112,24 @@
     "caption_color": "white",
     "structure": "happening-now",
     "pair_role": null
+  },
+  {
+    "video_id": "QuAeLDybnKo",
+    "published_at": "2026-07-19T23:28:29.195782+00:00",
+    "title": "O peixe que trocou de sexo pra sobreviver 😱",
+    "topic": "evolution",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "impossible",
+    "title_variant": "seo",
+    "has_loop": false,
+    "niche_styled": false,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 27.1,
+    "voice": "pt-BR-ThalitaMultilingualNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": null
   }
 ]
