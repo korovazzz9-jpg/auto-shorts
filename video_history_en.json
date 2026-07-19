@@ -280,5 +280,24 @@
     "caption_color": "white",
     "structure": "historical-story",
     "pair_role": null
+  },
+  {
+    "video_id": "PkUEqsUOouw",
+    "published_at": "2026-07-19T20:14:27.626527+00:00",
+    "title": "The Shipwreck That Paid Divers to Stay Away 😱",
+    "topic": "shipwrecks and lost treasures",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 36.9,
+    "voice": "en-US-ChristopherNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": null
   }
 ]
