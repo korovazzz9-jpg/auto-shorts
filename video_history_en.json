@@ -358,5 +358,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "Um_YY0lcqeg",
+    "published_at": "2026-07-20T20:14:38.470506+00:00",
+    "title": "The Lake That Rearranges Its Own Shoreline Every Year 😱",
+    "topic": "natural wonders",
+    "hook_template": "authority-cant-explain",
+    "title_opener": "the-x",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 31.3,
+    "voice": "en-AU-WilliamNeural",
+    "caption_color": "white",
+    "structure": "unsolved-mystery",
+    "pair_role": null
   }
 ]
