@@ -353,5 +353,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "kN5-JMr3bmc",
+    "published_at": "2026-07-20T20:23:31.944510+00:00",
+    "title": "Tu lengua reconstruye sus papilas cada 10 días 😱",
+    "topic": "the human body",
+    "hook_template": "vague-ability",
+    "title_opener": "your-x",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 30.2,
+    "voice": "es-CO-GonzaloNeural",
+    "caption_color": "white",
+    "structure": "historical-story",
+    "pair_role": null
   }
 ]
