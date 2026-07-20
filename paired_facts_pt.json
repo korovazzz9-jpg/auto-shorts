@@ -28,5 +28,15 @@
     "part_b_video_id": "0EjvMIQ8zyo",
     "status": "resolved",
     "created_at": 1784078877.6231549
+  },
+  {
+    "id": "Rl2xOjstIk4-1784590130",
+    "topic": "ancient history",
+    "part_a_video_id": "Rl2xOjstIk4",
+    "part_a_title": "O escriba egípcio que virou deus 1400 anos depois 🤯",
+    "claim": "Amenhotep filho de Hapu é o único não-real deificado no Egito antigo.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1784590130.4391797
   }
 ]
