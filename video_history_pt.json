@@ -169,5 +169,24 @@
     "caption_color": "white",
     "structure": "happening-now",
     "pair_role": null
+  },
+  {
+    "video_id": "Ix6D6iKKAk8",
+    "published_at": "2026-07-20T21:29:48.381520+00:00",
+    "title": "A cidade subterrânea que 10 mil pessoas abandonaram de uma vez 😱",
+    "topic": "archaeological discoveries",
+    "hook_template": "authority-cant-explain",
+    "title_opener": "the-x",
+    "emotional_tone": "creepy",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": false,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 38.7,
+    "voice": "pt-BR-AntonioNeural",
+    "caption_color": "white",
+    "structure": "unsolved-mystery",
+    "pair_role": null
   }
 ]
