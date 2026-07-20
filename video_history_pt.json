@@ -150,5 +150,24 @@
     "caption_color": "white",
     "structure": "unsolved-mystery",
     "pair_role": null
+  },
+  {
+    "video_id": "780T4OyjM7k",
+    "published_at": "2026-07-20T17:29:15.287551+00:00",
+    "title": "A floresta que cresce dentro de uma cratera de 3km 🤯",
+    "topic": "natural wonders",
+    "hook_template": "you-experience",
+    "title_opener": "the-x",
+    "emotional_tone": "awe",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": false,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 33.2,
+    "voice": "pt-BR-ThalitaMultilingualNeural",
+    "caption_color": "white",
+    "structure": "happening-now",
+    "pair_role": null
   }
 ]
