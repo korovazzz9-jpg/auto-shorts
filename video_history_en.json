@@ -453,5 +453,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "k-hU0fFlKWI",
+    "published_at": "2026-07-21T23:15:00.394637+00:00",
+    "title": "Nobody Expected a Computer to Grow Its Own Wiring 🤯",
+    "topic": "future technology",
+    "hook_template": "you-experience",
+    "title_opener": "nobody-expected",
+    "emotional_tone": "impossible",
+    "title_variant": "seo",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 33.1,
+    "voice": "en-US-EricNeural",
+    "caption_color": "white",
+    "structure": "happening-now",
+    "pair_role": null
   }
 ]
