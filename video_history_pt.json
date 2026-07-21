@@ -207,5 +207,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": "a"
+  },
+  {
+    "video_id": "J7PoiJV1BHY",
+    "published_at": "2026-07-21T01:30:40.397287+00:00",
+    "title": "A fortaleza de 3 mil anos achada intacta no fundo de um lago 🤯",
+    "topic": "archaeological discoveries",
+    "hook_template": "you-experience",
+    "title_opener": "the-x",
+    "emotional_tone": "awe",
+    "title_variant": "seo",
+    "has_loop": false,
+    "niche_styled": false,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 28.7,
+    "voice": "pt-BR-AntonioNeural",
+    "caption_color": "white",
+    "structure": "happening-now",
+    "pair_role": null
   }
 ]
