@@ -415,5 +415,24 @@
     "caption_color": "white",
     "structure": "happening-now",
     "pair_role": null
+  },
+  {
+    "video_id": "8qKw1_jscMU",
+    "published_at": "2026-07-21T16:22:14.553269+00:00",
+    "title": "Can Your Body Really Rebuild Itself While You Sleep? 🤯",
+    "topic": "the human body",
+    "hook_template": "you-experience",
+    "title_opener": "question",
+    "emotional_tone": "awe",
+    "title_variant": "seo",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 37.9,
+    "voice": "en-US-EricNeural",
+    "caption_color": "white",
+    "structure": "happening-now",
+    "pair_role": null
   }
 ]
