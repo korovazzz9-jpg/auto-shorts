@@ -410,5 +410,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "68BTI3XDyrA",
+    "published_at": "2026-07-21T13:23:57.941108+00:00",
+    "title": "El astronauta que envejeció 6 meses menos que todos 😱",
+    "topic": "space",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 29.4,
+    "voice": "es-CO-GonzaloNeural",
+    "caption_color": "white",
+    "structure": "historical-story",
+    "pair_role": null
   }
 ]
