@@ -28,5 +28,15 @@
     "part_b_video_id": null,
     "status": "awaiting_b",
     "created_at": 1784243588.300981
+  },
+  {
+    "id": "unFi9ZbDdH8-1784679397",
+    "topic": "the ocean",
+    "part_a_video_id": "unFi9ZbDdH8",
+    "part_a_title": "Nobody Expected the Ocean to Have Its Own Waterfall 😱",
+    "claim": "Angel Falls is often wrongly called Earth's tallest waterfall.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1784679397.2312474
   }
 ]
