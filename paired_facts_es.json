@@ -18,5 +18,15 @@
     "part_b_video_id": "P2-WdmEYqaI",
     "status": "resolved",
     "created_at": 1783887722.779879
+  },
+  {
+    "id": "cDmkvfuqmQ4-1784679900",
+    "topic": "archaeological discoveries",
+    "part_a_video_id": "cDmkvfuqmQ4",
+    "part_a_title": "¿Por qué sellaron esta tumba con cemento hace 3,000 años? 😱",
+    "claim": "Several Egyptian tombs were sealed to protect the living, not the dead.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1784679900.74899
   }
 ]
