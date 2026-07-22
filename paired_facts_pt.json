@@ -38,5 +38,15 @@
     "part_b_video_id": null,
     "status": "awaiting_b",
     "created_at": 1784590130.4391797
+  },
+  {
+    "id": "aLpHnLpmPgA-1784762934",
+    "topic": "natural wonders",
+    "part_a_video_id": "aLpHnLpmPgA",
+    "part_a_title": "O lugar onde o trovão ecoa por 9 horas seguidas 😱",
+    "claim": "Lago Maracaibo tem mais raios por km² que qualquer outro lugar.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1784762934.3340983
   }
 ]
