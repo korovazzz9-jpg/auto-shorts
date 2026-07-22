@@ -491,5 +491,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": "a"
+  },
+  {
+    "video_id": "KhAjWWcUhUg",
+    "published_at": "2026-07-22T16:20:44.186039+00:00",
+    "title": "One Fish Grew Fingers 375 Million Years Ago 🤯",
+    "topic": "evolution",
+    "hook_template": "you-experience",
+    "title_opener": "other",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 33.4,
+    "voice": "en-US-EricNeural",
+    "caption_color": "white",
+    "structure": "happening-now",
+    "pair_role": null
   }
 ]
