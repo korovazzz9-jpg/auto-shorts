@@ -302,5 +302,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "f44ij1WdNJ8",
+    "published_at": "2026-07-22T17:29:45.333569+00:00",
+    "title": "Seu osso se reconstrói completamente a cada 10 anos 🤯",
+    "topic": "the human body",
+    "hook_template": "sounds-fake",
+    "title_opener": "your-x",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": false,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 33.1,
+    "voice": "pt-BR-FranciscaNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": null
   }
 ]
