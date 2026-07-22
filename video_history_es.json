@@ -486,5 +486,24 @@
     "caption_color": "white",
     "structure": "unsolved-mystery",
     "pair_role": null
+  },
+  {
+    "video_id": "m-wO_3nWi7A",
+    "published_at": "2026-07-22T13:24:15.230808+00:00",
+    "title": "Tu cerebro borra el dolor con su propia morfina 😱",
+    "topic": "the human body",
+    "hook_template": "sounds-fake",
+    "title_opener": "your-x",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 32.5,
+    "voice": "es-US-AlonsoNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": null
   }
 ]
