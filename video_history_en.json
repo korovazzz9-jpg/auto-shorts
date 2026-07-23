@@ -586,5 +586,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "U8ZynX4ksg4",
+    "published_at": "2026-07-23T20:13:21.947685+00:00",
+    "title": "Warrior Found Buried In Full Armor After 2,700 Years 😱",
+    "topic": "archaeological discoveries",
+    "hook_template": "sounds-fake",
+    "title_opener": "scientists-discovered",
+    "emotional_tone": "awe",
+    "title_variant": "seo",
+    "has_loop": true,
+    "niche_styled": null,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 33.4,
+    "voice": "en-US-ChristopherNeural",
+    "caption_color": "white",
+    "structure": null,
+    "pair_role": null
   }
 ]
