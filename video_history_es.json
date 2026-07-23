@@ -581,5 +581,24 @@
     "caption_color": "white",
     "structure": "unsolved-mystery",
     "pair_role": null
+  },
+  {
+    "video_id": "b5dsGJCUqwM",
+    "published_at": "2026-07-23T20:24:05.185499+00:00",
+    "title": "El barco vikingo que apareció enterrado bajo una granja en 1904 😱",
+    "topic": "historical mysteries",
+    "hook_template": "you-experience",
+    "title_opener": "the-x",
+    "emotional_tone": "creepy",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 33.8,
+    "voice": "es-US-AlonsoNeural",
+    "caption_color": "white",
+    "structure": "happening-now",
+    "pair_role": null
   }
 ]
