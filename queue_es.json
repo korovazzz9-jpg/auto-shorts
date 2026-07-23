@@ -250,5 +250,58 @@
     "niche_styled": true,
     "title_variant": "narrative",
     "hashtag_position": "end"
+  },
+  {
+    "title": "El lago que mata en segundos sin hacer nada 💀",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "Nadie sobrevive esta orilla",
+    "hook_template": "authority-cant-explain",
+    "emotional_tone": "creepy",
+    "script": "Algo mata en este lago sin moverse, sin ruido, sin aviso. El lago Nyos, en Camerún, liberó una nube de CO₂ el 21 de agosto de 1986 y mató a 1,800 personas en horas — sin olor, sin color, sin señal. La explicación oficial dice que fue un derrumbe volcánico submarino. Pero el lago ya se estabilizó y sigue acumulando gas en el fondo como si nada hubiera pasado. Nadie puede garantizar que no vuelva a explotar. ¿Tú vivirías a 10 kilómetros de ahí? Y por eso.",
+    "word_count": 88,
+    "search_summary": "El lago Nyos en Camerún liberó CO₂ en 1986 y mató a 1,800 personas en horas sin señal de advertencia.",
+    "comment_question": "¿Seguirías viviendo cerca del lago Nyos sabiendo que puede explotar otra vez? 💀",
+    "source_note": "USGS y UNESCO, documentación del evento, 1986",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "lago nyos",
+      "misterios naturales",
+      "fenómenos inexplicables",
+      "datos curiosos",
+      "maravillas naturales",
+      "desastres naturales camerún",
+      "datos en 30 segundos",
+      "ciencia datos",
+      "cosas que no sabías",
+      "lago nyos camaroes",
+      "misterios naturales del mundo",
+      "fenómenos inexplicables captados en cámara"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datosc curiosos",
+      "#lagoNyos",
+      "#misteriosnaturales",
+      "#fenómenosinexplicables"
+    ],
+    "video_queries": [
+      "still dark lake fog",
+      "cameroon africa aerial landscape",
+      "volcanic lake water surface",
+      "ghost town abandoned houses africa",
+      "gas bubble underwater volcano",
+      "scientist measuring water lake",
+      "aerial foggy valley africa"
+    ],
+    "has_loop": true,
+    "topic": "natural wonders",
+    "structure": "unsolved-mystery",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
   }
 ]
