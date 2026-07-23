@@ -567,5 +567,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "lBNiyxpm8bE",
+    "published_at": "2026-07-23T16:19:45.824997+00:00",
+    "title": "The Tomb Robbers Who Sealed Themselves Inside 😱",
+    "topic": "archaeological discoveries",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "creepy",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": true,
+    "length_seconds": 28.1,
+    "voice": "en-AU-WilliamNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": null
   }
 ]
