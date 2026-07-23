@@ -416,5 +416,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "2OkYL-TdmCc",
+    "published_at": "2026-07-23T23:28:31.218185+00:00",
+    "title": "O lago que sobe do fundo do oceano e mata tudo 😱",
+    "topic": "natural wonders",
+    "hook_template": "you-experience",
+    "title_opener": "the-x",
+    "emotional_tone": "creepy",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": false,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 27.5,
+    "voice": "pt-BR-ThalitaMultilingualNeural",
+    "caption_color": "white",
+    "structure": "happening-now",
+    "pair_role": null
   }
 ]
