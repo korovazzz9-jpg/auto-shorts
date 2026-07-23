@@ -359,5 +359,24 @@
     "caption_color": "white",
     "structure": "unsolved-mystery",
     "pair_role": "a"
+  },
+  {
+    "video_id": "8uTRrhZ8TJc",
+    "published_at": "2026-07-23T01:28:57.233159+00:00",
+    "title": "A cidade que foi destruída — e reconstruída no mesmo lugar 😳",
+    "topic": "ancient civilizations",
+    "hook_template": "authority-cant-explain",
+    "title_opener": "the-x",
+    "emotional_tone": "creepy",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": false,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 33.0,
+    "voice": "pt-BR-ThalitaMultilingualNeural",
+    "caption_color": "white",
+    "structure": "unsolved-mystery",
+    "pair_role": null
   }
 ]
