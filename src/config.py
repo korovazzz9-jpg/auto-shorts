@@ -261,9 +261,10 @@ CONFIGS = {
         # «ES - 16:17» на 13:17 UTC.
         "daily_slots_utc": [(13, 17), (20, 17), (0, 17), (3, 17)],
         "script_language": "Spanish (neutral Latin American / Mexican Spanish, NOT European Spanish)",
+        # 2026-07-18: убран женский es-MX-DaliaNeural — решение юзера про стиль канала (мужские
+        # голоса), не по статистике (Dalia была не худшей, 67.5%, n=7).
         "voices": [
             "es-MX-JorgeNeural",
-            "es-MX-DaliaNeural",
             "es-US-AlonsoNeural",
             "es-CO-GonzaloNeural",
         ],
@@ -429,9 +430,11 @@ CONFIGS = {
         # EN(:07/:13)/ES(:17). UTC: 17:23=14:23BRT, 21:23=18:23, 23:23=20:23, 01:23=22:23.
         "daily_slots_utc": [(17, 23), (21, 23), (23, 23), (1, 23)],
         "script_language": "Brazilian Portuguese (natural, conversational, NOT European Portuguese)",
+        # 2026-07-18: убран женский pt-BR-FranciscaNeural (73.6%, n=10) — решение юзера про
+        # стиль канала. pt-BR-ThalitaMultilingualNeural ОСТАВЛЕН несмотря на то, что тоже
+        # женский — юзер explicit: она лидер по досмотру (82.6%, n=12), не трогать.
         "voices": [
             "pt-BR-AntonioNeural",
-            "pt-BR-FranciscaNeural",
             "pt-BR-ThalitaMultilingualNeural",
         ],
         # 2026-07-10: "SIGA" (follow) -> "INSCREVA-SE" (subscribe) — mesmo motivo do EN/ES,
