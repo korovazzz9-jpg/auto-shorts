@@ -605,5 +605,24 @@
     "caption_color": "white",
     "structure": null,
     "pair_role": null
+  },
+  {
+    "video_id": "li1JbsO31ro",
+    "published_at": "2026-07-23T23:15:16.730140+00:00",
+    "title": "The 1888 Hailstorm That Killed 246 People in Minutes 😱",
+    "topic": "extreme weather",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "fear",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": null,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 31.6,
+    "voice": "en-AU-WilliamNeural",
+    "caption_color": "white",
+    "structure": null,
+    "pair_role": null
   }
 ]
