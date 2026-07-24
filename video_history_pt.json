@@ -473,5 +473,24 @@
     "caption_color": "white",
     "structure": "historical-story",
     "pair_role": null
+  },
+  {
+    "video_id": "KxZToRDfvWg",
+    "published_at": "2026-07-24T21:28:52.292266+00:00",
+    "title": "A cidade romana achada debaixo de um campo de futebol 😳",
+    "topic": "archaeological discoveries",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "awe",
+    "title_variant": "seo",
+    "has_loop": false,
+    "niche_styled": false,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 35.2,
+    "voice": "pt-BR-AntonioNeural",
+    "caption_color": "white",
+    "structure": "historical-story",
+    "pair_role": null
   }
 ]
