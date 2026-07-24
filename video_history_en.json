@@ -624,5 +624,24 @@
     "caption_color": "white",
     "structure": null,
     "pair_role": null
+  },
+  {
+    "video_id": "oxn_9RFhWEY",
+    "published_at": "2026-07-24T00:14:25.383616+00:00",
+    "title": "This Bird Runs a Scam on Other Animals 🤯",
+    "topic": "the animal kingdom",
+    "hook_template": "authority-cant-explain",
+    "title_opener": "the-x",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": null,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 37.0,
+    "voice": "en-US-EricNeural",
+    "caption_color": "white",
+    "structure": null,
+    "pair_role": null
   }
 ]
