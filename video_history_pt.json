@@ -435,5 +435,24 @@
     "caption_color": "white",
     "structure": "happening-now",
     "pair_role": null
+  },
+  {
+    "video_id": "pBvrpK0LEss",
+    "published_at": "2026-07-24T01:28:02.097999+00:00",
+    "title": "O faraó que governou 94 anos — sem sair do trono 😱",
+    "topic": "ancient history",
+    "hook_template": "you-experience",
+    "title_opener": "the-x",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": false,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 29.0,
+    "voice": "pt-BR-ThalitaMultilingualNeural",
+    "caption_color": "white",
+    "structure": "happening-now",
+    "pair_role": null
   }
 ]
