@@ -643,5 +643,24 @@
     "caption_color": "white",
     "structure": null,
     "pair_role": null
+  },
+  {
+    "video_id": "AuhWgCp-oFU",
+    "published_at": "2026-07-24T16:21:04.042692+00:00",
+    "title": "The Dive in 1960 That Broke Every Ocean Rule 🤯",
+    "topic": "the ocean",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": null,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 34.1,
+    "voice": "en-US-EricNeural",
+    "caption_color": "white",
+    "structure": null,
+    "pair_role": null
   }
 ]
