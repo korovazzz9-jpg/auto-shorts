@@ -757,5 +757,24 @@
     "caption_color": "white",
     "structure": "unsolved-mystery",
     "pair_role": null
+  },
+  {
+    "video_id": "d5qJoNsOOSM",
+    "published_at": "2026-07-25T23:14:13.399105+00:00",
+    "title": "The Mummy That Rewrote a 3,000-Year-Old Murder 😱",
+    "topic": "historical mysteries",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "creepy",
+    "title_variant": "seo",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 27.8,
+    "voice": "en-AU-WilliamNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": null
   }
 ]
