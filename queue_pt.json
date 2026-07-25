@@ -47,5 +47,52 @@
     "niche_styled": false,
     "title_variant": "narrative",
     "hashtag_position": "end"
+  },
+  {
+    "title": "O asteroide que viaja colado na Terra há 100 anos 🤯",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "A Terra tem dois 'sóis'?",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "impossible",
+    "script": "Tem um objeto no espaço que segue a Terra há mais de um século — e a maioria dos astrônomos só percebeu em 1999. É o asteroide Cruithne, 5 km de largura, preso numa órbita em forma de ferradura ao redor do Sol. Ele nunca se afasta mais de 15 milhões de km da Terra. Mas aqui o negócio fica estranho: Cruithne nunca vai embora — ele vai nos acompanhar pelos próximos 5 mil anos. Então tecnicamente a Terra tem um segundo satélite — e você nunca ouviu falar dele. É desse jeito.",
+    "word_count": 88,
+    "search_summary": "Asteroide Cruithne orbita a Terra há mais de 100 anos e foi descoberto apenas em 1999.",
+    "comment_question": "Se Cruithne nos segue há 100 anos, por que ninguém te ensinou isso na escola? 🤯",
+    "source_note": "NASA Jet Propulsion Laboratory, 1999",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "fatos espaciais",
+      "asteroide Cruithne",
+      "segundo satélite da Terra",
+      "curiosidades do espaço",
+      "fatos incríveis",
+      "astronomia brasileira",
+      "órbita da Terra",
+      "asteroides próximos da Terra"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#fatosincríveis",
+      "#espaço",
+      "#asteroide",
+      "#astronomia"
+    ],
+    "video_queries": [
+      "asteroid flying through space",
+      "earth orbit from space",
+      "solar system animation wide",
+      "astronomer telescope night sky",
+      "earth from space satellite view"
+    ],
+    "has_loop": true,
+    "topic": "space",
+    "structure": "myth-debunk",
+    "niche_styled": false,
+    "title_variant": "seo",
+    "hashtag_position": "end"
   }
 ]
