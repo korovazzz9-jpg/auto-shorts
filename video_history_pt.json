@@ -568,5 +568,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "cZQ1-yVI67U",
+    "published_at": "2026-07-25T23:30:49.632467+00:00",
+    "title": "O túnel romano achado intacto com comida ainda na mesa 😱",
+    "topic": "archaeological discoveries",
+    "hook_template": "authority-cant-explain",
+    "title_opener": "the-x",
+    "emotional_tone": "creepy",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": false,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 35.8,
+    "voice": "pt-BR-AntonioNeural",
+    "caption_color": "white",
+    "structure": "unsolved-mystery",
+    "pair_role": null
   }
 ]
