@@ -676,5 +676,24 @@
     "caption_color": "white",
     "structure": "unsolved-mystery",
     "pair_role": null
+  },
+  {
+    "video_id": "bYxCTSg50lY",
+    "published_at": "2026-07-25T00:23:39.055666+00:00",
+    "title": "¿Los aztecas usaban cabezas humanas como pelotas? 😱",
+    "topic": "ancient civilizations",
+    "hook_template": "you-experience",
+    "title_opener": "question",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 32.2,
+    "voice": "es-MX-JorgeNeural",
+    "caption_color": "white",
+    "structure": "happening-now",
+    "pair_role": null
   }
 ]
