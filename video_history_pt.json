@@ -511,5 +511,24 @@
     "caption_color": "white",
     "structure": "historical-story",
     "pair_role": null
+  },
+  {
+    "video_id": "saOD_y6y2Zk",
+    "published_at": "2026-07-25T01:29:15.672046+00:00",
+    "title": "A tempestade que cria raios de 280 km/h para dentro 😱",
+    "topic": "extreme weather",
+    "hook_template": "you-experience",
+    "title_opener": "the-x",
+    "emotional_tone": "fear",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": false,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 32.8,
+    "voice": "pt-BR-ThalitaMultilingualNeural",
+    "caption_color": "white",
+    "structure": "happening-now",
+    "pair_role": null
   }
 ]
