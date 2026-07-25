@@ -733,5 +733,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "L8fZ8a-63Y0",
+    "published_at": "2026-07-25T20:25:14.393609+00:00",
+    "title": "¿Por qué sellaron vivo a este guerrero en 600 d.C.? 😱",
+    "topic": "archaeological discoveries",
+    "hook_template": "authority-cant-explain",
+    "title_opener": "question",
+    "emotional_tone": "creepy",
+    "title_variant": "seo",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 39.9,
+    "voice": "es-US-AlonsoNeural",
+    "caption_color": "white",
+    "structure": "unsolved-mystery",
+    "pair_role": null
   }
 ]
