@@ -809,5 +809,24 @@
     "caption_color": "white",
     "structure": "unsolved-mystery",
     "pair_role": null
+  },
+  {
+    "video_id": "j2qAbKiawAI",
+    "published_at": "2026-07-26T20:23:45.562205+00:00",
+    "title": "El lago que hierve y congela al mismo tiempo 🤯",
+    "topic": "natural wonders",
+    "hook_template": "authority-cant-explain",
+    "title_opener": "the-x",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 34.8,
+    "voice": "es-US-AlonsoNeural",
+    "caption_color": "white",
+    "structure": "unsolved-mystery",
+    "pair_role": null
   }
 ]
