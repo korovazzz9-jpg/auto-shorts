@@ -847,5 +847,24 @@
     "caption_color": "white",
     "structure": "historical-story",
     "pair_role": "a"
+  },
+  {
+    "video_id": "eV253y_qeIk",
+    "published_at": "2026-07-27T03:23:48.661980+00:00",
+    "title": "¿Este pájaro usa veneno ajeno para defenderse? 😱",
+    "topic": "the animal kingdom",
+    "hook_template": "sounds-fake",
+    "title_opener": "question",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 31.8,
+    "voice": "es-US-AlonsoNeural",
+    "caption_color": "white",
+    "structure": "unsolved-mystery",
+    "pair_role": null
   }
 ]
