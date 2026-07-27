@@ -990,5 +990,24 @@
     "caption_color": "white",
     "structure": "historical-story",
     "pair_role": null
+  },
+  {
+    "video_id": "Inpr3U_4XF0",
+    "published_at": "2026-07-27T23:14:37.336023+00:00",
+    "title": "Only Mammal That Poisons Prey With Its Own Sweat 😱",
+    "topic": "the animal kingdom",
+    "hook_template": "sounds-fake",
+    "title_opener": "only-place",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 34.7,
+    "voice": "en-US-EricNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": null
   }
 ]
