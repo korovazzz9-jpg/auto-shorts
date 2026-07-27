@@ -971,5 +971,24 @@
     "caption_color": "white",
     "structure": "historical-story",
     "pair_role": null
+  },
+  {
+    "video_id": "zyK3JBCB5tY",
+    "published_at": "2026-07-27T20:15:00.464494+00:00",
+    "title": "The Cuttlefish That Hypnotizes Prey With Its Own Skin 😱",
+    "topic": "the animal kingdom",
+    "hook_template": "vague-ability",
+    "title_opener": "the-x",
+    "emotional_tone": "creepy",
+    "title_variant": "seo",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 33.0,
+    "voice": "en-US-EricNeural",
+    "caption_color": "white",
+    "structure": "historical-story",
+    "pair_role": null
   }
 ]
