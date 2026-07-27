@@ -1,18 +1,17 @@
 {
   "outlier_counts": {
     "ancient history": 1,
-    "archaeological discoveries": 6,
+    "archaeological discoveries": 5,
     "ancient civilizations": 3,
     "shipwrecks and lost treasures": 2,
-    "historical mysteries": 1,
     "the human body": 2,
-    "the animal kingdom": 8,
-    "the ocean": 6,
-    "evolution": 6,
+    "the animal kingdom": 7,
+    "the ocean": 7,
+    "evolution": 5,
     "volcanoes and earthquakes": 1,
     "extreme weather": 4,
-    "natural wonders": 6,
-    "space": 1,
+    "natural wonders": 7,
+    "space": 2,
     "future technology": 3
   },
   "outlier_titles": {
@@ -22,7 +21,7 @@
     "archaeological discoveries": [
       "I couldn&#39;t believe my eyes that I found it #shorts",
       "Indus Valley Civilisation ki Khoj! #history #indianhistory #indusvalley #harappa #shorts #viral #ai",
-      "Shocking Discovery In Antarctica #shorts"
+      "A grand discovery has shocked the world #facts #history #ancient #ancienttreasures #ancientplaces"
     ],
     "ancient civilizations": [
       "Weirdest Test Of Ancient Egypt🙄",
@@ -33,17 +32,14 @@
       "He found the Biggest Treasure of Gold in the US!",
       "The Lost Treasures of the Titanic"
     ],
-    "historical mysteries": [
-      "Do REALLY, Scientists found RAVAN&#39;S Lanka 😳?  |  #shorts"
-    ],
     "the human body": [
       "🧠 Body Secrets: Organs Inside Us!❤️ #kids #learn",
       "Doctor Reacts To Biggest Human Body Design Flaw"
     ],
     "the animal kingdom": [
       "Powerful Hunters | Predators in Animal Kingdom | #shorts | Little Fox",
-      "Animals With Depressing Lives...",
-      "The Saddest Moments In The Animal Kingdom 💔#animalfacts #wildlife #facts"
+      "Fascinating Animal Facts You Didn&#39;t Know!#animalfacts#wildlife#facts",
+      "Moments That Should Never Have Happened In The Animal Kingdom...But Did"
     ],
     "the ocean": [
       "उत्तरी सागर / North Sea #shorts #facts #hindi #new",
@@ -52,8 +48,8 @@
     ],
     "evolution": [
       "Evolution of Mosasaurus #shorts #evolution",
-      "Evolution of Granny",
-      "Evolution of Michael Jackson (1958-2009) - King of Pop #MichaelJackson"
+      "Evolution of Michael Jackson (1958-2009) - King of Pop #MichaelJackson",
+      "Evolution of Goku. (animation)"
     ],
     "volcanoes and earthquakes": [
       "Japan Mount Fuji Volcano  Blast 💥 #japan #montfuji #shorts #viral"
@@ -69,111 +65,112 @@
       "China&#39;s Craziest Rides &amp; Engineering Wonders! 🇨🇳🤯 #shorts"
     ],
     "space": [
-      "अंतरिक्ष : Space Fact in Hindi ||  Space in hindi || Amazing facts 🤔"
+      "सबसे ऊंचा STATUE कौनसा है | Tallest Statue In The World | #statue #shorts #suryakant #statueofunity",
+      "World’s smallest computer #unknownfacts #tech #shorts"
     ],
     "future technology": [
       "New Innovation - 6 💥 #new #innovation #unique #tech #shorts",
       "जादू दिखाते समय हुई गलतियां 😱 amazing Facts #shorts​ it&#39;s Dhakad",
-      "मुकेश अंबानी का घर | mukesh ambani house | #antilia  #shorts #mumbai #facts #trending#youtubeshorts"
+      "इस Trick ने सबको हैरान कर दिया 😱 amazing Facts #shorts​ | it&#39;s Dhakad"
     ]
   },
   "top_outliers": [
     {
       "topic": "extreme weather",
-      "title": "#yakutsk The coldest city in the world 🌍? #russia #siberia #yakutia #extremeweather @Luv2SeeMore",
+      "title": "#yakutsk The coldest city in the world 🌍? #russia #siberia #yakutia #extremeweather @KatrinaBloom10",
       "video_id": "LB39uDZjItw",
-      "views": 12261389,
-      "subs": 8610,
-      "ratio": 1424.1
+      "views": 12302630,
+      "subs": 8640,
+      "ratio": 1423.9
     },
     {
       "topic": "natural wonders",
       "title": "Formation of lord Venkateshwara Swami face on 7 hills #tirumala #trendingshorts #devotional #viral",
       "video_id": "cF6hsiBPMAU",
-      "views": 53730941,
-      "subs": 46900,
-      "ratio": 1145.6
+      "views": 53858634,
+      "subs": 47000,
+      "ratio": 1145.9
     },
     {
       "topic": "volcanoes and earthquakes",
       "title": "Japan Mount Fuji Volcano  Blast 💥 #japan #montfuji #shorts #viral",
       "video_id": "m6yIuu09P0E",
-      "views": 9752021,
-      "subs": 9550,
-      "ratio": 1021.2
+      "views": 9793400,
+      "subs": 9570,
+      "ratio": 1023.3
     },
     {
       "topic": "archaeological discoveries",
       "title": "Indus Valley Civilisation ki Khoj! #history #indianhistory #indusvalley #harappa #shorts #viral #ai",
       "video_id": "GWztkdWYRU4",
-      "views": 32754571,
-      "subs": 43300,
-      "ratio": 756.5
+      "views": 32755218,
+      "subs": 43200,
+      "ratio": 758.2
     },
     {
       "topic": "natural wonders",
       "title": "Top 7 Most Dangerous Snakes 🐍 You Should Avoid",
       "video_id": "StgFalW00_w",
-      "views": 9383372,
-      "subs": 23600,
-      "ratio": 397.6
+      "views": 9647202,
+      "subs": 24200,
+      "ratio": 398.6
     },
     {
       "topic": "future technology",
       "title": "New Innovation - 6 💥 #new #innovation #unique #tech #shorts",
       "video_id": "iuLgq7bf6QY",
-      "views": 36260743,
+      "views": 36302901,
       "subs": 107000,
-      "ratio": 338.9
-    },
-    {
-      "topic": "natural wonders",
-      "title": "Danxia Mountain Janat ki siddhi #ytshorts #facts #youtubeshorts #tranding",
-      "video_id": "a6atrJymWDQ",
-      "views": 5810027,
-      "subs": 22600,
-      "ratio": 257.1
-    },
-    {
-      "topic": "the animal kingdom",
-      "title": "The Fastest Flying Bird In The World #shorts #birds #animals",
-      "video_id": "JiRkdW6OK5Y",
-      "views": 7210235,
-      "subs": 29000,
-      "ratio": 248.6
+      "ratio": 339.3
     },
     {
       "topic": "evolution",
       "title": "Evolution of Mosasaurus #shorts #evolution",
       "video_id": "rmo79934NYM",
-      "views": 120871859,
+      "views": 120981318,
       "subs": 513000,
-      "ratio": 235.6
+      "ratio": 235.8
     },
     {
       "topic": "evolution",
       "title": "Evolution of Michael Jackson (1958-2009) - King of Pop #MichaelJackson",
       "video_id": "vNm7xwqvbKg",
-      "views": 40301759,
-      "subs": 178000,
-      "ratio": 226.4
+      "views": 41716102,
+      "subs": 182000,
+      "ratio": 229.2
+    },
+    {
+      "topic": "natural wonders",
+      "title": "7 Wonders of the World 🌍 #shorts New Seven wonders of the world 2021 | Naya Kuch Facts 😲",
+      "video_id": "eRxTrS2AIMo",
+      "views": 1825140,
+      "subs": 9900,
+      "ratio": 184.4
+    },
+    {
+      "topic": "ancient civilizations",
+      "title": "Amazing Mysterious Khudia Rani Temple 😱😱 #shorts",
+      "video_id": "Xk5Ra93Ml-g",
+      "views": 35806676,
+      "subs": 232000,
+      "ratio": 154.3
     }
   ],
   "saturation": {
     "ancient history": 1000000,
-    "archaeological discoveries": 610117,
+    "archaeological discoveries": 590592,
     "ancient civilizations": 1000000,
-    "shipwrecks and lost treasures": 13661,
+    "shipwrecks and lost treasures": 15869,
     "historical mysteries": 1000000,
-    "the human body": 1000000,
+    "the human body": 476366,
     "the animal kingdom": 1000000,
     "the ocean": 1000000,
     "evolution": 1000000,
-    "volcanoes and earthquakes": 592680,
+    "volcanoes and earthquakes": 364875,
     "extreme weather": 1000000,
     "natural wonders": 1000000,
     "space": 1000000,
     "future technology": 1000000
   },
-  "updated": "2026-07-13"
+  "updated": "2026-07-27"
 }
