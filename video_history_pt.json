@@ -804,5 +804,24 @@
     "caption_color": "white",
     "structure": "historical-story",
     "pair_role": null
+  },
+  {
+    "video_id": "DFB2eWY-rgQ",
+    "published_at": "2026-07-27T23:29:12.506133+00:00",
+    "title": "O oceano tem uma corrente que leva 1.000 anos pra completar uma volta 🤯",
+    "topic": "the ocean",
+    "hook_template": "authority-cant-explain",
+    "title_opener": "the-x",
+    "emotional_tone": "awe",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": false,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 33.9,
+    "voice": "pt-BR-ThalitaMultilingualNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": "a"
   }
 ]
