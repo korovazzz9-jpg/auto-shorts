@@ -38,5 +38,15 @@
     "part_b_video_id": null,
     "status": "awaiting_b",
     "created_at": 1784679397.2312474
+  },
+  {
+    "id": "CPzy8Gj4mNQ-1785111234",
+    "topic": "archaeological discoveries",
+    "part_a_video_id": "CPzy8Gj4mNQ",
+    "part_a_title": "Nobody Expected a 3,000-Year-Old Harbor Beneath a Cornfield 😱",
+    "claim": "Ancient coastlines shifted so dramatically entire cities are now inland.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1785111234.2273118
   }
 ]
