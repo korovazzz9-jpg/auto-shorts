@@ -48,5 +48,200 @@
     "niche_styled": false,
     "title_variant": "narrative",
     "hashtag_position": "end"
+  },
+  {
+    "title": "A múmia que acordou com um bilhete dentro do crânio 😱",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "Ninguém esperava encontrar isso",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "creepy",
+    "script": "Arqueólogos abriram um caixão no Egito — e encontraram uma mensagem dentro do crânio da múmia. Era 1881, na cache real de Deir el-Bahari. Dentro do crânio de um sacerdote sem nome havia um papiro enrolado com uma maldição: quem perturbasse aquele corpo sofreria a ira de Amon. Os pesquisadores traduziram o texto, mas nunca conseguiram identificar quem escreveu. O sacerdote protegia a si mesmo com a única arma que tinha — palavras. Você teria aberto aquele papiro?",
+    "word_count": 85,
+    "search_summary": "Múmia encontrada em Deir el-Bahari em 1881 tinha papiro com maldição enrolado dentro do crânio.",
+    "comment_question": "Você abriria um papiro de maldição encontrado dentro de um crânio? 💀",
+    "source_note": "Museu do Cairo, descoberta documentada em 1881",
+    "loop_connectors": [
+      "why"
+    ],
+    "tags": [
+      "arqueologia egípcia",
+      "múmia egípcia",
+      "Deir el-Bahari",
+      "descobertas arqueológicas",
+      "fatos históricos",
+      "maldição do faraó",
+      "papiro egípcio",
+      "fatos curiosos",
+      "história antiga",
+      "deir el-bahari temple"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#fatoscuriosos",
+      "#arqueologia",
+      "#egitoantico",
+      "#mumia"
+    ],
+    "video_queries": [
+      "ancient egypt tomb opening",
+      "archaeologist excavation ruins",
+      "egypt mummy sarcophagus dark",
+      "ancient papyrus scroll close",
+      "egypt temple underground corridor"
+    ],
+    "has_loop": false,
+    "topic": "archaeological discoveries",
+    "structure": "historical-story",
+    "niche_styled": false,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "O marinheiro que provou que Colombo estava errado — e morreu por isso 😳",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "Ele sabia demais pra sobreviver",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "creepy",
+    "script": "Ele entregou a prova — e sumiu três dias depois. Em 1500, João Fernandes Lavrador mapeou terras ao norte que destruíam o argumento de Colombo de ter chegado à Ásia. Sua rota, seus mapas, seu nome ficaram registrados — até desaparecerem dos arquivos portugueses sem explicação. O Labrador, no Canadá, ainda carrega o nome dele hoje. Nenhum documento explica o sumiço. Nenhuma ordem de prisão. Nenhum corpo. Só o silêncio onde deveria haver uma história. Você acha que alguém apagou esse homem de propósito?",
+    "word_count": 83,
+    "search_summary": "João Fernandes Lavrador mapeou terras no norte em 1500 e desapareceu misteriosamente dos registros históricos portugueses.",
+    "comment_question": "Colombo ou Lavrador — quem realmente chegou primeiro ao continente? 🤔",
+    "source_note": "",
+    "loop_connectors": [
+      "why"
+    ],
+    "tags": [
+      "mistérios históricos",
+      "história inexplicável",
+      "João Fernandes Lavrador",
+      "exploração portuguesa",
+      "Colombo estava errado",
+      "descobrimentos apagados",
+      "fatos históricos",
+      "mistério da história"
+    ],
+    "hashtags": [
+      "#shorts",
+      "fatos históricos",
+      "#misterio",
+      "#descobrimentos",
+      "#historiamisteriosa"
+    ],
+    "video_queries": [
+      "old map parchment ancient",
+      "portuguese explorer ship ocean",
+      "medieval archive dusty documents",
+      "canada labrador coastline aerial",
+      "dark empty corridor castle",
+      "burning old documents fire"
+    ],
+    "has_loop": false,
+    "topic": "historical mysteries",
+    "structure": "historical-story",
+    "niche_styled": false,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "O terremoto que você sente acontece 500x por dia agora 🤯",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "500 terremotos. Todo dia.",
+    "hook_template": "you-experience",
+    "emotional_tone": "impossible",
+    "script": "Enquanto você assiste isso, a Terra está tremendo agora mesmo — e você não sente nada. São cerca de 500 terremotos por dia no planeta inteiro, segundo o USGS. A maioria abaixo de magnitude 2,5 — imperceptível sem instrumento. Mas eles nunca param: dia, noite, embaixo de cidades, oceanos, montanhas. Só nos últimos 30 dias, mais de 15 mil tremores foram registrados globalmente. Até essa frase acabar, outro já aconteceu. Comenta a cidade onde você mora — ela provavelmente tremeu essa semana. E é exatamente assim.",
+    "word_count": 82,
+    "search_summary": "A Terra registra cerca de 500 terremotos por dia segundo o USGS, a maioria imperceptível sem instrumentos.",
+    "comment_question": "Sua cidade tremeu essa semana e você não sabia? 😱",
+    "source_note": "USGS Earthquake Hazards Program, dados contínuos",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "terremotos",
+      "fatos curiosos",
+      "geologia",
+      "tremores imperceptíveis",
+      "USGS terremotos",
+      "quantos terremotos por dia",
+      "curiosidades sobre a Terra",
+      "fatos em 30 segundos",
+      "fatos curiosos do mundo"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#fatosnatureza",
+      "#terremotos",
+      "#geologia",
+      "#curiosidades"
+    ],
+    "video_queries": [
+      "earthquake seismograph waves",
+      "world map earthquake dots",
+      "city ground shaking aerial",
+      "seismometer recording tremor",
+      "ocean floor tectonic movement",
+      "earthquake data global visualization"
+    ],
+    "has_loop": true,
+    "topic": "volcanoes and earthquakes",
+    "structure": "happening-now",
+    "niche_styled": false,
+    "title_variant": "seo",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "A criança enterrada com honras de rei — 3.800 anos atrás 😱",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "Quem foi enterrado assim?",
+    "hook_template": "other",
+    "emotional_tone": "awe",
+    "script": "Uma criança foi enterrada com joias de ouro e armas de bronze — como se fosse um rei. Em 1988, arqueólogos abriram um túmulo em Aegina, Grécia, datado de 1800 a.C. Dentro havia um menino de cerca de oito anos, cercado de oferendas que só nobres recebiam. Nenhuma inscrição explica quem ele era. A teoria mais aceita: filho de um chefe guerreiro, morto cedo demais para ser coroado — e enterrado com o trono que nunca teve. Você acha que nascimento definia destino naquela época? E é por isso.",
+    "word_count": 88,
+    "search_summary": "Túmulo de criança com joias de ouro encontrado em Aegina, Grécia, datado de 1800 a.C., com oferendas de guerreiro.",
+    "comment_question": "Uma criança de 8 anos enterrada como rei — isso muda como você vê a antiguidade? 👑",
+    "source_note": "Escavações arqueológicas em Aegina, Grécia, 1988",
+    "loop_connectors": [
+      "why"
+    ],
+    "tags": [
+      "arqueologia",
+      "descobertas arqueológicas",
+      "fatos históricos",
+      "Grécia antiga",
+      "tumulo antigo",
+      "mistérios da história",
+      "fatos curiosos",
+      "civilizações antigas",
+      "história do mundo",
+      "descobertas arqueológicas bíblicas",
+      "fatos históricos interessantes",
+      "grécia antiga curiosidades"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#arqueologia",
+      "#historiaantiga",
+      "#fatoscuriosos",
+      "#misteriosdahistoria"
+    ],
+    "video_queries": [
+      "ancient greece ruins landscape",
+      "archaeologist excavating burial site",
+      "ancient tomb underground dig",
+      "bronze age artifacts excavation",
+      "archaeologist brushing soil ruins",
+      "ancient greek hillside ruins wide"
+    ],
+    "has_loop": true,
+    "topic": "archaeological discoveries",
+    "structure": "historical-story",
+    "niche_styled": false,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
   }
 ]
