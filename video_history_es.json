@@ -1042,5 +1042,24 @@
     "caption_color": "white",
     "structure": "historical-story",
     "pair_role": null
+  },
+  {
+    "video_id": "x4TaMyWjF_c",
+    "published_at": "2026-07-28T20:24:20.516721+00:00",
+    "title": "Tu piel entera se reemplaza cada 27 días sin avisarte 😱",
+    "topic": "the human body",
+    "hook_template": "sounds-fake",
+    "title_opener": "your-x",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 33.0,
+    "voice": "es-US-AlonsoNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": null
   }
 ]
