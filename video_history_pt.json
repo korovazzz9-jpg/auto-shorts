@@ -842,5 +842,24 @@
     "caption_color": "white",
     "structure": "historical-story",
     "pair_role": null
+  },
+  {
+    "video_id": "RNjmdvT6OG0",
+    "published_at": "2026-07-28T17:30:18.862396+00:00",
+    "title": "O terremoto que você sente acontece 500x por dia agora 🤯",
+    "topic": "volcanoes and earthquakes",
+    "hook_template": "you-experience",
+    "title_opener": "the-x",
+    "emotional_tone": "impossible",
+    "title_variant": "seo",
+    "has_loop": true,
+    "niche_styled": false,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 38.4,
+    "voice": "pt-BR-AntonioNeural",
+    "caption_color": "white",
+    "structure": "happening-now",
+    "pair_role": null
   }
 ]
