@@ -1028,5 +1028,24 @@
     "caption_color": "white",
     "structure": "historical-story",
     "pair_role": null
+  },
+  {
+    "video_id": "HdUrE7P373w",
+    "published_at": "2026-07-28T16:22:03.688069+00:00",
+    "title": "The Earthquake That Swallowed an Entire Coastline in 1700 😱",
+    "topic": "volcanoes and earthquakes",
+    "hook_template": "authority-cant-explain",
+    "title_opener": "the-x",
+    "emotional_tone": "fear",
+    "title_variant": "seo",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 39.0,
+    "voice": "en-US-GuyNeural",
+    "caption_color": "white",
+    "structure": "unsolved-mystery",
+    "pair_role": null
   }
 ]
