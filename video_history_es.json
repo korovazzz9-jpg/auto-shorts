@@ -1023,5 +1023,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "0NOkT4005_c",
+    "published_at": "2026-07-28T13:24:04.167037+00:00",
+    "title": "¿Esta empresa ya imprimió órganos humanos vivos en 3D? 😱",
+    "topic": "future technology",
+    "hook_template": "sounds-fake",
+    "title_opener": "question",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 32.5,
+    "voice": "es-CO-GonzaloNeural",
+    "caption_color": "white",
+    "structure": "historical-story",
+    "pair_role": null
   }
 ]

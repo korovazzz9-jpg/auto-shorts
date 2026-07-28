@@ -1,55 +1,5 @@
 [
   {
-    "title": "¿Esta empresa ya imprimió órganos humanos vivos en 3D? 😱",
-    "title_opener": "question",
-    "title_intensity": "extreme",
-    "hook_text": "Tu hígado... de una impresora",
-    "hook_template": "sounds-fake",
-    "emotional_tone": "impossible",
-    "script": "Una impresora fabricó tejido hepático humano vivo — y latió durante 45 días. En 2023, la empresa Organovo, con sede en San Diego, logró imprimir capas de células hepáticas reales usando biotinta humana. El tejido producía proteínas, metabolizaba fármacos y sobrevivía semanas en laboratorio. El objetivo inmediato no es un trasplante completo — es reemplazar las pruebas en animales para aprobar medicamentos. Millones de pacientes en lista de espera podrían beneficiarse antes de 2035. ¿Preferirías un órgano impreso o seguir esperando un donante?",
-    "word_count": 86,
-    "search_summary": "La empresa Organovo imprimió en 3D tejido hepático humano vivo funcional en 2023 para pruebas farmacéuticas.",
-    "comment_question": "¿Confiarías en un órgano impreso en 3D para trasplantarte? 🤯",
-    "source_note": "Organovo Holdings, publicaciones técnicas 2023",
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "tecnología del futuro",
-      "bioimpresión 3D",
-      "órganos impresos",
-      "Organovo",
-      "datos curiosos",
-      "ciencia increíble",
-      "trasplante de órganos",
-      "biotecnología 2023",
-      "tecnología del futuro 2050 la era digital",
-      "órganos impresos en 3d"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#datoscuriosos",
-      "#tecnología",
-      "#bioimpresión",
-      "#ciencia"
-    ],
-    "video_queries": [
-      "3D printer close up laboratory",
-      "biomedical lab researcher working",
-      "medical technology futuristic lab",
-      "scientist microscope human tissue",
-      "hospital patient waiting room",
-      "futuristic medical technology concept"
-    ],
-    "has_loop": false,
-    "topic": "future technology",
-    "structure": "historical-story",
-    "niche_styled": true,
-    "title_variant": "narrative",
-    "hashtag_position": "end"
-  },
-  {
     "title": "Tu piel entera se reemplaza cada 27 días sin avisarte 😱",
     "title_opener": "your-x",
     "title_intensity": "extreme",
