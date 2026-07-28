@@ -296,5 +296,56 @@
     "niche_styled": true,
     "title_variant": "narrative",
     "hashtag_position": "end"
+  },
+  {
+    "title": "El general cartaginés que cruzó los Alpes con elefantes en 218 a.C. 😱",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "Nadie creyó que era posible",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "awe",
+    "script": "Cruzó una cordillera de 4,000 metros con 37 elefantes de guerra en pleno invierno. Aníbal Barca salió de Cartago en 218 a.C. con 90,000 soldados. Su meta: atacar Roma por el norte, donde nadie esperaba un ejército. Perdió la mitad de sus tropas y casi todos los elefantes en 15 días de nieve y derrumbes. Llegó igual, destruyó cuatro ejércitos romanos, y mantuvo a Roma paralizada durante 16 años. Sólo lo detuvieron porque Cartago nunca le mandó refuerzos. ¿Habrías mandado los refuerzos o dejado ganar a Roma?",
+    "word_count": 88,
+    "search_summary": "Aníbal Barca cruzó los Alpes con 37 elefantes en 218 a.C. y derrotó cuatro ejércitos romanos.",
+    "comment_question": "¿Cartago traicionó a Aníbal o simplemente no pudo ayudarlo? 🤔",
+    "source_note": "Polibio, Historias, Libro III, ~150 a.C.",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "Aníbal Barca",
+      "cartagineses historia",
+      "cruce de los Alpes elefantes",
+      "guerras púnicas Roma",
+      "civilizaciones antiguas datos",
+      "historia antigua curiosidades",
+      "datos históricos increíbles",
+      "hechos curiosos historia",
+      "aníbal barca batalla de cannas",
+      "historia cartagineses y romanos"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#historiacuriosa",
+      "#civilizacionesantiguas",
+      "#anibal",
+      "#datoscuriosos"
+    ],
+    "video_queries": [
+      "snow mountain pass aerial landscape",
+      "ancient army marching desert wide shot",
+      "elephants walking savanna herd",
+      "mountain blizzard snowstorm wide",
+      "ancient roman soldiers battle reenactment",
+      "ruins ancient city wide landscape",
+      "soldier alone mountain fog dramatic"
+    ],
+    "has_loop": false,
+    "topic": "ancient civilizations",
+    "structure": "historical-story",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
   }
 ]
