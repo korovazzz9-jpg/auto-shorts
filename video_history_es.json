@@ -1061,5 +1061,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "xY_Y3CkCDs8",
+    "published_at": "2026-07-29T00:25:54.574184+00:00",
+    "title": "¿Una tormenta puede generar rayos bajo el agua? 😱",
+    "topic": "extreme weather",
+    "hook_template": "you-experience",
+    "title_opener": "question",
+    "emotional_tone": "awe",
+    "title_variant": "seo",
+    "has_loop": true,
+    "niche_styled": false,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 38.8,
+    "voice": "es-MX-JorgeNeural",
+    "caption_color": "white",
+    "structure": "happening-now",
+    "pair_role": "a"
   }
 ]

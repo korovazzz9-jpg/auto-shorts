@@ -38,5 +38,15 @@
     "part_b_video_id": null,
     "status": "awaiting_b",
     "created_at": 1785111855.0393882
+  },
+  {
+    "id": "xY_Y3CkCDs8-1785284754",
+    "topic": "extreme weather",
+    "part_a_video_id": "xY_Y3CkCDs8",
+    "part_a_title": "¿Una tormenta puede generar rayos bajo el agua? 😱",
+    "claim": "Lightning strikes the same spot more than once regularly.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1785284754.9616396
   }
 ]
