@@ -1085,5 +1085,24 @@
     "caption_color": "white",
     "structure": "happening-now",
     "pair_role": null
+  },
+  {
+    "video_id": "TJS2zbd1AGg",
+    "published_at": "2026-07-29T00:15:52.128969+00:00",
+    "title": "The Emperor Who Rewrote His Own Death — Twice 😱",
+    "topic": "ancient history",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 28.8,
+    "voice": "en-US-GuyNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": "a"
   }
 ]
