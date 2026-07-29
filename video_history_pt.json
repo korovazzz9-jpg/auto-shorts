@@ -899,5 +899,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": "b"
+  },
+  {
+    "video_id": "M0Lsed5Hnyk",
+    "published_at": "2026-07-29T01:29:26.340508+00:00",
+    "title": "A cidade de 5.000 anos enterrada com tinta ainda fresca 😱",
+    "topic": "archaeological discoveries",
+    "hook_template": "authority-cant-explain",
+    "title_opener": "the-x",
+    "emotional_tone": "creepy",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": false,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 34.0,
+    "voice": "pt-BR-AntonioNeural",
+    "caption_color": "white",
+    "structure": "unsolved-mystery",
+    "pair_role": null
   }
 ]
