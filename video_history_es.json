@@ -1118,5 +1118,24 @@
     "caption_color": "white",
     "structure": "historical-story",
     "pair_role": null
+  },
+  {
+    "video_id": "5bG01KC0oOo",
+    "published_at": "2026-07-29T20:24:44.995784+00:00",
+    "title": "El guerrero que cayó al río y salvó una civilización entera 😱",
+    "topic": "archaeological discoveries",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "awe",
+    "title_variant": "seo",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 38.7,
+    "voice": "es-US-AlonsoNeural",
+    "caption_color": "white",
+    "structure": "historical-story",
+    "pair_role": null
   }
 ]
