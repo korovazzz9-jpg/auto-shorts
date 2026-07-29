@@ -1142,5 +1142,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "32O4cNCwbyE",
+    "published_at": "2026-07-29T23:14:51.742936+00:00",
+    "title": "Nobody Expected $1 Billion in Gold Still Sitting on the Ocean Floor 😱",
+    "topic": "shipwrecks and lost treasures",
+    "hook_template": "sounds-fake",
+    "title_opener": "nobody-expected",
+    "emotional_tone": "huge",
+    "title_variant": "seo",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 37.7,
+    "voice": "en-US-EricNeural",
+    "caption_color": "white",
+    "structure": "happening-now",
+    "pair_role": null
   }
 ]
