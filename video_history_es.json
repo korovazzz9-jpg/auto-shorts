@@ -1099,5 +1099,24 @@
     "caption_color": "white",
     "structure": "historical-story",
     "pair_role": null
+  },
+  {
+    "video_id": "8UKwat2jq7s",
+    "published_at": "2026-07-29T13:23:28.559363+00:00",
+    "title": "El niño faraón que ordenó borrar a su padre de la historia 😱",
+    "topic": "ancient civilizations",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "creepy",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 40.1,
+    "voice": "es-US-AlonsoNeural",
+    "caption_color": "white",
+    "structure": "historical-story",
+    "pair_role": null
   }
 ]
