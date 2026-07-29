@@ -58,5 +58,15 @@
     "part_b_video_id": null,
     "status": "awaiting_b",
     "created_at": 1785194953.0962014
+  },
+  {
+    "id": "w2BH6m6FtM4-1785367892",
+    "topic": "volcanoes and earthquakes",
+    "part_a_video_id": "w2BH6m6FtM4",
+    "part_a_title": "O vulcão que dispara raios elétricos toda vez que entra em erupção 🤯",
+    "claim": "Raios vulcânicos podem ser mais intensos que raios de tempestade.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1785367892.0961282
   }
 ]
