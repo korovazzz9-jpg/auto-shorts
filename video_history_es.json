@@ -1175,5 +1175,24 @@
     "caption_color": "white",
     "structure": "unsolved-mystery",
     "pair_role": null
+  },
+  {
+    "video_id": "7OWImEDKY0o",
+    "published_at": "2026-07-30T13:24:18.308536+00:00",
+    "title": "Tu intestino delgado mide 6 metros y cabe en tu cuerpo 😱",
+    "topic": "the human body",
+    "hook_template": "you-experience",
+    "title_opener": "your-x",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 32.7,
+    "voice": "es-CO-GonzaloNeural",
+    "caption_color": "white",
+    "structure": "historical-story",
+    "pair_role": null
   }
 ]
