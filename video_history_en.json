@@ -1161,5 +1161,24 @@
     "caption_color": "white",
     "structure": "happening-now",
     "pair_role": null
+  },
+  {
+    "video_id": "GiXLGGRngFo",
+    "published_at": "2026-07-30T00:14:13.524090+00:00",
+    "title": "Taller Than Angel Falls — And Almost Nobody Knows It 😱",
+    "topic": "natural wonders",
+    "hook_template": "sounds-fake",
+    "title_opener": "other",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 33.4,
+    "voice": "en-US-GuyNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": "b"
   }
 ]
