@@ -994,5 +994,24 @@
     "caption_color": "white",
     "structure": "happening-now",
     "pair_role": null
+  },
+  {
+    "video_id": "wvVIwrGhoOU",
+    "published_at": "2026-07-30T17:29:31.820848+00:00",
+    "title": "O navio afundado em 1545 que guarda um segredo impossível 😱",
+    "topic": "shipwrecks and lost treasures",
+    "hook_template": "authority-cant-explain",
+    "title_opener": "the-x",
+    "emotional_tone": "creepy",
+    "title_variant": "seo",
+    "has_loop": false,
+    "niche_styled": false,
+    "niche_recreated": null,
+    "topical": true,
+    "length_seconds": 35.4,
+    "voice": "pt-BR-AntonioNeural",
+    "caption_color": "white",
+    "structure": "unsolved-mystery",
+    "pair_role": null
   }
 ]
