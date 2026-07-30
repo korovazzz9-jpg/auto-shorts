@@ -1137,5 +1137,24 @@
     "caption_color": "white",
     "structure": "historical-story",
     "pair_role": null
+  },
+  {
+    "video_id": "3gQmeFaVThY",
+    "published_at": "2026-07-30T00:24:03.977360+00:00",
+    "title": "El volcán que enterró una ciudad y la resucitó al mismo tiempo 😱",
+    "topic": "volcanoes and earthquakes",
+    "hook_template": "authority-cant-explain",
+    "title_opener": "the-x",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 31.9,
+    "voice": "es-CO-GonzaloNeural",
+    "caption_color": "white",
+    "structure": "unsolved-mystery",
+    "pair_role": null
   }
 ]
