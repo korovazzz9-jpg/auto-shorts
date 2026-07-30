@@ -1194,5 +1194,24 @@
     "caption_color": "white",
     "structure": "historical-story",
     "pair_role": null
+  },
+  {
+    "video_id": "CdNMI5OZfbE",
+    "published_at": "2026-07-30T20:26:27.598254+00:00",
+    "title": "El general cartaginés que cruzó los Alpes con elefantes en 218 a.C. 😱",
+    "topic": "ancient civilizations",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "awe",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 33.8,
+    "voice": "es-CO-GonzaloNeural",
+    "caption_color": "white",
+    "structure": "historical-story",
+    "pair_role": null
   }
 ]
