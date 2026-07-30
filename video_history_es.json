@@ -1156,5 +1156,24 @@
     "caption_color": "white",
     "structure": "unsolved-mystery",
     "pair_role": null
+  },
+  {
+    "video_id": "wHsAfp4qNas",
+    "published_at": "2026-07-30T03:25:28.068877+00:00",
+    "title": "¿La NASA imprimió un órgano humano en el espacio en 2019? 😱",
+    "topic": "future technology",
+    "hook_template": "authority-cant-explain",
+    "title_opener": "question",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": true,
+    "length_seconds": 37.7,
+    "voice": "es-US-AlonsoNeural",
+    "caption_color": "white",
+    "structure": "unsolved-mystery",
+    "pair_role": null
   }
 ]
