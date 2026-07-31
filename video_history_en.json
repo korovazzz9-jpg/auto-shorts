@@ -1256,5 +1256,24 @@
     "caption_color": "white",
     "structure": null,
     "pair_role": null
+  },
+  {
+    "video_id": "G9Fc5_dnnNc",
+    "published_at": "2026-07-31T16:21:58.792446+00:00",
+    "title": "The 1888 Blizzard That Killed 235 People in One Day 💀",
+    "topic": "extreme weather",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "fear",
+    "title_variant": "seo",
+    "has_loop": true,
+    "niche_styled": null,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 38.5,
+    "voice": "en-US-ChristopherNeural",
+    "caption_color": "white",
+    "structure": null,
+    "pair_role": null
   }
 ]
