@@ -1270,5 +1270,24 @@
     "caption_color": "white",
     "structure": "unsolved-mystery",
     "pair_role": null
+  },
+  {
+    "video_id": "2N5zBbsIpZM",
+    "published_at": "2026-07-31T20:24:49.417403+00:00",
+    "title": "¿Este volcán creció 400 metros en un solo año? 😱",
+    "topic": "volcanoes and earthquakes",
+    "hook_template": "you-experience",
+    "title_opener": "question",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 34.1,
+    "voice": "es-US-AlonsoNeural",
+    "caption_color": "white",
+    "structure": "happening-now",
+    "pair_role": null
   }
 ]
