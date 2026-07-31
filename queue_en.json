@@ -98,5 +98,108 @@
     "title_variant": "narrative",
     "hashtag_position": "end",
     "recycled_from": "68BTI3XDyrA"
+  },
+  {
+    "title": "One Reptile Grew Feathers — Then Became a Bird 🤯",
+    "title_opener": "other",
+    "title_intensity": "extreme",
+    "hook_text": "Scales turned into feathers",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "awe",
+    "script": "A living reptile sprouted feathers — and 150 million years later, we call its descendants birds. In 1861, a single fossil unearthed in Bavaria shattered every idea about where birds came from. Archaeopteryx had wings, feathers, and clawed fingers — but also a full set of reptile teeth and a bony tail. It wasn't a bird. It wasn't a dinosaur. It was the exact moment evolution got caught mid-switch. That fossil now sits in London's Natural History Museum. So — should we still call birds dinosaurs, or did something genuinely new emerge?",
+    "word_count": 88,
+    "search_summary": "Archaeopteryx 1861 fossil Bavaria proves birds evolved directly from feathered theropod dinosaurs mid-transition.",
+    "comment_question": "Are birds just living dinosaurs, or did Archaeopteryx start something genuinely new? 🦕",
+    "source_note": "Natural History Museum London, Archaeopteryx specimen catalogued 1862",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "evolution",
+      "Archaeopteryx",
+      "dinosaur evolution",
+      "bird evolution",
+      "fossil discovery",
+      "did you know facts",
+      "prehistoric animals",
+      "feathered dinosaurs",
+      "natural history",
+      "dinosaur evolution 2",
+      "bird evolution game",
+      "fossil discovery center of madera county"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#evolution",
+      "#archaeopteryx",
+      "#dinosaurs",
+      "#fossilfacts"
+    ],
+    "video_queries": [
+      "bird flying slow motion wings",
+      "paleontologist excavating fossil site",
+      "fossil rock museum display",
+      "ancient reptile skeleton reconstruction",
+      "feather close up texture",
+      "natural history museum interior"
+    ],
+    "has_loop": false,
+    "topic": "evolution",
+    "structure": "historical-story",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "Printed Skin That Heals Wounds in 2 Minutes 😱",
+    "title_opener": "other",
+    "title_intensity": "extreme",
+    "hook_text": "YOUR BODY, PRINTED ON-SITE",
+    "hook_template": "you-experience",
+    "emotional_tone": "impossible",
+    "script": "A handheld printer rolled over an open wound — and sealed it in under two minutes. Researchers at the University of Toronto built a skin-printing gun in 2020 that deposits living skin cells directly onto a wound. No donor site, no surgery, no waiting. The device lays down layers of bio-ink — collagen and fibrin — matching the patient's own tissue. Burn victims and diabetic ulcer patients were first in line. The printed skin actually integrates and heals. Would you let a printer repair your body?",
+    "word_count": 83,
+    "search_summary": "University of Toronto handheld skin printer deposits living cells onto wounds in under two minutes",
+    "comment_question": "Would you trust a handheld printer to heal your open wound? 🤯",
+    "source_note": "University of Toronto, Nature Biomedical Engineering, 2020",
+    "loop_connectors": [
+      "why",
+      "when"
+    ],
+    "tags": [
+      "future technology",
+      "bioprinting",
+      "skin printer",
+      "medical innovation",
+      "University of Toronto skin gun",
+      "wound healing technology",
+      "did you know",
+      "amazing science facts",
+      "future technology predictions",
+      "skin printer machine",
+      "medical innovation hosa"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#facts",
+      "#bioprinting",
+      "#futuretech",
+      "#medicalinnovation"
+    ],
+    "video_queries": [
+      "doctor treating burn wound",
+      "medical lab researcher working",
+      "scientist 3D printing close lab",
+      "hospital burn victim treatment",
+      "medical technology innovation lab",
+      "futuristic medical device demonstration"
+    ],
+    "has_loop": false,
+    "topic": "future technology",
+    "structure": "historical-story",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
   }
 ]
