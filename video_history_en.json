@@ -1294,5 +1294,24 @@
     "caption_color": "white",
     "structure": null,
     "pair_role": null
+  },
+  {
+    "video_id": "xXW2xHjz9MY",
+    "published_at": "2026-07-31T23:14:14.714034+00:00",
+    "title": "One Reptile Grew Feathers — Then Became a Bird 🤯",
+    "topic": "evolution",
+    "hook_template": "sounds-fake",
+    "title_opener": "other",
+    "emotional_tone": "awe",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 37.6,
+    "voice": "en-US-ChristopherNeural",
+    "caption_color": "white",
+    "structure": "historical-story",
+    "pair_role": null
   }
 ]
