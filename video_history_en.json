@@ -1237,5 +1237,24 @@
     "caption_color": "white",
     "structure": null,
     "pair_role": null
+  },
+  {
+    "video_id": "9XnLsFYqets",
+    "published_at": "2026-07-31T00:13:56.444347+00:00",
+    "title": "Viking Ship Buried Inside Another Ship at Gjellestad 😱",
+    "topic": "archaeological discoveries",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "impossible",
+    "title_variant": "seo",
+    "has_loop": true,
+    "niche_styled": null,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 35.3,
+    "voice": "en-US-EricNeural",
+    "caption_color": "white",
+    "structure": null,
+    "pair_role": null
   }
 ]
