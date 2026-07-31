@@ -1,0 +1,314 @@
+{
+"scripts": [
+{
+"id": "myth_01",
+"title": "ODIN EAT NOTHING",
+"topic": "norse",
+"beats": [
+{
+"text": "Norse god Odin never eats real food!",
+"emotion": "shocked",
+"prop": null,
+"background": "night"
+},
+{
+"text": "While other gods feast on wild boar, Odin feeds his meat to his two wolves.",
+"emotion": "neutral",
+"prop": null,
+"background": "forest"
+},
+{
+"text": "He survives entirely on wine alone.",
+"emotion": "smug",
+"prop": "potion",
+"background": "temple"
+},
+{
+"text": "Is he a genius, or just constantly drunk? Follow for more crazy myths!",
+"emotion": "confused",
+"prop": null,
+"background": "abstract"
+}
+]
+},
+{
+"id": "myth_02",
+"title": "TRICKING THE SUN",
+"topic": "japanese",
+"beats": [
+{
+"text": "The Japanese sun goddess once hid in a cave and plunged the world into darkness!",
+"emotion": "shocked",
+"prop": null,
+"background": "cave"
+},
+{
+"text": "The other gods could not drag her out.",
+"emotion": "sad",
+"prop": null,
+"background": "night"
+},
+{
+"text": "So they threw a massive party right outside.",
+"emotion": "happy",
+"prop": null,
+"background": "city"
+},
+{
+"text": "Curious, she peeked out and saw her own reflection in a mirror. Boom, light returned!",
+"emotion": "smug",
+"prop": null,
+"background": "sky"
+}
+]
+},
+{
+"id": "myth_03",
+"title": "POISON DRINK TEST",
+"topic": "egyptian",
+"beats": [
+{
+"text": "An Egyptian goddess almost wiped out all of humanity!",
+"emotion": "shocked",
+"prop": "skull",
+"background": "temple"
+},
+{
+"text": "Sekhmet went on a rampage, drinking human blood.",
+"emotion": "angry",
+"prop": null,
+"background": "city"
+},
+{
+"text": "To stop her, Ra dyed thousands of jars of beer red.",
+"emotion": "smug",
+"prop": "potion",
+"background": "temple"
+},
+{
+"text": "She drank it, got super drunk, and fell asleep, saving mankind! Follow for more!",
+"emotion": "happy",
+"prop": null,
+"background": "abstract"
+}
+]
+},
+{
+"id": "myth_04",
+"title": "GOLD MIDAS CURSE",
+"topic": "greek",
+"beats": [
+{
+"text": "King Midas thought he got the ultimate superpower, but it ruined his life!",
+"emotion": "smug",
+"prop": "crown",
+"background": "temple"
+},
+{
+"text": "Everything he touched turned into solid gold.",
+"emotion": "happy",
+"prop": "coins",
+"background": "city"
+},
+{
+"text": "Then he tried to eat, but his food turned to metal.",
+"emotion": "shocked",
+"prop": null,
+"background": "temple"
+},
+{
+"text": "He even turned his own daughter into a statue! Be careful what you wish for.",
+"emotion": "crying",
+"prop": null,
+"background": "abstract"
+}
+]
+},
+{
+"id": "myth_05",
+"title": "STEALING THE SUN",
+"topic": "aztec",
+"beats": [
+{
+"text": "The Aztecs believed we are living under the fifth sun!",
+"emotion": "shocked",
+"prop": null,
+"background": "sky"
+},
+{
+"text": "The first four suns were destroyed by monsters, floods, and fire.",
+"emotion": "angry",
+"prop": null,
+"background": "night"
+},
+{
+"text": "To create the current sun, a humble god jumped directly into a giant fire pit.",
+"emotion": "neutral",
+"prop": "torch",
+"background": "temple"
+},
+{
+"text": "Would you make that sacrifice to save the world?",
+"emotion": "suspicious",
+"prop": null,
+"background": "abstract"
+}
+]
+},
+{
+"id": "myth_06",
+"title": "SALMON OF WISDOM",
+"topic": "celtic",
+"beats": [
+{
+"text": "A simple fish holds all the knowledge in the universe!",
+"emotion": "shocked",
+"prop": null,
+"background": "forest"
+},
+{
+"text": "A warrior named Fionn was cooking the legendary Salmon of Wisdom.",
+"emotion": "neutral",
+"prop": null,
+"background": "forest"
+},
+{
+"text": "He burned his thumb on the hot fish and licked it clean.",
+"emotion": "x_eyes",
+"prop": null,
+"background": "forest"
+},
+{
+"text": "Instantly, all world wisdom transferred into his mind! Hit follow for smart facts!",
+"emotion": "smug",
+"prop": "lightbulb",
+"background": "abstract"
+}
+]
+},
+{
+"id": "myth_07",
+"title": "HERCULES SNAKE ATTACK",
+"topic": "greek",
+"beats": [
+{
+"text": "Hercules was fighting monsters before he could even walk!",
+"emotion": "shocked",
+"prop": "trophy",
+"background": "temple"
+},
+{
+"text": "A jealous goddess sent two deadly snakes into his baby crib.",
+"emotion": "angry",
+"prop": null,
+"background": "night"
+},
+{
+"text": "Instead of crying, tiny baby Hercules grabbed them both.",
+"emotion": "neutral",
+"prop": null,
+"background": "temple"
+},
+{
+"text": "He strangled the serpents with his bare hands while giggling!",
+"emotion": "happy",
+"prop": null,
+"background": "abstract"
+}
+]
+},
+{
+"id": "myth_08",
+"title": "THOR DRESSES UP",
+"topic": "norse",
+"beats": [
+{
+"text": "Thor once dressed up as a bride to steal back his hammer!",
+"emotion": "shocked",
+"prop": "sword_shield",
+"background": "city"
+},
+{
+"text": "A giant stole it and demanded a goddess as his wife.",
+"emotion": "angry",
+"prop": null,
+"background": "cave"
+},
+{
+"text": "Thor put on a wedding dress and veil to trick the giant.",
+"emotion": "eye_roll",
+"prop": "wreath",
+"background": "temple"
+},
+{
+"text": "At the wedding, he grabbed his hammer and smashed the whole party!",
+"emotion": "smug",
+"prop": null,
+"background": "abstract"
+}
+]
+},
+{
+"id": "myth_09",
+"title": "UNDERWORLD ESCAPE",
+"topic": "greek",
+"beats": [
+{
+"text": "Never look back when escaping the underworld!",
+"emotion": "shocked",
+"prop": "skull",
+"background": "cave"
+},
+{
+"text": "Orpheus played beautiful music to rescue his dead wife.",
+"emotion": "sad",
+"prop": null,
+"background": "night"
+},
+{
+"text": "Hades agreed, but warned him not to look back until they reached the light.",
+"emotion": "suspicious",
+"prop": null,
+"background": "cave"
+},
+{
+"text": "At the last second, he looked... and lost her forever. Subscribe for more tales!",
+"emotion": "crying",
+"prop": null,
+"background": "abstract"
+}
+]
+},
+{
+"id": "myth_10",
+"title": "MONKEY KING TRICK",
+"topic": "chinese",
+"beats": [
+{
+"text": "The Monkey King leaped to the end of the universe just to lose a bet!",
+"emotion": "shocked",
+"prop": null,
+"background": "space"
+},
+{
+"text": "He flew past giant pillars and wrote his name on one to prove he made it.",
+"emotion": "smug",
+"prop": "scroll",
+"background": "sky"
+},
+{
+"text": "When he returned, Buddha smiled and showed him his hand.",
+"emotion": "neutral",
+"prop": null,
+"background": "temple"
+},
+{
+"text": "The pillars were actually Buddha's fingers the entire time!",
+"emotion": "x_eyes",
+"prop": null,
+"background": "abstract"
+}
+]
+}
+]
+}
