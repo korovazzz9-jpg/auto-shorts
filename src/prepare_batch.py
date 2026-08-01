@@ -221,7 +221,7 @@ def main() -> None:
                 # берём как есть (лучше короткий/несовершенный скрипт, чем потерянный слот).
                 print(f"  item-{i}: замечания валидации ({len(problems)}), беру как есть.")
 
-            _append_loop(data)
+            _append_loop(data, topic)
             ht = str(data.get("hook_template", "")).strip().lower()
             data["hook_template"] = ht if ht in HOOK_TEMPLATES else "other"
             to = str(data.get("title_opener", "")).strip().lower()

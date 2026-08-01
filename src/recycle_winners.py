@@ -257,7 +257,7 @@ def main() -> None:
             problems = _validate(data)
             if problems:
                 print(f"  recycle-{i}: замечания валидации ({len(problems)}), беру как есть.")
-            _append_loop(data)
+            _append_loop(data, _source_topic(w))
             ht = str(data.get("hook_template", "")).strip().lower()
             data["hook_template"] = ht if ht in HOOK_TEMPLATES else "other"
             to = str(data.get("title_opener", "")).strip().lower()

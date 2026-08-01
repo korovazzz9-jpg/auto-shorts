@@ -146,7 +146,7 @@ def main() -> None:
     problems = _validate(data)
     if problems:
         print(f"  Замечания валидации ({len(problems)}), беру как есть.")
-    _append_loop(data)
+    _append_loop(data, target["topic"])
     for key, known, default in (
         ("hook_template", HOOK_TEMPLATES, "other"),
         ("title_opener", TITLE_OPENERS, "other"),

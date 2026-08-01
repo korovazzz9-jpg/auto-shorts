@@ -496,8 +496,9 @@ TITLE_OPENER_INSTRUCTION = (
     f"title_opener: which opening style the title uses — exactly one of "
     f"[{', '.join(TITLE_OPENERS)}]. VARY this across videos — don't default to 'the-x'/"
     "'your-x' every time; 'scientists-discovered', 'shouldnt-exist', 'nobody-expected', "
-    "'only-place', and 'question' are equally valid and often punchier. Report the closest "
-    "match (use 'other' if none fits)."
+    "and 'only-place' are equally valid and often punchier. Avoid 'question' — on this "
+    "channel it has correlated with much lower retention (an open question in the title "
+    "removes the reason to keep watching). Report the closest match (use 'other' if none fits)."
 )
 
 # Сила неожиданности действия/детали в title (2026-07-18, CurioShock-инсайт) — модель
@@ -758,11 +759,19 @@ def _better(a: dict, b: dict) -> dict:
     return a if wa <= wb else b
 
 
-def _append_loop(data: dict) -> None:
+# Темы, для которых петля обязательна (2026-08-01, monthly-insights): на EN-канале
+# "volcanoes and earthquakes" без петли даёт retention ~43%, с петлёй 54-86% (4 видео) —
+# слишком маленькая выборка для полной уверенности, но разница достаточно большая и
+# консистентная, чтобы форсировать петлю вместо обычной loop_probability-монетки.
+FORCE_LOOP_TOPICS = {"volcanoes and earthquakes"}
+
+
+def _append_loop(data: dict, topic: str = "") -> None:
     """С вероятностью loop_probability дописывает loop-фразу в конец скрипта на языке канала
     (коннектор — из помеченных Claude). Иначе оставляет обычную концовку.
     Проставляет data["has_loop"] для пометки тегом и сравнения в аналитике."""
-    if random.random() >= CFG.get("loop_probability", 0.5):
+    forced = topic in FORCE_LOOP_TOPICS
+    if not forced and random.random() >= CFG.get("loop_probability", 0.5):
         data["has_loop"] = False
         return
 
@@ -952,7 +961,7 @@ def generate_script(on_this_day: bool = False, pair_start: bool = False,
         except Exception as e:
             print(f"  Retry parse failed ({e}), keeping original.")
 
-    _append_loop(data)  # детерминированно дописываем loop-фразу под помеченный коннектор
+    _append_loop(data, topic)  # детерминированно дописываем loop-фразу под помеченный коннектор
     data["topic"] = topic
     data["structure"] = structure                # тег format-<id> (pipeline.py) + аналитика
     data["topical"] = bool(on_this_day)          # тег topical-onthisday (pipeline.py)
