@@ -1351,5 +1351,24 @@
     "caption_color": "white",
     "structure": "happening-now",
     "pair_role": null
+  },
+  {
+    "video_id": "J3mhapn7QJU",
+    "published_at": "2026-08-01T20:14:20.024978+00:00",
+    "title": "The Boiling River in the Amazon That Kills Anything 😱",
+    "topic": "natural wonders",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "fear",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 29.8,
+    "voice": "en-AU-WilliamNeural",
+    "caption_color": "white",
+    "structure": "historical-story",
+    "pair_role": null
   }
 ]
