@@ -1327,5 +1327,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "VqHIc8eyyAE",
+    "published_at": "2026-08-01T13:23:54.362740+00:00",
+    "title": "El marinero que llegó a Japón en 1600 y se volvió samurái 😱",
+    "topic": "historical mysteries",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "impossible",
+    "title_variant": "seo",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 29.2,
+    "voice": "es-CO-GonzaloNeural",
+    "caption_color": "white",
+    "structure": "happening-now",
+    "pair_role": null
   }
 ]
