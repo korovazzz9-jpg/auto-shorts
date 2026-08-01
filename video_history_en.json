@@ -1332,5 +1332,24 @@
     "caption_color": "white",
     "structure": "historical-story",
     "pair_role": null
+  },
+  {
+    "video_id": "XyUgMXt27PY",
+    "published_at": "2026-08-01T16:20:11.011354+00:00",
+    "title": "Only Ocean Where Surface Water Sinks to 4,000m Deep 😱",
+    "topic": "the ocean",
+    "hook_template": "you-experience",
+    "title_opener": "only-place",
+    "emotional_tone": "awe",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 29.8,
+    "voice": "en-US-GuyNeural",
+    "caption_color": "white",
+    "structure": "happening-now",
+    "pair_role": null
   }
 ]
