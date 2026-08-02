@@ -1427,5 +1427,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "RkhKdW9Q3Fk",
+    "published_at": "2026-08-02T20:13:19.649157+00:00",
+    "title": "The Shrimp That Punches Faster Than a Bullet 😱",
+    "topic": "the animal kingdom",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 24.3,
+    "voice": "en-AU-WilliamNeural",
+    "caption_color": "white",
+    "structure": "happening-now",
+    "pair_role": null
   }
 ]
