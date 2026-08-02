@@ -1365,5 +1365,24 @@
     "caption_color": "white",
     "structure": "unsolved-mystery",
     "pair_role": null
+  },
+  {
+    "video_id": "OWwN9opwMy8",
+    "published_at": "2026-08-02T00:24:39.842788+00:00",
+    "title": "Tu hueso más duro se fabrica nuevamente cada 10 años 😱",
+    "topic": "the human body",
+    "hook_template": "sounds-fake",
+    "title_opener": "your-x",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 30.8,
+    "voice": "es-US-AlonsoNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": null
   }
 ]
