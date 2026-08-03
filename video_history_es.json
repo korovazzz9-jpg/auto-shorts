@@ -1441,5 +1441,24 @@
     "caption_color": "white",
     "structure": "historical-story",
     "pair_role": null
+  },
+  {
+    "video_id": "NAFG5oQzZ9s",
+    "published_at": "2026-08-03T00:24:45.641924+00:00",
+    "title": "¿El faraón que gobernó desde la tumba... 1,300 años? 😱",
+    "topic": "historical mysteries",
+    "hook_template": "sounds-fake",
+    "title_opener": "question",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 33.7,
+    "voice": "es-MX-JorgeNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": "a"
   }
 ]
