@@ -1563,5 +1563,24 @@
     "caption_color": "white",
     "structure": "unsolved-mystery",
     "pair_role": null
+  },
+  {
+    "video_id": "uOJMse51agc",
+    "published_at": "2026-08-03T13:25:02.426824+00:00",
+    "title": "¿Esta niña vivió 7 años criada por lobos? 😱",
+    "topic": "historical mysteries",
+    "hook_template": "sounds-fake",
+    "title_opener": "question",
+    "emotional_tone": "creepy",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": true,
+    "topical": null,
+    "length_seconds": 36.7,
+    "voice": "es-MX-JorgeNeural",
+    "caption_color": "white",
+    "structure": null,
+    "pair_role": null
   }
 ]
