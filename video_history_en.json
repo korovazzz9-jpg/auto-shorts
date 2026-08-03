@@ -1568,5 +1568,24 @@
     "caption_color": "white",
     "structure": "unsolved-mystery",
     "pair_role": "a"
+  },
+  {
+    "video_id": "_ksiSKrxd5U",
+    "published_at": "2026-08-03T16:21:26.725716+00:00",
+    "title": "Only Place on Earth Where Lightning Never Stops 😱",
+    "topic": "natural wonders",
+    "hook_template": "one-category",
+    "title_opener": "only-place",
+    "emotional_tone": "impossible",
+    "title_variant": "seo",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 35.9,
+    "voice": "en-US-ChristopherNeural",
+    "caption_color": "white",
+    "structure": "historical-story",
+    "pair_role": null
   }
 ]
