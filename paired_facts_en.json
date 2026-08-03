@@ -58,5 +58,15 @@
     "part_b_video_id": null,
     "status": "awaiting_b",
     "created_at": 1785284152.66628
+  },
+  {
+    "id": "g8xeaGG40KE-1785716219",
+    "topic": "archaeological discoveries",
+    "part_a_video_id": "g8xeaGG40KE",
+    "part_a_title": "The 3,400-Year-Old Shipwreck Nobody Could Explain 😱",
+    "claim": "The Uluburun wreck contained the oldest known glass ingots ever found.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1785716219.87797
   }
 ]
