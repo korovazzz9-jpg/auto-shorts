@@ -1279,5 +1279,24 @@
     "caption_color": "white",
     "structure": "historical-story",
     "pair_role": null
+  },
+  {
+    "video_id": "4aB52sxUb9k",
+    "published_at": "2026-08-03T01:29:20.708876+00:00",
+    "title": "A cidade que mandou carta pro inimigo antes de ser destruída 😱",
+    "topic": "ancient civilizations",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "creepy",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": false,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 35.7,
+    "voice": "pt-BR-AntonioNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": null
   }
 ]
