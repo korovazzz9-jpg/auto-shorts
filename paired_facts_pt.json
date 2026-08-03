@@ -68,5 +68,15 @@
     "part_b_video_id": null,
     "status": "awaiting_b",
     "created_at": 1785367892.0961282
+  },
+  {
+    "id": "b4fQ7AgSB18-1785799732",
+    "topic": "archaeological discoveries",
+    "part_a_video_id": "b4fQ7AgSB18",
+    "part_a_title": "A tumba achada com 2.500 anos — ainda lacrada por dentro 😱",
+    "claim": "Saqqara tem mais tumbas não escavadas do que escavadas.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1785799732.7088192
   }
 ]

@@ -1417,5 +1417,24 @@
     "caption_color": "white",
     "structure": "historical-story",
     "pair_role": null
+  },
+  {
+    "video_id": "b4fQ7AgSB18",
+    "published_at": "2026-08-03T23:28:52.007964+00:00",
+    "title": "A tumba achada com 2.500 anos — ainda lacrada por dentro 😱",
+    "topic": "archaeological discoveries",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "impossible",
+    "title_variant": "seo",
+    "has_loop": false,
+    "niche_styled": false,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 30.2,
+    "voice": "pt-BR-ThalitaMultilingualNeural",
+    "caption_color": "white",
+    "structure": "happening-now",
+    "pair_role": "a"
   }
 ]
