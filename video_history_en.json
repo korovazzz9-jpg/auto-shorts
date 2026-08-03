@@ -1606,5 +1606,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "ar7zFNOPALw",
+    "published_at": "2026-08-03T23:13:55.971105+00:00",
+    "title": "Nobody Expected a 3,000-Year-Old Cheese Still Inside the Tomb 😱",
+    "topic": "archaeological discoveries",
+    "hook_template": "sounds-fake",
+    "title_opener": "nobody-expected",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 31.2,
+    "voice": "en-US-GuyNeural",
+    "caption_color": "white",
+    "structure": "happening-now",
+    "pair_role": null
   }
 ]
