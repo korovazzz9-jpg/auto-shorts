@@ -1587,5 +1587,24 @@
     "caption_color": "white",
     "structure": "historical-story",
     "pair_role": null
+  },
+  {
+    "video_id": "fvzGcM5gg7k",
+    "published_at": "2026-08-03T20:14:31.163319+00:00",
+    "title": "Only Mammal Born With a Venomous Spur — and Uses It on Rivals 😱",
+    "topic": "the animal kingdom",
+    "hook_template": "sounds-fake",
+    "title_opener": "only-place",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 29.9,
+    "voice": "en-US-EricNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": null
   }
 ]
