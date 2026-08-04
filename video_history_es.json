@@ -1601,5 +1601,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "ElaB9vZi4yU",
+    "published_at": "2026-08-04T00:25:48.053386+00:00",
+    "title": "¿El volcán que se activó... sin moverse un centímetro? 😱",
+    "topic": "volcanoes and earthquakes",
+    "hook_template": "you-experience",
+    "title_opener": "question",
+    "emotional_tone": "awe",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 33.6,
+    "voice": "es-US-AlonsoNeural",
+    "caption_color": "white",
+    "structure": "happening-now",
+    "pair_role": null
   }
 ]
