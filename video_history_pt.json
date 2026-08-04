@@ -1436,5 +1436,24 @@
     "caption_color": "white",
     "structure": "happening-now",
     "pair_role": "a"
+  },
+  {
+    "video_id": "vkdgRszAcpo",
+    "published_at": "2026-08-04T01:29:08.837971+00:00",
+    "title": "O oceano tem uma cascata de 3,5 km debaixo d'água 😱",
+    "topic": "the ocean",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": false,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 30.0,
+    "voice": "pt-BR-ThalitaMultilingualNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": null
   }
 ]
