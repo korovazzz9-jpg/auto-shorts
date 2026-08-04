@@ -1644,5 +1644,24 @@
     "caption_color": "white",
     "structure": "happening-now",
     "pair_role": "b"
+  },
+  {
+    "video_id": "qD2Oqf1Skp4",
+    "published_at": "2026-08-04T16:25:01.723049+00:00",
+    "title": "The Earthquake That Turned Solid Ground Into Liquid 😱",
+    "topic": "volcanoes and earthquakes",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "fear",
+    "title_variant": "seo",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 41.5,
+    "voice": "en-US-ChristopherNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": null
   }
 ]
