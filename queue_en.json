@@ -1,1 +1,53 @@
-[]
+[
+  {
+    "title": "The Earthquake That Turned Solid Ground Into Liquid 😱",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "GROUND TURNED TO LIQUID",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "fear",
+    "script": "Solid ground can liquefy in seconds — swallowing buildings whole without a single crack first. It's called liquefaction. When the 1964 Alaska earthquake hit at magnitude 9.2, entire neighborhoods in Anchorage didn't crumble — they sank. The soil stopped behaving like solid and started flowing like wet concrete. Streets dropped 10 feet. Houses tilted at 45-degree angles. But here's the terrifying part — this happens beneath ground that looks completely normal from above. No warning. No visible weakness. Send this to anyone who thinks an earthquake only breaks things. Which is why.",
+    "word_count": 88,
+    "search_summary": "Soil liquefaction during the 1964 Alaska earthquake caused entire Anchorage neighborhoods to sink as ground turned to liquid.",
+    "comment_question": "Would you trust solid ground after knowing this? 😨",
+    "source_note": "USGS reports on 1964 Alaska earthquake, ongoing",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "earthquake facts",
+      "liquefaction",
+      "1964 Alaska earthquake",
+      "natural disasters",
+      "geology facts",
+      "did you know",
+      "earthquake damage",
+      "Anchorage earthquake",
+      "earthquake facts for kids",
+      "1964 alaska earthquake footage",
+      "natural disasters for kids"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#earthquakefacts",
+      "#naturaldisaster",
+      "#liquefaction",
+      "#geology"
+    ],
+    "video_queries": [
+      "ground cracking earthquake destruction",
+      "buildings sinking collapsed earthquake",
+      "earthquake aftermath neighborhood damage",
+      "road collapse earthquake destruction",
+      "tilted house earthquake damage",
+      "aerial view earthquake devastation"
+    ],
+    "has_loop": true,
+    "topic": "volcanoes and earthquakes",
+    "structure": "myth-debunk",
+    "niche_styled": true,
+    "title_variant": "seo",
+    "hashtag_position": "end"
+  }
+]
