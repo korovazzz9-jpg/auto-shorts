@@ -1493,5 +1493,24 @@
     "caption_color": "white",
     "structure": "historical-story",
     "pair_role": null
+  },
+  {
+    "video_id": "cYFGE0OQ-40",
+    "published_at": "2026-08-04T23:29:33.977434+00:00",
+    "title": "O peixe que evoluiu a mesma coisa duas vezes — separado 😱",
+    "topic": "evolution",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "impossible",
+    "title_variant": "seo",
+    "has_loop": false,
+    "niche_styled": false,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 38.4,
+    "voice": "pt-BR-AntonioNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": null
   }
 ]
