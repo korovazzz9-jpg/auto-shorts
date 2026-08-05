@@ -1758,5 +1758,24 @@
     "caption_color": "white",
     "structure": "historical-story",
     "pair_role": null
+  },
+  {
+    "video_id": "gG4jDxWdxnQ",
+    "published_at": "2026-08-05T23:14:07.224400+00:00",
+    "title": "The Plague Letter That Poisoned Its Own Reader 😱",
+    "topic": "historical mysteries",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "creepy",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 35.9,
+    "voice": "en-US-EricNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": null
   }
 ]
