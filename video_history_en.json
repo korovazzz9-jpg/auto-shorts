@@ -1720,5 +1720,24 @@
     "caption_color": "white",
     "structure": "unsolved-mystery",
     "pair_role": "a"
+  },
+  {
+    "video_id": "Ql2vJlOd91Y",
+    "published_at": "2026-08-05T16:22:41.732801+00:00",
+    "title": "Your Skull Has a Hole That Seals Shut After Birth 😱",
+    "topic": "the human body",
+    "hook_template": "you-experience",
+    "title_opener": "your-x",
+    "emotional_tone": "creepy",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 32.4,
+    "voice": "en-US-EricNeural",
+    "caption_color": "white",
+    "structure": "unsolved-mystery",
+    "pair_role": null
   }
 ]
