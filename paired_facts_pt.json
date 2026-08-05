@@ -78,5 +78,15 @@
     "part_b_video_id": null,
     "status": "awaiting_b",
     "created_at": 1785799732.7088192
+  },
+  {
+    "id": "vuYBetpDci4-1785972598",
+    "topic": "shipwrecks and lost treasures",
+    "part_a_video_id": "vuYBetpDci4",
+    "part_a_title": "O naufrágio de 1804 que o próprio governo afundou de novo 😳",
+    "claim": "A empresa que achou o tesouro ficou com zero moedas.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1785972598.0264122
   }
 ]
