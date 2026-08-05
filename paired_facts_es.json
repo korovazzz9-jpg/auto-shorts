@@ -58,5 +58,15 @@
     "part_b_video_id": null,
     "status": "awaiting_b",
     "created_at": 1785716686.0644228
+  },
+  {
+    "id": "gDHPwjouhYU-1785889447",
+    "topic": "extreme weather",
+    "part_a_video_id": "gDHPwjouhYU",
+    "part_a_title": "¿La tormenta que congeló 800 personas en una sola noche? 😱",
+    "claim": "La tormenta de 1940 aceleró la creación del sistema de alertas meteorológicas en EE.UU.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1785889447.6329541
   }
 ]

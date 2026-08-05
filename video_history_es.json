@@ -1677,5 +1677,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "gDHPwjouhYU",
+    "published_at": "2026-08-05T00:24:07.266182+00:00",
+    "title": "¿La tormenta que congeló 800 personas en una sola noche? 😱",
+    "topic": "extreme weather",
+    "hook_template": "sounds-fake",
+    "title_opener": "question",
+    "emotional_tone": "fear",
+    "title_variant": "seo",
+    "has_loop": false,
+    "niche_styled": false,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 33.5,
+    "voice": "es-CO-GonzaloNeural",
+    "caption_color": "white",
+    "structure": "historical-story",
+    "pair_role": "a"
   }
 ]
