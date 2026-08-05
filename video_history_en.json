@@ -1701,5 +1701,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "hcaw1F54UXY",
+    "published_at": "2026-08-05T00:15:25.820132+00:00",
+    "title": "The Radio Signal From Space Nobody Can Decode 😱",
+    "topic": "space",
+    "hook_template": "authority-cant-explain",
+    "title_opener": "the-x",
+    "emotional_tone": "creepy",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 41.0,
+    "voice": "en-US-EricNeural",
+    "caption_color": "white",
+    "structure": "unsolved-mystery",
+    "pair_role": "a"
   }
 ]

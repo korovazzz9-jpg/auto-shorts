@@ -68,5 +68,15 @@
     "part_b_video_id": null,
     "status": "awaiting_b",
     "created_at": 1785716219.87797
+  },
+  {
+    "id": "hcaw1F54UXY-1785888926",
+    "topic": "space",
+    "part_a_video_id": "hcaw1F54UXY",
+    "part_a_title": "The Radio Signal From Space Nobody Can Decode 😱",
+    "claim": "The Wow! Signal matched the exact hydrogen frequency SETI predicted aliens would use.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1785888926.2742736
   }
 ]
