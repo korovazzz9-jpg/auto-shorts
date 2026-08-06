@@ -1772,5 +1772,24 @@
     "caption_color": "white",
     "structure": "happening-now",
     "pair_role": "b"
+  },
+  {
+    "video_id": "b1KwWrZBFCk",
+    "published_at": "2026-08-06T03:25:01.655478+00:00",
+    "title": "El sonido que el océano emitió el 1 de agosto de 1997 y nadie explicó 😱",
+    "topic": "the ocean",
+    "hook_template": "authority-cant-explain",
+    "title_opener": "the-x",
+    "emotional_tone": "creepy",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": true,
+    "length_seconds": 38.6,
+    "voice": "es-US-AlonsoNeural",
+    "caption_color": "white",
+    "structure": "unsolved-mystery",
+    "pair_role": null
   }
 ]
