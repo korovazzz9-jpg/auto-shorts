@@ -349,5 +349,99 @@
     "niche_styled": false,
     "title_variant": "narrative",
     "hashtag_position": "end"
+  },
+  {
+    "title": "El océano produce el 50% del oxígeno que respiras ahora mismo 😱",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "El mar te está dando aire",
+    "hook_template": "you-experience",
+    "emotional_tone": "awe",
+    "script": "Mientras ves esto, el océano está fabricando la mitad del oxígeno que entra a tus pulmones. No los bosques — el mar. Billones de organismos llamados fitoplancton, muchos invisibles a simple vista, generan más oxígeno que todos los árboles del planeta combinados. Solo el género Prochlorococcus produce el 20% del aire que respiras, cada segundo del día. Por el tiempo que dura este video, el océano ya generó miles de millones de litros de oxígeno. Y si ese fitoplancton desaparece, nosotros desaparecemos con él en semanas. Dime: ¿cuántas veces respiraste pensando que era gracias a un árbol?",
+    "word_count": 102,
+    "search_summary": "El fitoplancton marino, especialmente Prochlorococcus, produce el 50% del oxígeno que los humanos respiran cada segundo.",
+    "comment_question": "¿Cuántas veces respiraste hoy creyendo que era gracias a un árbol? 🌊",
+    "source_note": "NOAA Ocean Service, 2021",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "datos curiosos del océano",
+      "fitoplancton oxígeno",
+      "Prochlorococcus",
+      "el mar produce oxígeno",
+      "curiosidades del mar",
+      "datos en 30 segundos",
+      "hechos increíbles del océano",
+      "oxígeno marino"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#curiosidades",
+      "#oceano",
+      "#fitoplancton",
+      "#datoscuriosos"
+    ],
+    "video_queries": [
+      "ocean surface sunlight aerial",
+      "underwater phytoplankton microscopic bloom",
+      "ocean waves wide landscape",
+      "deep blue ocean aerial drone",
+      "person breathing close nature"
+    ],
+    "has_loop": false,
+    "topic": "the ocean",
+    "structure": "happening-now",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "El terremoto de 1811 invirtió el río Mississippi 😱",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "Un río corriendo al revés",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "impossible",
+    "script": "Un río entero corrió al revés durante horas. En diciembre de 1811, en New Madrid, Missouri, tres sismos masivos sacudieron el centro de Norteamérica. El suelo se abrió, los árboles desaparecieron tragados por la tierra, y el Mississippi invirtió su corriente. Las campanas de iglesias en Boston repicaron solas, a 1,500 kilómetros de distancia. Hoy esa falla sigue activa bajo millones de personas. Si el mismo sismo ocurriera mañana, ¿qué ciudad crees que desaparecería primero? Y por eso.",
+    "word_count": 83,
+    "search_summary": "Los terremotos de New Madrid de 1811 invirtieron el curso del río Mississippi y se sintieron en todo el este de Norteamérica.",
+    "comment_question": "¿Sabes qué ciudad estaría en mayor peligro si la falla de New Madrid se activa hoy? 😳",
+    "source_note": "USGS, registro histórico terremotos New Madrid, 1811",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "terremoto New Madrid 1811",
+      "río Mississippi invertido",
+      "terremotos históricos",
+      "falla sísmica New Madrid",
+      "datos curiosos terremotos",
+      "curiosidades geología",
+      "terremotos Estados Unidos",
+      "datos en 30 segundos"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#terremoto",
+      "#newmadrid",
+      "#geología"
+    ],
+    "video_queries": [
+      "Mississippi river flowing wide aerial",
+      "earthquake ground cracking wide shot",
+      "flooded forest swamp aftermath",
+      "church bells ringing old town",
+      "aerial view midwest city landscape"
+    ],
+    "has_loop": true,
+    "topic": "volcanoes and earthquakes",
+    "structure": "historical-story",
+    "niche_styled": true,
+    "title_variant": "seo",
+    "hashtag_position": "end"
   }
 ]

@@ -248,5 +248,102 @@
     "niche_styled": false,
     "title_variant": "narrative",
     "hashtag_position": "end"
+  },
+  {
+    "title": "O escravo que comprou sua liberdade — e destruiu Cartago 😱",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "Ele comprou a própria liberdade",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "awe",
+    "script": "Um homem nascido escravo foi o motivo pelo qual Cartago caiu em 146 a.C. Malchus era um general cartaginês que venceu batalhas na Sicília, foi exilado por seus próprios líderes como recompensa — e voltou com um exército. Sitiou a cidade que o traiu, executou os anciãos, e instalou seu filho como sumo sacerdote na ponta de uma lança. Cartago nunca se recuperou. Roma terminou o serviço cinquenta anos depois. Se você estivesse no lugar dos líderes cartagineses, teria exilado ele também?",
+    "word_count": 84,
+    "search_summary": "Malchus general cartaginês exilado sitiou Cartago em 146 a.C. e destruiu a cidade que o traiu",
+    "comment_question": "Os líderes de Cartago erraram ao exilar Malchus, ou não tinham escolha? 🤔",
+    "source_note": "Justinus, Epitoma Historiarum Philippicarum, séc. III d.C.",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "história antiga",
+      "Cartago",
+      "fatos históricos",
+      "generais da antiguidade",
+      "Roma vs Cartago",
+      "guerras púnicas",
+      "fatos curiosos",
+      "história militar antiga",
+      "história antiga enem",
+      "fatos históricos interessantes"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#fatoscuriosos",
+      "#historiaantiga",
+      "#cartago",
+      "#guerrapunica"
+    ],
+    "video_queries": [
+      "ancient carthage ruins aerial",
+      "roman army marching desert",
+      "ancient city siege war",
+      "mediterranean ruins landscape",
+      "ancient battlefield smoke fire",
+      "roman ruins dramatic sky"
+    ],
+    "has_loop": false,
+    "topic": "ancient history",
+    "structure": "historical-story",
+    "niche_styled": false,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "O peixe que perdeu os olhos — e voltou a enxergar 🤯",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "Cego por milhões de anos",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "impossible",
+    "script": "Um animal perdeu um órgão inteiro por milhões de anos — e depois recuperou do zero. O peixe-caverna mexicano, Astyanax mexicanus, ficou completamente cego vivendo no escuro por 1,5 milhão de anos. Seus olhos desapareceram. Mas aqui está o absurdo: quando cientistas cruzaram populações de caverna com populações de superfície, os filhotes nasceram com olhos funcionais de novo. A evolução não apagou o código — só desligou. Metade de vocês vai achar que isso muda tudo o que sabemos sobre perda evolutiva.",
+    "word_count": 83,
+    "search_summary": "O peixe-caverna mexicano Astyanax mexicanus perdeu os olhos por 1,5 milhão de anos e voltou a desenvolvê-los ao cruzar com populações de superfície.",
+    "comment_question": "Se a evolução pode 'religar' um órgão perdido, o que mais pode voltar? 👁️",
+    "source_note": "Journal Nature, estudo Jeffery et al., 2004",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "evolução",
+      "peixe caverna",
+      "Astyanax mexicanus",
+      "fatos de biologia",
+      "fatos inacreditáveis",
+      "evolução reversa",
+      "adaptação animal",
+      "curiosidades científicas"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#fatos",
+      "#evolução",
+      "#biologiacuriosidades"
+    ],
+    "video_queries": [
+      "dark underwater cave",
+      "blind cave fish swimming",
+      "scientist laboratory fish tank",
+      "fish eggs hatching underwater",
+      "underwater cave exploration",
+      "microscope biology lab research"
+    ],
+    "has_loop": false,
+    "topic": "evolution",
+    "structure": "myth-debunk",
+    "niche_styled": false,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
   }
 ]
