@@ -1848,5 +1848,24 @@
     "caption_color": "white",
     "structure": "happening-now",
     "pair_role": null
+  },
+  {
+    "video_id": "i3r5sSL2tAc",
+    "published_at": "2026-08-07T13:23:38.849473+00:00",
+    "title": "El volcán que creó una isla nueva en 1963 y aún crece 😱",
+    "topic": "volcanoes and earthquakes",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "awe",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 34.0,
+    "voice": "es-MX-JorgeNeural",
+    "caption_color": "white",
+    "structure": "historical-story",
+    "pair_role": null
   }
 ]
