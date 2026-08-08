@@ -1721,5 +1721,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "mpL_kAZaNxs",
+    "published_at": "2026-08-08T17:28:06.093194+00:00",
+    "title": "A árvore que sobrevive no deserto sem uma gota de chuva 🤯",
+    "topic": "natural wonders",
+    "hook_template": "authority-cant-explain",
+    "title_opener": "the-x",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": false,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 31.9,
+    "voice": "pt-BR-AntonioNeural",
+    "caption_color": "white",
+    "structure": "unsolved-mystery",
+    "pair_role": null
   }
 ]
