@@ -1910,5 +1910,24 @@
     "caption_color": "white",
     "structure": "historical-story",
     "pair_role": null
+  },
+  {
+    "video_id": "1WX0a5OPusI",
+    "published_at": "2026-08-08T16:21:04.689935+00:00",
+    "title": "One Whale Ancestor Walked on Four Legs 50M Years Ago 😱",
+    "topic": "evolution",
+    "hook_template": "sounds-fake",
+    "title_opener": "other",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 28.3,
+    "voice": "en-US-ChristopherNeural",
+    "caption_color": "white",
+    "structure": "happening-now",
+    "pair_role": null
   }
 ]
