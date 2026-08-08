@@ -1929,5 +1929,24 @@
     "caption_color": "white",
     "structure": "happening-now",
     "pair_role": null
+  },
+  {
+    "video_id": "p5D6e0qTEOc",
+    "published_at": "2026-08-08T20:13:04.805154+00:00",
+    "title": "Nobody Expected an Ancient City to Pay Builders in Beer 😱",
+    "topic": "ancient civilizations",
+    "hook_template": "sounds-fake",
+    "title_opener": "nobody-expected",
+    "emotional_tone": "impossible",
+    "title_variant": "seo",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 25.8,
+    "voice": "en-AU-WilliamNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": null
   }
 ]
