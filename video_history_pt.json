@@ -1740,5 +1740,24 @@
     "caption_color": "white",
     "structure": "unsolved-mystery",
     "pair_role": null
+  },
+  {
+    "video_id": "Wo3R77fMjUA",
+    "published_at": "2026-08-08T21:28:51.846904+00:00",
+    "title": "O escravo que comprou sua liberdade — e destruiu Cartago 😱",
+    "topic": "ancient history",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "awe",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": false,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 31.2,
+    "voice": "pt-BR-AntonioNeural",
+    "caption_color": "white",
+    "structure": "historical-story",
+    "pair_role": null
   }
 ]
