@@ -1891,5 +1891,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "up3IAiry-6s",
+    "published_at": "2026-08-08T00:14:52.817775+00:00",
+    "title": "Skeletons Found Holding Hands Under a Roman Road 😱",
+    "topic": "archaeological discoveries",
+    "hook_template": "sounds-fake",
+    "title_opener": "other",
+    "emotional_tone": "creepy",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 34.6,
+    "voice": "en-US-EricNeural",
+    "caption_color": "white",
+    "structure": "historical-story",
+    "pair_role": null
   }
 ]
