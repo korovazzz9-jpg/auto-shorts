@@ -1948,5 +1948,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "VrPgr2jR5jg",
+    "published_at": "2026-08-08T23:14:13.058367+00:00",
+    "title": "Nobody Expected a Volcano to Ring Like a Bell 😱",
+    "topic": "volcanoes and earthquakes",
+    "hook_template": "sounds-fake",
+    "title_opener": "nobody-expected",
+    "emotional_tone": "impossible",
+    "title_variant": "seo",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 30.8,
+    "voice": "en-AU-WilliamNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": null
   }
 ]
