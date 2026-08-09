@@ -2024,5 +2024,24 @@
     "caption_color": "white",
     "structure": "unsolved-mystery",
     "pair_role": null
+  },
+  {
+    "video_id": "q0ZCM5AYjjY",
+    "published_at": "2026-08-09T23:15:08.401227+00:00",
+    "title": "The Roman Army That Surrendered to Its Own Enemy 😱",
+    "topic": "ancient history",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 37.5,
+    "voice": "en-US-ChristopherNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": null
   }
 ]
