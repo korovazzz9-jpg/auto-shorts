@@ -2000,5 +2000,24 @@
     "caption_color": "white",
     "structure": "happening-now",
     "pair_role": null
+  },
+  {
+    "video_id": "yJ5gHpOHuNI",
+    "published_at": "2026-08-09T13:23:47.868444+00:00",
+    "title": "El terremoto de 1811 invirtió el río Mississippi 😱",
+    "topic": "volcanoes and earthquakes",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "impossible",
+    "title_variant": "seo",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 35.0,
+    "voice": "es-US-AlonsoNeural",
+    "caption_color": "white",
+    "structure": "historical-story",
+    "pair_role": null
   }
 ]
