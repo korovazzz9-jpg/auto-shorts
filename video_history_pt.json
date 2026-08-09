@@ -1797,5 +1797,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "dw1wtbeU1cM",
+    "published_at": "2026-08-09T17:28:30.774493+00:00",
+    "title": "A cidade de 3.700 anos achada dentro de uma pedreira ativa 😱",
+    "topic": "archaeological discoveries",
+    "hook_template": "sounds-fake",
+    "title_opener": "nobody-expected",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": false,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 31.3,
+    "voice": "pt-BR-AntonioNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": null
   }
 ]
