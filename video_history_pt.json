@@ -1778,5 +1778,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "4cxADLNEs3Y",
+    "published_at": "2026-08-09T01:29:06.406166+00:00",
+    "title": "O animal que virou planta — e depois voltou a ser animal 🤯",
+    "topic": "evolution",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": false,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 28.5,
+    "voice": "pt-BR-ThalitaMultilingualNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": null
   }
 ]
