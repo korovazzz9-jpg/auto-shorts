@@ -196,5 +196,103 @@
     "niche_styled": true,
     "title_variant": "narrative",
     "hashtag_position": "end"
+  },
+  {
+    "title": "¿El árbol que sobrevive en roca sólida sin tierra ni agua? 😱",
+    "title_opener": "question",
+    "title_intensity": "extreme",
+    "hook_text": "Vive sin tierra. Sin agua.",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "impossible",
+    "script": "Un árbol lleva 1,000 años creciendo de roca pura, sin suelo, sin río cerca. En el desierto de Bahrein existe un Prosopis cineraria llamado el Árbol de la Vida. Está solo en medio de la nada, a 2 kilómetros del agua subterránea más cercana. Nadie ha explicado de dónde saca el agua para sobrevivir. Sus raíces bajan 50 metros dentro de la piedra. Hoy recibe 50,000 visitantes al año — y sigue solo, sin explicación. ¿Tú le creerías a alguien que dijera que lo trasplantaron y sobrevivió igual?",
+    "word_count": 86,
+    "search_summary": "El Árbol de la Vida en Bahrein, un Prosopis cineraria de 1,000 años, crece en desierto sólido sin fuente de agua conocida.",
+    "comment_question": "¿Crees que hay agua oculta ahí abajo o es algo más extraño? 🌳",
+    "source_note": "Gobierno de Bahrein, Patrimonio Nacional, 2010",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "maravillas naturales",
+      "árbol de la vida bahrein",
+      "datos curiosos naturaleza",
+      "datos en 30 segundos",
+      "árboles milenarios",
+      "desierto de bahrein",
+      "hechos increíbles",
+      "misterios de la naturaleza",
+      "maravillas naturales del mundo",
+      "datos curiosos sobre la naturaleza"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#maravillasnaturales",
+      "#arboldelavida"
+    ],
+    "video_queries": [
+      "lone tree desert landscape",
+      "ancient tree rocky ground",
+      "vast empty desert aerial",
+      "tree roots cracking rock",
+      "tourists visiting remote desert",
+      "underground water dry land"
+    ],
+    "has_loop": false,
+    "topic": "natural wonders",
+    "structure": "historical-story",
+    "niche_styled": false,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "¿El volcán que se hundió bajo el mar... y sigue activo? 😱",
+    "title_opener": "question",
+    "title_intensity": "extreme",
+    "hook_text": "Nadie sabe por qué sigue vivo",
+    "hook_template": "authority-cant-explain",
+    "emotional_tone": "creepy",
+    "script": "Lleva décadas activo bajo el océano Pacífico — y nadie puede explicar por qué no para. El volcán Kama'ehuakanaloa, antes llamado Lō'ihi, erupciona a 975 metros bajo el agua frente a Hawái. En 1996 colapsó su cima entera en horas, formando un cráter de 1 kilómetro. Lo más raro: los sismos que lo rodean no siguen ningún patrón conocido. Los vulcanólogos llevan 30 años midiendo y modelando — y el sistema subterráneo que lo alimenta sigue sin mapa. ¿Tú qué explicación le darías — porque la ciencia todavía no tiene una? Y así es como.",
+    "word_count": 88,
+    "search_summary": "El volcán submarino Kama'ehuakanaloa frente a Hawái colapsó su cima en 1996 y sigue activo sin patrón sísmico conocido.",
+    "comment_question": "¿Qué crees que está pasando bajo Kama'ehuakanaloa que la ciencia no puede explicar? 🌋",
+    "source_note": "USGS Hawaiian Volcano Observatory, informes 1996–2023",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "volcán submarino",
+      "Kama'ehuakanaloa",
+      "Loihi Hawái",
+      "volcán activo misterio",
+      "erupción submarina",
+      "datos curiosos volcanes",
+      "terremotos inexplicables",
+      "vulcanología misterio",
+      "curiosidades científicas",
+      "volcán submarino en erupción"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#volcanes",
+      "#misterionatural",
+      "#hawai"
+    ],
+    "video_queries": [
+      "underwater volcano eruption pacific",
+      "ocean floor lava flow",
+      "volcano crater collapse aerial",
+      "seismograph earthquake monitoring",
+      "scientist studying volcano instruments"
+    ],
+    "has_loop": true,
+    "topic": "volcanoes and earthquakes",
+    "structure": "unsolved-mystery",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
   }
 ]
