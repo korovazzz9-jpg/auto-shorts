@@ -2140,5 +2140,24 @@
     "caption_color": "white",
     "structure": "historical-story",
     "pair_role": "a"
+  },
+  {
+    "video_id": "Da5kjh0NQRY",
+    "published_at": "2026-08-10T16:20:14.220699+00:00",
+    "title": "Nobody Expected Aztec Judges to Fear Their Own Verdict 😱",
+    "topic": "ancient civilizations",
+    "hook_template": "sounds-fake",
+    "title_opener": "nobody-expected",
+    "emotional_tone": "impossible",
+    "title_variant": "seo",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 33.1,
+    "voice": "en-US-EricNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": null
   }
 ]
