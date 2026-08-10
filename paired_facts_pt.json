@@ -88,5 +88,15 @@
     "part_b_video_id": null,
     "status": "awaiting_b",
     "created_at": 1785972598.0264122
+  },
+  {
+    "id": "WXM0-AqaDo8-1786404538",
+    "topic": "evolution",
+    "part_a_video_id": "WXM0-AqaDo8",
+    "part_a_title": "O peixe que cresceu pulmão — antes de sair da água 🤯",
+    "claim": "O peixe-pulmão africano tem o maior genoma de todos os vertebrados.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1786404538.0176075
   }
 ]
