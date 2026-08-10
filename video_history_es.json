@@ -2057,5 +2057,24 @@
     "caption_color": "white",
     "structure": "unsolved-mystery",
     "pair_role": "a"
+  },
+  {
+    "video_id": "8hIeevI4Nm8",
+    "published_at": "2026-08-10T03:24:27.049875+00:00",
+    "title": "El océano respira y mueve oxígeno hacia arriba ahora mismo 😱",
+    "topic": "the ocean",
+    "hook_template": "you-experience",
+    "title_opener": "the-x",
+    "emotional_tone": "awe",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 36.0,
+    "voice": "es-US-AlonsoNeural",
+    "caption_color": "white",
+    "structure": "happening-now",
+    "pair_role": null
   }
 ]
