@@ -2157,5 +2157,24 @@
     "caption_color": "white",
     "structure": "happening-now",
     "pair_role": null
+  },
+  {
+    "video_id": "aCsJFrXAm3I",
+    "published_at": "2026-08-10T13:25:23.217579+00:00",
+    "title": "¿Una ola de 524 metros golpeó tierra en 1958? 😱",
+    "topic": "extreme weather",
+    "hook_template": "sounds-fake",
+    "title_opener": "question",
+    "emotional_tone": "fear",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": true,
+    "topical": null,
+    "length_seconds": 39.0,
+    "voice": "es-MX-JorgeNeural",
+    "caption_color": "white",
+    "structure": null,
+    "pair_role": null
   }
 ]
