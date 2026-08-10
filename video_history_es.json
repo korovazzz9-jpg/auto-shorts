@@ -2176,5 +2176,24 @@
     "caption_color": "white",
     "structure": null,
     "pair_role": null
+  },
+  {
+    "video_id": "9PWPd4Q4HzA",
+    "published_at": "2026-08-10T20:23:44.386968+00:00",
+    "title": "¿Los romanos construyeron cloacas que aún funcionan hoy? 😱",
+    "topic": "ancient civilizations",
+    "hook_template": "you-experience",
+    "title_opener": "question",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 30.2,
+    "voice": "es-CO-GonzaloNeural",
+    "caption_color": "white",
+    "structure": "happening-now",
+    "pair_role": null
   }
 ]
