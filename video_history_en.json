@@ -2043,5 +2043,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "XX3IVUH7PWA",
+    "published_at": "2026-08-10T00:13:24.553033+00:00",
+    "title": "The 1925 Tri-State Tornado That Outran Every Warning 😱",
+    "topic": "extreme weather",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "fear",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 31.4,
+    "voice": "en-AU-WilliamNeural",
+    "caption_color": "white",
+    "structure": "historical-story",
+    "pair_role": "a"
   }
 ]
