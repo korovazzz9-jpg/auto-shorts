@@ -1226,7 +1226,10 @@
     "voice": "pt-BR-ThalitaMultilingualNeural",
     "caption_color": "white",
     "structure": "myth-debunk",
-    "pair_role": null
+    "pair_role": null,
+    "views": 15,
+    "retention_pct": 48.25,
+    "subs_gained": 0
   },
   {
     "video_id": "JYgP3iMwgUo",
@@ -1245,7 +1248,10 @@
     "voice": "pt-BR-ThalitaMultilingualNeural",
     "caption_color": "white",
     "structure": "myth-debunk",
-    "pair_role": null
+    "pair_role": null,
+    "views": 265,
+    "retention_pct": 61.73,
+    "subs_gained": 0
   },
   {
     "video_id": "Jz64yL7lM-A",
@@ -1264,7 +1270,10 @@
     "voice": "pt-BR-ThalitaMultilingualNeural",
     "caption_color": "white",
     "structure": "historical-story",
-    "pair_role": null
+    "pair_role": null,
+    "views": 245,
+    "retention_pct": 83.93,
+    "subs_gained": 0
   },
   {
     "video_id": "bQa-nTf29PM",
@@ -1283,7 +1292,10 @@
     "voice": "pt-BR-ThalitaMultilingualNeural",
     "caption_color": "white",
     "structure": "unsolved-mystery",
-    "pair_role": null
+    "pair_role": null,
+    "views": 691,
+    "retention_pct": 103.52,
+    "subs_gained": 0
   },
   {
     "video_id": "5nj_RXf05tU",
@@ -1302,7 +1314,10 @@
     "voice": "pt-BR-AntonioNeural",
     "caption_color": "white",
     "structure": "unsolved-mystery",
-    "pair_role": null
+    "pair_role": null,
+    "views": 717,
+    "retention_pct": 83.22,
+    "subs_gained": 1
   },
   {
     "video_id": "1EAzVW_Ho7w",
@@ -1321,7 +1336,10 @@
     "voice": "pt-BR-AntonioNeural",
     "caption_color": "white",
     "structure": "historical-story",
-    "pair_role": null
+    "pair_role": null,
+    "views": 1092,
+    "retention_pct": 58.87,
+    "subs_gained": 2
   },
   {
     "video_id": "VhZFPcauWsk",
@@ -1340,7 +1358,10 @@
     "voice": "pt-BR-AntonioNeural",
     "caption_color": "white",
     "structure": "historical-story",
-    "pair_role": null
+    "pair_role": null,
+    "views": 272,
+    "retention_pct": 56.26,
+    "subs_gained": 1
   },
   {
     "video_id": "-BXvVcrM2i0",
@@ -1359,7 +1380,10 @@
     "voice": "pt-BR-AntonioNeural",
     "caption_color": "white",
     "structure": "historical-story",
-    "pair_role": null
+    "pair_role": null,
+    "views": 642,
+    "retention_pct": 68.61,
+    "subs_gained": 3
   },
   {
     "video_id": "4aB52sxUb9k",
@@ -1378,7 +1402,10 @@
     "voice": "pt-BR-AntonioNeural",
     "caption_color": "white",
     "structure": "myth-debunk",
-    "pair_role": null
+    "pair_role": null,
+    "views": 163,
+    "retention_pct": 48.29,
+    "subs_gained": 0
   },
   {
     "video_id": "kAwBEqXP8Xw",
@@ -1397,7 +1424,10 @@
     "voice": "pt-BR-ThalitaMultilingualNeural",
     "caption_color": "white",
     "structure": "unsolved-mystery",
-    "pair_role": null
+    "pair_role": null,
+    "views": 175,
+    "retention_pct": 57.3,
+    "subs_gained": 1
   },
   {
     "video_id": "AurefJweDZo",
@@ -1416,7 +1446,10 @@
     "voice": "pt-BR-ThalitaMultilingualNeural",
     "caption_color": "white",
     "structure": "historical-story",
-    "pair_role": null
+    "pair_role": null,
+    "views": 410,
+    "retention_pct": 61.970000000000006,
+    "subs_gained": 0
   },
   {
     "video_id": "b4fQ7AgSB18",
@@ -1435,7 +1468,10 @@
     "voice": "pt-BR-ThalitaMultilingualNeural",
     "caption_color": "white",
     "structure": "happening-now",
-    "pair_role": "a"
+    "pair_role": "a",
+    "views": 344,
+    "retention_pct": 154.95,
+    "subs_gained": 0
   },
   {
     "video_id": "vkdgRszAcpo",
@@ -1454,7 +1490,10 @@
     "voice": "pt-BR-ThalitaMultilingualNeural",
     "caption_color": "white",
     "structure": "myth-debunk",
-    "pair_role": null
+    "pair_role": null,
+    "views": 225,
+    "retention_pct": 353.37,
+    "subs_gained": 0
   },
   {
     "video_id": "zSnFOEqWINw",
@@ -1473,7 +1512,10 @@
     "voice": "pt-BR-AntonioNeural",
     "caption_color": "white",
     "structure": "happening-now",
-    "pair_role": null
+    "pair_role": null,
+    "views": 127,
+    "retention_pct": 35.62,
+    "subs_gained": 0
   },
   {
     "video_id": "MjesNGZptAw",
@@ -1492,7 +1534,10 @@
     "voice": "pt-BR-ThalitaMultilingualNeural",
     "caption_color": "white",
     "structure": "historical-story",
-    "pair_role": null
+    "pair_role": null,
+    "views": 372,
+    "retention_pct": 53.290000000000006,
+    "subs_gained": 0
   },
   {
     "video_id": "cYFGE0OQ-40",
@@ -1511,7 +1556,10 @@
     "voice": "pt-BR-AntonioNeural",
     "caption_color": "white",
     "structure": "myth-debunk",
-    "pair_role": null
+    "pair_role": null,
+    "views": 870,
+    "retention_pct": 80.22,
+    "subs_gained": 3
   },
   {
     "video_id": "UiY6mYm1tDg",
@@ -1530,7 +1578,10 @@
     "voice": "pt-BR-AntonioNeural",
     "caption_color": "white",
     "structure": "myth-debunk",
-    "pair_role": null
+    "pair_role": null,
+    "views": 80,
+    "retention_pct": 42.73,
+    "subs_gained": 0
   },
   {
     "video_id": "Cc8PkFNvFfk",
@@ -1549,7 +1600,10 @@
     "voice": "pt-BR-AntonioNeural",
     "caption_color": "white",
     "structure": "historical-story",
-    "pair_role": null
+    "pair_role": null,
+    "views": 760,
+    "retention_pct": 44.29,
+    "subs_gained": 0
   },
   {
     "video_id": "tzUhJHj1rpo",
@@ -1568,7 +1622,10 @@
     "voice": "pt-BR-AntonioNeural",
     "caption_color": "white",
     "structure": "historical-story",
-    "pair_role": null
+    "pair_role": null,
+    "views": 85,
+    "retention_pct": 26.11,
+    "subs_gained": 0
   },
   {
     "video_id": "vuYBetpDci4",
@@ -1587,7 +1644,10 @@
     "voice": "pt-BR-ThalitaMultilingualNeural",
     "caption_color": "white",
     "structure": "historical-story",
-    "pair_role": "a"
+    "pair_role": "a",
+    "views": 180,
+    "retention_pct": 45.4,
+    "subs_gained": 0
   },
   {
     "video_id": "VQe8KPB3chU",
@@ -1606,7 +1666,10 @@
     "voice": "pt-BR-ThalitaMultilingualNeural",
     "caption_color": "white",
     "structure": "happening-now",
-    "pair_role": null
+    "pair_role": null,
+    "views": 982,
+    "retention_pct": 51.7,
+    "subs_gained": 3
   },
   {
     "video_id": "wZCzl5MfR-0",
@@ -1625,7 +1688,10 @@
     "voice": "pt-BR-AntonioNeural",
     "caption_color": "white",
     "structure": "myth-debunk",
-    "pair_role": null
+    "pair_role": null,
+    "views": 854,
+    "retention_pct": 168.01,
+    "subs_gained": 0
   },
   {
     "video_id": "XF79LZu2itA",
@@ -1644,7 +1710,10 @@
     "voice": "pt-BR-AntonioNeural",
     "caption_color": "white",
     "structure": "myth-debunk",
-    "pair_role": null
+    "pair_role": null,
+    "views": 910,
+    "retention_pct": 85.54,
+    "subs_gained": 5
   },
   {
     "video_id": "kTmqHYE_Wiw",
@@ -1663,7 +1732,10 @@
     "voice": "pt-BR-AntonioNeural",
     "caption_color": "white",
     "structure": "unsolved-mystery",
-    "pair_role": null
+    "pair_role": null,
+    "views": 232,
+    "retention_pct": 53.900000000000006,
+    "subs_gained": 0
   },
   {
     "video_id": "4JzeHZ6zNps",
@@ -1682,7 +1754,10 @@
     "voice": "pt-BR-ThalitaMultilingualNeural",
     "caption_color": "white",
     "structure": "myth-debunk",
-    "pair_role": null
+    "pair_role": null,
+    "views": 1054,
+    "retention_pct": 45.19,
+    "subs_gained": 2
   },
   {
     "video_id": "TQEv4bEP5QU",
@@ -1701,7 +1776,10 @@
     "voice": "pt-BR-ThalitaMultilingualNeural",
     "caption_color": "white",
     "structure": "myth-debunk",
-    "pair_role": null
+    "pair_role": null,
+    "views": 791,
+    "retention_pct": 64.56,
+    "subs_gained": 1
   },
   {
     "video_id": "X58PDGjCgw8",
@@ -1720,7 +1798,10 @@
     "voice": "pt-BR-ThalitaMultilingualNeural",
     "caption_color": "white",
     "structure": "myth-debunk",
-    "pair_role": null
+    "pair_role": null,
+    "views": 448,
+    "retention_pct": 194.45,
+    "subs_gained": 0
   },
   {
     "video_id": "mpL_kAZaNxs",
