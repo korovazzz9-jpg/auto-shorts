@@ -1,23 +1,25 @@
 {
   "outlier_counts": {
-    "ancient history": 3,
-    "archaeological discoveries": 2,
+    "ancient history": 4,
+    "archaeological discoveries": 3,
     "ancient civilizations": 2,
-    "historical mysteries": 5,
-    "the human body": 3,
-    "the ocean": 3,
+    "historical mysteries": 3,
+    "the human body": 4,
+    "the animal kingdom": 1,
+    "the ocean": 4,
     "evolution": 2,
-    "volcanoes and earthquakes": 2,
-    "space": 1,
-    "future technology": 5
+    "volcanoes and earthquakes": 3,
+    "extreme weather": 1,
+    "future technology": 6
   },
   "outlier_titles": {
     "ancient history": [
       "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos",
       "Tres datos históricos alucinantes #historia #interesante #hechos",
-      "Balduino IV: el hombre más fuerte de Medio Oriente  #BalduinoIV #datoscuriosos  #historiareal"
+      "Hallazgo del siglo 5 a.C en aguas Italianas #historia #datoscuriosos #shorts"
     ],
     "archaeological discoveries": [
+      "Tres datos históricos alucinantes #historia #interesante #hechos",
       "Hallazgo del siglo 5 a.C en aguas Italianas #historia #datoscuriosos #shorts",
       "La Reina Roja de Palenque🏺 #reelsvideo #shorts #fyp #curiosidades #datoscuriosos"
     ],
@@ -26,19 +28,22 @@
       "Tres datos históricos alucinantes #historia #interesante #hechos"
     ],
     "historical mysteries": [
-      "DATO CURIOSO - LA NIÑA PERRO #shorts",
       "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos",
-      "Tres datos históricos alucinantes #historia #interesante #hechos"
+      "Tres datos históricos alucinantes #historia #interesante #hechos",
+      "✅ La verdadera historia de los tres cerditos 🐷💀 #short #shortsviral"
     ],
     "the human body": [
       "DATO CURIOSO - LA NIÑA PERRO #shorts",
-      "😭😭😭 NUNCA ME DI CUENTA DE ESTE DETALLE #disney #peliculas #shorts #curiosidades",
-      "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos"
+      "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos",
+      "¿Qué pasaría si tu cuerpo estuviera hecho de estos elementos? #shorts #curiosidades"
+    ],
+    "the animal kingdom": [
+      "Si ves esto huye 😧"
     ],
     "the ocean": [
       "Si ves esto huye 😧",
-      "Las islas más peligrosas del mundo 🌎🤯 #curiosidades #shorts #estadosunidos",
-      "¿Tienes Talasofobia? 🤯😰 #shorts #talasofobia #fobias #short #mar #oceano"
+      "Las profundidades del Oceano #shorts",
+      "Las islas más peligrosas del mundo 🌎🤯 #curiosidades #shorts #estadosunidos"
     ],
     "evolution": [
       "3 DATOS del CYBERTRUCK 👀 #datoscuriosos",
@@ -46,15 +51,16 @@
     ],
     "volcanoes and earthquakes": [
       "🌍💥 El terremoto más potente #curiosidades #datoscuriosos",
-      "la erupción del volcan vesubio en pompeya"
+      "la erupción del volcan vesubio en pompeya",
+      "¿Cómo se forman los volcanes? #shorts  #curiosidades #datoscuriosos #sabiasque"
     ],
-    "space": [
-      "Algo se Aproxima a a Tierra #Shorts"
+    "extreme weather": [
+      "LAS OLAS MÁS GRANDES DEL MUNDO? 😳 #datoscuriosos #curiosidades #shorts"
     ],
     "future technology": [
       "Científicos EXPERIMENTOS CASEROS! 😱 #shorts",
-      "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos",
-      "El mejor teléfono del mundo😱🌎#datoscuriosos #top5 #shorts"
+      "3 DATOS del CYBERTRUCK 👀 #datoscuriosos",
+      "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos"
     ]
   },
   "top_outliers": [
@@ -62,7 +68,7 @@
       "topic": "future technology",
       "title": "El mejor teléfono del mundo😱🌎#datoscuriosos #top5 #shorts",
       "video_id": "_Wmiv1gALNw",
-      "views": 8615602,
+      "views": 8615711,
       "subs": 13400,
       "ratio": 643.0
     },
@@ -70,47 +76,31 @@
       "topic": "historical mysteries",
       "title": "✅ La verdadera historia de los tres cerditos 🐷💀 #short #shortsviral",
       "video_id": "QQ0sdApwJ0s",
-      "views": 4645878,
-      "subs": 18800,
-      "ratio": 247.1
+      "views": 4692313,
+      "subs": 18900,
+      "ratio": 248.3
     },
     {
-      "topic": "historical mysteries",
-      "title": "DATO CURIOSO - LA NIÑA PERRO #shorts",
-      "video_id": "9e82SusaU8c",
-      "views": 15174055,
-      "subs": 76100,
-      "ratio": 199.4
+      "topic": "extreme weather",
+      "title": "LAS OLAS MÁS GRANDES DEL MUNDO? 😳 #datoscuriosos #curiosidades #shorts",
+      "video_id": "adABcGeYEfU",
+      "views": 1658308,
+      "subs": 6970,
+      "ratio": 237.9
     },
     {
       "topic": "the human body",
       "title": "DATO CURIOSO - LA NIÑA PERRO #shorts",
       "video_id": "9e82SusaU8c",
-      "views": 15174055,
-      "subs": 76100,
-      "ratio": 199.4
-    },
-    {
-      "topic": "the ocean",
-      "title": "¿Tienes Talasofobia? 🤯😰 #shorts #talasofobia #fobias #short #mar #oceano",
-      "video_id": "GRGBrmHsXdg",
-      "views": 9496169,
-      "subs": 51500,
-      "ratio": 184.4
-    },
-    {
-      "topic": "space",
-      "title": "Algo se Aproxima a a Tierra #Shorts",
-      "video_id": "hOq7uz55_eo",
-      "views": 8432019,
-      "subs": 48900,
-      "ratio": 172.4
+      "views": 15210375,
+      "subs": 76200,
+      "ratio": 199.6
     },
     {
       "topic": "the ocean",
       "title": "Las islas más peligrosas del mundo 🌎🤯 #curiosidades #shorts #estadosunidos",
       "video_id": "TZHSvTMFYt8",
-      "views": 10602965,
+      "views": 10605563,
       "subs": 67000,
       "ratio": 158.3
     },
@@ -118,15 +108,23 @@
       "topic": "volcanoes and earthquakes",
       "title": "la erupción del volcan vesubio en pompeya",
       "video_id": "DB7ar9QMUAs",
-      "views": 738156,
-      "subs": 5660,
-      "ratio": 130.4
+      "views": 757198,
+      "subs": 5690,
+      "ratio": 133.1
+    },
+    {
+      "topic": "ancient history",
+      "title": "Hallazgo del siglo 5 a.C en aguas Italianas #historia #datoscuriosos #shorts",
+      "video_id": "XpaYY4Q2zhI",
+      "views": 957105,
+      "subs": 8100,
+      "ratio": 118.2
     },
     {
       "topic": "archaeological discoveries",
       "title": "Hallazgo del siglo 5 a.C en aguas Italianas #historia #datoscuriosos #shorts",
       "video_id": "XpaYY4Q2zhI",
-      "views": 957103,
+      "views": 957105,
       "subs": 8100,
       "ratio": 118.2
     },
@@ -134,26 +132,34 @@
       "topic": "volcanoes and earthquakes",
       "title": "🌍💥 El terremoto más potente #curiosidades #datoscuriosos",
       "video_id": "A_sPeB3Q9Dk",
-      "views": 4167941,
-      "subs": 38700,
-      "ratio": 107.7
+      "views": 4182794,
+      "subs": 38800,
+      "ratio": 107.8
+    },
+    {
+      "topic": "ancient history",
+      "title": "Tres datos históricos alucinantes #historia #interesante #hechos",
+      "video_id": "UIuWxBSEK0Y",
+      "views": 5019804,
+      "subs": 58000,
+      "ratio": 86.5
     }
   ],
   "saturation": {
-    "ancient history": 281922,
-    "archaeological discoveries": 50328,
-    "ancient civilizations": 148816,
+    "ancient history": 256146,
+    "archaeological discoveries": 47697,
+    "ancient civilizations": 149972,
     "shipwrecks and lost treasures": 131,
-    "historical mysteries": 309596,
-    "the human body": 655526,
+    "historical mysteries": 304819,
+    "the human body": 656600,
     "the animal kingdom": 1000000,
-    "the ocean": 472544,
-    "evolution": 648339,
-    "volcanoes and earthquakes": 6063,
-    "extreme weather": 221379,
-    "natural wonders": 232764,
-    "space": 706848,
-    "future technology": 658468
+    "the ocean": 239403,
+    "evolution": 647514,
+    "volcanoes and earthquakes": 5570,
+    "extreme weather": 241974,
+    "natural wonders": 159920,
+    "space": 699114,
+    "future technology": 654304
   },
-  "updated": "2026-08-03"
+  "updated": "2026-08-10"
 }

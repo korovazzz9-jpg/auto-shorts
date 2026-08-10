@@ -1,5 +1,57 @@
 [
   {
+    "title": "¿Una ola de 524 metros golpeó tierra en 1958? 😱",
+    "title_opener": "question",
+    "title_intensity": "extreme",
+    "hook_text": "La ola más alta de la historia",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "fear",
+    "script": "Esto suena falso, pero una ola arrasó árboles a más de 500 metros de altura. No fue un tsunami. En 1958, un sismo de magnitud 7.8 sacudió la Bahía de Lituya, en Alaska. Desprendió 90 millones de toneladas de roca que cayeron directo al agua. El impacto generó una megaola de 524 metros, la más alta jamás registrada. Destruyó bosques enteros en segundos. Pero lo más perturbador: dos botes de pesca estaban adentro de la bahía y sus tripulantes sobrevivieron para contarlo. ¿Tú te hubieras subido a ese bote después? Y por eso.",
+    "word_count": 88,
+    "search_summary": "La megaola de la Bahía de Lituya en 1958 alcanzó 524 metros de altura tras un sismo de magnitud 7.8 en Alaska.",
+    "comment_question": "¿Los sobrevivientes de Lituya merecen un monumento o nadie los recuerda? 🌊",
+    "source_note": "USGS registro geológico de Lituya Bay, 1958",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "datos curiosos",
+      "clima extremo",
+      "olas gigantes",
+      "megaola Lituya 1958",
+      "fenómenos naturales",
+      "terremotos y tsunamis",
+      "Alaska desastres naturales",
+      "hechos increíbles",
+      "datos curiosos de animales",
+      "clima extremo documental",
+      "olas gigantes barcos"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#fenomenosnaturales",
+      "#climaextremo",
+      "#alaska"
+    ],
+    "video_queries": [
+      "giant ocean waves crashing",
+      "earthquake landslide mountain",
+      "massive wave hitting forest",
+      "Alaska fjord aerial view",
+      "small fishing boat rough sea",
+      "tsunami wave destruction coast"
+    ],
+    "has_loop": true,
+    "topic": "extreme weather",
+    "title_variant": "narrative",
+    "hashtag_position": "end",
+    "niche_styled": true,
+    "niche_recreated": true,
+    "recreated_from_niche": "adABcGeYEfU"
+  },
+  {
     "title": "¿Los romanos construyeron cloacas que aún funcionan hoy? 😱",
     "title_opener": "question",
     "title_intensity": "extreme",
