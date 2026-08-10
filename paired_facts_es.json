@@ -68,5 +68,15 @@
     "part_b_video_id": null,
     "status": "awaiting_b",
     "created_at": 1785889447.6329541
+  },
+  {
+    "id": "7jromFTQUdM-1786321421",
+    "topic": "the human body",
+    "part_a_video_id": "7jromFTQUdM",
+    "part_a_title": "Tu hígado se regenera completo en 90 días 😱",
+    "claim": "El hígado es el único órgano interno humano que se regenera.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1786321421.3348148
   }
 ]

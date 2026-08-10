@@ -2038,5 +2038,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "7jromFTQUdM",
+    "published_at": "2026-08-10T00:23:41.001154+00:00",
+    "title": "Tu hígado se regenera completo en 90 días 😱",
+    "topic": "the human body",
+    "hook_template": "vague-ability",
+    "title_opener": "your-x",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 27.7,
+    "voice": "es-CO-GonzaloNeural",
+    "caption_color": "white",
+    "structure": "unsolved-mystery",
+    "pair_role": "a"
   }
 ]
