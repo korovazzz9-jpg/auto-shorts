@@ -2216,5 +2216,24 @@
     "caption_color": "white",
     "structure": "happening-now",
     "pair_role": null
+  },
+  {
+    "video_id": "gI1F5gszZic",
+    "published_at": "2026-08-11T16:22:14.384957+00:00",
+    "title": "Nobody Expected the Ocean to Produce Half Our Oxygen 😱",
+    "topic": "the ocean",
+    "hook_template": "sounds-fake",
+    "title_opener": "nobody-expected",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 36.5,
+    "voice": "en-US-EricNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": null
   }
 ]
