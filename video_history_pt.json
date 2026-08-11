@@ -2068,5 +2068,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "j016aYN6cBU",
+    "published_at": "2026-08-11T23:28:59.894557+00:00",
+    "title": "O naufrágio de 1857 que o banco afundou junto 😱",
+    "topic": "shipwrecks and lost treasures",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "awe",
+    "title_variant": "seo",
+    "has_loop": false,
+    "niche_styled": false,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 34.4,
+    "voice": "pt-BR-ThalitaMultilingualNeural",
+    "caption_color": "white",
+    "structure": "historical-story",
+    "pair_role": null
   }
 ]
