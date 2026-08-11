@@ -48,5 +48,109 @@
     "niche_styled": false,
     "title_variant": "narrative",
     "hashtag_position": "end"
+  },
+  {
+    "title": "A biblioteca de 1.800 anos achada com livros ainda intactos 😱",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "Isso não deveria existir",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "impossible",
+    "script": "Livros de 1.800 anos não sobrevivem. Papel apodrece, tinta some — mas numa ruína romana em Colônia, na Alemanha, arqueólogos encontraram uma biblioteca inteira de pé. Era 2017. As paredes ainda guardavam as marcas das prateleiras onde os rolos ficavam. Mas a parte impossível: o piso tinha um sistema de aquecimento embutido — exatamente para proteger os livros da umidade. Roma aquecia bibliotecas como a gente aquece data centers. Manda isso pra quem acha que tecnologia de preservação é coisa moderna. E é exatamente assim.",
+    "word_count": 83,
+    "search_summary": "Biblioteca romana de 1.800 anos foi encontrada intacta em Colônia, Alemanha, em 2017, com sistema de aquecimento para preservar os livros.",
+    "comment_question": "Roma aquecia biblioteca pra proteger livro — e a gente ainda perde HD com filme? 😳",
+    "source_note": "Archaeological excavation, Cologne city authorities, 2017",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "arqueologia",
+      "descobertas arqueológicas",
+      "roma antiga",
+      "biblioteca romana",
+      "fatos históricos",
+      "descoberta histórica Colônia",
+      "curiosidades históricas",
+      "império romano",
+      "descobertas arqueológicas bíblicas",
+      "roma antiga imagens",
+      "biblioteca romana minecraft"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#arqueologia",
+      "#romaantiga",
+      "#curiosidades",
+      "#historiareal"
+    ],
+    "video_queries": [
+      "ancient roman ruins excavation",
+      "archaeologists digging stone ruins",
+      "roman ancient city ruins wide",
+      "old library stone walls interior",
+      "underground roman floor heating ruins",
+      "archaeology discovery Germany ruins"
+    ],
+    "has_loop": true,
+    "topic": "archaeological discoveries",
+    "structure": "myth-debunk",
+    "niche_styled": false,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "Seu estômago se digere — e sobrevive todo dia 🤯",
+    "title_opener": "your-x",
+    "title_intensity": "extreme",
+    "hook_text": "Você tá sendo digerido agora",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "impossible",
+    "script": "Seu estômago produz ácido forte o suficiente pra dissolver metal — e ele está dentro de você agora. O ácido clorídrico gástrico atinge pH 1,5, capaz de corroer aço inoxidável. A parede do estômago deveria derreter em minutos. Mas aqui vem o absurdo: ele se reconstrói completamente a cada 3 dias. Uma camada nova de muco sela tudo antes do ácido chegar ao tecido vivo. Você digere a si mesmo — e sobrevive porque se reconstrói mais rápido do que se destrói. Manda isso pra alguém que acha que o corpo humano é simples.",
+    "word_count": 88,
+    "search_summary": "O estômago humano produz ácido clorídrico com pH 1,5 e reconstrói sua parede protetora a cada 3 dias.",
+    "comment_question": "Você sabia que tá sendo parcialmente digerido enquanto lê isso? 😳",
+    "source_note": "Journal of Physiology, revisões sobre mucosa gástrica, 2010",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "corpo humano",
+      "fatos incríveis",
+      "estômago",
+      "ácido gástrico",
+      "biologia humana",
+      "fatos curiosos",
+      "ciência do corpo",
+      "você sabia",
+      "fisiologia humana",
+      "corpo humano em inglês",
+      "fatos incríveis do mundo",
+      "ácido gástrico estomacal"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#fatoscuriosos",
+      "#corpоhumano",
+      "#biologia",
+      "#ciência"
+    ],
+    "video_queries": [
+      "stomach acid digestion animation",
+      "human body internal organs",
+      "liquid acid dissolving metal",
+      "human stomach lining microscopic",
+      "cell regeneration body tissue",
+      "person holding stomach pain",
+      "human body science visualization"
+    ],
+    "has_loop": false,
+    "topic": "the human body",
+    "structure": "myth-debunk",
+    "niche_styled": false,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
   }
 ]

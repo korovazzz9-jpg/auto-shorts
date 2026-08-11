@@ -299,5 +299,153 @@
     "niche_styled": true,
     "title_variant": "narrative",
     "hashtag_position": "end"
+  },
+  {
+    "title": "¿El volcán que enterró una ciudad... bajo el lago? 😱",
+    "title_opener": "question",
+    "title_intensity": "extreme",
+    "hook_text": "Una ciudad entera desapareció bajo el agua",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "awe",
+    "script": "Una erupción no destruyó la ciudad — la hundió bajo un lago. En 1883, el volcán Krakatoa colapso tan violentamente que su caldera entera se tragó el mar, generando un tsunami de 30 metros. Pero en Campi Flegrei, Italia, el suelo lleva décadas hundiéndose y alzándose en silencio: en los años 80 evacuaron 40,000 personas porque el terreno subió 1.8 metros en tres años. Hoy sigue moviéndose bajo Nápoles, con 3 millones de personas encima. ¿Tú te quedarías viviendo ahí? Y de esta forma.",
+    "word_count": 86,
+    "search_summary": "Campi Flegrei volcán Italia evacúa miles de personas mientras el suelo bajo Nápoles sube y baja activamente.",
+    "comment_question": "¿Vivirías sobre un volcán activo si llevas toda la vida ahí? 🌋",
+    "source_note": "Instituto Nazionale di Geofisica e Vulcanologia, 2023",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "volcán activo",
+      "Campi Flegrei",
+      "Nápoles volcán",
+      "supervolcán Italia",
+      "curiosidades geología",
+      "datos curiosos",
+      "terremotos y volcanes",
+      "catástrofes naturales",
+      "volcán activo en guatemala",
+      "campi flegrei volcano update"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#volcanes",
+      "#campiflegreinapoles",
+      "#geologiacuriosa"
+    ],
+    "video_queries": [
+      "volcano eruption ocean collapse",
+      "massive tsunami wave coastal destruction",
+      "Naples Italy city aerial view",
+      "ground cracking earthquake urban street",
+      "crowd people evacuating emergency",
+      "volcano smoke rising landscape"
+    ],
+    "has_loop": true,
+    "topic": "volcanoes and earthquakes",
+    "structure": "historical-story",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "¿Este pez evolucionó el mismo ojo 7 veces solo? 🤯",
+    "title_opener": "question",
+    "title_intensity": "extreme",
+    "hook_text": "Nadie puede explicarlo",
+    "hook_template": "authority-cant-explain",
+    "emotional_tone": "impossible",
+    "script": "Expertos llevan décadas intentando explicarlo — y siguen fallando. El pez cíclido africano desarrolló visión de color compleja al menos 7 veces por separado, en distintos lagos del continente, sin conexión entre sí. La explicación obvia: herencia común. Pero análisis genéticos de 2010 confirmaron que cada linaje lo hizo de cero, con genes distintos. La misma solución perfecta, reinventada 7 veces. La evolución no debería funcionar así — ¿o hay algo que todavía no entendemos sobre cómo funciona? Y por eso.",
+    "word_count": 84,
+    "search_summary": "El pez cíclido africano desarrolló visión de color compleja al menos 7 veces de forma independiente en distintos lagos.",
+    "comment_question": "Si la evolución es aleatoria, ¿cómo llega 7 veces a la misma respuesta exacta? 🤯",
+    "source_note": "Revista Science, estudio genético cíclidos, 2010",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "datos curiosos",
+      "evolución",
+      "pez cíclido",
+      "evolución convergente",
+      "biología curiosa",
+      "misterios de la ciencia",
+      "hechos increíbles",
+      "datos en 30 segundos",
+      "datos curiosos que no sabías",
+      "evolución convergente y divergente"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#evolución",
+      "#ciencia",
+      "#misterio"
+    ],
+    "video_queries": [
+      "scientist studying fish underwater",
+      "african lake aerial view",
+      "colorful tropical fish swimming",
+      "genetics laboratory researcher",
+      "deep lake water surface"
+    ],
+    "has_loop": true,
+    "topic": "evolution",
+    "structure": "unsolved-mystery",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "¿Encontraron un ejército romano sellado bajo tierra en Escocia? 😱",
+    "title_opener": "question",
+    "title_intensity": "extreme",
+    "hook_text": "Sellados vivos bajo tierra",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "awe",
+    "script": "Alguien enterró miles de objetos romanos con tanta precisión que parecía una trampa. En 1960, arqueólogos excavaron Newstead, Escocia — un fuerte romano llamado Trimontium. Dentro de pozos sellados encontraron armaduras completas, cadenas, herramientas y hasta un esqueleto humano, todo depositado intencionalmente alrededor del año 100 d.C. No fue un ataque ni un derrumbe: los romanos lo enterraron ellos mismos antes de abandonar el fuerte, como si ocultaran evidencia. Nadie sabe exactamente por qué. ¿Tú qué esconderías antes de abandonar un lugar para siempre? Y por eso exactamente.",
+    "word_count": 87,
+    "search_summary": "En el fuerte romano Trimontium en Newstead, Escocia, arqueólogos hallaron pozos sellados con armaduras y esqueletos enterrados intencionalmente alrededor del año 100 d.C.",
+    "comment_question": "¿Por qué los romanos sellarían su propio equipo antes de huir? 🤔",
+    "source_note": "National Museum of Scotland, excavaciones Trimontium 1905",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "arqueología romana",
+      "Trimontium Escocia",
+      "descubrimientos arqueológicos",
+      "romanos en Escocia",
+      "datos históricos",
+      "hallazgos arqueológicos",
+      "historia antigua",
+      "misterios romanos",
+      "datos curiosos historia",
+      "descubrimientos arqueológicos en méxico"
+    ],
+    "hashtags": [
+      "#arqueología",
+      "#historia",
+      "#romanos",
+      "#datoscuriosos",
+      "#shorts"
+    ],
+    "video_queries": [
+      "archaeologist digging underground ruins",
+      "ancient roman ruins scotland landscape",
+      "excavation pit archaeological site",
+      "roman armor artifacts museum",
+      "abandoned ancient fortress wide shot"
+    ],
+    "has_loop": true,
+    "topic": "archaeological discoveries",
+    "structure": "historical-story",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
   }
 ]
