@@ -2330,5 +2330,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "Yl1OgHdEYFo",
+    "published_at": "2026-08-12T23:15:04.552180+00:00",
+    "title": "The 3,700-Year-Old Bakery Found Still Sealed Shut 😱",
+    "topic": "archaeological discoveries",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 39.1,
+    "voice": "en-US-ChristopherNeural",
+    "caption_color": "white",
+    "structure": "happening-now",
+    "pair_role": null
   }
 ]
