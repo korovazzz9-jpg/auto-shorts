@@ -98,5 +98,15 @@
     "part_b_video_id": null,
     "status": "awaiting_b",
     "created_at": 1786404538.0176075
+  },
+  {
+    "id": "UdI6yJax-cU-1786577366",
+    "topic": "the human body",
+    "part_a_video_id": "UdI6yJax-cU",
+    "part_a_title": "Sua pele se renova completamente a cada 27 dias 🤯",
+    "claim": "A poeira doméstica é composta majoritariamente de células humanas.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1786577366.6921196
   }
 ]
