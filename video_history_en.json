@@ -2292,5 +2292,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": "a"
+  },
+  {
+    "video_id": "3NoVyKc4diw",
+    "published_at": "2026-08-12T16:21:05.121689+00:00",
+    "title": "The Minoan Palace That Drained Itself With Running Water 😱",
+    "topic": "ancient civilizations",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 32.6,
+    "voice": "en-US-EricNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": null
   }
 ]
