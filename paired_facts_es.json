@@ -78,5 +78,15 @@
     "part_b_video_id": null,
     "status": "awaiting_b",
     "created_at": 1786321421.3348148
+  },
+  {
+    "id": "84nZAcc0A3U-1786494235",
+    "topic": "ancient civilizations",
+    "part_a_video_id": "84nZAcc0A3U",
+    "part_a_title": "El imperio que enterró a sus reyes con sus sirvientes vivos 💀",
+    "claim": "Las Tumbas Reales de Ur contienen los instrumentos musicales más antiguos del mundo.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1786494235.3416164
   }
 ]
