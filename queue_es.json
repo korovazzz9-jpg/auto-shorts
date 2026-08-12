@@ -298,5 +298,106 @@
     "niche_styled": true,
     "title_variant": "narrative",
     "hashtag_position": "end"
+  },
+  {
+    "title": "El pez arquero escupe y mata con cálculo exacto 🎯",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "Dispara mejor que tú",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "impossible",
+    "script": "Un animal sin manos apunta, calcula y derriba su presa desde abajo del agua. El pez arquero, en los manglares del sudeste asiático, dispara chorros de agua con precisión de hasta 3 metros. Pero corrige el ángulo de refracción del agua en tiempo real — sin cerebro grande, sin entrenamiento. Acierta el 90% de sus disparos desde el primer intento. Ningún otro animal caza así. ¿Qué animal te parece más imposible que exista? Y así es como.",
+    "word_count": 79,
+    "search_summary": "El pez arquero dispara chorros de agua con 90% de precisión para cazar insectos desde abajo del agua.",
+    "comment_question": "¿Qué animal te parece más imposible que exista en la naturaleza? 🤯",
+    "source_note": "Journal of Experimental Biology, 2012",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "pez arquero",
+      "animales increíbles",
+      "datos curiosos animales",
+      "animales imposibles",
+      "pez dispara agua",
+      "datos en 30 segundos",
+      "curiosidades naturaleza",
+      "animales raros",
+      "pez arquero cazando",
+      "animales increíbles del mundo",
+      "datos curiosos animales para niños"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#animales",
+      "#pezarquero",
+      "#naturaleza"
+    ],
+    "video_queries": [
+      "archerfish spitting water slow motion",
+      "mangrove forest water surface",
+      "insect falling into water",
+      "underwater fish hunting",
+      "tropical river wildlife"
+    ],
+    "has_loop": true,
+    "topic": "the animal kingdom",
+    "structure": "historical-story",
+    "niche_styled": true,
+    "title_variant": "seo",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "¿Los minoicos escribieron un idioma que nadie puede leer? 🤯",
+    "title_opener": "question",
+    "title_intensity": "extreme",
+    "hook_text": "Nadie lo ha descifrado",
+    "hook_template": "authority-cant-explain",
+    "emotional_tone": "creepy",
+    "script": "Expertos llevan 120 años intentando leerlo — y siguen fallando. En 1900, Arthur Evans desenterró miles de tablillas en Creta con un sistema de escritura llamado Lineal A. Los minoicos usaron este idioma para gobernar un imperio comercial en el Mediterráneo. Pero nadie sabe qué dice. No es falta de tablillas — hay más de 1,500. El problema: el idioma detrás de los símbolos es completamente desconocido. ¿Qué ocultaban los minoicos que ni mil años después logramos entender?",
+    "word_count": 83,
+    "search_summary": "La escritura minoica Lineal A hallada en Creta en 1900 sigue sin descifrar después de 120 años de intentos.",
+    "comment_question": "¿Crees que el Lineal A se descifra algún día, o se perdió para siempre? 🤯",
+    "source_note": "Arthur Evans, excavaciones Knossos, Creta, 1900",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "civilización minoica",
+      "escritura Lineal A",
+      "misterios de la historia",
+      "idiomas perdidos",
+      "Creta antigua",
+      "civilizaciones antiguas",
+      "datos curiosos historia",
+      "misterios sin resolver",
+      "civilización minoica y micenica",
+      "escritura lineal a y b",
+      "misterios de la historia mdh"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#misterioshistóricos",
+      "#civilizacionesantiguas",
+      "#linealA"
+    ],
+    "video_queries": [
+      "ancient ruins excavation aerial",
+      "archaeologist digging ancient site",
+      "ancient clay tablets writing",
+      "mediterranean sea ancient landscape",
+      "old stone ruins Greece",
+      "researcher studying ancient documents"
+    ],
+    "has_loop": false,
+    "topic": "ancient civilizations",
+    "structure": "unsolved-mystery",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
   }
 ]
