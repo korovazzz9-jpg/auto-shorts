@@ -2311,5 +2311,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "b7SSmHmPdlE",
+    "published_at": "2026-08-12T20:14:34.885670+00:00",
+    "title": "The Merchant Ship Sunk Twice by the Same War 😱",
+    "topic": "shipwrecks and lost treasures",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "impossible",
+    "title_variant": "seo",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 34.9,
+    "voice": "en-US-ChristopherNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": null
   }
 ]
