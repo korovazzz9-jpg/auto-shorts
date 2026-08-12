@@ -2309,5 +2309,24 @@
     "caption_color": "white",
     "structure": "unsolved-mystery",
     "pair_role": null
+  },
+  {
+    "video_id": "mw2kI1L87NU",
+    "published_at": "2026-08-12T13:23:04.045332+00:00",
+    "title": "El cuervo que recuerda tu cara y te cobra venganza 😱",
+    "topic": "the animal kingdom",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "creepy",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": false,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 28.6,
+    "voice": "es-CO-GonzaloNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": null
   }
 ]
