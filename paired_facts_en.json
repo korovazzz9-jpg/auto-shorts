@@ -88,5 +88,15 @@
     "part_b_video_id": null,
     "status": "awaiting_b",
     "created_at": 1786320805.0356793
+  },
+  {
+    "id": "zrTVBYdzvMs-1786493667",
+    "topic": "the human body",
+    "part_a_video_id": "zrTVBYdzvMs",
+    "part_a_title": "Your Cornea Gets Zero Blood — And Steals Oxygen From Air 🤯",
+    "claim": "Contact lenses reduce corneal oxygen supply by up to 95%.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1786493667.5395646
   }
 ]
