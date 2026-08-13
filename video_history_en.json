@@ -2368,5 +2368,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "nhiPvqmNzxk",
+    "published_at": "2026-08-13T16:20:15.916174+00:00",
+    "title": "The Chip Growing Inside Living Tissue Right Now 🤯",
+    "topic": "future technology",
+    "hook_template": "you-experience",
+    "title_opener": "the-x",
+    "emotional_tone": "creepy",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": true,
+    "length_seconds": 31.3,
+    "voice": "en-US-GuyNeural",
+    "caption_color": "white",
+    "structure": "happening-now",
+    "pair_role": null
   }
 ]
