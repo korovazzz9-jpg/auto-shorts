@@ -2385,5 +2385,24 @@
     "caption_color": "white",
     "structure": "unsolved-mystery",
     "pair_role": null
+  },
+  {
+    "video_id": "bsexYL3cbAg",
+    "published_at": "2026-08-13T13:24:04.682343+00:00",
+    "title": "El Imperio que conquistó el mundo sin escribir una sola ley 🤯",
+    "topic": "ancient civilizations",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 35.1,
+    "voice": "es-CO-GonzaloNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": null
   }
 ]
