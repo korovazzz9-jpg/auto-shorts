@@ -299,5 +299,207 @@
     "niche_styled": true,
     "title_variant": "narrative",
     "hashtag_position": "end"
+  },
+  {
+    "title": "¿Tu cuerpo fabrica un veneno mortal... para protegerte? 😱",
+    "title_opener": "question",
+    "title_intensity": "extreme",
+    "hook_text": "Tu cuerpo te envenena a propósito",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "impossible",
+    "script": "Nadie puede explicar por qué tu cuerpo produce algo que debería matarte. Tu sistema inmune fabrica hipoclorito — blanqueador puro — dentro de tus células para destruir bacterias. Los neutrófilos lo rocían directo sobre los invasores. El problema: nadie sabe con exactitud cómo tus células sobreviven ese ataque sin quemarse ellas mismas. Los modelos actuales no cuadran. Si tu propio cuerpo usa veneno para salvarte... ¿qué más está haciendo sin avisarte?",
+    "word_count": 79,
+    "search_summary": "El sistema inmune humano produce hipoclorito, un blanqueador, dentro de las células para matar bacterias, proceso aún no explicado completamente.",
+    "comment_question": "¿Tu cuerpo te envenena para salvarte — eso te da miedo o asombro? 😱",
+    "source_note": "Weiss et al., Journal of Biological Chemistry, 2013",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "cuerpo humano",
+      "sistema inmune",
+      "datos curiosos",
+      "curiosidades del cuerpo",
+      "hipoclorito neutrófilos",
+      "hechos increíbles",
+      "ciencia curiosa",
+      "misterios del cuerpo humano",
+      "cuerpo humano para niños",
+      "sistema inmune para niños",
+      "datos curiosos del mundo"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#cuerpohumano",
+      "#sistemainmune",
+      "#ciencia"
+    ],
+    "video_queries": [
+      "human immune system animation",
+      "white blood cells attacking bacteria",
+      "bleach liquid pouring close up",
+      "human body cells microscope",
+      "scientist lab microscope research"
+    ],
+    "has_loop": false,
+    "topic": "the human body",
+    "structure": "unsolved-mystery",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "El volcán que predijo su erupción... y nadie le creyó 😱",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "Nadie quiso escuchar",
+    "hook_template": "authority-cant-explain",
+    "emotional_tone": "creepy",
+    "script": "Cientos de señales avisaron lo que venía — y todos las ignoraron. El Monte Santa Helena, en Washington, llevaba dos meses temblando antes del 18 de mayo de 1980. Los geólogos colocaron instrumentos, midieron cada sacudida, evacuaron zonas. Pero el flanco norte hinchado seguía creciendo: dos metros por día. Nadie calculó que ese bulto entero colapsaría en 8 segundos, disparando la erupción lateral más destructiva del siglo. Cuarenta años después, los modelos siguen sin predecir con exactitud cuándo un flanco volcánico colapsa. ¿Tú le hubieras creído al volcán? Y de esta forma.",
+    "word_count": 87,
+    "search_summary": "El Monte Santa Helena emitió señales por dos meses antes de su erupción del 18 de mayo de 1980, pero nadie predijo el colapso del flanco norte.",
+    "comment_question": "¿Evacuarías si el volcán lleva 2 meses temblando pero nada explota? 🌋",
+    "source_note": "USGS Cascades Volcano Observatory, registros 1980",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "Monte Santa Helena",
+      "volcán erupción 1980",
+      "volcanología misterio",
+      "erupción lateral volcánica",
+      "datos curiosos volcanes",
+      "terremotos y volcanes",
+      "catástrofes naturales",
+      "curiosidades geología",
+      "datos en 30 segundos",
+      "monte santa helena 1980",
+      "volcán santa helena erupción 1980"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#volcanes",
+      "#montesantahelena",
+      "#misterionatural"
+    ],
+    "video_queries": [
+      "volcano eruption smoke mountain",
+      "seismograph earthquake monitoring",
+      "geologist field measuring equipment",
+      "volcano flank landslide collapse",
+      "massive volcanic eruption ash cloud",
+      "scientist watching volcano crater"
+    ],
+    "has_loop": true,
+    "topic": "volcanoes and earthquakes",
+    "structure": "unsolved-mystery",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "El pez arquero apaga el sol para matar en la oscuridad 🤯",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "Está pasando ahora mismo",
+    "hook_template": "you-experience",
+    "emotional_tone": "impossible",
+    "script": "En este momento, una mantarraya en el Pacífico está navegando con un campo eléctrico que detecta el latido de un pez enterrado bajo la arena. No lo ve, no lo huele — lo siente latir. Su órgano de Lorenzini capta señales de 5 nanovolts, menos que una batería de reloj. Mientras ves este video, miles de rayas hacen esto exacto en todos los océanos del mundo. Es un sentido que los humanos no tenemos ni palabra para describir. ¿Tú qué sentido cambiarías por detectar electricidad? Y así es como.",
+    "word_count": 87,
+    "search_summary": "Las mantarrayas detectan el campo eléctrico del corazón de sus presas enterradas bajo la arena usando el órgano de Lorenzini.",
+    "comment_question": "¿Cambiarías la vista o el oído por detectar electricidad como la mantarraya? ⚡",
+    "source_note": "Journal of Experimental Biology, 2011",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "datos curiosos animales",
+      "mantarraya electricidad",
+      "órgano de Lorenzini",
+      "sentidos animales",
+      "hechos increíbles",
+      "animales del océano",
+      "datos en 30 segundos",
+      "peces eléctricos",
+      "curiosidades marinas",
+      "datos curiosos animales para niños"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#animales",
+      "#océano",
+      "#mantarraya"
+    ],
+    "video_queries": [
+      "manta ray ocean swimming",
+      "stingray sandy ocean floor",
+      "ocean floor sand close predator",
+      "manta ray hunting underwater",
+      "ocean wide shot pacific"
+    ],
+    "has_loop": true,
+    "topic": "the animal kingdom",
+    "structure": "happening-now",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "¿El esclavo que liberó a 20,000 prisioneros con una sola carta? 😱",
+    "title_opener": "question",
+    "title_intensity": "extreme",
+    "hook_text": "Una carta cambió todo",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "awe",
+    "script": "Una carta dictada por un esclavo liberó a 20,000 prisioneros de guerra de un solo golpe. Era el año 212 a.C. Sosias, secretario griego esclavizado por Roma, redactó el edicto que el cónsul Marcelo firmó tras la caída de Siracusa. Sin Sosias, el texto legal no existía — los romanos conquistaban, pero no sabían escribir sus propias órdenes. Ese documento definió cómo Roma trataría a los vencidos por los próximos tres siglos. ¿Cuántos imperios fueron construidos por hombres que la historia ni siquiera nombró?",
+    "word_count": 88,
+    "search_summary": "El esclavo griego Sosias redactó el edicto romano que liberó 20,000 prisioneros tras la caída de Siracusa en 212 a.C.",
+    "comment_question": "¿El verdadero poder estaba en la espada o en la pluma? ✍️",
+    "source_note": "",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "historia antigua",
+      "Roma antigua",
+      "esclavos en roma",
+      "Siracusa conquista romana",
+      "datos históricos",
+      "historia curiosa",
+      "hechos históricos",
+      "prisioneros de guerra roma",
+      "datos en 30 segundos",
+      "historia antigua del mundo",
+      "roma antigua para niños",
+      "esclavos romanos"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#historiacuriosa",
+      "#romaantigua",
+      "#datoshistoricos",
+      "#siracusa"
+    ],
+    "video_queries": [
+      "ancient rome soldiers marching",
+      "old parchment letter writing",
+      "roman conquest ruins landscape",
+      "ancient scribe writing scroll",
+      "prisoners crowd ancient setting",
+      "roman empire wide landscape ruins"
+    ],
+    "has_loop": false,
+    "topic": "ancient history",
+    "structure": "historical-story",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
   }
 ]
