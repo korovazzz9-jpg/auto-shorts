@@ -2480,5 +2480,24 @@
     "caption_color": "white",
     "structure": "historical-story",
     "pair_role": null
+  },
+  {
+    "video_id": "W-6cNpJPk9o",
+    "published_at": "2026-08-14T20:23:17.355947+00:00",
+    "title": "¿Los minoicos escribieron un idioma que nadie puede leer? 🤯",
+    "topic": "ancient civilizations",
+    "hook_template": "authority-cant-explain",
+    "title_opener": "question",
+    "emotional_tone": "creepy",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 28.7,
+    "voice": "es-CO-GonzaloNeural",
+    "caption_color": "white",
+    "structure": "unsolved-mystery",
+    "pair_role": null
   }
 ]
