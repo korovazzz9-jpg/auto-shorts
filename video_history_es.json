@@ -2423,5 +2423,24 @@
     "caption_color": "white",
     "structure": "historical-story",
     "pair_role": null
+  },
+  {
+    "video_id": "bV8PENRmnJc",
+    "published_at": "2026-08-14T00:24:11.741725+00:00",
+    "title": "¿Este pez evolucionó el mismo ojo 7 veces solo? 🤯",
+    "topic": "evolution",
+    "hook_template": "authority-cant-explain",
+    "title_opener": "question",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 36.0,
+    "voice": "es-US-AlonsoNeural",
+    "caption_color": "white",
+    "structure": "unsolved-mystery",
+    "pair_role": null
   }
 ]
