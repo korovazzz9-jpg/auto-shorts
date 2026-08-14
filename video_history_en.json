@@ -2482,5 +2482,24 @@
     "caption_color": "white",
     "structure": null,
     "pair_role": null
+  },
+  {
+    "video_id": "BSwgf738TOk",
+    "published_at": "2026-08-14T23:15:36.853065+00:00",
+    "title": "Nobody Expected a Roman Sewer to Hide a 2,000-Year-Old Feast 😱",
+    "topic": "archaeological discoveries",
+    "hook_template": "you-experience",
+    "title_opener": "nobody-expected",
+    "emotional_tone": "impossible",
+    "title_variant": "seo",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 34.7,
+    "voice": "en-US-ChristopherNeural",
+    "caption_color": "white",
+    "structure": "happening-now",
+    "pair_role": null
   }
 ]
