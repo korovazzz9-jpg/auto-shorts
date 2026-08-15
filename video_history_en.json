@@ -2539,5 +2539,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "4xzXAaoeI4w",
+    "published_at": "2026-08-15T20:14:02.140975+00:00",
+    "title": "Nobody Expected a Roman Soldier's Boot to Survive 2,000 Years 😱",
+    "topic": "archaeological discoveries",
+    "hook_template": "sounds-fake",
+    "title_opener": "nobody-expected",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 28.7,
+    "voice": "en-US-GuyNeural",
+    "caption_color": "white",
+    "structure": "historical-story",
+    "pair_role": null
   }
 ]
