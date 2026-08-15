@@ -2537,5 +2537,24 @@
     "caption_color": "white",
     "structure": "unsolved-mystery",
     "pair_role": null
+  },
+  {
+    "video_id": "PzufISO1YQs",
+    "published_at": "2026-08-15T13:23:54.618840+00:00",
+    "title": "El pez arquero apaga el sol para matar en la oscuridad 🤯",
+    "topic": "the animal kingdom",
+    "hook_template": "you-experience",
+    "title_opener": "the-x",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 33.6,
+    "voice": "es-US-AlonsoNeural",
+    "caption_color": "white",
+    "structure": "happening-now",
+    "pair_role": null
   }
 ]
