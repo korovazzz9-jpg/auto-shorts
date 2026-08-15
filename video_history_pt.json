@@ -2334,5 +2334,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "QReTLWE0wW4",
+    "published_at": "2026-08-15T17:31:25.032110+00:00",
+    "title": "Seu intestino tem um cérebro próprio — e decide sozinho 🤯",
+    "topic": "the human body",
+    "hook_template": "you-experience",
+    "title_opener": "your-x",
+    "emotional_tone": "impossible",
+    "title_variant": "seo",
+    "has_loop": true,
+    "niche_styled": false,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 32.7,
+    "voice": "pt-BR-AntonioNeural",
+    "caption_color": "white",
+    "structure": "happening-now",
+    "pair_role": null
   }
 ]
