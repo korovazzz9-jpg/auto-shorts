@@ -1,55 +1,5 @@
 [
   {
-    "title": "¿El océano tiene un volcán que burbujea cemento líquido? 🤯",
-    "title_opener": "question",
-    "title_intensity": "extreme",
-    "hook_text": "El mar fabrica cemento ahora mismo",
-    "hook_template": "you-experience",
-    "emotional_tone": "impossible",
-    "script": "Ahora mismo, en el fondo del Pacífico, un volcán submarino expulsa líquido tan caliente que forma cemento sólido al instante. Se llaman chimeneas hidrotermales. Eyectan agua a 400 °C — sin hervir, porque la presión es brutal. Cada minuto sueltan minerales que construyen torres de hasta 60 metros en años. Lo increíble: criaturas viven ahí sin luz, sin oxígeno solar, sin nada de lo que tú necesitas para existir. ¿Qué tan distinta crees que puede ser la vida en otros océanos del sistema solar?",
-    "word_count": 85,
-    "search_summary": "Las chimeneas hidrotermales del océano Pacífico expulsan agua a 400 °C y forman estructuras minerales sólidas de hasta 60 metros.",
-    "comment_question": "¿Crees que hay vida similar en los océanos de Europa o Encélado? 🪐",
-    "source_note": "NOAA Ocean Exploration Program, 2010",
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "chimeneas hidrotermales",
-      "volcán submarino",
-      "fondo del océano",
-      "datos curiosos océano",
-      "vida en el fondo del mar",
-      "curiosidades del mar",
-      "datos en 30 segundos",
-      "oceano pacifico profundidad",
-      "chimeneas hidrotermales origen de la vida",
-      "volcán submarino en erupción",
-      "fondo del océano en vivo"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#curiosidades",
-      "#oceano",
-      "#datoscuriosos",
-      "#vidamarina"
-    ],
-    "video_queries": [
-      "deep ocean hydrothermal vent underwater",
-      "underwater volcano eruption dark ocean",
-      "hydrothermal vent mineral chimney",
-      "deep sea creatures darkness",
-      "ocean floor expedition submarine"
-    ],
-    "has_loop": false,
-    "topic": "the ocean",
-    "structure": "happening-now",
-    "niche_styled": true,
-    "title_variant": "seo",
-    "hashtag_position": "end"
-  },
-  {
     "title": "¿Los mayas usaban cráneos humanos como moneda? 😱",
     "title_opener": "question",
     "title_intensity": "extreme",

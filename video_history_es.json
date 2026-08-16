@@ -2594,5 +2594,24 @@
     "caption_color": "white",
     "structure": "unsolved-mystery",
     "pair_role": null
+  },
+  {
+    "video_id": "NJzKS8rlM94",
+    "published_at": "2026-08-16T03:23:56.313252+00:00",
+    "title": "¿El océano tiene un volcán que burbujea cemento líquido? 🤯",
+    "topic": "the ocean",
+    "hook_template": "you-experience",
+    "title_opener": "question",
+    "emotional_tone": "impossible",
+    "title_variant": "seo",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 32.9,
+    "voice": "es-MX-JorgeNeural",
+    "caption_color": "white",
+    "structure": "happening-now",
+    "pair_role": null
   }
 ]
