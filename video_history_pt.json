@@ -2448,5 +2448,24 @@
     "caption_color": "white",
     "structure": "historical-story",
     "pair_role": null
+  },
+  {
+    "video_id": "M97Rq1jUm-s",
+    "published_at": "2026-08-16T23:29:11.974961+00:00",
+    "title": "O naufrágio que os escravizados resgataram — e a coroa ignorou 😳",
+    "topic": "shipwrecks and lost treasures",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "huge",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": false,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 35.3,
+    "voice": "pt-BR-AntonioNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": null
   }
 ]
