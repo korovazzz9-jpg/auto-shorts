@@ -2634,5 +2634,24 @@
     "caption_color": "white",
     "structure": "historical-story",
     "pair_role": null
+  },
+  {
+    "video_id": "LUaHJWnn0sc",
+    "published_at": "2026-08-16T23:16:18.845177+00:00",
+    "title": "The 7,000-Year-Old Temple Found Buried Under a City 😱",
+    "topic": "archaeological discoveries",
+    "hook_template": "authority-cant-explain",
+    "title_opener": "the-x",
+    "emotional_tone": "awe",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 38.2,
+    "voice": "en-US-EricNeural",
+    "caption_color": "white",
+    "structure": "unsolved-mystery",
+    "pair_role": null
   }
 ]
