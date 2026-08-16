@@ -2429,5 +2429,24 @@
     "caption_color": "white",
     "structure": "historical-story",
     "pair_role": null
+  },
+  {
+    "video_id": "uviyhDRkTfc",
+    "published_at": "2026-08-16T21:28:12.088589+00:00",
+    "title": "A nevasca que soterrou um trem inteiro — vivo 😱",
+    "topic": "extreme weather",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "fear",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": false,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 29.5,
+    "voice": "pt-BR-ThalitaMultilingualNeural",
+    "caption_color": "white",
+    "structure": "historical-story",
+    "pair_role": null
   }
 ]
