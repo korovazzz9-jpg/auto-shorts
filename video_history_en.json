@@ -2577,5 +2577,24 @@
     "caption_color": "white",
     "structure": "happening-now",
     "pair_role": null
+  },
+  {
+    "video_id": "b8BHiAjKDCw",
+    "published_at": "2026-08-16T00:14:59.949901+00:00",
+    "title": "The Volcano That Froze Mid-Eruption and Stayed That Way 😱",
+    "topic": "volcanoes and earthquakes",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 37.3,
+    "voice": "en-US-EricNeural",
+    "caption_color": "white",
+    "structure": "historical-story",
+    "pair_role": null
   }
 ]
