@@ -2615,5 +2615,24 @@
     "caption_color": "white",
     "structure": "historical-story",
     "pair_role": null
+  },
+  {
+    "video_id": "OY1VSN_haFQ",
+    "published_at": "2026-08-16T20:15:19.686755+00:00",
+    "title": "The Beetle That Drinks Fog With Its Own Back 😱",
+    "topic": "the animal kingdom",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 36.2,
+    "voice": "en-US-ChristopherNeural",
+    "caption_color": "white",
+    "structure": "historical-story",
+    "pair_role": null
   }
 ]
