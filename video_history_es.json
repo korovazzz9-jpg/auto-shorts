@@ -2613,5 +2613,24 @@
     "caption_color": "white",
     "structure": "happening-now",
     "pair_role": null
+  },
+  {
+    "video_id": "eZeH-uaHBlg",
+    "published_at": "2026-08-16T13:25:00.811087+00:00",
+    "title": "¿Los mayas usaban cráneos humanos como moneda? 😱",
+    "topic": "ancient civilizations",
+    "hook_template": "you-experience",
+    "title_opener": "question",
+    "emotional_tone": "creepy",
+    "title_variant": "seo",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 33.0,
+    "voice": "es-US-AlonsoNeural",
+    "caption_color": "white",
+    "structure": "happening-now",
+    "pair_role": null
   }
 ]
