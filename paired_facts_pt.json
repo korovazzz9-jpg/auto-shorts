@@ -108,5 +108,15 @@
     "part_b_video_id": null,
     "status": "awaiting_b",
     "created_at": 1786577366.6921196
+  },
+  {
+    "id": "7WU9ZR4icOM-1787009353",
+    "topic": "the ocean",
+    "part_a_video_id": "7WU9ZR4icOM",
+    "part_a_title": "O oceano tem zonas mortas que se expandem todo ano 😱",
+    "claim": "The Gulf of Mexico dead zone grows larger every summer.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1787009353.026859
   }
 ]
