@@ -1,25 +1,23 @@
 {
   "outlier_counts": {
-    "ancient history": 4,
-    "archaeological discoveries": 3,
+    "ancient history": 3,
+    "archaeological discoveries": 2,
     "ancient civilizations": 2,
     "historical mysteries": 3,
-    "the human body": 4,
-    "the animal kingdom": 1,
-    "the ocean": 4,
+    "the human body": 2,
+    "the ocean": 2,
     "evolution": 2,
-    "volcanoes and earthquakes": 3,
-    "extreme weather": 1,
-    "future technology": 6
+    "volcanoes and earthquakes": 5,
+    "space": 1,
+    "future technology": 7
   },
   "outlier_titles": {
     "ancient history": [
+      "¿Por qué falta la mitad del Coliseo romano? 😱",
       "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos",
-      "Tres datos históricos alucinantes #historia #interesante #hechos",
-      "Hallazgo del siglo 5 a.C en aguas Italianas #historia #datoscuriosos #shorts"
+      "Tres datos históricos alucinantes #historia #interesante #hechos"
     ],
     "archaeological discoveries": [
-      "Tres datos históricos alucinantes #historia #interesante #hechos",
       "Hallazgo del siglo 5 a.C en aguas Italianas #historia #datoscuriosos #shorts",
       "La Reina Roja de Palenque🏺 #reelsvideo #shorts #fyp #curiosidades #datoscuriosos"
     ],
@@ -30,19 +28,14 @@
     "historical mysteries": [
       "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos",
       "Tres datos históricos alucinantes #historia #interesante #hechos",
-      "✅ La verdadera historia de los tres cerditos 🐷💀 #short #shortsviral"
+      "Los misterios del Amazonas #amazonas #mitos #leyendas #curiosidades #shortsviral"
     ],
     "the human body": [
       "DATO CURIOSO - LA NIÑA PERRO #shorts",
-      "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos",
-      "¿Qué pasaría si tu cuerpo estuviera hecho de estos elementos? #shorts #curiosidades"
-    ],
-    "the animal kingdom": [
-      "Si ves esto huye 😧"
+      "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos"
     ],
     "the ocean": [
       "Si ves esto huye 😧",
-      "Las profundidades del Oceano #shorts",
       "Las islas más peligrosas del mundo 🌎🤯 #curiosidades #shorts #estadosunidos"
     ],
     "evolution": [
@@ -51,11 +44,11 @@
     ],
     "volcanoes and earthquakes": [
       "🌍💥 El terremoto más potente #curiosidades #datoscuriosos",
-      "la erupción del volcan vesubio en pompeya",
-      "¿Cómo se forman los volcanes? #shorts  #curiosidades #datoscuriosos #sabiasque"
+      "EL TSUNAMI MÁS GRANDE DE LA HISTORIA",
+      "la erupción del volcan vesubio en pompeya"
     ],
-    "extreme weather": [
-      "LAS OLAS MÁS GRANDES DEL MUNDO? 😳 #datoscuriosos #curiosidades #shorts"
+    "space": [
+      "Algo se Aproxima a a Tierra #Shorts"
     ],
     "future technology": [
       "Científicos EXPERIMENTOS CASEROS! 😱 #shorts",
@@ -68,39 +61,55 @@
       "topic": "future technology",
       "title": "El mejor teléfono del mundo😱🌎#datoscuriosos #top5 #shorts",
       "video_id": "_Wmiv1gALNw",
-      "views": 8615711,
+      "views": 8615753,
       "subs": 13400,
       "ratio": 643.0
     },
     {
-      "topic": "historical mysteries",
-      "title": "✅ La verdadera historia de los tres cerditos 🐷💀 #short #shortsviral",
-      "video_id": "QQ0sdApwJ0s",
-      "views": 4692313,
-      "subs": 18900,
-      "ratio": 248.3
+      "topic": "volcanoes and earthquakes",
+      "title": "¿Por qué tembló tan fuerte Colombia?#ciencia #terremoto #colombia #shorts",
+      "video_id": "4i8w_dROct8",
+      "views": 194299,
+      "subs": 674,
+      "ratio": 288.3
     },
     {
-      "topic": "extreme weather",
-      "title": "LAS OLAS MÁS GRANDES DEL MUNDO? 😳 #datoscuriosos #curiosidades #shorts",
-      "video_id": "adABcGeYEfU",
-      "views": 1658308,
-      "subs": 6970,
-      "ratio": 237.9
+      "topic": "ancient history",
+      "title": "¿Por qué falta la mitad del Coliseo romano? 😱",
+      "video_id": "k18cQG9VuUw",
+      "views": 14135552,
+      "subs": 54700,
+      "ratio": 258.4
+    },
+    {
+      "topic": "volcanoes and earthquakes",
+      "title": "EL TSUNAMI MÁS GRANDE DE LA HISTORIA",
+      "video_id": "Tp_f3ZBfxcc",
+      "views": 1638480,
+      "subs": 7540,
+      "ratio": 217.3
     },
     {
       "topic": "the human body",
       "title": "DATO CURIOSO - LA NIÑA PERRO #shorts",
       "video_id": "9e82SusaU8c",
-      "views": 15210375,
-      "subs": 76200,
-      "ratio": 199.6
+      "views": 15282015,
+      "subs": 76400,
+      "ratio": 200.0
+    },
+    {
+      "topic": "space",
+      "title": "Algo se Aproxima a a Tierra #Shorts",
+      "video_id": "hOq7uz55_eo",
+      "views": 8489812,
+      "subs": 49000,
+      "ratio": 173.3
     },
     {
       "topic": "the ocean",
       "title": "Las islas más peligrosas del mundo 🌎🤯 #curiosidades #shorts #estadosunidos",
       "video_id": "TZHSvTMFYt8",
-      "views": 10605563,
+      "views": 10608847,
       "subs": 67000,
       "ratio": 158.3
     },
@@ -108,23 +117,15 @@
       "topic": "volcanoes and earthquakes",
       "title": "la erupción del volcan vesubio en pompeya",
       "video_id": "DB7ar9QMUAs",
-      "views": 757198,
-      "subs": 5690,
-      "ratio": 133.1
-    },
-    {
-      "topic": "ancient history",
-      "title": "Hallazgo del siglo 5 a.C en aguas Italianas #historia #datoscuriosos #shorts",
-      "video_id": "XpaYY4Q2zhI",
-      "views": 957105,
-      "subs": 8100,
-      "ratio": 118.2
+      "views": 774291,
+      "subs": 5700,
+      "ratio": 135.8
     },
     {
       "topic": "archaeological discoveries",
       "title": "Hallazgo del siglo 5 a.C en aguas Italianas #historia #datoscuriosos #shorts",
       "video_id": "XpaYY4Q2zhI",
-      "views": 957105,
+      "views": 957107,
       "subs": 8100,
       "ratio": 118.2
     },
@@ -132,34 +133,26 @@
       "topic": "volcanoes and earthquakes",
       "title": "🌍💥 El terremoto más potente #curiosidades #datoscuriosos",
       "video_id": "A_sPeB3Q9Dk",
-      "views": 4182794,
-      "subs": 38800,
-      "ratio": 107.8
-    },
-    {
-      "topic": "ancient history",
-      "title": "Tres datos históricos alucinantes #historia #interesante #hechos",
-      "video_id": "UIuWxBSEK0Y",
-      "views": 5019804,
-      "subs": 58000,
-      "ratio": 86.5
+      "views": 4270058,
+      "subs": 39000,
+      "ratio": 109.5
     }
   ],
   "saturation": {
-    "ancient history": 256146,
-    "archaeological discoveries": 47697,
-    "ancient civilizations": 149972,
-    "shipwrecks and lost treasures": 131,
-    "historical mysteries": 304819,
-    "the human body": 656600,
+    "ancient history": 655423,
+    "archaeological discoveries": 50741,
+    "ancient civilizations": 150613,
+    "shipwrecks and lost treasures": 136,
+    "historical mysteries": 310848,
+    "the human body": 659882,
     "the animal kingdom": 1000000,
-    "the ocean": 239403,
-    "evolution": 647514,
-    "volcanoes and earthquakes": 5570,
-    "extreme weather": 241974,
-    "natural wonders": 159920,
-    "space": 699114,
-    "future technology": 654304
+    "the ocean": 473080,
+    "evolution": 649562,
+    "volcanoes and earthquakes": 61486,
+    "extreme weather": 228004,
+    "natural wonders": 235249,
+    "space": 701540,
+    "future technology": 654356
   },
-  "updated": "2026-08-10"
+  "updated": "2026-08-17"
 }
