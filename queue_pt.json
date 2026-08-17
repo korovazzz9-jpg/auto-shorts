@@ -49,5 +49,105 @@
     "niche_styled": false,
     "title_variant": "narrative",
     "hashtag_position": "end"
+  },
+  {
+    "title": "O sinal de 72 segundos que veio do espaço — e sumiu 😱",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "Ninguém sabe quem mandou isso",
+    "hook_template": "authority-cant-explain",
+    "emotional_tone": "creepy",
+    "script": "Ninguém consegue explicar o que chegou em agosto de 1977. O radiotelescópio Big Ear, em Ohio, captou um sinal tão forte que o astrônomo Jerry Ehman escreveu 'Wow!' no papel impresso. Durou exatamente 72 segundos — e nunca mais voltou. A teoria favorita é que foi uma transmissão natural de hidrogênio. Mas sinais naturais não chegam nessa frequência exata, nessa intensidade. Quarenta e oito anos depois, nenhum telescópio reproduziu o sinal. O que você acha que estava do outro lado? E é assim.",
+    "word_count": 85,
+    "search_summary": "O sinal Wow! de 1977 captado pelo Big Ear em Ohio continua sem explicação científica confirmada até hoje.",
+    "comment_question": "Se o sinal Wow! voltasse amanhã, você queria que a gente respondesse? 👽",
+    "source_note": "Ohio State University, Big Ear Radio Observatory, 1977",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "fatos do espaço",
+      "mistérios do universo",
+      "sinal Wow 1977",
+      "Big Ear radiotelescópio",
+      "vida extraterrestre",
+      "espaço inexplicável",
+      "fatos inacreditáveis",
+      "astronomia curiosidades",
+      "fatos assustadores do espaço",
+      "mistérios do universo documentário"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#fatoscuriosos",
+      "#espaço",
+      "#misterio",
+      "#extraterrestre"
+    ],
+    "video_queries": [
+      "radio telescope night sky",
+      "space signal satellite dish",
+      "astronomer working control room",
+      "deep space stars background",
+      "scientist reading printed data",
+      "empty universe dark space"
+    ],
+    "has_loop": true,
+    "topic": "space",
+    "structure": "unsolved-mystery",
+    "niche_styled": false,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "O naufrágio que um escravo descobriu — e a coroa roubou 😳",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "Ele achou o tesouro. Não ficou nada.",
+    "hook_template": "other",
+    "emotional_tone": "creepy",
+    "script": "Um mergulhador encontrou um tesouro inteiro — e saiu de mãos vazias. Em 1687, um escravo chamado Lázaro mergulhou perto de Cartagena das Índias e localizou o naufrágio espanhol San José, carregado com ouro e esmeraldas dos Andes. Ele reportou tudo ao seu dono. O dono reportou à Coroa espanhola. A Coroa tomou o crédito, mandou guardar o sítio e nunca pagou um real a Lázaro. Hoje o San José vale estimados 17 bilhões de dólares — e três países ainda brigam por ele. Se fosse você, teria mergulhado de novo ou sumido com o segredo?",
+    "word_count": 98,
+    "search_summary": "Escravo Lázaro descobriu naufrágio San José em 1687 perto de Cartagena, tesouro de 17 bilhões roubado pela Coroa espanhola.",
+    "comment_question": "Você teria guardado o segredo ou entregado o tesouro? 👇",
+    "source_note": "Archivo General de Indias, Sevilha",
+    "loop_connectors": [
+      "why"
+    ],
+    "tags": [
+      "naufrágio San José",
+      "tesouro perdido",
+      "Cartagena das Índias",
+      "história de naufrágios",
+      "ouro espanhol",
+      "tesouros submersos",
+      "fatos históricos",
+      "curiosidades históricas",
+      "tesouro perdido dalvin la melodia",
+      "cartagena das índias colômbia"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#fatoshistóricos",
+      "#naufrágio",
+      "#tesouroperdido",
+      "#sanjoséshipwreck"
+    ],
+    "video_queries": [
+      "underwater diver ocean deep",
+      "colonial ship wreck underwater",
+      "gold coins treasure chest dark",
+      "Cartagena Colombia coast aerial",
+      "Spanish galleon ocean storm",
+      "underwater treasure salvage diver",
+      "courtroom dispute crowd arguing"
+    ],
+    "has_loop": false,
+    "topic": "shipwrecks and lost treasures",
+    "structure": "historical-story",
+    "niche_styled": false,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
   }
 ]
