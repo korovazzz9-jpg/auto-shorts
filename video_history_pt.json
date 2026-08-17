@@ -2570,5 +2570,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "0YqP1VuLz0c",
+    "published_at": "2026-08-17T17:28:58.090554+00:00",
+    "title": "A chuva que virou bala de gelo a 270 km/h 😱",
+    "topic": "extreme weather",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "fear",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": false,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 31.6,
+    "voice": "pt-BR-AntonioNeural",
+    "caption_color": "white",
+    "structure": "historical-story",
+    "pair_role": null
   }
 ]
