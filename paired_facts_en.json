@@ -98,5 +98,15 @@
     "part_b_video_id": null,
     "status": "awaiting_b",
     "created_at": 1786493667.5395646
+  },
+  {
+    "id": "zEKRpulkXok-1786925668",
+    "topic": "natural wonders",
+    "part_a_video_id": "zEKRpulkXok",
+    "part_a_title": "The Cave That Refills Itself With a New Ocean Every 6 Hours 😱",
+    "claim": "The Giant's Causeway shares identical hexagonal columns across the Irish Sea.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1786925668.8219693
   }
 ]
