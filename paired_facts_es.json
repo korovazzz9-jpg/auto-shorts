@@ -88,5 +88,15 @@
     "part_b_video_id": null,
     "status": "awaiting_b",
     "created_at": 1786494235.3416164
+  },
+  {
+    "id": "_Y43sAv72uE-1786926269",
+    "topic": "volcanoes and earthquakes",
+    "part_a_video_id": "_Y43sAv72uE",
+    "part_a_title": "¿El volcán que predijo un tsunami 400 años antes? 😱",
+    "claim": "Volcanic collapses generate tsunamis larger than earthquake-triggered ones.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1786926269.2769396
   }
 ]
