@@ -2773,5 +2773,24 @@
     "caption_color": "white",
     "structure": "unsolved-mystery",
     "pair_role": null
+  },
+  {
+    "video_id": "T59n9xsO0f0",
+    "published_at": "2026-08-17T13:25:05.218205+00:00",
+    "title": "¿Colombia tiembla por una placa que se hunde viva? 😱",
+    "topic": "volcanoes and earthquakes",
+    "hook_template": "sounds-fake",
+    "title_opener": "question",
+    "emotional_tone": "fear",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": true,
+    "topical": null,
+    "length_seconds": 39.0,
+    "voice": "es-MX-JorgeNeural",
+    "caption_color": "white",
+    "structure": null,
+    "pair_role": null
   }
 ]
