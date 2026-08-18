@@ -2811,5 +2811,24 @@
     "caption_color": "white",
     "structure": "unsolved-mystery",
     "pair_role": null
+  },
+  {
+    "video_id": "mRXW_BNdAyE",
+    "published_at": "2026-08-18T00:25:33.793024+00:00",
+    "title": "¿Hallaron una ciudad inca... debajo de otra ciudad? 😱",
+    "topic": "archaeological discoveries",
+    "hook_template": "sounds-fake",
+    "title_opener": "question",
+    "emotional_tone": "awe",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 38.0,
+    "voice": "es-US-AlonsoNeural",
+    "caption_color": "white",
+    "structure": "happening-now",
+    "pair_role": null
   }
 ]
