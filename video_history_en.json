@@ -2813,5 +2813,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "5xhDJkkC-aE",
+    "published_at": "2026-08-18T00:15:22.142134+00:00",
+    "title": "Only Tornado to Kill More Than Tri-State — Nobody Talks About It 😱",
+    "topic": "natural wonders",
+    "hook_template": "sounds-fake",
+    "title_opener": "nobody-expected",
+    "emotional_tone": "impossible",
+    "title_variant": "seo",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 32.5,
+    "voice": "en-US-EricNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": "b"
   }
 ]
