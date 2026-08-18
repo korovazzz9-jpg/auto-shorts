@@ -2832,5 +2832,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": "b"
+  },
+  {
+    "video_id": "ELdL-ES29a0",
+    "published_at": "2026-08-18T16:23:15.477854+00:00",
+    "title": "Shouldn't Exist: The Void Larger Than 300 Million Light-Years 😱",
+    "topic": "space",
+    "hook_template": "authority-cant-explain",
+    "title_opener": "shouldnt-exist",
+    "emotional_tone": "fear",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 33.3,
+    "voice": "en-US-GuyNeural",
+    "caption_color": "white",
+    "structure": "unsolved-mystery",
+    "pair_role": null
   }
 ]
