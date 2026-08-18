@@ -302,5 +302,54 @@
     "niche_styled": true,
     "title_variant": "narrative",
     "hashtag_position": "end"
+  },
+  {
+    "title": "¿El Sol tardó 100,000 años en salir de sí mismo? 🤯",
+    "title_opener": "question",
+    "title_intensity": "extreme",
+    "hook_text": "Luz de 100,000 años llega a ti ahora",
+    "hook_template": "you-experience",
+    "emotional_tone": "awe",
+    "script": "La luz que te está tocando ahora mismo salió del centro del Sol hace 100,000 años. Un fotón nace en el núcleo solar y tarda hasta 100,000 años en abrirse paso entre capas de plasma antes de escapar. Luego cruza 150 millones de kilómetros en solo 8 minutos. Lo que sientes hoy empezó antes de que existiera el Homo sapiens. Dime en los comentarios: ¿te parece más increíble que tardó 100,000 años adentro o solo 8 minutos afuera? Y de esta forma.",
+    "word_count": 85,
+    "search_summary": "La luz solar tarda hasta 100,000 años en atravesar el interior del Sol antes de llegar a la Tierra en 8 minutos.",
+    "comment_question": "¿100,000 años adentro del Sol o 8 minutos para llegar aquí — cuál te rompe más la cabeza? 🤯",
+    "source_note": "NASA Solar Physics Division, estimaciones estándar de difusión radiativa",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "datos curiosos espacio",
+      "el sol datos",
+      "luz solar tiempo",
+      "fotón núcleo solar",
+      "curiosidades del universo",
+      "datos en 30 segundos",
+      "astronomía curiosidades",
+      "espacio hechos increíbles",
+      "datos curiosos del espacio",
+      "el sol datos curiosos"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#espacio",
+      "#universo",
+      "#elsol"
+    ],
+    "video_queries": [
+      "sun surface eruption close up",
+      "solar flare timelapse",
+      "sunlight streaming through window",
+      "space earth orbit wide shot",
+      "sunlight hitting earth from space"
+    ],
+    "has_loop": true,
+    "topic": "space",
+    "structure": "happening-now",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
   }
 ]
