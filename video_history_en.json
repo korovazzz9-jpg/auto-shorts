@@ -2870,5 +2870,24 @@
     "caption_color": "white",
     "structure": "happening-now",
     "pair_role": null
+  },
+  {
+    "video_id": "i9ZuP5mPzPg",
+    "published_at": "2026-08-18T23:13:17.952946+00:00",
+    "title": "Only Waterfall on Earth That Flows From Inside a Glacier 😱",
+    "topic": "natural wonders",
+    "hook_template": "you-experience",
+    "title_opener": "only-place",
+    "emotional_tone": "creepy",
+    "title_variant": "seo",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 29.2,
+    "voice": "en-US-GuyNeural",
+    "caption_color": "white",
+    "structure": "happening-now",
+    "pair_role": null
   }
 ]
