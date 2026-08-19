@@ -2703,5 +2703,24 @@
     "caption_color": "white",
     "structure": "happening-now",
     "pair_role": null
+  },
+  {
+    "video_id": "vvlUa9oSJ4c",
+    "published_at": "2026-08-19T01:31:11.611819+00:00",
+    "title": "O naufrágio que pagou a guerra — e ninguém sabia 😱",
+    "topic": "shipwrecks and lost treasures",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "huge",
+    "title_variant": "seo",
+    "has_loop": true,
+    "niche_styled": false,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 30.0,
+    "voice": "pt-BR-ThalitaMultilingualNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": null
   }
 ]
