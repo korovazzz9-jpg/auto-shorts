@@ -2722,5 +2722,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "0VAkqVTgH7I",
+    "published_at": "2026-08-19T17:29:34.790287+00:00",
+    "title": "Sua córnea não tem sangue — e sobrevive sugando o ar 🤯",
+    "topic": "the human body",
+    "hook_template": "sounds-fake",
+    "title_opener": "your-x",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": false,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 35.8,
+    "voice": "pt-BR-AntonioNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": null
   }
 ]
