@@ -2741,5 +2741,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "5JWdRBaqUAQ",
+    "published_at": "2026-08-19T23:29:23.519889+00:00",
+    "title": "O peixe que está virando outro animal agora mesmo 🤯",
+    "topic": "evolution",
+    "hook_template": "you-experience",
+    "title_opener": "the-x",
+    "emotional_tone": "impossible",
+    "title_variant": "seo",
+    "has_loop": false,
+    "niche_styled": false,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 31.7,
+    "voice": "pt-BR-AntonioNeural",
+    "caption_color": "white",
+    "structure": "happening-now",
+    "pair_role": "a"
   }
 ]

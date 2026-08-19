@@ -118,5 +118,15 @@
     "part_b_video_id": null,
     "status": "awaiting_b",
     "created_at": 1787009353.026859
+  },
+  {
+    "id": "5JWdRBaqUAQ-1787182163",
+    "topic": "evolution",
+    "part_a_video_id": "5JWdRBaqUAQ",
+    "part_a_title": "O peixe que está virando outro animal agora mesmo 🤯",
+    "claim": "A transição peixe-terra já aconteceu pelo menos 30 vezes na evolução.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1787182163.934683
   }
 ]
