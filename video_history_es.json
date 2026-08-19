@@ -2887,5 +2887,24 @@
     "caption_color": "white",
     "structure": "historical-story",
     "pair_role": null
+  },
+  {
+    "video_id": "aCA8mRvUQH0",
+    "published_at": "2026-08-19T00:22:52.355791+00:00",
+    "title": "¿La tormenta que congeló un lago en 8 horas en 1911? 😱",
+    "topic": "extreme weather",
+    "hook_template": "authority-cant-explain",
+    "title_opener": "question",
+    "emotional_tone": "fear",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": false,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 27.9,
+    "voice": "es-CO-GonzaloNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": "a"
   }
 ]
