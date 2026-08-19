@@ -108,5 +108,15 @@
     "part_b_video_id": null,
     "status": "awaiting_b",
     "created_at": 1786925668.8219693
+  },
+  {
+    "id": "lrGaDsC5sqc-1787098463",
+    "topic": "volcanoes and earthquakes",
+    "part_a_video_id": "lrGaDsC5sqc",
+    "part_a_title": "Nobody Expected a Volcano to Erupt Upward Through Ice 😱",
+    "claim": "Iceland sits on more active volcanoes than any country on Earth.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1787098463.1963344
   }
 ]
