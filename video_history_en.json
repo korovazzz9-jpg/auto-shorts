@@ -2946,5 +2946,24 @@
     "caption_color": "white",
     "structure": "historical-story",
     "pair_role": null
+  },
+  {
+    "video_id": "opc9BL17Li0",
+    "published_at": "2026-08-20T16:21:13.163057+00:00",
+    "title": "The Sealed Roman Tomb Found Still Locked From Inside 😱",
+    "topic": "archaeological discoveries",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "creepy",
+    "title_variant": "seo",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": true,
+    "length_seconds": 35.0,
+    "voice": "en-US-ChristopherNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": null
   }
 ]
