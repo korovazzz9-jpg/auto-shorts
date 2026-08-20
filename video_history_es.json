@@ -2963,5 +2963,24 @@
     "caption_color": "white",
     "structure": "unsolved-mystery",
     "pair_role": null
+  },
+  {
+    "video_id": "MMYSmEshUe8",
+    "published_at": "2026-08-20T03:25:53.722979+00:00",
+    "title": "¿Tu cerebro se apaga solo mientras duermes en 1982? 😱",
+    "topic": "the human body",
+    "hook_template": "you-experience",
+    "title_opener": "question",
+    "emotional_tone": "creepy",
+    "title_variant": "seo",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": true,
+    "length_seconds": 33.6,
+    "voice": "es-US-AlonsoNeural",
+    "caption_color": "white",
+    "structure": "unsolved-mystery",
+    "pair_role": null
   }
 ]
