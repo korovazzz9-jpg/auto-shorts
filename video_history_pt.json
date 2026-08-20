@@ -2779,5 +2779,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "DOK2EPtkd1U",
+    "published_at": "2026-08-20T17:28:38.696399+00:00",
+    "title": "A Voyager 1 cruzou a borda do Sistema Solar — e não parou 😱",
+    "topic": "space",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "awe",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": false,
+    "niche_recreated": null,
+    "topical": true,
+    "length_seconds": 33.0,
+    "voice": "pt-BR-AntonioNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": null
   }
 ]
