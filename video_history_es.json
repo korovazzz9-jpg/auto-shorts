@@ -3039,5 +3039,24 @@
     "caption_color": "white",
     "structure": "historical-story",
     "pair_role": null
+  },
+  {
+    "video_id": "ysAi9zwXnvw",
+    "published_at": "2026-08-21T03:23:33.345099+00:00",
+    "title": "¿El niño que dictó las leyes de Esparta... a los 9 años? 😱",
+    "topic": "ancient history",
+    "hook_template": "sounds-fake",
+    "title_opener": "question",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 30.3,
+    "voice": "es-MX-JorgeNeural",
+    "caption_color": "white",
+    "structure": "historical-story",
+    "pair_role": null
   }
 ]
