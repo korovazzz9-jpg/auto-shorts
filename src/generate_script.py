@@ -554,6 +554,13 @@ EMOTIONAL_TONE_INSTRUCTION = (
     f"of [{', '.join(EMOTIONAL_TONES)}]. This is independent of the topic — e.g. a space fact "
     "can be 'fear', 'awe', or 'beautiful' depending on the angle. Report the closest match "
     "(use 'other' if none fits)."
+    # 2026-08-21: weekly_report (ES) — 'impossible' 67.8% retention на самой большой выборке
+    # (n=15) среди тонов, тогда как creepy/awe/fear все выше 80%. ES-специфичный сигнал (EN
+    # на паузе, своих данных нет) — гейтим по каналу, не переносим на EN без его собственных
+    # данных, если/когда канал возобновится.
+    + (" Data note: on this channel 'impossible' currently retains viewers noticeably worse "
+       "than 'creepy'/'awe'/'fear' — prefer those angles when the fact genuinely supports them, "
+       "but never force a tone that doesn't fit." if CHANNEL == "es" else "")
 )
 
 

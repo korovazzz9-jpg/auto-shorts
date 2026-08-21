@@ -101,7 +101,10 @@ def run() -> None:
         # (schedule/topic/pair/generic) для тега cta-<...> и сравнения конверсии в подписку.
         cta_text, cta_kind = pick_cta_phrase(data["topic"], pair_tease)
         # A/B микро-CTA в середине ролика (2026-07-18): может резать retention — меряем.
-        mid_cta = random.random() < 0.5
+        # mid_cta_probability (CFG, default 0.5) — 2026-08-21: ES выключен (0.0), weekly_report
+        # показал -11.5 п.п. retention с микро-CTA (81.4% без / 69.9% с, n=9/10) — эксперимент
+        # "может резать retention — меряем" (config.py) дал достаточно чёткий ответ.
+        mid_cta = random.random() < CFG.get("mid_cta_probability", 0.5)
         video_path, thumb_path, caption_color = build_video(audio_path, clip_paths, words, video_path, topic=data["topic"], title=data["title"], hook_text=data.get("hook_text"), pair_tease=pair_tease, structure=data.get("structure"), hook_style=hook_style, cta_text=cta_text, mid_cta=mid_cta)
 
         print("5/6 Публикация...")

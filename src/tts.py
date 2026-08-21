@@ -16,7 +16,14 @@ TTS_MAX_RETRIES = 3
 
 
 def _pick_voice() -> str:
-    return random.choice(CFG["voices"])
+    """voice_weights (CFG, опционально) — необязательный тилт в сторону сильнейшего по retention
+    голоса (2026-08-21, weekly_report). Веса, не жёсткий выбор — ротация остальных сохраняется
+    ради anti-"inauthentic content" сигнала (см. комментарий выше)."""
+    voices = CFG["voices"]
+    weights = CFG.get("voice_weights")
+    if weights:
+        return random.choices(voices, weights=[weights.get(v, 1) for v in voices], k=1)[0]
+    return random.choice(voices)
 
 
 async def _synthesize(text: str, out_path: str, voice: str) -> list[dict]:

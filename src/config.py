@@ -268,6 +268,16 @@ CONFIGS = {
             "es-US-AlonsoNeural",
             "es-CO-GonzaloNeural",
         ],
+        # 2026-08-21: weekly_report — Jorge 90.5% retention (n=12) против Alonso 73.2% (n=12)
+        # и Gonzalo 73.7% (n=16), разрыв 17 п.п. Весим, не убираем остальные — ротация голосов
+        # существует ЧТОБЫ видео не звучали одинаково (anti-"inauthentic content" сигнал), полное
+        # исключение проиграло бы эту цель ради retention-прироста, который ещё предстоит
+        # перепроверить на бОльшей выборке.
+        "voice_weights": {
+            "es-MX-JorgeNeural": 3,
+            "es-US-AlonsoNeural": 1,
+            "es-CO-GonzaloNeural": 1,
+        },
         # 2026-07-10: "SÍGUEME" (follow) -> "SUSCRÍBETE" (subscribe) — misma razón que EN,
         # YouTube no tiene "Follow", el botón real dice "Suscribirse".
         "cta_phrases": [
@@ -286,6 +296,10 @@ CONFIGS = {
             "META: 1,000 SUSCRIPTORES\nSÉ UNO DE ELLOS",
         ],
         "mid_cta_text": "SUSCRÍBETE",
+        # 2026-08-21: weekly_report — микро-CTA режет retention на 11.5 п.п. (81.4% без / 69.9%
+        # с, n=9/10). Выключаем для ES (см. mid_cta_probability в pipeline.py, дефолт 0.5 для
+        # каналов без override).
+        "mid_cta_probability": 0.0,
         "first_comment_vote_lines": [
             "👍 este comentario si ya lo sabías — responde si te sorprendió",
             "👍 = ya lo sabía | responde = no tenía idea",
@@ -325,13 +339,17 @@ CONFIGS = {
             "ONE short CTA in Spanish, 4-7 words MAX — either \"Suscríbete para más.\" or "
             "\"Comenta si lo sabías.\" Pick one, no embellishment, no extra clauses"
         ),
-        # Ротация структур: ES под подавлением раздачи (inauthentic-classifier, 2026-07-10) —
-        # агрессивная равномерная ротация всех 4 типов, максимальная дифференциация паттерна.
+        # Ротация структур: была равномерной из-за подавления раздачи (inauthentic-classifier,
+        # 2026-07-10) — подавление разрешилось само 2026-07-16 (см. README «Аномалия ES»).
+        # 2026-08-21: weekly_report — unsolved-mystery 92.7% retention (n=12) далеко впереди
+        # happening-now 69.5% (n=9)/myth-debunk 72.7% (n=10)/historical-story 77.7% (n=8),
+        # разрыв 23 п.п. Тилт в сторону лидера, но БЕЗ обнуления остальных — та же причина, что
+        # у voice_weights (диверсификация паттерна важна сама по себе, не только retention).
         "structure_weights": {
-            "myth-debunk": 0.25,
-            "unsolved-mystery": 0.25,
-            "happening-now": 0.25,
-            "historical-story": 0.25,
+            "myth-debunk": 0.20,
+            "unsolved-mystery": 0.40,
+            "happening-now": 0.20,
+            "historical-story": 0.20,
         },
         # Instagram ES (2026-07-01): @datosen30s, свой Business-аккаунт/токен (см. daily-es.yml).
         "post_to_instagram": True,
