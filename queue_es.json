@@ -1,53 +1,5 @@
 [
   {
-    "title": "¿El volcán que destruyó una ciudad... bajo el hielo? 😱",
-    "title_opener": "question",
-    "title_intensity": "extreme",
-    "hook_text": "Nadie vio venir esto",
-    "hook_template": "authority-cant-explain",
-    "emotional_tone": "fear",
-    "script": "Nadie puede explicar cómo una ciudad entera desapareció sin que nadie lo reportara. En 1362, el volcán Öræfajökull en Islandia eruptó bajo un glaciar. El hielo derretido arrasó la región de Litla-Hérað en minutos — borrando aldeas, ganado, personas. Cero sobrevivientes para contar qué pasó exactamente. Los geólogos saben que hubo una erupción subglacial masiva, pero el mecanismo exacto que generó esa inundación instantánea todavía no está resuelto. El hielo contenía la erupción... hasta que no pudo más. ¿Cuántos volcanes activos están ahora mismo dormidos bajo glaciares esperando lo mismo? Y por eso exactamente.",
-    "word_count": 88,
-    "search_summary": "El volcán Öræfajökull en Islandia destruyó la región de Litla-Hérað en 1362 con una erupción subglacial cuyo mecanismo exacto sigue sin resolverse.",
-    "comment_question": "¿Cuántos volcanes bajo glaciares podrían despertar hoy sin aviso? 🌋",
-    "source_note": "Servicio Meteorológico de Islandia, registros históricos 1362",
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "volcán subglacial",
-      "Öræfajökull Islandia",
-      "erupción bajo hielo",
-      "misterios geológicos",
-      "desastres naturales",
-      "volcanes activos",
-      "datos curiosos",
-      "curiosidades históricas",
-      "fenómenos inexplicables"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#datoscuriosos",
-      "#volcanes",
-      "#misteriogeologico"
-    ],
-    "video_queries": [
-      "iceland glacier aerial landscape",
-      "volcanic eruption under ice",
-      "glacial flood rushing water",
-      "abandoned ruins snow Iceland",
-      "geologist examining ice field",
-      "active volcano steam beneath glacier"
-    ],
-    "has_loop": true,
-    "topic": "volcanoes and earthquakes",
-    "structure": "unsolved-mystery",
-    "niche_styled": true,
-    "title_variant": "narrative",
-    "hashtag_position": "end"
-  },
-  {
     "title": "¿El pulpo evolucionó su cerebro... sin usar ADN? 🤯",
     "title_opener": "question",
     "title_intensity": "extreme",

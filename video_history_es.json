@@ -3122,5 +3122,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "mrb7ErvvBIc",
+    "published_at": "2026-08-21T20:24:48.404462+00:00",
+    "title": "¿El volcán que destruyó una ciudad... bajo el hielo? 😱",
+    "topic": "volcanoes and earthquakes",
+    "hook_template": "authority-cant-explain",
+    "title_opener": "question",
+    "emotional_tone": "fear",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 42.8,
+    "voice": "es-US-AlonsoNeural",
+    "caption_color": "white",
+    "structure": "unsolved-mystery",
+    "pair_role": null
   }
 ]
