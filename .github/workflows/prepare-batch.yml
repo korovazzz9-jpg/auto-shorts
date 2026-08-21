@@ -69,7 +69,11 @@ jobs:
       # YT-креды нужны дедупу против уже ОПУБЛИКОВАННЫХ видео (recent_titles.
       # get_recent_video_texts) — без них проверка молча превращается в no-op
       # (перегенерация того же факта, реальный случай: медуза 2026-07-04).
+      # 2026-08-21: EN на паузе (плато 6 недель, слабее ES по всем метрикам) — отключено,
+      # чтобы не жечь Claude на скрипты, которые daily.yml (тоже отключён) всё равно не
+      # опубликует. Вернуть: убрать if: false (и daily.yml/watchdog.yml/etc заодно).
       - name: Prepare EN queue
+        if: false
         working-directory: src
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -104,7 +108,10 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python prepare_batch.py
 
+      # 2026-08-21: PT на паузе (самый молодой канал, плато ~500 просм/нед 4 недели подряд)
+      # — отключено по той же причине, что EN выше. Вернуть: убрать if: false.
       - name: Prepare PT queue
+        if: false
         working-directory: src
         env:
           CHANNEL: pt

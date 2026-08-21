@@ -20,7 +20,11 @@ jobs:
       - name: Install Python deps
         run: pip install -r requirements.txt
 
+      # 2026-08-21: EN на паузе (данные плато 6 недель, retention 58.7% против 78.9% у ES) —
+      # отключено, чтобы не жечь Claude на инсайты по каналу, который сейчас не публикует.
+      # Вернуть: убрать if: false.
       - name: EN insights
+        if: false
         working-directory: src
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}

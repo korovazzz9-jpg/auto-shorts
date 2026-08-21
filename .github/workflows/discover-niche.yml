@@ -32,7 +32,9 @@ jobs:
         run: pip install -r requirements.txt
 
       # TELEGRAM_* — для конкурентного дайджеста (топ-5 выбросов недели в Telegram).
+      # 2026-08-21: EN на паузе — отключено (см. prepare-batch.yml для контекста решения).
       - name: Discover EN niche outliers
+        if: false
         working-directory: src
         env:
           YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
@@ -65,8 +67,9 @@ jobs:
 
       # Outlier-recreation (2026-07-05): самый мощный чужой выброс недели пересоздаётся
       # своим скриптом в начало очереди. YT-креды нужны для дедупа против опубликованных.
+      # 2026-08-21: EN на паузе — отключено (см. prepare-batch.yml для контекста решения).
       - name: Recreate top EN outlier
-        if: always()
+        if: false
         working-directory: src
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
