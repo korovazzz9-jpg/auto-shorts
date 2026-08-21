@@ -6,25 +6,7 @@ from datetime import datetime, timezone
 from dotenv import load_dotenv
 load_dotenv()
 
-from google.oauth2.credentials import Credentials
-from googleapiclient.discovery import build
-
-SCOPES = [
-    "https://www.googleapis.com/auth/youtube.readonly",
-    "https://www.googleapis.com/auth/youtube.force-ssl",
-]
-
-
-def get_client(refresh_token):
-    creds = Credentials(
-        token=None,
-        refresh_token=refresh_token,
-        client_id=os.environ["YT_CLIENT_ID"],
-        client_secret=os.environ["YT_CLIENT_SECRET"],
-        token_uri="https://oauth2.googleapis.com/token",
-        scopes=SCOPES,
-    )
-    return build("youtube", "v3", credentials=creds)
+from youtube_auth import get_client
 
 
 def fetch_channel_info(yt):
