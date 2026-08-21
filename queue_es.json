@@ -249,5 +249,108 @@
     "niche_styled": false,
     "title_variant": "seo",
     "hashtag_position": "end"
+  },
+  {
+    "title": "El océano tiene cascadas 3,500 metros bajo el mar 😱",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "El agua cae hacia abajo… bajo el agua",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "impossible",
+    "script": "Hay cascadas más grandes que cualquier cosa en tierra... y nunca las has visto. Bajo el Atlántico, entre Groenlandia e Islandia, agua fría y densa cae 3,500 metros hacia el fondo del océano. La cascada más grande en tierra — el Salto Ángel — mide 979 metros. Esta la supera casi cuatro veces. Pero aquí está lo que nadie espera: esa caída no para. Cae sin interrupciones desde hace miles de años, moviendo billones de litros de agua cada segundo. Manda este video a alguien que crea que ya conoce el océano. Y así es como.",
+    "word_count": 87,
+    "search_summary": "Bajo el Atlántico existe una cascada submarina de 3,500 metros entre Groenlandia e Islandia, la más grande del mundo.",
+    "comment_question": "¿Sabías que el Salto Ángel ni siquiera está en el top 5 de cascadas reales? 🌊",
+    "source_note": "NOAA Ocean Facts, 2020",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "curiosidades del océano",
+      "datos sorprendentes",
+      "cascada submarina",
+      "fondo del mar",
+      "cascada más grande del mundo",
+      "océano Atlántico",
+      "datos en 30 segundos",
+      "hechos increíbles",
+      "datos sorprendentes del universo",
+      "cascada submarina isla mauricio"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#curiosidades",
+      "#oceano",
+      "#datosincreibles",
+      "#fondodelmar"
+    ],
+    "video_queries": [
+      "deep ocean dark water",
+      "underwater ocean abyss",
+      "waterfall aerial wide shot",
+      "ocean floor deep sea",
+      "Angel Falls wide landscape",
+      "deep sea ocean current flowing",
+      "underwater dark blue ocean"
+    ],
+    "has_loop": true,
+    "topic": "the ocean",
+    "structure": "myth-debunk",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "¿La sonda que viajó 46 años y aún manda señal? 😱",
+    "title_opener": "question",
+    "title_intensity": "extreme",
+    "hook_text": "Más lejos que cualquier humano",
+    "hook_template": "one-category",
+    "emotional_tone": "awe",
+    "script": "Una máquina lanzada en 1977 acaba de cruzar el límite del sistema solar — y todavía habla. La Voyager 1 viaja a más de 23 mil millones de kilómetros de la Tierra. En 2012, entró al espacio interestelar: ningún objeto humano había llegado tan lejos. La señal tarda 22 horas en llegar, y la NASA la recibe con una antena de 70 metros en California. Si hoy la apagaras, nadie podría apagarla: ya no habría forma de alcanzarla. ¿Le seguirías enviando señales sabiendo que nunca regresará?",
+    "word_count": 87,
+    "search_summary": "La sonda Voyager 1, lanzada en 1977, viaja en el espacio interestelar a 23 mil millones de kilómetros y sigue enviando señales a la NASA.",
+    "comment_question": "¿Vale la pena hablarle a algo que nunca va a volver? 🛸",
+    "source_note": "NASA Jet Propulsion Laboratory, 2023",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "datos curiosos del espacio",
+      "Voyager 1",
+      "sonda espacial",
+      "espacio interestelar",
+      "NASA curiosidades",
+      "datos en 30 segundos",
+      "hechos del universo",
+      "exploración espacial",
+      "datos increíbles",
+      "datos curiosos del espacio para niños",
+      "voyager 19",
+      "sonda espacial china"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datosCuriosos",
+      "#espacio",
+      "#NASA",
+      "#voyager"
+    ],
+    "video_queries": [
+      "deep space stars milky way",
+      "spacecraft launch rocket night sky",
+      "solar system planets wide view",
+      "radio telescope dish antenna desert",
+      "scientist control room monitors NASA",
+      "infinite space stars dark background"
+    ],
+    "has_loop": false,
+    "topic": "space",
+    "structure": "historical-story",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
   }
 ]
