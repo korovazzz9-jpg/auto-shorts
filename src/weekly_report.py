@@ -20,6 +20,9 @@ load_dotenv()
 
 HOOK_STATS_FILE = os.path.join(os.path.dirname(__file__), "..", f"hook_stats_{CHANNEL}.json")
 MIN_HOOK_SAMPLE = 5  # меньше видео на шаблон — рано делать выводы, файл не пишем
+TONE_STATS_FILE = os.path.join(os.path.dirname(__file__), "..", f"tone_stats_{CHANNEL}.json")
+MIN_TONE_SAMPLE = 5  # тот же порог, что MIN_HOOK_SAMPLE
+MIN_TONE_GAP = 5.0  # п.п. отставания от среднего по остальным тонам — меньше = шум, не сигнал
 
 
 def _avg_by(videos: list[dict], key: str, min_pct: float = 0.0) -> list[tuple[str, float, int]]:
@@ -139,6 +142,30 @@ def save_hook_stats(videos: list[dict]) -> None:
         json.dump({"best_template": best_template, "avg_pct": round(avg, 1), "videos": n,
                    "updated": date.today().isoformat()}, f, ensure_ascii=False, indent=2)
     print(f"  hook_stats: {best_template} ({avg:.1f}%, n={n})")
+
+
+def save_tone_stats(videos: list[dict]) -> None:
+    """Слабейший по retention эмоциональный тон недели → tone_stats_<channel>.json (коммитит
+    weekly-report.yml). generate_script._tone_note() читает файл и мягко советует не форсировать
+    этот тон. Тот же паттерн, что save_hook_stats, но с обратным знаком — тонов много (8),
+    «лучший» неустойчиво прыгает между ними на малых выборках, а вот стабильно ХУДШИЙ на фоне
+    остальных — сигнал понадёжнее (2026-08-21, найдено на ES: impossible 67.8% против 80%+ у
+    creepy/awe/fear)."""
+    tones = [(k, avg, n) for k, avg, n in _avg_by(videos, "emotional_tone")
+             if k not in ("—", "other") and n >= MIN_TONE_SAMPLE]
+    if len(tones) < 2:
+        print(f"  tone_stats: <2 тонов с ≥{MIN_TONE_SAMPLE} видео — данных мало, файл не трогаем.")
+        return
+    worst_tone, worst_avg, worst_n = tones[-1]  # _avg_by сортирует по убыванию — последний слабейший
+    rest_avg = sum(a for _, a, _ in tones[:-1]) / (len(tones) - 1)
+    if rest_avg - worst_avg < MIN_TONE_GAP:
+        print(f"  tone_stats: разброс тонов <{MIN_TONE_GAP:.0f} п.п. — не пишем, шум.")
+        return
+    with open(TONE_STATS_FILE, "w", encoding="utf-8") as f:
+        json.dump({"avoid_tone": worst_tone, "avg_pct": round(worst_avg, 1), "videos": worst_n,
+                   "rest_avg_pct": round(rest_avg, 1), "updated": date.today().isoformat()},
+                   f, ensure_ascii=False, indent=2)
+    print(f"  tone_stats: avoid {worst_tone} ({worst_avg:.1f}% vs rest {rest_avg:.1f}%, n={worst_n})")
 
 
 def save_dropoff_stats(videos: list[dict]) -> None:
@@ -423,6 +450,7 @@ def main() -> None:
     notify(build_report(videos, spike_die))
     save_hook_stats(videos)
     save_dropoff_stats(videos)
+    save_tone_stats(videos)
 
     # Дозаполняем video_history_<channel>.json просмотрами/retention/лайками (2026-07-06) —
     # эти же данные уже получены выше через _videos_with_retention(), лишних вызовов нет.

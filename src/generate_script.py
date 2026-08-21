@@ -554,14 +554,27 @@ EMOTIONAL_TONE_INSTRUCTION = (
     f"of [{', '.join(EMOTIONAL_TONES)}]. This is independent of the topic — e.g. a space fact "
     "can be 'fear', 'awe', or 'beautiful' depending on the angle. Report the closest match "
     "(use 'other' if none fits)."
-    # 2026-08-21: weekly_report (ES) — 'impossible' 67.8% retention на самой большой выборке
-    # (n=15) среди тонов, тогда как creepy/awe/fear все выше 80%. ES-специфичный сигнал (EN
-    # на паузе, своих данных нет) — гейтим по каналу, не переносим на EN без его собственных
-    # данных, если/когда канал возобновится.
-    + (" Data note: on this channel 'impossible' currently retains viewers noticeably worse "
-       "than 'creepy'/'awe'/'fear' — prefer those angles when the fact genuinely supports them, "
-       "but never force a tone that doesn't fit." if CHANNEL == "es" else "")
 )
+
+
+def _tone_note() -> str:
+    """Замыкает петлю тон-аналитики (2026-08-21, тот же паттерн, что _hook_preference/
+    _dropoff_note): weekly_report.py пишет слабейший по retention тон недели в
+    tone_stats_<channel>.json, здесь — мягкая подсказка не налегать на него. Файл-driven, а не
+    хардкод под конкретный канал — EN/PT подключатся сами, как только у них накопятся свои
+    данные (после паузы), без правки кода. Нет файла/данных — пустая строка."""
+    path = os.path.join(os.path.dirname(__file__), "..", f"tone_stats_{CHANNEL}.json")
+    try:
+        with open(path, encoding="utf-8") as f:
+            stats = json.load(f)
+        avoid = stats.get("avoid_tone", "")
+    except Exception:
+        return ""
+    if avoid not in EMOTIONAL_TONES or avoid == "other":
+        return ""
+    return (f" Data note: on this channel '{avoid}' currently retains viewers noticeably worse "
+            "than other tones — prefer a different angle when the fact genuinely supports it, "
+            "but never force a tone that doesn't fit.")
 
 
 # Video pairs (2026-07-08, см. paired_facts.py): видео A формулирует опровержимый/дополняемый
@@ -630,7 +643,7 @@ def _build_user_content(topic: str, avoid_block: str, title_instruction: str | N
         # Хук-подсказка из аналитики натренирована на myth-debunk шаблонах — для других
         # структур (свои формы хука) она бы тянула модель обратно в старый скелет.
         f"{_hook_preference() if structure == 'myth-debunk' else ''}\n"
-        f"- {EMOTIONAL_TONE_INSTRUCTION}\n"
+        f"- {EMOTIONAL_TONE_INSTRUCTION}{_tone_note()}\n"
         f"- tags: 6-9 specific YouTube search tags in {CFG['script_language']}, mixing "
         "broad ones (e.g. the channel's equivalent of 'facts'/'did you know') with specific "
         "long-tail ones tied to the exact fact (the specific phenomenon, place, or thing "
