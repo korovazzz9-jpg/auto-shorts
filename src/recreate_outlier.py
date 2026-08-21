@@ -11,7 +11,9 @@
 под якорь «вот заголовок перформящего видео конкурента — воспроизведи РЕАЛЬНЫЙ факт за ним
 своими словами», кладёт В НАЧАЛО очереди с флагом niche_recreated (тег niche-recreation).
 
-Запуск: шаг в discover-niche.yml (Пн, после discover), оба канала. 1 видео/канал/неделю.
+Запуск: шаг в discover-niche.yml (Пн, после discover), оба канала. До RECREATIONS_PER_RUN
+видео/канал/неделю (2026-08-21: 1→3 по запросу юзера — дайджест раньше показывал топ-5
+выбросов, а тестился только топ-1; остальные пропадали без следа).
 """
 import json
 import os
@@ -45,6 +47,7 @@ load_dotenv()
 NICHE_SIGNAL_FILE = os.path.join(os.path.dirname(__file__), "..", f"niche_signal_{CHANNEL}.json")
 RECREATED_FILE = os.path.join(os.path.dirname(__file__), "..", f"recreated_niche_{CHANNEL}.json")
 MAX_RECREATED_MEMORY = 100  # сколько последних пересозданных video_id помним
+RECREATIONS_PER_RUN = 3  # попыток за прогон (top_outliers хранит до 10 — запас на дедуп-пропуски)
 
 
 def _load_recreated() -> list[str]:
@@ -61,32 +64,27 @@ def _save_recreated(ids: list[str]) -> None:
         json.dump(ids[-MAX_RECREATED_MEMORY:], f, ensure_ascii=False, indent=2)
 
 
-def _pick_target() -> dict | None:
-    """Самый мощный ещё не пересозданный выброс из niche_signal."""
+def _pick_target(exclude: set[str] = frozenset()) -> dict | None:
+    """Самый мощный ещё не пересозданный выброс из niche_signal. exclude — video_id, уже
+    опробованные В ЭТОМ прогоне (не обязательно персистентно пересозданные, см. main())."""
     try:
         with open(NICHE_SIGNAL_FILE, encoding="utf-8") as f:
             outliers = json.load(f).get("top_outliers", [])
     except (FileNotFoundError, json.JSONDecodeError):
         return None
-    done = set(_load_recreated())
+    done = set(_load_recreated()) | exclude
     for o in outliers:
         if isinstance(o, dict) and o.get("video_id") and o["video_id"] not in done and o.get("title"):
             return o
     return None
 
 
-def main() -> None:
-    target = _pick_target()
-    if not target:
-        print("  Нет непересозданных выбросов — пропускаем.")
-        return
+def _recreate_one(target: dict, queue: list, published_signatures: list) -> bool:
+    """Один выброс: генерирует свой скрипт и кладёт в очередь. Возвращает True, если видео
+    реально добавлено. False — дедуп/брак; дедуп персистится в RECREATED_FILE (не пересоздаём
+    снова), а невалидный JSON от модели — НЕТ (цель не бракованная, ей просто не повезло в
+    этом прогоне, следующая неделя попробует снова)."""
     print(f"  Цель: «{target['title']}» ({target['ratio']}×, тема {target['topic']})")
-
-    queue = load_queue()
-    try:
-        published_signatures = [_signature_from_text(t) for t in get_recent_video_texts(50)]
-    except Exception:
-        published_signatures = []
 
     # Дедуп ДО генерации — по заголовку цели (сигнатура слабее, чем по скрипту, но чужого
     # скрипта у нас нет; после генерации проверяем ещё раз полной сигнатурой).
@@ -94,7 +92,7 @@ def main() -> None:
     if any(len(target_sig & ps) >= 2 for ps in published_signatures):
         print("  Факт из цели уже выходил на канале — пропускаем, помечаем как пересозданный.")
         _save_recreated(_load_recreated() + [target["video_id"]])
-        return
+        return False
 
     try:
         past_titles = get_recent_titles()
@@ -136,12 +134,16 @@ def main() -> None:
             last_err = e
             print(f"  JSON parse failed (attempt {attempt + 1}/3): {e}; retrying...")
     if data is None:
-        raise RuntimeError(f"Recreation JSON невалиден после 3 попыток: {last_err}")
+        # Не персистим в RECREATED_FILE — цель НЕ бракованная, просто не повезло с генерацией
+        # в этом прогоне, следующая неделя попробует снова. exclude в main() не даёт зациклиться
+        # на ней же в рамках ТЕКУЩЕГО прогона.
+        print(f"  Recreation JSON невалиден после 3 попыток ({last_err}) — пропускаем цель.")
+        return False
 
     missing = [k for k in ("title", "script", "video_queries", "tags", "hashtags") if not data.get(k)]
     if missing:
         print(f"  В JSON нет полей {missing} — пропускаем прогон.")
-        return
+        return False
 
     problems = _validate(data)
     if problems:
@@ -173,7 +175,7 @@ def main() -> None:
     if any(_is_duplicate(data, q) for q in queue) or any(len(sig & ps) >= 2 for ps in published_signatures):
         print("  Сгенерированный факт — дубль очереди/опубликованного, пропускаем.")
         _save_recreated(_load_recreated() + [target["video_id"]])
-        return
+        return False
 
     add_title_to_cache(data["title"])
     add_topic_to_cache(target["topic"])
@@ -181,6 +183,27 @@ def main() -> None:
     save_queue(queue)
     _save_recreated(_load_recreated() + [target["video_id"]])
     print(f"  + «{data['title']}» в начало очереди (из выброса {target['ratio']}×).")
+    return True
+
+
+def main() -> None:
+    queue = load_queue()
+    try:
+        published_signatures = [_signature_from_text(t) for t in get_recent_video_texts(50)]
+    except Exception:
+        published_signatures = []
+
+    attempted: set[str] = set()  # video_id опробованные В ЭТОМ прогоне (успех/дедуп/брак)
+    added = 0
+    for _ in range(RECREATIONS_PER_RUN):
+        target = _pick_target(exclude=attempted)
+        if not target:
+            print("  Нет больше непересозданных выбросов — останавливаемся.")
+            break
+        attempted.add(target["video_id"])
+        if _recreate_one(target, queue, published_signatures):
+            added += 1
+    print(f"  Итого добавлено в очередь: {added}/{RECREATIONS_PER_RUN}.")
 
 
 if __name__ == "__main__":
