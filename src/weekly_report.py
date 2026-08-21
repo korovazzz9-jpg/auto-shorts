@@ -322,6 +322,21 @@ def build_report(videos: list[dict], spike_die: list[dict] | None = None) -> str
         for name, avg, n in niche:
             lines.append(f"  {avg:5.1f}%  ({n:2})  {name}")
 
+    # Пересозданные топ-выбросы ниши (2026-08-21, recreate_outlier.py, юзер попросил
+    # отслеживать): тег niche-recreation — свой скрипт по мотивам чужого хита. Сравниваем и
+    # retention, и просмотры (не только % — там уже был один явный выброс 1901 против
+    # среднего ~884, вопрос переносится ли на бОльшую выборку).
+    recreated_groups = (("пересозданные", [v for v in videos if v.get("niche_recreated") == "yes"]),
+                         ("остальной канал", [v for v in videos if v.get("niche_recreated") != "yes"]))
+    if recreated_groups[0][1]:
+        lines.append("\nПересозданные чужие выбросы (niche-recreation):")
+        for label, group in recreated_groups:
+            with_pct = [v["pct"] for v in group if v.get("pct", 0) > 0]
+            with_views = [v["views"] for v in group if v.get("views", 0) > 0]
+            avg_pct = sum(with_pct) / len(with_pct) if with_pct else 0.0
+            avg_views = sum(with_views) / len(with_views) if with_views else 0
+            lines.append(f"  {avg_pct:5.1f}%  {avg_views:5.0f} views  ({len(group):2})  {label}")
+
     # «On this day» (2026-07-05): топикал-факты с привязкой к дате против обычных.
     topical = [(k, a, n) for k, a, n in _avg_by(videos, "topical") if k in ("yes", "no")]
     if any(k == "yes" for k, _, _ in topical):

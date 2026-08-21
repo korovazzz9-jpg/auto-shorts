@@ -41,6 +41,7 @@ MIDCTA_TAG_RE = re.compile(r"^midcta-(yes|no)$")  # микро-CTA в серед
 PAIR_A_TAG = "pair-a"  # часть A пары (несёт подписной тизер с 2026-07-10, см. paired_facts)
 PAIR_B_TAG = "pair-b"  # часть B (резолюция пары)
 NICHE_STYLED_TAG = "niche-styled"             # промпт получал заголовки чужих выбросов по теме
+NICHE_RECREATED_TAG = "niche-recreation"      # свой скрипт пересоздан из чужого выброса (recreate_outlier.py)
 TOPICAL_TAG = "topical-onthisday"             # факт с привязкой к дате публикации
 MAX_VIDEOS = 50  # сколько последних видео анализировать
 
@@ -101,11 +102,14 @@ def _recent_videos(youtube) -> list[dict]:
             cta_kind = None
             mid_cta = None
             niche = "plain"
+            niche_recreated = "no"
             topical = "no"
             pair = "no"
             for tag in v["snippet"].get("tags", []):
                 if tag == NICHE_STYLED_TAG:
                     niche = "styled"
+                if tag == NICHE_RECREATED_TAG:
+                    niche_recreated = "yes"
                 if tag == TOPICAL_TAG:
                     topical = "yes"
                 if tag == PAIR_A_TAG:
@@ -175,6 +179,7 @@ def _recent_videos(youtube) -> list[dict]:
                 "cta_kind": cta_kind or "—",
                 "mid_cta": mid_cta or "—",
                 "niche": niche,
+                "niche_recreated": niche_recreated,
                 "topical": topical,
                 "pair": pair,
             })

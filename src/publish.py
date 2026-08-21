@@ -90,7 +90,17 @@ def publish(
     # Служебные extra_tags (topic-/hook-/format-/color-/voice-) ОСТАЮТСЯ — скрытая телеметрия
     # для weekly_report, не SEO, зритель их не видит. Откат: lean_metadata=False в config.py.
     content_tags = [] if CFG.get("lean_metadata") else list(data["tags"])
-    tags = content_tags + list(extra_tags) + list(CFG.get("sister_lang_tags", []))
+    # 2026-08-21: порядок починен (баг найден при проверке niche-recreation на живых видео ES —
+    # тег отсутствовал у 3 из 4). _sanitize_tags (upload_youtube.py) режет ПО БЮДЖЕТУ 460 симв.,
+    # оставляя теги, добавленные РАНЬШЕ в списке — а extra_tags (телеметрия для weekly_report:
+    # hook-/niche-recreation/pair-a-b/cta-/midcta-/...) стояли ПОСЛЕДНИМИ, вопреки комментарию
+    # выше, что именно они важнее SEO-тегов. Суммарная длина тегов на реальных видео стабильно
+    # упиралась в 456-460 — обрезка срабатывала почти всегда, и телеметрия терялась молча (без
+    # ошибки — video_history.json продолжал писаться из data, а на самом YouTube тега не было).
+    # Теперь extra_tags идут первыми (никогда не режутся), SEO-content_tags — вторыми (жертвуются
+    # первыми при нехватке бюджета, это осознанный компромисс — весь пайплайн self-improvement
+    # держится на этих тегах, а SEO-эффект тегов для Shorts и так уже признан слабым выше).
+    tags = list(extra_tags) + content_tags + list(CFG.get("sister_lang_tags", []))
 
     print("Загрузка на YouTube...")
     video_id = upload_to_youtube(
