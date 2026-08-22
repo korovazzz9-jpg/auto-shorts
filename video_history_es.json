@@ -3141,5 +3141,24 @@
     "caption_color": "white",
     "structure": "unsolved-mystery",
     "pair_role": null
+  },
+  {
+    "video_id": "HgUjXZiOqYE",
+    "published_at": "2026-08-22T00:24:38.255966+00:00",
+    "title": "¿El pulpo evolucionó su cerebro... sin usar ADN? 🤯",
+    "topic": "evolution",
+    "hook_template": "sounds-fake",
+    "title_opener": "question",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 38.9,
+    "voice": "es-MX-JorgeNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": null
   }
 ]
