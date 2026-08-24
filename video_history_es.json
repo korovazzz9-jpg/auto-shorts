@@ -3386,5 +3386,24 @@
     "caption_color": "white",
     "structure": null,
     "pair_role": null
+  },
+  {
+    "video_id": "6jigCC2KAFk",
+    "published_at": "2026-08-24T20:24:08.742288+00:00",
+    "title": "El Coliseo romano saqueado por sus propios emperadores 😱",
+    "topic": "ancient history",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "awe",
+    "title_variant": "seo",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": true,
+    "topical": null,
+    "length_seconds": 35.1,
+    "voice": "es-US-AlonsoNeural",
+    "caption_color": "white",
+    "structure": null,
+    "pair_role": null
   }
 ]
