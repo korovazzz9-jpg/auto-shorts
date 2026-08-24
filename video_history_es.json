@@ -3367,5 +3367,24 @@
     "caption_color": "white",
     "structure": "unsolved-mystery",
     "pair_role": null
+  },
+  {
+    "video_id": "JD18JtL39bQ",
+    "published_at": "2026-08-24T13:25:42.131874+00:00",
+    "title": "¿Una montaña cayó al mar y nadie lo vio venir? 😱",
+    "topic": "volcanoes and earthquakes",
+    "hook_template": "sounds-fake",
+    "title_opener": "question",
+    "emotional_tone": "fear",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": true,
+    "topical": null,
+    "length_seconds": 42.2,
+    "voice": "es-US-AlonsoNeural",
+    "caption_color": "white",
+    "structure": null,
+    "pair_role": null
   }
 ]
