@@ -4,18 +4,20 @@
     "archaeological discoveries": 2,
     "ancient civilizations": 2,
     "historical mysteries": 3,
-    "the human body": 2,
+    "the human body": 1,
     "the ocean": 2,
     "evolution": 2,
     "volcanoes and earthquakes": 5,
+    "extreme weather": 1,
+    "natural wonders": 1,
     "space": 1,
     "future technology": 7
   },
   "outlier_titles": {
     "ancient history": [
+      "¿Por qué nadie quiere comprar la casa de Michael Jackson? 🏠",
       "¿Por qué falta la mitad del Coliseo romano? 😱",
-      "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos",
-      "Tres datos históricos alucinantes #historia #interesante #hechos"
+      "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos"
     ],
     "archaeological discoveries": [
       "Hallazgo del siglo 5 a.C en aguas Italianas #historia #datoscuriosos #shorts",
@@ -31,8 +33,7 @@
       "Los misterios del Amazonas #amazonas #mitos #leyendas #curiosidades #shortsviral"
     ],
     "the human body": [
-      "DATO CURIOSO - LA NIÑA PERRO #shorts",
-      "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos"
+      "DATO CURIOSO - LA NIÑA PERRO #shorts"
     ],
     "the ocean": [
       "Si ves esto huye 😧",
@@ -47,12 +48,18 @@
       "EL TSUNAMI MÁS GRANDE DE LA HISTORIA",
       "la erupción del volcan vesubio en pompeya"
     ],
+    "extreme weather": [
+      "China Enfría El Asfalto Con Camiones Cisterna 🥵💦"
+    ],
+    "natural wonders": [
+      "Maravillas del Río Amazonas: Naturaleza Exuberante y Vida Salvaje"
+    ],
     "space": [
       "Algo se Aproxima a a Tierra #Shorts"
     ],
     "future technology": [
       "Científicos EXPERIMENTOS CASEROS! 😱 #shorts",
-      "3 DATOS del CYBERTRUCK 👀 #datoscuriosos",
+      "EXPERIMENTOS CIENTÍFICOS CASEROS sencillos!!! #shorts #experimentos #caseros #cientificos",
       "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos"
     ]
   },
@@ -61,7 +68,7 @@
       "topic": "future technology",
       "title": "El mejor teléfono del mundo😱🌎#datoscuriosos #top5 #shorts",
       "video_id": "_Wmiv1gALNw",
-      "views": 8615753,
+      "views": 8615773,
       "subs": 13400,
       "ratio": 643.0
     },
@@ -69,90 +76,90 @@
       "topic": "volcanoes and earthquakes",
       "title": "¿Por qué tembló tan fuerte Colombia?#ciencia #terremoto #colombia #shorts",
       "video_id": "4i8w_dROct8",
-      "views": 194299,
-      "subs": 674,
-      "ratio": 288.3
+      "views": 220994,
+      "subs": 746,
+      "ratio": 296.2
+    },
+    {
+      "topic": "natural wonders",
+      "title": "Maravillas del Río Amazonas: Naturaleza Exuberante y Vida Salvaje",
+      "video_id": "K5UgjcZPUEc",
+      "views": 791829,
+      "subs": 2970,
+      "ratio": 266.6
     },
     {
       "topic": "ancient history",
       "title": "¿Por qué falta la mitad del Coliseo romano? 😱",
       "video_id": "k18cQG9VuUw",
-      "views": 14135552,
-      "subs": 54700,
-      "ratio": 258.4
+      "views": 14138898,
+      "subs": 54600,
+      "ratio": 259.0
     },
     {
       "topic": "volcanoes and earthquakes",
       "title": "EL TSUNAMI MÁS GRANDE DE LA HISTORIA",
       "video_id": "Tp_f3ZBfxcc",
-      "views": 1638480,
-      "subs": 7540,
-      "ratio": 217.3
+      "views": 1676310,
+      "subs": 7610,
+      "ratio": 220.3
     },
     {
       "topic": "the human body",
       "title": "DATO CURIOSO - LA NIÑA PERRO #shorts",
       "video_id": "9e82SusaU8c",
-      "views": 15282015,
-      "subs": 76400,
-      "ratio": 200.0
+      "views": 15341536,
+      "subs": 76500,
+      "ratio": 200.5
     },
     {
       "topic": "space",
       "title": "Algo se Aproxima a a Tierra #Shorts",
       "video_id": "hOq7uz55_eo",
-      "views": 8489812,
-      "subs": 49000,
+      "views": 8509106,
+      "subs": 49100,
       "ratio": 173.3
     },
     {
       "topic": "the ocean",
       "title": "Las islas más peligrosas del mundo 🌎🤯 #curiosidades #shorts #estadosunidos",
       "video_id": "TZHSvTMFYt8",
-      "views": 10608847,
+      "views": 10611107,
       "subs": 67000,
-      "ratio": 158.3
+      "ratio": 158.4
     },
     {
       "topic": "volcanoes and earthquakes",
       "title": "la erupción del volcan vesubio en pompeya",
       "video_id": "DB7ar9QMUAs",
-      "views": 774291,
-      "subs": 5700,
-      "ratio": 135.8
+      "views": 784410,
+      "subs": 5720,
+      "ratio": 137.1
     },
     {
-      "topic": "archaeological discoveries",
-      "title": "Hallazgo del siglo 5 a.C en aguas Italianas #historia #datoscuriosos #shorts",
-      "video_id": "XpaYY4Q2zhI",
-      "views": 957107,
-      "subs": 8100,
-      "ratio": 118.2
-    },
-    {
-      "topic": "volcanoes and earthquakes",
-      "title": "🌍💥 El terremoto más potente #curiosidades #datoscuriosos",
-      "video_id": "A_sPeB3Q9Dk",
-      "views": 4270058,
-      "subs": 39000,
-      "ratio": 109.5
+      "topic": "future technology",
+      "title": "Truco secreto de google que no conocías #shorts",
+      "video_id": "RgsNm0jEcko",
+      "views": 1419379,
+      "subs": 11500,
+      "ratio": 123.4
     }
   ],
   "saturation": {
-    "ancient history": 655423,
-    "archaeological discoveries": 50741,
-    "ancient civilizations": 150613,
-    "shipwrecks and lost treasures": 136,
-    "historical mysteries": 310848,
-    "the human body": 659882,
+    "ancient history": 654282,
+    "archaeological discoveries": 46930,
+    "ancient civilizations": 148219,
+    "shipwrecks and lost treasures": 1033,
+    "historical mysteries": 306108,
+    "the human body": 659768,
     "the animal kingdom": 1000000,
-    "the ocean": 473080,
-    "evolution": 649562,
-    "volcanoes and earthquakes": 61486,
-    "extreme weather": 228004,
-    "natural wonders": 235249,
-    "space": 701540,
-    "future technology": 654356
+    "the ocean": 475076,
+    "evolution": 648492,
+    "volcanoes and earthquakes": 6801,
+    "extreme weather": 234304,
+    "natural wonders": 238162,
+    "space": 698561,
+    "future technology": 648686
   },
-  "updated": "2026-08-17"
+  "updated": "2026-08-24"
 }
