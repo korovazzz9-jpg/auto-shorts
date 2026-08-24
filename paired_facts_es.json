@@ -108,5 +108,15 @@
     "part_b_video_id": null,
     "status": "awaiting_b",
     "created_at": 1787098972.8986852
+  },
+  {
+    "id": "gcV5MYyTHTE-1787531057",
+    "topic": "the ocean",
+    "part_a_video_id": "gcV5MYyTHTE",
+    "part_a_title": "El océano tiene oxígeno atrapado desde hace 800 años 😱",
+    "claim": "El océano tarda 1,000 años en completar una circulación global.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1787531057.2523608
   }
 ]

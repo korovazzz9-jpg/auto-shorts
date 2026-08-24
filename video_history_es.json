@@ -3293,5 +3293,24 @@
     "caption_color": "white",
     "structure": "historical-story",
     "pair_role": null
+  },
+  {
+    "video_id": "gcV5MYyTHTE",
+    "published_at": "2026-08-24T00:24:16.840957+00:00",
+    "title": "El océano tiene oxígeno atrapado desde hace 800 años 😱",
+    "topic": "the ocean",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "awe",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 26.8,
+    "voice": "es-CO-GonzaloNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": "a"
   }
 ]
