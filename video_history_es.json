@@ -3312,5 +3312,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": "a"
+  },
+  {
+    "video_id": "1jY6sq-UaV0",
+    "published_at": "2026-08-24T03:24:29.446965+00:00",
+    "title": "¿El océano tiene un punto donde el sonido no muere? 😱",
+    "topic": "the ocean",
+    "hook_template": "sounds-fake",
+    "title_opener": "question",
+    "emotional_tone": "creepy",
+    "title_variant": "narrative",
+    "has_loop": false,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 35.1,
+    "voice": "es-MX-JorgeNeural",
+    "caption_color": "white",
+    "structure": "unsolved-mystery",
+    "pair_role": null
   }
 ]
