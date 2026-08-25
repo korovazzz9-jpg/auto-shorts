@@ -72,9 +72,12 @@ CONFIGS = {
             "where": ["And that's exactly where.", "And it all happened where."],
             "because": ["And it's all because.", "And that's because."],
         },
-        # Доля видео с петлёй (остальные — обычная концовка). Не 100%, чтобы приём не стал
-        # формулой и чтобы было с чем сравнить в analytics_retention.py (тег loop-yes/loop-no).
-        "loop_probability": 0.5,
+        # Доля видео с петлёй (остальные — обычная концовка).
+        # 2026-08-21: 0.5→1.0 по запросу юзера — на полной истории (n=65/54) разница retention
+        # с петлёй/без была в пределах шума (59.2% vs 57.9%), а не сильная в ту или иную сторону,
+        # так что вреда от 100% нет. Ранние выводы «петля сильно помогает EN» (+17.6 п.п., 07-08)
+        # держались на маленькой недельной выборке (n=10/9), на полной истории не подтвердились.
+        "loop_probability": 1.0,
         # Topic-aware CTA: персональный призыв под тему видео конвертит лучше генерика.
         "cta_topic_template": "SUBSCRIBE for more\n{word} facts",
         # Пары, часть A (2026-07-10): у факта БУДЕТ продолжение (paired_facts) — бейдж-CTA
@@ -311,7 +314,10 @@ CONFIGS = {
             "where": ["Y justo ahí donde.", "Y todo pasó donde."],
             "because": ["Y todo porque.", "Y es porque."],
         },
-        "loop_probability": 0.5,
+        # 2026-08-21: 0.5→1.0 по запросу юзера — на полной истории (n=69/64) разница
+        # с петлёй/без в пределах шума (78.1% vs 78.3%). Свежая недельная выборка (07-08)
+        # показывала «петля вредит ES» (-21.6 п.п.), но на полной истории не подтвердилось.
+        "loop_probability": 1.0,
         "cta_topic_template": "SUSCRÍBETE para más\ndatos de {word}",
         # Пары, часть A — см. комментарий в EN-конфиге.
         "pair_cta_phrases": [
@@ -483,7 +489,10 @@ CONFIGS = {
             "where": ["E foi bem ali que.", "E tudo aconteceu onde."],
             "because": ["E tudo por causa disso.", "E é porque."],
         },
-        "loop_probability": 0.3,
+        # 2026-08-21: 0.3→1.0 по запросу юзера — на полной истории (n=35/75) разница с петлёй/
+        # без в пределах шума (73.3% vs 71.9%). Было нейтрально (0.3) с самого старта канала —
+        # своих данных, оправдывающих отличие от EN/ES, не накопилось.
+        "loop_probability": 1.0,
         "cta_topic_template": "INSCREVA-SE para mais\nfatos sobre {word}",
         # Пары, часть A — см. комментарий в EN-конфиге.
         "pair_cta_phrases": [
