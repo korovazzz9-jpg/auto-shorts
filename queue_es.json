@@ -294,5 +294,54 @@
     "niche_styled": false,
     "title_variant": "narrative",
     "hashtag_position": "end"
+  },
+  {
+    "title": "La IA que predice tu infarto 10 años antes de que ocurra 😱",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "Ya saben lo que te va a pasar",
+    "hook_template": "vague-ability",
+    "emotional_tone": "fear",
+    "script": "Mientras ves esto, una inteligencia artificial está analizando corazones y prediciendo infartos con 10 años de anticipación — antes de que tú sientas cualquier síntoma. Se llama ECG-AI, desarrollada por Mayo Clinic en 2019. Lee un electrocardiograma ordinario, detecta patrones invisibles al ojo humano, y da una alerta una década antes del evento. En ese tiempo, un médico puede evitarlo por completo. Tu corazón ya tiene señales que ningún cardiólogo puede ver hoy. ¿Tú ya te hiciste un ECG? Y por eso exactamente.",
+    "word_count": 85,
+    "search_summary": "La IA ECG-AI de Mayo Clinic predice infartos cardíacos hasta 10 años antes con un electrocardiograma común.",
+    "comment_question": "¿Ya te hiciste un ECG este año o esperas a que algo te duela? 💔",
+    "source_note": "Mayo Clinic, estudio publicado en The Lancet, 2019",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "tecnología del futuro",
+      "inteligencia artificial médica",
+      "predicción de infarto",
+      "ECG inteligencia artificial",
+      "datos curiosos",
+      "hechos increíbles",
+      "avances médicos 2024",
+      "salud y tecnología",
+      "tecnología del futuro 2050 la era digital"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#inteligenciaartificial",
+      "#salud",
+      "#tecnología"
+    ],
+    "video_queries": [
+      "heart monitor hospital close up",
+      "doctor reading ecg screen",
+      "AI medical technology futuristic",
+      "cardiologist examining patient",
+      "digital data heart scan",
+      "future hospital technology"
+    ],
+    "has_loop": true,
+    "topic": "future technology",
+    "structure": "happening-now",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
   }
 ]
