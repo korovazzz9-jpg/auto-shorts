@@ -3595,5 +3595,24 @@
     "caption_color": "white",
     "structure": "unsolved-mystery",
     "pair_role": null
+  },
+  {
+    "video_id": "S8C-aucoZxM",
+    "published_at": "2026-08-27T13:24:59.665043+00:00",
+    "title": "La tormenta de 1925 que cruzó 3 estados sin perder fuerza 😱",
+    "topic": "extreme weather",
+    "hook_template": "authority-cant-explain",
+    "title_opener": "the-x",
+    "emotional_tone": "fear",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": false,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 37.4,
+    "voice": "es-US-AlonsoNeural",
+    "caption_color": "white",
+    "structure": "unsolved-mystery",
+    "pair_role": null
   }
 ]
