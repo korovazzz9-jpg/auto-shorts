@@ -200,5 +200,55 @@
     "niche_styled": true,
     "title_variant": "seo",
     "hashtag_position": "end"
+  },
+  {
+    "title": "El lago de la Antártida que sangra agua roja hace 2 millones de años 😱",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "Nadie lo puede detener",
+    "hook_template": "authority-cant-explain",
+    "emotional_tone": "creepy",
+    "script": "Lleva más de 2 millones de años sangrando, y nadie sabe exactamente por qué. Se llama Blood Falls, en la Antártida: una cascada de agua roja que brota de un glaciar sobre suelo helado. Lo más extraño: en su interior viven bacterias sin oxígeno ni luz solar. La explicación más aceptada es hierro oxidado atrapado bajo el hielo. Pero esas bacterias no deberían sobrevivir ahí. ¿Qué forma de vida resiste 2 millones de años encerrada en hielo, en completa oscuridad? Y por eso exactamente.",
+    "word_count": 84,
+    "search_summary": "Blood Falls Antártida es una cascada roja de 2 millones de años con bacterias vivas sin oxígeno bajo el hielo.",
+    "comment_question": "¿Crees que esas bacterias podrían sobrevivir también en Marte? 🔴",
+    "source_note": "USGS y Universidad de Alaska, 2017",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "datos curiosos naturaleza",
+      "maravillas naturales del mundo",
+      "Blood Falls Antártida",
+      "lagos extraños del mundo",
+      "fenómenos naturales inexplicables",
+      "bacterias extremófilas Antártida",
+      "datos en 30 segundos",
+      "misterios de la naturaleza",
+      "datos curiosos sobre la naturaleza",
+      "7 maravillas naturales del mundo"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#antártida",
+      "#maravillasnaturales",
+      "#misteriosnaturales"
+    ],
+    "video_queries": [
+      "antarctica glacier red waterfall",
+      "blood red water flowing ice",
+      "antarctica frozen landscape aerial",
+      "scientist researcher antarctica cold",
+      "microscope bacteria extreme environment",
+      "dark ice cave frozen underground"
+    ],
+    "has_loop": true,
+    "topic": "natural wonders",
+    "structure": "unsolved-mystery",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
   }
 ]
