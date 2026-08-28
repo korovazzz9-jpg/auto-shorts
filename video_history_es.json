@@ -3671,5 +3671,24 @@
     "caption_color": "white",
     "structure": "happening-now",
     "pair_role": null
+  },
+  {
+    "video_id": "xxtbVq3UJnE",
+    "published_at": "2026-08-28T13:24:23.312216+00:00",
+    "title": "¿Tu córnea trasplantada sigue viva... sin saber quién eres? 😱",
+    "topic": "the human body",
+    "hook_template": "authority-cant-explain",
+    "title_opener": "question",
+    "emotional_tone": "creepy",
+    "title_variant": "seo",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 36.0,
+    "voice": "es-US-AlonsoNeural",
+    "caption_color": "white",
+    "structure": "unsolved-mystery",
+    "pair_role": null
   }
 ]
