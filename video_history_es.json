@@ -3633,5 +3633,24 @@
     "caption_color": "white",
     "structure": "happening-now",
     "pair_role": null
+  },
+  {
+    "video_id": "CDawulbcDpw",
+    "published_at": "2026-08-28T00:26:49.726063+00:00",
+    "title": "El faraón que gobernó Egipto 12 años desde su tumba 😱",
+    "topic": "historical mysteries",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "creepy",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 35.0,
+    "voice": "es-MX-JorgeNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": null
   }
 ]
