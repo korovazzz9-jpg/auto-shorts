@@ -7,6 +7,10 @@ import requests
 GRAPH_URL = "https://graph.facebook.com/v21.0"
 POLL_INTERVAL_SECONDS = 5
 POLL_TIMEOUT_SECONDS = 180
+CONTAINER_RETRIES = 2       # доп. попытки, помимо первой
+CONTAINER_RETRY_DELAY = 10  # секунд — Meta иногда роняет обработку контейнера (status_code=
+# ERROR) без видимой причины на самом файле (2026-08-28, реальный случай); пересоздание
+# контейнера (не повторный опрос уже упавшего) обычно проходит.
 
 
 def _raise_with_body(response: requests.Response) -> None:
@@ -46,12 +50,29 @@ def _wait_until_ready(container_id: str) -> None:
     raise TimeoutError(f"Instagram container {container_id} did not finish processing in time")
 
 
+def _create_container_with_retry(ig_user_id: str, **kwargs) -> str:
+    """Создаёт контейнер и ждёт готовности; при status_code=ERROR пересоздаёт контейнер
+    заново (повторный опрос уже упавшего контейнера бессмыслен — ошибка финальна для него)."""
+    last_err = None
+    for attempt in range(CONTAINER_RETRIES + 1):
+        container = _post(f"{ig_user_id}/media", **kwargs)
+        try:
+            _wait_until_ready(container["id"])
+            return container["id"]
+        except RuntimeError as e:
+            last_err = e
+            if attempt < CONTAINER_RETRIES:
+                print(f"  Instagram container failed (attempt {attempt + 1}/{CONTAINER_RETRIES + 1}), "
+                      f"retrying in {CONTAINER_RETRY_DELAY}s: {e}")
+                time.sleep(CONTAINER_RETRY_DELAY)
+    raise last_err
+
+
 def upload_photo(image_url: str, caption: str) -> str:
     """Публикует статичную фото-карточку в ленту (не Reel) — для IG-карточек фактов."""
     ig_user_id = os.environ["IG_USER_ID"]
-    container = _post(f"{ig_user_id}/media", image_url=image_url, caption=caption[:2200])
-    _wait_until_ready(container["id"])
-    publish = _post(f"{ig_user_id}/media_publish", creation_id=container["id"])
+    container_id = _create_container_with_retry(ig_user_id, image_url=image_url, caption=caption[:2200])
+    publish = _post(f"{ig_user_id}/media_publish", creation_id=container_id)
     print(f"Posted photo to Instagram: media id {publish['id']}")
     return publish["id"]
 
@@ -60,9 +81,8 @@ def upload_story(image_url: str) -> str:
     """Публикует изображение в Stories (2026-07-05): карточка факта дублируется в сторис —
     ленту видят новые люди, сторис — подписчики; двойное касание с той же картинки."""
     ig_user_id = os.environ["IG_USER_ID"]
-    container = _post(f"{ig_user_id}/media", media_type="STORIES", image_url=image_url)
-    _wait_until_ready(container["id"])
-    publish = _post(f"{ig_user_id}/media_publish", creation_id=container["id"])
+    container_id = _create_container_with_retry(ig_user_id, media_type="STORIES", image_url=image_url)
+    publish = _post(f"{ig_user_id}/media_publish", creation_id=container_id)
     print(f"Posted story to Instagram: media id {publish['id']}")
     return publish["id"]
 
@@ -78,10 +98,7 @@ def upload_reel(video_url: str, caption: str, cover_url: str | None = None) -> s
     if cover_url:
         kwargs["cover_url"] = cover_url
 
-    container = _post(f"{ig_user_id}/media", **kwargs)
-    container_id = container["id"]
-
-    _wait_until_ready(container_id)
+    container_id = _create_container_with_retry(ig_user_id, **kwargs)
 
     publish = _post(f"{ig_user_id}/media_publish", creation_id=container_id)
     media_id = publish["id"]

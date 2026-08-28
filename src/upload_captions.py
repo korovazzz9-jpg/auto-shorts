@@ -2,12 +2,19 @@
 бонус к доступности и индексации в поиске, помимо уже горящих в кадре karaoke-субтитров."""
 import io
 import os
+import time
 
 from anthropic import Anthropic
+from googleapiclient.errors import HttpError
 from googleapiclient.http import MediaIoBaseUpload
 
 from config import CFG
 from youtube_auth import get_client
+
+CAPTION_RETRIES = 2       # доп. попытки, помимо первой
+CAPTION_RETRY_DELAY = 30  # секунд — YouTube иногда 403-ит captions.insert сразу после аплоада
+# видео, пока бэкенд его ещё "не устаканил" (2026-08-28, реальный случай: тот же токен/код
+# успешно залил капшены на прогоне 3ч раньше — не проблема авторизации, гонка по времени).
 
 # 2026-07-04: переводные дорожки убраны совсем (были vi+tl). Гео-аналитика за 30 дней:
 # VN = 2.4% просмотров EN и 0% ES, PH/IN понимают английский, а YouTube сам предлагает
@@ -59,19 +66,30 @@ def _translate_srt(srt_content: str, target_lang: str) -> str:
 
 
 def _upload_one(youtube, video_id: str, srt_content: str, lang: str, name: str) -> None:
-    media = MediaIoBaseUpload(io.BytesIO(srt_content.encode("utf-8")), mimetype="application/octet-stream")
-    youtube.captions().insert(
-        part="snippet",
-        body={
-            "snippet": {
-                "videoId": video_id,
-                "language": lang,
-                "name": name,
-                "isDraft": False,
-            }
-        },
-        media_body=media,
-    ).execute()
+    last_err = None
+    for attempt in range(CAPTION_RETRIES + 1):
+        media = MediaIoBaseUpload(io.BytesIO(srt_content.encode("utf-8")), mimetype="application/octet-stream")
+        try:
+            youtube.captions().insert(
+                part="snippet",
+                body={
+                    "snippet": {
+                        "videoId": video_id,
+                        "language": lang,
+                        "name": name,
+                        "isDraft": False,
+                    }
+                },
+                media_body=media,
+            ).execute()
+            return
+        except HttpError as e:
+            last_err = e
+            if attempt < CAPTION_RETRIES:
+                print(f"  Captions upload failed (attempt {attempt + 1}/{CAPTION_RETRIES + 1}), "
+                      f"retrying in {CAPTION_RETRY_DELAY}s: {e}")
+                time.sleep(CAPTION_RETRY_DELAY)
+    raise last_err
 
 
 def upload_captions(video_id: str, words: list[dict]) -> None:
