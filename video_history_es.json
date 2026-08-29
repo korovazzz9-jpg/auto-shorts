@@ -3766,5 +3766,24 @@
     "caption_color": "white",
     "structure": "unsolved-mystery",
     "pair_role": null
+  },
+  {
+    "video_id": "s4BaQXrkbl8",
+    "published_at": "2026-08-29T20:24:00.249381+00:00",
+    "title": "¿El niño enterrado con joyas... que gobernó un reino a los 8? 😱",
+    "topic": "archaeological discoveries",
+    "hook_template": "sounds-fake",
+    "title_opener": "question",
+    "emotional_tone": "awe",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 30.7,
+    "voice": "es-MX-JorgeNeural",
+    "caption_color": "white",
+    "structure": "historical-story",
+    "pair_role": null
   }
 ]
