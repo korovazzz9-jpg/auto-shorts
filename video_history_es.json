@@ -3842,5 +3842,24 @@
     "caption_color": "white",
     "structure": "historical-story",
     "pair_role": null
+  },
+  {
+    "video_id": "5bxsgf7wIoc",
+    "published_at": "2026-08-30T20:24:22.292904+00:00",
+    "title": "¿El árbol que llueve agua pura desde sus hojas todo el año? 😱",
+    "topic": "natural wonders",
+    "hook_template": "sounds-fake",
+    "title_opener": "question",
+    "emotional_tone": "awe",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 35.3,
+    "voice": "es-MX-JorgeNeural",
+    "caption_color": "white",
+    "structure": "historical-story",
+    "pair_role": null
   }
 ]
