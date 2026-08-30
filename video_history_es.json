@@ -3785,5 +3785,24 @@
     "caption_color": "white",
     "structure": "historical-story",
     "pair_role": null
+  },
+  {
+    "video_id": "6_a-7h0-9Ik",
+    "published_at": "2026-08-30T00:26:08.330890+00:00",
+    "title": "¿La tormenta que congeló el Mar Negro en 1954? 😱",
+    "topic": "extreme weather",
+    "hook_template": "authority-cant-explain",
+    "title_opener": "question",
+    "emotional_tone": "creepy",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 39.9,
+    "voice": "es-MX-JorgeNeural",
+    "caption_color": "white",
+    "structure": "unsolved-mystery",
+    "pair_role": null
   }
 ]
