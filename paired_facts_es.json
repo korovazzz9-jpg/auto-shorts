@@ -128,5 +128,15 @@
     "part_b_video_id": null,
     "status": "awaiting_b",
     "created_at": 1787703968.9233744
+  },
+  {
+    "id": "trkFC0qhn60-1788135856",
+    "topic": "archaeological discoveries",
+    "part_a_video_id": "trkFC0qhn60",
+    "part_a_title": "El niño rey enterrado con 143 cuerpos en 550 d.C. 💀",
+    "claim": "Los moche construyeron pirámides más grandes que algunas egipcias.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1788135856.0590622
   }
 ]
