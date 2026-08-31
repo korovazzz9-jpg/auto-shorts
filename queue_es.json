@@ -251,5 +251,106 @@
     "niche_styled": false,
     "title_variant": "narrative",
     "hashtag_position": "end"
+  },
+  {
+    "title": "¿La tormenta que generó relámpagos 6 horas antes de llegar? 😱",
+    "title_opener": "question",
+    "title_intensity": "extreme",
+    "hook_text": "Nadie vio esto venir",
+    "hook_template": "authority-cant-explain",
+    "emotional_tone": "fear",
+    "script": "Nadie puede explicar cómo ocurrió esto antes de que llegara la tormenta. En julio de 1999, sobre el Medio Oeste de Estados Unidos, meteorólogos detectaron relámpagos intensos en cielo completamente despejado — seis horas antes de que se formara ninguna nube. La explicación oficial: campos eléctricos atmosféricos previos a la convección. Problema: los modelos existentes no predicen descargas sin nube activa. Ese mecanismo aún no tiene nombre formal en la literatura científica. ¿Qué estaba cargando la atmósfera antes de que existiera la tormenta? Y exactamente así.",
+    "word_count": 84,
+    "search_summary": "En julio de 1999 sobre el Medio Oeste de EE.UU. se detectaron relámpagos en cielo despejado seis horas antes de formarse ninguna tormenta.",
+    "comment_question": "¿Puede existir un relámpago sin tormenta, o los datos mienten? ⚡",
+    "source_note": "Journal of Geophysical Research, 2001",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "datos curiosos",
+      "clima extremo",
+      "tormentas eléctricas",
+      "relámpagos sin nube",
+      "fenómenos meteorológicos inexplicables",
+      "misterios de la naturaleza",
+      "datos en 30 segundos",
+      "meteorología extrema",
+      "datos curiosos que no sabías",
+      "clima extremo documental",
+      "tormentas eléctricas para dormir"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#tormentas",
+      "#fenómenosnaturales",
+      "#misterio"
+    ],
+    "video_queries": [
+      "lightning bolt dark sky",
+      "clear blue sky wide landscape",
+      "storm forming timelapse",
+      "meteorologist weather radar room",
+      "dramatic thunderstorm approaching plains",
+      "lightning strike open field night"
+    ],
+    "has_loop": true,
+    "topic": "extreme weather",
+    "structure": "unsolved-mystery",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "El ejército de Ciro el Grande que enterró su victoria en sal 😱",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "Ganaron la guerra… y desaparecieron",
+    "hook_template": "authority-cant-explain",
+    "emotional_tone": "creepy",
+    "script": "Nadie sabe cómo desapareció un ejército entero después de ganar. En 539 a.C., Ciro el Grande conquistó Babilonia sin batalla: los sacerdotes de Marduk le abrieron las puertas. Su ejército entró victorioso. Luego, miles de soldados simplemente no aparecen en ningún registro. Sin batalla perdida, sin deserción documentada, sin tumba colectiva. La explicación oficial dice que fueron reabsorbidos al imperio, pero no existe un solo censo, lista ni inscripción que los ubique después. ¿Los disolvió Ciro a propósito? ¿O alguien borró el rastro? Y así es como.",
+    "word_count": 85,
+    "search_summary": "El ejército de Ciro el Grande conquistó Babilonia en 539 a.C. y desapareció de todo registro histórico sin explicación.",
+    "comment_question": "¿Ciro borró a su propio ejército… o alguien reescribió la historia? 👇",
+    "source_note": "Cilindro de Ciro, British Museum, 539 a.C.",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "civilizaciones antiguas",
+      "misterios históricos",
+      "Ciro el Grande",
+      "Babilonia conquista",
+      "ejércitos perdidos historia",
+      "datos curiosos historia",
+      "hechos increíbles",
+      "civilizaciones antiguas de mexico",
+      "misterios históricos sin resolver",
+      "ciro el grande documental"
+    ],
+    "hashtags": [
+      "#shorts",
+      "##datoscuriosos",
+      "#historiaantigua",
+      "#misterios",
+      "#babilonia"
+    ],
+    "video_queries": [
+      "ancient army marching desert",
+      "mesopotamia ruins aerial view",
+      "ancient city gates archaeology",
+      "archaeologist digging ruins",
+      "dark ancient underground tunnel",
+      "old manuscript scroll closeup"
+    ],
+    "has_loop": true,
+    "topic": "ancient civilizations",
+    "structure": "unsolved-mystery",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
   }
 ]
