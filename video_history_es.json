@@ -3880,5 +3880,24 @@
     "caption_color": "white",
     "structure": "unsolved-mystery",
     "pair_role": "a"
+  },
+  {
+    "video_id": "DYOXfSo8oXA",
+    "published_at": "2026-08-31T03:23:31.547721+00:00",
+    "title": "El escriba que falsificó 30 años de historia egipcia 😱",
+    "topic": "ancient history",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "creepy",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 32.5,
+    "voice": "es-CO-GonzaloNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": null
   }
 ]
