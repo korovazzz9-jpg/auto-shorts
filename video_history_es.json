@@ -4037,5 +4037,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "b9O0fbyNKa8",
+    "published_at": "2026-09-01T03:28:41.488249+00:00",
+    "title": "La luna de Saturno que escupe océano al espacio 😱",
+    "topic": "space",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "awe",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": true,
+    "topical": null,
+    "length_seconds": 37.1,
+    "voice": "es-MX-JorgeNeural",
+    "caption_color": "white",
+    "structure": null,
+    "pair_role": null
   }
 ]
