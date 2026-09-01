@@ -4075,5 +4075,24 @@
     "caption_color": "white",
     "structure": "unsolved-mystery",
     "pair_role": null
+  },
+  {
+    "video_id": "nTVL-UY26NA",
+    "published_at": "2026-09-01T20:25:05.969059+00:00",
+    "title": "¿El niño que gobernó Cartago con 7 años... sin saberlo? 😱",
+    "topic": "ancient civilizations",
+    "hook_template": "sounds-fake",
+    "title_opener": "question",
+    "emotional_tone": "creepy",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 35.5,
+    "voice": "es-MX-JorgeNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": null
   }
 ]
