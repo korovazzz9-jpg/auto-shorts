@@ -4056,5 +4056,24 @@
     "caption_color": "white",
     "structure": null,
     "pair_role": null
+  },
+  {
+    "video_id": "zVsN-qjvb6w",
+    "published_at": "2026-09-01T13:25:37.980585+00:00",
+    "title": "¿El barco que llegó a puerto… sin tripulación en 1955? 😱",
+    "topic": "historical mysteries",
+    "hook_template": "authority-cant-explain",
+    "title_opener": "question",
+    "emotional_tone": "creepy",
+    "title_variant": "seo",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 39.5,
+    "voice": "es-US-AlonsoNeural",
+    "caption_color": "white",
+    "structure": "unsolved-mystery",
+    "pair_role": null
   }
 ]
