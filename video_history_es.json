@@ -4094,5 +4094,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": null
+  },
+  {
+    "video_id": "M0SVcNRgI4o",
+    "published_at": "2026-09-02T00:24:30.506825+00:00",
+    "title": "El esclavo que quemó Roma… y salvó a miles 😱",
+    "topic": "ancient history",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "awe",
+    "title_variant": "seo",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 35.6,
+    "voice": "es-MX-JorgeNeural",
+    "caption_color": "white",
+    "structure": "historical-story",
+    "pair_role": "a"
   }
 ]

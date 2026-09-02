@@ -138,5 +138,15 @@
     "part_b_video_id": null,
     "status": "awaiting_b",
     "created_at": 1788135856.0590622
+  },
+  {
+    "id": "M0SVcNRgI4o-1788308670",
+    "topic": "ancient history",
+    "part_a_video_id": "M0SVcNRgI4o",
+    "part_a_title": "El esclavo que quemó Roma… y salvó a miles 😱",
+    "claim": "Los galos saquearon Roma completa en 390 a.C. sin resistencia.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1788308670.820363
   }
 ]
