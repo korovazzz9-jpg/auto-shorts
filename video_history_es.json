@@ -4113,5 +4113,24 @@
     "caption_color": "white",
     "structure": "historical-story",
     "pair_role": "a"
+  },
+  {
+    "video_id": "QMvTUGEgt7o",
+    "published_at": "2026-09-02T03:24:54.043779+00:00",
+    "title": "¿El volcán que enterró una ciudad... en minutos bajo el barro en 1985? 😱",
+    "topic": "volcanoes and earthquakes",
+    "hook_template": "sounds-fake",
+    "title_opener": "question",
+    "emotional_tone": "fear",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 34.4,
+    "voice": "es-MX-JorgeNeural",
+    "caption_color": "white",
+    "structure": "historical-story",
+    "pair_role": null
   }
 ]
