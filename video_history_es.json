@@ -4132,5 +4132,24 @@
     "caption_color": "white",
     "structure": "historical-story",
     "pair_role": null
+  },
+  {
+    "video_id": "yoGwnINDEk8",
+    "published_at": "2026-09-02T13:25:03.301274+00:00",
+    "title": "¿La tumba que selló a un escriba vivo... con su rey? 😱",
+    "topic": "archaeological discoveries",
+    "hook_template": "sounds-fake",
+    "title_opener": "question",
+    "emotional_tone": "creepy",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 36.9,
+    "voice": "es-US-AlonsoNeural",
+    "caption_color": "white",
+    "structure": "historical-story",
+    "pair_role": null
   }
 ]
