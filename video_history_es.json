@@ -4189,5 +4189,24 @@
     "caption_color": "white",
     "structure": "unsolved-mystery",
     "pair_role": "b"
+  },
+  {
+    "video_id": "ywqYDcTG8_E",
+    "published_at": "2026-09-03T03:25:00.767037+00:00",
+    "title": "El terremoto del 3 de septiembre de 1886 que reactivó volcanes dormidos 😱",
+    "topic": "volcanoes and earthquakes",
+    "hook_template": "authority-cant-explain",
+    "title_opener": "the-x",
+    "emotional_tone": "fear",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": true,
+    "length_seconds": 37.4,
+    "voice": "es-CO-GonzaloNeural",
+    "caption_color": "white",
+    "structure": "unsolved-mystery",
+    "pair_role": null
   }
 ]
