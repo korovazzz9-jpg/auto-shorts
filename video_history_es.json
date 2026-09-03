@@ -4227,5 +4227,24 @@
     "caption_color": "white",
     "structure": "unsolved-mystery",
     "pair_role": null
+  },
+  {
+    "video_id": "QLNPZdC9vY0",
+    "published_at": "2026-09-03T20:26:15.755593+00:00",
+    "title": "El ejército de Ciro el Grande que enterró su victoria en sal 😱",
+    "topic": "ancient civilizations",
+    "hook_template": "authority-cant-explain",
+    "title_opener": "the-x",
+    "emotional_tone": "creepy",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 39.1,
+    "voice": "es-MX-JorgeNeural",
+    "caption_color": "white",
+    "structure": "unsolved-mystery",
+    "pair_role": null
   }
 ]
