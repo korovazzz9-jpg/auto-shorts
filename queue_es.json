@@ -1,53 +1,5 @@
 [
   {
-    "title": "¿El terremoto que hizo reventar un volcán a 700 km? 😱",
-    "title_opener": "question",
-    "title_intensity": "extreme",
-    "hook_text": "Un sismo encendió un volcán",
-    "hook_template": "sounds-fake",
-    "emotional_tone": "awe",
-    "script": "Un sismo disparó una erupción volcánica a cientos de kilómetros de distancia — y la ciencia tardó décadas en creerlo. El terremoto de Landers, California, en 1992, de magnitud 7.3, desencadenó actividad volcánica simultánea en el volcán Long Valley — a 400 kilómetros. Las ondas sísmicas comprimieron el magma tan fuerte que el volcán respondió en minutos. Pero lo más perturbador: no fue único. Desde entonces, los sismólogos identificaron al menos una docena de casos iguales en todo el mundo. Así que la próxima vez que tiemble donde vives, otro volcán podría estar despertando ahora mismo. Y por eso.",
-    "word_count": 88,
-    "search_summary": "El terremoto de Landers 1992 de magnitud 7.3 desencadenó actividad volcánica en Long Valley a 400 kilómetros de distancia.",
-    "comment_question": "¿Cuántos volcanes cercanos a tu ciudad podrían despertar con un sismo? 🌋",
-    "source_note": "USGS y Science journal, 1993",
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "terremotos curiosidades",
-      "volcanes datos",
-      "sismo y volcán",
-      "terremoto Landers 1992",
-      "Long Valley volcán",
-      "geología curiosidades",
-      "datos en 30 segundos",
-      "curiosidades de la tierra"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#datoscuriosos",
-      "#terremotos",
-      "#volcanes",
-      "#geología"
-    ],
-    "video_queries": [
-      "earthquake ground shaking aerial",
-      "volcano eruption wide landscape",
-      "seismic waves ground cracking",
-      "lava eruption volcanic crater",
-      "scientists studying earthquake data",
-      "city buildings shaking earthquake"
-    ],
-    "has_loop": true,
-    "topic": "volcanoes and earthquakes",
-    "structure": "myth-debunk",
-    "niche_styled": true,
-    "title_variant": "narrative",
-    "hashtag_position": "end"
-  },
-  {
     "title": "¿El rey hitita que firmó la paz... con sus enemigos muertos? 😱",
     "title_opener": "question",
     "title_intensity": "extreme",
