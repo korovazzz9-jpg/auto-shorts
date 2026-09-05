@@ -4379,5 +4379,24 @@
     "caption_color": "white",
     "structure": "unsolved-mystery",
     "pair_role": null
+  },
+  {
+    "video_id": "ALLlnjvdfCg",
+    "published_at": "2026-09-05T20:24:57.305689+00:00",
+    "title": "El cartógrafo que borró una isla de todos los mapas en 1762 😱",
+    "topic": "historical mysteries",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "creepy",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 38.0,
+    "voice": "es-US-AlonsoNeural",
+    "caption_color": "white",
+    "structure": "historical-story",
+    "pair_role": null
   }
 ]
