@@ -4417,5 +4417,24 @@
     "caption_color": "white",
     "structure": "unsolved-mystery",
     "pair_role": null
+  },
+  {
+    "video_id": "LOMxLCwH1p8",
+    "published_at": "2026-09-06T03:26:35.227362+00:00",
+    "title": "El cartógrafo persa que escondió un tesoro en su propio mapa 😱",
+    "topic": "historical mysteries",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "creepy",
+    "title_variant": "seo",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 35.6,
+    "voice": "es-US-AlonsoNeural",
+    "caption_color": "white",
+    "structure": "happening-now",
+    "pair_role": null
   }
 ]
