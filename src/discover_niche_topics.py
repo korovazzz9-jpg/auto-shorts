@@ -121,15 +121,10 @@ def discover() -> tuple[dict[str, int], dict[str, list[str]], list[dict], dict[s
     all_outliers: list[dict] = []
     saturation: dict[str, int] = {}
 
-    # 2026-09-07: сканируем ПОЛОВИНУ пула за прогон (чётные/нечётные ISO-недели), а не весь.
-    # Причина — квота: search().list стоит 100 ед. за тему, 13 тем = 1300 в понедельник, а
-    # после перехода ES на 5 слотов/день (5 x 1750 = 8750) это давало ~10 070 при лимите 10 000.
-    # Каждая тема всё равно сканируется раз в 2 недели, а niche_signal больше не перезаписывается
-    # целиком (см. main) — данные несканированной половины сохраняются с прошлого прогона.
-    half = date.today().isocalendar().week % 2
-    topics_this_run = [t for i, t in enumerate(TOPICS_POOL) if i % 2 == half]
-    print(f"  Скан половины пула ({len(topics_this_run)} из {len(TOPICS_POOL)} тем): {topics_this_run}")
-    for topic in topics_this_run:
+    # 2026-09-07: ненадолго сканировали половину пула ради квоты — откачено, лимит оказался
+    # кратно выше (см. captions_enabled в config.py). Мерж с прошлым прогоном в main() оставлен:
+    # при полном скане он no-op, но страхует, если тема выпадет из выдачи на одном прогоне.
+    for topic in TOPICS_POOL:
         results, total_results = _search_topic(youtube, topic)
         if not results:
             continue
