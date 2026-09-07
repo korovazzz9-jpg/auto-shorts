@@ -79,7 +79,16 @@ def _pick_thumb_frame(background, duration: float):
         return fallback
 
 
-THUMB_MAX_WORDS = 3        # у образцов ниши превью — 2-3 слова; больше не читается в ленте
+THUMB_MAX_WORDS = 4        # у образцов ниши превью — 2-3 слова, промпт просит столько же;
+                            # здесь порог на слово выше — это страховка от длинного ответа
+                            # модели, а не рабочий режим, и лучше показать 4 слова чуть мельче,
+                            # чем резать фразу ровно по лимиту
+# Служебные слова, на которые обрезанная фраза не должна заканчиваться: «LA OLA DE 524 METROS»
+# при слепом срезе до 3 слов давало «LA OLA DE» — предлог в конце, смысл потерян.
+THUMB_DANGLING = {"DE", "DEL", "LA", "EL", "LOS", "LAS", "Y", "EN", "A", "CON", "POR", "QUE",
+                  "UN", "UNA", "SIN", "SU", "AL", "LO", "SE", "ES",
+                  "THE", "OF", "AND", "IN", "ON", "TO", "A", "AN", "THAT", "ITS", "FOR",
+                  "DO", "DA", "DOS", "DAS", "E", "O", "OS", "AS", "NO", "NA", "COM", "POR"}
 THUMB_TEXT_COLOR = (255, 225, 0)   # жёлтый: единственный цвет, который держится и на светлом,
                                     # и на тёмном кадре, и не сливается с интерфейсом YouTube
 THUMB_FILL_RATIO = 0.88    # какую долю ширины кадра занимает текстовый блок
@@ -104,8 +113,12 @@ def _save_longform_thumb(img: Image.Image, path: str, hook_text: str | None) -> 
     W, H = img.size
     # Страховка на случай, если модель вернула длинную фразу: в ленте всё равно прочитается
     # только начало, лучше показать 3 слова крупно, чем 6 мелко.
-    words = hook_text.strip().upper().split()
-    text = " ".join(words[:THUMB_MAX_WORDS])
+    words = hook_text.strip().upper().split()[:THUMB_MAX_WORDS]
+    # Не оставляем висящий предлог/артикль в конце обрезанной фразы (см. THUMB_DANGLING).
+    # Последнее слово не трогаем, если оно единственное — пустая тумба хуже кривой.
+    while len(words) > 1 and words[-1].strip(".,:;!¡?¿") in THUMB_DANGLING:
+        words.pop()
+    text = " ".join(words)
     max_w = int(W * THUMB_FILL_RATIO)
     draw = ImageDraw.Draw(img)
 
