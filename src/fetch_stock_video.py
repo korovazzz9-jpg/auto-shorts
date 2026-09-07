@@ -31,6 +31,30 @@ _VISION_CACHE_MAX = 300
 # КАЖДОМ изменении промпта отбора, иначе эксперимент меряет смесь старого и нового.
 _VISION_CACHE_VERSION = 2
 
+# Телеметрия отбора за последний прогон fetch_clips (2026-09-07). Без неё замер эффекта
+# фильтра врёт: в выборке смешиваются ролики, где кадры реально проверены, и ролики, где
+# проверку обошли (нет превью / сбой API / добор после полного отказа). Пишется в
+# video_history полем `clip_selection` — тогда «проверенные» и «с обходом» выпуски можно
+# оценивать отдельно. `vision_calls` заодно отвечает на вопрос о стоимости фильтра.
+_STATS_TEMPLATE = {
+    "filter_version": _VISION_CACHE_VERSION,
+    "beats": 0,            # сколько запросов обработано
+    "vetted": 0,           # кадров одобрено vision (в т.ч. из кэша этой же версии)
+    "cache_hits": 0,
+    "no_preview": 0,       # превью не было — взят порядок стока БЕЗ проверки
+    "api_error": 0,        # вызов упал — взят порядок стока БЕЗ проверки
+    "unparsed": 0,         # ответ не разобрался — взят порядок стока БЕЗ проверки
+    "rejected": 0,         # vision отверг всех, бит остался без своего плана
+    "bypass": False,       # сработал добор без вето (все запросы отвергнуты)
+    "vision_calls": 0,     # реальных обращений к Haiku
+}
+_stats: dict = dict(_STATS_TEMPLATE)
+
+
+def selection_stats() -> dict:
+    """Срез телеметрии отбора за последний fetch_clips (см. _STATS_TEMPLATE)."""
+    return dict(_stats)
+
 
 def _load_vision_cache() -> dict:
     try:
@@ -163,7 +187,7 @@ def _get_candidates(query: str, used_ids: set) -> list[dict]:
     return candidates[:VISION_CANDIDATES]
 
 
-def _accepted_clips(candidates: list[dict], query: str) -> list[dict]:
+def _accepted_clips(candidates: list[dict], query: str) -> tuple[list[dict], str]:
     """Клипы, которые Haiku признал показывающими `query`, в порядке предпочтения. Отбор идёт
     по poster-кадрам (Pexels image URL), БЕЗ скачивания видео.
 
@@ -175,19 +199,19 @@ def _accepted_clips(candidates: list[dict], query: str) -> list[dict]:
     следующего из списка, и при возврате одного победителя запасные шли в ролик вообще без
     проверки — дыра ровно того же размера, что и исходная (найдено на ревью 2026-09-07)."""
     if not candidates:
-        return []
+        return [], "no_candidates"
 
     # Vision требует preview-кадра (есть у Pexels, нет у Pixabay). Раньше при <2 превью
     # брали первый ВСЛЕПУЮ — теперь одиночного кандидата тоже показываем модели: проверить
     # «то или не то» можно и на одном, это дешевле одного мимо-кадра в ролике.
     with_preview = [c for c in candidates if c.get("preview")]
     if not with_preview:
-        return candidates  # проверять нечем — отдаём порядок релевантности стока
+        return candidates, "no_preview"  # проверять нечем — порядок релевантности
 
     cached = _vision_cache_get(query, with_preview)
     if cached:
         print(f"  Vision cache hit for '{query}' — без вызова Haiku")
-        return cached
+        return cached, "cache_hit"
 
     client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
     content = [{"type": "text", "text": (
@@ -204,6 +228,7 @@ def _accepted_clips(candidates: list[dict], query: str) -> list[dict]:
         content.append({"type": "image", "source": {"type": "url", "url": c["preview"]}})
 
     try:
+        _stats["vision_calls"] += 1
         response = client.messages.create(
             model="claude-haiku-4-5-20251001",
             max_tokens=20,
@@ -214,17 +239,17 @@ def _accepted_clips(candidates: list[dict], query: str) -> list[dict]:
         # Сбой API — это отсутствие информации, а не суждение «не подходит». Держим прежнее
         # поведение (порядок стока), но НЕ молча: раньше эта ветка была невидима.
         print(f"  (vision-отбор для '{query}' упал: {e} — берём порядок релевантности)")
-        return with_preview
+        return with_preview, "api_error"
 
     # Полные числа, а не первый символ: `int(raw[0])` ломался на ответе вида "Clip 3"
     # (ValueError → тихий фолбэк на первый клип) и прочитал бы "10" как "1".
     nums = [int(n) for n in re.findall(r"\d+", raw)]
     if not nums:
         print(f"  (vision вернул неразбираемое '{raw}' для '{query}' — порядок релевантности)")
-        return with_preview
+        return with_preview, "unparsed"
     if nums[0] == 0:
         print(f"  Vision: ни один из {len(with_preview)} клипов не показывает '{query}'")
-        return []
+        return [], "rejected"
 
     seen, accepted = set(), []
     for n in nums:
@@ -233,14 +258,14 @@ def _accepted_clips(candidates: list[dict], query: str) -> list[dict]:
             accepted.append(with_preview[n - 1])
     if not accepted:
         print(f"  (vision назвал только номера вне диапазона ('{raw}') для '{query}' — порядок релевантности)")
-        return with_preview
+        return with_preview, "unparsed"
 
     print(f"  Vision одобрил {len(accepted)}/{len(with_preview)} клипов для '{query}'")
     try:  # кэшируем только реальный vision-выбор (не фолбэки) — сбой кэша не роняет пайплайн
         _vision_cache_put(query, [c["id"] for c in accepted])
     except Exception as e:
         print(f"  (vision cache write failed: {e})")
-    return accepted
+    return accepted, "vetted"
 
 
 def _search_with_fallback(query: str, used_ids: set) -> list[dict]:
@@ -257,17 +282,27 @@ def _search_with_fallback(query: str, used_ids: set) -> list[dict]:
     if not candidates:
         return []
 
-    accepted = _accepted_clips(candidates, query)
+    accepted, outcome = _accepted_clips(candidates, query)
     # Vision может отвергнуть ВСЕХ. Прежде чем оставлять бит без картинки, пробуем упрощённый
     # запрос — узкий («archerfish spitting water») часто не находится на стоке вовсе, а
-    # широкий («archerfish») находится.
+    # широкий («archerfish») находится. ⚠️ Это ВТОРОЙ вызов Haiku — отсюда прибавка к
+    # стоимости фильтра, которую видно в _stats["vision_calls"].
     if not accepted and short != query:
         alt = _get_candidates(short, used_ids)
         if alt:
             print(f"  (все клипы мимо, пробуем '{short}')")
-            accepted = _accepted_clips(alt, short)
+            accepted, outcome = _accepted_clips(alt, short)
     if not accepted:
         print(f"  (подходящего клипа для '{query}' нет — бит останется без своего плана)")
+
+    _stats["beats"] += 1
+    if outcome == "cache_hit":
+        _stats["cache_hits"] += 1
+        _stats["vetted"] += 1  # кэш хранит вердикты ТЕКУЩЕЙ версии фильтра
+    elif outcome in ("no_preview", "api_error", "unparsed", "rejected"):
+        _stats[outcome] += 1
+    elif outcome == "vetted":
+        _stats["vetted"] += 1
     return accepted
 
 
@@ -322,8 +357,9 @@ def fetch_satisfying_clips(count: int, out_dir: str) -> list[str]:
 
 
 def fetch_clips(queries: list[str], out_dir: str, landscape: bool = False) -> list[str]:
-    global LANDSCAPE
+    global LANDSCAPE, _stats
     LANDSCAPE = landscape
+    _stats = dict(_STATS_TEMPLATE)  # телеметрия считается за ОДИН прогон, см. selection_stats()
     paths = []
     used_ids: set = set()
     for i, query in enumerate(queries):
@@ -376,6 +412,7 @@ def fetch_clips(queries: list[str], out_dir: str, landscape: bool = False) -> li
     # похуже, но выйдет). Тихо это делать нельзя — иначе замер эффекта фильтра врёт.
     if not paths and queries:
         print("  ⚠️ vision отверг клипы по ВСЕМ запросам — добираем без вето, иначе слот потерян")
+        _stats["bypass"] = True
         for i, query in enumerate(queries):
             try:
                 relaxed = _get_candidates(query, used_ids)

@@ -36,6 +36,7 @@ def publish(
     enable_pinterest: bool = False,
     voice: str | None = None,
     caption_color: str | None = None,
+    clip_selection: dict | None = None,
 ) -> str:
     """Заливает видео на YouTube и кросс-постит. Возвращает video_id.
 
@@ -344,6 +345,10 @@ def publish(
             structure=data.get("structure"),  # тип структуры скрипта (ротация 2026-07-13)
             # Роль в паре (2026-07-10): a = открыла пару (несёт подписной тизер), b = резолюция.
             pair_role=("a" if "pair-a" in extra_tags else "b" if "pair-b" in extra_tags else None),
+            # Как отбирались кадры этого ролика (см. fetch_stock_video.selection_stats):
+            # vetted/no_preview/api_error/rejected/bypass + версия фильтра. Нужно, чтобы
+            # не мерить в одной куче ролики с проверенной картинкой и с обойдённой.
+            clip_selection=clip_selection,
         )
     except Exception as e:
         print(f"  (video_history не записан: {e})")

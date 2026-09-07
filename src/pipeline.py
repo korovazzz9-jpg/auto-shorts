@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 
 from build_video import build_video, pick_cta_phrase
 from config import CFG, CHANNEL
-from fetch_stock_video import fetch_clips
+from fetch_stock_video import fetch_clips, selection_stats
 from generate_script import generate_script
 from notify import notify
 from paired_facts import find_pending_pair, resolve_pair, start_pair
@@ -85,6 +85,11 @@ def run() -> None:
 
         print("2/6 Подбор стоковых видео под смысл сценария...")
         clip_paths = fetch_clips(data["video_queries"], tmp)
+        # Телеметрия отбора кадров (2026-09-07) — уходит в video_history, чтобы «проверенные»
+        # выпуски и выпуски с обходом фильтра можно было оценивать ОТДЕЛЬНО. Иначе просмотры
+        # смешивают два режима и непонятно, что именно испытывали.
+        clip_selection = selection_stats()
+        print(f"  Отбор кадров: {clip_selection}")
 
         print("3/6 Озвучка...")
         words, voice = text_to_speech(data["script"], audio_path)
@@ -171,6 +176,7 @@ def run() -> None:
             # (~19% стоимости публикации) — ради 5-го слота на ES их выключили. YouTube всё равно
             # генерирует автосубтитры сам, а ключевые слова уходят в search_summary описания.
             enable_captions=CFG.get("captions_enabled", True),
+            clip_selection=clip_selection,
             enable_pinterest=True,
         )
 
