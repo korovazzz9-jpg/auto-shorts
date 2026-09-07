@@ -148,5 +148,15 @@
     "part_b_video_id": null,
     "status": "awaiting_b",
     "created_at": 1788308670.820363
+  },
+  {
+    "id": "tMapn0EWPPw-1788740725",
+    "topic": "historical mysteries",
+    "part_a_video_id": "tMapn0EWPPw",
+    "part_a_title": "El bibliotecario que quemó 40,000 libros… para salvarlos 😱",
+    "claim": "Los manuscritos de Dunhuang incluyen el libro impreso más antiguo del mundo.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1788740725.581114
   }
 ]
