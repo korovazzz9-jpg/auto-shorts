@@ -144,17 +144,10 @@ def _save_longform_thumb(img: Image.Image, path: str, hook_text: str | None) -> 
     block_bottom = H - int(H * 0.12)
     y = block_bottom - block_h
 
-    # Мягкий градиент вместо сплошной полосы: полоса читается как чужая плашка субтитров,
-    # градиент оставляет кадр кадром и всё равно вытягивает контраст под текстом.
-    grad_top = max(0, y - int(H * 0.10))
-    overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
-    od = ImageDraw.Draw(overlay)
-    for i in range(grad_top, H):
-        a = int(170 * min(1.0, (i - grad_top) / max(1, (H - grad_top) * 0.55)))
-        od.line([(0, i), (W, i)], fill=(0, 0, 0, a))
-    img = Image.alpha_composite(img.convert("RGBA"), overlay).convert("RGB")
-    draw = ImageDraw.Draw(img)
-
+    # Подложки под текстом НЕТ намеренно. Затемнение (полоса или градиент) нужно было, пока
+    # текст был белый с обводкой в 3 px — там контраст держался только фоном. Обводка в ~10%
+    # от кегля читается на любом кадре сама, а затемнение при этом глушит нижнюю треть
+    # картинки — то есть ровно ту часть, которой превью и цепляет взгляд.
     for l in lines:
         bbox = draw.textbbox((0, 0), l, font=font, stroke_width=stroke)
         x = (W - (bbox[2] - bbox[0])) // 2 - bbox[0]
