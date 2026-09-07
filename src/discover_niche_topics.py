@@ -121,8 +121,9 @@ def discover() -> tuple[dict[str, int], dict[str, list[str]], list[dict], dict[s
     all_outliers: list[dict] = []
     saturation: dict[str, int] = {}
 
-    # 2026-09-07: ненадолго сканировали половину пула ради квоты — откачено, лимит оказался
-    # кратно выше (см. captions_enabled в config.py). Мерж с прошлым прогоном в main() оставлен:
+    # 2026-09-07: ненадолго сканировали половину пула ради квоты — откачено. Считал по неверной
+    # стоимости публикации (см. captions_enabled в config.py): реально Shorts стоит ~606 ед., а
+    # не 2150, и запас в 10 000 кратный. Мерж с прошлым прогоном в main() оставлен:
     # при полном скане он no-op, но страхует, если тема выпадет из выдачи на одном прогоне.
     for topic in TOPICS_POOL:
         results, total_results = _search_topic(youtube, topic)
