@@ -4493,5 +4493,24 @@
     "caption_color": "white",
     "structure": "myth-debunk",
     "pair_role": "a"
+  },
+  {
+    "video_id": "rO89eczpma0",
+    "published_at": "2026-09-07T03:24:12.922956+00:00",
+    "title": "El barco que zarpó solo 3 días después de hundirse 😱",
+    "topic": "historical mysteries",
+    "hook_template": "authority-cant-explain",
+    "title_opener": "the-x",
+    "emotional_tone": "creepy",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 32.0,
+    "voice": "es-CO-GonzaloNeural",
+    "caption_color": "white",
+    "structure": "unsolved-mystery",
+    "pair_role": null
   }
 ]
