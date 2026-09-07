@@ -4634,5 +4634,40 @@
       "input_tokens": 21906,
       "output_tokens": 267
     }
+  },
+  {
+    "video_id": "Zy6IAEYY-3I",
+    "published_at": "2026-09-07T20:26:03.205491+00:00",
+    "title": "La estrella que explotó 2 veces sin morir 😱",
+    "topic": "space",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "awe",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 42.6,
+    "voice": "es-MX-JorgeNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": null,
+    "clip_selection": {
+      "filter_version": 3,
+      "beats": 6,
+      "vetted": 1,
+      "cache_hits": 0,
+      "no_preview": 0,
+      "api_error": 0,
+      "unparsed": 5,
+      "rejected": 0,
+      "bypass": false,
+      "vision_calls": 6,
+      "no_candidates": 0,
+      "search_error": 0,
+      "input_tokens": 26494,
+      "output_tokens": 329
+    }
   }
 ]
