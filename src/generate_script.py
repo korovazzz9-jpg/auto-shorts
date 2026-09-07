@@ -8,28 +8,28 @@ from anthropic import Anthropic
 
 from config import CFG, CHANNEL
 from recent_titles import add_title_to_cache, add_topic_to_cache, get_recent_titles, get_recent_topics
-from topic_stats import get_topic_avg_views
+from topic_stats import get_topic_median_views
 
 # Темы, которые НЕЛЬЗЯ использовать — слишком абстрактны/технически сложны,
 # аудитория не понимает сюрпризы без специальных знаний.
 BANNED_TOPICS = {"physics", "quantum physics", "quantum mechanics"}
 
 TOPICS_POOL = [
-    # History/archaeology — исторически лучшие результаты на канале (avg views 740-1090)
+    # History/archaeology — исторически лучшие результаты на канале
     "ancient history", "archaeological discoveries", "ancient civilizations",
     "shipwrecks and lost treasures", "historical mysteries",
-    # Science/nature — стабильно хорошая вовлечённость (avg views 580-1075)
+    # Science/nature — стабильно хорошая вовлечённость
     "the human body", "the animal kingdom", "the ocean", "evolution",
     "volcanoes and earthquakes", "extreme weather", "natural wonders",
     # Space — широкая аудитория
     "space",
-    # Re-test 2026-06-29: future technology возвращена. Старые EN-видео по ней удалены
-    # (тег пропал из topic_stats) → тема получает НЕЙТРАЛЬНЫЙ вес и честно тестируется
-    # под текущим сильным промптом. Прежний провал (avg 16) был под старым слабым промптом;
-    # в ES та же тема сейчас 64% досмотра / 850-1380 просмотров. Если снова <300 — убрать.
-    "future technology",
     # Удалены 2026-06: psychology (avg 136), bizarre records (непроверенная, размытая) —
     # в 5-8 раз хуже топа, мешали consistency канала.
+    # Удалена 2026-09-07: future technology — ре-тест от 06-29 (вернули «под сильным промптом,
+    # убрать если снова <300») закрыт отрицательно. Замер по 304 роликам ES: медиана 360 против
+    # 988 по каналу, доля хитов (>=1200 просмотров) 7% против 20-48% у топ-тем, n=14 — уже не
+    # шум. Худшая тема пула на обеих осях (ещё и retention 58%). Возвращать только с новым
+    # углом подачи, а не «просто попробовать ещё раз».
 ]
 
 MIN_TOPICS_WITH_DATA = 5  # не взвешивать, пока статистика не накопилась хотя бы по стольким темам
@@ -64,9 +64,15 @@ def _load_saturation() -> dict[str, int]:
 def _saturation_multiplier(topic: str, saturation: dict[str, int]) -> float:
     """Мягкий противовес чистому спросу: тема с тем же avg_views/outlier-сигналом, но МЕНЬШЕЙ
     конкуренцией (меньше totalResults) — более «свободная» ниша, получает небольшой бонус;
-    сильно перенасыщенная — небольшой штраф. Специально мягче outlier-бонуса (макс ×1.45) —
+    сильно перенасыщенная — небольшой штраф. Специально мягче outlier-бонуса (макс ×1.21) —
     сигнал шумнее (один снэпшот поиска, произвольный порог), не должен доминировать над
-    реальной статистикой просмотров. Нет данных по теме/вообще — множитель 1.0."""
+    реальной статистикой просмотров. Нет данных по теме/вообще — множитель 1.0.
+
+    2026-09-07: полоса сужена 0.85-1.15 -> 0.93-1.07. Штраф за насыщенность ДВАЖДЫ наказывал
+    темы, которые и так набирают просмотры В насыщенной нише: `the animal kingdom` (медиана
+    1146) и `space` (1142) — 2-я и 3-я темы канала по собственным просмотрам — падали в
+    10%-ярус из-за ×0.85, уступая темам с медианой 876-968. Собственная статистика уже
+    учитывает конкуренцию по факту, снаружи её достаточно подправлять, а не переворачивать."""
     if not saturation or topic not in saturation:
         return 1.0
     values = [v for v in saturation.values() if v > 0]
@@ -75,7 +81,7 @@ def _saturation_multiplier(topic: str, saturation: dict[str, int]) -> float:
     median = sorted(values)[len(values) // 2]
     s = max(saturation.get(topic, median), 1)
     ratio = median / s  # >1 — тема менее насыщена медианы (бонус), <1 — более (штраф)
-    return min(max(ratio ** 0.3, 0.85), 1.15)
+    return min(max(ratio ** 0.3, 0.93), 1.07)
 
 
 def _niche_titles_for(topic: str) -> list[str]:
@@ -127,7 +133,7 @@ def _pick_topic() -> str:
         # Только темы пула: тег topic- носят и серии (там LLM-тема серии, не категория пула),
         # и легаси-темы, убранные из пула — они не совпадают ни с чем в pool, но искажали
         # overall_avg ниже и накручивали гейт MIN_TOPICS_WITH_DATA (см. topic_stats).
-        avg_views = get_topic_avg_views(set(TOPICS_POOL))
+        avg_views = get_topic_median_views(set(TOPICS_POOL))
     except Exception:
         avg_views = {}
 
@@ -139,12 +145,17 @@ def _pick_topic() -> str:
     saturation = _load_saturation()
     # Темы без данных получают средний вес — попадают в середину рейтинга и продолжают
     # исследоваться, не застревая ни в топе, ни в хвосте. Мягкий бонус от outlier-анализа по
-    # нише (2026-07-03): +15% веса за каждый найденный выброс, максимум ×1.45 (3+ выброса) —
-    # чтобы один аномальный чужой ролик не рвал всю квоту 70/20/10, только подталкивал.
+    # нише (2026-07-03) — чтобы один аномальный ЧУЖОЙ ролик не рвал квоту 70/20/10.
+    # 2026-09-07: бонус ослаблен 0.15→0.04 за выброс (макс ×1.45→×1.12). На замере по 304
+    # роликам старый потолок позволял чужому сигналу ПЕРЕБИВАТЬ свою статистику: `the ocean`
+    # (медиана 876) и `historical mysteries` (877) выезжали мимо `space` (1142) и
+    # `the animal kingdom` (1146), которые падали в 10%-ярус. Итоговый разброс внешних
+    # множителей (×0.93..×1.20) теперь уже реального разброса медиан по темам (756..1174,
+    # т.е. 1.55×) — то есть свои просмотры задают порядок, а ниша двигает только близкие темы.
     # Насыщенность темы (2026-07-08, см. _saturation_multiplier) — противовес спросу: та же
     # тема с меньшей конкуренцией ценнее, множитель мягче (0.85-1.15).
     weight = lambda t: (max(avg_views.get(t, overall_avg), 1.0)
-                         * (1.0 + 0.15 * min(niche_counts.get(t, 0), 3))
+                         * (1.0 + 0.04 * min(niche_counts.get(t, 0), 3))
                          * _saturation_multiplier(t, saturation))
     ranked = sorted(pool, key=lambda t: -weight(t))
 
@@ -172,7 +183,16 @@ stock-footage search queries in English regardless — they are only used to sea
 Universal quality bar (applies to EVERY structure): the fact MUST contain at least one concrete
 anchor — a number, a date, a named place, or a named person. Vague facts feel like trivia; a
 specific anchor makes it feel true and memorable. Prefer strong, vivid verbs over "is"/"there is"
-constructions. Keep sentences short and punchy — cut connector words and generic hedging phrases
+constructions.
+
+Prefer an EVENT over a PROPERTY. An event fact says something HAPPENED — at a moment in time, to
+a specific place or people, with a consequence ("a mountain collapsed into the sea and nobody saw
+it coming", "the 1700 earthquake split a continent"). A property fact says something merely IS or
+CAN ("this animal can survive without water", "your bones are stronger than steel"). Both can be
+true and surprising, but the event version consistently travels further: it has stakes, a before
+and after, and a reason to finish watching. When the topic only offers a property, anchor it to
+the moment it was discovered, the case where it mattered, or what it did to someone — turn the
+capability into a story with a date attached. Keep sentences short and punchy — cut connector words and generic hedging phrases
 like "fascinating", "scientists discovered", "this phenomenon". Avoid abstract or purely technical
 facts that require specialist background to feel surprising (e.g. quantum mechanics, relativity,
 advanced math) — the impact has to land for a general audience in one watch. Physics and quantum
@@ -354,18 +374,26 @@ list ONLY the connector words for which "<word> <sentence 1>" is a COHERENT, gra
 # the whole game, >45s drops off hard). Facts aren't tutorials, but need room for anchor+twist+bait,
 # so we target ~28-35s — the upper sweet spot. edge-tts at +5% ≈ 2.6 words/sec, so 70-88 words.
 LENGTH_INSTRUCTION = (
+    # 2026-09-07: 70-88 -> 62-80 слов. Замер по 304 роликам ES (просмотры, не retention):
+    # 25-30с медиана 1060 / 31% хитов, 40с+ — 904 / 20%, и при старом лимите 23% роликов
+    # всё равно уезжали за 40с (испанский плотнее по слогам, 88 слов не укладывались в
+    # заявленные 35с). Сдвигаем полосу вниз, чтобы фактическая длина попадала в 25-33с.
     "HARD LENGTH LIMIT: the script (hook through CTA, the loop line is added later) MUST be "
-    "70-88 words — top fact Shorts land at ~28-35s; longer than that and retention drops off. "
+    "62-80 words — top fact Shorts land at ~25-33s; longer than that and both retention and "
+    "reach drop off. "
     "Silently count the words of your script before responding (do NOT show any draft, count, or "
     "reasoning in your reply — go straight to the JSON object, nothing before it). If your silent "
-    "count is over 88, trim it before outputting. A script over 88 words is a failure even if "
+    "count is over 80, trim it before outputting. A script over 80 words is a failure even if "
     "great. Be ruthless: one tight sentence per beat, no throat-clearing, no second comment-bait, "
     "no padding adjectives. Build a full arc (setup, twist, payoff) tightly. Report your word "
     "count in the \"word_count\" field — it must match the actual word count of \"script\"."
 )
 
-SCRIPT_MIN_WORDS = 65
-SCRIPT_MAX_WORDS = 93  # gate: above this we retry; loop line (~3 words) appended after
+SCRIPT_MIN_WORDS = 58
+SCRIPT_MAX_WORDS = 85  # gate: above this we retry; loop line (~3 words) appended after
+# 2026-09-07: 65/93 -> 58/85 вслед за сдвигом LENGTH_INSTRUCTION на 62-80 слов (см. там).
+# Зазор гейта над целевой полосой сохранён прежним (+5 слов), чтобы валидатор не отбраковывал
+# скрипты, попавшие в полосу, но чуть перебравшие при подсчёте.
 
 # A/B заголовков (2026-07-02): чисто нарративные заголовки (текущая практика) против
 # keyword-насыщенных. Причина теста: индустриальные данные за 2026 говорят, что поисковая
@@ -494,11 +522,16 @@ TITLE_OPENERS = [
 
 TITLE_OPENER_INSTRUCTION = (
     f"title_opener: which opening style the title uses — exactly one of "
-    f"[{', '.join(TITLE_OPENERS)}]. VARY this across videos — don't default to 'the-x'/"
-    "'your-x' every time; 'scientists-discovered', 'shouldnt-exist', 'nobody-expected', "
-    "and 'only-place' are equally valid and often punchier. Avoid 'question' — on this "
-    "channel it has correlated with much lower retention (an open question in the title "
-    "removes the reason to keep watching). Report the closest match (use 'other' if none fits)."
+    # 2026-08-21 здесь стоял запрет на 'question' — ошибка: решение принималось по EN, где такой
+    # ролик был ОДИН (24% досмотра), а инструкция глобальная, без гейта по каналу. На ES замер по
+    # 304 роликам говорит обратное: 'question' — лучший опенер (медиана 1008, n=97), 'your-x' —
+    # худший (796, доля хитов 6% при 22-24% у question/the-x, n=16). Запрет снят.
+    f"[{', '.join(TITLE_OPENERS)}]. VARY this across videos — don't default to 'the-x' every "
+    "time; 'scientists-discovered', 'shouldnt-exist', 'nobody-expected', 'only-place' and "
+    "'question' are equally valid and often punchier. Go easy on 'your-x' ('Your body/bones "
+    "do X') — second-person framing narrows the fact to the viewer's own body and consistently "
+    "reaches fewer people than framing the same fact as an external subject. "
+    "Report the closest match (use 'other' if none fits)."
 )
 
 # Сила неожиданности действия/детали в title (2026-07-18, CurioShock-инсайт) — модель

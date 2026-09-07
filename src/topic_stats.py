@@ -1,13 +1,20 @@
-"""Считает средние просмотры по темам (на основе скрытого тега topic-<тема>, который
-пайплайн добавляет к каждому видео) — нужно для взвешенного выбора темы в generate_script.py."""
+"""Считает типичные просмотры по темам (на основе скрытого тега topic-<тема>, который
+пайплайн добавляет к каждому видео) — нужно для взвешенного выбора темы в generate_script.py.
+
+2026-09-07: СРЕДНЕЕ заменено на МЕДИАНУ. Просмотры Shorts распределены с длинным хвостом:
+один вирусный ролик перекашивал среднее по всей теме и ломал ранжирование. Замеры по
+304 роликам ES: `the ocean` среднее 972 против медианы 876, `future technology` среднее 521
+против медианы 360 — темы выглядели заметно сильнее, чем есть. Медиана совпадает с долей
+хитов (ролики >=1200 просмотров) в порядке ранжирования, среднее — нет."""
 import re
+from statistics import median
 
 from youtube_auth import get_client
 
 TOPIC_TAG_RE = re.compile(r"^topic-(.+)$")
 
 
-def get_topic_avg_views(known_topics: set[str] | None = None) -> dict[str, float]:
+def get_topic_median_views(known_topics: set[str] | None = None) -> dict[str, float]:
     """known_topics (2026-07-15) — вернуть только темы из этого набора. Нужно, потому что в
     тегах живут не только темы из пула: `generate_series.py` тегирует `topic-<конкретная тема
     серии>` (LLM-строка вроде «Immortal Animals» / «The Ancient City That Voted to Destroy
@@ -54,9 +61,9 @@ def get_topic_avg_views(known_topics: set[str] | None = None) -> dict[str, float
             views = int(video["statistics"].get("viewCount", 0))
             views_by_topic.setdefault(topic, []).append(views)
 
-    return {topic: sum(views) / len(views) for topic, views in views_by_topic.items()}
+    return {topic: float(median(views)) for topic, views in views_by_topic.items()}
 
 
 if __name__ == "__main__":
-    for topic, avg in sorted(get_topic_avg_views().items(), key=lambda kv: -kv[1]):
-        print(f"{avg:8.1f}  {topic}")
+    for topic, med in sorted(get_topic_median_views().items(), key=lambda kv: -kv[1]):
+        print(f"{med:8.1f}  {topic}")

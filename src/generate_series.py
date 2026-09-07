@@ -7,7 +7,7 @@ from anthropic import Anthropic
 from config import CFG
 from generate_script import BASE_SYSTEM_PROMPT, HOOK_TEMPLATES, TOPICS_POOL, BANNED_TOPICS, extract_first_json, _title_instruction_narrative
 from recent_titles import add_title_to_cache, add_topic_to_cache, get_recent_titles
-from topic_stats import get_topic_avg_views
+from topic_stats import get_topic_median_views
 import random
 
 
@@ -66,7 +66,7 @@ def _pick_series_topic() -> str:
     try:
         # Только темы из SERIES_TOPICS — иначе overall_avg ниже (вес тем БЕЗ данных) считался
         # бы вместе с мусорными topic-тегами: темами самих серий и легаси-темами вне пула.
-        avg_views = get_topic_avg_views(set(SERIES_TOPICS))
+        avg_views = get_topic_median_views(set(SERIES_TOPICS))
     except Exception:
         avg_views = {}
     overall_avg = sum(avg_views.values()) / len(avg_views) if avg_views else 100
