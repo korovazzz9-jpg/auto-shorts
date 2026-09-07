@@ -60,7 +60,7 @@ with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
         # Фон не тематический — берём залипательные клипы (на 1 больше фактов для ротации).
         clip_paths = fetch_satisfying_clips(FACTS_PER_VIDEO, tmp)
     else:
-        clip_paths = fetch_clips(data["video_queries"], tmp)
+        clip_paths = fetch_clips(data["video_queries"], tmp, narration=data["script"])
 
     print("3/4 Озвучка...")
     words, _voice = text_to_speech(data["script"], audio_path)

@@ -84,12 +84,14 @@ def run() -> None:
         video_path = os.path.join(tmp, "video.mp4")
 
         print("2/6 Подбор стоковых видео под смысл сценария...")
-        clip_paths = fetch_clips(data["video_queries"], tmp)
+        clip_paths = fetch_clips(data["video_queries"], tmp, narration=data["script"])
         # Телеметрия отбора кадров (2026-09-07) — уходит в video_history, чтобы «проверенные»
         # выпуски и выпуски с обходом фильтра можно было оценивать ОТДЕЛЬНО. Иначе просмотры
         # смешивают два режима и непонятно, что именно испытывали.
         clip_selection = selection_stats()
         print(f"  Отбор кадров: {clip_selection}")
+        if not clip_paths:
+            raise RuntimeError("Нет проверенных стоковых клипов; выпуск остановлен до озвучки")
 
         print("3/6 Озвучка...")
         words, voice = text_to_speech(data["script"], audio_path)
