@@ -25,6 +25,11 @@ MIN_WIDTH = 1280  # для горизонтального лонгформа —
 _VISION_CACHE_FILE = os.path.join(os.path.dirname(__file__), "vision_cache.json")
 _VISION_CACHE_TTL_DAYS = 7
 _VISION_CACHE_MAX = 300
+# 2026-09-07: версия схемы отбора. Записи, сделанные ПРЕЖНИМ принудительным отбором («выбери
+# лучший из этих», без права отказа), не должны проходить как одобренные новым фильтром — TTL
+# 7 дней иначе тащил бы старые решения ещё неделю и смазал бы замер эффекта. Бампать при
+# КАЖДОМ изменении промпта отбора, иначе эксперимент меряет смесь старого и нового.
+_VISION_CACHE_VERSION = 2
 
 
 def _load_vision_cache() -> dict:
@@ -36,9 +41,10 @@ def _load_vision_cache() -> dict:
         return {}
 
 
-def _vision_cache_get(query: str, candidates: list[dict]) -> dict | None:
+def _vision_cache_get(query: str, candidates: list[dict]) -> list[dict] | None:
+    """Одобренные клипы из кэша, в порядке предпочтения. Запись чужой версии отбора — miss."""
     entry = _load_vision_cache().get(query)
-    if not isinstance(entry, dict):
+    if not isinstance(entry, dict) or entry.get("v") != _VISION_CACHE_VERSION:
         return None
     try:
         age = time.time() - float(entry.get("ts", 0))
@@ -46,13 +52,15 @@ def _vision_cache_get(query: str, candidates: list[dict]) -> dict | None:
         return None
     if age > _VISION_CACHE_TTL_DAYS * 86400:
         return None
-    # Клип должен быть среди ТЕКУЩИХ кандидатов (used_ids уже отфильтрованы) — иначе miss.
-    return next((c for c in candidates if c["id"] == entry.get("id")), None)
+    # Клипы должны быть среди ТЕКУЩИХ кандидатов (used_ids уже отфильтрованы) — иначе miss.
+    by_id = {c["id"]: c for c in candidates}
+    hits = [by_id[i] for i in entry.get("ids", []) if i in by_id]
+    return hits or None
 
 
-def _vision_cache_put(query: str, clip_id) -> None:
+def _vision_cache_put(query: str, clip_ids: list) -> None:
     cache = _load_vision_cache()
-    cache[query] = {"id": clip_id, "ts": time.time()}
+    cache[query] = {"ids": list(clip_ids), "ts": time.time(), "v": _VISION_CACHE_VERSION}
     if len(cache) > _VISION_CACHE_MAX:  # не даём файлу расти бесконечно
         for k, _ in sorted(cache.items(), key=lambda kv: kv[1].get("ts", 0))[:len(cache) - _VISION_CACHE_MAX]:
             del cache[k]
@@ -155,25 +163,26 @@ def _get_candidates(query: str, used_ids: set) -> list[dict]:
     return candidates[:VISION_CANDIDATES]
 
 
-def _pick_best_clip(candidates: list[dict], query: str) -> dict | None:
-    """Отбирает клип по poster-кадрам (Pexels image URL) через Claude Haiku — БЕЗ скачивания
-    видео. Качается потом только победитель (в fetch_clips).
+def _accepted_clips(candidates: list[dict], query: str) -> list[dict]:
+    """Клипы, которые Haiku признал показывающими `query`, в порядке предпочтения. Отбор идёт
+    по poster-кадрам (Pexels image URL), БЕЗ скачивания видео.
 
-    Возвращает None, если НИ ОДИН кандидат не показывает нужное. 2026-09-07: раньше такого
-    исхода не было вовсе — промпт требовал «pick the one that best fits», и модель обязана
-    была назвать номер, даже когда все клипы мимо. Отсюда жираф в ролике про птицу, которая
-    охотится на змей (46% досмотра), скат вместо рыбы-стрелка и река со скалами вместо рыбы
-    с лёгкими. Мимо-кадр ломает обещание ролика; пустой бит его не ломает — `_build_background`
-    делит длительность на число клипов, соседний план просто держится дольше."""
+    Пустой список = ни один кандидат не подходит. 2026-09-07: раньше такого исхода не было —
+    промпт требовал «pick the one that best fits», и модель обязана была назвать номер, даже
+    когда все клипы мимо (отсюда жираф в ролике про птицу, охотящуюся на змей).
+
+    Возвращаем ВСЕ одобренные, а не одного победителя: `fetch_clips` при битом файле берёт
+    следующего из списка, и при возврате одного победителя запасные шли в ролик вообще без
+    проверки — дыра ровно того же размера, что и исходная (найдено на ревью 2026-09-07)."""
     if not candidates:
-        return None
+        return []
 
     # Vision требует preview-кадра (есть у Pexels, нет у Pixabay). Раньше при <2 превью
     # брали первый ВСЛЕПУЮ — теперь одиночного кандидата тоже показываем модели: проверить
     # «то или не то» можно и на одном, это дешевле одного мимо-кадра в ролике.
     with_preview = [c for c in candidates if c.get("preview")]
     if not with_preview:
-        return candidates[0]  # проверять нечем — отдаём порядок релевантности стока
+        return candidates  # проверять нечем — отдаём порядок релевантности стока
 
     cached = _vision_cache_get(query, with_preview)
     if cached:
@@ -184,10 +193,10 @@ def _pick_best_clip(candidates: list[dict], query: str) -> dict | None:
     content = [{"type": "text", "text": (
         f"I need a stock video clip that visually shows: \"{query}\"\n\n"
         f"Here are {len(with_preview)} candidate clips (numbered 1 to {len(with_preview)}).\n"
-        "Reply with ONLY the number of the clip that genuinely shows that subject or scene.\n"
+        "Reply with the numbers of EVERY clip that genuinely shows that subject or scene, "
+        "best first, comma-separated (for example: 3,1).\n"
         "If NONE of them do — if the closest match is merely a loosely related or generic "
-        "scene — reply 0 instead. A wrong clip is worse than no clip here: with no clip the "
-        "video simply holds the neighbouring shot a little longer, but a clip showing the "
+        "scene — reply 0 instead. A wrong clip is worse than no clip here: a clip showing the "
         "wrong animal or object breaks the promise the narration just made."
     )}]
     for idx, c in enumerate(with_preview, 1):
@@ -197,43 +206,48 @@ def _pick_best_clip(candidates: list[dict], query: str) -> dict | None:
     try:
         response = client.messages.create(
             model="claude-haiku-4-5-20251001",
-            max_tokens=10,
+            max_tokens=20,
             messages=[{"role": "user", "content": content}],
         )
         raw = response.content[0].text.strip()
     except Exception as e:
         # Сбой API — это отсутствие информации, а не суждение «не подходит». Держим прежнее
-        # поведение (первый по релевантности), но НЕ молча: раньше эта ветка была невидима.
-        print(f"  (vision-отбор для '{query}' упал: {e} — берём первый по релевантности)")
-        return with_preview[0]
+        # поведение (порядок стока), но НЕ молча: раньше эта ветка была невидима.
+        print(f"  (vision-отбор для '{query}' упал: {e} — берём порядок релевантности)")
+        return with_preview
 
-    # Полное число, а не первый символ: `int(raw[0])` ломался на ответе вида "Clip 3"
+    # Полные числа, а не первый символ: `int(raw[0])` ломался на ответе вида "Clip 3"
     # (ValueError → тихий фолбэк на первый клип) и прочитал бы "10" как "1".
-    m = re.search(r"\d+", raw)
-    if not m:
-        print(f"  (vision вернул неразбираемое '{raw}' для '{query}' — первый по релевантности)")
-        return with_preview[0]
-
-    pick = int(m.group())
-    if pick == 0:
+    nums = [int(n) for n in re.findall(r"\d+", raw)]
+    if not nums:
+        print(f"  (vision вернул неразбираемое '{raw}' для '{query}' — порядок релевантности)")
+        return with_preview
+    if nums[0] == 0:
         print(f"  Vision: ни один из {len(with_preview)} клипов не показывает '{query}'")
-        return None
-    if not 1 <= pick <= len(with_preview):
-        print(f"  (vision назвал клип {pick} вне диапазона для '{query}' — первый по релевантности)")
-        return with_preview[0]
+        return []
 
-    print(f"  Vision picked clip {pick}/{len(with_preview)} for '{query}'")
+    seen, accepted = set(), []
+    for n in nums:
+        if 1 <= n <= len(with_preview) and n not in seen:
+            seen.add(n)
+            accepted.append(with_preview[n - 1])
+    if not accepted:
+        print(f"  (vision назвал только номера вне диапазона ('{raw}') для '{query}' — порядок релевантности)")
+        return with_preview
+
+    print(f"  Vision одобрил {len(accepted)}/{len(with_preview)} клипов для '{query}'")
     try:  # кэшируем только реальный vision-выбор (не фолбэки) — сбой кэша не роняет пайплайн
-        _vision_cache_put(query, with_preview[pick - 1]["id"])
+        _vision_cache_put(query, [c["id"] for c in accepted])
     except Exception as e:
         print(f"  (vision cache write failed: {e})")
-    return with_preview[pick - 1]
+    return accepted
 
 
 def _search_with_fallback(query: str, used_ids: set) -> list[dict]:
-    """Возвращает кандидатов В ПОРЯДКЕ ПРЕДПОЧТЕНИЯ: победитель vision-отбора первым,
-    остальные — запасные (2026-07-13: раньше возвращался только победитель — если его
-    файл оказывался битым на CDN, запасных уже не было и слот публикации терялся)."""
+    """Только ОДОБРЕННЫЕ vision клипы, в порядке предпочтения (2026-07-13: список, а не один
+    победитель — если его файл окажется битым на CDN, нужен запасной, иначе слот публикации
+    теряется). 2026-09-07: запасные теперь тоже проходят проверку — раньше сюда добавлялись
+    все прочие кандидаты, и при битом победителе в ролик уходил непроверенный клип."""
     short = " ".join(query.split()[:2])
     candidates = _get_candidates(query, used_ids)
     if not candidates and short != query:
@@ -243,24 +257,18 @@ def _search_with_fallback(query: str, used_ids: set) -> list[dict]:
     if not candidates:
         return []
 
-    winner = _pick_best_clip(candidates, query)
-    # 2026-09-07: vision может отвергнуть ВСЕХ кандидатов. Прежде чем оставлять бит без
-    # картинки, пробуем упрощённый запрос — узкий («archerfish spitting water») часто не
-    # находится на стоке вовсе, а широкий («archerfish» / «tropical fish») находится.
-    if winner is None and short != query:
+    accepted = _accepted_clips(candidates, query)
+    # Vision может отвергнуть ВСЕХ. Прежде чем оставлять бит без картинки, пробуем упрощённый
+    # запрос — узкий («archerfish spitting water») часто не находится на стоке вовсе, а
+    # широкий («archerfish») находится.
+    if not accepted and short != query:
         alt = _get_candidates(short, used_ids)
         if alt:
             print(f"  (все клипы мимо, пробуем '{short}')")
-            winner = _pick_best_clip(alt, short)
-            if winner is not None:
-                candidates = alt
-    if winner is None:
-        # Осознанно возвращаем пусто: fetch_clips пропустит этот бит (там уже есть ветка
-        # `if not ranked: continue`), и соседний план растянется. Это лучше, чем показать
-        # заведомо не то — см. комментарий в _pick_best_clip.
+            accepted = _accepted_clips(alt, short)
+    if not accepted:
         print(f"  (подходящего клипа для '{query}' нет — бит останется без своего плана)")
-        return []
-    return [winner] + [c for c in candidates if c["id"] != winner["id"]]
+    return accepted
 
 
 def _is_valid_clip(path: str) -> bool:
@@ -359,6 +367,40 @@ def fetch_clips(queries: list[str], out_dir: str, landscape: bool = False) -> li
             break
         else:
             print(f"  (все кандидаты для '{query}' не скачались/битые, пропускаем запрос)")
+
+    # 2026-09-07: страховка от потери слота. Отказ vision по ОДНОМУ запросу безобиден —
+    # `_build_background` делит длительность между оставшимися клипами. Но если отвергнуты
+    # ВСЕ, список пуст, и там стоит `raise RuntimeError("Нет стоковых клипов...")` — то есть
+    # публикация теряется целиком. Здесь качество уступает выпуску: добираем без вето vision,
+    # по порядку релевантности стока, и говорим об этом громко (ролик выйдет с картинкой
+    # похуже, но выйдет). Тихо это делать нельзя — иначе замер эффекта фильтра врёт.
+    if not paths and queries:
+        print("  ⚠️ vision отверг клипы по ВСЕМ запросам — добираем без вето, иначе слот потерян")
+        for i, query in enumerate(queries):
+            try:
+                relaxed = _get_candidates(query, used_ids)
+            except Exception as e:
+                print(f"  (повторный поиск для '{query}' упал: {e})")
+                continue
+            for file_info in relaxed:
+                used_ids.add(file_info["id"])
+                out_path = os.path.join(out_dir, f"clip_relaxed_{i}.mp4")
+                try:
+                    r = requests.get(file_info["link"], timeout=60)
+                    r.raise_for_status()
+                    with open(out_path, "wb") as f:
+                        f.write(r.content)
+                except Exception:
+                    continue
+                if _is_valid_clip(out_path):
+                    paths.append(out_path)
+                    break
+                try:
+                    os.remove(out_path)
+                except OSError:
+                    pass
+            if paths:  # одного клипа достаточно, чтобы сборка не упала
+                break
     return paths
 
 
