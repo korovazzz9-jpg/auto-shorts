@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import tempfile
 import time
 
@@ -155,18 +156,24 @@ def _get_candidates(query: str, used_ids: set) -> list[dict]:
 
 
 def _pick_best_clip(candidates: list[dict], query: str) -> dict | None:
-    """Отбирает лучший клип по poster-кадрам (Pexels image URL) через Claude Haiku —
-    БЕЗ скачивания видео. Качается потом только победитель (в fetch_clips)."""
+    """Отбирает клип по poster-кадрам (Pexels image URL) через Claude Haiku — БЕЗ скачивания
+    видео. Качается потом только победитель (в fetch_clips).
+
+    Возвращает None, если НИ ОДИН кандидат не показывает нужное. 2026-09-07: раньше такого
+    исхода не было вовсе — промпт требовал «pick the one that best fits», и модель обязана
+    была назвать номер, даже когда все клипы мимо. Отсюда жираф в ролике про птицу, которая
+    охотится на змей (46% досмотра), скат вместо рыбы-стрелка и река со скалами вместо рыбы
+    с лёгкими. Мимо-кадр ломает обещание ролика; пустой бит его не ломает — `_build_background`
+    делит длительность на число клипов, соседний план просто держится дольше."""
     if not candidates:
         return None
-    if len(candidates) == 1:
-        return candidates[0]
 
-    # Vision возможен только если у всех кандидатов есть preview-кадр (Pexels).
-    # Если хоть у одного нет (Pixabay) — берём первый по релевантности от стока.
+    # Vision требует preview-кадра (есть у Pexels, нет у Pixabay). Раньше при <2 превью
+    # брали первый ВСЛЕПУЮ — теперь одиночного кандидата тоже показываем модели: проверить
+    # «то или не то» можно и на одном, это дешевле одного мимо-кадра в ролике.
     with_preview = [c for c in candidates if c.get("preview")]
-    if len(with_preview) < 2:
-        return candidates[0]
+    if not with_preview:
+        return candidates[0]  # проверять нечем — отдаём порядок релевантности стока
 
     cached = _vision_cache_get(query, with_preview)
     if cached:
@@ -175,9 +182,13 @@ def _pick_best_clip(candidates: list[dict], query: str) -> dict | None:
 
     client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
     content = [{"type": "text", "text": (
-        f"I need a stock video clip that visually matches: \"{query}\"\n\n"
-        f"Here are {len(with_preview)} candidate clips (numbered 1 to {len(with_preview)}). "
-        f"Pick the one whose footage best fits that description. Reply with ONLY the number."
+        f"I need a stock video clip that visually shows: \"{query}\"\n\n"
+        f"Here are {len(with_preview)} candidate clips (numbered 1 to {len(with_preview)}).\n"
+        "Reply with ONLY the number of the clip that genuinely shows that subject or scene.\n"
+        "If NONE of them do — if the closest match is merely a loosely related or generic "
+        "scene — reply 0 instead. A wrong clip is worse than no clip here: with no clip the "
+        "video simply holds the neighbouring shot a little longer, but a clip showing the "
+        "wrong animal or object breaks the promise the narration just made."
     )}]
     for idx, c in enumerate(with_preview, 1):
         content.append({"type": "text", "text": f"Clip {idx}:"})
@@ -189,32 +200,66 @@ def _pick_best_clip(candidates: list[dict], query: str) -> dict | None:
             max_tokens=10,
             messages=[{"role": "user", "content": content}],
         )
-        pick = int(response.content[0].text.strip()[0]) - 1
-        pick = max(0, min(pick, len(with_preview) - 1))
-        print(f"  Vision picked clip {pick + 1}/{len(with_preview)} for '{query}'")
-        try:  # кэшируем только реальный vision-выбор (не фолбэки) — сбой кэша не роняет пайплайн
-            _vision_cache_put(query, with_preview[pick]["id"])
-        except Exception as e:
-            print(f"  (vision cache write failed: {e})")
-        return with_preview[pick]
-    except Exception:
+        raw = response.content[0].text.strip()
+    except Exception as e:
+        # Сбой API — это отсутствие информации, а не суждение «не подходит». Держим прежнее
+        # поведение (первый по релевантности), но НЕ молча: раньше эта ветка была невидима.
+        print(f"  (vision-отбор для '{query}' упал: {e} — берём первый по релевантности)")
         return with_preview[0]
+
+    # Полное число, а не первый символ: `int(raw[0])` ломался на ответе вида "Clip 3"
+    # (ValueError → тихий фолбэк на первый клип) и прочитал бы "10" как "1".
+    m = re.search(r"\d+", raw)
+    if not m:
+        print(f"  (vision вернул неразбираемое '{raw}' для '{query}' — первый по релевантности)")
+        return with_preview[0]
+
+    pick = int(m.group())
+    if pick == 0:
+        print(f"  Vision: ни один из {len(with_preview)} клипов не показывает '{query}'")
+        return None
+    if not 1 <= pick <= len(with_preview):
+        print(f"  (vision назвал клип {pick} вне диапазона для '{query}' — первый по релевантности)")
+        return with_preview[0]
+
+    print(f"  Vision picked clip {pick}/{len(with_preview)} for '{query}'")
+    try:  # кэшируем только реальный vision-выбор (не фолбэки) — сбой кэша не роняет пайплайн
+        _vision_cache_put(query, with_preview[pick - 1]["id"])
+    except Exception as e:
+        print(f"  (vision cache write failed: {e})")
+    return with_preview[pick - 1]
 
 
 def _search_with_fallback(query: str, used_ids: set) -> list[dict]:
     """Возвращает кандидатов В ПОРЯДКЕ ПРЕДПОЧТЕНИЯ: победитель vision-отбора первым,
     остальные — запасные (2026-07-13: раньше возвращался только победитель — если его
     файл оказывался битым на CDN, запасных уже не было и слот публикации терялся)."""
+    short = " ".join(query.split()[:2])
     candidates = _get_candidates(query, used_ids)
-    if not candidates:
-        short = " ".join(query.split()[:2])
-        if short != query:
-            candidates = _get_candidates(short, used_ids)
-            if candidates:
-                print(f"  (simplified query '{query}' → '{short}')")
+    if not candidates and short != query:
+        candidates = _get_candidates(short, used_ids)
+        if candidates:
+            print(f"  (simplified query '{query}' → '{short}')")
     if not candidates:
         return []
+
     winner = _pick_best_clip(candidates, query)
+    # 2026-09-07: vision может отвергнуть ВСЕХ кандидатов. Прежде чем оставлять бит без
+    # картинки, пробуем упрощённый запрос — узкий («archerfish spitting water») часто не
+    # находится на стоке вовсе, а широкий («archerfish» / «tropical fish») находится.
+    if winner is None and short != query:
+        alt = _get_candidates(short, used_ids)
+        if alt:
+            print(f"  (все клипы мимо, пробуем '{short}')")
+            winner = _pick_best_clip(alt, short)
+            if winner is not None:
+                candidates = alt
+    if winner is None:
+        # Осознанно возвращаем пусто: fetch_clips пропустит этот бит (там уже есть ветка
+        # `if not ranked: continue`), и соседний план растянется. Это лучше, чем показать
+        # заведомо не то — см. комментарий в _pick_best_clip.
+        print(f"  (подходящего клипа для '{query}' нет — бит останется без своего плана)")
+        return []
     return [winner] + [c for c in candidates if c["id"] != winner["id"]]
 
 
