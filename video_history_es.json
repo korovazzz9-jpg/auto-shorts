@@ -4669,5 +4669,40 @@
       "input_tokens": 26494,
       "output_tokens": 329
     }
+  },
+  {
+    "video_id": "SMcH8Q8Q5WE",
+    "published_at": "2026-09-07T23:03:47.197671+00:00",
+    "title": "¿La tormenta que electrocutó 352 ovejas en un solo rayo? 😱",
+    "topic": "extreme weather",
+    "hook_template": "sounds-fake",
+    "title_opener": "question",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": false,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 32.0,
+    "voice": "es-CO-GonzaloNeural",
+    "caption_color": "white",
+    "structure": "unsolved-mystery",
+    "pair_role": null,
+    "clip_selection": {
+      "filter_version": 3,
+      "beats": 6,
+      "vetted": 2,
+      "cache_hits": 0,
+      "no_preview": 0,
+      "api_error": 0,
+      "unparsed": 4,
+      "rejected": 0,
+      "bypass": false,
+      "vision_calls": 6,
+      "no_candidates": 0,
+      "search_error": 0,
+      "input_tokens": 26363,
+      "output_tokens": 286
+    }
   }
 ]
