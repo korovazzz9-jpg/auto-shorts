@@ -123,8 +123,12 @@ def generate_longform_script() -> dict:
                 f"- title: compelling narrative hook in {CFG['script_language']}, under 70 "
                 "characters. Must read like a real headline, NOT a listicle "
                 "(no '5 Facts...' / 'X Things...' patterns).\n"
+                # 2026-09-07: 3-5 -> 2-3 слова. Превью в ленте показывается шириной ~200-350 px;
+                # пять слов там сжимаются до нечитаемого кегля. У разобранных каналов ниши на
+                # превью 2-3 слова крупно. Рендер режет лишнее (THUMB_MAX_WORDS), но пусть
+                # модель сама выбирает, ЧТО оставить, а не первые три слова подряд.
                 f"- thumb_text: a SHORT punchy thumbnail phrase in {CFG['script_language']}, "
-                "3-5 words MAX, the single most intriguing/shocking idea of the video. This is "
+                "2-3 words MAX, the single most intriguing/shocking idea of the video. This is "
                 "NOT the title — it's big bold text on the thumbnail, so it must be instantly "
                 "readable and create curiosity (e.g. 'A SIGNAL FROM SPACE', 'IT SHOULDN'T "
                 "EXIST'). No punctuation needed.\n"

@@ -79,25 +79,39 @@ def _pick_thumb_frame(background, duration: float):
         return fallback
 
 
+THUMB_MAX_WORDS = 3        # у образцов ниши превью — 2-3 слова; больше не читается в ленте
+THUMB_TEXT_COLOR = (255, 225, 0)   # жёлтый: единственный цвет, который держится и на светлом,
+                                    # и на тёмном кадре, и не сливается с интерфейсом YouTube
+THUMB_FILL_RATIO = 0.88    # какую долю ширины кадра занимает текстовый блок
+
+
 def _save_longform_thumb(img: Image.Image, path: str, hook_text: str | None) -> None:
-    """Тумба лонгформа (16:9): крупная короткая фраза-хук на затемнённой нижней трети.
-    Рисуем именно короткий thumb_text (3-5 слов), а НЕ длинный заголовок — иначе кадр
-    захламляется мелким текстом. Если фразы нет — отдаём чистый кадр."""
+    """Тумба лонгформа (16:9): 2-3 слова жёлтым капсом с жирной чёрной обводкой.
+
+    2026-09-07, переделано. Было: белый текст, обводка фиксированные 3 px, тёмная полоса
+    во всю нижнюю треть, до 5 слов кеглем от 60. В ленте превью показывается шириной
+    ~200-350 px — при таком уменьшении обводка в 3 px пропадала совсем, белый терялся на
+    светлых кадрах, а пять слов кеглем 60 превращались в нечитаемую строку. Ориентир —
+    разбор @ExplainInPaint1 (63.5K подписчиков за 3.5 месяца в смежном формате): жёлтый
+    капс, чёрная обводка, 2-3 слова. Обводка теперь пропорциональна кеглю, а не фиксирована.
+
+    Текст держим выше самого низа: правый нижний угол перекрыт плашкой длительности."""
     img = img.convert("RGB")
     if not hook_text or not hook_text.strip():
         img.save(path, "JPEG", quality=90)
         return
 
     W, H = img.size
-    text = hook_text.strip().upper()
-    max_w = int(W * 0.88)
+    # Страховка на случай, если модель вернула длинную фразу: в ленте всё равно прочитается
+    # только начало, лучше показать 3 слова крупно, чем 6 мелко.
+    words = hook_text.strip().upper().split()
+    text = " ".join(words[:THUMB_MAX_WORDS])
+    max_w = int(W * THUMB_FILL_RATIO)
     draw = ImageDraw.Draw(img)
 
-    # Подбираем размер шрифта так, чтобы фраза влезла максимум в 2 строки.
-    font_size = 170
-    while font_size > 60:
+    def _layout(size: int):
         try:
-            font = ImageFont.truetype(bv._ANTON, font_size)
+            font = ImageFont.truetype(bv._ANTON, size)
         except Exception:
             font = ImageFont.load_default()
         lines, cur = [], ""
@@ -111,31 +125,43 @@ def _save_longform_thumb(img: Image.Image, path: str, hook_text: str | None) -> 
                 cur = w
         if cur:
             lines.append(cur)
-        if len(lines) <= 2 and all(
-            draw.textbbox((0, 0), l, font=font)[2] <= max_w for l in lines
-        ):
+        return font, lines
+
+    # Идём сверху вниз: берём САМЫЙ крупный кегль, при котором влезает в 2 строки.
+    font_size = 300
+    while font_size > 90:
+        font, lines = _layout(font_size)
+        if len(lines) <= 2 and all(draw.textbbox((0, 0), l, font=font)[2] <= max_w for l in lines):
             break
         font_size -= 10
+    else:
+        font, lines = _layout(font_size)
 
-    line_h = font_size + 16
+    stroke = max(8, font_size // 10)
+    line_h = int(font_size * 1.12)
     block_h = len(lines) * line_h
-    band_top = max(0, H - block_h - 130)
+    # Низ блока — на 12% высоты выше края: там плашка длительности и полоса прогресса.
+    block_bottom = H - int(H * 0.12)
+    y = block_bottom - block_h
 
-    # Затемняющая полоса снизу — текст читается на любом кадре.
+    # Мягкий градиент вместо сплошной полосы: полоса читается как чужая плашка субтитров,
+    # градиент оставляет кадр кадром и всё равно вытягивает контраст под текстом.
+    grad_top = max(0, y - int(H * 0.10))
     overlay = Image.new("RGBA", img.size, (0, 0, 0, 0))
-    ImageDraw.Draw(overlay).rectangle([(0, band_top), (W, H)], fill=(0, 0, 0, 150))
+    od = ImageDraw.Draw(overlay)
+    for i in range(grad_top, H):
+        a = int(170 * min(1.0, (i - grad_top) / max(1, (H - grad_top) * 0.55)))
+        od.line([(0, i), (W, i)], fill=(0, 0, 0, a))
     img = Image.alpha_composite(img.convert("RGBA"), overlay).convert("RGB")
     draw = ImageDraw.Draw(img)
 
-    y = band_top + 60
     for l in lines:
-        bbox = draw.textbbox((0, 0), l, font=font)
+        bbox = draw.textbbox((0, 0), l, font=font, stroke_width=stroke)
         x = (W - (bbox[2] - bbox[0])) // 2 - bbox[0]
-        for dx, dy in [(-3, 0), (3, 0), (0, -3), (0, 3)]:  # чёрная обводка
-            draw.text((x + dx, y + dy), l, font=font, fill="black")
-        draw.text((x, y), l, font=font, fill="white")
+        draw.text((x, y), l, font=font, fill=THUMB_TEXT_COLOR,
+                  stroke_width=stroke, stroke_fill="black")
         y += line_h
-    img.save(path, "JPEG", quality=90)
+    img.save(path, "JPEG", quality=92)
 
 
 def _fit_clip(clip: VideoFileClip, duration: float, zoom_factor: float) -> VideoFileClip:
