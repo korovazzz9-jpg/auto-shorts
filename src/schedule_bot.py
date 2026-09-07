@@ -26,8 +26,11 @@ MSK = timezone(timedelta(hours=3))   # Москва UTC+3
 # 2026-07-01: EN 5→4 (убран 13:07), ES 3→4 (добавлен 16:17) — перелив ресурса на ES.
 # 2026-07-05: EN 22:13→23:07 (сдвиг в US-прайм 19:07 EDT, см. README).
 # 2026-07-07: ES 13:17→03:17 (сдвиг в мексиканский вечерний прайм 21:17, см. README).
-EN_SLOTS = [(16, 13), (20, 7), (23, 7), (0, 7)]
-ES_SLOTS = [(3, 17), (16, 17), (20, 17), (0, 17)]
+# 2026-08-21: EN и PT на паузе (воркфлоу отключены) — активен только ES.
+# 2026-09-07: ES 4→5 слотов, 03:17 убран (худший: хвост ночи для аудитории в Америках),
+# добавлены 17:17 и 22:17. Держать в синхроне с config.py daily_slots_utc.
+EN_SLOTS = []
+ES_SLOTS = [(13, 17), (17, 17), (20, 17), (22, 17), (0, 17)]
 ALL_SLOTS = sorted(set(EN_SLOTS + ES_SLOTS))
 
 TRIGGERS = ("расписание", "/расписание", "schedule", "/schedule", "/start")
@@ -53,11 +56,13 @@ def _next_slot_utc(now: datetime) -> datetime:
 
 def build_schedule() -> str:
     now = datetime.now(timezone.utc)
-    lines = ["📅 Расписание выхода роликов", "(🇻🇳 Вьетнам · 🇷🇺 Москва)", "", "EN — 5/день:"]
-    for h, m in EN_SLOTS:
-        vn, msk = _conv(h, m)
-        lines.append(f"• {vn} · {msk}")
-    lines += ["", "ES — 3/день:"]
+    lines = ["📅 Расписание выхода роликов", "(🇻🇳 Вьетнам · 🇷🇺 Москва)"]
+    if EN_SLOTS:
+        lines += ["", "EN — 5/день:"]
+        for h, m in EN_SLOTS:
+            vn, msk = _conv(h, m)
+            lines.append(f"• {vn} · {msk}")
+    lines += ["", f"ES — {len(ES_SLOTS)}/день:"]
     for h, m in ES_SLOTS:
         vn, msk = _conv(h, m)
         lines.append(f"• {vn} · {msk}")
@@ -69,8 +74,9 @@ def build_schedule() -> str:
     local = nxt.astimezone()  # время устройства (локальная зона ПК, где запущен бот)
     lines += ["", f"⏭ Следующий: {local.strftime('%H:%M')} (твоё время) — через {h}ч {m:02d}м"]
 
-    lines += ["", "ℹ️ Пн–Ср последний слот — это серии (Part 1/2/3).",
-              "Вс ~06:00 ВН / 02:00 МСК — лонгформ."]
+    # 2026-09-07: строка про воскресный лонгформ убрана — лонгформы и месячные компиляции
+    # отключены (9 роликов собрали 293 просмотра суммарно).
+    lines += ["", "ℹ️ Пн–Ср последний слот — это серии (Part 1/2/3)."]
     return "\n".join(lines)
 
 

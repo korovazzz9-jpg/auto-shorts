@@ -121,7 +121,15 @@ def discover() -> tuple[dict[str, int], dict[str, list[str]], list[dict], dict[s
     all_outliers: list[dict] = []
     saturation: dict[str, int] = {}
 
-    for topic in TOPICS_POOL:
+    # 2026-09-07: сканируем ПОЛОВИНУ пула за прогон (чётные/нечётные ISO-недели), а не весь.
+    # Причина — квота: search().list стоит 100 ед. за тему, 13 тем = 1300 в понедельник, а
+    # после перехода ES на 5 слотов/день (5 x 1750 = 8750) это давало ~10 070 при лимите 10 000.
+    # Каждая тема всё равно сканируется раз в 2 недели, а niche_signal больше не перезаписывается
+    # целиком (см. main) — данные несканированной половины сохраняются с прошлого прогона.
+    half = date.today().isocalendar().week % 2
+    topics_this_run = [t for i, t in enumerate(TOPICS_POOL) if i % 2 == half]
+    print(f"  Скан половины пула ({len(topics_this_run)} из {len(TOPICS_POOL)} тем): {topics_this_run}")
+    for topic in topics_this_run:
         results, total_results = _search_topic(youtube, topic)
         if not results:
             continue
@@ -171,10 +179,28 @@ def _send_digest(outliers: list[dict]) -> None:
 
 def main() -> None:
     counts, titles, outliers, saturation = discover()
+    # Мержим с прошлым прогоном, а не перезаписываем: за раз сканируется половина пула
+    # (см. discover), полная перезапись стирала бы данные второй половины и множитель ниши
+    # в _pick_topic() скакал бы через неделю.
+    try:
+        with open(NICHE_SIGNAL_FILE, encoding="utf-8") as f:
+            prev = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        prev = {}
+    merged_counts = {**prev.get("outlier_counts", {}), **counts}
+    merged_titles = {**prev.get("outlier_titles", {}), **titles}
+    merged_sat = {**prev.get("saturation", {}), **saturation}
+    # top_outliers: свежие + прошлые, без дублей по video_id, сильнейшие сверху.
+    seen, merged_outliers = set(), []
+    for o in sorted(outliers + prev.get("top_outliers", []), key=lambda x: -x.get("ratio", 0)):
+        vid = o.get("video_id")
+        if vid and vid not in seen:
+            seen.add(vid)
+            merged_outliers.append(o)
     with open(NICHE_SIGNAL_FILE, "w", encoding="utf-8") as f:
         json.dump(
-            {"outlier_counts": counts, "outlier_titles": titles,
-             "top_outliers": outliers[:10], "saturation": saturation,
+            {"outlier_counts": merged_counts, "outlier_titles": merged_titles,
+             "top_outliers": merged_outliers[:10], "saturation": merged_sat,
              "updated": date.today().isoformat()},
             f, ensure_ascii=False, indent=2,
         )

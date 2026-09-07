@@ -46,12 +46,16 @@ def publish(
     # Воронка Shorts→лонгформ: приоритет — лонгформ на ТУ ЖЕ тему (выше релевантность/CTR),
     # иначе последний лонгформ вообще («глубокий разбор» как формат). Пусто, если лонгформов
     # ещё не было.
+    # 2026-09-07: воронка под флагом. На ES лонгформы отключены (9 штук собрали 293 просмотра
+    # суммарно против 988 у одного среднего Shorts), и ссылка вела бы на ролик с 6 просмотрами —
+    # это тратит место в описании и закреп-комменте впустую. Вернуть: longform_funnel=True.
     longform_url = ""
-    try:
-        from longform_link import get_last_longform_url
-        longform_url = get_last_longform_url(topic)
-    except Exception:
-        longform_url = ""
+    if CFG.get("longform_funnel", True):
+        try:
+            from longform_link import get_last_longform_url
+            longform_url = get_last_longform_url(topic)
+        except Exception:
+            longform_url = ""
 
     # 2026-07-17: search_summary БОЛЬШЕ НЕ подмешиваем в начало описания под флагом
     # lean_metadata. Причина — анализ топов ниши (Zack D. Films, FactoHolic, Facts' Mine,
