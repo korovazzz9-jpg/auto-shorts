@@ -43,14 +43,30 @@ class SelectionTests(unittest.TestCase):
             usage=NS(input_tokens=123, output_tokens=12)))))
         return self.client.return_value.messages.create
 
+    def test_wrapped_json_is_accepted(self):
+        """Реальные ответы из прод-лога (2026-09-07, ролик 2gD7Jh7lUa8): модель кладёт JSON
+        в markdown-заборчик и дописывает объяснение. Это ОДОБРЕНИЕ, а не брак."""
+        fence = '```json\n'
+        self.assertEqual(stock._parse_selection(
+            fence + '{"approved":[1]}\n```\n\nClip 1 is the only appropriate choice.', 4), [1])
+        self.assertEqual(stock._parse_selection(
+            fence + '{"approved":[2,1]}\n```\n\n**Reasoning:**\n\nClip 2 is best', 4), [2, 1])
+        self.assertEqual(stock._parse_selection('{"approved":[1]} explanation', 4), [1])
+        self.assertEqual(stock._parse_selection(fence + '{"approved":[]}\n```\nNone fit.', 4), [])
+
     def test_strict_contract(self):
         self.assertEqual(stock._parse_selection('{"approved":[3,1]}', 4), [3, 1])
         self.assertEqual(stock._parse_selection('{"approved":[]}', 4), [])
+        # 2026-09-07: обёртка вокруг JSON больше НЕ брак. Модель в проде стабильно отвечает
+        # ```json-заборчиком с рассуждением после, и требование «строго JSON» съело 4 бита
+        # из 5 в ролике 2gD7Jh7lUa8 — кадры были одобрены, но не попали в него. Содержимое
+        # объекта валидируется так же строго, см. кейсы ниже и test_wrapped_json_is_accepted.
         for raw in ['3,1', 'Clip 3', '0 None of these clips show a pyramid.',
                     'None of these clips show a pyramid.', '{"approved":[true]}',
                     '{"approved":[0,1]}', '{"approved":[1,10]}', '{"approved":[1,1]}',
                     '{"approved":["1"]}', '{"approved":[1],"extra":3}',
-                    '{"approved":[1]} explanation', '{"approved":null}', '[]']:
+                    '{"approved":null}', '[]',
+                    '```json\n{"approved":[1', '{"approved":[1']:  # обрезан по max_tokens
             with self.subTest(raw=raw):
                 self.assertIsNone(stock._parse_selection(raw, 4))
 

@@ -190,10 +190,36 @@ def _get_candidates(query: str, used_ids: set) -> list[dict]:
     return candidates[:VISION_CANDIDATES]
 
 
+def _extract_json_object(raw: str) -> str | None:
+    """Достаёт JSON-объект из ответа модели: она регулярно оборачивает его в ```json-заборчик
+    и дописывает рассуждение после. 2026-09-07, прод: из 5 битов ролика 2gD7Jh7lUa8 четыре
+    ушли в `unparsed` при ответах вида '```json\\n{"approved":[1]}\\n```\\n\\nClip 1 is the only
+    appropriate choice...' — то есть кадры были ОДОБРЕНЫ, но не попали в ролик, и он собрался
+    из одного клипа. Само содержимое по-прежнему валидируется строго (см. _parse_selection);
+    послабление касается только обёртки, не сути ответа."""
+    if not isinstance(raw, str):
+        return None
+    start = raw.find("{")
+    if start == -1:
+        return None
+    depth = 0
+    for i, ch in enumerate(raw[start:], start):
+        if ch == "{":
+            depth += 1
+        elif ch == "}":
+            depth -= 1
+            if depth == 0:
+                return raw[start:i + 1]
+    return None  # объект не закрыт — ответ обрезан по max_tokens, это честный брак
+
+
 def _parse_selection(raw: str, count: int) -> list[int] | None:
     """Strict contract: an empty list is rejection; malformed output is not approval."""
+    blob = _extract_json_object(raw)
+    if blob is None:
+        return None
     try:
-        value = json.loads(raw)
+        value = json.loads(blob)
     except (ValueError, TypeError):
         return None
     if not isinstance(value, dict) or set(value) != {"approved"}:
