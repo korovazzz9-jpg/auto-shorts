@@ -4512,5 +4512,40 @@
     "caption_color": "white",
     "structure": "unsolved-mystery",
     "pair_role": null
+  },
+  {
+    "video_id": "2gD7Jh7lUa8",
+    "published_at": "2026-09-07T13:23:35.731658+00:00",
+    "title": "La ciudad que enterró vivos a sus propios sacerdotes cada 52 años 😱",
+    "topic": "ancient civilizations",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "creepy",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 30.5,
+    "voice": "es-MX-JorgeNeural",
+    "caption_color": "white",
+    "structure": "unsolved-mystery",
+    "pair_role": null,
+    "clip_selection": {
+      "filter_version": 3,
+      "beats": 5,
+      "vetted": 1,
+      "cache_hits": 0,
+      "no_preview": 0,
+      "api_error": 0,
+      "unparsed": 4,
+      "rejected": 0,
+      "bypass": false,
+      "vision_calls": 5,
+      "no_candidates": 0,
+      "search_error": 0,
+      "input_tokens": 21906,
+      "output_tokens": 267
+    }
   }
 ]
