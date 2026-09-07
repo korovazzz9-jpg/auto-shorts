@@ -245,6 +245,13 @@ def _accepted_clips(candidates: list[dict], query: str) -> tuple[list[dict], str
     # (ValueError → тихий фолбэк на первый клип) и прочитал бы "10" как "1".
     nums = [int(n) for n in re.findall(r"\d+", raw)]
     if not nums:
+        # Модель иногда отвечает отказом СЛОВАМИ, без цифры («None of these clips show an
+        # aerial view of a Mesoamerican pyramid» — реальный ответ, пойман на замере 2026-09-07).
+        # Считать это «не разобрал» и пропускать клипы без проверки — прямо противоположно
+        # тому, что она сказала.
+        if re.search(r"\b(none|no clip|neither|nothing|ninguno|ninguna|nenhum)\b", raw, re.I):
+            print(f"  Vision (словами): ни один из {len(with_preview)} клипов не подходит под '{query}'")
+            return [], "rejected"
         print(f"  (vision вернул неразбираемое '{raw}' для '{query}' — порядок релевантности)")
         return with_preview, "unparsed"
     if nums[0] == 0:
