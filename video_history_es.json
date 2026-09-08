@@ -4704,5 +4704,64 @@
       "input_tokens": 26363,
       "output_tokens": 286
     }
+  },
+  {
+    "video_id": "083rTuhz4YQ",
+    "published_at": "2026-09-08T11:41:28.974921+00:00",
+    "title": "¿El barco que desapareció con 300 hombres en 1918 sin rastro? 😱",
+    "topic": "historical mysteries",
+    "hook_template": "authority-cant-explain",
+    "title_opener": "question",
+    "emotional_tone": "creepy",
+    "title_variant": "seo",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 32.0,
+    "voice": "es-MX-JorgeNeural",
+    "caption_color": "white",
+    "structure": "unsolved-mystery",
+    "pair_role": null,
+    "clip_selection": {
+      "filter_version": 3,
+      "retries": 0,
+      "retry_recovered": 0,
+      "unknown_usage_attempts": 0,
+      "retry_input_tokens": 0,
+      "retry_output_tokens": 0,
+      "retry_reasons": null,
+      "reused_selections": 0,
+      "extra_searches": 0,
+      "downloaded_scenes": 6,
+      "backup_scenes": 1,
+      "extra_input_tokens": 0,
+      "extra_output_tokens": 0,
+      "initial_scenes": 5,
+      "source_errors": null,
+      "source_candidates": {
+        "pexels": 50,
+        "pixabay": 7,
+        "coverr": 0
+      },
+      "downloaded_sources": {
+        "pexels": 6
+      },
+      "stock_cache_hits": 0,
+      "beats": 5,
+      "vetted": 5,
+      "cache_hits": 0,
+      "no_preview": 0,
+      "api_error": 0,
+      "unparsed": 0,
+      "rejected": 0,
+      "bypass": false,
+      "vision_calls": 5,
+      "no_candidates": 0,
+      "search_error": 0,
+      "input_tokens": 24136,
+      "output_tokens": 320,
+      "target_scenes": 6
+    }
   }
 ]
