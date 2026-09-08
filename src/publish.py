@@ -88,6 +88,16 @@ def publish(
         sister_cta = random.choice(sister_ctas)
         description += f"\n\n{sister_cta} https://www.youtube.com/@{sister_handle}"
 
+    sources = (clip_selection or {}).get("downloaded_sources") or {}
+    credits = []
+    for provider, url in [("pexels", "https://www.pexels.com"),
+                          ("pixabay", "https://pixabay.com"),
+                          ("coverr", "https://coverr.co")]:
+        if sources.get(provider):
+            credits.append(f"Video: {provider.capitalize()} — {url}")
+    if credits:
+        description = "\n".join(credits) + "\n\n" + description
+
     # Билингвальные теги (2026-07-02): пара generic discovery-тегов НА ДРУГОМ языке —
     # шанс попасть в рекомендации зрителю, который смотрит на двух языках. Не топик-
     # специфичные (те и так на языке канала), а самые общие ("facts"/"datos curiosos").

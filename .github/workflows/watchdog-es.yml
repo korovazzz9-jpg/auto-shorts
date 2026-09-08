@@ -57,6 +57,13 @@ jobs:
           ref: master
         if: steps.guard.outputs.skip == 'false'
 
+      - name: Restore stock search cache
+        uses: actions/cache/restore@v4
+        with:
+          path: src/stock_search_cache.json
+          key: stock-search-es-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: stock-search-es-
+
       - uses: actions/setup-python@v5
         if: steps.guard.outputs.skip == 'false'
         with:
@@ -103,6 +110,7 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
           PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
+          COVERR_API_KEY: ${{ secrets.COVERR_API_KEY }}
           YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
           YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
           # 2026-07-17: свой OAuth-клиент на канал (лимит Google — 50 живых токенов
@@ -146,3 +154,10 @@ jobs:
           git commit -m "chore(queue): ES queue/card state (watchdog retry) $(date -u +%F)" || { echo "no changes"; exit 0; }
           git pull --rebase origin master
           git push
+
+      - name: Save stock search cache
+        if: always() && hashFiles('src/stock_search_cache.json') != ''
+        uses: actions/cache/save@v4
+        with:
+          path: src/stock_search_cache.json
+          key: stock-search-es-${{ github.run_id }}-${{ github.run_attempt }}

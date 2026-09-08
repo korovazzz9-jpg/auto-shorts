@@ -12,8 +12,10 @@ import time
 import requests
 from anthropic import Anthropic, APIConnectionError, APIStatusError
 
-PEXELS_SEARCH_URL = "https://api.pexels.com/videos/search"
+PEXELS_SEARCH_URL = "https://api.pexels.com/v1/videos/search"
 PIXABAY_SEARCH_URL = "https://pixabay.com/api/videos/"
+COVERR_SEARCH_URL = "https://api.coverr.co/videos"
+_STOCK_CACHE_FILE = os.path.join(os.path.dirname(__file__), "stock_search_cache.json")
 RESULTS_PER_QUERY = 10
 VISION_CANDIDATES = 4  # сколько клипов скачиваем для vision-отбора
 MIN_HEIGHT = 960  # ниже этого — слишком мутно для полноэкранного Shorts-видео
@@ -46,6 +48,8 @@ _STATS_TEMPLATE = {
     "downloaded_scenes": 0, "backup_scenes": 0,
     "extra_input_tokens": 0, "extra_output_tokens": 0,
     "initial_scenes": 0,
+    "source_errors": None, "source_candidates": None, "downloaded_sources": None,
+    "stock_cache_hits": 0,
     "beats": 0,            # сколько запросов обработано
     "vetted": 0,           # кадров одобрено vision (в т.ч. из кэша этой же версии)
     "cache_hits": 0,
@@ -193,7 +197,7 @@ def _search_pexels(query: str, api_key: str, used_ids: set, limit: int) -> list[
         file = _best_vertical_file(v)
         if file:
             # v["image"] — готовый poster-кадр клипа, используем для vision-отбора без скачивания.
-            results.append({"link": file["link"], "id": v["id"], "preview": v.get("image")})
+            results.append({"link": file["link"], "id": v["id"], "preview": v.get("image"), "source": "pexels"})
         if len(results) >= limit:
             break
     return results
@@ -218,31 +222,115 @@ def _search_pixabay(query: str, api_key: str, used_ids: set, limit: int) -> list
     data = response.json()
     results = []
     for hit in data.get("hits", []):
-        if hit["id"] in used_ids:
+        clip_id = f"pixabay:{hit['id']}"
+        if clip_id in used_ids:
             continue
         file = _best_pixabay_variant(hit)
         if file:
-            # Pixabay не отдаёт прямой poster-URL — preview=None, такие кандидаты в vision не идут.
-            results.append({"link": file["url"], "id": hit["id"], "preview": None})
+            preview = file.get("thumbnail") or next(
+                (v.get("thumbnail") for v in hit.get("videos", {}).values() if v.get("thumbnail")), None)
+            results.append({"link": file["url"], "id": clip_id, "preview": preview, "source": "pixabay"})
         if len(results) >= limit:
             break
     return results
 
 
+def _search_coverr(query: str, api_key: str, used_ids: set, limit: int) -> list[dict]:
+    response = requests.get(COVERR_SEARCH_URL,
+        params={"query": query, "page_size": RESULTS_PER_QUERY},
+        headers={"Authorization": f"Bearer {api_key}"}, timeout=30)
+    response.raise_for_status()
+    result = []
+    for hit in response.json().get("hits", []):
+        raw_id = hit.get("id")
+        if not raw_id or hit.get("is_ai_generated") or hit.get("is_ai"):
+            continue
+        clip_id = f"coverr:{raw_id}"
+        if clip_id in used_ids or not _orientation_ok(hit.get("max_width", 0), hit.get("max_height", 0)):
+            continue
+        preview = hit.get("poster") or hit.get("thumbnail")
+        if not preview:
+            continue
+        # Never persist account-bound signed download URLs in git checkpoints/caches.
+        result.append({"id": clip_id, "source": "coverr", "provider_id": str(raw_id),
+                       "link": f"{COVERR_SEARCH_URL}/{raw_id}", "preview": preview})
+        if len(result) >= limit:
+            break
+    return result
+
+
+def _download_url(info: dict) -> str:
+    if info.get("source") != "coverr":
+        return info["link"]
+    response = requests.get(f"{COVERR_SEARCH_URL}/{info['provider_id']}",
+        headers={"Authorization": f"Bearer {os.environ['COVERR_API_KEY']}"}, timeout=30)
+    response.raise_for_status()
+    url = response.json().get("urls", {}).get("mp4_download")
+    if not url:
+        raise ValueError("Coverr download URL unavailable")
+    # Download endpoint also records the download as required by the provider.
+    return url
+
+
+def _source_pool(source, query, key, search):
+    cache_key = json.dumps([source, query, LANDSCAPE, MIN_HEIGHT, MIN_WIDTH, RESULTS_PER_QUERY])
+    try:
+        with open(_STOCK_CACHE_FILE, encoding="utf-8") as f:
+            cache = json.load(f)
+        if not isinstance(cache, dict):
+            cache = {}
+    except (OSError, ValueError):
+        cache = {}
+    entry = cache.get(cache_key, {})
+    if 0 <= time.time() - entry.get("ts", 0) < 86400:
+        _stats["stock_cache_hits"] += 1
+        return entry["rows"]
+    rows = search(query, key, set(), RESULTS_PER_QUERY)
+    cache[cache_key] = {"ts": time.time(), "rows": rows}
+    cache = dict(sorted(cache.items(), key=lambda item: item[1].get("ts", 0))[-500:])
+    try:
+        with open(_STOCK_CACHE_FILE + ".tmp", "w", encoding="utf-8") as f:
+            json.dump(cache, f, ensure_ascii=False)
+        os.replace(_STOCK_CACHE_FILE + ".tmp", _STOCK_CACHE_FILE)
+    except OSError:
+        print("  stock search cache could not be saved")
+    return rows
+
+
 def _get_candidates(query: str, used_ids: set) -> list[dict]:
-    """Собирает до VISION_CANDIDATES кандидатов из Pexels и Pixabay."""
-    candidates = []
-    pexels_key = os.environ.get("PEXELS_API_KEY")
-    if pexels_key:
-        candidates += _search_pexels(query, pexels_key, used_ids, VISION_CANDIDATES)
-
-    if len(candidates) < VISION_CANDIDATES:
-        pixabay_key = os.environ.get("PIXABAY_API_KEY")
-        if pixabay_key:
-            need = VISION_CANDIDATES - len(candidates)
-            candidates += _search_pixabay(query, pixabay_key, used_ids, need)
-
-    return candidates[:VISION_CANDIDATES]
+    """Round-robin free providers; still only four posters per vision request."""
+    pools = []
+    for source, env_key, search in [
+        ("pexels", "PEXELS_API_KEY", _search_pexels),
+        ("pixabay", "PIXABAY_API_KEY", _search_pixabay),
+        ("coverr", "COVERR_API_KEY", _search_coverr),
+    ]:
+        key = os.environ.get(env_key)
+        if not key:
+            continue
+        try:
+            rows = _source_pool(source, query, key, search)
+            rows = [c for c in rows if c.get("preview") and c["id"] not in used_ids]
+            pools.append(rows)
+            counts = dict(_stats.get("source_candidates") or {})
+            counts[source] = counts.get(source, 0) + len(rows)
+            _stats["source_candidates"] = counts
+        except Exception as exc:
+            counts = dict(_stats.get("source_errors") or {})
+            counts[source] = counts.get(source, 0) + 1
+            _stats["source_errors"] = counts
+            # Exception URLs may contain API keys. Never print the exception body.
+            status = getattr(getattr(exc, "response", None), "status_code", None)
+            print(f"  {source} search unavailable: {type(exc).__name__}, HTTP {status}")
+    result, seen = [], set()
+    for row in range(RESULTS_PER_QUERY):
+        for pool in pools:
+            if row < len(pool) and pool[row]["id"] not in seen:
+                result.append(pool[row])
+                seen.add(pool[row]["id"])
+                if len(result) == VISION_CANDIDATES:
+                    return result
+    return result
 
 
 def _extract_json_object(raw: str) -> str | None:
@@ -460,7 +548,7 @@ def fetch_clips(queries: list[str], out_dir: str, landscape: bool = False,
             used_ids.add(info["id"])
             path = os.path.join(out_dir, f"clip_{len(paths)}.mp4")
             try:
-                response = requests.get(info["link"], timeout=60)
+                response = requests.get(_download_url(info), timeout=60)
                 response.raise_for_status()
                 with open(path, "wb") as f:
                     f.write(response.content)
@@ -472,10 +560,14 @@ def fetch_clips(queries: list[str], out_dir: str, landscape: bool = False,
                     continue
                 content_hashes.add(digest)
             except Exception as exc:
-                print(f"  clip download failed: {exc}")
+                print(f"  clip download failed: {type(exc).__name__}")
                 failed_ids.add(info["id"])
                 continue
             paths.append(path)
+            sources = dict(_stats.get("downloaded_sources") or {})
+            source = info.get("source", "pexels")
+            sources[source] = sources.get(source, 0) + 1
+            _stats["downloaded_sources"] = sources
             _stats["downloaded_scenes"] = len(paths)
             return ranked[n + 1:]
         return []

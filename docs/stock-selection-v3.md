@@ -67,3 +67,41 @@ These tests block paid/network calls. They cover bounds, approved backup filling
 additional search, duplicate bytes, saved selection reuse, queue/pair recovery,
 pre-TTS deferral, completed and ambiguous uploads. They establish control flow,
 not measured footage quality or improved views.
+
+## Free stock sources (2026-09-08)
+
+Pexels and Pixabay are searched together and interleaved before the existing
+four-poster vision call. A failed provider does not suppress other providers.
+Pixabay uses videos.<rendition>.thumbnail (or another rendition of the same clip),
+with pixabay-prefixed IDs to avoid collisions with legacy numeric Pexels IDs.
+Search results are cached for 24 hours in src/stock_search_cache.json; ES workflows
+restore/save this cache, including failed attempts. No secret values are cached.
+
+Coverr is optional: set COVERR_API_KEY in GitHub Actions repository secrets. Daily
+ES and its watchdog already forward that key; absent key means no Coverr request.
+Get a key at https://coverr.co/developers. Current free tier is 50 API calls/hour;
+no paid plan or generation endpoint is enabled by this adapter. Actual account
+quotas and current terms still apply. Coverr advertises commercially licensed API
+content requiring attribution on its current developer page (the older docs intro
+contains inconsistent commercial-use wording).
+
+Coverr stores only public preview URLs and IDs in checkpoints. Signed URLs tied
+to the API key are resolved just before downloading and never persisted. Downloads
+use mp4_download so Coverr records them. No-resolution/missing-poster or explicitly
+AI-marked hits are excluded. Coverr cannot be live-verified without an account key.
+
+History tracks source_candidates, source_errors and downloaded_sources. Publication
+adds provider credit links to the beginning of the description. The number of
+model calls/posters per selection is unchanged; it is not a promise of identical
+billing, since retries, replenishment and image dimensions can still affect cost.
+
+Official references:
+- https://pixabay.com/api/docs/
+- https://www.pexels.com/api/documentation/
+- https://api.coverr.co/docs/videos/
+- https://api.coverr.co/docs/auth/
+- https://coverr.co/developers
+
+Live read-only checks: waterfall vertical returned Pexels + Pixabay with previews;
+elephant/ocean waves/wildlife portrait returned Pexels under the existing portrait
+resolution filter. No paid vision, TTS, generation or publication was run.
