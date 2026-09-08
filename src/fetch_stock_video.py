@@ -1,13 +1,16 @@
 """Скачивает вертикальные стоковые видеоклипы по ключевым словам через Pexels API (бесплатно)."""
 from __future__ import annotations
 
+from datetime import datetime, timezone
+from email.utils import parsedate_to_datetime
+import hashlib
 import json
 import os
 import tempfile
 import time
 
 import requests
-from anthropic import Anthropic
+from anthropic import Anthropic, APIConnectionError, APIStatusError
 
 PEXELS_SEARCH_URL = "https://api.pexels.com/videos/search"
 PIXABAY_SEARCH_URL = "https://pixabay.com/api/videos/"
@@ -37,6 +40,12 @@ _VISION_CACHE_VERSION = 3
 # оценивать отдельно. `vision_calls` заодно отвечает на вопрос о стоимости фильтра.
 _STATS_TEMPLATE = {
     "filter_version": _VISION_CACHE_VERSION,
+    "retries": 0, "retry_recovered": 0, "unknown_usage_attempts": 0,
+    "retry_input_tokens": 0, "retry_output_tokens": 0,
+    "retry_reasons": None, "reused_selections": 0, "extra_searches": 0,
+    "downloaded_scenes": 0, "backup_scenes": 0,
+    "extra_input_tokens": 0, "extra_output_tokens": 0,
+    "initial_scenes": 0,
     "beats": 0,            # сколько запросов обработано
     "vetted": 0,           # кадров одобрено vision (в т.ч. из кэша этой же версии)
     "cache_hits": 0,
@@ -52,6 +61,52 @@ _STATS_TEMPLATE = {
     "output_tokens": 0,
 }
 _stats: dict = dict(_STATS_TEMPLATE)
+
+
+def _vision_request(client, content):
+    """At most one explicit retry; never retry a content rejection."""
+    for attempt in range(2):
+        _stats["vision_calls"] += 1
+        try:
+            response = client.messages.create(
+                model="claude-haiku-4-5-20251001", max_tokens=64,
+                messages=[{"role": "user", "content": content}], timeout=45.0,
+            )
+        except (APIConnectionError, APIStatusError) as exc:
+            status = getattr(exc, "status_code", None)
+            transient = isinstance(exc, APIConnectionError) or status in (408, 409, 429) or (status is not None and status >= 500)
+            # A failed request may have been billed even though usage was not returned.
+            _stats["unknown_usage_attempts"] += 1
+            if attempt or not transient:
+                raise
+            reason = str(status or type(exc).__name__)
+            reasons = dict(_stats.get("retry_reasons") or {})
+            reasons[reason] = reasons.get(reason, 0) + 1
+            _stats["retry_reasons"] = reasons
+            headers = getattr(getattr(exc, "response", None), "headers", {})
+            try:
+                delay = max(0.0, float(headers.get("retry-after", 5)))
+            except (TypeError, ValueError):
+                try:
+                    date = parsedate_to_datetime(headers.get("retry-after", ""))
+                    delay = max(0.0, (date - datetime.now(timezone.utc)).total_seconds())
+                except (TypeError, ValueError, OverflowError):
+                    delay = 5.0
+            # Long server cooldowns are left to the next persisted pipeline attempt.
+            if delay > 60:
+                raise
+            _stats["retries"] += 1
+            time.sleep(delay)
+            continue
+        usage = getattr(response, "usage", None)
+        for field in ("input_tokens", "output_tokens"):
+            value = getattr(usage, field, 0) or 0
+            _stats[field] += value
+            if attempt:
+                _stats["retry_" + field] += value
+        if attempt:
+            _stats["retry_recovered"] += 1
+        return response
 
 
 def selection_stats() -> dict:
@@ -275,15 +330,7 @@ def _accepted_clips(candidates: list[dict], query: str,
     try:
         # No hidden paid retries and no second vision call on a simplified query.
         client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"], max_retries=0)
-        _stats["vision_calls"] += 1
-        response = client.messages.create(
-            model="claude-haiku-4-5-20251001",
-            max_tokens=64,
-            messages=[{"role": "user", "content": content}],
-        )
-        usage = getattr(response, "usage", None)
-        for field in ("input_tokens", "output_tokens"):
-            _stats[field] += getattr(usage, field, 0) or 0
+        response = _vision_request(client, content)
         raw = "".join(block.text for block in response.content if block.type == "text").strip()
     except Exception as e:
         print(f"  (vision для '{query}' упал: {e} — клипы не допущены)")
@@ -376,57 +423,100 @@ def fetch_satisfying_clips(count: int, out_dir: str) -> list[str]:
 
 
 def fetch_clips(queries: list[str], out_dir: str, landscape: bool = False,
-                *, narration: str = "") -> list[str]:
+                *, narration: str = "", min_scenes: int = 0,
+                saved_selections: dict | None = None, save_progress=None) -> list[str]:
     global LANDSCAPE, _stats
     LANDSCAPE = landscape
-    _stats = dict(_STATS_TEMPLATE)  # телеметрия считается за ОДИН прогон, см. selection_stats()
+    _stats = dict(_STATS_TEMPLATE)
+    _stats["target_scenes"] = min_scenes
+    saved = saved_selections if saved_selections is not None else {}
     paths = []
-    used_ids: set = set()
-    for i, query in enumerate(queries):
-        # Поиск изолирован так же, как скачивание ниже (2026-07-10, фикс с ревью): раньше
-        # транзиентный 429/5xx от Pexels/Pixabay (raise_for_status в _search_*) пролетал
-        # наверх и ронял ВЕСЬ слот публикации из-за одного неудачного запроса. Пустой
-        # итоговый список по-прежнему ловит guard в build_video/_build_background.
-        try:
-            context = (f"Shot {i + 1} of {len(queries)}. Full narration: {narration}"
-                       if narration else "")
-            ranked = _search_with_fallback(query, used_ids, context)
-        except Exception as e:
-            print(f"  (поиск стока для '{query}' упал: {e}, пропускаем запрос)")
-            continue
-        if not ranked:
-            print(f"  (no clip found for '{query}', skipping)")
-            continue
-        out_path = os.path.join(out_dir, f"clip_{i}.mp4")
-        # Кандидаты пробуются по порядку (победитель vision → запасные), каждый скачанный
-        # файл валидируется чтением первого кадра (2026-07-13): битый файл от CDN больше
-        # не долетает до сборки — берём следующего кандидата. id заносится в used_ids для
-        # КАЖДОГО испробованного (битый клип не должен достаться другому запросу).
-        for n, file_info in enumerate(ranked):
-            used_ids.add(file_info["id"])
-            try:
-                video_response = requests.get(file_info["link"], timeout=60)
-                video_response.raise_for_status()
-                with open(out_path, "wb") as f:
-                    f.write(video_response.content)
-            except Exception as e:
-                print(f"  (не скачался клип для '{query}': {e}, пробуем следующего кандидата)")
-                continue
-            if not _is_valid_clip(out_path):
-                print(f"  (битый файл клипа {file_info['id']} для '{query}' — пробуем следующего кандидата)")
-                try:
-                    os.remove(out_path)
-                except OSError:
-                    pass
-                continue
-            if n > 0:
-                print(f"  ('{query}': победитель не годился, взят запасной кандидат #{n + 1})")
-            paths.append(out_path)
-            break
-        else:
-            print(f"  (все кандидаты для '{query}' не скачались/битые, пропускаем запрос)")
+    used_ids = set()
+    reserve = []
+    content_hashes = set()
+    failed_ids = set()
 
-    # Never revive rejected/unverified clips to fill an empty result.
+    def select(query, context):
+        key = hashlib.sha256(json.dumps([_VISION_CACHE_VERSION, landscape, query, context],
+                                       ensure_ascii=False).encode()).hexdigest()
+        if key in saved:
+            remaining = [c for c in saved[key] if c["id"] not in used_ids]
+            if remaining:
+                _stats["reused_selections"] += 1
+                return remaining
+        ranked = _search_with_fallback(query, used_ids, context)
+        if ranked:
+            combined = {c["id"]: c for c in saved.get(key, [])}
+            combined.update({c["id"]: c for c in ranked})
+            saved[key] = list(combined.values())
+            if save_progress:
+                save_progress()
+        return ranked
+
+    def download(ranked):
+        for n, info in enumerate(ranked):
+            if info["id"] in used_ids:
+                continue
+            used_ids.add(info["id"])
+            path = os.path.join(out_dir, f"clip_{len(paths)}.mp4")
+            try:
+                response = requests.get(info["link"], timeout=60)
+                response.raise_for_status()
+                with open(path, "wb") as f:
+                    f.write(response.content)
+                digest = hashlib.sha256(response.content).hexdigest()
+                if digest in content_hashes:
+                    continue
+                if not _is_valid_clip(path):
+                    failed_ids.add(info["id"])
+                    continue
+                content_hashes.add(digest)
+            except Exception as exc:
+                print(f"  clip download failed: {exc}")
+                failed_ids.add(info["id"])
+                continue
+            paths.append(path)
+            _stats["downloaded_scenes"] = len(paths)
+            return ranked[n + 1:]
+        return []
+
+    for i, query in enumerate(queries):
+        context = f"Shot {i + 1} of {len(queries)}. Full narration: {narration}" if narration else ""
+        try:
+            reserve.extend(download(select(query, context)))
+        except Exception as exc:
+            print(f"  stock selection failed for {query!r}: {exc}")
+
+    _stats["initial_scenes"] = len(paths)
+    # Reuse already approved distinct backups before paying for another vision call.
+    while len(paths) < min_scenes and reserve:
+        before = len(paths)
+        reserve = download(reserve)
+        _stats["backup_scenes"] += len(paths) - before
+
+    # Bounded alternate retrieval, retaining the concrete query and full narration.
+    for i, query in enumerate(queries[:3] if min_scenes else []):
+        if len(paths) >= min_scenes:
+            break
+        _stats["extra_searches"] += 1
+        context = f"Additional distinct shot. Full narration: {narration}"
+        before_tokens = {k: _stats[k] for k in ("input_tokens", "output_tokens")}
+        try:
+            ranked = select(query + " close up" if i % 2 == 0 else query + " wide view", context)
+            while ranked and len(paths) < min_scenes:
+                ranked = download(ranked)
+        except Exception as exc:
+            print(f"  additional stock search failed: {exc}")
+        finally:
+            for key, before in before_tokens.items():
+                _stats["extra_" + key] += _stats[key] - before
+    if failed_ids:
+        for key in list(saved):
+            saved[key] = [c for c in saved[key] if c["id"] not in failed_ids]
+            if not saved[key]:
+                del saved[key]
+        if save_progress:
+            save_progress()
     return paths
 
 

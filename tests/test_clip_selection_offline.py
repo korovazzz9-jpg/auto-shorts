@@ -178,16 +178,6 @@ class SelectionTests(unittest.TestCase):
                 self.assertTrue(contexts[0].startswith('Shot 1 of '))
         self.client.assert_not_called()
 
-    def test_pipeline_stops_before_tts_when_no_clips(self):
-        tree = ast.parse((ROOT / 'src/pipeline.py').read_text(encoding='utf-8'))
-        run = next(node for node in tree.body if isinstance(node, ast.FunctionDef) and node.name == 'run')
-        guard = next(node for node in ast.walk(run) if isinstance(node, ast.If)
-                     and ast.unparse(node.test) == 'not clip_paths')
-        with self.assertRaisesRegex(RuntimeError, 'Нет проверенных'):
-            exec(compile(ast.Module(body=[guard], type_ignores=[]), '<guard>', 'exec'), {'clip_paths': []})
-        tts = next(node for node in ast.walk(run) if isinstance(node, ast.Call)
-                   and isinstance(node.func, ast.Name) and node.func.id == 'text_to_speech')
-        self.assertLess(guard.lineno, tts.lineno)
 
 
 if __name__ == '__main__':

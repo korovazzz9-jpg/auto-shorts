@@ -37,6 +37,7 @@ def publish(
     voice: str | None = None,
     caption_color: str | None = None,
     clip_selection: dict | None = None,
+    on_youtube_uploaded=None,
 ) -> str:
     """Заливает видео на YouTube и кросс-постит. Возвращает video_id.
 
@@ -118,6 +119,8 @@ def publish(
         thumbnail_path=thumb_path,
         default_language=CFG["lang_code"],
     )
+    if on_youtube_uploaded is not None:
+        on_youtube_uploaded(video_id)
     # Локализация метаданных (2026-07-03) — СОЗНАТЕЛЬНО только для лонгформа
     # (pipeline_longform.py), не здесь: риск для Shorts/серий — зритель кликает по знакомому
     # переведённому заголовку, слышит озвучку на другом языке, отваливается за секунды →

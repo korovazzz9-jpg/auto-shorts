@@ -19,6 +19,10 @@ on:
     - cron: "32 0 * * *"
   workflow_dispatch: {}
 
+concurrency:
+  group: daily-es
+  cancel-in-progress: false
+
 permissions:
   actions: read
   contents: write   # ретрай пайплайна берёт сценарий из queue_es.json — его надо закоммитить обратно
@@ -49,6 +53,8 @@ jobs:
           fi
 
       - uses: actions/checkout@v4
+        with:
+          ref: master
         if: steps.guard.outputs.skip == 'false'
 
       - uses: actions/setup-python@v5
@@ -117,11 +123,21 @@ jobs:
       # Тот же шаг, что в daily-es.yml: pipeline.py мог взять сценарий из queue_es.json
       # (Batch API preload) — без коммита следующий запуск увидел бы несдвинутую очередь
       # и опубликовал бы ТОТ ЖЕ сценарий второй раз.
+      - name: Save recovery diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: es-recovery-${{ github.run_id }}-${{ github.run_attempt }}
+          path: recovery_es.json
+          if-no-files-found: ignore
+          retention-days: 14
+
       - name: Persist queue state
         if: always() && steps.guard.outputs.skip == 'false' && steps.check.outputs.missed == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          [ -f recovery_es.json ] && git add recovery_es.json
           [ -f queue_es.json ] && git add queue_es.json
           [ -f ig_card_counter_es.json ] && git add ig_card_counter_es.json
           [ -f video_history_es.json ] && git add video_history_es.json

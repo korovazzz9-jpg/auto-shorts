@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 from build_video import build_video, pick_cta_phrase
 from config import CFG, CHANNEL
 from fetch_stock_video import fetch_clips, selection_stats
+from episode_recovery import EpisodeRecovery
 from generate_script import generate_script
 from notify import notify
 from paired_facts import find_pending_pair, resolve_pair, start_pair
@@ -43,6 +44,17 @@ def _verify_channel() -> None:
 
 
 def run() -> None:
+    recovery = EpisodeRecovery(CHANNEL, slots=CFG["daily_slots_utc"])
+    try:
+        _run(recovery)
+    except Exception as exc:
+        recovery.finish("deferred", selection_stats(), exc)
+        raise
+    else:
+        recovery.finish("published", selection_stats())
+
+
+def _run(recovery) -> None:
     _verify_channel()
     # «On this day» (2026-07-05): раз в неделю (Чт, первый слот дня) — топикал-факт с привязкой
     # к сегодняшней дате. Мимо очереди: batch-заготовки генерятся заранее и дату не знают.
@@ -63,20 +75,28 @@ def run() -> None:
 
     # Batch API preload (prepare_batch.py) экономит ~50% на этом вызове, если очередь заполнена.
     # Пустая очередь = сценарий генерится вживую, как раньше — отсутствие preload не ломает публикацию.
-    force_live = topical or pending_pair or pair_start_mode
-    data = None if force_live else pop_next()
-    if data is not None:
-        print(f"[{CFG['channel_name']}] 1/6 Сценарий из очереди (Batch API preload)...")
+    checkpoint = recovery.pending()
+    if checkpoint:
+        data = checkpoint["data"]
+        pending_pair = checkpoint["pending_pair"]
+        pair_start_mode = checkpoint["pair_start_mode"]
+        print("Resuming saved episode and approved selections.")
     else:
-        label = ("топикал «On this day», мимо очереди" if topical else
-                  "резолюция пары, мимо очереди" if pending_pair else
-                  "старт пары, мимо очереди" if pair_start_mode else "вживую")
-        print(f"[{CFG['channel_name']}] 1/6 Генерация сценария ({label})...")
-        data = generate_script(
-            on_this_day=topical,
-            pair_start=pair_start_mode,
-            pair_resolve_claim=pending_pair["claim"] if pending_pair else None,
-        )
+        force_live = topical or pending_pair or pair_start_mode
+        data = None if force_live else pop_next()
+        if data is not None:
+            print(f"[{CFG['channel_name']}] 1/6 Сценарий из очереди (Batch API preload)...")
+        else:
+            label = ("топикал «On this day», мимо очереди" if topical else
+                      "резолюция пары, мимо очереди" if pending_pair else
+                      "старт пары, мимо очереди" if pair_start_mode else "вживую")
+            print(f"[{CFG['channel_name']}] 1/6 Генерация сценария ({label})...")
+            data = generate_script(
+                on_this_day=topical,
+                pair_start=pair_start_mode,
+                pair_resolve_claim=pending_pair["claim"] if pending_pair else None,
+            )
+        checkpoint = recovery.prepare(data, pending_pair, pair_start_mode)
     print(f"  Тема: {data['topic']} | Заголовок: {data['title']}")
 
     with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
@@ -84,14 +104,26 @@ def run() -> None:
         video_path = os.path.join(tmp, "video.mp4")
 
         print("2/6 Подбор стоковых видео под смысл сценария...")
-        clip_paths = fetch_clips(data["video_queries"], tmp, narration=data["script"])
+        target_scenes = max(6, len(data["video_queries"]))
+        clip_paths = fetch_clips(data["video_queries"], tmp, narration=data["script"],
+                                 min_scenes=target_scenes, saved_selections=checkpoint["selections"],
+                                 save_progress=recovery.save)
         # Телеметрия отбора кадров (2026-09-07) — уходит в video_history, чтобы «проверенные»
         # выпуски и выпуски с обходом фильтра можно было оценивать ОТДЕЛЬНО. Иначе просмотры
         # смешивают два режима и непонятно, что именно испытывали.
         clip_selection = selection_stats()
         print(f"  Отбор кадров: {clip_selection}")
-        if not clip_paths:
-            raise RuntimeError("Нет проверенных стоковых клипов; выпуск остановлен до озвучки")
+        clip_selection["target_scenes"] = target_scenes
+        if len(clip_paths) < target_scenes:
+            raise RuntimeError(f"Добор сцен продолжается: {len(clip_paths)}/{target_scenes}. "
+                               "Сценарий и одобренные клипы сохранены для следующей попытки.")
+        if clip_selection.get("retries") or recovery.resumed:
+            notify(f"🛠 [{CFG['channel_name']}] восстановление: повторов API "
+                   f"{clip_selection['retries']}, ответов восстановлено {clip_selection['retry_recovered']}, "
+                   f"сцен {len(clip_paths)}; сохранённый сценарий: {recovery.resumed}.")
+        if clip_selection.get("initial_scenes", 0) < target_scenes:
+            notify(f"⚠️ [{CFG['channel_name']}] после добора {len(clip_paths)} разных сцен "
+                   f"(изначально {clip_selection.get('initial_scenes', 0)}): {data['title']}")
 
         print("3/6 Озвучка...")
         words, voice = text_to_speech(data["script"], audio_path)
@@ -161,6 +193,7 @@ def run() -> None:
                 a_url = f"https://youtube.com/shorts/{pending_pair['part_a_video_id']}"
                 pair_extra_comment = f"{random.choice(callback_pool)} {a_url}"
 
+        recovery.publishing()
         video_id = publish(
             data=data,
             video_path=video_path,
@@ -179,6 +212,7 @@ def run() -> None:
             # генерирует автосубтитры сам, а ключевые слова уходят в search_summary описания.
             enable_captions=CFG.get("captions_enabled", True),
             clip_selection=clip_selection,
+            on_youtube_uploaded=recovery.uploaded,
             enable_pinterest=True,
         )
 
@@ -210,5 +244,5 @@ if __name__ == "__main__":
     except Exception as e:
         # Жёсткий сбой — видео НЕ вышло. Сообщаем в Telegram и пробрасываем дальше,
         # чтобы GitHub Actions тоже пометил запуск красным.
-        notify(f"🔴 [{CFG['channel_name']}] пайплайн УПАЛ, видео не вышло:\n{e}")
+        notify(f"🔴 [{CFG['channel_name']}] попытка выпуска не завершена; состояние сохранено:\n{e}")
         raise

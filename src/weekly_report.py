@@ -447,7 +447,11 @@ def main() -> None:
     except Exception as e:
         print(f"  spike-and-die анализ пропущен: {e}")
         spike_die = []
+    from episode_recovery import reliability_report
     notify(build_report(videos, spike_die))
+    recovery_summary = reliability_report(CHANNEL)
+    if recovery_summary:
+        notify(recovery_summary)
     save_hook_stats(videos)
     save_dropoff_stats(videos)
     save_tone_stats(videos)

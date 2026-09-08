@@ -13,7 +13,7 @@ on:
 
 concurrency:
   group: daily-es
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   # В Пн/Вт/Ср прайм-слот 00:17 UTC (18:17 Мехико) занимает серия (weekly-series-es.yml) —
@@ -39,6 +39,8 @@ jobs:
       contents: write   # коммитит queue_es.json обратно (Batch API preload, prepare_batch.py)
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: master
 
       - name: Restore titles cache
         uses: actions/cache@v4
@@ -94,6 +96,15 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python pipeline.py
 
+      - name: Save recovery diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: es-recovery-${{ github.run_id }}-${{ github.run_attempt }}
+          path: recovery_es.json
+          if-no-files-found: ignore
+          retention-days: 14
+
       - name: Persist queue state
         if: always()
         run: |
@@ -101,6 +112,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           # ig_card_counter_es.json меняется только в слот IG-карточки (ig_card_slot_hour) —
           # на остальных 3 слотах дня файла может не быть/не измениться, это ок.
+          [ -f recovery_es.json ] && git add recovery_es.json
           [ -f queue_es.json ] && git add queue_es.json
           [ -f ig_card_counter_es.json ] && git add ig_card_counter_es.json
           [ -f paired_facts_es.json ] && git add paired_facts_es.json
