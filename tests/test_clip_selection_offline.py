@@ -82,10 +82,24 @@ class SelectionTests(unittest.TestCase):
 
     def test_unknown_and_truncated_fail_closed(self):
         for raw, stop, outcome in [('None fit', 'end_turn', 'unparsed'),
-                                    ('{"approved":[1]}', 'max_tokens', 'unparsed'),
+                                    ('{"approved":[1', 'max_tokens', 'unparsed'),
+                                    ('{"approved":[1]}', 'refusal', 'unparsed'),
                                     ('{"approved":[]}', 'end_turn', 'rejected')]:
             self.response(raw, stop)
             self.assertEqual(stock._accepted_clips(CANDIDATES, 'query'), ([], outcome))
+
+    def test_complete_selection_with_truncated_explanation(self):
+        # Nightly failures: valid JSON followed by prose cut at the 64-token cap.
+        for raw, ids, outcome in [
+            ('```json\n{"approved":[3,4]}\n```\nClip 3 shows an aerial view of', [3, 4], 'vetted'),
+            ('{"approved":[]}\n\n**Reasoning:**\nThe narration describes', [], 'rejected'),
+        ]:
+            with self.subTest(raw=raw):
+                create = self.response(raw, 'max_tokens')
+                clips, actual = stock._accepted_clips(CANDIDATES, raw, 'Peruvian ruins')
+                self.assertEqual([c['id'] for c in clips], ids)
+                self.assertEqual(actual, outcome)
+                create.assert_called_once()
 
     def test_no_preview_and_api_error_fail_closed(self):
         self.assertEqual(stock._accepted_clips([dict(id=1)], 'query'), ([], 'no_preview'))

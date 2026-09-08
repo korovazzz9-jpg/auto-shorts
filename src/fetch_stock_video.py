@@ -290,7 +290,8 @@ def _accepted_clips(candidates: list[dict], query: str,
         return [], "api_error"
 
     numbers = _parse_selection(raw, len(with_preview))
-    if getattr(response, "stop_reason", None) != "end_turn" or numbers is None:
+    # A complete validated selection remains usable if only trailing prose was cut.
+    if getattr(response, "stop_reason", None) not in {"end_turn", "max_tokens"} or numbers is None:
         print(f"  (невалидный ответ vision для '{query}': {raw!r} — клипы не допущены)")
         return [], "unparsed"
     if not numbers:
