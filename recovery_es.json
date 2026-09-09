@@ -357,6 +357,57 @@
         "target_scenes": 6
       },
       "error": null
+    },
+    {
+      "id": "34381964680:1",
+      "at": "2026-09-09T17:17:51.757730+00:00",
+      "outcome": "published",
+      "resumed": false,
+      "title": "El sacerdote maya que desapareció en 830 d.C. y nadie buscó 😱",
+      "episode": "2026-09-09T17:17:51.757730+00:00",
+      "slot": "2026-09-09T17:17:00+00:00",
+      "video_id": "9-GCCl7iC3A",
+      "selection": {
+        "filter_version": 3,
+        "retries": 0,
+        "retry_recovered": 0,
+        "unknown_usage_attempts": 0,
+        "retry_input_tokens": 0,
+        "retry_output_tokens": 0,
+        "retry_reasons": null,
+        "reused_selections": 0,
+        "extra_searches": 0,
+        "downloaded_scenes": 6,
+        "backup_scenes": 0,
+        "extra_input_tokens": 0,
+        "extra_output_tokens": 0,
+        "initial_scenes": 6,
+        "source_errors": null,
+        "source_candidates": {
+          "pexels": 58,
+          "pixabay": 5,
+          "coverr": 0
+        },
+        "downloaded_sources": {
+          "pexels": 6
+        },
+        "stock_cache_hits": 0,
+        "beats": 6,
+        "vetted": 6,
+        "cache_hits": 0,
+        "no_preview": 0,
+        "api_error": 0,
+        "unparsed": 0,
+        "rejected": 0,
+        "bypass": false,
+        "vision_calls": 6,
+        "no_candidates": 0,
+        "search_error": 0,
+        "input_tokens": 29332,
+        "output_tokens": 384,
+        "target_scenes": 6
+      },
+      "error": null
     }
   ]
 }
