@@ -49,5 +49,201 @@
     "niche_styled": true,
     "title_variant": "narrative",
     "hashtag_position": "end"
+  },
+  {
+    "title": "¿El tiburón evolucionó los mismos dientes... en tus oídos? 🤯",
+    "title_opener": "question",
+    "title_intensity": "extreme",
+    "hook_text": "Tus oídos tienen dientes de tiburón",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "impossible",
+    "script": "Tus oídos tienen el mismo tejido que los dientes de un tiburón — y nadie sabe por qué. Las células ciliadas del oído interno de los mamíferos comparten una proteína clave, la prestin, con las escamas dentadas de los tiburones. Evolucionaron por separado, sin contacto, hace más de 400 millones de años. La explicación estándar es convergencia evolutiva — pero prestin aparece en estructuras tan distintas que los biólogos aún debaten si fue coincidencia o algo más profundo. ¿Qué crees tú — accidente de la evolución o regla que nadie ha descifrado? Y de esta forma.",
+    "word_count": 80,
+    "search_summary": "Las células ciliadas del oído interno comparten la proteína prestin con las escamas de tiburones, evolucionando por separado hace 400 millones de años.",
+    "comment_question": "¿Evolución paralela o hay una regla oculta que nadie ha encontrado? 🤯",
+    "source_note": "Journal of Experimental Biology, 2011",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "evolución convergente",
+      "datos curiosos de biología",
+      "tiburones evolución",
+      "oído interno mamíferos",
+      "proteína prestin",
+      "datos curiosos ciencia",
+      "evolución paralela",
+      "curiosidades del cuerpo humano",
+      "evolución convergente y divergente"
+    ],
+    "hashtags": [
+      "#shorts",
+      "##datoscuriosos",
+      "#evolución",
+      "#biología",
+      "#ciencia"
+    ],
+    "video_queries": [
+      "shark swimming ocean underwater",
+      "shark teeth close underwater",
+      "human ear anatomy illustration",
+      "scientist microscope laboratory",
+      "ocean deep ancient prehistoric"
+    ],
+    "has_loop": true,
+    "topic": "evolution",
+    "structure": "unsolved-mystery",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "La tormenta de 1972 que sepultó Irán bajo 8 metros de nieve 😱",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "Nadie salió a buscarlos",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "fear",
+    "script": "Una tormenta enterró ciudades enteras y nadie pudo entrar a rescatarlas por días. En febrero de 1972, una ventisca golpeó el sur de Irán y sepultó más de 200 pueblos bajo hasta 8 metros de nieve. Cuatro mil personas murieron. Algunos pueblos desaparecieron por completo — sin sobrevivientes. Pero lo más perturbador: los rescatistas tardaron una semana en llegar. Los pueblos no estaban bloqueados. Simplemente ya no existían. Mándaselo a alguien que crea que la nieve solo detiene el tráfico. Y por eso exactamente.",
+    "word_count": 80,
+    "search_summary": "La ventisca de febrero de 1972 en Irán sepultó 200 pueblos bajo 8 metros de nieve y mató 4,000 personas.",
+    "comment_question": "¿Cómo desaparece un pueblo entero y nadie lo reporta por una semana? 😳",
+    "source_note": "Iran Blizzard of 1972, Encyclopedia Britannica",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "clima extremo",
+      "ventisca mortal",
+      "tormentas históricas",
+      "desastres naturales",
+      "nevada iran 1972",
+      "datos en 30 segundos",
+      "hechos increíbles",
+      "fenómenos climáticos",
+      "clima extremo documental"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#climaextremo",
+      "#desastresnaturales",
+      "#datoscuriosos",
+      "#ventisca"
+    ],
+    "video_queries": [
+      "blizzard buried village snow",
+      "snowstorm extreme depth aerial",
+      "rescue team snow disaster",
+      "abandoned town under snow",
+      "helicopter rescue snowstorm mountains"
+    ],
+    "has_loop": true,
+    "topic": "extreme weather",
+    "structure": "myth-debunk",
+    "niche_styled": true,
+    "title_variant": "seo",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "¿El mensajero que llegó 3 días tarde y hundió un imperio? 😱",
+    "title_opener": "question",
+    "title_intensity": "extreme",
+    "hook_text": "Un mensaje lo cambió todo",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "creepy",
+    "script": "Un mensajero llegó tarde tres días y enterró a su propio rey. En 480 a.C., el rey persa Jerjes esperaba refuerzos en Termopilas. El mensajero se extravió. Las Termópilas cayeron, pero la demora dio tiempo a Atenas para evacuar su flota. En Salamina, 380 barcos griegos destrozaron la armada persa. Jerjes nunca volvió a intentar conquistar Europa. ¿El mensajero actuó solo... o alguien lo desvió a propósito? Y así es como.",
+    "word_count": 75,
+    "search_summary": "Un mensajero persa perdido en 480 a.C. retrasó refuerzos en Termopilas y causó la derrota de Jerjes en Salamina.",
+    "comment_question": "¿Crees que el mensajero se perdió solo o fue saboteado? 🤔",
+    "source_note": "Heródoto, Historias, Libro VIII, siglo V a.C.",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "misterios históricos",
+      "Imperio Persa",
+      "batalla de Salamina",
+      "Jerjes",
+      "Termopilas",
+      "historia antigua",
+      "hechos históricos",
+      "datos curiosos historia",
+      "misterios históricos sin resolver",
+      "imperio persa documental",
+      "batalla de salamina documental"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#historiamisteriosa",
+      "#datoscuriosos",
+      "#imperiopersas",
+      "#batallashistoricas"
+    ],
+    "video_queries": [
+      "ancient messenger running desert",
+      "ancient persian army march",
+      "narrow mountain pass ancient ruins",
+      "ancient greek naval battle reenactment",
+      "stormy ocean warships horizon",
+      "dark ancient road torch night"
+    ],
+    "has_loop": true,
+    "topic": "historical mysteries",
+    "structure": "historical-story",
+    "niche_styled": true,
+    "title_variant": "seo",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "¿El pájaro que roba veneno de sapos para envenenarse solo? 😱",
+    "title_opener": "question",
+    "title_intensity": "extreme",
+    "hook_text": "Se envenena... a propósito",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "creepy",
+    "script": "Nadie puede explicar por qué este pájaro busca veneno para frotárselo encima. El tordo norteamericano atrapa sapos del género Bufo, los muerde, y se embadurna las plumas con su toxina. Lo hacen desde 1831, cuando Audubon lo documentó — y sigue sin explicación. La teoría más popular dice que el veneno mata los parásitos. Pero algunos tordos lo hacen sin parásitos detectables, en pleno invierno. ¿Te parece que estaban intentando algo más — o este pájaro descubrió algo que nosotros aún no entendemos? Por eso mismo.",
+    "word_count": 80,
+    "search_summary": "El tordo norteamericano frota toxina de sapos Bufo en sus plumas en comportamiento inexplicado desde 1831.",
+    "comment_question": "¿Crees que el tordo se envenena por placer o por sobrevivir? 🐦",
+    "source_note": "Journal of Field Ornithology, 1988",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "datos curiosos animales",
+      "pájaros raros",
+      "tordo norteamericano",
+      "animales con veneno",
+      "comportamiento animal inexplicado",
+      "curiosidades de la naturaleza",
+      "hechos increíbles animales",
+      "animales peligrosos",
+      "datos curiosos animales para niños",
+      "pájaros raros del mundo"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#animales",
+      "#naturaleza",
+      "#misterio"
+    ],
+    "video_queries": [
+      "bird in nature close behavior",
+      "toad on forest ground",
+      "bird rubbing feathers on ground",
+      "wildlife forest floor bird",
+      "bird preening feathers slow motion"
+    ],
+    "has_loop": true,
+    "topic": "the animal kingdom",
+    "structure": "unsolved-mystery",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
   }
 ]
