@@ -158,5 +158,15 @@
     "part_b_video_id": null,
     "status": "awaiting_b",
     "created_at": 1788740725.581114
+  },
+  {
+    "id": "FV2nNW2TOzM-1788913411",
+    "topic": "archaeological discoveries",
+    "part_a_video_id": "FV2nNW2TOzM",
+    "part_a_title": "La tumba inca que se selló sola con mercurio líquido 😱",
+    "claim": "Teotihuacán fue construida por una civilización que aún no identificamos.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1788913411.6847057
   }
 ]
