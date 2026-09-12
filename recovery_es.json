@@ -75,6 +75,22 @@
           "preview": "https://images.pexels.com/videos/34264893/pexels-photo-34264893.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630",
           "source": "pexels"
         }
+      ],
+      "72594b3b19a1ca4ece83f2fd658ac4caba809c5e8329441987b6c1b041878702": [
+        {
+          "link": "https://videos.pexels.com/video-files/31446320/13411336_1080_1920_24fps.mp4",
+          "id": 31446320,
+          "preview": "https://images.pexels.com/videos/31446320/pexels-photo-31446320.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630",
+          "source": "pexels"
+        }
+      ],
+      "94c72c71ba564ad61543dff4d657eacfe1d8b9f4bf4971a8787046601abc1c71": [
+        {
+          "link": "https://videos.pexels.com/video-files/33000377/14064740_1080_1920_30fps.mp4",
+          "id": 33000377,
+          "preview": "https://images.pexels.com/videos/33000377/hungry-fishes-33000377.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630",
+          "source": "pexels"
+        }
       ]
     },
     "status": "prepared",
@@ -1153,6 +1169,57 @@
         "target_scenes": 6
       },
       "error": "Добор сцен продолжается: 3/6. Сценарий и одобренные клипы сохранены для следующей попытки."
+    },
+    {
+      "id": "34661700096:1",
+      "at": "2026-09-12T00:28:25.944978+00:00",
+      "outcome": "deferred",
+      "resumed": true,
+      "title": "El pez arquero que caza con agua como arma a 3 metros 🎯",
+      "episode": "2026-09-12T00:17:58.334792+00:00",
+      "slot": "2026-09-12T00:17:00+00:00",
+      "video_id": null,
+      "selection": {
+        "filter_version": 3,
+        "retries": 0,
+        "retry_recovered": 0,
+        "unknown_usage_attempts": 0,
+        "retry_input_tokens": 0,
+        "retry_output_tokens": 0,
+        "retry_reasons": null,
+        "reused_selections": 3,
+        "extra_searches": 3,
+        "downloaded_scenes": 5,
+        "backup_scenes": 0,
+        "extra_input_tokens": 4358,
+        "extra_output_tokens": 64,
+        "initial_scenes": 2,
+        "source_errors": null,
+        "source_candidates": {
+          "pexels": 39,
+          "pixabay": 1,
+          "coverr": 0
+        },
+        "downloaded_sources": {
+          "pexels": 5
+        },
+        "stock_cache_hits": 12,
+        "beats": 4,
+        "vetted": 2,
+        "cache_hits": 0,
+        "no_preview": 0,
+        "api_error": 0,
+        "unparsed": 0,
+        "rejected": 2,
+        "bypass": false,
+        "vision_calls": 4,
+        "no_candidates": 0,
+        "search_error": 0,
+        "input_tokens": 18016,
+        "output_tokens": 201,
+        "target_scenes": 6
+      },
+      "error": "Добор сцен продолжается: 5/6. Сценарий и одобренные клипы сохранены для следующей попытки."
     }
   ]
 }
