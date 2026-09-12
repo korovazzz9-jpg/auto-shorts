@@ -1,5 +1,85 @@
 {
-  "pending": null,
+  "pending": {
+    "data": {
+      "title": "El pez arquero que caza con agua como arma a 3 metros 🎯",
+      "title_opener": "the-x",
+      "title_intensity": "extreme",
+      "hook_text": "Mata sin moverse del agua",
+      "hook_template": "sounds-fake",
+      "emotional_tone": "impossible",
+      "script": "Un animal derriba presas en tierra firme sin salir del agua — y nunca falla. El pez arquero escupe un chorro de agua con tanta precisión que derriba insectos a 3 metros. Pero aquí viene lo imposible: compensa la refracción de la luz entre agua y aire en milisegundos, algo que requiere cálculo óptico avanzado. Sin cerebro, sin fórmulas. Manda este video a alguien que crea que los peces no piensan. Y por eso exactamente.",
+      "word_count": 75,
+      "search_summary": "El pez arquero escupe agua con precisión para derribar insectos a 3 metros fuera del agua compensando la refracción de la luz.",
+      "comment_question": "¿Un pez sin cerebro calcula óptica mejor que tú en un examen? 😳",
+      "source_note": "Journal of Experimental Biology, 2012",
+      "loop_connectors": [
+        "why",
+        "how"
+      ],
+      "tags": [
+        "pez arquero",
+        "animales increíbles",
+        "datos curiosos",
+        "reino animal",
+        "animales que cazan",
+        "curiosidades de animales",
+        "peces inteligentes",
+        "datos en 30 segundos",
+        "pez arquero cazando",
+        "animales increíbles del mundo",
+        "datos curiosos del mundo"
+      ],
+      "hashtags": [
+        "#shorts",
+        "datoscuriosos",
+        "#pezarquero",
+        "#reinoanimal",
+        "#curiosidades"
+      ],
+      "video_queries": [
+        "archerfish spitting water slow motion",
+        "fish hunting insect surface water",
+        "underwater fish surface shot",
+        "insect falling water surface slow motion"
+      ],
+      "has_loop": true,
+      "topic": "the animal kingdom",
+      "structure": "myth-debunk",
+      "niche_styled": true,
+      "title_variant": "narrative",
+      "hashtag_position": "end"
+    },
+    "pending_pair": null,
+    "pair_start_mode": false,
+    "selections": {
+      "4f1941f3e81bae63a890b418b2301765fffa4b9112d537472fad793f7797777f": [
+        {
+          "link": "https://videos.pexels.com/video-files/7662545/7662545-hd_1080_1920_24fps.mp4",
+          "id": 7662545,
+          "preview": "https://images.pexels.com/videos/7662545/pexels-photo-7662545.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630",
+          "source": "pexels"
+        }
+      ],
+      "2b50851559dbe84f12a47bd21cfd04fcfadf96685ee7af0371f49185c8d7dc5e": [
+        {
+          "link": "https://videos.pexels.com/video-files/8676982/8676982-hd_1080_1920_30fps.mp4",
+          "id": 8676982,
+          "preview": "https://images.pexels.com/videos/8676982/pexels-photo-8676982.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630",
+          "source": "pexels"
+        }
+      ],
+      "58880930d3b0362fe82a80c9e86c39fa286f9d3eba94420fd46a5bc4964aa8c4": [
+        {
+          "link": "https://videos.pexels.com/video-files/34264893/14517614_1080_1920_30fps.mp4",
+          "id": 34264893,
+          "preview": "https://images.pexels.com/videos/34264893/pexels-photo-34264893.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630",
+          "source": "pexels"
+        }
+      ]
+    },
+    "status": "prepared",
+    "created": "2026-09-12T00:17:58.334792+00:00"
+  },
   "attempts": [
     {
       "id": "34221465880:1",
@@ -1022,6 +1102,57 @@
         "target_scenes": 6
       },
       "error": null
+    },
+    {
+      "id": "34661114014:1",
+      "at": "2026-09-12T00:17:58.334792+00:00",
+      "outcome": "deferred",
+      "resumed": false,
+      "title": "El pez arquero que caza con agua como arma a 3 metros 🎯",
+      "episode": "2026-09-12T00:17:58.334792+00:00",
+      "slot": "2026-09-12T00:17:00+00:00",
+      "video_id": null,
+      "selection": {
+        "filter_version": 3,
+        "retries": 0,
+        "retry_recovered": 0,
+        "unknown_usage_attempts": 0,
+        "retry_input_tokens": 0,
+        "retry_output_tokens": 0,
+        "retry_reasons": null,
+        "reused_selections": 0,
+        "extra_searches": 3,
+        "downloaded_scenes": 3,
+        "backup_scenes": 0,
+        "extra_input_tokens": 13651,
+        "extra_output_tokens": 137,
+        "initial_scenes": 1,
+        "source_errors": null,
+        "source_candidates": {
+          "pexels": 70,
+          "pixabay": 2,
+          "coverr": 0
+        },
+        "downloaded_sources": {
+          "pexels": 3
+        },
+        "stock_cache_hits": 0,
+        "beats": 7,
+        "vetted": 3,
+        "cache_hits": 0,
+        "no_preview": 0,
+        "api_error": 0,
+        "unparsed": 0,
+        "rejected": 4,
+        "bypass": false,
+        "vision_calls": 7,
+        "no_candidates": 0,
+        "search_error": 0,
+        "input_tokens": 31671,
+        "output_tokens": 338,
+        "target_scenes": 6
+      },
+      "error": "Добор сцен продолжается: 3/6. Сценарий и одобренные клипы сохранены для следующей попытки."
     }
   ]
 }
