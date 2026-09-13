@@ -148,6 +148,40 @@ class PipelineRecoveryTests(unittest.TestCase):
         self.assertIsNone(EpisodeRecovery("es", self.tmp.name).pending())
         self.assertIn("восстановлено выпусков 1", reliability_report("es", self.tmp.name))
 
+    def test_partial_fill_above_floor_publishes(self):
+        """2026-09-13: 5/6 разных сцен — нормальный ролик. Раньше это откладывалось бесконечно
+        (эпизод «рыба-стрелок» застрял на 5/6 и блокировал канал больше суток)."""
+        self.env["fetch_clips"].return_value = [f"clip{i}" for i in range(5)]
+        self.env["publish"].side_effect = lambda **kw: (kw["on_youtube_uploaded"]("yt-id") or "yt-id")
+        self.env["_run"](self.recovery)
+        self.env["publish"].assert_called_once()
+        self.env["text_to_speech"].assert_called_once()
+
+    def test_below_floor_is_abandoned_after_attempt_cap(self):
+        """Ниже порога эпизод откладывается, но не вечно: на max_episode_attempts он бросается,
+        и следующий прогон начинает со свежего сценария."""
+        self.recovery.prepare(self.data, None, False)
+        self.recovery.finish("deferred", {})
+        self.recovery.finish("deferred", {})
+        resumed = EpisodeRecovery("es", self.tmp.name, slots=[(0, 17)])
+        self.assertEqual(resumed.deferred_attempts(), 2)
+        with self.assertRaisesRegex(RuntimeError, "Эпизод брошен"):
+            self.env["_run"](resumed)
+        resumed.finish("deferred", {})
+        self.env["publish"].assert_not_called()
+        fresh = EpisodeRecovery("es", self.tmp.name)
+        self.assertIsNone(fresh.pending())
+        last = fresh.state["attempts"][-1]
+        self.assertEqual(last["outcome"], "abandoned")
+        self.assertEqual(last["title"], "A bird")
+
+    def test_below_floor_defers_before_cap(self):
+        """Первая попытка ниже порога — всё ещё откладывается, эпизод не теряется зря."""
+        with self.assertRaisesRegex(RuntimeError, "Добор сцен продолжается"):
+            self.env["_run"](self.recovery)
+        self.recovery.finish("deferred", {})
+        self.assertIsNotNone(EpisodeRecovery("es", self.tmp.name).pending())
+
     def test_unknown_upload_is_not_republished(self):
         self.recovery.prepare(self.data, None, False)
         self.recovery.publishing()

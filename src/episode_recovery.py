@@ -47,8 +47,27 @@ class EpisodeRecovery:
         self.state["pending"].update(status="published", video_id=video_id)
         self.save()
 
+    def deferred_attempts(self):
+        """Сколько попыток УЖЕ записано по текущему эпизоду (текущая ещё не записана —
+        finish() зовётся после _run). 2026-09-13: журнал был «bounded» только по размеру,
+        лимита попыток на эпизод не существовало — сценарий с неудовлетворимым требованием
+        (рыба-стрелок, 5/6 сцен) повторялся 8 раз и блокировал все слоты канала больше суток."""
+        created = (self.state.get("pending") or {}).get("created")
+        if not created:
+            return 0
+        return sum(1 for a in self.state.get("attempts", []) if a.get("episode") == created)
+
+    def abandon(self):
+        """Бросить эпизод: следующий прогон возьмёт свежий сценарий. Снимок сохраняется, чтобы
+        finish() записал в журнал, ЧТО именно брошено, а не пустую запись."""
+        self.abandoned = self.state.get("pending")
+        self.state["pending"] = None
+        self.save()
+
     def finish(self, outcome, stats, error=None):
-        pending = self.state.get("pending") or {}
+        pending = self.state.get("pending") or getattr(self, "abandoned", None) or {}
+        if getattr(self, "abandoned", None) and not self.state.get("pending"):
+            outcome = "abandoned"
         if pending.get("video_id"):
             outcome = "published"
         self.state["attempts"].append({"id": self.attempt_id, "at": self.started,

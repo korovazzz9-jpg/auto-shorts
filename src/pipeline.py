@@ -114,7 +114,25 @@ def _run(recovery) -> None:
         clip_selection = selection_stats()
         print(f"  Отбор кадров: {clip_selection}")
         clip_selection["target_scenes"] = target_scenes
-        if len(clip_paths) < target_scenes:
+        # 2026-09-13, прод-инцидент: жёсткое «ровно target_scenes, иначе отложить» + отсутствие
+        # лимита попыток = дедлок. Сценарий про рыбу-стрелка набрал 5/6, добор каждый раз шёл
+        # по тем же закэшированным запросам, модель отклоняла тех же двух кандидатов — и так
+        # 8 попыток подряд, все слоты канала стояли больше суток. Теперь:
+        # 1) target_scenes остаётся ЦЕЛЬЮ добора, но публикуем уже от порога min_publish_scenes
+        #    (5 разных сцен на 30 с — нормальный ролик; порог при этом отсекает случай «ролик
+        #    из одного растянутого клипа», ради которого добор и вводился);
+        # 2) ниже порога эпизод откладывается не бесконечно: после max_episode_attempts попыток
+        #    он бросается, и следующий прогон (сторож перезапускает слот) берёт новый сценарий.
+        publish_floor = min(target_scenes, CFG.get("min_publish_scenes", 4))
+        if len(clip_paths) < publish_floor:
+            max_attempts = CFG.get("max_episode_attempts", 3)
+            if recovery.deferred_attempts() + 1 >= max_attempts:
+                title = data.get("title")
+                recovery.abandon()
+                notify(f"🗑 [{CFG['channel_name']}] эпизод брошен после {max_attempts} попыток "
+                       f"({len(clip_paths)}/{target_scenes} сцен): {title}. Следующий прогон возьмёт новый сценарий.")
+                raise RuntimeError(f"Эпизод брошен: {len(clip_paths)}/{target_scenes} сцен после "
+                                   f"{max_attempts} попыток. Следующий прогон возьмёт новый сценарий.")
             raise RuntimeError(f"Добор сцен продолжается: {len(clip_paths)}/{target_scenes}. "
                                "Сценарий и одобренные клипы сохранены для следующей попытки.")
         if clip_selection.get("retries") or recovery.resumed:
