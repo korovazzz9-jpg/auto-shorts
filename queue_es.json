@@ -195,5 +195,153 @@
     "niche_styled": true,
     "title_variant": "narrative",
     "hashtag_position": "end"
+  },
+  {
+    "title": "El pez globo que envenena a sus depredadores desde adentro 😱",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "Nadie puede explicarlo",
+    "hook_template": "authority-cant-explain",
+    "emotional_tone": "creepy",
+    "script": "Científicos llevan décadas sin entender cómo sobrevive este animal a su propio veneno. El pez globo carga tetrodotoxina —1,200 veces más letal que el cianuro— en su hígado, piel y órganos. La teoría oficial: bacterias en su dieta producen la toxina. Pero peces globo criados en laboratorio sin esas bacterias siguen siendo tóxicos. Nadie sabe de dónde viene el veneno entonces. ¿Cómo explicas eso? Y por eso.",
+    "word_count": 70,
+    "search_summary": "El pez globo contiene tetrodotoxina letal en sus órganos sin origen bacteriano confirmado.",
+    "comment_question": "¿El veneno del pez globo es suyo o lo roba? 🐡",
+    "source_note": "Woods Hole Oceanographic Institution, 2002",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "pez globo veneno",
+      "tetrodotoxina pez globo",
+      "animales venenosos",
+      "datos curiosos animales",
+      "misterios del reino animal",
+      "curiosidades marinas",
+      "peces peligrosos",
+      "datos en 30 segundos",
+      "pez globo venenoso",
+      "animales venenosos del mundo"
+    ],
+    "hashtags": [
+      "#shorts",
+      "datoscuriosos",
+      "#pezglobo",
+      "#animalesmarinos",
+      "#misterios"
+    ],
+    "video_queries": [
+      "pufferfish swimming ocean",
+      "pufferfish inflated underwater",
+      "scientist lab fish tank",
+      "ocean deep water dark",
+      "marine biologist research aquarium"
+    ],
+    "has_loop": true,
+    "topic": "the animal kingdom",
+    "structure": "unsolved-mystery",
+    "niche_styled": true,
+    "title_variant": "seo",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "El niño enterrado con su asesino en Çatalhöyük 😱",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "Nadie entiende esta tumba",
+    "hook_template": "authority-cant-explain",
+    "emotional_tone": "creepy",
+    "script": "Nadie puede explicar por qué están juntos en esta tumba. En Çatalhöyük, Turquía, arqueólogos abrieron una tumba de 9,000 años con un niño y un adulto enterrados abrazados. El adulto tenía marcas de violencia en los huesos — y el niño, fracturas que señalan al mismo agresor. La teoría más obvia: familia. Pero el ADN confirmó que no comparten ni un gen. ¿Quién entierra a un niño con su probable asesino... y por qué? Y de esta forma.",
+    "word_count": 79,
+    "search_summary": "En Çatalhöyük hallaron una tumba de 9,000 años con un niño y su posible asesino enterrados juntos sin vínculo genético.",
+    "comment_question": "¿Por qué alguien enterraría juntos a un niño y su asesino? 👀",
+    "source_note": "Revista Journal of Archaeological Science, 2013",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "arqueología",
+      "descubrimientos arqueológicos",
+      "datos curiosos",
+      "misterios históricos",
+      "Çatalhöyük",
+      "tumba antigua",
+      "historia misteriosa",
+      "hallazgos arqueológicos",
+      "descubrimientos arqueológicos en méxico",
+      "datos curiosos que no sabías",
+      "misterios históricos sin resolver"
+    ],
+    "hashtags": [
+      "#shorts",
+      "datoscuriosos",
+      "#arqueología",
+      "#misterio",
+      "#historiaancestral"
+    ],
+    "video_queries": [
+      "archaeologist excavating ancient ruins",
+      "ancient burial site excavation",
+      "archaeological dig Turkey landscape",
+      "dark underground tomb tunnel",
+      "forensic archaeologist examining bones"
+    ],
+    "has_loop": true,
+    "topic": "archaeological discoveries",
+    "structure": "unsolved-mystery",
+    "niche_styled": true,
+    "title_variant": "seo",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "¿La señal de radio que viene del espacio... cada 16 días? 😱",
+    "title_opener": "question",
+    "title_intensity": "extreme",
+    "hook_text": "Nadie sabe quién manda esto",
+    "hook_template": "authority-cant-explain",
+    "emotional_tone": "impossible",
+    "script": "Lleva años llegando puntual, cada 16 días, y nadie sabe qué la manda. Se llama FRB 20180916B — una ráfaga de radio rápida detectada en 2020, a 500 millones de años luz. Emite durante 4 días, se calla 12, y repite. Los astrónomos tienen dos teorías: una estrella de neutrones con ciclos orbitales, o algo que nadie quiere nombrar. Pero ninguna explica por qué el patrón es tan perfecto. ¿Qué explicación te convence más? Y de esta forma.",
+    "word_count": 79,
+    "search_summary": "FRB 20180916B es una ráfaga de radio rápida que pulsa cada 16 días desde 500 millones de años luz y no tiene explicación confirmada.",
+    "comment_question": "¿Ciclo orbital natural... o algo que no queremos admitir? 👽",
+    "source_note": "CHIME/FRB Collaboration, Nature, 2020",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "datos del espacio",
+      "misterios del universo",
+      "ráfagas de radio rápidas",
+      "FRB espacio",
+      "señales del espacio inexplicables",
+      "astronomía misterios",
+      "datos curiosos espacio",
+      "fenómenos cósmicos inexplicables",
+      "datos del espacio para dormir",
+      "misterios del universo para dormir"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datosdeespacío",
+      "#misteriosdelespacío",
+      "#astronomia",
+      "#frbespacio"
+    ],
+    "video_queries": [
+      "radio telescope night sky",
+      "deep space stars timelapse",
+      "astronomer observatory screen",
+      "galaxy far away telescope",
+      "space signal wave animation"
+    ],
+    "has_loop": true,
+    "topic": "space",
+    "structure": "unsolved-mystery",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
   }
 ]
