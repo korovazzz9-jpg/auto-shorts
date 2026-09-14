@@ -168,5 +168,15 @@
     "part_b_video_id": null,
     "status": "awaiting_b",
     "created_at": 1788913411.6847057
+  },
+  {
+    "id": "vDKmgijN4Kw-1789345509",
+    "topic": "volcanoes and earthquakes",
+    "part_a_video_id": "vDKmgijN4Kw",
+    "part_a_title": "¿El terremoto de 1950 que movió glaciares a 2,000 km? 😱",
+    "claim": "The 1950 Assam earthquake remains one of the least-studied mega-quakes.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1789345509.6727092
   }
 ]
