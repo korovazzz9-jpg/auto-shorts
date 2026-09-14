@@ -1,11 +1,11 @@
 {
   "outlier_counts": {
-    "ancient history": 3,
+    "ancient history": 2,
     "archaeological discoveries": 1,
-    "ancient civilizations": 3,
-    "historical mysteries": 3,
-    "the human body": 1,
-    "the ocean": 2,
+    "ancient civilizations": 2,
+    "historical mysteries": 4,
+    "the human body": 3,
+    "the ocean": 4,
     "evolution": 3,
     "volcanoes and earthquakes": 5,
     "space": 1,
@@ -16,26 +16,27 @@
   "outlier_titles": {
     "ancient history": [
       "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos",
-      "Tres datos históricos alucinantes #historia #interesante #hechos",
-      "Balduino IV: el hombre más fuerte de Medio Oriente  #BalduinoIV #datoscuriosos  #historiareal"
+      "Tres datos históricos alucinantes #historia #interesante #hechos"
     ],
     "archaeological discoveries": [
       "La Reina Roja de Palenque🏺 #reelsvideo #shorts #fyp #curiosidades #datoscuriosos"
     ],
     "ancient civilizations": [
       "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos",
-      "Tres datos históricos alucinantes #historia #interesante #hechos",
-      "Datos Curiosos de Cleopatra, una Mujer Exótica #shorts"
+      "Tres datos históricos alucinantes #historia #interesante #hechos"
     ],
     "historical mysteries": [
       "Tres datos históricos alucinantes #historia #interesante #hechos",
-      "Pruebas de que Jesús existió Realmente? #shorts",
-      "✅ La verdadera historia de los tres cerditos 🐷💀 #short #shortsviral"
+      "✅ La verdadera historia de los tres cerditos 🐷💀 #short #shortsviral",
+      "Los misterios del Amazonas #amazonas #mitos #leyendas #curiosidades #shortsviral"
     ],
     "the human body": [
-      "DATO CURIOSO - LA NIÑA PERRO #shorts"
+      "DATO CURIOSO - LA NIÑA PERRO #shorts",
+      "¿Qué pasaría si tu CUERPO fuera de estos MATERIALES? 🧊🌋💀 #shorts",
+      "Algo se Aproxima a a Tierra #Shorts"
     ],
     "the ocean": [
+      "Las profundidades del Oceano #shorts",
       "¿Tienes Talasofobia? 🤯😰 #shorts #talasofobia #fobias #short #mar #oceano",
       "Las islas más peligrosas del mundo 🌎🤯 #curiosidades #shorts #estadosunidos"
     ],
@@ -58,8 +59,8 @@
       "EXPERIMENTOS CIENTÍFICOS CASEROS sencillos!!! #shorts #experimentos #caseros #cientificos"
     ],
     "the animal kingdom": [
-      "Así NACEN las PERLAS 🦪 #curiosidadN212 #las1000curiosidades #datoscuriosos",
       "SHAKIRA se ASUSTÓ por una RATA 😱 #shakira #curiosidades #datoscuriosos",
+      "Así NACEN las PERLAS 🦪 #curiosidadN212 #las1000curiosidades #datoscuriosos",
       "El DETALLE de hotel Transylvania que NO VISTE #mavis #datoscuriosos #curiosidades"
     ],
     "extreme weather": [
@@ -103,66 +104,66 @@
       "topic": "historical mysteries",
       "title": "✅ La verdadera historia de los tres cerditos 🐷💀 #short #shortsviral",
       "video_id": "QQ0sdApwJ0s",
-      "views": 4845351,
-      "subs": 19200,
-      "ratio": 252.4
+      "views": 4892992,
+      "subs": 19300,
+      "ratio": 253.5
     },
     {
       "topic": "volcanoes and earthquakes",
       "title": "EL TSUNAMI MÁS GRANDE DE LA HISTORIA",
       "video_id": "Tp_f3ZBfxcc",
-      "views": 1734136,
-      "subs": 7680,
-      "ratio": 225.8
+      "views": 1752476,
+      "subs": 7710,
+      "ratio": 227.3
     },
     {
       "topic": "the human body",
       "title": "DATO CURIOSO - LA NIÑA PERRO #shorts",
       "video_id": "9e82SusaU8c",
-      "views": 15459761,
-      "subs": 76800,
-      "ratio": 201.3
-    },
-    {
-      "topic": "the ocean",
-      "title": "¿Tienes Talasofobia? 🤯😰 #shorts #talasofobia #fobias #short #mar #oceano",
-      "video_id": "GRGBrmHsXdg",
-      "views": 9526936,
-      "subs": 51400,
-      "ratio": 185.3
+      "views": 15544823,
+      "subs": 77000,
+      "ratio": 201.9
     },
     {
       "topic": "the human body",
       "title": "¿Qué pasaría si tu CUERPO fuera de estos MATERIALES? 🧊🌋💀 #shorts",
       "video_id": "yVSqsCM__jE",
-      "views": 12508580,
-      "subs": 67800,
-      "ratio": 184.5
+      "views": 15423199,
+      "subs": 82600,
+      "ratio": 186.7
     },
     {
       "topic": "the ocean",
-      "title": "Las islas más peligrosas del mundo 🌎🤯 #curiosidades #shorts #estadosunidos",
-      "video_id": "TZHSvTMFYt8",
-      "views": 10615817,
-      "subs": 67000,
-      "ratio": 158.4
+      "title": "¿Tienes Talasofobia? 🤯😰 #shorts #talasofobia #fobias #short #mar #oceano",
+      "video_id": "GRGBrmHsXdg",
+      "views": 9538811,
+      "subs": 51400,
+      "ratio": 185.6
+    },
+    {
+      "topic": "the human body",
+      "title": "Algo se Aproxima a a Tierra #Shorts",
+      "video_id": "hOq7uz55_eo",
+      "views": 8573668,
+      "subs": 49200,
+      "ratio": 174.3
     }
   ],
   "saturation": {
-    "ancient history": 278608,
-    "archaeological discoveries": 77211,
-    "ancient civilizations": 107050,
-    "shipwrecks and lost treasures": 1594,
-    "historical mysteries": 182587,
-    "the human body": 298308,
-    "the animal kingdom": 414522,
-    "the ocean": 228686,
-    "evolution": 281594,
-    "volcanoes and earthquakes": 55218,
-    "extreme weather": 130201,
-    "natural wonders": 153668,
-    "space": 299971,
+    "ancient history": 282604,
+    "archaeological discoveries": 78695,
+    "ancient civilizations": 111517,
+    "shipwrecks and lost treasures": 1718,
+    "historical mysteries": 189988,
+    "the human body": 301049,
+    "the animal kingdom": 412402,
+    "the ocean": 243873,
+    "evolution": 286699,
+    "volcanoes and earthquakes": 60010,
+    "extreme weather": 137700,
+    "natural wonders": 158918,
+    "space": 309478,
     "future technology": 298101
   },
-  "updated": "2026-09-07"
+  "updated": "2026-09-14"
 }
