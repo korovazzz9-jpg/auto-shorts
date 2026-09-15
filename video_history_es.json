@@ -6748,5 +6748,64 @@
       "output_tokens": 223,
       "target_scenes": 6
     }
+  },
+  {
+    "video_id": "GVCYjMsNpKU",
+    "published_at": "2026-09-15T20:24:57.766864+00:00",
+    "title": "¿El pez macho que se fusiona con la hembra… para siempre? 😱",
+    "topic": "the animal kingdom",
+    "hook_template": "sounds-fake",
+    "title_opener": "question",
+    "emotional_tone": "creepy",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 31.6,
+    "voice": "es-US-AlonsoNeural",
+    "caption_color": "white",
+    "structure": "happening-now",
+    "pair_role": null,
+    "clip_selection": {
+      "filter_version": 3,
+      "retries": 0,
+      "retry_recovered": 0,
+      "unknown_usage_attempts": 0,
+      "retry_input_tokens": 0,
+      "retry_output_tokens": 0,
+      "retry_reasons": null,
+      "reused_selections": 0,
+      "extra_searches": 3,
+      "downloaded_scenes": 5,
+      "backup_scenes": 0,
+      "extra_input_tokens": 13675,
+      "extra_output_tokens": 84,
+      "initial_scenes": 2,
+      "source_errors": null,
+      "source_candidates": {
+        "pexels": 88,
+        "pixabay": 7,
+        "coverr": 0
+      },
+      "downloaded_sources": {
+        "pexels": 5
+      },
+      "stock_cache_hits": 0,
+      "beats": 9,
+      "vetted": 4,
+      "cache_hits": 0,
+      "no_preview": 0,
+      "api_error": 0,
+      "unparsed": 0,
+      "rejected": 5,
+      "bypass": false,
+      "vision_calls": 9,
+      "no_candidates": 0,
+      "search_error": 0,
+      "input_tokens": 42415,
+      "output_tokens": 468,
+      "target_scenes": 6
+    }
   }
 ]
