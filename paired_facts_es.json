@@ -178,5 +178,15 @@
     "part_b_video_id": null,
     "status": "awaiting_b",
     "created_at": 1789345509.6727092
+  },
+  {
+    "id": "fV0LZ_ppupo-1789518263",
+    "topic": "ancient history",
+    "part_a_video_id": "fV0LZ_ppupo",
+    "part_a_title": "El faraón que ordenó borrar a su sucesor de la historia 😱",
+    "claim": "Hatshepsut gobernó Egipto más tiempo que Cleopatra.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1789518263.1728609
   }
 ]

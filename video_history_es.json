@@ -6866,5 +6866,65 @@
       "output_tokens": 512,
       "target_scenes": 6
     }
+  },
+  {
+    "video_id": "fV0LZ_ppupo",
+    "published_at": "2026-09-16T00:24:22.680195+00:00",
+    "title": "El faraón que ordenó borrar a su sucesor de la historia 😱",
+    "topic": "ancient history",
+    "hook_template": "other",
+    "title_opener": "the-x",
+    "emotional_tone": "awe",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 37.0,
+    "voice": "es-MX-JorgeNeural",
+    "caption_color": "white",
+    "structure": "happening-now",
+    "pair_role": "a",
+    "clip_selection": {
+      "filter_version": 3,
+      "retries": 0,
+      "retry_recovered": 0,
+      "unknown_usage_attempts": 0,
+      "retry_input_tokens": 0,
+      "retry_output_tokens": 0,
+      "retry_reasons": null,
+      "reused_selections": 0,
+      "extra_searches": 0,
+      "downloaded_scenes": 6,
+      "backup_scenes": 1,
+      "extra_input_tokens": 0,
+      "extra_output_tokens": 0,
+      "initial_scenes": 5,
+      "source_errors": null,
+      "source_candidates": {
+        "pexels": 48,
+        "pixabay": 9,
+        "coverr": 0
+      },
+      "downloaded_sources": {
+        "pexels": 5,
+        "pixabay": 1
+      },
+      "stock_cache_hits": 0,
+      "beats": 5,
+      "vetted": 5,
+      "cache_hits": 0,
+      "no_preview": 0,
+      "api_error": 0,
+      "unparsed": 0,
+      "rejected": 0,
+      "bypass": false,
+      "vision_calls": 5,
+      "no_candidates": 0,
+      "search_error": 0,
+      "input_tokens": 24319,
+      "output_tokens": 219,
+      "target_scenes": 6
+    }
   }
 ]
