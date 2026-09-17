@@ -7340,5 +7340,64 @@
       "output_tokens": 272,
       "target_scenes": 6
     }
+  },
+  {
+    "video_id": "MKRSPVUkFQY",
+    "published_at": "2026-09-17T20:23:57.006322+00:00",
+    "title": "Tu médula ósea reemplaza toda tu sangre cada 120 días 🤯",
+    "topic": "the human body",
+    "hook_template": "sounds-fake",
+    "title_opener": "your-x",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 30.7,
+    "voice": "es-US-AlonsoNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": null,
+    "clip_selection": {
+      "filter_version": 3,
+      "retries": 0,
+      "retry_recovered": 0,
+      "unknown_usage_attempts": 0,
+      "retry_input_tokens": 0,
+      "retry_output_tokens": 0,
+      "retry_reasons": null,
+      "reused_selections": 0,
+      "extra_searches": 0,
+      "downloaded_scenes": 6,
+      "backup_scenes": 3,
+      "extra_input_tokens": 0,
+      "extra_output_tokens": 0,
+      "initial_scenes": 3,
+      "source_errors": null,
+      "source_candidates": {
+        "pexels": 47,
+        "pixabay": 0,
+        "coverr": 0
+      },
+      "downloaded_sources": {
+        "pexels": 6
+      },
+      "stock_cache_hits": 0,
+      "beats": 5,
+      "vetted": 3,
+      "cache_hits": 0,
+      "no_preview": 0,
+      "api_error": 0,
+      "unparsed": 0,
+      "rejected": 2,
+      "bypass": false,
+      "vision_calls": 5,
+      "no_candidates": 0,
+      "search_error": 0,
+      "input_tokens": 21882,
+      "output_tokens": 320,
+      "target_scenes": 6
+    }
   }
 ]
