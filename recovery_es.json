@@ -1,75 +1,5 @@
 {
-  "pending": {
-    "data": {
-      "title": "¿El pez macho que se convierte en madre… en 24 horas? 😱",
-      "title_opener": "question",
-      "title_intensity": "extreme",
-      "hook_text": "Está pasando ahora mismo",
-      "hook_template": "you-experience",
-      "emotional_tone": "impossible",
-      "script": "Right now, a male seahorse is giving birth — and he's doing it in real time. El caballito de mar macho lleva hasta 2,000 crías en su bolsa abdominal y las expulsa en menos de 24 horas. Es el único vertebrado macho en la Tierra que queda embarazado, gestiona el embarazo completo y da a luz solo. Cada minuto que llevas viendo esto, miles de machos están pariendo en el océano. ¿Tú crees que eso lo supera algún otro animal? Dímelo en los comentarios. Y por eso exactamente.",
-      "word_count": 80,
-      "search_summary": "El caballito de mar macho es el único vertebrado que queda embarazado y da a luz hasta 2,000 crías.",
-      "comment_question": "¿Existe otro vertebrado macho que dé a luz? Demuéstralo 👇",
-      "source_note": "Syngnathidae research, Upsala University, 2021",
-      "loop_connectors": [
-        "why",
-        "how"
-      ],
-      "tags": [
-        "caballito de mar embarazo",
-        "datos curiosos animales",
-        "animal kingdom facts español",
-        "vertebrado que da a luz",
-        "animales increíbles",
-        "curiosidades marinas",
-        "datos en 30 segundos",
-        "hechos insólitos naturaleza",
-        "datos curiosos animales para niños"
-      ],
-      "hashtags": [
-        "#datoscuriosos",
-        "#shorts",
-        "#animalesincreibles",
-        "#caballitodemar",
-        "#naturaleza"
-      ],
-      "video_queries": [
-        "seahorse swimming ocean underwater",
-        "seahorse giving birth close water",
-        "underwater ocean life slow motion",
-        "ocean floor marine life wide shot"
-      ],
-      "has_loop": true,
-      "topic": "the animal kingdom",
-      "structure": "happening-now",
-      "niche_styled": true,
-      "title_variant": "narrative",
-      "hashtag_position": "end"
-    },
-    "pending_pair": null,
-    "pair_start_mode": false,
-    "selections": {
-      "45759a409bf3386d9654b8e0356819a0ba4763a1c768ba534aaef39c3a6e482e": [
-        {
-          "link": "https://videos.pexels.com/video-files/38583389/16387455_1080_1920_57fps.mp4",
-          "id": 38583389,
-          "preview": "https://images.pexels.com/videos/38583389/pexels-photo-38583389.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630",
-          "source": "pexels"
-        }
-      ],
-      "4b32538d41332d7933e8b24ad26d19ecd0c955046930da3e138a070ad5965ab2": [
-        {
-          "link": "https://videos.pexels.com/video-files/31582310/13460503_1080_1920_30fps.mp4",
-          "id": 31582310,
-          "preview": "https://images.pexels.com/videos/31582310/pexels-photo-31582310.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630",
-          "source": "pexels"
-        }
-      ]
-    },
-    "status": "prepared",
-    "created": "2026-09-18T20:18:09.531015+00:00"
-  },
+  "pending": null,
   "attempts": [
     {
       "id": "34221465880:1",
@@ -3034,6 +2964,57 @@
         "target_scenes": 6
       },
       "error": "Добор сцен продолжается: 2/6. Сценарий и одобренные клипы сохранены для следующей попытки."
+    },
+    {
+      "id": "35402937929:1",
+      "at": "2026-09-18T22:46:07.685914+00:00",
+      "outcome": "abandoned",
+      "resumed": true,
+      "title": "¿El pez macho que se convierte en madre… en 24 horas? 😱",
+      "episode": "2026-09-18T20:18:09.531015+00:00",
+      "slot": "2026-09-18T22:17:00+00:00",
+      "video_id": null,
+      "selection": {
+        "filter_version": 3,
+        "retries": 0,
+        "retry_recovered": 0,
+        "unknown_usage_attempts": 0,
+        "retry_input_tokens": 0,
+        "retry_output_tokens": 0,
+        "retry_reasons": null,
+        "reused_selections": 2,
+        "extra_searches": 3,
+        "downloaded_scenes": 2,
+        "backup_scenes": 0,
+        "extra_input_tokens": 14836,
+        "extra_output_tokens": 192,
+        "initial_scenes": 2,
+        "source_errors": null,
+        "source_candidates": {
+          "pexels": 48,
+          "pixabay": 5,
+          "coverr": 0
+        },
+        "downloaded_sources": {
+          "pexels": 2
+        },
+        "stock_cache_hits": 15,
+        "beats": 5,
+        "vetted": 0,
+        "cache_hits": 0,
+        "no_preview": 0,
+        "api_error": 0,
+        "unparsed": 0,
+        "rejected": 5,
+        "bypass": false,
+        "vision_calls": 5,
+        "no_candidates": 0,
+        "search_error": 0,
+        "input_tokens": 24731,
+        "output_tokens": 320,
+        "target_scenes": 6
+      },
+      "error": "Эпизод брошен: 2/6 сцен после 3 попыток. Следующий прогон возьмёт новый сценарий."
     }
   ]
 }
