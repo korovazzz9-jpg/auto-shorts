@@ -2709,6 +2709,57 @@
         "target_scenes": 6
       },
       "error": null
+    },
+    {
+      "id": "35290536809:1",
+      "at": "2026-09-18T00:18:08.626011+00:00",
+      "outcome": "published",
+      "resumed": false,
+      "title": "¿El terremoto de 1663 que invirtió un río en Canadá? 😱",
+      "episode": "2026-09-18T00:18:08.626011+00:00",
+      "slot": "2026-09-18T00:17:00+00:00",
+      "video_id": "muke127hj70",
+      "selection": {
+        "filter_version": 3,
+        "retries": 0,
+        "retry_recovered": 0,
+        "unknown_usage_attempts": 0,
+        "retry_input_tokens": 0,
+        "retry_output_tokens": 0,
+        "retry_reasons": null,
+        "reused_selections": 0,
+        "extra_searches": 0,
+        "downloaded_scenes": 6,
+        "backup_scenes": 0,
+        "extra_input_tokens": 0,
+        "extra_output_tokens": 0,
+        "initial_scenes": 6,
+        "source_errors": null,
+        "source_candidates": {
+          "pexels": 59,
+          "pixabay": 13,
+          "coverr": 0
+        },
+        "downloaded_sources": {
+          "pexels": 6
+        },
+        "stock_cache_hits": 0,
+        "beats": 6,
+        "vetted": 6,
+        "cache_hits": 0,
+        "no_preview": 0,
+        "api_error": 0,
+        "unparsed": 0,
+        "rejected": 0,
+        "bypass": false,
+        "vision_calls": 6,
+        "no_candidates": 0,
+        "search_error": 0,
+        "input_tokens": 30195,
+        "output_tokens": 331,
+        "target_scenes": 6
+      },
+      "error": null
     }
   ]
 }
