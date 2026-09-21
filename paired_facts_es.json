@@ -188,5 +188,15 @@
     "part_b_video_id": null,
     "status": "awaiting_b",
     "created_at": 1789518263.1728609
+  },
+  {
+    "id": "k26xgxRk4jE-1789950261",
+    "topic": "volcanoes and earthquakes",
+    "part_a_video_id": "k26xgxRk4jE",
+    "part_a_title": "¿El volcán que enterró un ejército entero bajo el mar en 1650 a.C.? 😱",
+    "claim": "La erupción de Tera fue 10 veces más potente que Krakatoa.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1789950261.220966
   }
 ]
