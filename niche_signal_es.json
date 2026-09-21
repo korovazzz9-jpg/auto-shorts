@@ -1,44 +1,47 @@
 {
   "outlier_counts": {
-    "ancient history": 2,
-    "archaeological discoveries": 1,
-    "ancient civilizations": 2,
+    "ancient history": 4,
+    "archaeological discoveries": 3,
+    "ancient civilizations": 3,
     "historical mysteries": 4,
-    "the human body": 3,
-    "the ocean": 4,
+    "the human body": 1,
+    "the ocean": 3,
     "evolution": 3,
     "volcanoes and earthquakes": 5,
     "space": 1,
     "future technology": 5,
-    "the animal kingdom": 3,
-    "extreme weather": 1
+    "the animal kingdom": 4,
+    "extreme weather": 2,
+    "natural wonders": 1
   },
   "outlier_titles": {
     "ancient history": [
+      "DATO CURIOSO - LA NIÑA PERRO #shorts",
       "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos",
       "Tres datos históricos alucinantes #historia #interesante #hechos"
     ],
     "archaeological discoveries": [
-      "La Reina Roja de Palenque🏺 #reelsvideo #shorts #fyp #curiosidades #datoscuriosos"
+      "7 Datos Curiosos sobre la Atlántida  #historia #curiosidades",
+      "La Reina Roja de Palenque🏺 #reelsvideo #shorts #fyp #curiosidades #datoscuriosos",
+      "4 hallazgos que jamás debieron permanecer ocultos 👀"
     ],
     "ancient civilizations": [
       "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos",
-      "Tres datos históricos alucinantes #historia #interesante #hechos"
+      "Tres datos históricos alucinantes #historia #interesante #hechos",
+      "7 Datos Curiosos sobre la Atlántida  #historia #curiosidades"
     ],
     "historical mysteries": [
-      "Tres datos históricos alucinantes #historia #interesante #hechos",
+      "Pruebas de que Jesús existió Realmente? #shorts",
       "✅ La verdadera historia de los tres cerditos 🐷💀 #short #shortsviral",
       "Los misterios del Amazonas #amazonas #mitos #leyendas #curiosidades #shortsviral"
     ],
     "the human body": [
-      "DATO CURIOSO - LA NIÑA PERRO #shorts",
-      "¿Qué pasaría si tu CUERPO fuera de estos MATERIALES? 🧊🌋💀 #shorts",
-      "Algo se Aproxima a a Tierra #Shorts"
+      "DATO CURIOSO - LA NIÑA PERRO #shorts"
     ],
     "the ocean": [
       "Las profundidades del Oceano #shorts",
       "¿Tienes Talasofobia? 🤯😰 #shorts #talasofobia #fobias #short #mar #oceano",
-      "Las islas más peligrosas del mundo 🌎🤯 #curiosidades #shorts #estadosunidos"
+      "LOS GRANDES MISTERIOS DEL OCÉANO | #shorts"
     ],
     "evolution": [
       "DATO CURIOSO - LA NIÑA PERRO #shorts",
@@ -60,11 +63,15 @@
     ],
     "the animal kingdom": [
       "SHAKIRA se ASUSTÓ por una RATA 😱 #shakira #curiosidades #datoscuriosos",
-      "Así NACEN las PERLAS 🦪 #curiosidadN212 #las1000curiosidades #datoscuriosos",
-      "El DETALLE de hotel Transylvania que NO VISTE #mavis #datoscuriosos #curiosidades"
+      "El DETALLE de hotel Transylvania que NO VISTE #mavis #datoscuriosos #curiosidades",
+      "NO VAS A CREER lo que estos ANIMALES hicieron. #animales #datoscuriosos #naturaleza"
     ],
     "extreme weather": [
+      "The Scariest Natural Disasters Caught On Camera 🌪 #shorts",
       "Las Cataratas del Niágara se congelaron tras temperaturas extremas. #ClimaExtremo #Viral #Shorts"
+    ],
+    "natural wonders": [
+      "Maravillas del Río Amazonas: Naturaleza Exuberante y Vida Salvaje"
     ]
   },
   "top_outliers": [
@@ -93,6 +100,14 @@
       "ratio": 291.6
     },
     {
+      "topic": "natural wonders",
+      "title": "Maravillas del Río Amazonas: Naturaleza Exuberante y Vida Salvaje",
+      "video_id": "K5UgjcZPUEc",
+      "views": 848938,
+      "subs": 3050,
+      "ratio": 278.3
+    },
+    {
       "topic": "ancient history",
       "title": "¿Por qué falta la mitad del Coliseo romano? 😱",
       "video_id": "k18cQG9VuUw",
@@ -104,25 +119,25 @@
       "topic": "historical mysteries",
       "title": "✅ La verdadera historia de los tres cerditos 🐷💀 #short #shortsviral",
       "video_id": "QQ0sdApwJ0s",
-      "views": 4892992,
+      "views": 4937007,
       "subs": 19300,
-      "ratio": 253.5
+      "ratio": 255.8
     },
     {
       "topic": "volcanoes and earthquakes",
       "title": "EL TSUNAMI MÁS GRANDE DE LA HISTORIA",
       "video_id": "Tp_f3ZBfxcc",
-      "views": 1752476,
-      "subs": 7710,
-      "ratio": 227.3
+      "views": 1766382,
+      "subs": 7730,
+      "ratio": 228.5
     },
     {
-      "topic": "the human body",
+      "topic": "ancient history",
       "title": "DATO CURIOSO - LA NIÑA PERRO #shorts",
       "video_id": "9e82SusaU8c",
-      "views": 15544823,
+      "views": 15582773,
       "subs": 77000,
-      "ratio": 201.9
+      "ratio": 202.4
     },
     {
       "topic": "the human body",
@@ -139,31 +154,23 @@
       "views": 9538811,
       "subs": 51400,
       "ratio": 185.6
-    },
-    {
-      "topic": "the human body",
-      "title": "Algo se Aproxima a a Tierra #Shorts",
-      "video_id": "hOq7uz55_eo",
-      "views": 8573668,
-      "subs": 49200,
-      "ratio": 174.3
     }
   ],
   "saturation": {
-    "ancient history": 282604,
-    "archaeological discoveries": 78695,
-    "ancient civilizations": 111517,
-    "shipwrecks and lost treasures": 1718,
-    "historical mysteries": 189988,
-    "the human body": 301049,
-    "the animal kingdom": 412402,
-    "the ocean": 243873,
-    "evolution": 286699,
-    "volcanoes and earthquakes": 60010,
-    "extreme weather": 137700,
-    "natural wonders": 158918,
-    "space": 309478,
+    "ancient history": 265383,
+    "archaeological discoveries": 77996,
+    "ancient civilizations": 111070,
+    "shipwrecks and lost treasures": 1200,
+    "historical mysteries": 190187,
+    "the human body": 303830,
+    "the animal kingdom": 410944,
+    "the ocean": 243319,
+    "evolution": 285319,
+    "volcanoes and earthquakes": 60598,
+    "extreme weather": 131668,
+    "natural wonders": 158788,
+    "space": 307515,
     "future technology": 298101
   },
-  "updated": "2026-09-14"
+  "updated": "2026-09-21"
 }
