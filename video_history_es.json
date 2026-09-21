@@ -8288,5 +8288,64 @@
       "output_tokens": 384,
       "target_scenes": 6
     }
+  },
+  {
+    "video_id": "_dbEt89qaT4",
+    "published_at": "2026-09-21T13:27:23.776975+00:00",
+    "title": "¿El pez que se hace invisible cambiando su sangre? 🤯",
+    "topic": "the animal kingdom",
+    "hook_template": "sounds-fake",
+    "title_opener": "question",
+    "emotional_tone": "impossible",
+    "title_variant": "seo",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 33.8,
+    "voice": "es-MX-JorgeNeural",
+    "caption_color": "white",
+    "structure": "myth-debunk",
+    "pair_role": null,
+    "clip_selection": {
+      "filter_version": 3,
+      "retries": 0,
+      "retry_recovered": 0,
+      "unknown_usage_attempts": 0,
+      "retry_input_tokens": 0,
+      "retry_output_tokens": 0,
+      "retry_reasons": null,
+      "reused_selections": 0,
+      "extra_searches": 3,
+      "downloaded_scenes": 5,
+      "backup_scenes": 1,
+      "extra_input_tokens": 13158,
+      "extra_output_tokens": 192,
+      "initial_scenes": 3,
+      "source_errors": null,
+      "source_candidates": {
+        "pexels": 76,
+        "pixabay": 3,
+        "coverr": 0
+      },
+      "downloaded_sources": {
+        "pexels": 5
+      },
+      "stock_cache_hits": 0,
+      "beats": 8,
+      "vetted": 4,
+      "cache_hits": 0,
+      "no_preview": 0,
+      "api_error": 0,
+      "unparsed": 0,
+      "rejected": 4,
+      "bypass": false,
+      "vision_calls": 8,
+      "no_candidates": 0,
+      "search_error": 0,
+      "input_tokens": 36811,
+      "output_tokens": 465,
+      "target_scenes": 6
+    }
   }
 ]
