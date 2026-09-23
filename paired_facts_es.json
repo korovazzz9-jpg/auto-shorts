@@ -1,15 +1,5 @@
 [
   {
-    "id": "gznkECdqNo4-1783873361",
-    "topic": "ancient history",
-    "part_a_video_id": "gznkECdqNo4",
-    "part_a_title": "El mercado más grande del mundo era azteca",
-    "claim": "Tlatelolco tenía un sistema legal más complejo que Londres en 1519.",
-    "part_b_video_id": "foHlBGneHUw",
-    "status": "resolved",
-    "created_at": 1783873361.3127236
-  },
-  {
     "id": "Dv4i-wO5638-1783887722",
     "topic": "ancient civilizations",
     "part_a_video_id": "Dv4i-wO5638",
@@ -198,5 +188,15 @@
     "part_b_video_id": null,
     "status": "awaiting_b",
     "created_at": 1789950261.220966
+  },
+  {
+    "id": "bUUJKrloiBI-1790122994",
+    "topic": "ancient civilizations",
+    "part_a_video_id": "bUUJKrloiBI",
+    "part_a_title": "¿Los hititas firmaron el primer tratado de paz… con sus enemigos? 😱",
+    "claim": "La Batalla de Qadesh fue un empate que ambos bandos reclamaron como victoria.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1790122994.9920087
   }
 ]
