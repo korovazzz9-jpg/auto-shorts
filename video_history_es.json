@@ -9616,5 +9616,64 @@
       "output_tokens": 354,
       "target_scenes": 7
     }
+  },
+  {
+    "video_id": "bb0tXeg_44o",
+    "published_at": "2026-09-25T17:23:39.807906+00:00",
+    "title": "El calamar vampiro que respira sin oxígeno en las profundidades 🤯",
+    "topic": "the animal kingdom",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 32.3,
+    "voice": "es-MX-JorgeNeural",
+    "caption_color": "white",
+    "structure": "historical-story",
+    "pair_role": null,
+    "clip_selection": {
+      "filter_version": 3,
+      "retries": 0,
+      "retry_recovered": 0,
+      "unknown_usage_attempts": 0,
+      "retry_input_tokens": 0,
+      "retry_output_tokens": 0,
+      "retry_reasons": null,
+      "reused_selections": 0,
+      "extra_searches": 1,
+      "downloaded_scenes": 6,
+      "backup_scenes": 0,
+      "extra_input_tokens": 4382,
+      "extra_output_tokens": 64,
+      "initial_scenes": 4,
+      "source_errors": null,
+      "source_candidates": {
+        "pexels": 68,
+        "pixabay": 10,
+        "coverr": 0
+      },
+      "downloaded_sources": {
+        "pexels": 6
+      },
+      "stock_cache_hits": 0,
+      "beats": 7,
+      "vetted": 5,
+      "cache_hits": 0,
+      "no_preview": 0,
+      "api_error": 0,
+      "unparsed": 0,
+      "rejected": 2,
+      "bypass": false,
+      "vision_calls": 7,
+      "no_candidates": 0,
+      "search_error": 0,
+      "input_tokens": 34117,
+      "output_tokens": 393,
+      "target_scenes": 6
+    }
   }
 ]
