@@ -187,7 +187,9 @@ push при сохранении состояния (`scripts/git_persist.sh`, �
 типам завязок в `stats/baby/weekly.md` по понедельникам), поток `track-baby.yml`. **Выключен, пока
 нет секрета `YT_TOKEN_BABY`**: поток выходит зелёным с «канал не подключён». Подключить:
 `py src/get_youtube_token.py baby`, пошагово — `docs/SETUP_BABY.md`. Ролик с завязкой связывает
-тег `s-<name>` (или строка в `stats/baby/mapping.csv`).
+тег `s-<name>` (или строка в `stats/baby/mapping.csv`). Выкладка — `src/publish_baby.py`: один ролик или пачка
+`--plan FROM-TO --start ГГГГ-ММ-ДД` по расписанию. Выложенное пишется в `stats/baby/published.csv`, повторно не уходит.
+Команды — в `docs/SETUP_BABY.md`, раздел «Выкладка».
 
 ---
 
