@@ -208,16 +208,9 @@ def main() -> None:
         _add_drop_offs(analytics_client, videos)
     except Exception as e:
         print(f"  drop-off анализ пропущен: {e}")
-    try:
-        spike_die = find_spike_and_die(analytics_client, videos)
-    except Exception as e:
-        print(f"  spike-and-die анализ пропущен: {e}")
-        spike_die = []
-    from episode_recovery import reliability_report
-    notify(build_report(videos, spike_die))
-    recovery_summary = reliability_report(CHANNEL)
-    if recovery_summary:
-        notify(recovery_summary)
+    report = build_report(videos)
+    if report:
+        notify(report)
     save_hook_stats(videos)
     save_dropoff_stats(videos)
     save_tone_stats(videos)

@@ -3,6 +3,7 @@ import ast
 from datetime import date, timedelta
 from pathlib import Path
 import unittest
+from unittest.mock import Mock
 
 
 source = (Path(__file__).resolve().parents[1] / "src" / "weekly_report.py").read_text(encoding="utf-8")
@@ -38,6 +39,32 @@ class WeeklyReportTests(unittest.TestCase):
         self.assertNotIn("Тема для следующего теста", report)
         report = build_report([self.video(1), self.video(2), self.video(3)])
         self.assertIn("ocean", report)
+
+    def test_main_sends_one_report_and_saves_feedback(self):
+        main_node = next(node for node in ast.parse(source).body
+                         if isinstance(node, ast.FunctionDef) and node.name == "main")
+        main_module = ast.Module(body=[main_node], type_ignores=[])
+        video = self.video(1)
+        send = Mock()
+        save_hook = Mock()
+        save_dropoff = Mock()
+        save_tone = Mock()
+        local = {"_videos_with_retention": lambda: [video],
+                 "get_analytics_client": Mock(),
+                 "_add_drop_offs": Mock(),
+                 "build_report": build_report,
+                 "notify": send,
+                 "save_hook_stats": save_hook,
+                 "save_dropoff_stats": save_dropoff,
+                 "save_tone_stats": save_tone,
+                 "enrich_with_performance": Mock(return_value=1),
+                 "CHANNEL": "es", "print": Mock()}
+        exec(compile(ast.fix_missing_locations(main_module), "<weekly_main>", "exec"), local)
+        local["main"]()
+        send.assert_called_once()
+        save_hook.assert_called_once_with([video])
+        save_dropoff.assert_called_once_with([video])
+        save_tone.assert_called_once_with([video])
 
     def test_weak_video_and_message_fit(self):
         videos = [self.video(i, views=100 + i, pct=80) for i in range(40)]
