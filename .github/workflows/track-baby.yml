@@ -1,0 +1,86 @@
+name: Track Baby Channel Stats
+
+# Статистика канала «малышка и щенок» (2026-09-29): раз в день снимок по всем роликам
+# (stats/baby/daily.csv + videos.csv), по понедельникам — сводка по типам завязок
+# (stats/baby/weekly.md). Не тратит Claude, только YouTube Data/Analytics API — опоздание
+# GitHub-крона здесь не страшно, поэтому штатный cron, а не cron-job.org.
+# Пока секрета YT_TOKEN_BABY нет, поток выходит успешно с «канал не подключён».
+# Подключение — docs/SETUP_BABY.md. Перезапуск упавшего — `gh workflow run track-baby.yml`,
+# не `gh run rerun` (тот берёт устаревший SHA, см. CLAUDE.md); сохранение — scripts/git_persist.sh
+# (pull --rebase + push с повтором), concurrency не даёт двум прогонам писать одновременно.
+on:
+  schedule:
+    - cron: "41 7 * * *"   # вне слотов ES (13:17/17:17/20:17/22:17/00:17) — меньше гонок за push
+  workflow_dispatch:
+    inputs:
+      report:
+        description: "Пересобрать и weekly.md"
+        type: boolean
+        default: false
+
+concurrency:
+  group: track-baby
+  cancel-in-progress: false
+
+permissions:
+  contents: write   # коммитит stats/baby/*.csv и weekly.md обратно
+
+jobs:
+  track:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check channel is connected
+        id: gate
+        env:
+          YT_TOKEN_BABY: ${{ secrets.YT_TOKEN_BABY }}
+        run: |
+          if [ -z "${YT_TOKEN_BABY:-}" ]; then
+            echo "канал не подключён: секрета YT_TOKEN_BABY нет — трекер выключен (docs/SETUP_BABY.md)."
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "enabled=true" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/checkout@v4
+        if: steps.gate.outputs.enabled == 'true'
+        with:
+          ref: master
+
+      - uses: actions/setup-python@v5
+        if: steps.gate.outputs.enabled == 'true'
+        with:
+          python-version: "3.11"
+
+      - name: Install Python deps
+        if: steps.gate.outputs.enabled == 'true'
+        run: pip install -r requirements.txt
+
+      - name: Daily snapshot
+        if: steps.gate.outputs.enabled == 'true'
+        working-directory: src
+        env:
+          YT_TOKEN_BABY: ${{ secrets.YT_TOKEN_BABY }}
+          # Свой OAuth-клиент канала (лимит Google — 50 живых токенов на client_id+аккаунт).
+          # Секрет не заведён => youtube_auth._client_pair() берёт общие YT_CLIENT_ID/SECRET.
+          YT_CLIENT_ID_BABY: ${{ secrets.YT_CLIENT_ID_BABY }}
+          YT_CLIENT_SECRET_BABY: ${{ secrets.YT_CLIENT_SECRET_BABY }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+        run: python track_baby.py
+
+      - name: Weekly summary
+        if: steps.gate.outputs.enabled == 'true' && (inputs.report || github.event_name == 'schedule')
+        working-directory: src
+        run: |
+          # По расписанию — только по понедельникам (UTC); вручную — по галочке report.
+          if [ "${{ github.event_name }}" = "schedule" ] && [ "$(date -u +%u)" != "1" ]; then
+            echo "не понедельник — сводку не пересобираю"
+            exit 0
+          fi
+          python track_baby_report.py
+
+      - name: Persist stats
+        if: always() && steps.gate.outputs.enabled == 'true'
+        run: |
+          bash scripts/git_persist.sh "chore(stats): baby channel snapshot $(date -u +%F)" \
+            stats/baby/daily.csv stats/baby/videos.csv stats/baby/mapping.csv stats/baby/weekly.md

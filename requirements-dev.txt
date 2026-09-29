@@ -1,0 +1,5 @@
+# Офлайн-тесты: pip install -r requirements-dev.txt && python -m pytest tests
+# httpx нужен tests/test_episode_recovery.py (новый anthropic тянет httpx2, а не httpx).
+-r requirements.txt
+pytest
+httpx

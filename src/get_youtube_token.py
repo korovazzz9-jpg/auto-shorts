@@ -3,6 +3,8 @@
   python src/get_youtube_token.py       — для EN канала (YT_REFRESH_TOKEN)
   python src/get_youtube_token.py es    — для ES канала (YT_REFRESH_TOKEN_ES)
   python src/get_youtube_token.py pt    — для PT канала (YT_REFRESH_TOKEN_PT)
+  python src/get_youtube_token.py baby  — для канала «малышка и щенок» (YT_TOKEN_BABY, трекер
+                                          статистики track_baby.py, см. docs/SETUP_BABY.md)
 Понадобится client_secret.json, скачанный из Google Cloud Console
 (OAuth client ID, тип "Desktop app", API: YouTube Data API v3).
 """
@@ -53,6 +55,10 @@ def main() -> None:
     # стандартное YT_REFRESH_TOKEN внутри workflow'а канала). 2026-07-09: обобщено с es-only
     # на любой код канала (нужно под pt/vi/будущие).
     env_key = "YT_REFRESH_TOKEN" if channel == "en" else f"YT_REFRESH_TOKEN_{channel.upper()}"
+    if channel == "baby":
+        # 2026-09-29: у канала baby нет daily-потока и маппинга в YT_REFRESH_TOKEN — трекер
+        # (track-baby.yml) читает секрет YT_TOKEN_BABY напрямую.
+        env_key = "YT_TOKEN_BABY"
 
     secret_path = _client_secret_path(channel)
     per_channel = os.path.basename(secret_path) != "client_secret.json"

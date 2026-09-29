@@ -6,7 +6,8 @@ from pathlib import Path
 
 
 class EpisodeRecovery:
-    def __init__(self, channel, root=None, slots=()):
+    def __init__(self, channel, root=None, slots=(), reconcile=None):
+        self.reconcile = reconcile
         self.path = Path(root or Path(__file__).resolve().parents[1]) / f"recovery_{channel}.json"
         self.state = json.loads(self.path.read_text(encoding="utf-8")) if self.path.exists() else {"pending": None, "attempts": []}
         self.started = datetime.now(timezone.utc).isoformat()
@@ -23,9 +24,11 @@ class EpisodeRecovery:
         tmp.replace(self.path)
 
     def pending(self):
+        """self.reconcile(title, since_iso) -> video_id | None — сверка с каналом для эпизода,
+        застрявшего в «publishing» (см. _reconcile). Без неё поведение прежнее: остановка."""
         item = self.state.get("pending")
         if item and item.get("status") == "publishing":
-            raise RuntimeError("Previous YouTube upload has unknown outcome; reconcile before retry to avoid duplicate.")
+            item = self._reconcile(item, self.reconcile)
         if item and item.get("status") == "published":
             self.state["pending"] = None
             self.save()
@@ -41,7 +44,38 @@ class EpisodeRecovery:
 
     def publishing(self):
         self.state["pending"]["status"] = "publishing"
+        self.state["pending"]["publishing_at"] = datetime.now(timezone.utc).isoformat()
         self.save()
+
+    # Раньше этого срока отсутствие ролика в списке загрузок ещё не доказательство: YouTube может
+    # не успеть показать его в uploads-плейлисте. Сторож приходит через 15+ мин после слота.
+    RECONCILE_GRACE_MINUTES = 20
+
+    def _reconcile(self, item, reconcile):
+        """2026-09-29, аудит: статус «publishing» остаётся, если загрузка упала с неизвестным
+        исходом (обрыв сети посреди videos.insert). Раньше такой эпизод останавливал ВСЕ
+        следующие прогоны канала до ручной сверки — тот же класс остановки, что дедлок 12.09.
+        Теперь сверяемся с каналом: ролик с этим заголовком уже вышел — эпизод закрыт как
+        опубликованный; не вышел и прошло больше RECONCILE_GRACE_MINUTES — возвращаем эпизод в
+        «prepared» и публикуем заново (сценарий и одобренные клипы сохранены). Ошибка сверки
+        или слишком свежий статус — прежняя остановка, дубль хуже пропуска."""
+        unknown = "Previous YouTube upload has unknown outcome; reconcile before retry to avoid duplicate."
+        if reconcile is None:
+            raise RuntimeError(unknown)
+        since = item.get("publishing_at") or item.get("created") or self.started
+        video_id = reconcile(item.get("data", {}).get("title", ""), since)
+        if video_id:
+            print(f"  Сверка: эпизод уже опубликован ({video_id}) — закрываю без повторной загрузки.")
+            item.update(status="published", video_id=video_id, reconciled="found")
+            self.save()
+            return item
+        age = datetime.now(timezone.utc) - datetime.fromisoformat(since)
+        if age < timedelta(minutes=self.RECONCILE_GRACE_MINUTES):
+            raise RuntimeError(unknown + f" (загрузка начата {int(age.total_seconds() // 60)} мин назад — рано судить)")
+        print("  Сверка: ролика на канале нет — эпизод возвращён к публикации.")
+        item.update(status="prepared", reconciled="absent")
+        self.save()
+        return item
 
     def uploaded(self, video_id):
         self.state["pending"].update(status="published", video_id=video_id)
