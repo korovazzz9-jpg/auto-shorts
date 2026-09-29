@@ -6,11 +6,11 @@ _recent_videos/_retention из analytics_retention.py). Запуск:
 """
 import json
 import os
-from datetime import date
+from datetime import date, timedelta
 
 from dotenv import load_dotenv
 
-from analytics_retention import _recent_videos, _retention, _retention_curve, biggest_drop, retention_threshold
+from analytics_retention import _recent_videos, _retention, _retention_curve, biggest_drop
 from config import CFG, CHANNEL
 from notify import notify
 from video_history import enrich_with_performance
@@ -59,58 +59,6 @@ DROP_OFF_SAMPLE = 10  # худших видео недели (2026-07-08: 5->10 
 # отдаёт данные на видео от ~500 просмотров, не только на единичных случаях, есть смысл смотреть шире)
 DROPOFF_STATS_FILE = os.path.join(os.path.dirname(__file__), "..", f"dropoff_stats_{CHANNEL}.json")
 MIN_DROPOFF_SAMPLE = 3  # меньше видео с кривыми — сигнал шумный, файл не пишем
-
-
-SPIKE_DIE_MIN_AGE_DAYS = 6    # младше — рано, day1 ещё не «устоялся»
-SPIKE_DIE_MAX_AGE_DAYS = 10   # старше — не «эта неделя», не показываем повторно
-SPIKE_DIE_SAMPLE = 5          # доп. Analytics-запросы (тот же паттерн, что DROP_OFF_SAMPLE)
-SPIKE_DIE_MIN_DAY1_VIEWS = 100  # отсекаем шум — 3 просмотра в день 1 из 4 не «взлёт»
-SPIKE_DIE_DAY1_SHARE = 0.6    # день 1 даёт ≥60% ВСЕХ просмотров когорты — явный «взлёт и тишина»
-
-
-def _daily_views_curve(analytics, video_id: str, start: str, end: str) -> list[tuple[str, int]]:
-    """День → просмотры для ОДНОГО видео. Тот же принцип, что `_retention_curve` — эндпоинт
-    Analytics не батчится по video==, тянем точечно (см. SPIKE_DIE_SAMPLE)."""
-    try:
-        resp = analytics.reports().query(
-            ids="channel==MINE", startDate=start, endDate=end,
-            metrics="views", dimensions="day", filters=f"video=={video_id}", sort="day",
-        ).execute()
-    except Exception:
-        return []
-    return [(r[0], int(r[1])) for r in resp.get("rows", []) or []]
-
-
-def _age_days(v: dict) -> int:
-    from datetime import datetime
-    published = datetime.fromisoformat(v["published"])
-    return (datetime.now() - published).days
-
-
-def find_spike_and_die(analytics, videos: list[dict]) -> list[dict]:
-    """«Почти вирусные» (2026-07-08): не топ по абсолютным просмотрам и не худшие по retention —
-    отдельная категория: видео резко выросло в день 1 (алгоритм реально протолкнул), а потом
-    рост почти остановился. Отличается от «просто слабого» видео (то никогда и не росло) —
-    здесь явно виден момент, когда алгоритм «разочаровался» (обычно: слабый payoff/середина/
-    длина). Когорта — видео 6-10 дней от роду (данные уже устоялись, но это ещё «эта неделя»),
-    сэмпл ограничен (не батчится, как `_retention_curve`/`_add_drop_offs`)."""
-    cohort = [v for v in videos if SPIKE_DIE_MIN_AGE_DAYS <= _age_days(v) <= SPIKE_DIE_MAX_AGE_DAYS]
-    cohort.sort(key=lambda v: -v.get("views", 0))
-
-    results = []
-    for v in cohort[:SPIKE_DIE_SAMPLE]:
-        curve = _daily_views_curve(analytics, v["id"], v["published"], date.today().isoformat())
-        if len(curve) < 3:
-            continue
-        day1 = curve[0][1]
-        total = sum(c[1] for c in curve)
-        if day1 < SPIKE_DIE_MIN_DAY1_VIEWS or total <= 0:
-            continue
-        day1_share = day1 / total
-        if day1_share >= SPIKE_DIE_DAY1_SHARE:
-            results.append({"title": v["title"], "id": v["id"], "day1": day1,
-                             "total": total, "day1_share": round(day1_share, 2)})
-    return results
 
 
 def _add_drop_offs(analytics, videos: list[dict]) -> None:
@@ -203,234 +151,52 @@ def save_dropoff_stats(videos: list[dict]) -> None:
     print(f"  dropoff_stats: zone={zone} (взвеш. медиана {median:.0%} длины, n={len(weighted)})")
 
 
-def build_report(videos: list[dict], spike_die: list[dict] | None = None) -> str:
-    if not videos:
-        return f"📊 [{CFG['channel_name']}] Нет видео для отчёта."
+def build_report(videos: list[dict]) -> str:
+    """Короткий Telegram-отчёт только по выпускам последних 7 дней.
 
-    lines = [f"📊 Retention-сводка за неделю: {CFG['channel_name']}"]
+    Срез последних 50 загрузок нужен для обучающих JSON, но в сообщении он
+    не должен называться «неделей». Значения retention на момент отчёта.
+    """
+    cutoff = (date.today() - timedelta(days=7)).isoformat()
+    recent = [v for v in videos if v.get("published", "") >= cutoff]
+    if not recent:
+        return ""
 
-    hooks = _avg_by(videos, "hook")
-    if hooks:
-        lines.append("\nХук-шаблоны:")
-        for name, avg, n in hooks[:5]:
-            lines.append(f"  {avg:5.1f}%  ({n:2})  {name}")
+    measured = [v for v in recent if v.get("pct", 0) > 0 and v.get("views", 0) > 0]
+    lines = [f"📊 {CFG['channel_name']} · выпуски за 7 дней", "Просмотры — с публикации роликов."]
+    if not measured:
+        return "\n".join(lines + [f"Новых видео: {len(recent)}. Данные YouTube Analytics ещё не появились."])
 
-    loops = _avg_by(videos, "loop")
-    loops = [(k, a, n) for k, a, n in loops if k in ("yes", "no")]
-    if loops:
-        lines.append("\nПетля:")
-        for name, avg, n in loops:
-            label = "с петлёй" if name == "yes" else "без петли"
-            lines.append(f"  {avg:5.1f}%  ({n:2})  {label}")
+    views = sum(v["views"] for v in measured)
+    avg_pct = sum(v["pct"] for v in measured) / len(measured)
+    lines.append(f"{len(recent)} видео · {len(measured)} с данными · {views:,} просмотров · досмотр {avg_pct:.0f}%")
+    if len(measured) < len(recent):
+        lines.append(f"Без данных пока: {len(recent) - len(measured)}.")
 
-    # A/B заголовков (2026-07-02): keyword-насыщенный (seo) vs чисто нарративный. См.
-    # generate_script.TITLE_SEO_PROBABILITY — 30% видео идут с seo-вариантом.
-    titles = _avg_by(videos, "title_variant")
-    titles = [(k, a, n) for k, a, n in titles if k in ("seo", "narrative")]
-    if titles:
-        lines.append("\nЗаголовок (A/B):")
-        for name, avg, n in titles:
-            lines.append(f"  {avg:5.1f}%  ({n:2})  {name}")
+    lines.append("\nЛучшие по просмотрам:")
+    for v in sorted(measured, key=lambda v: -v["views"])[:2]:
+        lines.append(f"• {v['title'][:65]} — {v['views']:,} просмотров, досмотр {v['pct']:.0f}%\n  https://youtube.com/shorts/{v['id']}")
 
-    # Ротация опенеров заголовка (2026-07-03): было 84% "The"/"Your"/"This" на EN-канале —
-    # см. TITLE_OPENERS в generate_script.py. "—" (нет тега, старые видео) исключён.
-    openers = [(k, a, n) for k, a, n in _avg_by(videos, "title_opener") if k not in ("—", "other")]
-    if openers:
-        lines.append("\nОпенер заголовка:")
-        for name, avg, n in openers[:6]:
-            lines.append(f"  {avg:5.1f}%  ({n:2})  {name}")
+    # Не делаем вывод по ролику, который Analytics почти не показывал.
+    eligible = [v for v in measured if v["views"] >= 100]
+    if eligible:
+        weakest = min(eligible, key=lambda v: v["pct"])
+        drop = weakest.get("drop")
+        detail = f"; резкий спад ~{drop['second']}-я сек." if drop else ""
+        lines.append(f"\nПроверить монтаж: {weakest['title'][:65]} — досмотр {weakest['pct']:.0f}%{detail}\n"
+                     f"https://youtube.com/shorts/{weakest['id']}")
 
-    # Эмоциональный тон факта (2026-07-03) — независимая от темы ось (EMOTIONAL_TONES).
-    tones = [(k, a, n) for k, a, n in _avg_by(videos, "emotional_tone") if k not in ("—", "other")]
-    if tones:
-        lines.append("\nЭмоциональный тон:")
-        for name, avg, n in tones[:6]:
-            lines.append(f"  {avg:5.1f}%  ({n:2})  {name}")
-
-    # Тип структуры скрипта (2026-07-13, ротация против «mass-produced»-паттерна — см.
-    # STRUCTURES в generate_script.py): какой формат лучше удерживает на ЭТОМ канале.
-    formats = [(k, a, n) for k, a, n in _avg_by(videos, "structure") if k != "—"]
-    if formats:
-        lines.append("\nТип структуры:")
-        for name, avg, n in formats:
-            lines.append(f"  {avg:5.1f}%  ({n:2})  {name}")
-
-    # Стиль заголовка: вопрос vs утверждение (2026-07-17, CurioShock outlier-анализ показал
-    # утверждения сильнее вопросов в разы на похожем контенте — проверяем на своей аудитории).
-    title_styles = [(k, a, n) for k, a, n in _avg_by(videos, "title_style") if k != "—"]
-    if title_styles:
-        lines.append("\nСтиль заголовка:")
-        for name, avg, n in title_styles:
-            lines.append(f"  {avg:5.1f}%  ({n:2})  {name}")
-
-    # Сила неожиданности действия в заголовке (2026-07-18, CurioShock-инсайт: топы всегда
-    # берут самое шоковое/конкретное действие, не мягкую формулировку) — self-report модели.
-    title_intensities = [(k, a, n) for k, a, n in _avg_by(videos, "title_intensity") if k != "—"]
-    if title_intensities:
-        lines.append("\nСила заголовка:")
-        for name, avg, n in title_intensities:
-            lines.append(f"  {avg:5.1f}%  ({n:2})  {name}")
-
-    # Тип CTA-фразы → КОНВЕРСИЯ В ПОДПИСКУ (2026-07-18): сравниваем schedule («4 факта в
-    # день») / topic («more OCEAN facts») / pair (тизер продолжения) / generic. Метрика —
-    # подписки на 1000 просмотров, СУММАРНО по группе (среднее отношений на малых числах —
-    # чистый шум: у ролика 0-2 подписки). Видео без просмотров исключены (лаг Analytics).
-    def _conv_section(key: str, header: str) -> None:
-        groups: dict[str, list[dict]] = {}
-        for v in videos:
-            if v.get("views", 0) > 0 and v.get(key, "—") != "—":
-                groups.setdefault(v[key], []).append(v)
-        if not groups:
-            return
-        lines.append(f"\n{header}")
-        rows = []
-        for kind, vs in groups.items():
-            views = sum(v["views"] for v in vs)
-            subs = sum(v.get("subs", 0) for v in vs)
-            rows.append((subs / views * 1000 if views else 0.0, subs, views, len(vs), kind))
-        for conv, subs, views, n, kind in sorted(rows, reverse=True):
-            lines.append(f"  {conv:5.2f}  ({subs:2} подп / {views:5} просм, {n:2} видео)  {kind}")
-
-    _conv_section("cta_kind", "CTA → подписки/1000 просм:")
-
-    # Микро-CTA в середине (2026-07-18): цель — подписки, риск — retention. Смотрим ОБЕ
-    # метрики: конверсию здесь и досмотр отдельной секцией ниже.
-    _conv_section("mid_cta", "Микро-CTA (середина) → подписки/1000 просм:")
-    mid_ret = [(k, a, n) for k, a, n in _avg_by(videos, "mid_cta") if k != "—"]
-    if mid_ret:
-        lines.append("Микро-CTA → досмотр:")
-        for name, avg, n in mid_ret:
-            lines.append(f"  {avg:5.1f}%  ({n:2})  {name}")
-
-    # Раскраска хук-плашки (2026-07-18, Noxterra-стиль: жёлтый→белый→красный vs белый).
-    hook_styles = [(k, a, n) for k, a, n in _avg_by(videos, "hook_style") if k != "—"]
-    if hook_styles:
-        lines.append("\nХук-плашка:")
-        for name, avg, n in hook_styles:
-            lines.append(f"  {avg:5.1f}%  ({n:2})  {name}")
-
-    # Цвет субтитров (2026-07-10, см. CAPTION_COLORS в build_video.py) — независимая от
-    # контента ось оформления, ротируется случайно ради вариативности между видео.
-    colors = [(k, a, n) for k, a, n in _avg_by(videos, "caption_color") if k != "—"]
-    if colors:
-        lines.append("\nЦвет субтитров:")
-        for name, avg, n in colors:
-            lines.append(f"  {avg:5.1f}%  ({n:2})  {name}")
-
-    # TTS-голос (2026-07-10, см. voices в config.py) — ротируется случайно между видео.
-    voices = [(k, a, n) for k, a, n in _avg_by(videos, "voice") if k != "—"]
-    if voices:
-        lines.append("\nГолос озвучки:")
-        for name, avg, n in voices:
-            lines.append(f"  {avg:5.1f}%  ({n:2})  {name}")
-
-    # Пары (2026-07-10): часть A с этой даты несёт подписной тизер (pair_cta_phrases в
-    # config) — меряем, что он реально даёт: retention + сколько подписок принесли pair-a
-    # видео против остальных. ⚠️ pair-a-видео, вышедшие ДО 2026-07-10, тизера не имели —
-    # первые пару недель сравнение смешанное, честным станет по мере обновления выборки.
-    pair_groups = (("часть A (тизер)", [v for v in videos if v.get("pair") == "a"]),
-                   ("часть B", [v for v in videos if v.get("pair") == "b"]),
-                   ("без пары", [v for v in videos if v.get("pair") == "no"]))
-    if any(g for label, g in pair_groups[:2]):
-        lines.append("\nПары (подписной тизер на A):")
-        for label, group in pair_groups:
-            if not group:
-                continue
-            with_pct = [v["pct"] for v in group if v.get("pct", 0) > 0]
-            avg_pct = sum(with_pct) / len(with_pct) if with_pct else 0.0
-            subs = sum(v.get("subs", 0) for v in group)
-            lines.append(f"  {avg_pct:5.1f}%  ({len(group):2})  {label} — подписок: +{subs}")
-
-    # Стилевая калибровка по нише (2026-07-05): видео, чей промпт получал заголовки чужих
-    # выбросов (тег niche-styled), против остальных.
-    niche = [(k, a, n) for k, a, n in _avg_by(videos, "niche") if k in ("styled", "plain")]
-    if len(niche) == 2:
-        lines.append("\nНиша-калибровка (styled vs plain):")
-        for name, avg, n in niche:
-            lines.append(f"  {avg:5.1f}%  ({n:2})  {name}")
-
-    # Пересозданные топ-выбросы ниши (2026-08-21, recreate_outlier.py, юзер попросил
-    # отслеживать): тег niche-recreation — свой скрипт по мотивам чужого хита. Сравниваем и
-    # retention, и просмотры (не только % — там уже был один явный выброс 1901 против
-    # среднего ~884, вопрос переносится ли на бОльшую выборку).
-    recreated_groups = (("пересозданные", [v for v in videos if v.get("niche_recreated") == "yes"]),
-                         ("остальной канал", [v for v in videos if v.get("niche_recreated") != "yes"]))
-    if recreated_groups[0][1]:
-        lines.append("\nПересозданные чужие выбросы (niche-recreation):")
-        for label, group in recreated_groups:
-            with_pct = [v["pct"] for v in group if v.get("pct", 0) > 0]
-            with_views = [v["views"] for v in group if v.get("views", 0) > 0]
-            avg_pct = sum(with_pct) / len(with_pct) if with_pct else 0.0
-            avg_views = sum(with_views) / len(with_views) if with_views else 0
-            lines.append(f"  {avg_pct:5.1f}%  {avg_views:5.0f} views  ({len(group):2})  {label}")
-
-    # «On this day» (2026-07-05): топикал-факты с привязкой к дате против обычных.
-    topical = [(k, a, n) for k, a, n in _avg_by(videos, "topical") if k in ("yes", "no")]
-    if any(k == "yes" for k, _, _ in topical):
-        lines.append("\n«On this day» (топикал vs обычные):")
-        for name, avg, n in topical:
-            label = "топикал" if name == "yes" else "обычные"
-            lines.append(f"  {avg:5.1f}%  ({n:2})  {label}")
-
-    # Пороги retention (2026-07-02, retention_threshold): explore-and-exploit тест YouTube —
-    # ниже порога (65% для <30с, 50% для 30-60с) раздача резко сокращается. Не абстрактное
-    # "выше/ниже среднего", а конкретный порог из индустриальных 2026-данных.
-    threshold_videos = [v for v in videos if v.get("pct", 0) > 0 and v.get("length")]
-    if threshold_videos:
-        passed = [v for v in threshold_videos if v["pct"] >= retention_threshold(v["length"])]
-        lines.append(f"\nПорог retention: {len(passed)}/{len(threshold_videos)} видео прошли "
-                      f"(65% для <30с, 50% для 30-60с)")
-        failed = sorted((v for v in threshold_videos if v not in passed), key=lambda v: v["pct"])
-        for v in failed[:3]:
-            lines.append(f"  ниже порога: «{v['title'][:40]}» — {v['pct']:.1f}% "
-                          f"(нужно {retention_threshold(v['length']):.0f}%)")
-
-    topics = _avg_by(videos, "topic")
-    if topics:
-        lines.append("\nТоп-3 темы:")
-        for name, avg, n in topics[:3]:
-            lines.append(f"  {avg:5.1f}%  ({n:2})  {name}")
-
-    # Слот-анализ: средние просмотры по часу публикации (UTC) — так был найден слабый
-    # слот 13:07 EN. Свежие видео с нулём просмотров (лаг Analytics) не учитываем.
-    slot_videos = [v for v in videos if v.get("views", 0) > 0 and v.get("published_full")]
-    if slot_videos:
-        by_slot: dict[str, list[int]] = {}
-        for v in slot_videos:
-            hour = v["published_full"][11:13]  # "2026-07-01T16:13:08Z" -> "16"
-            by_slot.setdefault(f"{hour}:xx UTC", []).append(v["views"])
-        lines.append("\nСлоты (ср. просмотры):")
-        for slot, views in sorted(by_slot.items(), key=lambda kv: -sum(kv[1]) / len(kv[1])):
-            lines.append(f"  {sum(views) / len(views):7.0f}  ({len(views):2})  {slot}")
-
-    by_views = [v for v in videos if v.get("views", 0) > 0]
-    if by_views:
-        top3 = sorted(by_views, key=lambda v: -v["views"])[:3]
-        lines.append("\n🧪 Топ недели — 2 ручных шага в Studio (5 мин):")
-        for v in top3:
-            lines.append(f"  {v['views']:6} — {v['title']}\n  https://youtube.com/shorts/{v['id']}")
-        lines.append(
-            "1) Test & Compare (заголовок/тумба)\n"
-            "2) Related video → укажи свежий лонгформ (официальная воронка Shorts→длинное, "
-            "сильнее ссылки в описании; API её не даёт)"
-        )
-
-    # Retention-кривая (не только % досмотра, а В КАКОЙ МОМЕНТ отваливаются) — для худших
-    # видео недели. Показывает не «эта тема слабая», а «на 6-й секунде теряем зрителя».
-    drops = [v for v in videos if v.get("drop")]
-    if drops:
-        lines.append("\n📉 Где теряем зрителя (худшие видео недели):")
-        for v in drops:
-            d = v["drop"]
-            lines.append(f"  «{v['title'][:40]}» — обрыв ~{d['second']}s (−{d['drop_pct']} п.п.)")
-
-    # «Почти вирусные» (2026-07-08, find_spike_and_die) — не топ, не худшие: видео резко
-    # выросло в день 1, потом почти остановилось. Момент, где алгоритм «разочаровался».
-    if spike_die:
-        lines.append("\n🚀📉 Взлетели и затихли (не топ, не худшие — отдельная категория):")
-        for v in spike_die:
-            lines.append(f"  «{v['title'][:40]}» — день 1: {v['day1']} из {v['total']} всего "
-                          f"({v['day1_share']:.0%} просмотров пришлось на первый день)")
+    # Малые группы и отдельные выбросы не выдаём за устойчивые тенденции.
+    topics: dict[str, list[int]] = {}
+    for v in measured:
+        if v.get("topic") not in (None, "—"):
+            topics.setdefault(v["topic"], []).append(v["views"])
+    comparable = [(name, sum(counts) / len(counts), len(counts))
+                  for name, counts in topics.items() if len(counts) >= 3]
+    if comparable:
+        best = max(comparable, key=lambda row: row[1])
+        lines.append(f"\nТема для следующего теста: {best[0]} — в среднем {best[1]:.0f} просмотров "
+                     f"({best[2]} видео).")
 
     return "\n".join(lines)
 

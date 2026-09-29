@@ -31,7 +31,6 @@ jobs:
       - name: Install Python deps
         run: pip install -r requirements.txt
 
-      # TELEGRAM_* — для конкурентного дайджеста (топ-5 выбросов недели в Telegram).
       # 2026-08-21: EN на паузе — отключено (см. prepare-batch.yml для контекста решения).
       - name: Discover EN niche outliers
         if: false

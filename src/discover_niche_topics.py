@@ -111,7 +111,7 @@ def _fetch_stats(youtube, video_ids: list[str], channel_ids: list[str]) -> tuple
 def discover() -> tuple[dict[str, int], dict[str, list[str]], list[dict], dict[str, int]]:
     """Возвращает ({topic: outlier_count}, {topic: [заголовки]}, [все выбросы с метриками],
     {topic: total_results}). Заголовки (до 3 на тему) — для стилевой калибровки промпта;
-    полный список выбросов — для Telegram-дайджеста и outlier-recreation; total_results —
+    полный список выбросов — для outlier-recreation; total_results —
     насыщенность темы (сигнал ПРЕДЛОЖЕНИЯ, см. _search_topic), используется в _pick_topic()
     как противовес чистому спросу — тема с выбросами, но и с гигантской конкуренцией, менее
     ценна, чем такая же тема с меньшим количеством видео вообще."""
@@ -155,24 +155,6 @@ def discover() -> tuple[dict[str, int], dict[str, list[str]], list[dict], dict[s
     return outlier_counts, outlier_titles, all_outliers, saturation
 
 
-def _send_digest(outliers: list[dict]) -> None:
-    """Конкурентный дайджест (2026-07-05): топ-5 чужих выбросов недели в Telegram — тренды
-    ниши глазами, можно вручную скорректировать направление. Сбой не роняет прогон."""
-    if not outliers:
-        return
-    try:
-        from notify import notify
-        lines = [f"🔎 [{CFG['channel_name']}] Топ выбросов ниши за неделю:"]
-        for o in outliers[:5]:
-            lines.append(
-                f"\n{o['ratio']}× — {o['views']:,} views / {o['subs']:,} subs [{o['topic']}]\n"
-                f"«{o['title']}»\nhttps://youtube.com/shorts/{o['video_id']}"
-            )
-        notify("\n".join(lines))
-    except Exception as e:
-        print(f"  digest не отправлен: {e}")
-
-
 def main() -> None:
     counts, titles, outliers, saturation = discover()
     # Мержим с прошлым прогоном, а не перезаписываем: за раз сканируется половина пула
@@ -201,7 +183,6 @@ def main() -> None:
             f, ensure_ascii=False, indent=2,
         )
     print(f"  niche_signal saved: {counts}")
-    _send_digest(outliers)
 
 
 if __name__ == "__main__":

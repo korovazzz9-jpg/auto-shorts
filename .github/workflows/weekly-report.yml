@@ -23,21 +23,6 @@ jobs:
       - name: Install Python deps
         run: pip install -r requirements.txt
 
-      - name: EN report
-        working-directory: src
-        env:
-          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
-          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
-          # 2026-07-17: свой OAuth-клиент на канал (лимит Google — 50 живых токенов
-          # на client_id+аккаунт; общий client_id вытеснял чужие токены).
-          # Секрет не заведён => _client_pair() падает на общие выше.
-          YT_CLIENT_ID_EN: ${{ secrets.YT_CLIENT_ID_EN }}
-          YT_CLIENT_SECRET_EN: ${{ secrets.YT_CLIENT_SECRET_EN }}
-          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: python weekly_report.py
-
       - name: ES report
         working-directory: src
         env:
@@ -54,26 +39,6 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python weekly_report.py
 
-      # PT добавлен 2026-07-10 (не был подключён с запуска канала): без отчёта не копится
-      # слот-аналитика и не крутятся петли hook/dropoff -> промпт. На малых числах секции
-      # просто короче (MIN_HOOK_SAMPLE и пр. сами гейтят выводы), падать нечему.
-      - name: PT report
-        if: always()   # сбой EN/ES-отчёта не должен лишать PT его данных (и наоборот)
-        working-directory: src
-        env:
-          CHANNEL: pt
-          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
-          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
-          # 2026-07-17: свой OAuth-клиент на канал (лимит Google — 50 живых токенов
-          # на client_id+аккаунт; общий client_id вытеснял чужие токены).
-          # Секрет не заведён => _client_pair() падает на общие выше.
-          YT_CLIENT_ID_PT: ${{ secrets.YT_CLIENT_ID_PT }}
-          YT_CLIENT_SECRET_PT: ${{ secrets.YT_CLIENT_SECRET_PT }}
-          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN_PT }}
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: python weekly_report.py
-
       # generate_script._hook_preference() читает эти файлы из репо при каждой генерации —
       # без коммита данные остались бы в эфемерном раннере (тот же паттерн, что queue_*.json).
       - name: Persist hook stats
@@ -81,7 +46,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          for f in hook_stats_en.json hook_stats_es.json hook_stats_pt.json dropoff_stats_en.json dropoff_stats_es.json dropoff_stats_pt.json tone_stats_en.json tone_stats_es.json tone_stats_pt.json video_history_en.json video_history_es.json video_history_pt.json; do
+          for f in hook_stats_es.json dropoff_stats_es.json tone_stats_es.json video_history_es.json; do
             if [ -f "$f" ]; then git add "$f"; fi
           done
           git commit -m "chore(hooks): weekly hook+dropoff stats + video_history enrich $(date -u +%F)" || { echo "no changes"; exit 0; }

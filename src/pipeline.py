@@ -141,10 +141,6 @@ def _run(recovery) -> None:
             notify(f"🛠 [{CFG['channel_name']}] восстановление: повторов API "
                    f"{clip_selection['retries']}, ответов восстановлено {clip_selection['retry_recovered']}, "
                    f"сцен {len(clip_paths)}; сохранённый сценарий: {recovery.resumed}.")
-        if clip_selection.get("initial_scenes", 0) < target_scenes:
-            notify(f"⚠️ [{CFG['channel_name']}] после добора {len(clip_paths)} разных сцен "
-                   f"(изначально {clip_selection.get('initial_scenes', 0)}): {data['title']}")
-
         print("3/6 Озвучка...")
         words, voice = text_to_speech(data["script"], audio_path)
 
