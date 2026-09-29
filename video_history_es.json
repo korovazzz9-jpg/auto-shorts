@@ -10015,7 +10015,10 @@
       "input_tokens": 27979,
       "output_tokens": 281,
       "target_scenes": 6
-    }
+    },
+    "views": 967,
+    "retention_pct": 56.50999999999999,
+    "subs_gained": 0
   },
   {
     "video_id": "k2HKTlfq3ok",
@@ -10075,7 +10078,10 @@
       "input_tokens": 28129,
       "output_tokens": 286,
       "target_scenes": 6
-    }
+    },
+    "views": 603,
+    "retention_pct": 53.959999999999994,
+    "subs_gained": 1
   },
   {
     "video_id": "4-9XVeXGp64",
@@ -10135,7 +10141,10 @@
       "input_tokens": 23042,
       "output_tokens": 272,
       "target_scenes": 6
-    }
+    },
+    "views": 640,
+    "retention_pct": 116.71000000000001,
+    "subs_gained": 0
   },
   {
     "video_id": "gXpQzhX8LJA",
@@ -10194,7 +10203,10 @@
       "input_tokens": 27577,
       "output_tokens": 286,
       "target_scenes": 6
-    }
+    },
+    "views": 570,
+    "retention_pct": 54.1,
+    "subs_gained": 0
   },
   {
     "video_id": "u6_EtGBrU1A",
@@ -10253,7 +10265,10 @@
       "input_tokens": 22059,
       "output_tokens": 273,
       "target_scenes": 6
-    }
+    },
+    "views": 391,
+    "retention_pct": 67.59,
+    "subs_gained": 2
   },
   {
     "video_id": "U3kX2-M_8jw",
