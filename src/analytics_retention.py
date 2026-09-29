@@ -64,7 +64,9 @@ def retention_threshold(length_seconds: int) -> float:
     return 65.0 if length_seconds < 30 else 50.0
 
 
-def _recent_videos(youtube) -> list[dict]:
+def upload_video_ids(youtube, limit: int = MAX_VIDEOS) -> list[str]:
+    """id последних `limit` загрузок канала (новые первыми) через uploads-плейлист: 1 ед. квоты
+    на страницу из 50 против 100 у search.list. Общий для retention-аналитики и track_baby.py."""
     channels = youtube.channels().list(part="contentDetails", mine=True).execute()
     items = channels.get("items", [])
     if not items:
@@ -72,7 +74,7 @@ def _recent_videos(youtube) -> list[dict]:
     uploads_id = items[0]["contentDetails"]["relatedPlaylists"]["uploads"]
 
     video_ids, page_token = [], None
-    while len(video_ids) < MAX_VIDEOS:
+    while len(video_ids) < limit:
         resp = youtube.playlistItems().list(
             part="snippet", playlistId=uploads_id, maxResults=50, pageToken=page_token
         ).execute()
@@ -80,7 +82,13 @@ def _recent_videos(youtube) -> list[dict]:
         page_token = resp.get("nextPageToken")
         if not page_token:
             break
-    video_ids = video_ids[:MAX_VIDEOS]
+    return video_ids[:limit]
+
+
+def _recent_videos(youtube) -> list[dict]:
+    video_ids = upload_video_ids(youtube, MAX_VIDEOS)
+    if not video_ids:
+        return []
 
     videos = []
     for i in range(0, len(video_ids), 50):
@@ -221,31 +229,38 @@ def biggest_drop(curve: list[tuple[float, float]], video_length: int) -> dict | 
     return {"second": round(ratio * video_length), "drop_pct": round(drop * 100, 1)}
 
 
+def video_report(analytics, video_ids: list[str], start: str, end: str, metrics: str) -> dict:
+    """{video_id: {метрика: значение}} из Analytics API с разбивкой по видео. Analytics API
+    ограничивает длину фильтра — бьём по 200 id на запрос (retention-отчёт укладывается в один)."""
+    out = {}
+    for i in range(0, len(video_ids), 200):
+        batch = video_ids[i:i + 200]
+        resp = analytics.reports().query(
+            ids="channel==MINE",
+            startDate=start,
+            endDate=end,
+            metrics=metrics,
+            dimensions="video",
+            filters="video==" + ",".join(batch),
+            maxResults=len(batch),
+        ).execute()
+        headers = [h["name"] for h in resp.get("columnHeaders", [])]
+        for row in resp.get("rows", []) or []:
+            rec = dict(zip(headers, row))
+            out[rec.pop("video")] = rec
+    return out
+
+
 def _retention(analytics, video_ids: list[str], start: str, end: str) -> dict:
     """Возвращает {video_id: {pct, dur, views, subs}}. subs = subscribersGained (2026-07-10):
     сколько зрителей подписалось С ЭТОГО видео — нужен для замера подписного тизера пар
     (pair_cta_phrases); тот же самый запрос, доп. квоты не стоит."""
-    out = {}
-    # Analytics API ограничивает длину фильтра — бьём по 200, у нас максимум 50.
-    resp = analytics.reports().query(
-        ids="channel==MINE",
-        startDate=start,
-        endDate=end,
-        metrics="averageViewPercentage,averageViewDuration,views,subscribersGained",
-        dimensions="video",
-        filters="video==" + ",".join(video_ids),
-        maxResults=len(video_ids),
-    ).execute()
-    headers = [h["name"] for h in resp.get("columnHeaders", [])]
-    for row in resp.get("rows", []):
-        rec = dict(zip(headers, row))
-        out[rec["video"]] = {
-            "pct": rec.get("averageViewPercentage", 0),
-            "dur": rec.get("averageViewDuration", 0),
-            "views": rec.get("views", 0),
-            "subs": rec.get("subscribersGained", 0),
-        }
-    return out
+    rows = video_report(analytics, video_ids, start, end,
+                        "averageViewPercentage,averageViewDuration,views,subscribersGained")
+    return {vid: {"pct": rec.get("averageViewPercentage", 0),
+                  "dur": rec.get("averageViewDuration", 0),
+                  "views": rec.get("views", 0),
+                  "subs": rec.get("subscribersGained", 0)} for vid, rec in rows.items()}
 
 
 def main() -> None:

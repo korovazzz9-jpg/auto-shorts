@@ -17,6 +17,7 @@ from post_comment import post_channel_comment
 from publish import publish
 from script_queue import pop_next
 from tts import text_to_speech
+from upload_youtube import find_recent_upload
 from youtube_auth import get_authenticated_channel_title
 
 load_dotenv()
@@ -44,7 +45,8 @@ def _verify_channel() -> None:
 
 
 def run() -> None:
-    recovery = EpisodeRecovery(CHANNEL, slots=CFG["daily_slots_utc"])
+    # reconcile: эпизод, застрявший в «publishing», сверяется с каналом (см. EpisodeRecovery._reconcile).
+    recovery = EpisodeRecovery(CHANNEL, slots=CFG["daily_slots_utc"], reconcile=find_recent_upload)
     try:
         _run(recovery)
     except Exception as exc:

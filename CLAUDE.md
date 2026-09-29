@@ -171,10 +171,33 @@ API (playlistItems -> videos.list): вся разметка лежит в тег
 
 ---
 
+## Аудит 2026-09 и трекер канала «малышка и щенок»
+
+Отчёт — `docs/AUDIT_2026-09.md`: прогоны за 30 дней, причины падений, расходы, выводы по данным ES,
+рекомендации. Главное из него: сторож ES почти не страхует — GitHub-крон опаздывает на ~2 ч, в окно
+повтора попадает треть запусков; лечится запуском `watchdog-es` из cron-job.org (не сделано).
+
+Правки того же PR: повтор загрузки на YouTube (`upload_youtube.resumable_upload`), сверка эпизода,
+застрявшего в `publishing`, с каналом вместо вечной остановки (`EpisodeRecovery._reconcile`), повтор
+push при сохранении состояния (`scripts/git_persist.sh`, в `daily-es`/`watchdog-es`/`track-baby`).
+Тесты: `pip install -r requirements-dev.txt`, затем `python -m pytest tests` (в CI не гоняются).
+
+Трекер нового канала (англоязычная серия «малышка и щенок» из репозитория AI) — `src/track_baby.py`
+(снимок раз в день в `stats/baby/daily.csv` и `videos.csv`), `src/track_baby_report.py` (сводка по
+типам завязок в `stats/baby/weekly.md` по понедельникам), поток `track-baby.yml`. **Выключен, пока
+нет секрета `YT_TOKEN_BABY`**: поток выходит зелёным с «канал не подключён». Подключить:
+`py src/get_youtube_token.py baby`, пошагово — `docs/SETUP_BABY.md`. Ролик с завязкой связывает
+тег `s-<name>` (или строка в `stats/baby/mapping.csv`).
+
+---
+
 ## Что лежит рядом
 
 * `telegram-bot/` — свой README, отдельная служба.
-* `docs/` — только `privacy.html` и `tos.html` для страниц согласия OAuth.
+* `docs/` — `privacy.html` и `tos.html` для страниц согласия OAuth, `AUDIT_2026-09.md`,
+  `SETUP_BABY.md`, задания облачным сессиям `CLOUD_BRIEF_*.md`.
+* `stats/baby/` — статистика канала «малышка и щенок» (пишет `track-baby.yml`) и
+  `shorts_types.csv` — выгрузка name,type,risk из `shorts.json` репозитория AI.
 * `SETUP_ES.md` — заметки по заведению испанского канала.
 * Файлы `*_en.json`, `*_es.json`, `*_pt.json` в корне — состояние каналов
   (очередь, история, статистика удержания и зацепок). Руками не править:

@@ -66,9 +66,11 @@ def get_client(refresh_token: str | None = None, channel: str | None = None):
     return build("youtube", "v3", credentials=_credentials(refresh_token, channel))
 
 
-def get_analytics_client():
-    """YouTube Analytics API v2 — для retention-метрик (avg view duration / % досмотра)."""
-    return build("youtubeAnalytics", "v2", credentials=_credentials())
+def get_analytics_client(refresh_token: str | None = None, channel: str | None = None):
+    """YouTube Analytics API v2 — для retention-метрик (avg view duration / % досмотра).
+    refresh_token/channel — как у get_client (2026-09-29: трекер канала baby работает со своим
+    токеном в процессе, где CHANNEL не выставлен; без аргументов поведение прежнее)."""
+    return build("youtubeAnalytics", "v2", credentials=_credentials(refresh_token, channel))
 
 
 def get_authenticated_channel_title() -> str:

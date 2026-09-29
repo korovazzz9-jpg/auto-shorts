@@ -106,19 +106,26 @@ def print_channel(label, refresh_token):
         print(f"  {title:<42} {age:>7} {v['views']:>7,} {v['likes']:>5,}")
 
 
-channels = [
-    ("EN", os.environ.get("YT_REFRESH_TOKEN", "")),
-    ("ES", os.environ.get("YT_REFRESH_TOKEN_ES", "")),
-    ("PT", os.environ.get("YT_REFRESH_TOKEN_PT", "")),  # 2026-07-17: PT отсутствовал
-]
+def main() -> None:
+    channels = [
+        ("EN", os.environ.get("YT_REFRESH_TOKEN", "")),
+        ("ES", os.environ.get("YT_REFRESH_TOKEN_ES", "")),
+        ("PT", os.environ.get("YT_REFRESH_TOKEN_PT", "")),  # 2026-07-17: PT отсутствовал
+    ]
 
-for label, token in channels:
-    if not token:
-        print(f"\n[!] No token for {label}")
-        continue
-    try:
-        print_channel(label, token)
-    except Exception as e:
-        print(f"\n[!] Error for {label}: {e}")
+    for label, token in channels:
+        if not token:
+            print(f"\n[!] No token for {label}")
+            continue
+        try:
+            print_channel(label, token)
+        except Exception as e:
+            print(f"\n[!] Error for {label}: {e}")
 
-print()
+    print()
+
+
+# 2026-09-29: сводка по каналам — только при прямом запуске. Раньше код стоял на уровне модуля
+# и выполнялся при любом импорте, а fetch_channel_info нужен и трекеру канала baby.
+if __name__ == "__main__":
+    main()

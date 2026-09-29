@@ -116,19 +116,11 @@ jobs:
       - name: Persist queue state
         if: always()
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          # 2026-09-29: повтор pull+push при гонке с другими потоками — scripts/git_persist.sh.
           # ig_card_counter_es.json меняется только в слот IG-карточки (ig_card_slot_hour) —
-          # на остальных 3 слотах дня файла может не быть/не измениться, это ок.
-          [ -f recovery_es.json ] && git add recovery_es.json
-          [ -f queue_es.json ] && git add queue_es.json
-          [ -f ig_card_counter_es.json ] && git add ig_card_counter_es.json
-          [ -f paired_facts_es.json ] && git add paired_facts_es.json
-          [ -f video_history_es.json ] && git add video_history_es.json
-          git diff --cached --quiet && { echo "no changes"; exit 0; }
-          git commit -m "chore(queue): ES queue/card state $(date -u +%F)" || { echo "no changes"; exit 0; }
-          git pull --rebase origin master
-          git push
+          # на остальных слотах дня файла может не быть/не измениться, это ок.
+          bash scripts/git_persist.sh "chore(queue): ES queue/card state $(date -u +%F)" \
+            recovery_es.json queue_es.json ig_card_counter_es.json paired_facts_es.json video_history_es.json
 
       - name: Save stock search cache
         if: always() && hashFiles('src/stock_search_cache.json') != ''
