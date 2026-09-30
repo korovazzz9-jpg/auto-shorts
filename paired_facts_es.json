@@ -1,15 +1,5 @@
 [
   {
-    "id": "cDmkvfuqmQ4-1784679900",
-    "topic": "archaeological discoveries",
-    "part_a_video_id": "cDmkvfuqmQ4",
-    "part_a_title": "¿Por qué sellaron esta tumba con cemento hace 3,000 años? 😱",
-    "claim": "Several Egyptian tombs were sealed to protect the living, not the dead.",
-    "part_b_video_id": "_3KOIfCSe28",
-    "status": "resolved",
-    "created_at": 1784679900.74899
-  },
-  {
     "id": "eivo4R9ANq8-1785111855",
     "topic": "archaeological discoveries",
     "part_a_video_id": "eivo4R9ANq8",
@@ -198,5 +188,15 @@
     "part_b_video_id": null,
     "status": "awaiting_b",
     "created_at": 1790555070.857875
+  },
+  {
+    "id": "JzYGMmqhrAY-1790727813",
+    "topic": "extreme weather",
+    "part_a_video_id": "JzYGMmqhrAY",
+    "part_a_title": "La tormenta que generó granizo de 20 cm en 2010 😱",
+    "claim": "Las supercélulas pueden generar granizo durante más de 2 horas.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1790727813.8091884
   }
 ]
