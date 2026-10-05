@@ -1,15 +1,5 @@
 [
   {
-    "id": "eivo4R9ANq8-1785111855",
-    "topic": "archaeological discoveries",
-    "part_a_video_id": "eivo4R9ANq8",
-    "part_a_title": "¿Enterraron un niño con joyas de otro continente en 1600 a.C.? 😱",
-    "claim": "Stonehenge fue construido en etapas durante 1,500 años.",
-    "part_b_video_id": "0gOBMEtNxBw",
-    "status": "resolved",
-    "created_at": 1785111855.0393882
-  },
-  {
     "id": "xY_Y3CkCDs8-1785284754",
     "topic": "extreme weather",
     "part_a_video_id": "xY_Y3CkCDs8",
@@ -198,5 +188,15 @@
     "part_b_video_id": null,
     "status": "awaiting_b",
     "created_at": 1790727813.8091884
+  },
+  {
+    "id": "kjK6TRAPtBg-1791159847",
+    "topic": "ancient civilizations",
+    "part_a_video_id": "kjK6TRAPtBg",
+    "part_a_title": "El escriba que falsificó a un faraón vivo en 1274 a.C. 😱",
+    "claim": "Ramsés II firmó el primer tratado de paz conocido con sus enemigos.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1791159847.1737967
   }
 ]
