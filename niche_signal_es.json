@@ -1,17 +1,17 @@
 {
   "outlier_counts": {
     "ancient history": 2,
-    "archaeological discoveries": 2,
-    "ancient civilizations": 3,
-    "historical mysteries": 5,
+    "archaeological discoveries": 3,
+    "ancient civilizations": 2,
+    "historical mysteries": 6,
     "the human body": 1,
     "the ocean": 4,
     "evolution": 3,
     "volcanoes and earthquakes": 5,
     "space": 1,
     "future technology": 5,
-    "the animal kingdom": 3,
-    "extreme weather": 3,
+    "the animal kingdom": 4,
+    "extreme weather": 2,
     "natural wonders": 1
   },
   "outlier_titles": {
@@ -21,17 +21,17 @@
     ],
     "archaeological discoveries": [
       "7 Datos Curiosos sobre la Atlántida  #historia #curiosidades",
-      "La Reina Roja de Palenque🏺 #reelsvideo #shorts #fyp #curiosidades #datoscuriosos"
+      "La Reina Roja de Palenque🏺 #reelsvideo #shorts #fyp #curiosidades #datoscuriosos",
+      "¿Encontraron el Arca de Noé en 2025? 😱 ¡Increíble descubrimiento en Turquía! #shorts #datoscuriosos"
     ],
     "ancient civilizations": [
       "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos",
-      "Tres datos históricos alucinantes #historia #interesante #hechos",
-      "Datos Curiosos de Cleopatra, una Mujer Exótica #shorts"
+      "Garras antiguas talladas en hueso humano🦴 #reelsvideo #shorts #fyp #curiosidades #datoscuriosos"
     ],
     "historical mysteries": [
-      "Tres datos históricos alucinantes #historia #interesante #hechos",
       "✅ La verdadera historia de los tres cerditos 🐷💀 #short #shortsviral",
-      "Los misterios del Amazonas #amazonas #mitos #leyendas #curiosidades #shortsviral"
+      "Los misterios del Amazonas #amazonas #mitos #leyendas #curiosidades #shortsviral",
+      "Secretos que los guardias reales no quieren que sepas dato curioso #curiosidades #sabiasque #shorts"
     ],
     "the human body": [
       "DATO CURIOSO - LA NIÑA PERRO #shorts"
@@ -60,13 +60,12 @@
       "EXPERIMENTOS CIENTÍFICOS CASEROS sencillos!!! #shorts #experimentos #caseros #cientificos"
     ],
     "the animal kingdom": [
+      "EL MEGALODÓN... ¿¡ES REAL?! | CLUB DE INVESTIGADORES #shorts | #education for #kids",
       "SHAKIRA se ASUSTÓ por una RATA 😱 #shakira #curiosidades #datoscuriosos",
-      "El DETALLE de hotel Transylvania que NO VISTE #mavis #datoscuriosos #curiosidades",
-      "Los animales sabían que era su último día juntos 🐾✨ #love #animals #shorts"
+      "El DETALLE de hotel Transylvania que NO VISTE #mavis #datoscuriosos #curiosidades"
     ],
     "extreme weather": [
       "The Scariest Natural Disasters Caught On Camera 🌪 #shorts",
-      "Multi-Vortex Tornadoes #shorts",
       "Las Cataratas del Niágara se congelaron tras temperaturas extremas. #ClimaExtremo #Viral #Shorts"
     ],
     "natural wonders": [
@@ -118,58 +117,58 @@
       "topic": "historical mysteries",
       "title": "✅ La verdadera historia de los tres cerditos 🐷💀 #short #shortsviral",
       "video_id": "QQ0sdApwJ0s",
-      "views": 4980473,
-      "subs": 19400,
-      "ratio": 256.7
+      "views": 5015808,
+      "subs": 19500,
+      "ratio": 257.2
     },
     {
       "topic": "evolution",
       "title": "POPEYE FUE BASADO POR UNA PERSONA EN LA VIDA REAL #datoscuriosos #popeyes #shorts",
       "video_id": "ON2vmNJTQYQ",
-      "views": 3594860,
+      "views": 3599690,
       "subs": 14400,
-      "ratio": 249.6
+      "ratio": 250.0
     },
     {
-      "topic": "volcanoes and earthquakes",
+      "topic": "historical mysteries",
       "title": "EL TSUNAMI MÁS GRANDE DE LA HISTORIA",
       "video_id": "Tp_f3ZBfxcc",
-      "views": 1779672,
-      "subs": 7750,
-      "ratio": 229.6
+      "views": 1790955,
+      "subs": 7760,
+      "ratio": 230.8
+    },
+    {
+      "topic": "archaeological discoveries",
+      "title": "¿Encontraron el Arca de Noé en 2025? 😱 ¡Increíble descubrimiento en Turquía! #shorts #datoscuriosos",
+      "video_id": "hHTNpfzZ1lo",
+      "views": 31871,
+      "subs": 152,
+      "ratio": 209.7
     },
     {
       "topic": "the human body",
       "title": "DATO CURIOSO - LA NIÑA PERRO #shorts",
       "video_id": "9e82SusaU8c",
-      "views": 15633646,
-      "subs": 77100,
-      "ratio": 202.8
-    },
-    {
-      "topic": "the human body",
-      "title": "¿Qué pasaría si tu CUERPO fuera de estos MATERIALES? 🧊🌋💀 #shorts",
-      "video_id": "yVSqsCM__jE",
-      "views": 15423199,
-      "subs": 82600,
-      "ratio": 186.7
+      "views": 15719437,
+      "subs": 77400,
+      "ratio": 203.1
     }
   ],
   "saturation": {
-    "ancient history": 646127,
-    "archaeological discoveries": 91061,
-    "ancient civilizations": 144391,
-    "shipwrecks and lost treasures": 1077,
-    "historical mysteries": 291616,
-    "the human body": 710571,
+    "ancient history": 646190,
+    "archaeological discoveries": 93360,
+    "ancient civilizations": 147566,
+    "shipwrecks and lost treasures": 1074,
+    "historical mysteries": 297520,
+    "the human body": 676399,
     "the animal kingdom": 1000000,
-    "the ocean": 459594,
-    "evolution": 641303,
-    "volcanoes and earthquakes": 71570,
-    "extreme weather": 189794,
-    "natural wonders": 237199,
-    "space": 732176,
+    "the ocean": 472160,
+    "evolution": 629248,
+    "volcanoes and earthquakes": 76339,
+    "extreme weather": 187781,
+    "natural wonders": 246137,
+    "space": 776164,
     "future technology": 298101
   },
-  "updated": "2026-09-28"
+  "updated": "2026-10-05"
 }
