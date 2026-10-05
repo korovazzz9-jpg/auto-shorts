@@ -4,7 +4,7 @@
   ролики  — video_gen/ui/_cp77_series/girl01/final/<NN>_<slug>.mp4
   тексты  — video_gen/ui/_cp77_series/girl01/CHANNEL_PACK.md: таблица «Заголовки, описания, теги»
   порядок — там же, раздел «Порядок выкладки»
-Расписание: 2 ролика в день, 12:00 и 19:00 МСК. Ставится «не для детей» и «синтетический контент».
+Расписание: 2 ролика в день, 12:00 и вечер — через день 18:00 или 19:00 МСК (опыт со временем). Ставится «не для детей» и «синтетический контент».
 
     python publish_humor.py --start 2026-10-05 --dry     показать расписание и что уйдёт, ничего не выкладывая
     python publish_humor.py --start 2026-10-05 [--yes]   выложить всё оставшееся по расписанию
@@ -96,9 +96,16 @@ def record(row, vid, when):
 
 
 def slots(start, count, taken):
+    busy = {dt.datetime.strptime(t, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=dt.timezone.utc).astimezone(MSK).date()
+            for t in taken}
     out, day = [], start
     while len(out) < count:
+        if day in busy:
+            day += dt.timedelta(days=1)
+            continue
         for t in SLOTS:
+            if t.hour == 19 and day.toordinal() % 2 == 0:
+                t = dt.time(18, 0)  # 5 окт: вечер через день в 18:00 — сравнить с 19:00 (решение пользователя)
             when = dt.datetime.combine(day, t, tzinfo=MSK)
             if when >= _now() + LEAD and _utc(when) not in taken and len(out) < count:
                 out.append(when)
