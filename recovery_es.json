@@ -7468,6 +7468,57 @@
         "target_scenes": 6
       },
       "error": null
+    },
+    {
+      "id": "37525280897:1",
+      "at": "2026-10-06T20:17:57.483107+00:00",
+      "outcome": "published",
+      "resumed": false,
+      "title": "La mantis religiosa que le arranca la cabeza a su pareja al aparearse 😱",
+      "episode": "2026-10-06T20:17:57.483107+00:00",
+      "slot": "2026-10-06T20:17:00+00:00",
+      "video_id": "8ZPawjle7W0",
+      "selection": {
+        "filter_version": 3,
+        "retries": 0,
+        "retry_recovered": 0,
+        "unknown_usage_attempts": 0,
+        "retry_input_tokens": 0,
+        "retry_output_tokens": 0,
+        "retry_reasons": null,
+        "reused_selections": 0,
+        "extra_searches": 3,
+        "downloaded_scenes": 5,
+        "backup_scenes": 0,
+        "extra_input_tokens": 14190,
+        "extra_output_tokens": 144,
+        "initial_scenes": 3,
+        "source_errors": null,
+        "source_candidates": {
+          "pexels": 61,
+          "pixabay": 5,
+          "coverr": 0
+        },
+        "downloaded_sources": {
+          "pexels": 5
+        },
+        "stock_cache_hits": 0,
+        "beats": 7,
+        "vetted": 4,
+        "cache_hits": 0,
+        "no_preview": 0,
+        "api_error": 0,
+        "unparsed": 0,
+        "rejected": 3,
+        "bypass": false,
+        "vision_calls": 7,
+        "no_candidates": 0,
+        "search_error": 0,
+        "input_tokens": 33308,
+        "output_tokens": 295,
+        "target_scenes": 6
+      },
+      "error": null
     }
   ]
 }
