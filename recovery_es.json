@@ -7366,6 +7366,57 @@
         "target_scenes": 6
       },
       "error": null
+    },
+    {
+      "id": "37469597768:1",
+      "at": "2026-10-06T13:18:01.179357+00:00",
+      "outcome": "published",
+      "resumed": false,
+      "title": "El terremoto de 1600 que mató cosechas en 3 continentes 😱",
+      "episode": "2026-10-06T13:18:01.179357+00:00",
+      "slot": "2026-10-06T13:17:00+00:00",
+      "video_id": "pPotz1lqGQo",
+      "selection": {
+        "filter_version": 3,
+        "retries": 0,
+        "retry_recovered": 0,
+        "unknown_usage_attempts": 0,
+        "retry_input_tokens": 0,
+        "retry_output_tokens": 0,
+        "retry_reasons": null,
+        "reused_selections": 0,
+        "extra_searches": 1,
+        "downloaded_scenes": 6,
+        "backup_scenes": 1,
+        "extra_input_tokens": 4413,
+        "extra_output_tokens": 64,
+        "initial_scenes": 4,
+        "source_errors": null,
+        "source_candidates": {
+          "pexels": 67,
+          "pixabay": 7,
+          "coverr": 0
+        },
+        "downloaded_sources": {
+          "pexels": 6
+        },
+        "stock_cache_hits": 0,
+        "beats": 7,
+        "vetted": 5,
+        "cache_hits": 0,
+        "no_preview": 0,
+        "api_error": 0,
+        "unparsed": 0,
+        "rejected": 2,
+        "bypass": false,
+        "vision_calls": 7,
+        "no_candidates": 0,
+        "search_error": 0,
+        "input_tokens": 32614,
+        "output_tokens": 348,
+        "target_scenes": 6
+      },
+      "error": null
     }
   ]
 }
