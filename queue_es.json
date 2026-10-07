@@ -291,5 +291,104 @@
     "niche_styled": true,
     "title_variant": "narrative",
     "hashtag_position": "end"
+  },
+  {
+    "title": "El planeta que llueve hierro fundido cada noche 😱",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "Lluvia de metal. Ahora mismo.",
+    "hook_template": "you-experience",
+    "emotional_tone": "impossible",
+    "script": "Ahora mismo, en otro mundo, está lloviendo hierro líquido. WASP-76b, un exoplaneta a 640 años luz, tiene un lado que alcanza 2,400°C — suficiente para vaporizar metales. Ese vapor viaja al lado nocturno, se enfría, y cae como lluvia de hierro fundido cada noche sin parar. Por un lado, eterno amanecer. Por el otro, metal derritiéndose del cielo. ¿Qué mundo preferirías habitar? Y por eso.",
+    "word_count": 73,
+    "search_summary": "WASP-76b es un exoplaneta donde llueve hierro fundido cada noche debido a temperaturas de 2,400 grados Celsius.",
+    "comment_question": "¿Preferirías el lado de fuego eterno o el de lluvia de hierro? 🔥",
+    "source_note": "Nature, Universidad de Ginebra, 2020",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "datos del espacio",
+      "exoplanetas",
+      "WASP-76b",
+      "planetas extraños",
+      "datos curiosos",
+      "lluvia de hierro",
+      "espacio datos en 30 segundos",
+      "universo increíble",
+      "datos del espacio para dormir",
+      "planetas extraños documental",
+      "datos curiosos que no sabías"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#espacio",
+      "#exoplanetas"
+    ],
+    "video_queries": [
+      "molten iron flowing dark",
+      "stormy alien planet surface",
+      "extreme heat metal melting",
+      "night sky iron rain",
+      "space planet atmosphere orbit"
+    ],
+    "has_loop": true,
+    "topic": "space",
+    "structure": "happening-now",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "El escriba que salvó a un faraón borrándolo de la historia 😱",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "Lo borraron para salvarlo",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "creepy",
+    "script": "Un hombre borró a su rey de cada muro, cada lista, cada registro — y lo hizo para protegerlo. En 1352 a.C., el faraón Akhenatón impuso un solo dios y destruyó los templos del resto. Cuando murió, sus sucesores lo declararon traidor. Los escribas que borraron su nombre lo salvaron de algo peor: ser cazado incluso en el más allá. Hoy, Akhenatón existe solo porque casi logran hacerlo desaparecer. ¿Borrarías a alguien de la historia para protegerlo? Y por eso pasa.",
+    "word_count": 79,
+    "search_summary": "El faraón Akhenatón fue borrado de registros egipcios en 1352 a.C. para protegerlo tras imponer el monoteísmo.",
+    "comment_question": "¿Borrar a alguien de la historia lo salva o lo condena para siempre? 👁️",
+    "source_note": "The Egyptian Museum, Cairo; Egyptology records, 2001",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "historia antigua",
+      "Akhenatón",
+      "faraones egipcios",
+      "Egipto antiguo",
+      "datos históricos",
+      "hechos curiosos",
+      "monoteísmo egipcio",
+      "historia increíble",
+      "historia antigua del mundo",
+      "faraones egipcios para niños",
+      "egipto antiguo documental"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#historiaantigua",
+      "#egipto",
+      "#datoscuriosos",
+      "#faraones"
+    ],
+    "video_queries": [
+      "ancient egypt hieroglyphics wall",
+      "archaeologist excavating ruins",
+      "dark underground temple egypt",
+      "ancient egypt desert ruins wide",
+      "egypt tomb dark corridor"
+    ],
+    "has_loop": true,
+    "topic": "ancient history",
+    "structure": "historical-story",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
   }
 ]
