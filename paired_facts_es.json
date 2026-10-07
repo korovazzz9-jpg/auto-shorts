@@ -1,15 +1,5 @@
 [
   {
-    "id": "xY_Y3CkCDs8-1785284754",
-    "topic": "extreme weather",
-    "part_a_video_id": "xY_Y3CkCDs8",
-    "part_a_title": "¿Una tormenta puede generar rayos bajo el agua? 😱",
-    "claim": "Lightning strikes the same spot more than once regularly.",
-    "part_b_video_id": null,
-    "status": "awaiting_b",
-    "created_at": 1785284754.9616396
-  },
-  {
     "id": "NAFG5oQzZ9s-1785716686",
     "topic": "historical mysteries",
     "part_a_video_id": "NAFG5oQzZ9s",
@@ -198,5 +188,15 @@
     "part_b_video_id": null,
     "status": "awaiting_b",
     "created_at": 1791159847.1737967
+  },
+  {
+    "id": "3LmW0bXi4DI-1791332836",
+    "topic": "the human body",
+    "part_a_video_id": "3LmW0bXi4DI",
+    "part_a_title": "El nervio que recorre todo tu cuerpo y controla tu corazón 😱",
+    "claim": "El 80% de las señales del nervio vago van al cerebro, no del cerebro al cuerpo.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1791332836.00461
   }
 ]
