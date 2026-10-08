@@ -1,5 +1,70 @@
 {
-  "pending": null,
+  "pending": {
+    "data": {
+      "title": "La tarántula que deja morir a sus crías comiéndola viva 💀",
+      "title_opener": "the-x",
+      "title_intensity": "extreme",
+      "hook_text": "Te están comiendo vivo ahora mismo",
+      "hook_template": "you-experience",
+      "emotional_tone": "creepy",
+      "script": "En este momento, una madre tarántula está siendo devorada viva por sus propias crías. Se llama matriphagy. La hembra se disuelve desde adentro — sus órganos se vuelven líquido — y los bebés la absorben entera. Pasa en menos de 24 horas. Una sola madre alimenta a más de 80 crías así. No escapa. No se defiende. Su cuerpo entero es el primer alimento. ¿Tú harías lo mismo por tus hijos? Y por eso exactamente.",
+      "word_count": 72,
+      "search_summary": "La tarántula hembra permite que sus crías la devoren viva en proceso llamado matrifagia en menos de 24 horas.",
+      "comment_question": "¿Esto es amor o la cosa más perturbadora del reino animal? 💀",
+      "source_note": "Journal of Arachnology, 2018",
+      "loop_connectors": [
+        "why",
+        "how"
+      ],
+      "tags": [
+        "datos curiosos animales",
+        "reino animal",
+        "tarántula",
+        "matrifagia",
+        "curiosidades de la naturaleza",
+        "animales raros",
+        "datos en 30 segundos",
+        "comportamiento animal extremo",
+        "datos curiosos animales para niños",
+        "reino animal unimas",
+        "curiosidades de la naturaleza para niños"
+      ],
+      "hashtags": [
+        "#shorts",
+        "datoscuriosos",
+        "#reinoanimal",
+        "#tarántula",
+        "#naturaleza"
+      ],
+      "video_queries": [
+        "tarantula spider close up moving",
+        "spider eggs hatching nest",
+        "spider babies swarming mother",
+        "dark forest floor spider web",
+        "mother animal protecting young"
+      ],
+      "has_loop": true,
+      "topic": "the animal kingdom",
+      "structure": "happening-now",
+      "niche_styled": true,
+      "title_variant": "narrative",
+      "hashtag_position": "end"
+    },
+    "pending_pair": null,
+    "pair_start_mode": false,
+    "selections": {
+      "e715c2767dfb6434151ab89cdbbe22ac8365370e38dfaeab30cc32b26f7ee16d": [
+        {
+          "link": "https://videos.pexels.com/video-files/8745497/8745497-hd_1080_1920_25fps.mp4",
+          "id": 8745497,
+          "preview": "https://images.pexels.com/videos/8745497/pexels-photo-8745497.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630",
+          "source": "pexels"
+        }
+      ]
+    },
+    "status": "prepared",
+    "created": "2026-10-08T20:17:58.289853+00:00"
+  },
   "attempts": [
     {
       "id": "34221465880:1",
@@ -7979,6 +8044,57 @@
         "target_scenes": 6
       },
       "error": null
+    },
+    {
+      "id": "37838291445:1",
+      "at": "2026-10-08T20:17:58.289853+00:00",
+      "outcome": "deferred",
+      "resumed": false,
+      "title": "La tarántula que deja morir a sus crías comiéndola viva 💀",
+      "episode": "2026-10-08T20:17:58.289853+00:00",
+      "slot": "2026-10-08T20:17:00+00:00",
+      "video_id": null,
+      "selection": {
+        "filter_version": 3,
+        "retries": 0,
+        "retry_recovered": 0,
+        "unknown_usage_attempts": 0,
+        "retry_input_tokens": 0,
+        "retry_output_tokens": 0,
+        "retry_reasons": null,
+        "reused_selections": 0,
+        "extra_searches": 3,
+        "downloaded_scenes": 1,
+        "backup_scenes": 0,
+        "extra_input_tokens": 14234,
+        "extra_output_tokens": 192,
+        "initial_scenes": 1,
+        "source_errors": null,
+        "source_candidates": {
+          "pexels": 77,
+          "pixabay": 3,
+          "coverr": 0
+        },
+        "downloaded_sources": {
+          "pexels": 1
+        },
+        "stock_cache_hits": 0,
+        "beats": 8,
+        "vetted": 1,
+        "cache_hits": 0,
+        "no_preview": 0,
+        "api_error": 0,
+        "unparsed": 0,
+        "rejected": 7,
+        "bypass": false,
+        "vision_calls": 8,
+        "no_candidates": 0,
+        "search_error": 0,
+        "input_tokens": 36632,
+        "output_tokens": 512,
+        "target_scenes": 6
+      },
+      "error": "Добор сцен продолжается: 1/6. Сценарий и одобренные клипы сохранены для следующей попытки."
     }
   ]
 }
