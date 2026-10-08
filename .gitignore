@@ -35,3 +35,8 @@ README.md
 
 src/stock_search_cache.json
 src/stock_search_cache.json.tmp
+
+# Lika social: rotating TikTok refresh token and logs
+stats/humor/tiktok_token.json
+stats/humor/social_*.log
+tiktok_auth.txt
