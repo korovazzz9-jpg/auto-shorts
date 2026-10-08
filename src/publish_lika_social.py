@@ -167,13 +167,41 @@ def tt_post(row, video):
     return pid
 
 
+def plan(platform, start, days):
+    """Instagram и TikTok по API откладывать не дают, а в своих интерфейсах — да (Business Suite до 29 дней,
+    TikTok Studio до 10). Лист: слот (МСК и Вьетнам), файл, подпись — для ручного планирования перед отъездом."""
+    order, rows = ph.load_pack()
+    left = [rows[n] for n in order if n not in done(platform)]
+    vn = dt.timezone(dt.timedelta(hours=7))
+    out = [f"# Лика — {platform}: расписание с {start:%d.%m} на {days} дн.\n",
+           "Ролики: " + str(ph.GIRL / "final") + "\n"]
+    i = 0
+    for d in range(days):
+        for t in ph.SLOTS:
+            if i >= len(left):
+                break
+            when = dt.datetime.combine(start + dt.timedelta(days=d), t, tzinfo=ph.MSK)
+            r = left[i]
+            i += 1
+            out.append(f"## {i}. {when:%d.%m} {when:%H:%M} МСК = {when.astimezone(vn):%H:%M} Вьетнам — {r['file']}\n")
+            out.append("```\n" + caption(r, platform) + "\n```\n")
+    f = ROOT / "docs" / f"lika_schedule_{platform}.md"
+    f.write_text("\n".join(out), encoding="utf-8")
+    print(f"{f}: {i} слотов, роликов в очереди {len(left)}")
+    return 0
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--platform", choices=["ig", "tiktok"], required=True)
     ap.add_argument("--count", type=int, default=1, help="сколько роликов за запуск (по умолчанию 1)")
     ap.add_argument("--dry", action="store_true")
     ap.add_argument("--yes", action="store_true")
+    ap.add_argument("--plan", metavar="ГГГГ-ММ-ДД", help="лист ручного планирования (Business Suite / TikTok Studio)")
+    ap.add_argument("--days", type=int, default=12)
     a = ap.parse_args(argv)
+    if a.plan:
+        return plan(a.platform, dt.date.fromisoformat(a.plan), a.days)
     order, rows = ph.load_pack()
     left = [rows[n] for n in order if n not in done(a.platform)]
     if not left:
