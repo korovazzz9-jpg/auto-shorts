@@ -194,5 +194,253 @@
     "niche_styled": true,
     "title_variant": "narrative",
     "hashtag_position": "end"
+  },
+  {
+    "title": "¿La tormenta que derritió el suelo de Siberia en 1 hora? 😱",
+    "title_opener": "question",
+    "title_intensity": "extreme",
+    "hook_text": "El suelo no puede derretirse... ¿o sí?",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "impossible",
+    "script": "Esto suena falso: una tormenta derritió el suelo congelado de Siberia en minutos. En agosto de 2020, una tormenta eléctrica sobre Yakutia descargó calor tan concentrado sobre el permafrost que abrió cráteres de hasta 50 metros de diámetro en horas. El suelo literalmente explotó desde adentro. Pero lo más perturbador: esos cráteres siguen abriéndose solos, sin tormenta. Mándale esto a alguien que crea que el clima extremo solo afecta otros países. Y de esta forma.",
+    "word_count": 75,
+    "search_summary": "Las tormentas eléctricas en Yakutia, Siberia en 2020 aceleraron la explosión del permafrost formando cráteres de 50 metros.",
+    "comment_question": "¿Sigues creyendo que el permafrost solo le importa a los científicos? 🌍",
+    "source_note": "Siberian Times / Instituto de Permafrost, Rusia, 2020",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "clima extremo",
+      "tormenta Siberia",
+      "permafrost explosión",
+      "cráteres Yakutia",
+      "fenómenos naturales",
+      "datos curiosos",
+      "catástrofes naturales",
+      "tormenta eléctrica",
+      "clima extremo documental",
+      "tormenta en siberia"
+    ],
+    "hashtags": [
+      "#shorts",
+      "##datoscuriosos",
+      "#climaextremo",
+      "#siberia",
+      "#fenomenosnaturales"
+    ],
+    "video_queries": [
+      "siberia frozen tundra landscape",
+      "lightning storm dark sky timelapse",
+      "permafrost ground cracking collapse",
+      "massive crater open ground drone",
+      "frozen ground explosion aerial view"
+    ],
+    "has_loop": true,
+    "topic": "extreme weather",
+    "structure": "myth-debunk",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "La tumba de Gobekli Tepe fue enterrada a propósito en 8000 a.C. 😱",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "Nadie sabe quién lo hizo",
+    "hook_template": "authority-cant-explain",
+    "emotional_tone": "creepy",
+    "script": "Alguien enterró el templo más antiguo del mundo... a propósito. Göbekli Tepe, en Turquía, tiene 12,000 años — dos veces más viejo que Stonehenge. Alrededor del 8000 a.C., alguien lo sepultó bajo toneladas de tierra y piedra, capa por capa, con cuidado. No fue erosión. No fue un derrumbe. Cada columna fue tapada deliberadamente. No existe ninguna escritura, ninguna pista de por qué. ¿Fue un ritual? ¿Una advertencia? Explícamelo tú, porque los arqueólogos llevan 30 años sin respuesta. Y por eso.",
+    "word_count": 79,
+    "search_summary": "Göbekli Tepe en Turquía fue enterrado deliberadamente alrededor del 8000 a.C. y nadie sabe por qué.",
+    "comment_question": "¿Por qué alguien enterraría un templo tan importante? ¿Qué estaban escondiendo? 👀",
+    "source_note": "Excavaciones de Klaus Schmidt, Universidad de Heidelberg, 1995–2014",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "göbekli tepe",
+      "templo más antiguo del mundo",
+      "misterios arqueológicos",
+      "descubrimientos arqueológicos",
+      "historia antigua",
+      "datos curiosos",
+      "misterios sin resolver",
+      "civilizaciones antiguas",
+      "göbeklitepe"
+    ],
+    "hashtags": [
+      "#datoscuriosos",
+      "#arqueología",
+      "#misteriosdelahistoria",
+      "#shorts"
+    ],
+    "video_queries": [
+      "ancient stone temple ruins",
+      "archaeologist digging excavation site",
+      "massive stone columns ruins",
+      "workers burying large stones",
+      "dark underground excavation tunnel",
+      "archaeologist examining ancient ruins"
+    ],
+    "has_loop": true,
+    "topic": "archaeological discoveries",
+    "structure": "unsolved-mystery",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "¿La tormenta que heló el Lago Erie en una sola noche de 1996? 😱",
+    "title_opener": "question",
+    "title_intensity": "extreme",
+    "hook_text": "Esto pasa mientras duermes",
+    "hook_template": "you-experience",
+    "emotional_tone": "fear",
+    "script": "Ahora mismo, el aire sobre tu ciudad está acumulando energía para congelarte en horas. En enero de 1996, una tormenta ártica cubrió el Lago Erie —el más superficial de los Grandes Lagos— con hielo sólido en menos de una noche. 1,200 kilómetros cuadrados de agua líquida desaparecieron antes del amanecer. Eso no es clima extremo — eso es el planeta apagando un lago como si fuera una llama. ¿A qué velocidad tiene que caer la temperatura para que eso pase donde tú vives? Y exactamente así.",
+    "word_count": 80,
+    "search_summary": "La tormenta ártica de enero 1996 congeló el Lago Erie entero en una sola noche.",
+    "comment_question": "¿Cuánto frío necesitas donde vives para que se congele un río? 🧊",
+    "source_note": "NOAA National Weather Service, 1996",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "clima extremo",
+      "tormenta ártica",
+      "Lago Erie congelado",
+      "fenómenos naturales",
+      "datos curiosos",
+      "tormenta de hielo",
+      "grandes lagos",
+      "fenómenos climáticos",
+      "datos en 30 segundos",
+      "clima extremo documental"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#climaextremo",
+      "#tormentaártica",
+      "#lagoerie",
+      "#datosviral"
+    ],
+    "video_queries": [
+      "dark storm clouds gathering city",
+      "arctic blizzard freezing landscape",
+      "frozen lake wide aerial winter",
+      "ice sheet expanding lake timelapse",
+      "frozen lake surface sunrise"
+    ],
+    "has_loop": true,
+    "topic": "extreme weather",
+    "structure": "happening-now",
+    "niche_styled": true,
+    "title_variant": "seo",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "¿El pez que se convirtió en tierra… hace 375 millones de años? 😱",
+    "title_opener": "question",
+    "title_intensity": "extreme",
+    "hook_text": "Un pez abandonó el mar para siempre",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "impossible",
+    "script": "Un animal eligió salir del agua y no volvió jamás. En 2004, paleontólogos encontraron en Ellesmere Island, Canadá, el fósil de Tiktaalik roseae — un pez de 375 millones de años con cuello, muñecas y pulmones. Podía apoyarse en sus aletas como brazos. Ese movimiento, en un instante geológico, conectó el océano con toda vida terrestre. Cada reptil, mamífero y humano desciende de ese momento. ¿Qué crees que lo empujó a salir? Y por eso.",
+    "word_count": 79,
+    "search_summary": "Tiktaalik roseae fósil 2004 Ellesmere Island pez con muñecas y cuello ancestro de todos los vertebrados terrestres.",
+    "comment_question": "¿Fue el hambre, el peligro o el azar lo que sacó a Tiktaalik del agua? 🤔",
+    "source_note": "Daeschler, Shubin & Jenkins, Nature, 2006",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "evolución",
+      "Tiktaalik",
+      "datos curiosos",
+      "fósiles",
+      "vertebrados terrestres",
+      "paleontología",
+      "origen de la vida",
+      "datos en 30 segundos",
+      "datos curiosos del mundo",
+      "origen de la vida en la tierra"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#evolución",
+      "#tiktaalik",
+      "#paleontología"
+    ],
+    "video_queries": [
+      "ocean waves prehistoric",
+      "arctic tundra landscape Canada",
+      "paleontologist fossil excavation",
+      "ancient fish fossil rock",
+      "land animal walking shore",
+      "human evolution silhouette"
+    ],
+    "has_loop": true,
+    "topic": "evolution",
+    "structure": "historical-story",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "La señal WOW de 1977 que nadie ha podido repetir 😱",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "Nadie lo puede explicar",
+    "hook_template": "authority-cant-explain",
+    "emotional_tone": "impossible",
+    "script": "Llegó una señal del espacio en 1977 — y nadie la ha vuelto a detectar en 47 años. El astrónomo Jerry Ehman la captó en el Observatorio Big Ear de Ohio. Duró exactamente 72 segundos, venía de la constelación Sagitario, y era tan perfecta que Ehman escribió '¡Wow!' en el margen del papel. La explicación más popular — un cometa — fue descartada en 2017 porque los dos cometas candidatos ni siquiera estaban en esa dirección. ¿Tú qué crees que la envió — porque la ciencia oficial sigue sin respuesta? Y por eso pasa.",
+    "word_count": 97,
+    "search_summary": "La señal Wow de 1977 captada en Ohio durante 72 segundos desde Sagitario nunca se ha repetido ni explicado.",
+    "comment_question": "¿Qué crees que generó la señal Wow — cometa, estrella, o algo más? 👽",
+    "source_note": "Observatorio Big Ear, Ohio State University, 1977",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "misterios del espacio",
+      "señal wow 1977",
+      "extraterrestres",
+      "astronomía datos",
+      "datos curiosos espacio",
+      "señales del espacio",
+      "vida extraterrestre",
+      "misterios sin resolver",
+      "datos en 30 segundos",
+      "misterios del espacio exterior",
+      "señal wow 1977 audio",
+      "astronomía datos curiosos"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datosc curiosos",
+      "#espacio",
+      "#misterio",
+      "#señalwow"
+    ],
+    "video_queries": [
+      "radio telescope night sky",
+      "space signal data screen",
+      "observatory control room vintage",
+      "constellation stars milky way",
+      "scientist writing notes paper",
+      "deep space dark universe"
+    ],
+    "has_loop": true,
+    "topic": "space",
+    "structure": "unsolved-mystery",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
   }
 ]
