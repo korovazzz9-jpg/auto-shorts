@@ -1,5 +1,122 @@
 {
-  "pending": null,
+  "pending": {
+    "data": {
+      "title": "El pulpo que edita su propio ADN en tiempo real 🤯",
+      "title_opener": "the-x",
+      "title_intensity": "extreme",
+      "hook_text": "Ningún animal hace esto",
+      "hook_template": "authority-cant-explain",
+      "emotional_tone": "impossible",
+      "script": "Los científicos llevan años sin explicar cómo lo hace. El pulpo californiano edita su propio ARN mientras piensa — no su ADN heredado, sino las instrucciones activas en sus neuronas, en tiempo real. Eso no debería ser posible: la evolución opera en generaciones, no en segundos. Pero este pulpo rediseña su sistema nervioso solo cuando cambia la temperatura del agua. Ningún otro animal conocido hace eso. ¿Qué más está reescribiendo sobre sí mismo sin que nadie lo note? Y por eso exactamente.",
+      "word_count": 79,
+      "search_summary": "El pulpo californiano edita su ARN en tiempo real para adaptar su sistema nervioso al frío del agua.",
+      "comment_question": "Si pudieras editar tu cerebro en tiempo real como el pulpo, ¿qué cambiarías primero? 🧠",
+      "source_note": "Tel Aviv University y Woods Hole, 2022",
+      "pair_resolved": false,
+      "loop_connectors": [
+        "why",
+        "how"
+      ],
+      "tags": [
+        "pulpo californiano",
+        "animales increíbles",
+        "datos curiosos animales",
+        "ARN edición",
+        "biología curiosa",
+        "datos en 30 segundos",
+        "misterios del reino animal",
+        "cerebro animal",
+        "curiosidades científicas",
+        "animales increíbles del mundo",
+        "datos curiosos animales para niños"
+      ],
+      "hashtags": [
+        "#shorts",
+        "datoscuriosos",
+        "#animales",
+        "#ciencia",
+        "#pulpo"
+      ],
+      "video_queries": [
+        "octopus underwater swimming close",
+        "octopus camouflage ocean floor",
+        "neuron brain signal animation",
+        "deep ocean cold water dark",
+        "octopus tentacles moving slow"
+      ],
+      "has_loop": true,
+      "topic": "the animal kingdom",
+      "structure": "unsolved-mystery",
+      "topical": false,
+      "niche_styled": true,
+      "pairable_claim": "",
+      "title_variant": "narrative",
+      "title_style": "statement",
+      "hashtag_position": "end"
+    },
+    "pending_pair": {
+      "id": "yPkN8HsuA3I-1790555070",
+      "topic": "historical mysteries",
+      "part_a_video_id": "yPkN8HsuA3I",
+      "part_a_title": "¿El mapa que existió 300 años antes de que se explorara? 😱",
+      "claim": "La Antártida estuvo libre de hielo hace menos de 12,000 años.",
+      "part_b_video_id": null,
+      "status": "awaiting_b",
+      "created_at": 1790555070.857875
+    },
+    "pair_start_mode": false,
+    "selections": {
+      "ded28d3b693040c7de7ebe0d72a9ee83daa6bfb1c984adba0ee5372d7c755e7b": [
+        {
+          "link": "https://videos.pexels.com/video-files/17836505/17836505-hd_1080_1920_25fps.mp4",
+          "id": 17836505,
+          "preview": "https://images.pexels.com/videos/17836505/aquarium-pulp-17836505.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630",
+          "source": "pexels"
+        }
+      ],
+      "b7bdc9ea3c2c57ddc3f3a109708798e2fade81ba2e57dfc8423458ec71f608df": [
+        {
+          "link": "https://videos.pexels.com/video-files/35662097/15112641_1080_1920_60fps.mp4",
+          "id": 35662097,
+          "preview": "https://images.pexels.com/videos/35662097/4k-nature-adventure-destination-bubble-maker-coral-gardens-35662097.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630",
+          "source": "pexels"
+        }
+      ],
+      "c0dd017dfbf8c1b7e7514ffbc334a08b90d090ea944dc51a9f6d3bff1b669dad": [
+        {
+          "link": "https://videos.pexels.com/video-files/35010179/14831284_1080_1920_30fps.mp4",
+          "id": 35010179,
+          "preview": "https://images.pexels.com/videos/35010179/pexels-photo-35010179.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630",
+          "source": "pexels"
+        }
+      ],
+      "7a3f1abf2e634f69f92a434bce5e69e965163f6d98b85449abf5a589ab3d2d4e": [
+        {
+          "link": "https://videos.pexels.com/video-files/20349819/20349819-hd_1080_1920_60fps.mp4",
+          "id": 20349819,
+          "preview": "https://images.pexels.com/videos/20349819/pexels-photo-20349819.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630",
+          "source": "pexels"
+        }
+      ],
+      "bda006239c0b4409ecb354a35a6565722a07e13902a49ce5c1428f31cbcc904d": [
+        {
+          "link": "https://videos.pexels.com/video-files/38434903/16321455_1080_1920_30fps.mp4",
+          "id": 38434903,
+          "preview": "https://images.pexels.com/videos/38434903/pexels-photo-38434903.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630",
+          "source": "pexels"
+        },
+        {
+          "link": "https://videos.pexels.com/video-files/34617338/14671432_1080_1920_60fps.mp4",
+          "id": 34617338,
+          "preview": "https://images.pexels.com/videos/34617338/pexels-photo-34617338.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630",
+          "source": "pexels"
+        }
+      ]
+    },
+    "status": "publishing",
+    "created": "2026-10-08T00:17:53.842406+00:00",
+    "publishing_at": "2026-10-08T00:21:44.791780+00:00"
+  },
   "attempts": [
     {
       "id": "34221465880:1",
@@ -7826,6 +7943,57 @@
         "target_scenes": 6
       },
       "error": null
+    },
+    {
+      "id": "37706951932:1",
+      "at": "2026-10-08T00:17:53.842406+00:00",
+      "outcome": "deferred",
+      "resumed": false,
+      "title": "El pulpo que edita su propio ADN en tiempo real 🤯",
+      "episode": "2026-10-08T00:17:53.842406+00:00",
+      "slot": "2026-10-08T00:17:00+00:00",
+      "video_id": null,
+      "selection": {
+        "filter_version": 3,
+        "retries": 0,
+        "retry_recovered": 0,
+        "unknown_usage_attempts": 0,
+        "retry_input_tokens": 0,
+        "retry_output_tokens": 0,
+        "retry_reasons": null,
+        "reused_selections": 0,
+        "extra_searches": 2,
+        "downloaded_scenes": 6,
+        "backup_scenes": 0,
+        "extra_input_tokens": 8735,
+        "extra_output_tokens": 128,
+        "initial_scenes": 4,
+        "source_errors": null,
+        "source_candidates": {
+          "pexels": 67,
+          "pixabay": 0,
+          "coverr": 0
+        },
+        "downloaded_sources": {
+          "pexels": 6
+        },
+        "stock_cache_hits": 0,
+        "beats": 7,
+        "vetted": 5,
+        "cache_hits": 0,
+        "no_preview": 0,
+        "api_error": 0,
+        "unparsed": 0,
+        "rejected": 2,
+        "bypass": false,
+        "vision_calls": 7,
+        "no_candidates": 0,
+        "search_error": 0,
+        "input_tokens": 30577,
+        "output_tokens": 448,
+        "target_scenes": 6
+      },
+      "error": "<HttpError 410 when requesting https://youtube.googleapis.com/upload/youtube/v3/videos?part=snippet%2Cstatus&alt=json&uploadType=resumable returned \"Gone\". Details: \"Gone\">"
     }
   ]
 }
