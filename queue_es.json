@@ -1,54 +1,5 @@
 [
   {
-    "title": "¿La tormenta que heló el Lago Erie en una sola noche de 1996? 😱",
-    "title_opener": "question",
-    "title_intensity": "extreme",
-    "hook_text": "Esto pasa mientras duermes",
-    "hook_template": "you-experience",
-    "emotional_tone": "fear",
-    "script": "Ahora mismo, el aire sobre tu ciudad está acumulando energía para congelarte en horas. En enero de 1996, una tormenta ártica cubrió el Lago Erie —el más superficial de los Grandes Lagos— con hielo sólido en menos de una noche. 1,200 kilómetros cuadrados de agua líquida desaparecieron antes del amanecer. Eso no es clima extremo — eso es el planeta apagando un lago como si fuera una llama. ¿A qué velocidad tiene que caer la temperatura para que eso pase donde tú vives? Y exactamente así.",
-    "word_count": 80,
-    "search_summary": "La tormenta ártica de enero 1996 congeló el Lago Erie entero en una sola noche.",
-    "comment_question": "¿Cuánto frío necesitas donde vives para que se congele un río? 🧊",
-    "source_note": "NOAA National Weather Service, 1996",
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "clima extremo",
-      "tormenta ártica",
-      "Lago Erie congelado",
-      "fenómenos naturales",
-      "datos curiosos",
-      "tormenta de hielo",
-      "grandes lagos",
-      "fenómenos climáticos",
-      "datos en 30 segundos",
-      "clima extremo documental"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#climaextremo",
-      "#tormentaártica",
-      "#lagoerie",
-      "#datosviral"
-    ],
-    "video_queries": [
-      "dark storm clouds gathering city",
-      "arctic blizzard freezing landscape",
-      "frozen lake wide aerial winter",
-      "ice sheet expanding lake timelapse",
-      "frozen lake surface sunrise"
-    ],
-    "has_loop": true,
-    "topic": "extreme weather",
-    "structure": "happening-now",
-    "niche_styled": true,
-    "title_variant": "seo",
-    "hashtag_position": "end"
-  },
-  {
     "title": "¿El pez que se convirtió en tierra… hace 375 millones de años? 😱",
     "title_opener": "question",
     "title_intensity": "extreme",
