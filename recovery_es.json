@@ -8489,6 +8489,57 @@
         "target_scenes": 6
       },
       "error": null
+    },
+    {
+      "id": "38071104108:1",
+      "at": "2026-10-10T17:17:52.684134+00:00",
+      "outcome": "published",
+      "resumed": false,
+      "title": "El pez arquero que aprendió a cazar fuera del agua 🤯",
+      "episode": "2026-10-10T17:17:52.684134+00:00",
+      "slot": "2026-10-10T17:17:00+00:00",
+      "video_id": "jsBP7J-ck6E",
+      "selection": {
+        "filter_version": 3,
+        "retries": 0,
+        "retry_recovered": 0,
+        "unknown_usage_attempts": 0,
+        "retry_input_tokens": 0,
+        "retry_output_tokens": 0,
+        "retry_reasons": null,
+        "reused_selections": 0,
+        "extra_searches": 3,
+        "downloaded_scenes": 6,
+        "backup_scenes": 1,
+        "extra_input_tokens": 13704,
+        "extra_output_tokens": 98,
+        "initial_scenes": 2,
+        "source_errors": null,
+        "source_candidates": {
+          "pexels": 79,
+          "pixabay": 2,
+          "coverr": 0
+        },
+        "downloaded_sources": {
+          "pexels": 6
+        },
+        "stock_cache_hits": 0,
+        "beats": 8,
+        "vetted": 4,
+        "cache_hits": 0,
+        "no_preview": 0,
+        "api_error": 0,
+        "unparsed": 0,
+        "rejected": 4,
+        "bypass": false,
+        "vision_calls": 8,
+        "no_candidates": 0,
+        "search_error": 0,
+        "input_tokens": 36169,
+        "output_tokens": 418,
+        "target_scenes": 6
+      },
+      "error": null
     }
   ]
 }
