@@ -1,50 +1,50 @@
 {
   "outlier_counts": {
     "ancient history": 2,
-    "archaeological discoveries": 3,
+    "archaeological discoveries": 4,
     "ancient civilizations": 2,
     "historical mysteries": 6,
     "the human body": 1,
-    "the ocean": 4,
+    "the ocean": 3,
     "evolution": 3,
     "volcanoes and earthquakes": 5,
     "space": 1,
     "future technology": 5,
     "the animal kingdom": 4,
-    "extreme weather": 2,
+    "extreme weather": 4,
     "natural wonders": 1
   },
   "outlier_titles": {
     "ancient history": [
-      "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos",
-      "Tres datos históricos alucinantes #historia #interesante #hechos"
+      "Crazy Facts About Queen Cleopatra 🇪🇬 #history #shorts #cleopatra",
+      "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos"
     ],
     "archaeological discoveries": [
       "7 Datos Curiosos sobre la Atlántida  #historia #curiosidades",
       "La Reina Roja de Palenque🏺 #reelsvideo #shorts #fyp #curiosidades #datoscuriosos",
-      "¿Encontraron el Arca de Noé en 2025? 😱 ¡Increíble descubrimiento en Turquía! #shorts #datoscuriosos"
+      "4 hallazgos que jamás debieron permanecer ocultos 👀"
     ],
     "ancient civilizations": [
       "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos",
-      "Garras antiguas talladas en hueso humano🦴 #reelsvideo #shorts #fyp #curiosidades #datoscuriosos"
+      "7 Datos Curiosos sobre la Atlántida  #historia #curiosidades"
     ],
     "historical mysteries": [
+      "Pruebas de que Jesús existió Realmente? #shorts",
       "✅ La verdadera historia de los tres cerditos 🐷💀 #short #shortsviral",
-      "Los misterios del Amazonas #amazonas #mitos #leyendas #curiosidades #shortsviral",
       "Secretos que los guardias reales no quieren que sepas dato curioso #curiosidades #sabiasque #shorts"
     ],
     "the human body": [
       "DATO CURIOSO - LA NIÑA PERRO #shorts"
     ],
     "the ocean": [
-      "Las profundidades del Oceano #shorts",
       "¿Tienes Talasofobia? 🤯😰 #shorts #talasofobia #fobias #short #mar #oceano",
-      "Las islas más peligrosas del mundo 🌎🤯 #curiosidades #shorts #estadosunidos"
+      "Las islas más peligrosas del mundo 🌎🤯 #curiosidades #shorts #estadosunidos",
+      "LOS GRANDES MISTERIOS DEL OCÉANO | #shorts"
     ],
     "evolution": [
-      "POPEYE FUE BASADO POR UNA PERSONA EN LA VIDA REAL #datoscuriosos #popeyes #shorts",
-      "Primeras Figuras LEGO #lego #datoscuriosos #minifiguras #shorts",
-      "7 DATOS CURIOSOS DE YAYOROZU MOMO #shorts #yaoyorozumomo #bokunoheroacademia"
+      "3 DATOS del CYBERTRUCK 👀 #datoscuriosos",
+      "Arbol Familiar de Pokémon en 1 MINUTO #shorts",
+      "La increíble evolución de un bebé paso a paso 👶"
     ],
     "volcanoes and earthquakes": [
       "🌍💥 El terremoto más potente #curiosidades #datoscuriosos",
@@ -66,7 +66,8 @@
     ],
     "extreme weather": [
       "The Scariest Natural Disasters Caught On Camera 🌪 #shorts",
-      "Las Cataratas del Niágara se congelaron tras temperaturas extremas. #ClimaExtremo #Viral #Shorts"
+      "Multi-Vortex Tornadoes #shorts",
+      "¿Crees que escapaste del tornado? Mira a tu derecha..."
     ],
     "natural wonders": [
       "Maravillas del Río Amazonas: Naturaleza Exuberante y Vida Salvaje"
@@ -98,6 +99,14 @@
       "ratio": 291.6
     },
     {
+      "topic": "ancient history",
+      "title": "Crazy Facts About Queen Cleopatra 🇪🇬 #history #shorts #cleopatra",
+      "video_id": "Xv-_c3WtY8M",
+      "views": 21689950,
+      "subs": 75000,
+      "ratio": 289.2
+    },
+    {
       "topic": "natural wonders",
       "title": "Maravillas del Río Amazonas: Naturaleza Exuberante y Vida Salvaje",
       "video_id": "K5UgjcZPUEc",
@@ -106,20 +115,20 @@
       "ratio": 278.3
     },
     {
+      "topic": "historical mysteries",
+      "title": "✅ La verdadera historia de los tres cerditos 🐷💀 #short #shortsviral",
+      "video_id": "QQ0sdApwJ0s",
+      "views": 5053225,
+      "subs": 19500,
+      "ratio": 259.1
+    },
+    {
       "topic": "ancient history",
       "title": "¿Por qué falta la mitad del Coliseo romano? 😱",
       "video_id": "k18cQG9VuUw",
       "views": 14142779,
       "subs": 54600,
       "ratio": 259.0
-    },
-    {
-      "topic": "historical mysteries",
-      "title": "✅ La verdadera historia de los tres cerditos 🐷💀 #short #shortsviral",
-      "video_id": "QQ0sdApwJ0s",
-      "views": 5015808,
-      "subs": 19500,
-      "ratio": 257.2
     },
     {
       "topic": "evolution",
@@ -133,42 +142,34 @@
       "topic": "historical mysteries",
       "title": "EL TSUNAMI MÁS GRANDE DE LA HISTORIA",
       "video_id": "Tp_f3ZBfxcc",
-      "views": 1790955,
-      "subs": 7760,
-      "ratio": 230.8
+      "views": 1804398,
+      "subs": 7770,
+      "ratio": 232.2
     },
     {
       "topic": "archaeological discoveries",
       "title": "¿Encontraron el Arca de Noé en 2025? 😱 ¡Increíble descubrimiento en Turquía! #shorts #datoscuriosos",
       "video_id": "hHTNpfzZ1lo",
-      "views": 31871,
-      "subs": 152,
-      "ratio": 209.7
-    },
-    {
-      "topic": "the human body",
-      "title": "DATO CURIOSO - LA NIÑA PERRO #shorts",
-      "video_id": "9e82SusaU8c",
-      "views": 15719437,
-      "subs": 77400,
-      "ratio": 203.1
+      "views": 35132,
+      "subs": 156,
+      "ratio": 225.2
     }
   ],
   "saturation": {
-    "ancient history": 646190,
-    "archaeological discoveries": 93360,
-    "ancient civilizations": 147566,
-    "shipwrecks and lost treasures": 1074,
-    "historical mysteries": 297520,
-    "the human body": 676399,
+    "ancient history": 1000000,
+    "archaeological discoveries": 223513,
+    "ancient civilizations": 629893,
+    "shipwrecks and lost treasures": 2454,
+    "historical mysteries": 1000000,
+    "the human body": 1000000,
     "the animal kingdom": 1000000,
-    "the ocean": 472160,
-    "evolution": 629248,
-    "volcanoes and earthquakes": 76339,
-    "extreme weather": 187781,
-    "natural wonders": 246137,
-    "space": 776164,
+    "the ocean": 1000000,
+    "evolution": 1000000,
+    "volcanoes and earthquakes": 213894,
+    "extreme weather": 882490,
+    "natural wonders": 901925,
+    "space": 1000000,
     "future technology": 298101
   },
-  "updated": "2026-10-05"
+  "updated": "2026-10-12"
 }
