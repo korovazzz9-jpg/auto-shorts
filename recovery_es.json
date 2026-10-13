@@ -1,114 +1,5 @@
 {
-  "pending": {
-    "data": {
-      "title": "¿La tormenta que paralizó Texas con hielo... en julio de 1972? 😱",
-      "title_opener": "question",
-      "title_intensity": "extreme",
-      "hook_text": "Nadie lo vio venir",
-      "hook_template": "authority-cant-explain",
-      "emotional_tone": "impossible",
-      "script": "Nadie puede explicar cómo cayó hielo en pleno verano de Texas. El 4 de julio de 1972, una tormenta de granizo destruyó cultivos en Lubbock en minutos — granizo del tamaño de pelotas de béisbol, con 38°C afuera. Los meteorólogos dijeron: anomalía térmica. Pero el granizo siguió cayendo durante 4 horas seguidas, algo físicamente imposible con ese calor. Ningún modelo climático de entonces — ni de ahora — lo reproduce. ¿Qué lo causó realmente? Y por eso exactamente.",
-      "word_count": 75,
-      "search_summary": "Tormenta de granizo extrema en Lubbock Texas el 4 de julio de 1972 destruyó cultivos con temperatura de 38 grados.",
-      "comment_question": "¿Granizo 4 horas seguidas con 38°C afuera — cómo es eso posible? 🤯",
-      "source_note": "NOAA Storm Data archives, 1972",
-      "loop_connectors": [
-        "why",
-        "how"
-      ],
-      "tags": [
-        "tormenta extrema",
-        "granizo gigante",
-        "clima extremo Texas",
-        "fenómenos meteorológicos inexplicables",
-        "datos curiosos",
-        "misterios del clima",
-        "tormenta de verano",
-        "desastres naturales",
-        "tormenta extrema en rusia",
-        "granizo gigante en brasil"
-      ],
-      "hashtags": [
-        "#shorts",
-        "##datoscuriosos",
-        "#climaextremo",
-        "#tormentasgranizo",
-        "#misterios"
-      ],
-      "video_queries": [
-        "hailstorm destroying crops field",
-        "giant hail falling summer",
-        "Lubbock Texas storm aerial view",
-        "meteorologist weather map analysis",
-        "extreme hail damage cars street",
-        "summer thunderstorm dark sky"
-      ],
-      "has_loop": true,
-      "topic": "extreme weather",
-      "structure": "unsolved-mystery",
-      "niche_styled": true,
-      "title_variant": "narrative",
-      "hashtag_position": "end"
-    },
-    "pending_pair": null,
-    "pair_start_mode": false,
-    "selections": {
-      "b709e50dc57bb449584125d53641d466d829d6c3a3cd05c00c8fcba0a09d63b3": [
-        {
-          "link": "https://videos.pexels.com/video-files/27408344/12137206_1080_1920_25fps.mp4",
-          "id": 27408344,
-          "preview": "https://images.pexels.com/videos/27408344/pexels-photo-27408344.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630",
-          "source": "pexels"
-        }
-      ],
-      "af8706828f19f72ba309f763c1077c4740210905b5fa0d5b5316400224105e1a": [
-        {
-          "link": "https://videos.pexels.com/video-files/32410944/13825475_1080_1920_30fps.mp4",
-          "id": 32410944,
-          "preview": "https://images.pexels.com/videos/32410944/4k-drone-4k-drone-footage-aerial-by-drone-aerial-drone-32410944.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630",
-          "source": "pexels"
-        },
-        {
-          "link": "https://videos.pexels.com/video-files/32410813/13825187_1080_1920_30fps.mp4",
-          "id": 32410813,
-          "preview": "https://images.pexels.com/videos/32410813/4k-drone-footage-aerial-by-drone-blue-sky-clouds-clouds-32410813.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630",
-          "source": "pexels"
-        }
-      ],
-      "ea59663296121ad53f098fba22845e74ddb300d31a43fb736e1bdb99f7677554": [
-        {
-          "link": "https://videos.pexels.com/video-files/8828779/8828779-hd_1080_1920_30fps.mp4",
-          "id": 8828779,
-          "preview": "https://images.pexels.com/videos/8828779/pexels-photo-8828779.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630",
-          "source": "pexels"
-        },
-        {
-          "link": "https://videos.pexels.com/video-files/8828912/8828912-hd_1080_1920_30fps.mp4",
-          "id": 8828912,
-          "preview": "https://images.pexels.com/videos/8828912/pexels-photo-8828912.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630",
-          "source": "pexels"
-        }
-      ],
-      "c06aba8fe65a0f7185149ac42822da25a0bab7909c4652ac984075ab26d0511c": [
-        {
-          "link": "https://videos.pexels.com/video-files/19555119/19555119-hd_1080_1920_24fps.mp4",
-          "id": 19555119,
-          "preview": "https://images.pexels.com/videos/19555119/pexels-photo-19555119.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630",
-          "source": "pexels"
-        }
-      ],
-      "2cd32a543f5fc72a72f303a98ea8682d9f22ea055c686e85302f7037556b26ac": [
-        {
-          "link": "https://videos.pexels.com/video-files/12107199/12107199-hd_1080_1920_60fps.mp4",
-          "id": 12107199,
-          "preview": "https://images.pexels.com/videos/12107199/pexels-photo-12107199.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630",
-          "source": "pexels"
-        }
-      ]
-    },
-    "status": "prepared",
-    "created": "2026-10-12T13:18:03.034577+00:00"
-  },
+  "pending": null,
   "attempts": [
     {
       "id": "34221465880:1",
@@ -9365,6 +9256,57 @@
         "target_scenes": 6
       },
       "error": "403, message='Invalid response status', url='wss://speech.platform.bing.com/consumer/speech/synthesize/readaloud/edge/v1?TrustedClientToken=6A5AA1D4EAFF4E9FB37E23D68491D6F4&ConnectionId=69ea1421f49046d2aa650570249694db&Sec-MS-GEC=2D296164198CBABECEB25C6C1BC124507435D3FACA8E31EBDCCE3875EF419B08&Sec-MS-GEC-Version=1-143.0.3650.75'"
+    },
+    {
+      "id": "38437413714:1",
+      "at": "2026-10-13T17:17:50.744283+00:00",
+      "outcome": "published",
+      "resumed": true,
+      "title": "¿La tormenta que paralizó Texas con hielo... en julio de 1972? 😱",
+      "episode": "2026-10-12T13:18:03.034577+00:00",
+      "slot": "2026-10-13T17:17:00+00:00",
+      "video_id": "TULzZBPllJg",
+      "selection": {
+        "filter_version": 3,
+        "retries": 0,
+        "retry_recovered": 0,
+        "unknown_usage_attempts": 0,
+        "retry_input_tokens": 0,
+        "retry_output_tokens": 0,
+        "retry_reasons": null,
+        "reused_selections": 5,
+        "extra_searches": 0,
+        "downloaded_scenes": 6,
+        "backup_scenes": 1,
+        "extra_input_tokens": 0,
+        "extra_output_tokens": 0,
+        "initial_scenes": 5,
+        "source_errors": null,
+        "source_candidates": {
+          "pexels": 9,
+          "pixabay": 0,
+          "coverr": 0
+        },
+        "downloaded_sources": {
+          "pexels": 6
+        },
+        "stock_cache_hits": 0,
+        "beats": 1,
+        "vetted": 0,
+        "cache_hits": 0,
+        "no_preview": 0,
+        "api_error": 0,
+        "unparsed": 0,
+        "rejected": 1,
+        "bypass": false,
+        "vision_calls": 1,
+        "no_candidates": 0,
+        "search_error": 0,
+        "input_tokens": 4384,
+        "output_tokens": 64,
+        "target_scenes": 6
+      },
+      "error": null
     }
   ]
 }
