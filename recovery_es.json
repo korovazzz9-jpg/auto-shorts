@@ -9314,6 +9314,57 @@
         "target_scenes": 6
       },
       "error": "403, message='Invalid response status', url='wss://speech.platform.bing.com/consumer/speech/synthesize/readaloud/edge/v1?TrustedClientToken=6A5AA1D4EAFF4E9FB37E23D68491D6F4&ConnectionId=68f2b35cc69a4d72bbae608832714f8c&Sec-MS-GEC=31792BCF4F65068113847C6AD58B41D64FFD0ADE662108CED60B9F1FEA4C51BD&Sec-MS-GEC-Version=1-143.0.3650.75'"
+    },
+    {
+      "id": "38403731522:1",
+      "at": "2026-10-13T13:17:57.063015+00:00",
+      "outcome": "deferred",
+      "resumed": true,
+      "title": "¿La tormenta que paralizó Texas con hielo... en julio de 1972? 😱",
+      "episode": "2026-10-12T13:18:03.034577+00:00",
+      "slot": "2026-10-13T13:17:00+00:00",
+      "video_id": null,
+      "selection": {
+        "filter_version": 3,
+        "retries": 0,
+        "retry_recovered": 0,
+        "unknown_usage_attempts": 0,
+        "retry_input_tokens": 0,
+        "retry_output_tokens": 0,
+        "retry_reasons": null,
+        "reused_selections": 5,
+        "extra_searches": 0,
+        "downloaded_scenes": 6,
+        "backup_scenes": 1,
+        "extra_input_tokens": 0,
+        "extra_output_tokens": 0,
+        "initial_scenes": 5,
+        "source_errors": null,
+        "source_candidates": {
+          "pexels": 9,
+          "pixabay": 0,
+          "coverr": 0
+        },
+        "downloaded_sources": {
+          "pexels": 6
+        },
+        "stock_cache_hits": 3,
+        "beats": 1,
+        "vetted": 0,
+        "cache_hits": 0,
+        "no_preview": 0,
+        "api_error": 0,
+        "unparsed": 0,
+        "rejected": 1,
+        "bypass": false,
+        "vision_calls": 1,
+        "no_candidates": 0,
+        "search_error": 0,
+        "input_tokens": 4384,
+        "output_tokens": 64,
+        "target_scenes": 6
+      },
+      "error": "403, message='Invalid response status', url='wss://speech.platform.bing.com/consumer/speech/synthesize/readaloud/edge/v1?TrustedClientToken=6A5AA1D4EAFF4E9FB37E23D68491D6F4&ConnectionId=69ea1421f49046d2aa650570249694db&Sec-MS-GEC=2D296164198CBABECEB25C6C1BC124507435D3FACA8E31EBDCCE3875EF419B08&Sec-MS-GEC-Version=1-143.0.3650.75'"
     }
   ]
 }
