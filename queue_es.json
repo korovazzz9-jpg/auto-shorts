@@ -444,5 +444,52 @@
     "niche_styled": true,
     "title_variant": "narrative",
     "hashtag_position": "end"
+  },
+  {
+    "title": "¿El terremoto de 1783 que creó una isla... y la borró? 😱",
+    "title_opener": "question",
+    "title_intensity": "extreme",
+    "hook_text": "Una isla nació y murió en días",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "impossible",
+    "script": "Una isla entera brotó del mar en cuestión de días — sin que nadie la pidiera. En febrero de 1783, el terremoto de Calabria sacudió el sur de Italia con tanta fuerza que el fondo marino se levantó frente a la costa de Scilla y formó una isla nueva. Los pescadores locales desembarcaron en ella. Semanas después, el mar la tragó de regreso como si nunca hubiera existido. Hoy no queda ni una roca. ¿Habrías pisado esa isla sabiendo que el suelo temblaba? Y así es como.",
+    "word_count": 80,
+    "search_summary": "El terremoto de Calabria de 1783 hizo emerger una isla temporal frente a Scilla que desapareció semanas después.",
+    "comment_question": "¿Tú habrías pisado una isla nacida de un terremoto? 🌊",
+    "source_note": "Guidoboni & Comastri, Catalogue of Strong Earthquakes, 1997",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "terremoto calabria 1783",
+      "isla que desapareció",
+      "volcanes y terremotos",
+      "datos curiosos historia",
+      "fenómenos naturales extremos",
+      "terremotos italia",
+      "curiosidades geológicas",
+      "datoscuriosos",
+      "volcanes y terremotos para niños"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#terremotos",
+      "#fenomenosnaturales"
+    ],
+    "video_queries": [
+      "island emerging from sea waves",
+      "earthquake damage coastal italy",
+      "fishermen rocky shoreline Mediterranean",
+      "ocean waves submerging rocks",
+      "empty sea horizon no land"
+    ],
+    "has_loop": true,
+    "topic": "volcanoes and earthquakes",
+    "structure": "historical-story",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
   }
 ]
