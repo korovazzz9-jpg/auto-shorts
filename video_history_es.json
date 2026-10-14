@@ -14829,5 +14829,64 @@
       "output_tokens": 242,
       "target_scenes": 6
     }
+  },
+  {
+    "video_id": "WtAfcCr1qj4",
+    "published_at": "2026-10-14T00:24:07.282041+00:00",
+    "title": "¿El pez que se parte en dos… y ambas mitades sobreviven? 😱",
+    "topic": "the animal kingdom",
+    "hook_template": "sounds-fake",
+    "title_opener": "question",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 28.8,
+    "voice": "es-CO-GonzaloNeural",
+    "caption_color": "white",
+    "structure": "happening-now",
+    "pair_role": "a",
+    "clip_selection": {
+      "filter_version": 3,
+      "retries": 0,
+      "retry_recovered": 0,
+      "unknown_usage_attempts": 0,
+      "retry_input_tokens": 0,
+      "retry_output_tokens": 0,
+      "retry_reasons": null,
+      "reused_selections": 0,
+      "extra_searches": 2,
+      "downloaded_scenes": 6,
+      "backup_scenes": 1,
+      "extra_input_tokens": 9894,
+      "extra_output_tokens": 128,
+      "initial_scenes": 3,
+      "source_errors": null,
+      "source_candidates": {
+        "pexels": 69,
+        "pixabay": 5,
+        "coverr": 0
+      },
+      "downloaded_sources": {
+        "pexels": 6
+      },
+      "stock_cache_hits": 0,
+      "beats": 7,
+      "vetted": 5,
+      "cache_hits": 0,
+      "no_preview": 0,
+      "api_error": 0,
+      "unparsed": 0,
+      "rejected": 2,
+      "bypass": false,
+      "vision_calls": 7,
+      "no_candidates": 0,
+      "search_error": 0,
+      "input_tokens": 33497,
+      "output_tokens": 400,
+      "target_scenes": 6
+    }
   }
 ]
