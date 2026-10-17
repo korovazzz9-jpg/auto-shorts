@@ -10281,6 +10281,57 @@
         "target_scenes": 6
       },
       "error": null
+    },
+    {
+      "id": "39053078169:1",
+      "at": "2026-10-17T17:18:00.353902+00:00",
+      "outcome": "published",
+      "resumed": false,
+      "title": "El pez pistola dispara sonido que hierve el agua 🤯",
+      "episode": "2026-10-17T17:18:00.353902+00:00",
+      "slot": "2026-10-17T17:17:00+00:00",
+      "video_id": "S1TNGXzH9mU",
+      "selection": {
+        "filter_version": 3,
+        "retries": 0,
+        "retry_recovered": 0,
+        "unknown_usage_attempts": 0,
+        "retry_input_tokens": 0,
+        "retry_output_tokens": 0,
+        "retry_reasons": null,
+        "reused_selections": 0,
+        "extra_searches": 2,
+        "downloaded_scenes": 6,
+        "backup_scenes": 1,
+        "extra_input_tokens": 9382,
+        "extra_output_tokens": 128,
+        "initial_scenes": 4,
+        "source_errors": null,
+        "source_candidates": {
+          "pexels": 67,
+          "pixabay": 4,
+          "coverr": 0
+        },
+        "downloaded_sources": {
+          "pexels": 6
+        },
+        "stock_cache_hits": 0,
+        "beats": 7,
+        "vetted": 5,
+        "cache_hits": 0,
+        "no_preview": 0,
+        "api_error": 0,
+        "unparsed": 0,
+        "rejected": 2,
+        "bypass": false,
+        "vision_calls": 7,
+        "no_candidates": 0,
+        "search_error": 0,
+        "input_tokens": 33137,
+        "output_tokens": 448,
+        "target_scenes": 6
+      },
+      "error": null
     }
   ]
 }
