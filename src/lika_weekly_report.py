@@ -21,6 +21,7 @@ PAGE_NAME = "Юмор шортс Humor Shorts"
 IG_USERNAME = "smeshno_shorts"
 YOUTUBE_NAME = PAGE_NAME
 MAX_ITEMS = 200
+MIN_RANK_AGE = timedelta(hours=24)
 
 
 class DataUnavailable(Exception):
@@ -153,11 +154,13 @@ def fetch_facebook(now):
     page_token = page["access_token"]
     profile = _graph(PAGE_ID, page_token, fields="name,followers_count")
     media = _page_items(f"{PAGE_ID}/videos", page_token,
-                        "id,description,created_time,views,permalink_url", now)
+                        "id,description,created_time,published,views,permalink_url", now)
     videos = [{"id": m["id"], "title": (m.get("description") or "Reel").splitlines()[0],
-               "published_at": m["created_time"], "url": m.get("permalink_url", ""),
+               "published_at": m["created_time"],
+               "url": ("https://www.facebook.com" + m["permalink_url"]
+                       if m.get("permalink_url", "").startswith("/") else m.get("permalink_url", "")),
                "views": int(m.get("views") or 0)}
-              for m in media if m.get("created_time")]
+              for m in media if m.get("published") is True and m.get("created_time")]
     videos = _recent(videos, now)
     views_status = None
     if videos and not any(v["views"] > 0 for v in videos):
@@ -217,8 +220,8 @@ def save_snapshot(results, now, path=HISTORY):
 
 
 def render(results, history, now):
-    lines = [f"📊 Лика · {now:%d.%m.%Y} · новые ролики за 7 дней",
-             "Просмотры роликов — с публикации, на момент отчёта."]
+    lines = [f"📊 Лика · {now:%d.%m.%Y} · опубликовано за 7 дней",
+             "Рейтинг: ролики старше 24 часов; просмотры с публикации."]
     for key, name in (("youtube", "YouTube"), ("instagram", "Instagram"), ("facebook", "Facebook")):
         lines.append(f"\n{name}")
         result = results[key]
@@ -236,17 +239,20 @@ def render(results, history, now):
         else:
             lines.append(f"Подписчики: {count:,} (первый замер; прирост со следующей недели)")
         videos = result["videos"]
-        lines.append(f"Новых роликов: {len(videos)}")
-        measured = [v for v in videos if v.get("views") is not None]
-        if videos and len(measured) == len(videos):
+        lines.append(f"Опубликовано роликов: {len(videos)}")
+        eligible = [v for v in videos if _published(v["published_at"]) <= now - MIN_RANK_AGE]
+        measured = [v for v in eligible if v.get("views") is not None]
+        if eligible and len(measured) == len(eligible):
             best = max(measured, key=lambda v: v["views"])
             worst = min(measured, key=lambda v: v["views"])
             lines.append(f"Самый просматриваемый: {best['views']:,} — {best['title'][:50]}\n{best['url']}")
             lines.append(f"Наименее просматриваемый: {worst['views']:,} — {worst['title'][:50]}\n{worst['url']}")
-        elif videos:
-            lines.append(f"Лидер и аутсайдер не определены: просмотры доступны для {len(measured)}/{len(videos)} роликов")
+        elif eligible:
+            lines.append(f"Лидер и аутсайдер не определены: просмотры доступны для {len(measured)}/{len(eligible)} зрелых роликов")
             if result.get("views_status"):
                 lines.append(result["views_status"])
+        elif videos:
+            lines.append("Рейтинг пока не готов: всем роликам меньше 24 часов")
         else:
             lines.append("За неделю новых роликов нет")
     return "\n".join(lines)
