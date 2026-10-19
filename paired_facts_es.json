@@ -1,15 +1,5 @@
 [
   {
-    "id": "7jromFTQUdM-1786321421",
-    "topic": "the human body",
-    "part_a_video_id": "7jromFTQUdM",
-    "part_a_title": "Tu hígado se regenera completo en 90 días 😱",
-    "claim": "El hígado es el único órgano interno humano que se regenera.",
-    "part_b_video_id": null,
-    "status": "awaiting_b",
-    "created_at": 1786321421.3348148
-  },
-  {
     "id": "84nZAcc0A3U-1786494235",
     "topic": "ancient civilizations",
     "part_a_video_id": "84nZAcc0A3U",
@@ -198,5 +188,15 @@
     "part_b_video_id": null,
     "status": "awaiting_b",
     "created_at": 1791937447.8256063
+  },
+  {
+    "id": "XgN1FU-nLEs-1792369413",
+    "topic": "natural wonders",
+    "part_a_video_id": "XgN1FU-nLEs",
+    "part_a_title": "¿El río que corre bajo el Amazonas… al revés? 😱",
+    "claim": "El Amazonas descarga más agua que los siguientes siete ríos combinados.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1792369413.862553
   }
 ]
