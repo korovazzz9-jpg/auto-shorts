@@ -1,15 +1,5 @@
 [
   {
-    "id": "84nZAcc0A3U-1786494235",
-    "topic": "ancient civilizations",
-    "part_a_video_id": "84nZAcc0A3U",
-    "part_a_title": "El imperio que enterró a sus reyes con sus sirvientes vivos 💀",
-    "claim": "Las Tumbas Reales de Ur contienen los instrumentos musicales más antiguos del mundo.",
-    "part_b_video_id": null,
-    "status": "awaiting_b",
-    "created_at": 1786494235.3416164
-  },
-  {
     "id": "_Y43sAv72uE-1786926269",
     "topic": "volcanoes and earthquakes",
     "part_a_video_id": "_Y43sAv72uE",
@@ -198,5 +188,15 @@
     "part_b_video_id": null,
     "status": "awaiting_b",
     "created_at": 1792369413.862553
+  },
+  {
+    "id": "cri3lzICQbU-1792542353",
+    "topic": "ancient civilizations",
+    "part_a_video_id": "cri3lzICQbU",
+    "part_a_title": "La ciudad que los sumerios borraron de sus propios registros 😱",
+    "claim": "Eridu aparece en la Lista Real Sumeria como ciudad anterior al diluvio.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1792542353.3123484
   }
 ]
