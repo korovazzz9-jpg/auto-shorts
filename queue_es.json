@@ -1,54 +1,5 @@
 [
   {
-    "title": "¿La señal de radio que llegó del espacio... en 2022? 😱",
-    "title_opener": "question",
-    "title_intensity": "extreme",
-    "hook_text": "Nadie la puede explicar",
-    "hook_template": "authority-cant-explain",
-    "emotional_tone": "awe",
-    "script": "Lleva tres años repitiendo y nadie sabe qué la genera. En 2022, el telescopio CHIME en Canadá detectó una señal de radio que pulsa cada 21 minutos desde el espacio profundo — exacta, mecánica, precisa. Lo normal sería una estrella de neutrones. Pero ninguna estrella de neutrones conocida puede pulsar tan lento. Los astrónomos la siguen rastreando hoy. ¿Qué manda una señal perfecta cada 21 minutos — y lleva años haciéndolo? Y exactamente así.",
-    "word_count": 78,
-    "search_summary": "En 2022 el telescopio CHIME detectó una señal de radio espacial que pulsa exactamente cada 21 minutos y no tiene explicación científica.",
-    "comment_question": "¿Estrella de neutrones rara, objeto desconocido... o algo más? 👀",
-    "source_note": "Nature Astronomy, CHIME Collaboration, 2022",
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "misterios del espacio",
-      "señales del espacio",
-      "datos del espacio",
-      "telescopio CHIME",
-      "señal de radio espacial",
-      "objetos espaciales desconocidos",
-      "astronomía datos",
-      "misterio sin explicación",
-      "misterios del espacio exterior",
-      "señales del espacio wow",
-      "datos del espacio para dormir"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#espaciomisterioso",
-      "#astronomia",
-      "#datoscuriosos"
-    ],
-    "video_queries": [
-      "radio telescope night sky",
-      "deep space stars milky way",
-      "scientist watching monitor screen",
-      "space signal radar wave",
-      "astronomer observatory dark"
-    ],
-    "has_loop": true,
-    "topic": "space",
-    "structure": "unsolved-mystery",
-    "niche_styled": true,
-    "title_variant": "narrative",
-    "hashtag_position": "end"
-  },
-  {
     "title": "¿El géiser que hierve y congela al mismo tiempo? 😱",
     "title_opener": "question",
     "title_intensity": "extreme",
