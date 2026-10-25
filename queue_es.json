@@ -1,55 +1,5 @@
 [
   {
-    "title": "¿La sonda Voyager 1 transmitió datos erróneos por 5 meses en 2023? 😱",
-    "title_opener": "question",
-    "title_intensity": "extreme",
-    "hook_text": "Nadie entendía qué decía",
-    "hook_template": "authority-cant-explain",
-    "emotional_tone": "impossible",
-    "script": "Por 5 meses, la NASA no pudo leer los datos que enviaba su propia sonda. La Voyager 1, a 24 mil millones de kilómetros de la Tierra, empezó a transmitir pura basura en 2023. Ingenieros tardaron meses en rastrear el fallo: un chip de memoria corrupto. Lo rodearon con código alternativo y recuperaron la señal. Pero la sonda tiene 46 años y nadie sabe cuántos chips más están fallando ahora mismo. ¿Cuánto tiempo le queda antes de que la perdamos para siempre? Y por eso.",
-    "word_count": 80,
-    "search_summary": "La sonda Voyager 1 transmitió datos corruptos e ilegibles por 5 meses en 2023 por un chip de memoria fallido.",
-    "comment_question": "¿Crees que la NASA puede mantener viva a la Voyager 1 mucho más tiempo? 🛸",
-    "source_note": "NASA Jet Propulsion Laboratory, 2024",
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "voyager 1",
-      "NASA misterio",
-      "espacio datos corruptos",
-      "sonda espacial fallo",
-      "datos en 30 segundos",
-      "curiosidades del espacio",
-      "misterios del universo",
-      "exploración espacial",
-      "voyager 19",
-      "nasa misterios"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#espaciomisterioso",
-      "#voyager1",
-      "#NASA",
-      "#datoscuriosos"
-    ],
-    "video_queries": [
-      "deep space dark starfield",
-      "NASA mission control engineers screens",
-      "satellite dish signal transmission night",
-      "engineer analyzing data computer screen",
-      "space probe outer solar system animation",
-      "NASA control room team working"
-    ],
-    "has_loop": true,
-    "topic": "space",
-    "structure": "unsolved-mystery",
-    "niche_styled": true,
-    "title_variant": "narrative",
-    "hashtag_position": "end"
-  },
-  {
     "title": "El escriba sumerio que vendió su ciudad por un cargo en 2350 a.C. 💀",
     "title_opener": "the-x",
     "title_intensity": "extreme",
