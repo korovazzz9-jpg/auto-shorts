@@ -1,46 +1,45 @@
 {
   "outlier_counts": {
-    "ancient history": 3,
+    "ancient history": 5,
     "archaeological discoveries": 4,
-    "ancient civilizations": 3,
-    "historical mysteries": 2,
+    "ancient civilizations": 2,
+    "historical mysteries": 4,
     "the human body": 2,
-    "the ocean": 2,
-    "evolution": 4,
+    "the ocean": 1,
+    "evolution": 3,
     "volcanoes and earthquakes": 5,
     "space": 1,
     "future technology": 5,
-    "the animal kingdom": 2,
+    "the animal kingdom": 3,
     "extreme weather": 3,
     "natural wonders": 1
   },
   "outlier_titles": {
     "ancient history": [
-      "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos",
-      "Tres datos históricos alucinantes #historia #interesante #hechos",
-      "Balduino IV: el hombre más fuerte de Medio Oriente  #BalduinoIV #datoscuriosos  #historiareal"
+      "DATO CURIOSO - LA NIÑA PERRO #shorts",
+      "Los Mayas Nunca Desaparecieron #Mayas  #maya #mexico #historia #curiosidadeshistoricas",
+      "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos"
     ],
     "archaeological discoveries": [
+      "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos",
       "Hallazgo del siglo 5 a.C en aguas Italianas #historia #datoscuriosos #shorts",
-      "7 Datos Curiosos sobre la Atlántida  #historia #curiosidades",
       "La Reina Roja de Palenque🏺 #reelsvideo #shorts #fyp #curiosidades #datoscuriosos"
     ],
     "ancient civilizations": [
       "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos",
-      "Tres datos históricos alucinantes #historia #interesante #hechos",
-      "7 Datos Curiosos sobre la Atlántida  #historia #curiosidades"
+      "Tres datos históricos alucinantes #historia #interesante #hechos"
     ],
     "historical mysteries": [
       "✅ La verdadera historia de los tres cerditos 🐷💀 #short #shortsviral",
-      "Paul Tibbets: El piloto de Hiroshima que nunca se arrepintió #historia #datoscuriosos"
+      "Paul Tibbets: El piloto de Hiroshima que nunca se arrepintió #historia #datoscuriosos",
+      "Secretos que los guardias reales no quieren que sepas dato curioso #curiosidades #sabiasque #shorts"
     ],
     "the human body": [
       "DATO CURIOSO - LA NIÑA PERRO #shorts",
       "¿Qué pasaría si tu CUERPO fuera de estos MATERIALES? 🧊🌋💀 #shorts"
     ],
     "the ocean": [
-      "¿Tienes Talasofobia? 🤯😰 #shorts #talasofobia #fobias #short #mar #oceano",
-      "Por que nenhum aquário tem um TUBARÃO BRANCO? #curiosidades #fatoscuriosos #tubarão #animais #shorts"
+      "¿Tienes Talasofobia? 🤯😰 #shorts #talasofobia #fobias #short #mar #oceano"
     ],
     "evolution": [
       "3 DATOS del CYBERTRUCK 👀 #datoscuriosos",
@@ -53,7 +52,7 @@
       "la erupción del volcan vesubio en pompeya"
     ],
     "space": [
-      "Planetas donde podría haber vida 😱🪐🔥 | Gian Astronomy #planetas #shorts #gianastronomy"
+      "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos"
     ],
     "future technology": [
       "Científicos EXPERIMENTOS CASEROS! 😱 #shorts",
@@ -62,7 +61,8 @@
     ],
     "the animal kingdom": [
       "SHAKIRA se ASUSTÓ por una RATA 😱 #shakira #curiosidades #datoscuriosos",
-      "El DETALLE de hotel Transylvania que NO VISTE #mavis #datoscuriosos #curiosidades"
+      "El DETALLE de hotel Transylvania que NO VISTE #mavis #datoscuriosos #curiosidades",
+      "Los animales sabían que era su último día juntos 🐾✨ #love #animals #shorts"
     ],
     "extreme weather": [
       "Multi-Vortex Tornadoes #shorts",
@@ -118,9 +118,9 @@
       "topic": "historical mysteries",
       "title": "✅ La verdadera historia de los tres cerditos 🐷💀 #short #shortsviral",
       "video_id": "QQ0sdApwJ0s",
-      "views": 5092296,
+      "views": 5127408,
       "subs": 19600,
-      "ratio": 259.8
+      "ratio": 261.6
     },
     {
       "topic": "ancient history",
@@ -139,12 +139,12 @@
       "ratio": 250.0
     },
     {
-      "topic": "volcanoes and earthquakes",
+      "topic": "historical mysteries",
       "title": "EL TSUNAMI MÁS GRANDE DE LA HISTORIA",
       "video_id": "Tp_f3ZBfxcc",
-      "views": 1816234,
-      "subs": 7790,
-      "ratio": 233.1
+      "views": 1827100,
+      "subs": 7800,
+      "ratio": 234.2
     },
     {
       "topic": "archaeological discoveries",
@@ -157,19 +157,19 @@
   ],
   "saturation": {
     "ancient history": 1000000,
-    "archaeological discoveries": 129968,
-    "ancient civilizations": 345215,
-    "shipwrecks and lost treasures": 1709,
-    "historical mysteries": 732677,
+    "archaeological discoveries": 113742,
+    "ancient civilizations": 262063,
+    "shipwrecks and lost treasures": 2814,
+    "historical mysteries": 617874,
     "the human body": 1000000,
     "the animal kingdom": 1000000,
-    "the ocean": 986017,
+    "the ocean": 860472,
     "evolution": 1000000,
-    "volcanoes and earthquakes": 156068,
-    "extreme weather": 493759,
-    "natural wonders": 521617,
+    "volcanoes and earthquakes": 119498,
+    "extreme weather": 396168,
+    "natural wonders": 443322,
     "space": 1000000,
     "future technology": 298101
   },
-  "updated": "2026-10-19"
+  "updated": "2026-10-26"
 }
