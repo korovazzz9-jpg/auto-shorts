@@ -1,15 +1,5 @@
 [
   {
-    "id": "_Y43sAv72uE-1786926269",
-    "topic": "volcanoes and earthquakes",
-    "part_a_video_id": "_Y43sAv72uE",
-    "part_a_title": "¿El volcán que predijo un tsunami 400 años antes? 😱",
-    "claim": "Volcanic collapses generate tsunamis larger than earthquake-triggered ones.",
-    "part_b_video_id": "dgN_3xJkFaE",
-    "status": "resolved",
-    "created_at": 1786926269.2769396
-  },
-  {
     "id": "aCA8mRvUQH0-1787098972",
     "topic": "extreme weather",
     "part_a_video_id": "aCA8mRvUQH0",
@@ -198,5 +188,15 @@
     "part_b_video_id": null,
     "status": "awaiting_b",
     "created_at": 1792542353.3123484
+  },
+  {
+    "id": "WUithC9oE8k-1792974303",
+    "topic": "volcanoes and earthquakes",
+    "part_a_video_id": "WUithC9oE8k",
+    "part_a_title": "¿El volcán que generó un tsunami sin tocar el agua en 1888? 😱",
+    "claim": "Volcanic flank collapses can generate tsunamis larger than any earthquake.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1792974303.6495306
   }
 ]
