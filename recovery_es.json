@@ -13094,6 +13094,57 @@
         "target_scenes": 6
       },
       "error": null
+    },
+    {
+      "id": "40734240256:1",
+      "at": "2026-10-28T17:18:24.450238+00:00",
+      "outcome": "published",
+      "resumed": false,
+      "title": "¿La tormenta de 1972 que congeló el Golfo Pérsico en una noche? 😱",
+      "episode": "2026-10-28T17:18:24.450238+00:00",
+      "slot": "2026-10-28T17:17:00+00:00",
+      "video_id": "y9NNgoeRBpA",
+      "selection": {
+        "filter_version": 3,
+        "retries": 0,
+        "retry_recovered": 0,
+        "unknown_usage_attempts": 0,
+        "retry_input_tokens": 0,
+        "retry_output_tokens": 0,
+        "retry_reasons": null,
+        "reused_selections": 0,
+        "extra_searches": 2,
+        "downloaded_scenes": 6,
+        "backup_scenes": 0,
+        "extra_input_tokens": 8765,
+        "extra_output_tokens": 128,
+        "initial_scenes": 3,
+        "source_errors": null,
+        "source_candidates": {
+          "pexels": 69,
+          "pixabay": 1,
+          "coverr": 0
+        },
+        "downloaded_sources": {
+          "pexels": 6
+        },
+        "stock_cache_hits": 0,
+        "beats": 7,
+        "vetted": 5,
+        "cache_hits": 0,
+        "no_preview": 0,
+        "api_error": 0,
+        "unparsed": 0,
+        "rejected": 2,
+        "bypass": false,
+        "vision_calls": 7,
+        "no_candidates": 0,
+        "search_error": 0,
+        "input_tokens": 31259,
+        "output_tokens": 398,
+        "target_scenes": 6
+      },
+      "error": null
     }
   ]
 }
