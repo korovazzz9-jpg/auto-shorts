@@ -1,15 +1,5 @@
 [
   {
-    "id": "aCA8mRvUQH0-1787098972",
-    "topic": "extreme weather",
-    "part_a_video_id": "aCA8mRvUQH0",
-    "part_a_title": "¿La tormenta que congeló un lago en 8 horas en 1911? 😱",
-    "claim": "El lago Constanza se ha congelado completamente solo cuatro veces en 700 años.",
-    "part_b_video_id": null,
-    "status": "awaiting_b",
-    "created_at": 1787098972.8986852
-  },
-  {
     "id": "gcV5MYyTHTE-1787531057",
     "topic": "the ocean",
     "part_a_video_id": "gcV5MYyTHTE",
@@ -198,5 +188,15 @@
     "part_b_video_id": null,
     "status": "awaiting_b",
     "created_at": 1792974303.6495306
+  },
+  {
+    "id": "DK_YG5GHLJw-1793147231",
+    "topic": "ancient history",
+    "part_a_video_id": "DK_YG5GHLJw",
+    "part_a_title": "El pueblo hitita que existió 800 años antes de los hititas 😱",
+    "claim": "Los hititas firmaron el primer tratado de paz escrito conocido.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1793147231.95123
   }
 ]
