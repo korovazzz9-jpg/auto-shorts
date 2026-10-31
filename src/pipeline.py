@@ -10,6 +10,7 @@ from build_video import build_video, pick_cta_phrase
 from config import CFG, CHANNEL
 from fetch_stock_video import fetch_clips, selection_stats
 from episode_recovery import EpisodeRecovery
+from fact_review import verify_es_script
 from generate_script import generate_script
 from notify import notify
 from paired_facts import find_pending_pair, resolve_pair, start_pair
@@ -98,6 +99,33 @@ def _run(recovery) -> None:
                 pair_start=pair_start_mode,
                 pair_resolve_claim=pending_pair["claim"] if pending_pair else None,
             )
+    if CHANNEL == "es":
+        from script_facts import check_consistency
+        for review_attempt in range(2):
+            problems = check_consistency(data)
+            if problems:
+                approved, reason = False, "; ".join(problems)
+            else:
+                try:
+                    approved, reason = verify_es_script(data)
+                except Exception as exc:
+                    approved, reason = False, f"review unavailable ({type(exc).__name__})"
+            if approved:
+                print(f"  ES fact review: approved ({review_attempt + 1}/2).")
+                break
+            print(f"  ES fact review: rejected ({review_attempt + 1}/2): {reason}")
+            if checkpoint:
+                recovery.abandon()
+                checkpoint = None
+            if review_attempt == 0:
+                data = generate_script(
+                    on_this_day=topical,
+                    pair_start=pair_start_mode,
+                    pair_resolve_claim=pending_pair["claim"] if pending_pair else None,
+                )
+        else:
+            raise RuntimeError("Two ES script candidates failed independent fact review")
+    if not checkpoint:
         checkpoint = recovery.prepare(data, pending_pair, pair_start_mode)
     print(f"  Тема: {data['topic']} | Заголовок: {data['title']}")
 

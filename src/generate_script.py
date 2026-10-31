@@ -702,11 +702,6 @@ def _build_user_content(topic: str, avoid_block: str, title_instruction: str | N
         f"(e.g. 'University of Washington study, 2008'), max 8 words, in {CFG['script_language']}, "
         "no URL. ONLY name a source you genuinely know; if not 100% sure, return \"\" — an "
         "invented source is worse than none.\n"
-        "- source_url: direct HTTPS link to a primary institution, museum, journal or government "
-        "page that supports the CENTRAL claim; no search-result links. If unsure, use empty string.\n"
-        "- source_quote: copy 40-180 characters VERBATIM from that page that support the "
-        "central claim, including the relevant date and subject if stated. Do not invent text. "
-        "If you cannot recall an exact quote, use empty string.\n"
         f"{_dropoff_note()}"
         f"{PAIR_START_INSTRUCTION if pair_start else ''}"
         f"{_pair_resolve_note(pair_resolve_claim) if pair_resolve_claim else ''}\n\n"
@@ -722,8 +717,6 @@ def _build_user_content(topic: str, avoid_block: str, title_instruction: str | N
         '"search_summary": "plain keyword-dense sentence", '
         '"comment_question": "provocative question about the fact", '
         '"source_note": "origin of the fact or empty string", '
-        '"source_url": "direct primary-source HTTPS URL or empty string", '
-        '"source_quote": "verbatim supporting passage or empty string", '
         + ('"pairable_claim": "short falsifiable/extendable claim or empty string", ' if pair_start else '')
         + ('"pair_resolved": true, ' if pair_resolve_claim else '')
         + '"loop_connectors": ["why", "how"], '

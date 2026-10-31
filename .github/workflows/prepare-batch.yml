@@ -100,9 +100,7 @@ jobs:
         working-directory: src
         env:
           CHANNEL: es
-          # Пока строгая проверка источника даёт 0 принятых в пробах,
-          # не оплачиваем 10 отклонённых сценариев ежедневно.
-          BATCH_LIMIT: ${{ inputs.batch_limit || '3' }}
+          BATCH_LIMIT: ${{ inputs.batch_limit || '10' }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
           YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
