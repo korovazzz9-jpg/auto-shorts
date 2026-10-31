@@ -1,0 +1,45 @@
+name: Track ES reach after 72 hours
+
+on:
+  schedule:
+    - cron: "47 10 * * *"
+  workflow_dispatch: {}
+
+concurrency:
+  group: track-es-reach
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: master
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install API dependencies
+        run: pip install "google-api-python-client>=2.130.0" "google-auth>=2.30.0" "python-dotenv>=1.0.0"
+
+      - name: Snapshot ES Shorts
+        working-directory: src
+        env:
+          CHANNEL: es
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_CLIENT_ID_ES: ${{ secrets.YT_CLIENT_ID_ES }}
+          YT_CLIENT_SECRET_ES: ${{ secrets.YT_CLIENT_SECRET_ES }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN_ES }}
+        run: python track_es_reach.py
+
+      - name: Persist snapshots
+        if: always()
+        run: |
+          bash scripts/git_persist.sh "chore(stats): ES reach snapshot $(date -u +%F)" \
+            stats/es/reach_after_72h.csv

@@ -159,15 +159,16 @@ def _pick_topic() -> str:
                          * _saturation_multiplier(t, saturation))
     ranked = sorted(pool, key=lambda t: -weight(t))
 
-    # Квоты 70/20/10 вместо чистого взвешивания по avg_views: взвешивание самоусиливает
+    # Квоты вместо чистого взвешивания по avg_views: взвешивание самоусиливает
     # победителей до усталости темы (локальный максимум — напр. серия почти одинаковых
-    # shipwreck-роликов). Явные квоты гарантируют исследование: 70% — верхняя треть тем,
-    # 20% — средняя, 10% — нижняя (wildcard). Внутри яруса — равномерно.
+    # shipwreck-роликов). ES: 75/20/5 по замеру 120 роликов за октябрь 2026; другие
+    # каналы оставляем на 70/20/10. Внутри яруса — равномерно.
     third = max(1, len(ranked) // 3)
     roll = random.random()
-    if roll < 0.7:
+    top_share, mid_share = (0.75, 0.20) if CHANNEL == "es" else (0.70, 0.20)
+    if roll < top_share:
         tier, label = ranked[:third], "top"
-    elif roll < 0.9:
+    elif roll < top_share + mid_share:
         tier, label = ranked[third:2 * third] or ranked[:third], "mid"
     else:
         tier, label = ranked[2 * third:] or ranked[-third:], "wild"
@@ -657,12 +658,13 @@ def _build_user_content(topic: str, avoid_block: str, title_instruction: str | N
         "every 4-5 seconds of the script) and for each one write a short stock-footage "
         "search query (2-4 words, concrete, visual, in English, the kind you'd type into "
         "a stock video site search box, matching what's being said at that point). "
-        "IMPORTANT for video queries: stock sites have generic footage, not specific "
-        "artifacts or rare objects. Write queries for the MOOD and SETTING, not the "
-        "exact object named in the script. Bad: 'sealed canopic jars egypt' (too specific). "
-        "Good: 'ancient egypt excavation', 'archaeologist digging ruins', 'dark underground "
-        "tunnel'. Always prefer wide scenes, landscapes, and human action over close-ups "
-        "of specific objects.\n\n"
+        "IMPORTANT for video queries: the FIRST query supplies the opening shot. It MUST "
+        "name the visible subject or action of the first spoken claim (or a recognizable "
+        "visual class if the exact artifact is too rare). Never use only mood, setting, "
+        "continent, or generic wildlife for this query. For a bird hunting snakes, search "
+        "'bird hunting snake', not 'African safari'. For LATER queries, use concrete "
+        "subjects/actions and then setting if needed; stock footage need not show a rare "
+        "named artifact exactly. Avoid vague scenery unrelated to the narration.\n\n"
         "Requirements:\n"
         f"- {title_instruction}\n"
         f"- {TITLE_OPENER_INSTRUCTION}\n"

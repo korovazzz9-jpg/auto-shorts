@@ -79,6 +79,7 @@ class SelectionTests(unittest.TestCase):
         self.assertIn('A bird hunts snakes.', create.call_args.kwargs['messages'][0]['content'][0]['text'])
         self.assertEqual(stock.selection_stats()['input_tokens'], 123)
         self.assertEqual(stock.selection_stats()['output_tokens'], 12)
+        self.assertIn('OPENING CLAIM', create.call_args.kwargs['messages'][0]['content'][0]['text'])
 
     def test_unknown_and_truncated_fail_closed(self):
         for raw, stop, outcome in [('None fit', 'end_turn', 'unparsed'),
@@ -166,6 +167,16 @@ class SelectionTests(unittest.TestCase):
             paths = stock.fetch_clips(['bird'], self.tmp.name, narration='The bird hunts snakes.')
         self.assertEqual(len(paths), 1)
         self.assertEqual(downloaded, ['https://invalid/clip3', 'https://invalid/clip1'])
+        self.assertTrue(stock.selection_stats()['opening_vetted'])
+
+    def test_later_clip_cannot_claim_opening_vetted(self):
+        with patch.object(stock, '_search_with_fallback', side_effect=[[], CANDIDATES[:1]]), \
+             patch.object(stock.requests, 'get', return_value=NS(content=b'video', raise_for_status=lambda: None)), \
+             patch.object(stock, '_is_valid_clip', return_value=True):
+            paths = stock.fetch_clips(['african wildlife', 'bird hunting snake'], self.tmp.name,
+                                      narration='A bird hunts snakes.')
+        self.assertEqual(len(paths), 1)
+        self.assertFalse(stock.selection_stats()['opening_vetted'])
 
     def test_saved_queue_context_without_network(self):
         queue = json.loads((ROOT / 'queue_es.json').read_text(encoding='utf-8'))
@@ -176,6 +187,7 @@ class SelectionTests(unittest.TestCase):
                 contexts = [c.args[2] for c in search.call_args_list[-len(data['video_queries']):]]
                 self.assertTrue(all(data['script'] in context for context in contexts))
                 self.assertTrue(contexts[0].startswith('Shot 1 of '))
+                self.assertIn('OPENING CLAIM', contexts[0])
         self.client.assert_not_called()
 
 
