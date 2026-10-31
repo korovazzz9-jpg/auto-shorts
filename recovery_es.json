@@ -13589,6 +13589,51 @@
         "output_tokens": 0
       },
       "error": "Two ES script candidates failed independent fact review"
+    },
+    {
+      "id": "41239527994:1",
+      "at": "2026-10-31T20:35:05.242373+00:00",
+      "outcome": "deferred",
+      "resumed": false,
+      "title": null,
+      "episode": null,
+      "slot": "2026-10-31T20:17:00+00:00",
+      "video_id": null,
+      "selection": {
+        "filter_version": 3,
+        "retries": 0,
+        "retry_recovered": 0,
+        "unknown_usage_attempts": 0,
+        "retry_input_tokens": 0,
+        "retry_output_tokens": 0,
+        "retry_reasons": null,
+        "reused_selections": 0,
+        "extra_searches": 0,
+        "downloaded_scenes": 0,
+        "backup_scenes": 0,
+        "extra_input_tokens": 0,
+        "extra_output_tokens": 0,
+        "initial_scenes": 0,
+        "opening_vetted": false,
+        "source_errors": null,
+        "source_candidates": null,
+        "downloaded_sources": null,
+        "stock_cache_hits": 0,
+        "beats": 0,
+        "vetted": 0,
+        "cache_hits": 0,
+        "no_preview": 0,
+        "api_error": 0,
+        "unparsed": 0,
+        "rejected": 0,
+        "bypass": false,
+        "vision_calls": 0,
+        "no_candidates": 0,
+        "search_error": 0,
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "error": "Two ES script candidates failed independent fact review"
     }
   ]
 }
