@@ -1,11 +1,19 @@
 """One-off live probe of the independent ES fact gate (no publishing)."""
 
 import sys
+import json
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from fact_review import verify_es_script
+
+if "--queue" in sys.argv:
+    queue = json.loads((Path(__file__).resolve().parents[1] / "queue_es.json").read_text(encoding="utf-8"))
+    for index, case in enumerate(queue):
+        approved, reason = verify_es_script(case)
+        print(f"queue_index={index} approved={approved} title={case['title']} reason={reason}")
+    raise SystemExit(0)
 
 
 cases = [
