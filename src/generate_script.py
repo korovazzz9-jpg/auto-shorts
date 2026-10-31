@@ -254,13 +254,13 @@ Structure, in order:
    are a top ranking signal, so the viewer should feel they CAN'T scroll without replying. Land
    on the single most debatable or personal point of the fact — never a generic recap or a soft
    "what do you think?". Pick the mechanism that creates the most disagreement or self-recognition:
-   a) Correction trap: state it so confidently that people who "know better" rush to correct you.
-      ("So technically, [common belief] was never actually true.")
+   a) Evidence-based challenge: ask viewers which interpretation of the documented fact they
+      accept. Never insert a false date, name, event, number, or claim to invite corrections.
    b) Personal-experience call: make a specific bet about the viewer's own body/life they'll want
       to confirm or deny. ("If your [body part] ever [sensation], you've felt this and didn't know it.")
    c) Camps: explicitly split the audience and predict one side won't accept it. ("Half of you will
       refuse to believe this even after watching twice.")
-   d) Unfinished "actually": leave a deliberate, baitable gap that begs an "actually..." reply.
+   d) Open interpretation: leave a genuine unresolved question about the verified fact.
    e) Share trigger: phrase it so the viewer wants to SEND it to a specific person — name the
       type of person who needs to see it ("Send this to someone who still thinks [belief]").
       Shares and share-to-DM are a top distribution signal on both YouTube and TikTok."""
@@ -322,8 +322,9 @@ Structure, in order:
    consequence, with one concrete detail that makes it land (a number, what survives today,
    what changed forever).
 4. Comment bait (one sentence, the LAST sentence): put the viewer INSIDE the dilemma — "What
-   would YOU have done?" grounded in the story's specific choice, or a correction trap on the
-   story's most debatable claim, or a share dare naming who needs to hear this story."""
+   would YOU have done?" grounded in the story's specific choice, or ask viewers to debate a
+   documented interpretation, or a share dare naming who needs to hear this story. Never change
+   the factual details to provoke a correction."""
 
 STRUCTURES = {
     "myth-debunk": STRUCTURE_MYTH_DEBUNK,

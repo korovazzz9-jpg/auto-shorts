@@ -1,6 +1,7 @@
 """Озвучивает текст в mp3 через edge-tts и возвращает тайминги слов для синхронных субтитров."""
 import asyncio
 import random
+import time
 
 import edge_tts
 
@@ -57,17 +58,25 @@ def text_to_speech(text: str, out_path: str) -> tuple[list[dict], str]:
             words = asyncio.run(_synthesize(text, out_path, voice))
         except Exception as e:
             last_err = e
-            print(f"  TTS attempt {attempt}: {e}, retrying...")
+            print(f"  TTS attempt {attempt} ({voice}): {e}")
+            if attempt < TTS_MAX_RETRIES:
+                time.sleep(4 * attempt)
+                alternatives = [v for v in CFG["voices"] if v != voice]
+                if alternatives:
+                    voice = random.choice(alternatives)
             continue
         duration = words[-1]["end"] if words else 0
         if duration >= TTS_MIN_DURATION:
             return words, voice
-        print(f"  TTS attempt {attempt}: audio too short ({duration:.1f}s < {TTS_MIN_DURATION}s), retrying...")
-    if not words and last_err is not None:
+        print(f"  TTS attempt {attempt} ({voice}): audio too short ({duration:.1f}s < {TTS_MIN_DURATION}s)")
+        if attempt < TTS_MAX_RETRIES:
+            time.sleep(4 * attempt)
+            alternatives = [v for v in CFG["voices"] if v != voice]
+            if alternatives:
+                voice = random.choice(alternatives)
+    if last_err is not None:
         raise last_err
-    # Последняя попытка — возвращаем что есть (в т.ч. пусто, если ловили только
-    # короткое-аудио случаи), pipeline дальше разберётся.
-    return words, voice
+    raise RuntimeError(f"TTS audio too short after {TTS_MAX_RETRIES} attempts")
 
 
 if __name__ == "__main__":
