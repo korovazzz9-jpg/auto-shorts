@@ -17,6 +17,7 @@ import os
 import re
 import time
 import unicodedata
+from urllib.parse import urlparse
 
 from anthropic import Anthropic
 from anthropic.types.message_create_params import MessageCreateParamsNonStreaming
@@ -229,7 +230,10 @@ def main() -> None:
 
         fact_problems = check_consistency(data) + check_source(data)
         if fact_problems:
-            print(f"  item-{i}: факт не подтверждён ({'; '.join(fact_problems)}), пропускаем.")
+            host = urlparse(str(data.get("source_url") or "")).hostname or "empty"
+            print(f"  item-{i}: факт не подтверждён ({'; '.join(fact_problems)}), "
+                  f"source_host={host}, quote_chars={len(str(data.get('source_quote') or ''))}, "
+                  "пропускаем.")
             continue
         data["source_verified"] = True
 
