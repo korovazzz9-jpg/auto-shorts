@@ -35,8 +35,7 @@ def verify_es_script(data: dict, client=None) -> tuple[bool, str]:
                 "all important concrete claims, return supported=false. Do not rewrite the script. "
                 "Return only JSON: {\"supported\": true/false, \"reason\": \"brief reason\"}."),
         messages=[{"role": "user", "content": json.dumps(
-            {"title": data.get("title", ""), "script": data.get("script", ""),
-             "source_hint": data.get("source_url") or data.get("source_note") or ""},
+            {"title": data.get("title", ""), "script": data.get("script", "")},
             ensure_ascii=False)}],
     )
     searched = any(getattr(block, "type", None) == "server_tool_use" and
