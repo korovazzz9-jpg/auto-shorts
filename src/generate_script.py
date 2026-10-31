@@ -8,6 +8,7 @@ from anthropic import Anthropic
 
 from config import CFG, CHANNEL
 from recent_titles import add_title_to_cache, add_topic_to_cache, get_recent_titles, get_recent_topics
+from script_facts import check_consistency
 from topic_stats import get_topic_median_views
 
 # Темы, которые НЕЛЬЗЯ использовать — слишком абстрактны/технически сложны,
@@ -781,6 +782,8 @@ _LOOP_END_WORDS = {"why", "how", "when", "where", "because"}
 def _validate(data: dict) -> list[str]:
     """Returns a list of human-readable problems; empty list means the script passed."""
     problems = []
+    if CHANNEL == "es":
+        problems.extend(check_consistency(data))
     script = data.get("script", "")
     word_count = len(script.split())
     reported = data.get("word_count")
