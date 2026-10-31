@@ -46,6 +46,7 @@ from generate_script import (
 from recent_titles import add_title_to_cache, add_topic_to_cache, get_recent_titles, get_recent_video_texts
 from script_queue import load_queue, save_queue
 from script_facts import check_consistency
+from fact_review import verify_es_script
 
 load_dotenv()
 
@@ -274,6 +275,12 @@ def main() -> None:
                 print(f"  item-{i}: «{data['title']}» похож на уже ОПУБЛИКОВАННОЕ видео "
                       f"(совпадение имён/чисел в скрипте) — пропускаем.")
                 continue
+
+            if os.getenv("CHANNEL", "en") == "es":
+                approved, reason = verify_es_script(data)
+                if not approved:
+                    print(f"  item-{i}: независимая проверка факта отклонила сценарий ({reason}).")
+                    continue
 
             add_title_to_cache(data["title"])
             queue.append(data)

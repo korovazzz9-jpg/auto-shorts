@@ -23,6 +23,9 @@ cases = [
     ({"title": "El terremoto de Cascadia de 1700 provocó un tsunami en Japón",
       "script": "El 26 de enero de 1700 un gran terremoto en Cascadia generó un tsunami que llegó a Japón."},
      True),
+    ({"title": "El señor de El Caño fue enterrado con exactamente 31 sacrificados",
+      "script": "En la tumba T9 hallada en 2024 había exactamente 31 sacrificados. Los huesos demuestran que todos estaban bien alimentados y nunca fueron cautivos."},
+     False),
 ]
 
 for case, expected in cases:

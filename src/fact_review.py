@@ -32,7 +32,9 @@ def verify_es_script(data: dict, client=None) -> tuple[bool, str]:
                 "number, cause, mechanism, person, or outcome is UNSUPPORTED. Do not infer "
                 "support from a source that merely mentions the event. Prefer primary sources "
                 "(government, museum, research institution). If the one search cannot verify "
-                "all important concrete claims, return supported=false. Do not rewrite the script. "
+                "all important concrete claims, including negative claims (no evidence, nobody knows) "
+                "and descriptions of victims or motives, return supported=false. An estimate or 'up to N' "
+                "does not support an exact count of N. Do not rewrite the script. "
                 "Return only JSON: {\"supported\": true/false, \"reason\": \"brief reason\"}."),
         messages=[{"role": "user", "content": json.dumps(
             {"title": data.get("title", ""), "script": data.get("script", "")},
