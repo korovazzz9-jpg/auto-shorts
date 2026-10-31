@@ -26,6 +26,9 @@ cases = [
     ({"title": "El señor de El Caño fue enterrado con exactamente 31 sacrificados",
       "script": "En la tumba T9 hallada en 2024 había exactamente 31 sacrificados. Los huesos demuestran que todos estaban bien alimentados y nunca fueron cautivos."},
      False),
+    ({"title": "La espada de 2.3 metros que nadie debería poder cargar",
+      "script": "En Nara hallaron una espada de 2.37 metros. Nadie la pudo haber blandido: pesa demasiado. Fue creada únicamente para intimidar a los demonios."},
+     False),
 ]
 
 for case, expected in cases:

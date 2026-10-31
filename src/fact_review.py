@@ -27,14 +27,17 @@ def verify_es_script(data: dict, client=None) -> tuple[bool, str]:
         model="claude-haiku-4-5-20251001",
         max_tokens=500,
         tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 1}],
-        system=("You are an independent fact checker. Search the web for the MOST specific "
-                "claim in the supplied title and script. A real event with an invented date, "
+        system=("You are an independent fact checker. Search the web for the core event, "
+                "then check EVERY sentence of the title and script against the results. "
+                "A real event with an invented date, "
                 "number, cause, mechanism, person, or outcome is UNSUPPORTED. Do not infer "
                 "support from a source that merely mentions the event. Prefer primary sources "
                 "(government, museum, research institution). If the one search cannot verify "
                 "all important concrete claims, including negative claims (no evidence, nobody knows) "
                 "and descriptions of victims or motives, return supported=false. An estimate or 'up to N' "
-                "does not support an exact count of N. Do not rewrite the script. "
+                "does not support an exact count of N. Do not approve plausible embellishments "
+                "about weight, physical impossibility, intent, or supernatural purpose without "
+                "explicit source support. Do not rewrite the script. "
                 "Return only JSON: {\"supported\": true/false, \"reason\": \"brief reason\"}."),
         messages=[{"role": "user", "content": json.dumps(
             {"title": data.get("title", ""), "script": data.get("script", "")},
