@@ -702,6 +702,7 @@ def _build_user_content(topic: str, avoid_block: str, title_instruction: str | N
         f"(e.g. 'University of Washington study, 2008'), max 8 words, in {CFG['script_language']}, "
         "no URL. ONLY name a source you genuinely know; if not 100% sure, return \"\" — an "
         "invented source is worse than none.\n"
+        "- source_url: direct HTTPS URL for the source, or empty string if unknown.\n"
         f"{_dropoff_note()}"
         f"{PAIR_START_INSTRUCTION if pair_start else ''}"
         f"{_pair_resolve_note(pair_resolve_claim) if pair_resolve_claim else ''}\n\n"
@@ -717,6 +718,7 @@ def _build_user_content(topic: str, avoid_block: str, title_instruction: str | N
         '"search_summary": "plain keyword-dense sentence", '
         '"comment_question": "provocative question about the fact", '
         '"source_note": "origin of the fact or empty string", '
+        '"source_url": "direct source URL or empty string", '
         + ('"pairable_claim": "short falsifiable/extendable claim or empty string", ' if pair_start else '')
         + ('"pair_resolved": true, ' if pair_resolve_claim else '')
         + '"loop_connectors": ["why", "how"], '

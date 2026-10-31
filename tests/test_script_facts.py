@@ -18,6 +18,9 @@ class ScriptFactTests(unittest.TestCase):
         self.assertIn("title years absent from script: 1972", check_consistency(item))
         self.assertEqual([], check_consistency({"title": "Terremoto de 1700 en Cascadia",
                                                 "script": "En 1700 Cascadia sufrió un terremoto."}))
+        self.assertIn("title BCE date absent from script", check_consistency({
+            "title": "Sungir en 34,000 a.C.",
+            "script": "Encontraron Sungir en 1955 y llevaba 10,000 cuentas."}))
 
     def test_quote_must_be_on_trusted_page_and_match_anchors(self):
         item = {"title": "Terremoto de 1700 en Cascadia",

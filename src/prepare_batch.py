@@ -161,13 +161,18 @@ def main() -> None:
             custom_id=f"item-{i}",
             params=MessageCreateParamsNonStreaming(
                 model="claude-sonnet-4-6",
-                max_tokens=1600,
+                max_tokens=3000,
+                tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 1}],
                 system=[{"type": "text",
                          "text": build_system_prompt(structures[i]) + "\n\n" + LOOP_INSTRUCTION + "\n\n" + LENGTH_INSTRUCTION,
                          "cache_control": {"type": "ephemeral"}}],
                 messages=[{"role": "user", "content": _build_user_content(
                     topics[i], avoid_block, title_variants[i][0] + variety_note,
-                    structure=structures[i])}],
+                    structure=structures[i]) +
+                    "\nUse web_search once BEFORE choosing the fact. Choose a concrete fact "
+                    "directly supported by the search results; avoid sensational mechanisms "
+                    "or motives not stated by the source. Include the direct source URL in "
+                    "source_url. Return the full JSON without reasoning."}],
             ),
         )
         for i in range(need)
@@ -198,6 +203,11 @@ def main() -> None:
             print(f"  item-{i}: batch-запрос не удался ({status}), пропускаем.")
             continue
         try:
+            if not any(getattr(block, "type", None) == "server_tool_use" and
+                       getattr(block, "name", None) == "web_search"
+                       for block in result.result.message.content):
+                print(f"  item-{i}: веб-поиск источника не выполнен, пропускаем.")
+                continue
             data = _parse_response(result.result.message)
         except Exception as e:
             print(f"  item-{i}: не распарсился JSON ({e}); "

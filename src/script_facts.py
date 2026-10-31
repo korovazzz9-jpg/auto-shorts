@@ -13,6 +13,7 @@ from urllib.request import Request, urlopen
 
 
 _YEAR = re.compile(r"(?<!\d)(?:1[5-9]\d{2}|20\d{2})(?!\d)")
+_BCE_YEAR = re.compile(r"(?<!\d)(\d[\d,\.]{2,7})\s*(?:a\.?\s*c\.?|b\.?c\.?e?\.?)", re.I)
 _SKIP = {"para", "hace", "años", "desde", "entre", "sobre", "cuando", "donde",
          "nunca", "nadie", "minutos", "horas", "siglo", "siglos", "mundo",
          "entero", "entera", "propios", "propias", "propio", "propia", "solo",
@@ -56,6 +57,10 @@ def check_consistency(data: dict) -> list[str]:
     missing_years = set(_YEAR.findall(title)) - set(_YEAR.findall(script))
     if missing_years:
         problems.append(f"title years absent from script: {', '.join(sorted(missing_years))}")
+    bce_title = {re.sub(r"\D", "", year) for year in _BCE_YEAR.findall(title)}
+    bce_script = {re.sub(r"\D", "", year) for year in _BCE_YEAR.findall(script)}
+    if bce_title - bce_script:
+        problems.append("title BCE date absent from script")
     title_words = {w for w in _norm(title).split() if len(w) >= 4 and w not in _SKIP}
     story_words = set(_norm(script + " " + summary).split())
     if title_words and not title_words & story_words:
