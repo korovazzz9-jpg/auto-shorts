@@ -105,7 +105,7 @@ def _is_duplicate(a: dict, b: dict) -> bool:
 
 def main() -> None:
     queue = load_queue()
-    need = QUEUE_TARGET - len(queue)
+    need = min(QUEUE_TARGET - len(queue), max(1, int(os.getenv("BATCH_LIMIT", "10"))))
     if need <= 0:
         print(f"  Очередь уже полна ({len(queue)}/{QUEUE_TARGET}), ничего не готовим.")
         return
@@ -161,7 +161,7 @@ def main() -> None:
             custom_id=f"item-{i}",
             params=MessageCreateParamsNonStreaming(
                 model="claude-sonnet-4-6",
-                max_tokens=1800,
+                max_tokens=3000,
                 tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 1}],
                 system=[{"type": "text",
                          "text": build_system_prompt(structures[i]) + "\n\n" + LOOP_INSTRUCTION + "\n\n" + LENGTH_INSTRUCTION,
@@ -173,7 +173,9 @@ def main() -> None:
                     "If no source confirms the central claim, choose a different fact. "
                     "Use a direct HTTPS page on .gov, .edu, iceman.it, britishmuseum.org, "
                     "nature.com, or science.org; other hosts cannot pass verification. "
-                    "Copy the supporting passage exactly into source_quote."}],
+                    "Copy the supporting passage exactly into source_quote. The passage "
+                    "must name the title subject and title year; omit a year from the title "
+                    "if the passage does not contain it. Keep the full JSON response concise."}],
             ),
         )
         for i in range(need)
@@ -211,7 +213,8 @@ def main() -> None:
                 continue
             data = _parse_response(result.result.message)
         except Exception as e:
-            print(f"  item-{i}: не распарсился JSON ({e}), пропускаем.")
+            print(f"  item-{i}: не распарсился JSON ({e}); "
+                  f"stop_reason={getattr(result.result.message, 'stop_reason', '?')}, пропускаем.")
             continue
 
         # Обязательные поля для публикации (pipeline.py/publish.py читают их без .get) —

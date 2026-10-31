@@ -66,9 +66,13 @@ def check_source(data: dict, fetch=None) -> list[str]:
     """Require a real source page containing the model's claimed verbatim passage."""
     url = str(data.get("source_url") or "").strip()
     quote = str(data.get("source_quote") or "").strip()
-    parsed = urlparse(url)
+    try:
+        parsed = urlparse(url)
+        port = parsed.port
+    except ValueError:
+        return ["invalid source URL"]
     host = (parsed.hostname or "").lower()
-    if parsed.scheme != "https" or parsed.port not in (None, 443) or not any(
+    if parsed.scheme != "https" or port not in (None, 443) or not any(
         host == suffix.lstrip(".") or host.endswith(suffix) for suffix in _TRUSTED_HOSTS
     ):
         return ["missing trusted HTTPS source URL"]

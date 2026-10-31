@@ -10,7 +10,12 @@ on:
   # daily-слота ни у одного канала (EN/ES/PT).
   schedule:
     - cron: "17 9 * * *"
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      batch_limit:
+        description: "Max ES candidates for this manual run (1-10)"
+        required: false
+        default: "10"
 
 # 2026-07-09: JSON плохо merge-дружелюбен для git — при пересечении по времени с
 # recycle-winners.yml/discover-niche.yml (оба тоже пишут в queue_en/es/pt.json) конфликт
@@ -95,6 +100,7 @@ jobs:
         working-directory: src
         env:
           CHANNEL: es
+          BATCH_LIMIT: ${{ inputs.batch_limit || '10' }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
           YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
