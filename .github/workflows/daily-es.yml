@@ -19,7 +19,7 @@ jobs:
   # В Пн/Вт/Ср прайм-слот 00:17 UTC (18:17 Мехико) занимает серия (weekly-series-es.yml) —
   # обычное видео в этот слот не публикуем, иначе будет 5 роликов в день вместо 4.
   guard:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     outputs:
       skip: ${{ steps.check.outputs.skip }}
     steps:
@@ -34,7 +34,7 @@ jobs:
   publish:
     needs: guard
     if: needs.guard.outputs.skip == 'false'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: write   # коммитит queue_es.json обратно (Batch API preload, prepare_batch.py)
     steps:

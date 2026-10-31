@@ -29,7 +29,7 @@ permissions:
 
 jobs:
   check-and-retry:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       # 2026-07-13: ждём завершения живого прогона вместо немедленного skip — см. watchdog.yml
       # (реальный промах 12.07: guard пришёл за 5 секунд до конца ПАДАЮЩЕГО прогона).
