@@ -30,6 +30,14 @@ def pop_next() -> dict | None:
     queue = load_queue()
     if not queue:
         return None
+    if CHANNEL == "es":
+        from script_facts import check_consistency
+        while queue and (not queue[0].get("source_verified") or check_consistency(queue[0])):
+            rejected = queue.pop(0)
+            print(f"  ES queue: отвергнут непроверенный сценарий «{rejected.get('title', '')}».")
+        if not queue:
+            save_queue(queue)
+            return None
     item = queue.pop(0)
     save_queue(queue)
     return item

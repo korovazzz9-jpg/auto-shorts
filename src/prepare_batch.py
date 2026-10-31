@@ -45,6 +45,7 @@ from generate_script import (
 )
 from recent_titles import add_title_to_cache, add_topic_to_cache, get_recent_titles, get_recent_video_texts
 from script_queue import load_queue, save_queue
+from script_facts import check_consistency, check_source
 
 load_dotenv()
 
@@ -160,13 +161,19 @@ def main() -> None:
             custom_id=f"item-{i}",
             params=MessageCreateParamsNonStreaming(
                 model="claude-sonnet-4-6",
-                max_tokens=1600,
+                max_tokens=1800,
+                tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 1}],
                 system=[{"type": "text",
                          "text": build_system_prompt(structures[i]) + "\n\n" + LOOP_INSTRUCTION + "\n\n" + LENGTH_INSTRUCTION,
                          "cache_control": {"type": "ephemeral"}}],
                 messages=[{"role": "user", "content": _build_user_content(
                     topics[i], avoid_block, title_variants[i][0] + variety_note,
-                    structure=structures[i])}],
+                    structure=structures[i]) +
+                    "\nUse the web search tool to find a primary source BEFORE writing. "
+                    "If no source confirms the central claim, choose a different fact. "
+                    "Use a direct HTTPS page on .gov, .edu, iceman.it, britishmuseum.org, "
+                    "nature.com, or science.org; other hosts cannot pass verification. "
+                    "Copy the supporting passage exactly into source_quote."}],
             ),
         )
         for i in range(need)
@@ -197,6 +204,11 @@ def main() -> None:
             print(f"  item-{i}: batch-запрос не удался ({status}), пропускаем.")
             continue
         try:
+            if not any(getattr(block, "type", None) == "server_tool_use" and
+                       getattr(block, "name", None) == "web_search"
+                       for block in result.result.message.content):
+                print(f"  item-{i}: источник не искали через web search, пропускаем.")
+                continue
             data = _parse_response(result.result.message)
         except Exception as e:
             print(f"  item-{i}: не распарсился JSON ({e}), пропускаем.")
@@ -211,6 +223,12 @@ def main() -> None:
         if missing:
             print(f"  item-{i}: в JSON нет полей {missing}, пропускаем.")
             continue
+
+        fact_problems = check_consistency(data) + check_source(data)
+        if fact_problems:
+            print(f"  item-{i}: факт не подтверждён ({'; '.join(fact_problems)}), пропускаем.")
+            continue
+        data["source_verified"] = True
 
         # Пост-обработка одного элемента изолирована: сбой на одном не должен обрушить весь
         # прогон и потерять уже добавленные в очередь элементы (save_queue — после цикла).
