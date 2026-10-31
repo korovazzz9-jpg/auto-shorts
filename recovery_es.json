@@ -13402,6 +13402,58 @@
         "target_scenes": 6
       },
       "error": "No audio was received. Please verify that your parameters are correct."
+    },
+    {
+      "id": "41205765871:1",
+      "at": "2026-10-31T13:29:52.499991+00:00",
+      "outcome": "published",
+      "resumed": false,
+      "title": "¿El terremoto de 1700 que nadie sintió... hundió 2,000 km de costa? 😱",
+      "episode": "2026-10-31T13:29:52.499991+00:00",
+      "slot": "2026-10-31T13:17:00+00:00",
+      "video_id": "vU-e8h-Gs8U",
+      "selection": {
+        "filter_version": 3,
+        "retries": 0,
+        "retry_recovered": 0,
+        "unknown_usage_attempts": 0,
+        "retry_input_tokens": 0,
+        "retry_output_tokens": 0,
+        "retry_reasons": null,
+        "reused_selections": 0,
+        "extra_searches": 3,
+        "downloaded_scenes": 6,
+        "backup_scenes": 0,
+        "extra_input_tokens": 14359,
+        "extra_output_tokens": 144,
+        "initial_scenes": 4,
+        "opening_vetted": false,
+        "source_errors": null,
+        "source_candidates": {
+          "pexels": 79,
+          "pixabay": 14,
+          "coverr": 0
+        },
+        "downloaded_sources": {
+          "pexels": 6
+        },
+        "stock_cache_hits": 0,
+        "beats": 8,
+        "vetted": 6,
+        "cache_hits": 0,
+        "no_preview": 0,
+        "api_error": 0,
+        "unparsed": 0,
+        "rejected": 2,
+        "bypass": false,
+        "vision_calls": 8,
+        "no_candidates": 0,
+        "search_error": 0,
+        "input_tokens": 40400,
+        "output_tokens": 464,
+        "target_scenes": 6
+      },
+      "error": null
     }
   ]
 }
