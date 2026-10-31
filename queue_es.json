@@ -1,1 +1,100 @@
-[]
+[
+  {
+    "title": "El niño de Sungir fue enterrado con 10,000 cuentas en 34,000 a.C. 😱",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "34,000 años de misterio",
+    "hook_template": "other",
+    "emotional_tone": "awe",
+    "script": "Dos niños enterrados juntos, cabeza con cabeza, cubiertos de marfil de mamut. En 1955, arqueólogos soviéticos abrieron una tumba en Sungir, Rusia, y encontraron algo que no tenía sentido: dos pequeños, de unos 10 y 13 años, rodeados de más de 10,000 cuentas cosidas a mano — cada una requería una hora de trabajo. Nadie tarda 10,000 horas en vestir a sus muertos sin una razón poderosa. Eran príncipes, shamanes, o algo que todavía no entendemos. ¿Qué crees que eran esos niños? Y por eso.",
+    "word_count": 79,
+    "search_summary": "La tumba de Sungir en Rusia tiene dos niños de hace 34,000 años enterrados con más de 10,000 cuentas de marfil de mamut.",
+    "comment_question": "¿10,000 horas de trabajo para dos niños — qué poder tenían? 🤯",
+    "source_note": "Excavaciones de Otto Bader, Instituto de Arqueología de Moscú, 1955",
+    "loop_connectors": [
+      "why"
+    ],
+    "tags": [
+      "arqueología",
+      "descubrimientos arqueológicos",
+      "historia antigua",
+      "Sungir",
+      "tumba prehistórica",
+      "homo sapiens paleolítico",
+      "cuentas de marfil mamut",
+      "datos curiosos historia",
+      "descubrimientos arqueológicos en méxico",
+      "historia antigua del mundo"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#arqueología",
+      "#datoscuriosos",
+      "#historiaantigua",
+      "##descubrimientoarqueológico"
+    ],
+    "video_queries": [
+      "ancient burial site excavation",
+      "ivory mammoth beads prehistoric",
+      "Soviet archaeologist excavation 1950s",
+      "child burial prehistoric grave",
+      "hand-carved bone beads ancient"
+    ],
+    "has_loop": true,
+    "topic": "archaeological discoveries",
+    "structure": "historical-story",
+    "niche_styled": true,
+    "title_variant": "seo",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "¿El pez que se comunica con electricidad... y miente? 🤯",
+    "title_opener": "question",
+    "title_intensity": "extreme",
+    "hook_text": "Nadie puede explicar esto",
+    "hook_template": "authority-cant-explain",
+    "emotional_tone": "impossible",
+    "script": "Algo en el Amazonas miente con electricidad — y los científicos no saben por qué. El pez eléctrico Apteronotus leptorhynchus genera campos eléctricos para comunicarse con su especie. Cuando dos rivales se encuentran, uno cambia su frecuencia para evitar interferencias — lo normal. Pero a veces imita exactamente la frecuencia del rival, como haciéndose pasar por él. No hay señal de reproducción ni territorio en juego. ¿Qué está ganando este pez cuando decide mentir? Y por eso exactamente.",
+    "word_count": 79,
+    "search_summary": "El pez Apteronotus leptorhynchus del Amazonas imita la frecuencia eléctrica de sus rivales sin razón conocida.",
+    "comment_question": "¿Para qué mentiría un pez con electricidad si no gana nada obvio? ⚡",
+    "source_note": "Journal of Experimental Biology, 2009",
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "datos curiosos animales",
+      "reino animal",
+      "pez eléctrico",
+      "Apteronotus",
+      "animales del Amazonas",
+      "curiosidades de la naturaleza",
+      "datos en 30 segundos",
+      "misterios del río Amazonas",
+      "datos curiosos animales para niños",
+      "reino animal unimas",
+      "pez gato eléctrico"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#reinoanimal",
+      "#pezelectrico",
+      "#amazonas"
+    ],
+    "video_queries": [
+      "electric fish underwater amazon",
+      "weakly electric fish close up",
+      "two fish facing off underwater",
+      "electric eel signal visualization",
+      "amazon river fish slow motion"
+    ],
+    "has_loop": true,
+    "topic": "the animal kingdom",
+    "structure": "unsolved-mystery",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
+  }
+]
