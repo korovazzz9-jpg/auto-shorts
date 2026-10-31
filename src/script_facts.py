@@ -18,7 +18,8 @@ _SKIP = {"para", "hace", "años", "desde", "entre", "sobre", "cuando", "donde",
          "entero", "entera", "propios", "propias", "propio", "propia", "solo",
          "tormenta", "terremoto", "sonda", "niño", "ciudad", "mar", "río"}
 _TRUSTED_HOSTS = (".gov", ".edu", "iceman.it", "britishmuseum.org", "nature.com",
-                  "science.org", "smithsonianmag.com", "britannica.com")
+                  "science.org", "heraklionmuseum.gr", "smithsonianmag.com",
+                  "britannica.com", ".museum")
 
 
 def _norm(value: str) -> str:

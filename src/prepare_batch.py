@@ -163,7 +163,9 @@ def main() -> None:
             params=MessageCreateParamsNonStreaming(
                 model="claude-sonnet-4-6",
                 max_tokens=3000,
-                tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 1}],
+                tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 1},
+                       {"type": "web_fetch_20250910", "name": "web_fetch", "max_uses": 1,
+                        "max_content_tokens": 2500}],
                 system=[{"type": "text",
                          "text": build_system_prompt(structures[i]) + "\n\n" + LOOP_INSTRUCTION + "\n\n" + LENGTH_INSTRUCTION,
                          "cache_control": {"type": "ephemeral"}}],
@@ -172,9 +174,9 @@ def main() -> None:
                     structure=structures[i]) +
                     "\nUse the web search tool to find a primary source BEFORE writing. "
                     "If no source confirms the central claim, choose a different fact. "
-                    "Use a direct HTTPS page on .gov, .edu, iceman.it, britishmuseum.org, "
-                    "nature.com, or science.org; other hosts cannot pass verification. "
-                    "Copy the supporting passage exactly into source_quote. The passage "
+                    "Open the best primary source with web_fetch. Use a direct HTTPS page on "
+                    ".gov, .edu, an official museum site, nature.com, or science.org. "
+                    "Copy a supporting passage from the FETCHED page exactly into source_quote. The passage "
                     "must name the title subject and title year; omit a year from the title "
                     "if the passage does not contain it. Keep the full JSON response concise."}],
             ),
