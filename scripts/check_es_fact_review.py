@@ -30,10 +30,12 @@ if "--repair" in sys.argv:
 
 if "--queue" in sys.argv:
     queue = json.loads((Path(__file__).resolve().parents[1] / "queue_es.json").read_text(encoding="utf-8"))
+    rejected = 0
     for index, case in enumerate(queue):
         approved, reason = verify_es_script(case)
         print(f"queue_index={index} approved={approved} title={case['title']} reason={reason}")
-    raise SystemExit(0)
+        rejected += not approved
+    raise SystemExit(1 if rejected else 0)
 
 
 cases = [
