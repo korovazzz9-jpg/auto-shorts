@@ -27,8 +27,11 @@ class InfographicTests(unittest.TestCase):
         card["items"][1] = "un cráter"
         card["after_query"] = 2
         self.assertIsNone(normalize_card(card, video["script"], video["video_queries"]))
+        card["after_query"] = 3
+        card["items"] = ["un cráter", "un cráter"]
+        self.assertIsNone(normalize_card(card, video["script"], video["video_queries"]))
 
-    def test_four_card_types_render_at_shorts_size(self):
+    def test_eight_card_types_render_at_shorts_size(self):
         ocean, island, volcano = self.queue
         examples = [
             ({"type": "route", "subject": "patitos de goma",
@@ -41,6 +44,22 @@ class InfographicTests(unittest.TestCase):
               "items": ["100 metros", "200 metros"], "after_query": 3},
              {"script": "Dos torres: la torre A mide 100 metros. La torre B mide 200 metros.",
               "video_queries": ["tower", "tower aerial", "ruler"]}),
+            ({"type": "cause_effect", "subject": "la erupción",
+              "items": ["hielo derretido", "alud de barro"], "after_query": 3},
+             {"script": "La erupción derritió hielo. El hielo derretido provocó un alud de barro.",
+              "video_queries": ["volcano", "ice", "mud"]}),
+            ({"type": "layers", "subject": "La Tierra",
+              "items": ["corteza", "manto", "núcleo"], "after_query": 3},
+             {"script": "La Tierra tiene corteza sobre manto y núcleo.",
+              "video_queries": ["earth", "rock", "core"]}),
+            ({"type": "cycle", "subject": "El agua",
+              "items": ["se evapora", "forma nubes", "lluvia"], "after_query": 3},
+             {"script": "El agua se evapora, forma nubes, cae como lluvia y vuelve a evaporarse.",
+              "video_queries": ["water", "cloud", "rain"]}),
+            ({"type": "part_whole", "subject": "El corazón",
+              "items": ["El corazón", "ventrículo izquierdo"], "after_query": 3},
+             {"script": "El corazón tiene cuatro cámaras. El ventrículo izquierdo es una de ellas.",
+              "video_queries": ["heart", "anatomy", "ventricle"]}),
         ]
         with tempfile.TemporaryDirectory(dir=ROOT) as tmp:
             for index, (card, video) in enumerate(examples):

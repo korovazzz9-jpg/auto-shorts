@@ -112,6 +112,8 @@ def render_infographic(template_id: str, output_path: str) -> str:
 _CARD_LABELS = {
     "route": "RUTA DEL HECHO", "before_after": "ANTES / DESPUÉS",
     "timeline": "CRONOLOGÍA", "comparison": "COMPARACIÓN",
+    "cause_effect": "CAUSA → EFECTO", "layers": "CAPAS EN ORDEN",
+    "cycle": "CICLO", "part_whole": "DENTRO DE",
 }
 
 
@@ -159,13 +161,54 @@ def render_card(card: dict, script: str, video_queries: list, output_path: str) 
             _fit_center(draw, 600, y + 35, value.upper(), 700, 64)
             if i < 2:
                 draw.line((185, y + 72, 185, y + 139), fill=CYAN, width=6)
-    else:  # comparison: equal panels avoid implying an unsupported numeric ratio.
+    elif kind == "comparison":  # Equal panels avoid implying an unsupported ratio.
         for x, value in ((295, items[0]), (785, items[1])):
             draw.rounded_rectangle((x - 205, 745, x + 205, 1040), radius=25,
                                    outline="#3F7C8A", width=3)
             draw.rectangle((x - 145, 951, x + 145, 982), fill=ORANGE)
             _fit_center(draw, x, 854, value.upper(), 370, 63)
         _fit_center(draw, 540, 1070, "FRENTE A FRENTE", 700, 32, CYAN)
+    elif kind == "cause_effect":
+        for x, label, value, color in ((300, "CAUSA", items[0], ORANGE),
+                                       (780, "EFECTO", items[1], CYAN)):
+            draw.rounded_rectangle((x - 195, 747, x + 195, 1028), radius=24,
+                                   outline=color, width=4)
+            _fit_center(draw, x, 813, label, 360, 45, color)
+            _fit_center(draw, x, 930, value.upper(), 355, 59)
+        draw.line((506, 886, 563, 886), fill=WHITE, width=7)
+        draw.polygon(((578, 886), (547, 862), (547, 910)), fill=WHITE)
+    elif kind == "layers":
+        for i, value in enumerate(items):
+            top = 706 + i * 123
+            draw.rounded_rectangle((140, top, 940, top + 105), radius=19,
+                                   fill=('#1D4861' if i % 2 == 0 else '#22546A'))
+            _fit_center(draw, 190, top + 53, str(i + 1), 65, 47, ORANGE)
+            _fit_center(draw, 575, top + 53, value.upper(), 675, 59)
+    elif kind == "cycle":
+        points = ((540, 771), (282, 970), (798, 970))
+        for start, end in ((0, 1), (1, 2), (2, 0)):
+            x1, y1 = points[start]
+            x2, y2 = points[end]
+            draw.line((x1, y1, x2, y2), fill=CYAN, width=6)
+            dx, dy = x2 - x1, y2 - y1
+            length = (dx * dx + dy * dy) ** 0.5
+            ux, uy = dx / length, dy / length
+            tip_x, tip_y = x1 + dx * 0.65, y1 + dy * 0.65
+            base_x, base_y = tip_x - ux * 30, tip_y - uy * 30
+            draw.polygon(((tip_x, tip_y),
+                          (base_x - uy * 18, base_y + ux * 18),
+                          (base_x + uy * 18, base_y - ux * 18)), fill=CYAN)
+        for (x, y), value in zip(points, items):
+            draw.rounded_rectangle((x - 132, y - 57, x + 132, y + 57), radius=24,
+                                   fill="#24536B", outline=ORANGE, width=4)
+            _fit_center(draw, x, y, value.upper(), 245, 46)
+    elif kind == "part_whole":
+        draw.rounded_rectangle((155, 727, 925, 1050), radius=38,
+                               outline=CYAN, width=5)
+        _fit_center(draw, 540, 798, items[0].upper(), 715, 62)
+        draw.rounded_rectangle((300, 865, 780, 1004), radius=32,
+                               fill="#28566C", outline=ORANGE, width=5)
+        _fit_center(draw, 540, 935, items[1].upper(), 440, 58, ORANGE)
 
     image.save(output_path, format="PNG")
     return output_path

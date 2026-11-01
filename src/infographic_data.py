@@ -4,7 +4,9 @@ import re
 import unicodedata
 
 
-KINDS = {"route", "before_after", "timeline", "comparison"}
+KINDS = {"route", "before_after", "timeline", "comparison",
+         "cause_effect", "layers", "cycle", "part_whole"}
+THREE_ITEM_KINDS = {"timeline", "layers", "cycle"}
 
 
 def _plain(value: str) -> str:
@@ -20,7 +22,7 @@ def normalize_card(card, script: str, video_queries: list) -> dict | None:
     subject, items, after = card.get("subject"), card.get("items"), card.get("after_query")
     if not isinstance(subject, str) or not 3 <= len(subject.strip()) <= 36:
         return None
-    if not isinstance(items, list) or len(items) != (3 if card["type"] == "timeline" else 2):
+    if not isinstance(items, list) or len(items) != (3 if card["type"] in THREE_ITEM_KINDS else 2):
         return None
     if not isinstance(after, int) or isinstance(after, bool) or not 3 <= after <= len(video_queries):
         return None
@@ -33,5 +35,7 @@ def normalize_card(card, script: str, video_queries: list) -> dict | None:
         exact = _plain(phrase)
         if not exact or f" {exact} " not in f" {script_plain} ":
             return None
+    if len({_plain(item) for item in items}) != len(items):
+        return None
     return {"type": card["type"], "subject": subject.strip(),
             "items": [item.strip() for item in items], "after_query": after}
