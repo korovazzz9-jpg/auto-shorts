@@ -40,6 +40,31 @@ class FactReviewTests(unittest.TestCase):
         approved, _ = verify_es_script({"title": "Tornado", "script": "Fire"}, FakeClient(blocks))
         self.assertTrue(approved)
 
+    def test_bad_optional_card_does_not_reject_good_script(self):
+        blocks = [types.SimpleNamespace(type="server_tool_use", name="web_search"),
+                  types.SimpleNamespace(type="text", text=(
+                      '{"supported":true,"card_supported":false,"reason":"route is misleading"}'))]
+        data = {"title": "Surtsey", "script": "Surtsey surgió en 1963 y cambió durante décadas.",
+                "video_queries": ["island", "volcano", "waves"],
+                "visual_card": {"type": "route", "subject": "Surtsey",
+                                "items": ["1963", "durante décadas"], "after_query": 3}}
+        approved, _ = verify_es_script(data, FakeClient(blocks))
+        self.assertTrue(approved)
+        self.assertIsNone(data["visual_card"])
+
+    def test_supported_card_survives_review(self):
+        blocks = [types.SimpleNamespace(type="server_tool_use", name="web_search"),
+                  types.SimpleNamespace(type="text", text=(
+                      '{"supported":true,"card_supported":true,"reason":"both grounded"}'))]
+        card = {"type": "route", "subject": "patitos de goma",
+                "items": ["Pacífico Norte", "distintas costas"], "after_query": 3}
+        data = {"title": "Juguetes en el océano",
+                "script": "Los patitos de goma pasaron del Pacífico Norte a distintas costas.",
+                "video_queries": ["toys", "sea", "beach"], "visual_card": card}
+        approved, _ = verify_es_script(data, FakeClient(blocks))
+        self.assertTrue(approved)
+        self.assertEqual(card, data["visual_card"])
+
     def test_repair_keeps_loop_and_removes_false_claim(self):
         import config
         from unittest.mock import patch

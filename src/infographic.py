@@ -1,8 +1,10 @@
-"""Three sourced ES infographic scenes, rendered locally without an image API."""
+"""Sourced and data-driven ES infographic scenes, rendered without an image API."""
 
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
+
+from infographic_data import normalize_card
 
 
 SIZE = (1080, 1920)
@@ -103,6 +105,68 @@ def render_infographic(template_id: str, output_path: str) -> str:
     label, title, eyebrow, paint = TEMPLATES[template_id]
     image, draw = _base(label, title, eyebrow)
     paint(draw)
+    image.save(output_path, format="PNG")
+    return output_path
+
+
+_CARD_LABELS = {
+    "route": "RUTA DEL HECHO", "before_after": "ANTES / DESPUÉS",
+    "timeline": "CRONOLOGÍA", "comparison": "COMPARACIÓN",
+}
+
+
+def _fit_center(draw, x: int, y: int, text: str, width: int, size: int,
+                fill=WHITE, minimum: int = 28):
+    font = _font(size, True)
+    while draw.textbbox((0, 0), text, font=font)[2] > width and size > minimum:
+        size -= 2
+        font = _font(size, True)
+    _center(draw, (x, y), text, font, fill)
+
+
+def render_card(card: dict, script: str, video_queries: list, output_path: str) -> str:
+    """Render one checked card. Invalid or unsupported claims never become a frame."""
+    card = normalize_card(card, script, video_queries)
+    if card is None:
+        raise ValueError("invalid infographic card")
+    kind, items = card["type"], card["items"]
+    image, draw = _base("DATOS EN 30S", (), _CARD_LABELS[kind])
+    _fit_center(draw, 540, 455, card["subject"].upper(), 900, 87)
+    draw.rounded_rectangle((82, 665, 998, 1105), radius=34, fill="#123451",
+                           outline="#29718A", width=3)
+
+    if kind == "route":
+        for x, label, value in ((302, "ORIGEN", items[0]), (778, "DESTINO", items[1])):
+            draw.ellipse((x - 64, 724, x + 64, 852), outline=ORANGE, width=7)
+            draw.ellipse((x - 17, 771, x + 17, 805), fill=ORANGE)
+            _fit_center(draw, x, 918, label, 370, 41, CYAN)
+            _fit_center(draw, x, 993, value.upper(), 405, 62)
+        draw.line((382, 789, 689, 789), fill=CYAN, width=8)
+        draw.polygon(((700, 789), (671, 767), (671, 811)), fill=CYAN)
+    elif kind == "before_after":
+        for x, label, value in ((295, "ANTES", items[0]), (785, "DESPUÉS", items[1])):
+            draw.rounded_rectangle((x - 205, 727, x + 205, 1038), radius=25,
+                                   outline="#3F7C8A", width=3)
+            _fit_center(draw, x, 811, label, 385, 47, ORANGE)
+            draw.line((x - 155, 850, x + 155, 850), fill="#3F7C8A", width=3)
+            _fit_center(draw, x, 943, value.upper(), 375, 61)
+        draw.polygon(((553, 882), (525, 860), (525, 904)), fill=CYAN)
+    elif kind == "timeline":
+        for i, value in enumerate(items):
+            y = 747 + i * 140
+            draw.ellipse((150, y, 220, y + 70), fill=ORANGE)
+            _fit_center(draw, 180, y + 35, str(i + 1), 48, 43, INK)
+            _fit_center(draw, 600, y + 35, value.upper(), 700, 64)
+            if i < 2:
+                draw.line((185, y + 72, 185, y + 139), fill=CYAN, width=6)
+    else:  # comparison: equal panels avoid implying an unsupported numeric ratio.
+        for x, value in ((295, items[0]), (785, items[1])):
+            draw.rounded_rectangle((x - 205, 745, x + 205, 1040), radius=25,
+                                   outline="#3F7C8A", width=3)
+            draw.rectangle((x - 145, 951, x + 145, 982), fill=ORANGE)
+            _fit_center(draw, x, 854, value.upper(), 370, 63)
+        _fit_center(draw, 540, 1070, "FRENTE A FRENTE", 700, 32, CYAN)
+
     image.save(output_path, format="PNG")
     return output_path
 

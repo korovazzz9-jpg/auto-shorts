@@ -5,6 +5,8 @@ import os
 
 from anthropic import Anthropic
 
+from infographic_data import normalize_card
+
 
 def _json_from_text(text: str) -> dict:
     decoder = json.JSONDecoder()
@@ -23,12 +25,18 @@ def verify_es_script(data: dict, client=None) -> tuple[bool, str]:
     """One web search and one small Haiku verdict. Uncertain claims fail review."""
     if client is None:
         client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"], max_retries=2)
+    card = normalize_card(data.get("visual_card"), data.get("script", ""),
+                          data.get("video_queries", []))
     message = client.messages.create(
         model="claude-haiku-4-5-20251001",
         max_tokens=900,
         tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 1}],
         system=("You are an independent fact checker. Search the web for the core event, "
                 "then check EVERY sentence of the title and script against the results. "
+                "Set supported based ONLY on the title and script. If visual_card is present, "
+                "check its displayed phrases AND whether the route, order, change or "
+                "comparison it depicts is supported by the script and source. Report this "
+                "separately as card_supported; a bad optional card must not reject a good script. "
                 "A real event with an invented date, "
                 "number, cause, mechanism, person, or outcome is UNSUPPORTED. Do not infer "
                 "support from a source that merely mentions the event. Prefer primary sources "
@@ -38,9 +46,11 @@ def verify_es_script(data: dict, client=None) -> tuple[bool, str]:
                 "does not support an exact count of N. Do not approve plausible embellishments "
                 "about weight, physical impossibility, intent, or supernatural purpose without "
                 "explicit source support. Do not rewrite the script. "
-                "Return only JSON: {\"supported\": true/false, \"reason\": \"brief reason\"}."),
+                "Return only JSON: {\"supported\": true/false, "
+                "\"card_supported\": true/false, \"reason\": \"brief reason\"}."),
         messages=[{"role": "user", "content": json.dumps(
-            {"title": data.get("title", ""), "script": data.get("script", "")},
+            {"title": data.get("title", ""), "script": data.get("script", ""),
+             **({"visual_card": card} if card else {})},
             ensure_ascii=False)}],
     )
     searched = any(getattr(block, "type", None) == "server_tool_use" and
@@ -48,6 +58,9 @@ def verify_es_script(data: dict, client=None) -> tuple[bool, str]:
     text = "\n".join(block.text for block in message.content
                      if getattr(block, "type", None) == "text")
     verdict = _json_from_text(text)
+    if card and verdict.get("card_supported") is not True:
+        data["visual_card"] = None
+        print("  ES visual card discarded by independent review.")
     reason = str(verdict.get("reason") or
                  f"no grounded verdict (stop={getattr(message, 'stop_reason', 'unknown')}, "
                  f"text_chars={len(text)}, searched={searched})")[:600]
@@ -92,6 +105,8 @@ def repair_es_script(data: dict, reason: str, client=None) -> dict:
         raise ValueError("repair returned invalid video queries")
     revised = dict(data)
     revised.update({key: fixed[key] for key in required})
+    revised.pop("visual_card", None)  # old diagram may no longer match corrected narration
+    revised.pop("infographic_template", None)
     if loop_tail:
         revised["script"] = revised["script"].rstrip() + " " + loop_tail
     if not 58 <= len(revised["script"].split()) <= 90:

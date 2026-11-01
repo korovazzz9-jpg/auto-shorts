@@ -12,7 +12,8 @@ from fetch_stock_video import fetch_clips, selection_stats
 from episode_recovery import EpisodeRecovery
 from fact_review import repair_es_script, verify_es_script
 from generate_script import generate_script
-from infographic import TEMPLATES
+from infographic import TEMPLATES, render_card
+from infographic_data import normalize_card
 from notify import notify
 from paired_facts import find_pending_pair, resolve_pair, start_pair
 from post_comment import post_channel_comment
@@ -103,6 +104,8 @@ def _run(recovery) -> None:
     if CHANNEL == "es":
         from script_facts import check_consistency
         for review_attempt in range(2):
+            data["visual_card"] = normalize_card(
+                data.get("visual_card"), data.get("script", ""), data.get("video_queries", []))
             problems = check_consistency(data)
             if problems:
                 approved, reason = False, "; ".join(problems)
@@ -154,6 +157,15 @@ def _run(recovery) -> None:
         if graphic and not os.path.isfile(graphic):
             print(f"  Инфографика {template_id} отсутствует, используем только сток.")
             graphic = None
+        card = data.get("visual_card") if CHANNEL == "es" else None
+        if not graphic and card:
+            try:
+                graphic = render_card(card, data["script"], data["video_queries"],
+                                      os.path.join(tmp, "infographic.png"))
+                template_id = f"auto-{card['type']}"
+            except (ValueError, OSError) as exc:
+                print(f"  Динамическая инфографика пропущена: {exc}")
+                graphic = None
         clip_paths = fetch_clips(data["video_queries"], tmp, narration=data["script"],
                                  min_scenes=target_scenes - bool(graphic),
                                  saved_selections=checkpoint["selections"],
@@ -161,8 +173,9 @@ def _run(recovery) -> None:
         stock_count = len(clip_paths)
         # Одна схема после трёх реальных кадров; 1–2 стоковых клипа не превращаем
         # в публикацию из картинок. При отсутствии PNG поведение прежнее.
-        if graphic and stock_count >= 3:
-            clip_paths.insert(3, graphic)
+        insert_after = card["after_query"] if graphic and template_id.startswith("auto-") else 3
+        if graphic and stock_count >= max(3, insert_after):
+            clip_paths.insert(insert_after, graphic)
             print(f"  Инфографика: {template_id}, 1 из {len(clip_paths)} сцен.")
         # Телеметрия отбора кадров (2026-09-07) — уходит в video_history, чтобы «проверенные»
         # выпуски и выпуски с обходом фильтра можно было оценивать ОТДЕЛЬНО. Иначе просмотры
@@ -171,7 +184,7 @@ def _run(recovery) -> None:
         print(f"  Отбор кадров: {clip_selection}")
         clip_selection["target_scenes"] = target_scenes
         clip_selection["infographic_scenes"] = len(clip_paths) - stock_count
-        clip_selection["infographic_template"] = template_id if stock_count >= 3 and graphic else None
+        clip_selection["infographic_template"] = template_id if len(clip_paths) > stock_count else None
         # 2026-09-13, прод-инцидент: жёсткое «ровно target_scenes, иначе отложить» + отсутствие
         # лимита попыток = дедлок. Сценарий про рыбу-стрелка набрал 5/6, добор каждый раз шёл
         # по тем же закэшированным запросам, модель отклоняла тех же двух кандидатов — и так

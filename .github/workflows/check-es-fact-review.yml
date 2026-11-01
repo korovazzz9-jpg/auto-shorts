@@ -11,6 +11,10 @@ on:
         description: "Test one rejected ES script repair without publishing"
         required: false
         default: "false"
+      card_once:
+        description: "Review one sourced ES infographic without publishing"
+        required: false
+        default: "false"
 
 jobs:
   check:
@@ -22,7 +26,7 @@ jobs:
           python-version: "3.11"
       - run: pip install 'anthropic>=0.52.0'
       - name: Probe two claims without publishing
-        if: inputs.audit_queue != 'true' && inputs.repair_once != 'true'
+        if: inputs.audit_queue != 'true' && inputs.repair_once != 'true' && inputs.card_once != 'true'
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python scripts/check_es_fact_review.py
@@ -37,3 +41,9 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           CHANNEL: es
         run: python scripts/check_es_fact_review.py --repair
+      - name: Probe sourced infographic without publishing
+        if: inputs.card_once == 'true'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CHANNEL: es
+        run: python scripts/check_es_fact_review.py --card

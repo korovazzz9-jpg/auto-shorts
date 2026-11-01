@@ -8,6 +8,19 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from fact_review import repair_es_script, verify_es_script
 
+if "--card" in sys.argv:
+    queue = json.loads((Path(__file__).resolve().parents[1] / "queue_es.json").read_text(encoding="utf-8"))
+    case = next((item for item in queue if item.get("title") ==
+                 "Los juguetes que revelaron las rutas del océano"), None)
+    if case is None:
+        raise SystemExit("known NOAA example is no longer queued")
+    case["visual_card"] = {"type": "route", "subject": "patitos de goma",
+                           "items": ["Pacífico Norte", "distintas costas"], "after_query": 3}
+    approved, reason = verify_es_script(case)
+    card_approved = case.get("visual_card") is not None
+    print(f"script_approved={approved} card_approved={card_approved} reason={reason}")
+    raise SystemExit(0 if approved and card_approved else 1)
+
 if "--repair" in sys.argv:
     case = {
         "title": "¿La catarata más grande del mundo está bajo el océano?",

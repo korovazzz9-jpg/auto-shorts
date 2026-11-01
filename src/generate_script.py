@@ -676,6 +676,16 @@ def _build_user_content(topic: str, avoid_block: str, title_instruction: str | N
            "or a 'nobody knows' mystery. Do not make a weak fact more extreme to fit "
            "the title examples. A vivid, true fact beats an unverified shock.\n\n"
            if CHANNEL == "es" else "") +
+        ("Optional visual_card for ONE infographic scene. Use it only if the spoken script "
+         "already contains short literal phrases that honestly form a route, before/after, "
+         "timeline or comparison. Format: {type: route|before_after|timeline|comparison, "
+         "subject: exact phrase from script (max 36 characters), items: 2 exact phrases "
+         "from script (3 for timeline, each max 24 characters), "
+         "after_query: integer 3..number of video_queries}. Put the card "
+         "after the search beat matching that part of the narration. No new numbers, places, "
+         "causes or visual claims; use null if the fact does not fit. This replaces ONE stock "
+         "scene, not the opening shot, and requires no image-generation call.\n\n"
+         if CHANNEL == "es" else "") +
         "Requirements:\n"
         f"- {title_instruction}\n"
         f"- {TITLE_OPENER_INSTRUCTION}\n"
@@ -728,6 +738,7 @@ def _build_user_content(topic: str, avoid_block: str, title_instruction: str | N
         '"comment_question": "provocative question about the fact", '
         '"source_note": "origin of the fact or empty string", '
         '"source_url": "direct source URL or empty string", '
+        + ('"visual_card": null, ' if CHANNEL == "es" else '')
         + ('"pairable_claim": "short falsifiable/extendable claim or empty string", ' if pair_start else '')
         + ('"pair_resolved": true, ' if pair_resolve_claim else '')
         + '"loop_connectors": ["why", "how"], '
@@ -979,7 +990,7 @@ def generate_script(on_this_day: bool = False, pair_start: bool = False,
         for attempt in range(attempts):
             message = client.messages.create(
                 model="claude-sonnet-4-6",
-                max_tokens=1600,
+                max_tokens=1800 if CHANNEL == "es" else 1600,
                 system=system_prompt,
                 messages=[{"role": "user", "content": content}],
             )
@@ -1017,7 +1028,7 @@ def generate_script(on_this_day: bool = False, pair_start: bool = False,
         )
         retry = client.messages.create(
             model="claude-sonnet-4-6",
-            max_tokens=1600,
+            max_tokens=1800 if CHANNEL == "es" else 1600,
             system=system_prompt,
             messages=[
                 {"role": "user", "content": user_content},

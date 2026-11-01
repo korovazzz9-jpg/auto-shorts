@@ -47,6 +47,7 @@ from recent_titles import add_title_to_cache, add_topic_to_cache, get_recent_tit
 from script_queue import load_queue, save_queue
 from script_facts import check_consistency
 from fact_review import verify_es_script
+from infographic_data import normalize_card
 
 load_dotenv()
 
@@ -240,6 +241,9 @@ def main() -> None:
                 print(f"  item-{i}: замечания валидации ({len(problems)}), беру как есть.")
 
             _append_loop(data, topic)
+            if os.getenv("CHANNEL", "en") == "es":
+                data["visual_card"] = normalize_card(
+                    data.get("visual_card"), data["script"], data["video_queries"])
             ht = str(data.get("hook_template", "")).strip().lower()
             data["hook_template"] = ht if ht in HOOK_TEMPLATES else "other"
             to = str(data.get("title_opener", "")).strip().lower()
