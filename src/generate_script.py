@@ -188,13 +188,14 @@ specific anchor makes it feel true and memorable. Prefer strong, vivid verbs ove
 constructions.
 
 Prefer an EVENT over a PROPERTY. An event fact says something HAPPENED — at a moment in time, to
-a specific place or people, with a consequence ("a mountain collapsed into the sea and nobody saw
-it coming", "the 1700 earthquake split a continent"). A property fact says something merely IS or
+a specific place or people, with a consequence ("a landslide displaced water in Lituya Bay",
+"the 1700 Cascadia earthquake sent a tsunami to Japan"). A property fact says something merely IS or
 CAN ("this animal can survive without water", "your bones are stronger than steel"). Both can be
 true and surprising, but the event version consistently travels further: it has stakes, a before
 and after, and a reason to finish watching. When the topic only offers a property, anchor it to
-the moment it was discovered, the case where it mattered, or what it did to someone — turn the
-capability into a story with a date attached. Keep sentences short and punchy — cut connector words and generic hedging phrases
+the moment it was discovered, the case where it mattered, or what it did to someone ONLY WHEN
+that specific event is documented. Never attach an invented date or incident to a general property.
+Keep sentences short and punchy — cut connector words and generic hedging phrases
 like "fascinating", "scientists discovered", "this phenomenon". Avoid abstract or purely technical
 facts that require specialist background to feel surprising (e.g. quantum mechanics, relativity,
 advanced math) — the impact has to land for a general audience in one watch. Physics and quantum
@@ -225,7 +226,7 @@ Structure, in order:
    - "This [vague noun] can [shocking ability] — and [surprising consequence]."
    - "You've [common experience], and you never knew [hidden reason]."
    - "One [vague category] can [shocking thing] in [short timeframe]."
-   - "[Authority] still can't explain why [phenomenon]."
+   - "A documented [phenomenon] changed [specific consequence]."
    - "This sounds fake, but [claim without naming subject]."
    Never open with "Did you know" / "¿sabías que?" / "Today we'll talk about" / any warm-up —
    the shocking words come FIRST, framing second. Cut into the most interesting part mid-thought.
@@ -273,8 +274,8 @@ signals, anomalies, lost knowledge) — never invent mystery where science has a
 Structure, in order:
 1. Hook (FIRST sentence, max ~12 words): open on the unresolved tension itself — what happened
    is verifiable, WHY/HOW is not. Don't name the subject yet. First 3-4 words must stop the
-   scroll. Good shapes: "No one can explain what happened here in [year]." / "Experts have
-   tried for [N] years — and failed." / "Something [did impossible thing], and then vanished."
+   scroll. Good shape: "Records agree that [specific event] happened — but disagree on
+   [one precise, documented open question]." Never say nobody can explain a settled phenomenon.
 2. The setup: name the subject, place, date — establish that this is REAL and documented, with
    a concrete anchor. Lay out what IS known, fast and vivid.
 3. The deepening: give the best explanation people usually offer — then show, with one concrete
@@ -313,9 +314,9 @@ twist of fate — obscure enough that the ending isn't common knowledge.
 
 Structure, in order:
 1. Hook (FIRST sentence, max ~12 words): drop the viewer INTO the decisive moment of the story,
-   mid-action, without naming names or year yet. Good shapes: "One man's mistake erased an
-   entire city from every map." / "A single letter, sent 3 weeks late, ended an empire." /
-   "They laughed at him — right up until [consequence]."
+   mid-action, without naming names or year yet. Use a documented decision, disaster,
+   or discovery and its real consequence; never invent a person, delay, or destroyed city
+   just to make the hook sound cinematic.
 2. The setup: now name who, where, when (concrete anchor mandatory: name + year/place). Two or
    three fast, vivid sentences establishing the situation and what was at stake.
 3. The turn: the moment everything flipped — one clear pivot, told plainly. Then the
