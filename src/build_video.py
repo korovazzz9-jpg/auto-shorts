@@ -191,10 +191,12 @@ def _build_background(clip_paths: list[str], duration: float, visual_loop: bool 
         clip_paths.append(loop_tail)
 
     per_clip = duration / len(clip_paths)
-    fitted = [
-        _fit_clip(VideoFileClip(p), per_clip, _pick_zoom_factor(), loop=(i == len(clip_paths) - 1))
-        for i, p in enumerate(clip_paths)
-    ]
+    fitted = []
+    for i, path in enumerate(clip_paths):
+        source = (ImageClip(path).set_duration(per_clip) if path.lower().endswith(".png")
+                  else VideoFileClip(path))
+        fitted.append(_fit_clip(source, per_clip, _pick_zoom_factor(),
+                                loop=(i == len(clip_paths) - 1)))
     sequence = concatenate_videoclips(fitted, method="compose")
 
     # Уникализация футажа (см. FOOTAGE_UNIQUENESS выше): грейд + оверлей-виньетка/тинт.

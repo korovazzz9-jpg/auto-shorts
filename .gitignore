@@ -13,6 +13,8 @@ test.mp3
 *.jpg
 *.jpeg
 *.png
+!assets/infographics/*.png
+.local-py/
 assets/backgrounds/*
 !assets/backgrounds/.gitkeep
 # Фоновая музыка и шрифты нужны в CI — исключаем из общего игнора *.mp3
