@@ -1,49 +1,5 @@
 [
   {
-    "title": "El volcán que perdió su cima en una avalancha",
-    "title_opener": "the-x",
-    "title_intensity": "extreme",
-    "hook_text": "LA MONTAÑA CAMBIÓ DE FORMA",
-    "hook_template": "sounds-fake",
-    "emotional_tone": "awe",
-    "script": "Una montaña perdió gran parte de su cima en una sola erupción. En 1980, el monte Santa Helena, en Washington, sufrió una enorme avalancha de escombros. El Servicio Geológico de Estados Unidos calcula que desaparecieron unos cuatrocientos metros de su parte superior. Donde antes había una cumbre quedó un cráter con forma de herradura. No fue solo una nube de ceniza: la propia montaña cambió de perfil. ¿Reconocerías ese volcán si vieras una foto de antes y otra de después? Y todo empezó cuando.",
-    "word_count": 84,
-    "search_summary": "La erupción de 1980 del monte Santa Helena eliminó unos 400 metros de su cima.",
-    "comment_question": "¿Reconocerías el monte Santa Helena después de perder parte de su cima?",
-    "source_note": "USGS, Mount St. Helens",
-    "source_url": "https://www.usgs.gov/volcanoes/mount-st.-helens",
-    "loop_connectors": [
-      "when"
-    ],
-    "tags": [
-      "datos curiosos",
-      "monte Santa Helena",
-      "erupción 1980",
-      "volcanes",
-      "avalancha volcánica",
-      "Washington"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#datoscuriosos",
-      "#volcanes",
-      "#geologia"
-    ],
-    "video_queries": [
-      "Mount St Helens volcano",
-      "volcano debris avalanche",
-      "volcanic mountain summit",
-      "volcano crater aerial",
-      "Mount St Helens crater"
-    ],
-    "infographic_template": "st-helens-1980",
-    "topic": "volcanoes and earthquakes",
-    "structure": "historical-story",
-    "title_variant": "narrative",
-    "has_loop": true,
-    "hashtag_position": "end"
-  },
-  {
     "title": "¿La Gran Falla de África está abriendo un nuevo océano ahora mismo? 🤯",
     "title_opener": "question",
     "title_intensity": "extreme",
