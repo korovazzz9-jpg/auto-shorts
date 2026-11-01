@@ -7,6 +7,10 @@ on:
         description: "Review queued ES facts instead of two controls"
         required: false
         default: "false"
+      repair_once:
+        description: "Test one rejected ES script repair without publishing"
+        required: false
+        default: "false"
 
 jobs:
   check:
@@ -18,7 +22,7 @@ jobs:
           python-version: "3.11"
       - run: pip install 'anthropic>=0.52.0'
       - name: Probe two claims without publishing
-        if: inputs.audit_queue != 'true'
+        if: inputs.audit_queue != 'true' && inputs.repair_once != 'true'
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python scripts/check_es_fact_review.py
@@ -27,3 +31,9 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python scripts/check_es_fact_review.py --queue
+      - name: Probe rejected script repair without publishing
+        if: inputs.repair_once == 'true'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CHANNEL: es
+        run: python scripts/check_es_fact_review.py --repair

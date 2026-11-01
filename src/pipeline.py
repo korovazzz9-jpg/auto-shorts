@@ -10,7 +10,7 @@ from build_video import build_video, pick_cta_phrase
 from config import CFG, CHANNEL
 from fetch_stock_video import fetch_clips, selection_stats
 from episode_recovery import EpisodeRecovery
-from fact_review import verify_es_script
+from fact_review import repair_es_script, verify_es_script
 from generate_script import generate_script
 from notify import notify
 from paired_facts import find_pending_pair, resolve_pair, start_pair
@@ -118,11 +118,23 @@ def _run(recovery) -> None:
                 recovery.abandon()
                 checkpoint = None
             if review_attempt == 0:
-                data = generate_script(
-                    on_this_day=topical,
-                    pair_start=pair_start_mode,
-                    pair_resolve_claim=pending_pair["claim"] if pending_pair else None,
-                )
+                if reason.startswith(("no grounded verdict", "review unavailable")):
+                    data = generate_script(
+                        on_this_day=topical,
+                        pair_start=pair_start_mode,
+                        pair_resolve_claim=pending_pair["claim"] if pending_pair else None,
+                    )
+                else:
+                    try:
+                        data = repair_es_script(data, reason)
+                        print("  ES fact review: corrected draft will be checked again.")
+                    except Exception as exc:
+                        print(f"  ES fact review: repair failed ({type(exc).__name__}); trying a new fact.")
+                        data = generate_script(
+                            on_this_day=topical,
+                            pair_start=pair_start_mode,
+                            pair_resolve_claim=pending_pair["claim"] if pending_pair else None,
+                        )
         else:
             raise RuntimeError("Two ES script candidates failed independent fact review")
     if not checkpoint:

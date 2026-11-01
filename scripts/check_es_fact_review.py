@@ -6,7 +6,27 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from fact_review import verify_es_script
+from fact_review import repair_es_script, verify_es_script
+
+if "--repair" in sys.argv:
+    case = {
+        "title": "¿La catarata más grande del mundo está bajo el océano?",
+        "script": ("Hay una catarata que cae 3,500 metros — completamente invisible. "
+                   "En el Estrecho de Dinamarca, entre Islandia y Groenlandia, agua fría "
+                   "del Ártico choca con agua más cálida del Atlántico. La fría pesa más "
+                   "y se hunde hacia el fondo. Eso triplica el Salto Ángel. "
+                   "El agua fría que tomas hoy pasó por ahí. "
+                   "¿Cuántas cosas más esconde el océano? Y así es como."),
+        "video_queries": ["Denmark strait ocean", "underwater current"],
+        "source_url": "https://oceanservice.noaa.gov/facts/largest-waterfall.html",
+        "topic": "the ocean", "has_loop": True,
+    }
+    revised = repair_es_script(case, "NOAA does not support the claim that drinking water passed through this cataract.")
+    approved, reason = verify_es_script(revised)
+    print(f"repair_approved={approved} title={revised['title']} reason={reason}")
+    if not approved:
+        raise SystemExit(1)
+    raise SystemExit(0)
 
 if "--queue" in sys.argv:
     queue = json.loads((Path(__file__).resolve().parents[1] / "queue_es.json").read_text(encoding="utf-8"))
