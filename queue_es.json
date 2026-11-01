@@ -1,49 +1,5 @@
 [
   {
-    "title": "La isla que nació del mar y cambió de forma",
-    "title_opener": "the-x",
-    "title_intensity": "extreme",
-    "hook_text": "NACIÓ FRENTE A ISLANDIA",
-    "hook_template": "sounds-fake",
-    "emotional_tone": "awe",
-    "script": "Una isla apareció donde antes solo había mar. Se llama Surtsey y surgió frente a Islandia durante erupciones que comenzaron en 1963. La lava y los fragmentos expulsados por el volcán construyeron tierra nueva sobre la superficie. Pero la historia no terminó ahí: las olas y el viento empezaron a cambiar sus costas, arrancando material de unas zonas y acumulándolo en otras. Los científicos han seguido esos cambios durante décadas. ¿Te gustaría ver cómo cambia una isla recién nacida? Y todo empezó cuando.",
-    "word_count": 83,
-    "search_summary": "La isla volcánica Surtsey surgió frente a Islandia en 1963 y sus costas cambiaron por erosión.",
-    "comment_question": "¿Visitarías una isla volcánica que todavía cambia de forma?",
-    "source_note": "USGS, estudio de Surtsey, 1992",
-    "source_url": "https://www.usgs.gov/publications/remote-sensing-studies-geomorphology-surtsey-1987-1991",
-    "loop_connectors": [
-      "when"
-    ],
-    "tags": [
-      "datos curiosos",
-      "Surtsey",
-      "isla volcánica",
-      "volcán de Islandia",
-      "erosión costera",
-      "geología"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#datoscuriosos",
-      "#volcanes",
-      "#islandia"
-    ],
-    "video_queries": [
-      "volcanic island ocean",
-      "Iceland sea volcano",
-      "lava island coast",
-      "waves volcanic shore",
-      "wind rocky coast"
-    ],
-    "infographic_template": "surtsey-1963",
-    "topic": "volcanoes and earthquakes",
-    "structure": "historical-story",
-    "title_variant": "narrative",
-    "has_loop": true,
-    "hashtag_position": "end"
-  },
-  {
     "title": "El volcán que perdió su cima en una avalancha",
     "title_opener": "the-x",
     "title_intensity": "extreme",
