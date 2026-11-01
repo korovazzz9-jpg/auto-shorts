@@ -1,29 +1,5 @@
 [
   {
-    "title": "Los juguetes que revelaron las rutas del océano",
-    "title_opener": "the-x",
-    "title_intensity": "extreme",
-    "hook_text": "UN MAPA HECHO DE JUGUETES",
-    "hook_template": "sounds-fake",
-    "emotional_tone": "awe",
-    "script": "Unos juguetes perdidos terminaron dibujando las rutas del océano. En 1992, un contenedor con patitos de goma y otros juguetes de baño cayó al Pacífico Norte. No aparecieron todos en el mismo lugar: flotaron con las corrientes y llegaron a distintas costas. Sus hallazgos ayudaron a estudiar cómo se mueve el agua. Una carga perdida se convirtió en una pista científica. ¿Habrías guardado uno si lo encontrabas en la playa? Y todo empezó cuando.",
-    "word_count": 74,
-    "search_summary": "Juguetes de un contenedor caído al mar en 1992 ayudaron a estudiar las corrientes del Pacífico Norte.",
-    "comment_question": "¿Guardarías un patito encontrado en la playa o lo devolverías al mar?",
-    "source_note": "NOAA, Mapping Friendly Floatees",
-    "source_url": "https://sanctuaries.noaa.gov/education/teachers/ocean-mysteries/mapping-floatees.html",
-    "loop_connectors": ["when"],
-    "tags": ["datos curiosos", "océano Pacífico", "corrientes oceánicas", "patitos de goma", "carga perdida", "ciencia del mar"],
-    "hashtags": ["#shorts", "#datoscuriosos", "#oceano", "#ciencia"],
-    "video_queries": ["rubber duck floating water", "container ship storm", "rubber ducks water", "ocean current map", "beach plastic toy"],
-    "infographic_template": "ocean-toys-1992",
-    "topic": "the ocean",
-    "structure": "historical-story",
-    "title_variant": "narrative",
-    "has_loop": true,
-    "hashtag_position": "end"
-  },
-  {
     "title": "La isla que nació del mar y cambió de forma",
     "title_opener": "the-x",
     "title_intensity": "extreme",
@@ -36,10 +12,30 @@
     "comment_question": "¿Visitarías una isla volcánica que todavía cambia de forma?",
     "source_note": "USGS, estudio de Surtsey, 1992",
     "source_url": "https://www.usgs.gov/publications/remote-sensing-studies-geomorphology-surtsey-1987-1991",
-    "loop_connectors": ["when"],
-    "tags": ["datos curiosos", "Surtsey", "isla volcánica", "volcán de Islandia", "erosión costera", "geología"],
-    "hashtags": ["#shorts", "#datoscuriosos", "#volcanes", "#islandia"],
-    "video_queries": ["volcanic island ocean", "Iceland sea volcano", "lava island coast", "waves volcanic shore", "wind rocky coast"],
+    "loop_connectors": [
+      "when"
+    ],
+    "tags": [
+      "datos curiosos",
+      "Surtsey",
+      "isla volcánica",
+      "volcán de Islandia",
+      "erosión costera",
+      "geología"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#volcanes",
+      "#islandia"
+    ],
+    "video_queries": [
+      "volcanic island ocean",
+      "Iceland sea volcano",
+      "lava island coast",
+      "waves volcanic shore",
+      "wind rocky coast"
+    ],
     "infographic_template": "surtsey-1963",
     "topic": "volcanoes and earthquakes",
     "structure": "historical-story",
@@ -60,10 +56,30 @@
     "comment_question": "¿Reconocerías el monte Santa Helena después de perder parte de su cima?",
     "source_note": "USGS, Mount St. Helens",
     "source_url": "https://www.usgs.gov/volcanoes/mount-st.-helens",
-    "loop_connectors": ["when"],
-    "tags": ["datos curiosos", "monte Santa Helena", "erupción 1980", "volcanes", "avalancha volcánica", "Washington"],
-    "hashtags": ["#shorts", "#datoscuriosos", "#volcanes", "#geologia"],
-    "video_queries": ["Mount St Helens volcano", "volcano debris avalanche", "volcanic mountain summit", "volcano crater aerial", "Mount St Helens crater"],
+    "loop_connectors": [
+      "when"
+    ],
+    "tags": [
+      "datos curiosos",
+      "monte Santa Helena",
+      "erupción 1980",
+      "volcanes",
+      "avalancha volcánica",
+      "Washington"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#volcanes",
+      "#geologia"
+    ],
+    "video_queries": [
+      "Mount St Helens volcano",
+      "volcano debris avalanche",
+      "volcanic mountain summit",
+      "volcano crater aerial",
+      "Mount St Helens crater"
+    ],
     "infographic_template": "st-helens-1980",
     "topic": "volcanoes and earthquakes",
     "structure": "historical-story",
