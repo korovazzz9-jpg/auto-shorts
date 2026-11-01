@@ -682,7 +682,9 @@ def _build_user_content(topic: str, avoid_block: str, title_instruction: str | N
          "Format: {type: route|before_after|timeline|comparison|cause_effect|layers|cycle|part_whole, "
          "subject: exact phrase from script (max 36 characters), items: exact phrases "
          "from script (3 for timeline/layers/cycle, 2 otherwise; each max 24 characters), "
-         "after_query: integer 3..number of video_queries}. Put the card "
+         "after_query: integer 3..number of video_queries}. Prefer a card whenever "
+         "the narration directly supports one of these relations. Use null ONLY when "
+         "no relation can be shown honestly. Put the card "
          "in the same order as the spoken fact: cause then effect, layers top to bottom, "
          "whole then contained part, and cycle only if the process really repeats. "
          "after the search beat matching that part of the narration. No new numbers, places, "
@@ -741,7 +743,9 @@ def _build_user_content(topic: str, avoid_block: str, title_instruction: str | N
         '"comment_question": "provocative question about the fact", '
         '"source_note": "origin of the fact or empty string", '
         '"source_url": "direct source URL or empty string", '
-        + ('"visual_card": null, ' if CHANNEL == "es" else '')
+        + ('"visual_card": {"type": "before_after", "subject": "exact phrase from script", '
+           '"items": ["exact phrase 1", "exact phrase 2"], "after_query": 3}, '
+           if CHANNEL == "es" else '')
         + ('"pairable_claim": "short falsifiable/extendable claim or empty string", ' if pair_start else '')
         + ('"pair_resolved": true, ' if pair_resolve_claim else '')
         + '"loop_connectors": ["why", "how"], '

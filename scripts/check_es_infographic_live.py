@@ -39,6 +39,8 @@ def main():
         messages=[{"role": "user", "content": prompt}],
     )
     data = _parse_response(response)
+    print(f"raw_card={json.dumps(data.get('visual_card'), ensure_ascii=False)}")
+    print(f"script={data.get('script')} queries={data.get('video_queries')}")
     card = normalize_card(data.get("visual_card"), data.get("script", ""),
                           data.get("video_queries", []))
     print(f"title={data.get('title')} card_generated={bool(card)} card={json.dumps(card, ensure_ascii=False)}")
