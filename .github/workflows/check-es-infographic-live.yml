@@ -1,0 +1,30 @@
+name: Check ES infographic end to end
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt
+      - name: Generate, review and render without publishing
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CHANNEL: es
+        run: python scripts/check_es_infographic_live.py
+      - name: Keep visual result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: es-infographic-probe
+          path: |
+            artifacts/es-infographic-probe/card.png
+            artifacts/es-infographic-probe/preview.mp4
+          if-no-files-found: ignore
