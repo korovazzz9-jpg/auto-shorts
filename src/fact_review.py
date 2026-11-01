@@ -25,7 +25,7 @@ def verify_es_script(data: dict, client=None) -> tuple[bool, str]:
         client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"], max_retries=2)
     message = client.messages.create(
         model="claude-haiku-4-5-20251001",
-        max_tokens=500,
+        max_tokens=900,
         tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 1}],
         system=("You are an independent fact checker. Search the web for the core event, "
                 "then check EVERY sentence of the title and script against the results. "
@@ -48,5 +48,7 @@ def verify_es_script(data: dict, client=None) -> tuple[bool, str]:
     text = "\n".join(block.text for block in message.content
                      if getattr(block, "type", None) == "text")
     verdict = _json_from_text(text)
-    reason = str(verdict.get("reason") or "no grounded verdict")[:200]
+    reason = str(verdict.get("reason") or
+                 f"no grounded verdict (stop={getattr(message, 'stop_reason', 'unknown')}, "
+                 f"text_chars={len(text)}, searched={searched})")[:200]
     return searched and verdict.get("supported") is True, reason
