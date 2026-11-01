@@ -19,6 +19,17 @@ class InfographicTests(unittest.TestCase):
     def setUpClass(cls):
         cls.queue = json.loads((ROOT / "queue_es.json").read_text(encoding="utf-8"))
 
+    def test_live_paraphrase_uses_spoken_words(self):
+        script = ("Mount St. Helens, Washington, 1980: su cima era perfecta, nevada, "
+                  "imponente. Donde había una punta simétrica quedó un cráter en "
+                  "forma de herradura abierto hacia el norte.")
+        card = {"type": "before_after", "subject": "cima de Mount St. Helens",
+                "items": ["Punta simétrica nevada", "Cráter en herradura"],
+                "after_query": 3}
+        result = normalize_card(card, script, ["one", "two", "three"])
+        self.assertEqual(result["subject"], "Mount St. Helens")
+        self.assertEqual(result["items"], ["punta simétrica", "cráter en forma de herradura"])
+
     def test_new_or_mistimed_claim_is_not_rendered(self):
         video = self.queue[2]
         card = {"type": "comparison", "subject": "monte Santa Helena",

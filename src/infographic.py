@@ -126,6 +126,20 @@ def _fit_center(draw, x: int, y: int, text: str, width: int, size: int,
     _center(draw, (x, y), text, font, fill)
 
 
+def _fit_panel_value(draw, x: int, y: int, text: str, width: int):
+    """Keep long before/after phrases legible inside their panel."""
+    font = _font(61, True)
+    if draw.textbbox((0, 0), text, font=font)[2] <= width:
+        _center(draw, (x, y), text, font)
+        return
+    words = text.split()
+    splits = [(" ".join(words[:i]), " ".join(words[i:])) for i in range(1, len(words))]
+    first, second = min(splits, key=lambda pair: max(
+        draw.textbbox((0, 0), line, font=font)[2] for line in pair))
+    _fit_center(draw, x, y - 36, first, width, 55, minimum=36)
+    _fit_center(draw, x, y + 36, second, width, 55, minimum=36)
+
+
 def render_card(card: dict, script: str, video_queries: list, output_path: str) -> str:
     """Render one checked card. Invalid or unsupported claims never become a frame."""
     card = normalize_card(card, script, video_queries)
@@ -151,7 +165,7 @@ def render_card(card: dict, script: str, video_queries: list, output_path: str) 
                                    outline="#3F7C8A", width=3)
             _fit_center(draw, x, 811, label, 385, 47, ORANGE)
             draw.line((x - 155, 850, x + 155, 850), fill="#3F7C8A", width=3)
-            _fit_center(draw, x, 943, value.upper(), 375, 61)
+            _fit_panel_value(draw, x, 943, value.upper(), 375)
         draw.polygon(((553, 882), (525, 860), (525, 904)), fill=CYAN)
     elif kind == "timeline":
         for i, value in enumerate(items):
