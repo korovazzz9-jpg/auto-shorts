@@ -30,6 +30,17 @@ class InfographicTests(unittest.TestCase):
         self.assertEqual(result["subject"], "Mount St. Helens")
         self.assertEqual(result["items"], ["punta simétrica", "cráter en forma de herradura"])
 
+    def test_before_after_drops_unspoken_adjective(self):
+        script = ("El Monte Santa Helena perdió su cumbre entera y la convirtió "
+                  "en un cráter en forma de herradura.")
+        card = {"type": "before_after", "subject": "Monte Santa Helena",
+                "items": ["cumbre intacta", "cráter en herradura"],
+                "after_query": 3}
+        result = normalize_card(card, script, ["one", "two", "three"])
+        self.assertEqual(result["items"], ["cumbre", "cráter en forma de herradura"])
+        card["items"][0] = "veinte metros"
+        self.assertIsNone(normalize_card(card, script, ["one", "two", "three"]))
+
     def test_new_or_mistimed_claim_is_not_rendered(self):
         video = self.queue[2]
         card = {"type": "comparison", "subject": "monte Santa Helena",

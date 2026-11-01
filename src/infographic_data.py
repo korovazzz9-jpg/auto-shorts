@@ -26,7 +26,7 @@ def _overlap(a: list[str], b: list[str]) -> int:
     return previous[-1]
 
 
-def _literal_span(phrase: str, script: str, limit: int) -> str | None:
+def _literal_span(phrase: str, script: str, limit: int, allow_short_anchor: bool = False) -> str | None:
     """Find a close verbatim script span, dropping paraphrased words, never adding facts."""
     if not isinstance(phrase, str) or not 3 <= len(phrase.strip()) <= 48:
         return None
@@ -52,7 +52,20 @@ def _literal_span(phrase: str, script: str, limit: int) -> str | None:
             score = matches / max(len(query), len(tokens))
             if score >= 0.6 and (matches, score, -len(tokens), candidate) > best:
                 best = (matches, score, -len(tokens), candidate)
-    return best[3] or None
+    if best[3]:
+        return best[3]
+    # A two-word before/after label may paraphrase its adjective. Keep only
+    # the spoken noun; never drop a quantity or unit to make a claim pass.
+    quantitative = {"cero", "uno", "una", "dos", "tres", "cuatro", "cinco",
+                    "seis", "siete", "ocho", "nueve", "diez", "cien",
+                    "ciento", "mil", "millon", "metros", "kilometros", "anos"}
+    if (allow_short_anchor and len(query) == 2 and not any(
+            word.isdigit() or word in quantitative for word in query)
+            and len(query[0]) >= 5):
+        for word in words:
+            if _plain(word.group()) == query[0]:
+                return word.group()
+    return None
 
 
 def normalize_card(card, script: str, video_queries: list) -> dict | None:
@@ -65,7 +78,7 @@ def normalize_card(card, script: str, video_queries: list) -> dict | None:
     if not isinstance(after, int) or isinstance(after, bool) or not 3 <= after <= len(video_queries):
         return None
     phrases = [_literal_span(subject, script, 36)] + [
-        _literal_span(item, script, 32) for item in items]
+        _literal_span(item, script, 32, card["type"] == "before_after") for item in items]
     if any(phrase is None for phrase in phrases):
         return None
     script_plain = _plain(script)
