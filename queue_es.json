@@ -1,112 +1,12 @@
 [
   {
-    "title": "El volcán Parícutin nació en un campo de maíz en 1943 😱",
-    "title_opener": "the-x",
-    "title_intensity": "extreme",
-    "hook_text": "Nació del suelo en segundos",
-    "hook_template": "sounds-fake",
-    "emotional_tone": "impossible",
-    "script": "Un agricultor en Michoacán sintió el suelo temblar bajo sus pies — y en minutos, el campo de maíz empezó a abrirse. Era el 20 de febrero de 1943. En nueve años, Parícutin creció 424 metros desde tierra plana hasta volcán completo — el único nacimiento volcánico documentado desde su primer segundo. Sepultó dos pueblos enteros bajo lava. Geólogos del mundo entero llegaron a registrar algo que nunca volverá a repetirse. ¿Tú qué harías si el suelo frente a ti empezara a humear? Por eso mismo.",
-    "word_count": 79,
-    "search_summary": "El volcán Parícutin nació en un campo agrícola en Michoacán, México, el 20 de febrero de 1943 y creció 424 metros en nueve años.",
-    "comment_question": "¿Qué harías si un volcán naciera en tu patio hoy? 🌋",
-    "source_note": "Smithsonian Global Volcanism Program, registro histórico Parícutin",
-    "source_url": "https://volcano.si.edu/volcano.cfm?vn=341040",
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "volcán Parícutin",
-      "maravillas naturales",
-      "volcanes México",
-      "Michoacán volcán",
-      "datos curiosos naturaleza",
-      "fenómenos naturales increíbles",
-      "volcanes historia",
-      "datos en 30 segundos",
-      "maravillas naturales del mundo",
-      "volcanes activos en méxico"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#datoscuriosos",
-      "#volcanes",
-      "#maravillasnaturales",
-      "#México"
-    ],
-    "video_queries": [
-      "farmer field ground shaking eruption",
-      "Paricutin volcano born 1943 eruption",
-      "lava flow burying village",
-      "volcano growing from flat ground",
-      "scientists observing active volcano"
-    ],
-    "has_loop": true,
-    "topic": "natural wonders",
-    "structure": "happening-now",
-    "niche_styled": true,
-    "title_variant": "narrative",
-    "hashtag_position": "end"
-  },
-  {
-    "title": "¿La máscara del dios tormenta maya fue enterrada con un rey en 350 d.C.? 😱",
-    "title_opener": "question",
-    "title_intensity": "extreme",
-    "hook_text": "Enterrado con un dios en la cara",
-    "hook_template": "sounds-fake",
-    "emotional_tone": "awe",
-    "script": "Le pusieron la cara de un dios encima antes de sellarlo para siempre. En Chochkitam, Guatemala, alrededor del año 350 d.C., un rey maya fue enterrado con una máscara de mosaico de jade sobre el pecho — los ojos y dientes hechos de concha spondylus. La máscara representa al Dios de la Tormenta maya. Sobrevivió intacta más de 1,600 años bajo tierra. ¿Qué rey en tu opinión merece una máscara así para la eternidad? Y así es como.",
-    "word_count": 75,
-    "search_summary": "Rey maya de Chochkitam enterrado en 350 d.C. con máscara de jade del Dios de la Tormenta sobre el pecho.",
-    "comment_question": "¿Con qué máscara enterrarías a alguien para la eternidad? 😱",
-    "source_note": "National Geographic, descubrimientos arqueológicos 2024",
-    "source_url": "https://www.nationalgeographic.com/science/article/archaeological-discoveries-2024",
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "máscara maya",
-      "rey maya",
-      "Chochkitam",
-      "arqueología maya",
-      "jade maya",
-      "descubrimientos arqueológicos",
-      "datos curiosos",
-      "historia antigua",
-      "dios tormenta maya",
-      "rey maya quiche"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#datoscuriosos",
-      "#arqueología",
-      "#maya",
-      "#historiaantigua"
-    ],
-    "video_queries": [
-      "jade mosaic mask closeup",
-      "Maya archaeological burial excavation",
-      "jade artifacts ancient Maya",
-      "spondylus shell artifact",
-      "Guatemala jungle archaeological site"
-    ],
-    "has_loop": true,
-    "topic": "archaeological discoveries",
-    "structure": "historical-story",
-    "niche_styled": true,
-    "title_variant": "seo",
-    "hashtag_position": "end"
-  },
-  {
     "title": "¿La catarata más grande del mundo está bajo el océano? 🤯",
     "title_opener": "question",
     "title_intensity": "extreme",
     "hook_text": "Nadie la puede ver",
     "hook_template": "sounds-fake",
     "emotional_tone": "impossible",
-    "script": "Hay una catarata que cae 3,500 metros — completamente invisible. En el Estrecho de Dinamarca, entre Islandia y Groenlandia, agua fría del Ártico choca con agua más cálida del Atlántico. La fría pesa más y se hunde en caída libre: 3,500 metros hacia el fondo. Eso triplica el Salto Ángel. Ninguna catarata en tierra ni se acerca. El agua fría que tomas hoy pasó por ahí. ¿Cuántas cosas más esconde el océano que jamás vamos a ver? Y así es como.",
+    "script": "La catarata más grande del mundo está escondida bajo el mar. En el estrecho de Dinamarca, entre Groenlandia e Islandia, el agua fría y densa desciende bajo otra masa de agua más cálida. La caída alcanza unos 3,500 metros: más de tres veces la altura del Salto Ángel. No verás espuma desde un barco, porque toda la corriente se mueve bajo la superficie. ¿Te imaginabas una cascada de ese tamaño sin verla? Y así es como.",
     "word_count": 74,
     "search_summary": "La cascada submarina del Estrecho de Dinamarca cae 3,500 metros, siendo la catarata más grande del mundo bajo el océano Atlántico.",
     "comment_question": "¿Qué más crees que esconde el océano que nunca vamos a descubrir? 🌊",
