@@ -14120,6 +14120,58 @@
         "output_tokens": 0
       },
       "error": "ES backup script failed independent fact review: Critical factual errors: (1) Army reached El Kharga or similar oasis, not Luxor—Luxor is on Nile, not in western desert route to Siwa. (2) Bones and artifacts WERE found (Persian arrow tips, daggers, skeletal remains with cavalry bits) contrary to claim that 'no bones or armor' were found. These contradictions with documented archaeological discoveries make the script unsupported."
+    },
+    {
+      "id": "41489704078:1",
+      "at": "2026-11-02T17:18:01.216291+00:00",
+      "outcome": "published",
+      "resumed": false,
+      "title": "El niño de Lepenski Vir enterrado mirando al río en 6000 a.C. 😱",
+      "episode": "2026-11-02T17:18:01.216291+00:00",
+      "slot": "2026-11-02T17:17:00+00:00",
+      "video_id": "2T4D3VAoZZM",
+      "selection": {
+        "filter_version": 3,
+        "retries": 0,
+        "retry_recovered": 0,
+        "unknown_usage_attempts": 0,
+        "retry_input_tokens": 0,
+        "retry_output_tokens": 0,
+        "retry_reasons": null,
+        "reused_selections": 0,
+        "extra_searches": 1,
+        "downloaded_scenes": 6,
+        "backup_scenes": 1,
+        "extra_input_tokens": 4382,
+        "extra_output_tokens": 64,
+        "initial_scenes": 4,
+        "opening_vetted": true,
+        "source_errors": null,
+        "source_candidates": {
+          "pexels": 58,
+          "pixabay": 4,
+          "coverr": 0
+        },
+        "downloaded_sources": {
+          "pexels": 6
+        },
+        "stock_cache_hits": 0,
+        "beats": 6,
+        "vetted": 5,
+        "cache_hits": 0,
+        "no_preview": 0,
+        "api_error": 0,
+        "unparsed": 0,
+        "rejected": 1,
+        "bypass": false,
+        "vision_calls": 6,
+        "no_candidates": 0,
+        "search_error": 0,
+        "input_tokens": 28599,
+        "output_tokens": 281,
+        "target_scenes": 6
+      },
+      "error": null
     }
   ]
 }
