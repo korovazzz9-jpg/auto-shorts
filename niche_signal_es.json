@@ -1,58 +1,59 @@
 {
   "outlier_counts": {
     "ancient history": 5,
-    "archaeological discoveries": 4,
-    "ancient civilizations": 2,
-    "historical mysteries": 4,
+    "archaeological discoveries": 3,
+    "ancient civilizations": 4,
+    "historical mysteries": 5,
     "the human body": 2,
-    "the ocean": 1,
-    "evolution": 3,
-    "volcanoes and earthquakes": 5,
-    "space": 1,
+    "the ocean": 2,
+    "evolution": 1,
+    "volcanoes and earthquakes": 6,
+    "space": 2,
     "future technology": 5,
-    "the animal kingdom": 3,
+    "the animal kingdom": 2,
     "extreme weather": 3,
     "natural wonders": 1
   },
   "outlier_titles": {
     "ancient history": [
       "DATO CURIOSO - LA NIÑA PERRO #shorts",
-      "Los Mayas Nunca Desaparecieron #Mayas  #maya #mexico #historia #curiosidadeshistoricas",
-      "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos"
-    ],
-    "archaeological discoveries": [
-      "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos",
-      "Hallazgo del siglo 5 a.C en aguas Italianas #historia #datoscuriosos #shorts",
-      "La Reina Roja de Palenque🏺 #reelsvideo #shorts #fyp #curiosidades #datoscuriosos"
-    ],
-    "ancient civilizations": [
       "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos",
       "Tres datos históricos alucinantes #historia #interesante #hechos"
     ],
+    "archaeological discoveries": [
+      "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos",
+      "La Reina Roja de Palenque🏺 #reelsvideo #shorts #fyp #curiosidades #datoscuriosos",
+      "¿Encontraron el Arca de Noé en 2025? 😱 ¡Increíble descubrimiento en Turquía! #shorts #datoscuriosos"
+    ],
+    "ancient civilizations": [
+      "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos",
+      "Tres datos históricos alucinantes #historia #interesante #hechos",
+      "Datos Curiosos de Cleopatra, una Mujer Exótica #shorts"
+    ],
     "historical mysteries": [
+      "Tres datos históricos alucinantes #historia #interesante #hechos",
       "✅ La verdadera historia de los tres cerditos 🐷💀 #short #shortsviral",
-      "Paul Tibbets: El piloto de Hiroshima que nunca se arrepintió #historia #datoscuriosos",
-      "Secretos que los guardias reales no quieren que sepas dato curioso #curiosidades #sabiasque #shorts"
+      "El misterio de cómo se movían los Moai #shorts"
     ],
     "the human body": [
       "DATO CURIOSO - LA NIÑA PERRO #shorts",
       "¿Qué pasaría si tu CUERPO fuera de estos MATERIALES? 🧊🌋💀 #shorts"
     ],
     "the ocean": [
+      "Las profundidades del Oceano #shorts",
       "¿Tienes Talasofobia? 🤯😰 #shorts #talasofobia #fobias #short #mar #oceano"
     ],
     "evolution": [
-      "3 DATOS del CYBERTRUCK 👀 #datoscuriosos",
-      "Arbol Familiar de Pokémon en 1 MINUTO #shorts",
-      "La increíble evolución de un bebé paso a paso 👶"
+      "3 DATOS del CYBERTRUCK 👀 #datoscuriosos"
     ],
     "volcanoes and earthquakes": [
       "🌍💥 El terremoto más potente #curiosidades #datoscuriosos",
       "EL TSUNAMI MÁS GRANDE DE LA HISTORIA",
-      "la erupción del volcan vesubio en pompeya"
+      "¡Estos desastres naturales podrían destruir el mundo! 😱"
     ],
     "space": [
-      "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos"
+      "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos",
+      "el Planeta Jupiter #datoscuriosos #sabiasque#planetas #planeta #jupiter"
     ],
     "future technology": [
       "Científicos EXPERIMENTOS CASEROS! 😱 #shorts",
@@ -61,12 +62,11 @@
     ],
     "the animal kingdom": [
       "SHAKIRA se ASUSTÓ por una RATA 😱 #shakira #curiosidades #datoscuriosos",
-      "El DETALLE de hotel Transylvania que NO VISTE #mavis #datoscuriosos #curiosidades",
-      "Los animales sabían que era su último día juntos 🐾✨ #love #animals #shorts"
+      "El DETALLE de hotel Transylvania que NO VISTE #mavis #datoscuriosos #curiosidades"
     ],
     "extreme weather": [
+      "The Scariest Natural Disasters Caught On Camera 🌪 #shorts",
       "Multi-Vortex Tornadoes #shorts",
-      "¿Crees que escapaste del tornado? Mira a tu derecha...",
       "Las Cataratas del Niágara se congelaron tras temperaturas extremas. #ClimaExtremo #Viral #Shorts"
     ],
     "natural wonders": [
@@ -118,9 +118,9 @@
       "topic": "historical mysteries",
       "title": "✅ La verdadera historia de los tres cerditos 🐷💀 #short #shortsviral",
       "video_id": "QQ0sdApwJ0s",
-      "views": 5127408,
-      "subs": 19600,
-      "ratio": 261.6
+      "views": 5159374,
+      "subs": 19700,
+      "ratio": 261.9
     },
     {
       "topic": "ancient history",
@@ -139,37 +139,37 @@
       "ratio": 250.0
     },
     {
-      "topic": "historical mysteries",
-      "title": "EL TSUNAMI MÁS GRANDE DE LA HISTORIA",
-      "video_id": "Tp_f3ZBfxcc",
-      "views": 1827100,
-      "subs": 7800,
-      "ratio": 234.2
-    },
-    {
       "topic": "archaeological discoveries",
       "title": "¿Encontraron el Arca de Noé en 2025? 😱 ¡Increíble descubrimiento en Turquía! #shorts #datoscuriosos",
       "video_id": "hHTNpfzZ1lo",
-      "views": 35132,
-      "subs": 156,
-      "ratio": 225.2
+      "views": 39911,
+      "subs": 163,
+      "ratio": 244.9
+    },
+    {
+      "topic": "historical mysteries",
+      "title": "EL TSUNAMI MÁS GRANDE DE LA HISTORIA",
+      "video_id": "Tp_f3ZBfxcc",
+      "views": 1838425,
+      "subs": 7810,
+      "ratio": 235.4
     }
   ],
   "saturation": {
     "ancient history": 1000000,
-    "archaeological discoveries": 113742,
-    "ancient civilizations": 262063,
-    "shipwrecks and lost treasures": 2814,
-    "historical mysteries": 617874,
+    "archaeological discoveries": 188469,
+    "ancient civilizations": 368356,
+    "shipwrecks and lost treasures": 3462,
+    "historical mysteries": 825825,
     "the human body": 1000000,
     "the animal kingdom": 1000000,
-    "the ocean": 860472,
+    "the ocean": 1000000,
     "evolution": 1000000,
-    "volcanoes and earthquakes": 119498,
-    "extreme weather": 396168,
-    "natural wonders": 443322,
+    "volcanoes and earthquakes": 216675,
+    "extreme weather": 497110,
+    "natural wonders": 568239,
     "space": 1000000,
     "future technology": 298101
   },
-  "updated": "2026-10-26"
+  "updated": "2026-11-02"
 }
