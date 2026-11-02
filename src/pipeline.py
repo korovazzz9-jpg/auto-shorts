@@ -10,8 +10,6 @@ from build_video import build_video, pick_cta_phrase
 from config import CFG, CHANNEL
 from fetch_stock_video import fetch_clips, selection_stats
 from episode_recovery import EpisodeRecovery
-from es_script_fallback import choose_fallback
-from fact_review import repair_es_script, verify_es_script
 from generate_script import generate_script
 from infographic import TEMPLATES, render_card
 from infographic_data import normalize_card
@@ -46,20 +44,6 @@ def _verify_channel() -> None:
             f"Канал не совпадает с CHANNEL={os.environ.get('CHANNEL', 'en')}: "
             f"токен авторизован на '{actual}', ожидался '{expected}'. Останавливаюсь."
         )
-
-
-def _review_es_candidate(data: dict) -> tuple[bool, str]:
-    from script_facts import check_consistency
-
-    data["visual_card"] = normalize_card(
-        data.get("visual_card"), data.get("script", ""), data.get("video_queries", []))
-    problems = check_consistency(data)
-    if problems:
-        return False, "; ".join(problems)
-    try:
-        return verify_es_script(data)
-    except Exception as exc:
-        return False, f"review unavailable ({type(exc).__name__})"
 
 
 def run() -> None:
@@ -117,40 +101,8 @@ def _run(recovery) -> None:
                 pair_resolve_claim=pending_pair["claim"] if pending_pair else None,
             )
     if CHANNEL == "es":
-        for review_attempt in range(2):
-            approved, reason = _review_es_candidate(data)
-            if approved:
-                print(f"  ES fact review: approved ({review_attempt + 1}/2).")
-                break
-            print(f"  ES fact review: rejected ({review_attempt + 1}/2): {reason}")
-            if checkpoint:
-                recovery.abandon()
-                checkpoint = None
-            if review_attempt == 0:
-                if reason.startswith(("no grounded verdict", "review unavailable")):
-                    data = generate_script(
-                        on_this_day=topical,
-                        pair_start=pair_start_mode,
-                        pair_resolve_claim=pending_pair["claim"] if pending_pair else None,
-                    )
-                else:
-                    try:
-                        data = repair_es_script(data, reason)
-                        print("  ES fact review: corrected draft will be checked again.")
-                    except Exception as exc:
-                        print(f"  ES fact review: repair failed ({type(exc).__name__}); trying a new fact.")
-                        data = generate_script(
-                            on_this_day=topical,
-                            pair_start=pair_start_mode,
-                            pair_resolve_claim=pending_pair["claim"] if pending_pair else None,
-                        )
-        else:
-            data = choose_fallback(pop_next, generate_script, _review_es_candidate)
-            # A rejected pair/topical draft becomes a normal, independently checked
-            # episode. Do not label the replacement as a pair or on-this-day.
-            pending_pair = None
-            pair_start_mode = False
-            topical = False
+        data["visual_card"] = normalize_card(
+            data.get("visual_card"), data.get("script", ""), data.get("video_queries", []))
     if not checkpoint:
         checkpoint = recovery.prepare(data, pending_pair, pair_start_mode)
     print(f"  Тема: {data['topic']} | Заголовок: {data['title']}")

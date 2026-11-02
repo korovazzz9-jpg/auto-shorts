@@ -1,6 +1,5 @@
 """The generic ES cards must not introduce a new visible claim."""
 
-import json
 import sys
 import tempfile
 import unittest
@@ -17,7 +16,19 @@ from PIL import Image
 class InfographicTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.queue = json.loads((ROOT / "queue_es.json").read_text(encoding="utf-8"))
+        # Stable excerpts from three sourced drafts; the live queue is routinely empty.
+        cls.queue = [
+            {"script": ("En 1992, un contenedor con patitos de goma cayó al Pacífico Norte. "
+                        "Flotaron con las corrientes y llegaron a distintas costas."),
+             "video_queries": ["toys", "ship", "ocean"]},
+            {"script": ("Surtsey surgió frente a Islandia en 1963. Las olas cambiaron sus "
+                        "costas durante décadas."),
+             "video_queries": ["island", "waves", "coast"]},
+            {"script": ("En 1980, el monte Santa Helena perdió cuatrocientos metros de su "
+                        "parte superior. Donde antes había una cumbre quedó un cráter con "
+                        "forma de herradura."),
+             "video_queries": ["volcano", "avalanche", "crater"]},
+        ]
 
     def test_live_paraphrase_uses_spoken_words(self):
         script = ("Mount St. Helens, Washington, 1980: su cima era perfecta, nevada, "

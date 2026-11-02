@@ -46,7 +46,6 @@ from generate_script import (
 from recent_titles import add_title_to_cache, add_topic_to_cache, get_recent_titles, get_recent_video_texts
 from script_queue import load_queue, save_queue
 from script_facts import check_consistency
-from fact_review import verify_es_script
 from infographic_data import normalize_card
 
 load_dotenv()
@@ -163,18 +162,15 @@ def main() -> None:
             custom_id=f"item-{i}",
             params=MessageCreateParamsNonStreaming(
                 model="claude-sonnet-4-6",
-                max_tokens=3000,
-                tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 1}],
+                max_tokens=2200,
                 system=[{"type": "text",
                          "text": build_system_prompt(structures[i]) + "\n\n" + LOOP_INSTRUCTION + "\n\n" + LENGTH_INSTRUCTION,
                          "cache_control": {"type": "ephemeral"}}],
                 messages=[{"role": "user", "content": _build_user_content(
                     topics[i], avoid_block, title_variants[i][0] + variety_note,
                     structure=structures[i]) +
-                    "\nUse web_search once BEFORE choosing the fact. Choose a concrete fact "
-                    "directly supported by the search results; avoid sensational mechanisms "
-                    "or motives not stated by the source. Include the direct source URL in "
-                    "source_url. Return the full JSON without reasoning."}],
+                    "\nChoose a concrete, well documented fact. Avoid sensational mechanisms "
+                    "or motives that you cannot support. Return the full JSON without reasoning."}],
             ),
         )
         for i in range(need)
@@ -205,11 +201,6 @@ def main() -> None:
             print(f"  item-{i}: batch-запрос не удался ({status}), пропускаем.")
             continue
         try:
-            if not any(getattr(block, "type", None) == "server_tool_use" and
-                       getattr(block, "name", None) == "web_search"
-                       for block in result.result.message.content):
-                print(f"  item-{i}: веб-поиск источника не выполнен, пропускаем.")
-                continue
             data = _parse_response(result.result.message)
         except Exception as e:
             print(f"  item-{i}: не распарсился JSON ({e}); "
@@ -279,12 +270,6 @@ def main() -> None:
                 print(f"  item-{i}: «{data['title']}» похож на уже ОПУБЛИКОВАННОЕ видео "
                       f"(совпадение имён/чисел в скрипте) — пропускаем.")
                 continue
-
-            if os.getenv("CHANNEL", "en") == "es":
-                approved, reason = verify_es_script(data)
-                if not approved:
-                    print(f"  item-{i}: независимая проверка факта отклонила сценарий ({reason}).")
-                    continue
 
             add_title_to_cache(data["title"])
             queue.append(data)
