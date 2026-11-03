@@ -1,5 +1,79 @@
 {
-  "pending": null,
+  "pending": {
+    "data": {
+      "title": "El calamar vampiro que apaga su propio cuerpo para desaparecer 🤯",
+      "title_opener": "the-x",
+      "title_intensity": "extreme",
+      "hook_text": "Se apaga como un foco",
+      "hook_template": "sounds-fake",
+      "emotional_tone": "impossible",
+      "script": "Un animal se apaga por completo en el océano — y reaparece a metros de distancia. El calamar vampiro, Vampyroteuthis infernalis, vive a 900 metros de profundidad donde no llega luz. Cuando algo lo amenaza, apaga todos sus fotóforos al instante: desaparece en la oscuridad total. Pero aquí viene lo raro — enciende los fotóforos de la punta de sus tentáculos para aparecer 2 metros más lejos, como si se teletransportara. Manda esto a alguien que crea que los calamares son simples. Y de esta forma.",
+      "word_count": 79,
+      "search_summary": "El calamar vampiro Vampyroteuthis infernalis apaga y enciende sus fotóforos para desaparecer y reaparecer en la oscuridad del océano profundo.",
+      "comment_question": "¿Apagar la luz para huir o para atacar — qué crees que hace realmente? 🦑",
+      "source_note": "MBARI Monterey Bay Aquarium Research Institute, 2021",
+      "source_url": "https://www.mbari.org/news/vampire-squid-bioluminescence/",
+      "visual_card": null,
+      "loop_connectors": [
+        "why",
+        "how"
+      ],
+      "tags": [
+        "calamar vampiro",
+        "animales del océano profundo",
+        "bioluminiscencia",
+        "datos curiosos animales",
+        "vampyroteuthis infernalis",
+        "criaturas del mar",
+        "curiosidades animales",
+        "datos en 30 segundos",
+        "calamar vampiro del infierno",
+        "los 10 animales más extraños del océano profundo",
+        "datos curiosos animales para niños"
+      ],
+      "hashtags": [
+        "#shorts",
+        "datoscuriosos",
+        "#calamar",
+        "#oceano",
+        "#animales"
+      ],
+      "video_queries": [
+        "vampire squid deep ocean bioluminescence",
+        "deep sea darkness 900 meters",
+        "vampire squid photophores glowing tentacles",
+        "vampire squid disappearing reappearing dark water"
+      ],
+      "has_loop": true,
+      "topic": "the animal kingdom",
+      "structure": "myth-debunk",
+      "niche_styled": true,
+      "title_variant": "narrative",
+      "hashtag_position": "end"
+    },
+    "pending_pair": null,
+    "pair_start_mode": false,
+    "selections": {
+      "2328a8fdd81c3d5748c8c20be134a159ac2416a600dc19a0de2bf380be24d05b": [
+        {
+          "link": "https://videos.pexels.com/video-files/26509759/11955278_1080_1920_30fps.mp4",
+          "id": 26509759,
+          "preview": "https://images.pexels.com/videos/26509759/aquarium-fish-jellyfish-26509759.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630",
+          "source": "pexels"
+        }
+      ],
+      "c42ca9db676cac6391d75a1b046f40041ae81d5236c0c51ceb2424342ecab325": [
+        {
+          "link": "https://videos.pexels.com/video-files/3538273/3538273-hd_720_1280_30fps.mp4",
+          "id": 3538273,
+          "preview": "https://images.pexels.com/videos/3538273/free-video-3538273.jpg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630",
+          "source": "pexels"
+        }
+      ]
+    },
+    "status": "prepared",
+    "created": "2026-11-03T13:17:52.448660+00:00"
+  },
   "attempts": [
     {
       "id": "34221465880:1",
@@ -14328,6 +14402,58 @@
         "target_scenes": 6
       },
       "error": null
+    },
+    {
+      "id": "41642989566:1",
+      "at": "2026-11-03T13:17:52.448660+00:00",
+      "outcome": "deferred",
+      "resumed": false,
+      "title": "El calamar vampiro que apaga su propio cuerpo para desaparecer 🤯",
+      "episode": "2026-11-03T13:17:52.448660+00:00",
+      "slot": "2026-11-03T13:17:00+00:00",
+      "video_id": null,
+      "selection": {
+        "filter_version": 3,
+        "retries": 0,
+        "retry_recovered": 0,
+        "unknown_usage_attempts": 0,
+        "retry_input_tokens": 0,
+        "retry_output_tokens": 0,
+        "retry_reasons": null,
+        "reused_selections": 0,
+        "extra_searches": 3,
+        "downloaded_scenes": 2,
+        "backup_scenes": 0,
+        "extra_input_tokens": 13220,
+        "extra_output_tokens": 192,
+        "initial_scenes": 1,
+        "opening_vetted": true,
+        "source_errors": null,
+        "source_candidates": {
+          "pexels": 66,
+          "pixabay": 0,
+          "coverr": 0
+        },
+        "downloaded_sources": {
+          "pexels": 2
+        },
+        "stock_cache_hits": 0,
+        "beats": 7,
+        "vetted": 2,
+        "cache_hits": 0,
+        "no_preview": 0,
+        "api_error": 0,
+        "unparsed": 0,
+        "rejected": 5,
+        "bypass": false,
+        "vision_calls": 7,
+        "no_candidates": 0,
+        "search_error": 0,
+        "input_tokens": 30864,
+        "output_tokens": 448,
+        "target_scenes": 6
+      },
+      "error": "Добор сцен продолжается: 2/6. Сценарий и одобренные клипы сохранены для следующей попытки."
     }
   ]
 }
