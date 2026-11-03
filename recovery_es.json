@@ -14484,6 +14484,58 @@
         "target_scenes": 6
       },
       "error": "Эпизод брошен: 2/6 сцен после 3 попыток. Следующий прогон возьмёт новый сценарий."
+    },
+    {
+      "id": "41729440948:1",
+      "at": "2026-11-03T22:17:52.579009+00:00",
+      "outcome": "published",
+      "resumed": false,
+      "title": "El volcán que enterró viva una ciudad romana en 79 d.C. 😱",
+      "episode": "2026-11-03T22:17:52.579009+00:00",
+      "slot": "2026-11-03T22:17:00+00:00",
+      "video_id": "1KetMNokEr0",
+      "selection": {
+        "filter_version": 3,
+        "retries": 0,
+        "retry_recovered": 0,
+        "unknown_usage_attempts": 0,
+        "retry_input_tokens": 0,
+        "retry_output_tokens": 0,
+        "retry_reasons": null,
+        "reused_selections": 0,
+        "extra_searches": 0,
+        "downloaded_scenes": 5,
+        "backup_scenes": 2,
+        "extra_input_tokens": 0,
+        "extra_output_tokens": 0,
+        "initial_scenes": 3,
+        "opening_vetted": false,
+        "source_errors": null,
+        "source_candidates": {
+          "pexels": 50,
+          "pixabay": 0,
+          "coverr": 0
+        },
+        "downloaded_sources": {
+          "pexels": 5
+        },
+        "stock_cache_hits": 0,
+        "beats": 5,
+        "vetted": 3,
+        "cache_hits": 0,
+        "no_preview": 0,
+        "api_error": 0,
+        "unparsed": 0,
+        "rejected": 2,
+        "bypass": false,
+        "vision_calls": 5,
+        "no_candidates": 0,
+        "search_error": 0,
+        "input_tokens": 22041,
+        "output_tokens": 320,
+        "target_scenes": 5
+      },
+      "error": null
     }
   ]
 }
