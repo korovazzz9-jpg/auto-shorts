@@ -14693,6 +14693,58 @@
         "target_scenes": 6
       },
       "error": null
+    },
+    {
+      "id": "41905141055:1",
+      "at": "2026-11-04T20:18:16.054705+00:00",
+      "outcome": "published",
+      "resumed": false,
+      "title": "La sonda que NASA perdió en el espacio y regresó sola 31 años después 😱",
+      "episode": "2026-11-04T20:18:16.054705+00:00",
+      "slot": "2026-11-04T20:17:00+00:00",
+      "video_id": "ztCJfMhjOxM",
+      "selection": {
+        "filter_version": 3,
+        "retries": 0,
+        "retry_recovered": 0,
+        "unknown_usage_attempts": 0,
+        "retry_input_tokens": 0,
+        "retry_output_tokens": 0,
+        "retry_reasons": null,
+        "reused_selections": 0,
+        "extra_searches": 2,
+        "downloaded_scenes": 6,
+        "backup_scenes": 0,
+        "extra_input_tokens": 8841,
+        "extra_output_tokens": 25,
+        "initial_scenes": 4,
+        "opening_vetted": true,
+        "source_errors": null,
+        "source_candidates": {
+          "pexels": 67,
+          "pixabay": 0,
+          "coverr": 0
+        },
+        "downloaded_sources": {
+          "pexels": 6
+        },
+        "stock_cache_hits": 0,
+        "beats": 7,
+        "vetted": 6,
+        "cache_hits": 0,
+        "no_preview": 0,
+        "api_error": 0,
+        "unparsed": 0,
+        "rejected": 1,
+        "bypass": false,
+        "vision_calls": 7,
+        "no_candidates": 0,
+        "search_error": 0,
+        "input_tokens": 30958,
+        "output_tokens": 345,
+        "target_scenes": 6
+      },
+      "error": null
     }
   ]
 }
