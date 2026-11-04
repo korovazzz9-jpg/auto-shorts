@@ -20581,5 +20581,68 @@
       "infographic_scenes": 0,
       "infographic_template": null
     }
+  },
+  {
+    "video_id": "AE9JgKsrebY",
+    "published_at": "2026-11-04T22:25:44.707244+00:00",
+    "title": "¿La momia más perfecta de los Andes tenía 13 años en 1999? 😱",
+    "topic": "archaeological discoveries",
+    "hook_template": "authority-cant-explain",
+    "title_opener": "question",
+    "emotional_tone": "creepy",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 37.5,
+    "voice": "es-US-AlonsoNeural",
+    "caption_color": "white",
+    "structure": "unsolved-mystery",
+    "pair_role": null,
+    "clip_selection": {
+      "filter_version": 3,
+      "retries": 0,
+      "retry_recovered": 0,
+      "unknown_usage_attempts": 0,
+      "retry_input_tokens": 0,
+      "retry_output_tokens": 0,
+      "retry_reasons": null,
+      "reused_selections": 0,
+      "extra_searches": 2,
+      "downloaded_scenes": 6,
+      "backup_scenes": 1,
+      "extra_input_tokens": 8825,
+      "extra_output_tokens": 78,
+      "initial_scenes": 4,
+      "opening_vetted": false,
+      "source_errors": null,
+      "source_candidates": {
+        "pexels": 67,
+        "pixabay": 1,
+        "coverr": 0
+      },
+      "downloaded_sources": {
+        "pexels": 5,
+        "pixabay": 1
+      },
+      "stock_cache_hits": 0,
+      "beats": 7,
+      "vetted": 5,
+      "cache_hits": 0,
+      "no_preview": 0,
+      "api_error": 0,
+      "unparsed": 0,
+      "rejected": 2,
+      "bypass": false,
+      "vision_calls": 7,
+      "no_candidates": 0,
+      "search_error": 0,
+      "input_tokens": 31471,
+      "output_tokens": 398,
+      "target_scenes": 6,
+      "infographic_scenes": 0,
+      "infographic_template": null
+    }
   }
 ]
