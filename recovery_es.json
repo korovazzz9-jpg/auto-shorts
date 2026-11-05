@@ -15006,6 +15006,58 @@
         "target_scenes": 6
       },
       "error": null
+    },
+    {
+      "id": "42120180423:1",
+      "at": "2026-11-05T22:18:32.641847+00:00",
+      "outcome": "published",
+      "resumed": false,
+      "title": "¿Los sacerdotes de Jericó guardaban cráneos de sus ancestros en casa? 😱",
+      "episode": "2026-11-05T22:18:32.641847+00:00",
+      "slot": "2026-11-05T22:17:00+00:00",
+      "video_id": "8_WTYw4lk_U",
+      "selection": {
+        "filter_version": 3,
+        "retries": 0,
+        "retry_recovered": 0,
+        "unknown_usage_attempts": 0,
+        "retry_input_tokens": 0,
+        "retry_output_tokens": 0,
+        "retry_reasons": null,
+        "reused_selections": 0,
+        "extra_searches": 1,
+        "downloaded_scenes": 6,
+        "backup_scenes": 2,
+        "extra_input_tokens": 4412,
+        "extra_output_tokens": 64,
+        "initial_scenes": 3,
+        "opening_vetted": false,
+        "source_errors": null,
+        "source_candidates": {
+          "pexels": 58,
+          "pixabay": 0,
+          "coverr": 0
+        },
+        "downloaded_sources": {
+          "pexels": 6
+        },
+        "stock_cache_hits": 0,
+        "beats": 6,
+        "vetted": 4,
+        "cache_hits": 0,
+        "no_preview": 0,
+        "api_error": 0,
+        "unparsed": 0,
+        "rejected": 2,
+        "bypass": false,
+        "vision_calls": 6,
+        "no_candidates": 0,
+        "search_error": 0,
+        "input_tokens": 26479,
+        "output_tokens": 384,
+        "target_scenes": 6
+      },
+      "error": null
     }
   ]
 }
