@@ -1,55 +1,5 @@
 [
   {
-    "title": "¿La sonda que grabó un planeta explotando en tiempo real? 😱",
-    "title_opener": "question",
-    "title_intensity": "extreme",
-    "hook_text": "Lo vio explotar en vivo",
-    "hook_template": "sounds-fake",
-    "emotional_tone": "impossible",
-    "script": "Un telescopio espacial captó una estrella destruyendo su propio planeta en 2010. La sonda Spitzer de la NASA detectó cómo la estrella gigante BCom tragó a su planeta en cuestión de semanas — el primero documentado en tiempo real. El planeta cayó en espiral hacia su estrella y desapareció para siempre. Nada en la Tierra sobreviviría ese proceso. ¿Qué harías si descubrieras que el Sol está a punto de hacer lo mismo con nosotros? Y así es como.",
-    "word_count": 76,
-    "search_summary": "El telescopio Spitzer de la NASA captó en 2010 cómo una estrella gigante engulló a su planeta en tiempo real.",
-    "comment_question": "¿Crees que el Sol podría tragarse la Tierra antes de lo que pensamos? 🌍",
-    "source_note": "NASA Spitzer Space Telescope, 2010",
-    "source_url": "https://www.nasa.gov/mission_pages/spitzer/news/spitzer20101209.html",
-    "visual_card": null,
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "datos curiosos espacio",
-      "planeta destruido por estrella",
-      "telescopio Spitzer NASA",
-      "estrella gigante engullendo planeta",
-      "hechos del espacio",
-      "datos en 30 segundos",
-      "astronomía curiosidades",
-      "planeta cayendo al sol",
-      "datos curiosos del espacio para niños"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#datoscuriosos",
-      "#espacio",
-      "#nasa",
-      "#astronomia"
-    ],
-    "video_queries": [
-      "star engulfing planet animation",
-      "NASA Spitzer space telescope",
-      "planet spiral into star simulation",
-      "giant star explosion space",
-      "earth sun orbit space"
-    ],
-    "has_loop": true,
-    "topic": "space",
-    "structure": "historical-story",
-    "niche_styled": true,
-    "title_variant": "narrative",
-    "hashtag_position": "end"
-  },
-  {
     "title": "El rey persa que mandó azotar el mar en 480 a.C. 😱",
     "title_opener": "the-x",
     "title_intensity": "extreme",
