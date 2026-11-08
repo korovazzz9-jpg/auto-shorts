@@ -21701,5 +21701,67 @@
       "infographic_scenes": 0,
       "infographic_template": null
     }
+  },
+  {
+    "video_id": "5V9kTwJVjg4",
+    "published_at": "2026-11-08T17:23:26.415130+00:00",
+    "title": "El cuerpo humano genera suficiente calor al día para hervir 30 litros de agua 🤯",
+    "topic": "the human body",
+    "hook_template": "you-experience",
+    "title_opener": "the-x",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": null,
+    "length_seconds": 27.3,
+    "voice": "es-CO-GonzaloNeural",
+    "caption_color": "white",
+    "structure": "unsolved-mystery",
+    "pair_role": null,
+    "clip_selection": {
+      "filter_version": 3,
+      "retries": 0,
+      "retry_recovered": 0,
+      "unknown_usage_attempts": 0,
+      "retry_input_tokens": 0,
+      "retry_output_tokens": 0,
+      "retry_reasons": null,
+      "reused_selections": 0,
+      "extra_searches": 0,
+      "downloaded_scenes": 6,
+      "backup_scenes": 2,
+      "extra_input_tokens": 0,
+      "extra_output_tokens": 0,
+      "initial_scenes": 4,
+      "opening_vetted": false,
+      "source_errors": null,
+      "source_candidates": {
+        "pexels": 50,
+        "pixabay": 1,
+        "coverr": 0
+      },
+      "downloaded_sources": {
+        "pexels": 6
+      },
+      "stock_cache_hits": 0,
+      "beats": 5,
+      "vetted": 4,
+      "cache_hits": 0,
+      "no_preview": 0,
+      "api_error": 0,
+      "unparsed": 0,
+      "rejected": 1,
+      "bypass": false,
+      "vision_calls": 5,
+      "no_candidates": 0,
+      "search_error": 0,
+      "input_tokens": 22600,
+      "output_tokens": 273,
+      "target_scenes": 6,
+      "infographic_scenes": 0,
+      "infographic_template": null
+    }
   }
 ]
