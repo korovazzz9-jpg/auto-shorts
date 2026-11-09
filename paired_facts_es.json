@@ -1,15 +1,5 @@
 [
   {
-    "id": "fefaQQhEqC0-1787703968",
-    "topic": "archaeological discoveries",
-    "part_a_video_id": "fefaQQhEqC0",
-    "part_a_title": "Los 'sacrificios' de Cartago que resultaron ser propaganda romana 😱",
-    "claim": "Roma destruyó Cartago en 146 a.C. y reescribió su historia completa.",
-    "part_b_video_id": null,
-    "status": "awaiting_b",
-    "created_at": 1787703968.9233744
-  },
-  {
     "id": "trkFC0qhn60-1788135856",
     "topic": "archaeological discoveries",
     "part_a_video_id": "trkFC0qhn60",
@@ -198,5 +188,15 @@
     "part_b_video_id": null,
     "status": "awaiting_b",
     "created_at": 1793751998.123955
+  },
+  {
+    "id": "mVexf6sPf9E-1794183850",
+    "topic": "the animal kingdom",
+    "part_a_video_id": "mVexf6sPf9E",
+    "part_a_title": "El pájaro que sumerge sus huevos en volcanes para incubarlos 😱",
+    "claim": "Las crías del talégalo nacen completamente solas, sin ayuda de los padres.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1794183850.1747108
   }
 ]

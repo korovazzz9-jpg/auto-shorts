@@ -21887,5 +21887,67 @@
       "infographic_scenes": 0,
       "infographic_template": null
     }
+  },
+  {
+    "video_id": "mVexf6sPf9E",
+    "published_at": "2026-11-09T00:24:09.650538+00:00",
+    "title": "El pájaro que sumerge sus huevos en volcanes para incubarlos 😱",
+    "topic": "the animal kingdom",
+    "hook_template": "sounds-fake",
+    "title_opener": "the-x",
+    "emotional_tone": "impossible",
+    "title_variant": "narrative",
+    "has_loop": true,
+    "niche_styled": true,
+    "niche_recreated": null,
+    "topical": false,
+    "length_seconds": 30.8,
+    "voice": "es-MX-JorgeNeural",
+    "caption_color": "white",
+    "structure": "unsolved-mystery",
+    "pair_role": "a",
+    "clip_selection": {
+      "filter_version": 3,
+      "retries": 0,
+      "retry_recovered": 0,
+      "unknown_usage_attempts": 0,
+      "retry_input_tokens": 0,
+      "retry_output_tokens": 0,
+      "retry_reasons": null,
+      "reused_selections": 0,
+      "extra_searches": 3,
+      "downloaded_scenes": 4,
+      "backup_scenes": 1,
+      "extra_input_tokens": 13196,
+      "extra_output_tokens": 142,
+      "initial_scenes": 2,
+      "opening_vetted": false,
+      "source_errors": null,
+      "source_candidates": {
+        "pexels": 68,
+        "pixabay": 1,
+        "coverr": 0
+      },
+      "downloaded_sources": {
+        "pexels": 4
+      },
+      "stock_cache_hits": 0,
+      "beats": 7,
+      "vetted": 3,
+      "cache_hits": 0,
+      "no_preview": 0,
+      "api_error": 0,
+      "unparsed": 0,
+      "rejected": 4,
+      "bypass": false,
+      "vision_calls": 7,
+      "no_candidates": 0,
+      "search_error": 0,
+      "input_tokens": 31375,
+      "output_tokens": 350,
+      "target_scenes": 6,
+      "infographic_scenes": 0,
+      "infographic_template": null
+    }
   }
 ]
