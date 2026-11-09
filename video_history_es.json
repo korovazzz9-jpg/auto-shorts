@@ -19652,7 +19652,10 @@
       "input_tokens": 22496,
       "output_tokens": 272,
       "target_scenes": 6
-    }
+    },
+    "views": 1079,
+    "retention_pct": 57.10999999999999,
+    "subs_gained": 1
   },
   {
     "video_id": "vU-e8h-Gs8U",
@@ -19712,7 +19715,10 @@
       "input_tokens": 40400,
       "output_tokens": 464,
       "target_scenes": 6
-    }
+    },
+    "views": 208,
+    "retention_pct": 61.919999999999995,
+    "subs_gained": 0
   },
   {
     "video_id": "lAFAO7Vu4lY",
@@ -19772,7 +19778,10 @@
       "input_tokens": 24201,
       "output_tokens": 267,
       "target_scenes": 6
-    }
+    },
+    "views": 1494,
+    "retention_pct": 70.77,
+    "subs_gained": 1
   },
   {
     "video_id": "HaSSzGM1_LQ",
@@ -19834,7 +19843,10 @@
       "target_scenes": 6,
       "infographic_scenes": 1,
       "infographic_template": "ocean-toys-1992"
-    }
+    },
+    "views": 795,
+    "retention_pct": 66.78,
+    "subs_gained": 2
   },
   {
     "video_id": "_szKuAxX5hQ",
@@ -19897,7 +19909,10 @@
       "target_scenes": 6,
       "infographic_scenes": 1,
       "infographic_template": "surtsey-1963"
-    }
+    },
+    "views": 1013,
+    "retention_pct": 39.61,
+    "subs_gained": 1
   },
   {
     "video_id": "VKLF7zDF6uc",
@@ -19959,7 +19974,10 @@
       "target_scenes": 6,
       "infographic_scenes": 1,
       "infographic_template": "st-helens-1980"
-    }
+    },
+    "views": 626,
+    "retention_pct": 53.17000000000001,
+    "subs_gained": 2
   },
   {
     "video_id": "ctD8WX1eWGo",
@@ -20021,7 +20039,10 @@
       "target_scenes": 6,
       "infographic_scenes": 0,
       "infographic_template": null
-    }
+    },
+    "views": 706,
+    "retention_pct": 58.52,
+    "subs_gained": 1
   },
   {
     "video_id": "2T4D3VAoZZM",
@@ -20083,7 +20104,10 @@
       "target_scenes": 6,
       "infographic_scenes": 0,
       "infographic_template": null
-    }
+    },
+    "views": 22,
+    "retention_pct": 51.96999999999999,
+    "subs_gained": 0
   },
   {
     "video_id": "SF8nFCFS7NI",
@@ -20145,7 +20169,10 @@
       "target_scenes": 6,
       "infographic_scenes": 0,
       "infographic_template": null
-    }
+    },
+    "views": 437,
+    "retention_pct": 68.6,
+    "subs_gained": 0
   },
   {
     "video_id": "ClESVbfmQZ8",
@@ -20207,7 +20234,10 @@
       "target_scenes": 6,
       "infographic_scenes": 0,
       "infographic_template": null
-    }
+    },
+    "views": 199,
+    "retention_pct": 76.87,
+    "subs_gained": 0
   },
   {
     "video_id": "MLjjax3OMMo",
@@ -20269,7 +20299,10 @@
       "target_scenes": 6,
       "infographic_scenes": 0,
       "infographic_template": null
-    }
+    },
+    "views": 1238,
+    "retention_pct": 60.57,
+    "subs_gained": 0
   },
   {
     "video_id": "1KetMNokEr0",
@@ -20331,7 +20364,10 @@
       "target_scenes": 6,
       "infographic_scenes": 1,
       "infographic_template": "auto-cause_effect"
-    }
+    },
+    "views": 125,
+    "retention_pct": 30.820000000000004,
+    "subs_gained": 1
   },
   {
     "video_id": "hklu0SxAZkM",
@@ -20394,7 +20430,10 @@
       "target_scenes": 6,
       "infographic_scenes": 0,
       "infographic_template": null
-    }
+    },
+    "views": 478,
+    "retention_pct": 84.03,
+    "subs_gained": 0
   },
   {
     "video_id": "75V4tCpDzqc",
@@ -20456,7 +20495,10 @@
       "target_scenes": 6,
       "infographic_scenes": 0,
       "infographic_template": null
-    }
+    },
+    "views": 728,
+    "retention_pct": 63.92,
+    "subs_gained": 1
   },
   {
     "video_id": "snhTQ4uLDGI",
@@ -20518,7 +20560,10 @@
       "target_scenes": 6,
       "infographic_scenes": 0,
       "infographic_template": null
-    }
+    },
+    "views": 226,
+    "retention_pct": 38.08,
+    "subs_gained": 1
   },
   {
     "video_id": "ztCJfMhjOxM",
@@ -20580,7 +20625,10 @@
       "target_scenes": 6,
       "infographic_scenes": 0,
       "infographic_template": null
-    }
+    },
+    "views": 678,
+    "retention_pct": 145.46,
+    "subs_gained": 1
   },
   {
     "video_id": "AE9JgKsrebY",
@@ -20643,7 +20691,10 @@
       "target_scenes": 6,
       "infographic_scenes": 0,
       "infographic_template": null
-    }
+    },
+    "views": 310,
+    "retention_pct": 64.83,
+    "subs_gained": 0
   },
   {
     "video_id": "lWylck7bybk",
@@ -20705,7 +20756,10 @@
       "target_scenes": 6,
       "infographic_scenes": 0,
       "infographic_template": null
-    }
+    },
+    "views": 164,
+    "retention_pct": 200.07999999999998,
+    "subs_gained": 0
   },
   {
     "video_id": "o6F9isRJlOw",
@@ -20767,7 +20821,10 @@
       "target_scenes": 6,
       "infographic_scenes": 0,
       "infographic_template": null
-    }
+    },
+    "views": 185,
+    "retention_pct": 80.66,
+    "subs_gained": 2
   },
   {
     "video_id": "khnT4V8q5tM",
@@ -20829,7 +20886,10 @@
       "target_scenes": 6,
       "infographic_scenes": 0,
       "infographic_template": null
-    }
+    },
+    "views": 94,
+    "retention_pct": 30.380000000000003,
+    "subs_gained": 0
   },
   {
     "video_id": "q_EVNlIlL4Q",
@@ -20891,7 +20951,10 @@
       "target_scenes": 6,
       "infographic_scenes": 0,
       "infographic_template": null
-    }
+    },
+    "views": 3943,
+    "retention_pct": 98.21,
+    "subs_gained": 4
   },
   {
     "video_id": "8_WTYw4lk_U",
@@ -20953,7 +21016,10 @@
       "target_scenes": 6,
       "infographic_scenes": 0,
       "infographic_template": null
-    }
+    },
+    "views": 4,
+    "retention_pct": 100.0,
+    "subs_gained": 0
   },
   {
     "video_id": "F6KlhWib3y0",
@@ -21015,7 +21081,10 @@
       "target_scenes": 6,
       "infographic_scenes": 0,
       "infographic_template": null
-    }
+    },
+    "views": 1028,
+    "retention_pct": 86.54,
+    "subs_gained": 2
   },
   {
     "video_id": "q8YH-bj0J80",
@@ -21078,7 +21147,10 @@
       "target_scenes": 6,
       "infographic_scenes": 0,
       "infographic_template": null
-    }
+    },
+    "views": 98,
+    "retention_pct": 112.6,
+    "subs_gained": 0
   },
   {
     "video_id": "Ri24QssIi2Y",
@@ -21140,7 +21212,10 @@
       "target_scenes": 6,
       "infographic_scenes": 0,
       "infographic_template": null
-    }
+    },
+    "views": 962,
+    "retention_pct": 35.25,
+    "subs_gained": 0
   },
   {
     "video_id": "4OczfWPsY4Y",
@@ -21204,7 +21279,10 @@
       "target_scenes": 6,
       "infographic_scenes": 0,
       "infographic_template": null
-    }
+    },
+    "views": 643,
+    "retention_pct": 73.5,
+    "subs_gained": 0
   },
   {
     "video_id": "xX1HLUYaMmk",
@@ -21266,7 +21344,10 @@
       "target_scenes": 6,
       "infographic_scenes": 0,
       "infographic_template": null
-    }
+    },
+    "views": 1124,
+    "retention_pct": 74.65,
+    "subs_gained": 2
   },
   {
     "video_id": "yPFFYlBkZvM",
@@ -21328,7 +21409,10 @@
       "target_scenes": 6,
       "infographic_scenes": 0,
       "infographic_template": null
-    }
+    },
+    "views": 1060,
+    "retention_pct": 68.56,
+    "subs_gained": 1
   },
   {
     "video_id": "Y38k4BHKBOg",
