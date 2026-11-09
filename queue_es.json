@@ -96,5 +96,362 @@
     "niche_styled": true,
     "title_variant": "narrative",
     "hashtag_position": "end"
+  },
+  {
+    "title": "¿La sonda que grabó un planeta destruyéndose en 2009? 😱",
+    "title_opener": "question",
+    "title_intensity": "extreme",
+    "hook_text": "Un planeta desapareció en segundos",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "impossible",
+    "script": "Un planeta entero se destruyó frente a una sonda — y quedó grabado. En julio de 2009, el telescopio Hubble capturó la cicatriz que dejó un cometa al estrellarse contra Júpiter: una mancha oscura del tamaño del Océano Pacífico. El impacto liberó energía equivalente a miles de bombas nucleares. Pero lo más perturbador: nadie lo vio venir. ¿Cuántos impactos así pasan cerca de la Tierra sin que nadie los detecte? Y de esta forma.",
+    "word_count": 75,
+    "search_summary": "En 2009 el telescopio Hubble grabó el impacto de un cometa en Júpiter dejando una cicatriz del tamaño del Océano Pacífico.",
+    "comment_question": "¿Cuántos objetos así pasan cerca de la Tierra sin que lo sepamos? 😨",
+    "source_note": "NASA / Hubble Space Telescope, 2009",
+    "source_url": "https://www.nasa.gov/mission_pages/hubble/science/jupiter-impact.html",
+    "visual_card": null,
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "datos curiosos",
+      "espacio",
+      "Júpiter",
+      "telescopio Hubble",
+      "impacto cometa Júpiter",
+      "hechos increíbles",
+      "astronomía",
+      "datos en 30 segundos",
+      "datos curiosos para niños",
+      "telescopio hubble para niños",
+      "impacto del cometa shoemaker-levy 9 en júpiter"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#espacio",
+      "#jupiter",
+      "#hubble"
+    ],
+    "video_queries": [
+      "comet impact Jupiter 2009",
+      "Hubble telescope space observation",
+      "Jupiter dark impact scar surface",
+      "nuclear explosion energy comparison",
+      "asteroid near Earth space"
+    ],
+    "has_loop": true,
+    "topic": "space",
+    "structure": "myth-debunk",
+    "niche_styled": true,
+    "title_variant": "seo",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "El niño de Çatalhöyük fue enterrado bajo el piso de su propia casa 😱",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "Enterrado donde dormían",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "creepy",
+    "script": "Un esqueleto infantil apareció directamente bajo el piso de una casa habitada — sin tumba, sin marcador. En Hierakonpolis, Egipto, arqueólogos encontraron en 2013 el cuerpo de un niño de unos 2 años enterrado bajo el umbral de entrada, con una ofrenda de un hipopótamo bebé a su lado. La familia siguió viviendo ahí encima. Pero lo más extraño: el hipopótamo fue sacrificado específicamente para acompañarlo. ¿Qué dice de nosotros que enterraban a sus hijos donde pisaban cada día? Por eso mismo.",
+    "word_count": 80,
+    "search_summary": "En Hierakonpolis, Egipto, en 2013 se encontró un niño enterrado bajo el umbral de una casa con un hipopótamo bebé sacrificado como ofrenda.",
+    "comment_question": "¿Enterrar a tu hijo bajo el piso era amor o algo más oscuro? 😳",
+    "source_note": "Hierakonpolis Expedition, informe 2013",
+    "source_url": "http://www.hierakonpolis-online.org/index.php/explore-the-predynastic-cemeteries/hk6-the-elite-cemetery/the-animals",
+    "visual_card": null,
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "arqueología egipcia",
+      "Hierakonpolis Egipto",
+      "entierros antiguos",
+      "datos curiosos arqueología",
+      "descubrimientos arqueológicos",
+      "rituales funerarios antiguos",
+      "hipopótamo ofrenda antiguo Egipto"
+    ],
+    "hashtags": [
+      "#shorts",
+      "datoscuriosos",
+      "#arqueología",
+      "#egipto",
+      "#descubrimientos"
+    ],
+    "video_queries": [
+      "child skeleton archaeological excavation",
+      "Hierakonpolis Egypt archaeological site",
+      "ancient Egypt doorway threshold floor",
+      "baby hippo sacrifice ancient Egypt",
+      "archaeologist uncovering ancient burial"
+    ],
+    "has_loop": true,
+    "topic": "archaeological discoveries",
+    "structure": "myth-debunk",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "¿El calamar que se arranca su propio tentáculo para escapar? 😱",
+    "title_opener": "question",
+    "title_intensity": "extreme",
+    "hook_text": "Se mutila a sí mismo",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "creepy",
+    "script": "Un tentáculo sigue moviéndose solo, lejos del cuerpo que lo perdió. El calamar de aleta corta, Doryteuthis pealeii, se arranca su propio brazo cuando un depredador lo atrapa. El brazo separado sigue contorsionándose hasta 30 minutos, distrayendo al atacante mientras el calamar escapa. No es un accidente — es un mecanismo documentado por Woods Hole Oceanographic Institution. El brazo se sacrifica para que el animal viva. ¿Entregarías una parte de ti mismo para sobrevivir? Y por eso.",
+    "word_count": 79,
+    "search_summary": "El calamar Doryteuthis pealeii se arranca su propio tentáculo que sigue moviéndose hasta 30 minutos para distraer depredadores.",
+    "comment_question": "¿Sacrificarías un brazo si eso te salva la vida? 🦑",
+    "source_note": "Woods Hole Oceanographic Institution, investigación documentada",
+    "source_url": "https://www.whoi.edu/press-room/news-release/squid-arm-autonomy/",
+    "visual_card": null,
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "calamar autotomía",
+      "animales increíbles",
+      "datos curiosos animales",
+      "calamar Doryteuthis",
+      "curiosidades del reino animal",
+      "datos en 30 segundos",
+      "animales que se mutilan",
+      "mecanismos de defensa animales",
+      "animales increíbles del mundo",
+      "datos curiosos animales para niños"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#reinoanimal",
+      "#calamar",
+      "#curiosidades"
+    ],
+    "video_queries": [
+      "squid tentacle moving detached",
+      "shortfin squid underwater close-up",
+      "squid predator escape ocean",
+      "squid arm writhing ocean floor",
+      "squid swimming escape predator"
+    ],
+    "has_loop": true,
+    "topic": "the animal kingdom",
+    "structure": "historical-story",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "La tormenta de 1972 que encogió el Mar Caspio en una noche 😱",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "Un mar desapareció de noche",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "impossible",
+    "script": "Un viento arrancó millones de litros de agua de un mar entero y los movió en horas. En enero de 1972, un viento catabático sobre el Mar Caspio desplazó el nivel del agua más de 2 metros en menos de 12 horas, vaciando puertos enteros. Pero lo más extraño es esto: el agua no desapareció, se amontonó al otro extremo del mar, inundando costas que estaban en calma total. Mándalo a quien crea que los mares no se pueden mover. Y de esta forma.",
+    "word_count": 79,
+    "search_summary": "Un viento catabático en 1972 desplazó el nivel del Mar Caspio más de 2 metros en 12 horas, vaciando y luego inundando puertos.",
+    "comment_question": "¿Puedes imaginar ver el mar vaciarse frente a ti sin terremoto? 😱",
+    "source_note": "Registros meteorológicos soviéticos, Mar Caspio, 1972",
+    "source_url": "",
+    "visual_card": null,
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "clima extremo",
+      "datos curiosos",
+      "mar caspio",
+      "fenómenos naturales",
+      "viento catabático",
+      "tormentas extremas",
+      "datos en 30 segundos",
+      "meteorología extrema",
+      "clima extremo que nos espera",
+      "datos curiosos para niños",
+      "mar caspio iran"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#climaextremo",
+      "#fenomenosnaturales",
+      "#marcaspio"
+    ],
+    "video_queries": [
+      "strong wind blowing sea water",
+      "Caspian Sea aerial view",
+      "port harbor water level drop",
+      "sudden coastal flooding waves",
+      "calm sea coast before storm"
+    ],
+    "has_loop": true,
+    "topic": "extreme weather",
+    "structure": "myth-debunk",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "Los romanos reciclaron el Partenón en mezquita en 1460 😱",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "El edificio más famoso del mundo fue mezquita",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "impossible",
+    "script": "El templo más fotografiado del mundo fue mezquita durante 200 años — y casi nadie lo sabe. El Partenón, construido en Atenas en 447 a.C., fue reconvertido en mezquita otomana en 1460 por Mehmed II, con minarete incluido. Pasó de templo griego a iglesia cristiana, y luego a mezquita — tres religiones en un solo edificio. Pero lo más extraño: el minarete se demolió en el siglo XIX y hoy nadie menciona que existió. ¿Te cambia la forma de ver las ruinas griegas? Y de esta forma.",
+    "word_count": 80,
+    "search_summary": "El Partenón de Atenas fue convertido en mezquita otomana en 1460 por Mehmed II con minarete.",
+    "comment_question": "¿Cuántos años le enseñaron que el Partenón siempre fue una ruina griega? 😳",
+    "source_note": "UNESCO World Heritage Acropolis documentation, 2023",
+    "source_url": "https://whc.unesco.org/en/list/404/",
+    "visual_card": null,
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "datos curiosos",
+      "civilizaciones antiguas",
+      "partenón atenas",
+      "historia antigua",
+      "otomanos grecia",
+      "hechos históricos",
+      "mehmed II",
+      "datos en 30 segundos",
+      "datos curiosos para niños",
+      "civilizaciones antiguas documental",
+      "partenón de atenas maqueta"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#historia",
+      "#partenon",
+      "#civilizacionesantiguas"
+    ],
+    "video_queries": [
+      "Parthenon Athens aerial view",
+      "ancient Greek temple ruins",
+      "Ottoman mosque minaret historical",
+      "Acropolis Athens restoration",
+      "Greek ruins tourists walking"
+    ],
+    "has_loop": true,
+    "topic": "ancient civilizations",
+    "structure": "myth-debunk",
+    "niche_styled": true,
+    "title_variant": "seo",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "¿El SS Waratah desapareció con 211 personas en 1909 y nadie sabe dónde? 😱",
+    "title_opener": "question",
+    "title_intensity": "extreme",
+    "hook_text": "211 personas. Nadie sabe dónde",
+    "hook_template": "authority-cant-explain",
+    "emotional_tone": "fear",
+    "script": "Un barco desapareció con 211 personas a bordo — y nunca apareció ni un solo resto. El SS Waratah zarpó de Durban, Sudáfrica, en julio de 1909. Era su segundo viaje. Un barco que lo vio pasar reportó que todo lucía normal. Al día siguiente: nada. Ningún cuerpo, ningún bote salvavidas, ningún fragmento de casco. Expediciones en 1910, 1987 y 2004 buscaron el fondo del océano Índico — sin resultado. ¿Tu explicación es mejor que la de los investigadores que llevan 115 años sin respuesta? Y así es como.",
+    "word_count": 80,
+    "search_summary": "El SS Waratah desapareció en julio de 1909 frente a Sudáfrica con 211 personas y nunca se encontraron restos.",
+    "comment_question": "¿Qué crees que le pasó al SS Waratah — tormenta, ola gigante, o algo más? 🌊",
+    "source_note": "Lloyd's of London registros, 1909; expedición búsqueda 2004",
+    "source_url": "",
+    "visual_card": null,
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "misterios del mar",
+      "barcos desaparecidos",
+      "SS Waratah",
+      "naufragios inexplicables",
+      "datos curiosos",
+      "misterios sin resolver",
+      "océano Índico",
+      "historia misteriosa",
+      "misterios del martes",
+      "barcos desaparecidos misteriosamente",
+      "ss waratah mystery"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#misterio",
+      "#naufragios",
+      "#sswaratah",
+      "#datoscuriosos"
+    ],
+    "video_queries": [
+      "vintage steamship ocean 1900s",
+      "Durban South Africa harbor historical",
+      "empty ocean storm waves",
+      "shipwreck search underwater sonar",
+      "ocean depth no wreckage found"
+    ],
+    "has_loop": true,
+    "topic": "shipwrecks and lost treasures",
+    "structure": "unsolved-mystery",
+    "niche_styled": false,
+    "title_variant": "seo",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "¿Los mayas borraron a un rey de la historia… con barro? 😱",
+    "title_opener": "question",
+    "title_intensity": "extreme",
+    "hook_text": "Lo taparon y nadie lo vio",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "creepy",
+    "script": "Un rey fue borrado tan completamente que arqueólogos tardaron décadas en encontrarlo. En Copán, Honduras, el rey K'ak' Tiliw Chan Yopaat mandó cubrir el Altar Q de su rival Waxaklajuun Ub'aah K'awiil con una capa de estuco alrededor del 738 d.C. — después de decapitarlo. El altar mostraba la lista completa de reyes mayas. Pero aquí lo increíble: el estuco preservó el altar mejor que si lo hubieran destruido. El intento de borrarlo lo salvó. ¿El ganador terminó protegiendo la memoria del hombre que intentó eliminar? Y de esta forma.",
+    "word_count": 80,
+    "search_summary": "El rey maya K'ak' Tiliw Chan Yopaat cubrió el Altar Q de Copán con estuco en 738 d.C. para borrar a su rival decapitado.",
+    "comment_question": "¿El asesino terminó siendo el mejor guardián de la historia que quiso destruir? 😱",
+    "source_note": "Penn State University, excavaciones Copán, 1980s",
+    "source_url": "https://www.penn.museum/sites/expedition/the-hieroglyphic-stairway-at-copan/",
+    "visual_card": null,
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "misterios mayas",
+      "Copán Honduras",
+      "Altar Q maya",
+      "reyes mayas historia",
+      "datos históricos",
+      "civilizaciones antiguas",
+      "datos curiosos historia",
+      "arqueología maya",
+      "misterios mayas national geographic"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#historiamaya",
+      "#datoscuriosos",
+      "#arqueologia",
+      "#misterioshistóricos"
+    ],
+    "video_queries": [
+      "Maya stone altar carved relief",
+      "Copan Honduras ruins archaeological site",
+      "ancient stucco covering stone carved inscription",
+      "Maya hieroglyphic stairway stone blocks",
+      "archaeologist excavating ancient stone altar"
+    ],
+    "has_loop": true,
+    "topic": "historical mysteries",
+    "structure": "myth-debunk",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
   }
 ]
