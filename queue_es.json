@@ -1,53 +1,5 @@
 [
   {
-    "title": "¿El terremoto de 1811 que creó lagos donde había tierra? 😱",
-    "title_opener": "question",
-    "title_intensity": "extreme",
-    "hook_text": "El suelo se tragó un río entero",
-    "hook_template": "sounds-fake",
-    "emotional_tone": "impossible",
-    "script": "El suelo desapareció y el río fluyó al revés — y nadie sabe exactamente por qué ocurrió con esa magnitud. En diciembre de 1811, un terremoto bajo New Madrid, Missouri, licuó la tierra: campos enteros se hundieron y el Mississippi retrocedió corriente arriba por horas, inundando más de 2,000 kilómetros cuadrados. El movimiento sísmico explica algo — pero no por qué el suelo colapsó tan profundo ni por qué los lagos formados ese día, como el Reelfoot Lake, siguen ahí hoy. ¿Tú qué explicación le darías — porque la geología todavía no cierra el caso? Y así es como.",
-    "word_count": 95,
-    "search_summary": "El terremoto de New Madrid de 1811 licuó el suelo, invirtió el río Mississippi y formó el lago Reelfoot en Missouri.",
-    "comment_question": "¿Cómo puede un sismo hacer fluir un río al revés? 🤯",
-    "source_note": "USGS, New Madrid Seismic Zone documentation",
-    "source_url": "https://www.usgs.gov/programs/earthquake-hazards/new-madrid-seismic-zone",
-    "visual_card": null,
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "terremoto New Madrid 1811",
-      "Mississippi al revés",
-      "lago Reelfoot",
-      "licuefacción del suelo",
-      "terremotos curiosidades",
-      "datos curiosos",
-      "misterios geológicos",
-      "terremotos históricos"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#datoscuriosos",
-      "#terremotos",
-      "#misterio"
-    ],
-    "video_queries": [
-      "Mississippi River flowing backwards",
-      "earthquake ground liquefaction sinkhole",
-      "Reelfoot Lake Tennessee aerial",
-      "earthquake aftermath flooded fields",
-      "seismic zone fault map"
-    ],
-    "has_loop": true,
-    "topic": "volcanoes and earthquakes",
-    "structure": "unsolved-mystery",
-    "niche_styled": true,
-    "title_variant": "seo",
-    "hashtag_position": "end"
-  },
-  {
     "title": "¿El terremoto de 1783 hizo hervir el mar en Calabria? 😱",
     "title_opener": "question",
     "title_intensity": "extreme",
