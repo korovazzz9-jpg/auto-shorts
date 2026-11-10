@@ -1,57 +1,5 @@
 [
   {
-    "title": "¿La sonda que grabó un planeta destruyéndose en 2009? 😱",
-    "title_opener": "question",
-    "title_intensity": "extreme",
-    "hook_text": "Un planeta desapareció en segundos",
-    "hook_template": "sounds-fake",
-    "emotional_tone": "impossible",
-    "script": "Un planeta entero se destruyó frente a una sonda — y quedó grabado. En julio de 2009, el telescopio Hubble capturó la cicatriz que dejó un cometa al estrellarse contra Júpiter: una mancha oscura del tamaño del Océano Pacífico. El impacto liberó energía equivalente a miles de bombas nucleares. Pero lo más perturbador: nadie lo vio venir. ¿Cuántos impactos así pasan cerca de la Tierra sin que nadie los detecte? Y de esta forma.",
-    "word_count": 75,
-    "search_summary": "En 2009 el telescopio Hubble grabó el impacto de un cometa en Júpiter dejando una cicatriz del tamaño del Océano Pacífico.",
-    "comment_question": "¿Cuántos objetos así pasan cerca de la Tierra sin que lo sepamos? 😨",
-    "source_note": "NASA / Hubble Space Telescope, 2009",
-    "source_url": "https://www.nasa.gov/mission_pages/hubble/science/jupiter-impact.html",
-    "visual_card": null,
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "datos curiosos",
-      "espacio",
-      "Júpiter",
-      "telescopio Hubble",
-      "impacto cometa Júpiter",
-      "hechos increíbles",
-      "astronomía",
-      "datos en 30 segundos",
-      "datos curiosos para niños",
-      "telescopio hubble para niños",
-      "impacto del cometa shoemaker-levy 9 en júpiter"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#datoscuriosos",
-      "#espacio",
-      "#jupiter",
-      "#hubble"
-    ],
-    "video_queries": [
-      "comet impact Jupiter 2009",
-      "Hubble telescope space observation",
-      "Jupiter dark impact scar surface",
-      "nuclear explosion energy comparison",
-      "asteroid near Earth space"
-    ],
-    "has_loop": true,
-    "topic": "space",
-    "structure": "myth-debunk",
-    "niche_styled": true,
-    "title_variant": "seo",
-    "hashtag_position": "end"
-  },
-  {
     "title": "El niño de Çatalhöyük fue enterrado bajo el piso de su propia casa 😱",
     "title_opener": "the-x",
     "title_intensity": "extreme",
