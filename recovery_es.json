@@ -1,138 +1,6 @@
 {
-  "pending": {
-    "data": {
-      "title": "¿La sonda que grabó un planeta destruyéndose en 2009? 😱",
-      "title_opener": "question",
-      "title_intensity": "extreme",
-      "hook_text": "Un planeta desapareció en segundos",
-      "hook_template": "sounds-fake",
-      "emotional_tone": "impossible",
-      "script": "Un planeta entero se destruyó frente a una sonda — y quedó grabado. En julio de 2009, el telescopio Hubble capturó la cicatriz que dejó un cometa al estrellarse contra Júpiter: una mancha oscura del tamaño del Océano Pacífico. El impacto liberó energía equivalente a miles de bombas nucleares. Pero lo más perturbador: nadie lo vio venir. ¿Cuántos impactos así pasan cerca de la Tierra sin que nadie los detecte? Y de esta forma.",
-      "word_count": 75,
-      "search_summary": "En 2009 el telescopio Hubble grabó el impacto de un cometa en Júpiter dejando una cicatriz del tamaño del Océano Pacífico.",
-      "comment_question": "¿Cuántos objetos así pasan cerca de la Tierra sin que lo sepamos? 😨",
-      "source_note": "NASA / Hubble Space Telescope, 2009",
-      "source_url": "https://www.nasa.gov/mission_pages/hubble/science/jupiter-impact.html",
-      "visual_card": null,
-      "loop_connectors": [
-        "why",
-        "how"
-      ],
-      "tags": [
-        "datos curiosos",
-        "espacio",
-        "Júpiter",
-        "telescopio Hubble",
-        "impacto cometa Júpiter",
-        "hechos increíbles",
-        "astronomía",
-        "datos en 30 segundos",
-        "datos curiosos para niños",
-        "telescopio hubble para niños",
-        "impacto del cometa shoemaker-levy 9 en júpiter"
-      ],
-      "hashtags": [
-        "#shorts",
-        "#datoscuriosos",
-        "#espacio",
-        "#jupiter",
-        "#hubble"
-      ],
-      "video_queries": [
-        "comet impact Jupiter 2009",
-        "Hubble telescope space observation",
-        "Jupiter dark impact scar surface",
-        "nuclear explosion energy comparison",
-        "asteroid near Earth space"
-      ],
-      "has_loop": true,
-      "topic": "space",
-      "structure": "myth-debunk",
-      "niche_styled": true,
-      "title_variant": "seo",
-      "hashtag_position": "end"
-    },
-    "pending_pair": null,
-    "pair_start_mode": false,
-    "selections": {
-      "d63014a8f1c57da4d20e5e17c790137d4c17f7d047f6098b3e6884169b9c8b8b": [
-        {
-          "link": "https://videos.pexels.com/video-files/39599449/16880024_1080_1920_30fps.mp4",
-          "id": 39599449,
-          "preview": "https://images.pexels.com/videos/39599449/pexels-photo-39599449.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630",
-          "source": "pexels"
-        },
-        {
-          "link": "https://videos.pexels.com/video-files/39608091/16882138_1080_1920_30fps.mp4",
-          "id": 39608091,
-          "preview": "https://images.pexels.com/videos/39608091/pexels-photo-39608091.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630",
-          "source": "pexels"
-        }
-      ],
-      "fb3bde37c006e4a29b4df2f572c11c767a3c8de901228e3d6093e99c686b99cc": [
-        {
-          "link": "https://videos.pexels.com/video-files/27975940/12278762_1080_1920_30fps.mp4",
-          "id": 27975940,
-          "preview": "https://images.pexels.com/videos/27975940/astronomy-cosmos-galaxy-universe-27975940.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630",
-          "source": "pexels"
-        }
-      ]
-    },
-    "status": "prepared",
-    "created": "2026-11-10T13:18:03.910007+00:00"
-  },
+  "pending": null,
   "attempts": [
-    {
-      "id": "34653317392:1",
-      "at": "2026-09-11T22:17:57.629857+00:00",
-      "outcome": "published",
-      "resumed": false,
-      "title": "El terremoto de 1949 que hizo hervir un río entero 😱",
-      "episode": "2026-09-11T22:17:57.629857+00:00",
-      "slot": "2026-09-11T22:17:00+00:00",
-      "video_id": "5RtFk7hUxo8",
-      "selection": {
-        "filter_version": 3,
-        "retries": 0,
-        "retry_recovered": 0,
-        "unknown_usage_attempts": 0,
-        "retry_input_tokens": 0,
-        "retry_output_tokens": 0,
-        "retry_reasons": null,
-        "reused_selections": 0,
-        "extra_searches": 0,
-        "downloaded_scenes": 6,
-        "backup_scenes": 0,
-        "extra_input_tokens": 0,
-        "extra_output_tokens": 0,
-        "initial_scenes": 6,
-        "source_errors": null,
-        "source_candidates": {
-          "pexels": 59,
-          "pixabay": 2,
-          "coverr": 0
-        },
-        "downloaded_sources": {
-          "pexels": 6
-        },
-        "stock_cache_hits": 0,
-        "beats": 6,
-        "vetted": 6,
-        "cache_hits": 0,
-        "no_preview": 0,
-        "api_error": 0,
-        "unparsed": 0,
-        "rejected": 0,
-        "bypass": false,
-        "vision_calls": 6,
-        "no_candidates": 0,
-        "search_error": 0,
-        "input_tokens": 27402,
-        "output_tokens": 384,
-        "target_scenes": 6
-      },
-      "error": null
-    },
     {
       "id": "34661114014:1",
       "at": "2026-09-12T00:17:58.334792+00:00",
@@ -15419,6 +15287,58 @@
         "target_scenes": 6
       },
       "error": "Добор сцен продолжается: 3/6. Сценарий и одобренные клипы сохранены для следующей попытки."
+    },
+    {
+      "id": "42893778994:1",
+      "at": "2026-11-10T20:17:56.571446+00:00",
+      "outcome": "published",
+      "resumed": true,
+      "title": "¿La sonda que grabó un planeta destruyéndose en 2009? 😱",
+      "episode": "2026-11-10T13:18:03.910007+00:00",
+      "slot": "2026-11-10T20:17:00+00:00",
+      "video_id": "E-o2ufftxGc",
+      "selection": {
+        "filter_version": 3,
+        "retries": 0,
+        "retry_recovered": 0,
+        "unknown_usage_attempts": 0,
+        "retry_input_tokens": 0,
+        "retry_output_tokens": 0,
+        "retry_reasons": null,
+        "reused_selections": 2,
+        "extra_searches": 3,
+        "downloaded_scenes": 4,
+        "backup_scenes": 1,
+        "extra_input_tokens": 9349,
+        "extra_output_tokens": 128,
+        "initial_scenes": 2,
+        "opening_vetted": false,
+        "source_errors": null,
+        "source_candidates": {
+          "pexels": 59,
+          "pixabay": 2,
+          "coverr": 0
+        },
+        "downloaded_sources": {
+          "pexels": 4
+        },
+        "stock_cache_hits": 18,
+        "beats": 6,
+        "vetted": 1,
+        "cache_hits": 0,
+        "no_preview": 0,
+        "api_error": 0,
+        "unparsed": 0,
+        "rejected": 5,
+        "bypass": false,
+        "vision_calls": 6,
+        "no_candidates": 0,
+        "search_error": 0,
+        "input_tokens": 27487,
+        "output_tokens": 384,
+        "target_scenes": 6
+      },
+      "error": null
     }
   ]
 }
