@@ -1,15 +1,5 @@
 [
   {
-    "id": "trkFC0qhn60-1788135856",
-    "topic": "archaeological discoveries",
-    "part_a_video_id": "trkFC0qhn60",
-    "part_a_title": "El niño rey enterrado con 143 cuerpos en 550 d.C. 💀",
-    "claim": "Los moche construyeron pirámides más grandes que algunas egipcias.",
-    "part_b_video_id": null,
-    "status": "awaiting_b",
-    "created_at": 1788135856.0590622
-  },
-  {
     "id": "M0SVcNRgI4o-1788308670",
     "topic": "ancient history",
     "part_a_video_id": "M0SVcNRgI4o",
@@ -198,5 +188,15 @@
     "part_b_video_id": null,
     "status": "awaiting_b",
     "created_at": 1794183850.1747108
+  },
+  {
+    "id": "nC8-yUdXZaA-1794356679",
+    "topic": "historical mysteries",
+    "part_a_video_id": "nC8-yUdXZaA",
+    "part_a_title": "El edificio que nadie construyó aparece en mapas de 1440 😱",
+    "claim": "Fra Mauro dibujó Australia en 1450, antes de su descubrimiento oficial.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1794356679.5302453
   }
 ]

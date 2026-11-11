@@ -2,57 +2,6 @@
   "pending": null,
   "attempts": [
     {
-      "id": "34661700096:1",
-      "at": "2026-09-12T00:28:25.944978+00:00",
-      "outcome": "deferred",
-      "resumed": true,
-      "title": "El pez arquero que caza con agua como arma a 3 metros 🎯",
-      "episode": "2026-09-12T00:17:58.334792+00:00",
-      "slot": "2026-09-12T00:17:00+00:00",
-      "video_id": null,
-      "selection": {
-        "filter_version": 3,
-        "retries": 0,
-        "retry_recovered": 0,
-        "unknown_usage_attempts": 0,
-        "retry_input_tokens": 0,
-        "retry_output_tokens": 0,
-        "retry_reasons": null,
-        "reused_selections": 3,
-        "extra_searches": 3,
-        "downloaded_scenes": 5,
-        "backup_scenes": 0,
-        "extra_input_tokens": 4358,
-        "extra_output_tokens": 64,
-        "initial_scenes": 2,
-        "source_errors": null,
-        "source_candidates": {
-          "pexels": 39,
-          "pixabay": 1,
-          "coverr": 0
-        },
-        "downloaded_sources": {
-          "pexels": 5
-        },
-        "stock_cache_hits": 12,
-        "beats": 4,
-        "vetted": 2,
-        "cache_hits": 0,
-        "no_preview": 0,
-        "api_error": 0,
-        "unparsed": 0,
-        "rejected": 2,
-        "bypass": false,
-        "vision_calls": 4,
-        "no_candidates": 0,
-        "search_error": 0,
-        "input_tokens": 18016,
-        "output_tokens": 201,
-        "target_scenes": 6
-      },
-      "error": "Добор сцен продолжается: 5/6. Сценарий и одобренные клипы сохранены для следующей попытки."
-    },
-    {
       "id": "34696005350:1",
       "at": "2026-09-12T13:17:53.546167+00:00",
       "outcome": "deferred",
@@ -15338,6 +15287,58 @@
         "input_tokens": 23188,
         "output_tokens": 265,
         "target_scenes": 6
+      },
+      "error": null
+    },
+    {
+      "id": "42930149640:1",
+      "at": "2026-11-11T00:18:12.235420+00:00",
+      "outcome": "published",
+      "resumed": false,
+      "title": "El edificio que nadie construyó aparece en mapas de 1440 😱",
+      "episode": "2026-11-11T00:18:12.235420+00:00",
+      "slot": "2026-11-11T00:17:00+00:00",
+      "video_id": "nC8-yUdXZaA",
+      "selection": {
+        "filter_version": 3,
+        "retries": 0,
+        "retry_recovered": 0,
+        "unknown_usage_attempts": 0,
+        "retry_input_tokens": 0,
+        "retry_output_tokens": 0,
+        "retry_reasons": null,
+        "reused_selections": 0,
+        "extra_searches": 0,
+        "downloaded_scenes": 5,
+        "backup_scenes": 0,
+        "extra_input_tokens": 0,
+        "extra_output_tokens": 0,
+        "initial_scenes": 5,
+        "opening_vetted": true,
+        "source_errors": null,
+        "source_candidates": {
+          "pexels": 49,
+          "pixabay": 2,
+          "coverr": 0
+        },
+        "downloaded_sources": {
+          "pexels": 5
+        },
+        "stock_cache_hits": 0,
+        "beats": 5,
+        "vetted": 5,
+        "cache_hits": 0,
+        "no_preview": 0,
+        "api_error": 0,
+        "unparsed": 0,
+        "rejected": 0,
+        "bypass": false,
+        "vision_calls": 5,
+        "no_candidates": 0,
+        "search_error": 0,
+        "input_tokens": 23025,
+        "output_tokens": 270,
+        "target_scenes": 5
       },
       "error": null
     }
