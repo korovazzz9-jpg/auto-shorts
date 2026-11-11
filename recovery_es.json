@@ -1,139 +1,6 @@
 {
-  "pending": {
-    "data": {
-      "title": "¿El calamar que se arranca su propio tentáculo para escapar? 😱",
-      "title_opener": "question",
-      "title_intensity": "extreme",
-      "hook_text": "Se mutila a sí mismo",
-      "hook_template": "sounds-fake",
-      "emotional_tone": "creepy",
-      "script": "Un tentáculo sigue moviéndose solo, lejos del cuerpo que lo perdió. El calamar de aleta corta, Doryteuthis pealeii, se arranca su propio brazo cuando un depredador lo atrapa. El brazo separado sigue contorsionándose hasta 30 minutos, distrayendo al atacante mientras el calamar escapa. No es un accidente — es un mecanismo documentado por Woods Hole Oceanographic Institution. El brazo se sacrifica para que el animal viva. ¿Entregarías una parte de ti mismo para sobrevivir? Y por eso.",
-      "word_count": 79,
-      "search_summary": "El calamar Doryteuthis pealeii se arranca su propio tentáculo que sigue moviéndose hasta 30 minutos para distraer depredadores.",
-      "comment_question": "¿Sacrificarías un brazo si eso te salva la vida? 🦑",
-      "source_note": "Woods Hole Oceanographic Institution, investigación documentada",
-      "source_url": "https://www.whoi.edu/press-room/news-release/squid-arm-autonomy/",
-      "visual_card": null,
-      "loop_connectors": [
-        "why",
-        "how"
-      ],
-      "tags": [
-        "calamar autotomía",
-        "animales increíbles",
-        "datos curiosos animales",
-        "calamar Doryteuthis",
-        "curiosidades del reino animal",
-        "datos en 30 segundos",
-        "animales que se mutilan",
-        "mecanismos de defensa animales",
-        "animales increíbles del mundo",
-        "datos curiosos animales para niños"
-      ],
-      "hashtags": [
-        "#shorts",
-        "#datoscuriosos",
-        "#reinoanimal",
-        "#calamar",
-        "#curiosidades"
-      ],
-      "video_queries": [
-        "squid tentacle moving detached",
-        "shortfin squid underwater close-up",
-        "squid predator escape ocean",
-        "squid arm writhing ocean floor",
-        "squid swimming escape predator"
-      ],
-      "has_loop": true,
-      "topic": "the animal kingdom",
-      "structure": "historical-story",
-      "niche_styled": true,
-      "title_variant": "narrative",
-      "hashtag_position": "end"
-    },
-    "pending_pair": null,
-    "pair_start_mode": false,
-    "selections": {
-      "7935f5cbe982c1bd2bb35f8eb23039702dfa1a6c006d9afbf3aac9f635d80fbe": [
-        {
-          "link": "https://videos.pexels.com/video-files/17836505/17836505-hd_1080_1920_25fps.mp4",
-          "id": 17836505,
-          "preview": "https://images.pexels.com/videos/17836505/aquarium-pulp-17836505.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630",
-          "source": "pexels"
-        }
-      ],
-      "faa7f5e2c07119d5520241fb7636cc072012caaaf17cc1fa6291084b44fe9a82": [
-        {
-          "link": "https://videos.pexels.com/video-files/37885077/16073599_1080_1920_60fps.mp4",
-          "id": 37885077,
-          "preview": "https://images.pexels.com/videos/37885077/4k-blueworld-37885077.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630",
-          "source": "pexels"
-        }
-      ],
-      "1120c5665562b6c3c9819e3de3b1ddcd6dedf3eceb8cb24a7bbe9ccd3779df0b": [
-        {
-          "link": "https://videos.pexels.com/video-files/16236649/16236649-hd_1080_1920_30fps.mp4",
-          "id": 16236649,
-          "preview": "https://images.pexels.com/videos/16236649/glide-ocean-peaceful-ray-16236649.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630",
-          "source": "pexels"
-        }
-      ]
-    },
-    "status": "prepared",
-    "created": "2026-11-11T13:18:08.730320+00:00"
-  },
+  "pending": null,
   "attempts": [
-    {
-      "id": "34716642586:1",
-      "at": "2026-09-12T20:18:02.411574+00:00",
-      "outcome": "deferred",
-      "resumed": true,
-      "title": "El pez arquero que caza con agua como arma a 3 metros 🎯",
-      "episode": "2026-09-12T00:17:58.334792+00:00",
-      "slot": "2026-09-12T20:17:00+00:00",
-      "video_id": null,
-      "selection": {
-        "filter_version": 3,
-        "retries": 0,
-        "retry_recovered": 0,
-        "unknown_usage_attempts": 0,
-        "retry_input_tokens": 0,
-        "retry_output_tokens": 0,
-        "retry_reasons": null,
-        "reused_selections": 5,
-        "extra_searches": 3,
-        "downloaded_scenes": 5,
-        "backup_scenes": 0,
-        "extra_input_tokens": 0,
-        "extra_output_tokens": 0,
-        "initial_scenes": 2,
-        "source_errors": null,
-        "source_candidates": {
-          "pexels": 20,
-          "pixabay": 0,
-          "coverr": 0
-        },
-        "downloaded_sources": {
-          "pexels": 5
-        },
-        "stock_cache_hits": 6,
-        "beats": 2,
-        "vetted": 0,
-        "cache_hits": 0,
-        "no_preview": 0,
-        "api_error": 0,
-        "unparsed": 0,
-        "rejected": 2,
-        "bypass": false,
-        "vision_calls": 2,
-        "no_candidates": 0,
-        "search_error": 0,
-        "input_tokens": 8727,
-        "output_tokens": 128,
-        "target_scenes": 6
-      },
-      "error": "Добор сцен продолжается: 5/6. Сценарий и одобренные клипы сохранены для следующей попытки."
-    },
     {
       "id": "34722319972:1",
       "at": "2026-09-12T22:17:57.922482+00:00",
@@ -15425,6 +15292,58 @@
         "target_scenes": 6
       },
       "error": "Добор сцен продолжается: 3/6. Сценарий и одобренные клипы сохранены для следующей попытки."
+    },
+    {
+      "id": "43095058988:1",
+      "at": "2026-11-11T20:18:10.132786+00:00",
+      "outcome": "abandoned",
+      "resumed": true,
+      "title": "¿El calamar que se arranca su propio tentáculo para escapar? 😱",
+      "episode": "2026-11-11T13:18:08.730320+00:00",
+      "slot": "2026-11-11T20:17:00+00:00",
+      "video_id": null,
+      "selection": {
+        "filter_version": 3,
+        "retries": 0,
+        "retry_recovered": 0,
+        "unknown_usage_attempts": 0,
+        "retry_input_tokens": 0,
+        "retry_output_tokens": 0,
+        "retry_reasons": null,
+        "reused_selections": 3,
+        "extra_searches": 3,
+        "downloaded_scenes": 3,
+        "backup_scenes": 0,
+        "extra_input_tokens": 8801,
+        "extra_output_tokens": 128,
+        "initial_scenes": 2,
+        "opening_vetted": false,
+        "source_errors": null,
+        "source_candidates": {
+          "pexels": 47,
+          "pixabay": 0,
+          "coverr": 0
+        },
+        "downloaded_sources": {
+          "pexels": 3
+        },
+        "stock_cache_hits": 15,
+        "beats": 5,
+        "vetted": 0,
+        "cache_hits": 0,
+        "no_preview": 0,
+        "api_error": 0,
+        "unparsed": 0,
+        "rejected": 5,
+        "bypass": false,
+        "vision_calls": 5,
+        "no_candidates": 0,
+        "search_error": 0,
+        "input_tokens": 22019,
+        "output_tokens": 320,
+        "target_scenes": 6
+      },
+      "error": "Эпизод брошен: 3/6 сцен после 3 попыток. Следующий прогон возьмёт новый сценарий."
     }
   ]
 }
