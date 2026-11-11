@@ -2,57 +2,6 @@
   "pending": null,
   "attempts": [
     {
-      "id": "34722319972:1",
-      "at": "2026-09-12T22:17:57.922482+00:00",
-      "outcome": "deferred",
-      "resumed": true,
-      "title": "El pez arquero que caza con agua como arma a 3 metros 🎯",
-      "episode": "2026-09-12T00:17:58.334792+00:00",
-      "slot": "2026-09-12T22:17:00+00:00",
-      "video_id": null,
-      "selection": {
-        "filter_version": 3,
-        "retries": 0,
-        "retry_recovered": 0,
-        "unknown_usage_attempts": 0,
-        "retry_input_tokens": 0,
-        "retry_output_tokens": 0,
-        "retry_reasons": null,
-        "reused_selections": 5,
-        "extra_searches": 3,
-        "downloaded_scenes": 5,
-        "backup_scenes": 0,
-        "extra_input_tokens": 0,
-        "extra_output_tokens": 0,
-        "initial_scenes": 2,
-        "source_errors": null,
-        "source_candidates": {
-          "pexels": 20,
-          "pixabay": 0,
-          "coverr": 0
-        },
-        "downloaded_sources": {
-          "pexels": 5
-        },
-        "stock_cache_hits": 6,
-        "beats": 2,
-        "vetted": 0,
-        "cache_hits": 0,
-        "no_preview": 0,
-        "api_error": 0,
-        "unparsed": 0,
-        "rejected": 2,
-        "bypass": false,
-        "vision_calls": 2,
-        "no_candidates": 0,
-        "search_error": 0,
-        "input_tokens": 8727,
-        "output_tokens": 128,
-        "target_scenes": 6
-      },
-      "error": "Добор сцен продолжается: 5/6. Сценарий и одобренные клипы сохранены для следующей попытки."
-    },
-    {
       "id": "34722864964:1",
       "at": "2026-09-12T22:29:43.410564+00:00",
       "outcome": "deferred",
@@ -15344,6 +15293,58 @@
         "target_scenes": 6
       },
       "error": "Эпизод брошен: 3/6 сцен после 3 попыток. Следующий прогон возьмёт новый сценарий."
+    },
+    {
+      "id": "43110466891:1",
+      "at": "2026-11-11T22:18:01.234949+00:00",
+      "outcome": "published",
+      "resumed": false,
+      "title": "La tormenta de 1972 que encogió el Mar Caspio en una noche 😱",
+      "episode": "2026-11-11T22:18:01.234949+00:00",
+      "slot": "2026-11-11T22:17:00+00:00",
+      "video_id": "yq6EF-QF5wc",
+      "selection": {
+        "filter_version": 3,
+        "retries": 0,
+        "retry_recovered": 0,
+        "unknown_usage_attempts": 0,
+        "retry_input_tokens": 0,
+        "retry_output_tokens": 0,
+        "retry_reasons": null,
+        "reused_selections": 0,
+        "extra_searches": 0,
+        "downloaded_scenes": 6,
+        "backup_scenes": 1,
+        "extra_input_tokens": 0,
+        "extra_output_tokens": 0,
+        "initial_scenes": 5,
+        "opening_vetted": true,
+        "source_errors": null,
+        "source_candidates": {
+          "pexels": 50,
+          "pixabay": 0,
+          "coverr": 0
+        },
+        "downloaded_sources": {
+          "pexels": 6
+        },
+        "stock_cache_hits": 0,
+        "beats": 5,
+        "vetted": 5,
+        "cache_hits": 0,
+        "no_preview": 0,
+        "api_error": 0,
+        "unparsed": 0,
+        "rejected": 0,
+        "bypass": false,
+        "vision_calls": 5,
+        "no_candidates": 0,
+        "search_error": 0,
+        "input_tokens": 21955,
+        "output_tokens": 212,
+        "target_scenes": 6
+      },
+      "error": null
     }
   ]
 }
