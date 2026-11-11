@@ -357,5 +357,107 @@
     "niche_styled": true,
     "title_variant": "narrative",
     "hashtag_position": "end"
+  },
+  {
+    "title": "¿El ciervo que se come su propia cornamenta cada año? 🤯",
+    "title_opener": "question",
+    "title_intensity": "extreme",
+    "hook_text": "Se la come entera",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "impossible",
+    "script": "Un ciervo pierde su cornamenta completa y se la come. Es el ciervo rojo, Cervus elaphus, y lo hace cada año. Cada primavera, los cuernos caen al suelo. El ciervo los localiza, los mastica y los digiere para recuperar el calcio perdido — hasta 2 kilos de mineral en semanas. Sin eso, sus huesos se debilitarían antes de que la nueva cornamenta termine de crecer. El ciclo se repite cada año, perfecto y brutal. ¿Tú te comerías algo de tu propio cuerpo para sobrevivir? Y así es como.",
+    "word_count": 80,
+    "search_summary": "El ciervo rojo Cervus elaphus come su propia cornamenta caída cada año para recuperar calcio.",
+    "comment_question": "¿Preferirías perder 2 kilos de hueso cada año o no recuperarlos nunca? 🦌",
+    "source_note": "Journal of Experimental Biology, estudios de remodelación ósea en cérvidos",
+    "source_url": "",
+    "visual_card": null,
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "datos curiosos animales",
+      "ciervo rojo curiosidades",
+      "animales increíbles",
+      "datos en 30 segundos",
+      "curiosidades naturaleza",
+      "cervus elaphus cornamenta",
+      "animales que se comen a sí mismos",
+      "datos impactantes",
+      "datos curiosos animales para niños",
+      "animales increíbles del mundo"
+    ],
+    "hashtags": [
+      "#datoscuriosos",
+      "#shorts",
+      "#animales",
+      "#naturaleza",
+      "#ciervo"
+    ],
+    "video_queries": [
+      "red deer chewing antler ground",
+      "red deer antler shedding close up",
+      "deer eating bone calcium",
+      "red deer new antler growing velvet",
+      "red deer walking forest spring"
+    ],
+    "has_loop": true,
+    "topic": "the animal kingdom",
+    "structure": "historical-story",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "¿Los romanos usaban orina para lavar su ropa? 😱",
+    "title_opener": "question",
+    "title_intensity": "extreme",
+    "hook_text": "Tu ropa huele a esto",
+    "hook_template": "you-experience",
+    "emotional_tone": "disgust",
+    "script": "Ahora mismo, tu ropa lleva residuos de un proceso que los romanos hacían con orina humana. En el siglo I d.C., Roma tenía jarras públicas en las calles donde la gente orinaba. Los fullones, lavanderos profesionales, recogían esa orina y la usaban para blanquear telas, pisándolas con los pies durante horas. El amoniaco natural disolvía la grasa mejor que cualquier jabón. El emperador Vespasiano hasta cobró impuesto por esa orina en el año 70 d.C. ¿Tú pagarías impuesto por orinar? Y por eso pasa.",
+    "word_count": 80,
+    "search_summary": "Los romanos del siglo I d.C. usaban orina humana fermentada para lavar y blanquear ropa en las fullonicae.",
+    "comment_question": "¿Pagarías impuesto por orinar como en el Roma antigua? 😱",
+    "source_note": "Plinius Maior, Naturalis Historia, siglo I d.C.",
+    "source_url": "",
+    "visual_card": null,
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "historia antigua",
+      "romanos curiosidades",
+      "datos curiosos historia",
+      "Imperio romano",
+      "fullonicae romanas",
+      "vida cotidiana romana",
+      "datos en 30 segundos",
+      "hechos históricos impactantes",
+      "historia antigua de mexico",
+      "curiosidades romanos",
+      "datos curiosos historia de mexico"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#historiaromana",
+      "#imperioromano"
+    ],
+    "video_queries": [
+      "ancient Roman street scene",
+      "Roman pottery urns street collection",
+      "worker stomping fabric ancient",
+      "Roman toga white cloth",
+      "ancient Rome Emperor bust"
+    ],
+    "has_loop": true,
+    "topic": "ancient history",
+    "structure": "happening-now",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
   }
 ]
