@@ -152,5 +152,107 @@
     "niche_styled": true,
     "title_variant": "narrative",
     "hashtag_position": "end"
+  },
+  {
+    "title": "¿Los persas momificaron a un rey sentado en su trono? 😱",
+    "title_opener": "question",
+    "title_intensity": "extreme",
+    "hook_text": "Un rey muerto gobernó años más",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "creepy",
+    "script": "Un rey muerto siguió recibiendo visitas oficiales durante años — y nadie lo cuestionó. Los persas aqueménidas embalsamaban a sus reyes con cera y miel, los sentaban en el trono, y los cortesanos seguían presentándoles informes. Cambises II murió en 522 a.C. y su cuerpo permaneció en posición de mando mientras el Imperio decidía quién tomaba el poder. Pero lo más perturbador: los súbditos sabían que estaba muerto. ¿Seguirías obedeciendo órdenes de un cadáver si todos fingían que era normal? Y por eso.",
+    "word_count": 80,
+    "search_summary": "Los persas aqueménidas embalsamaban a sus reyes con cera y los sentaban en el trono para mantener el poder tras su muerte.",
+    "comment_question": "¿Obedecerías órdenes de un cadáver si todos fingían que era normal? 💀",
+    "source_note": "Heródoto, Historias, Libro III, s. V a.C.",
+    "source_url": "",
+    "visual_card": null,
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "civilizaciones antiguas",
+      "Imperio persa",
+      "datos históricos",
+      "Cambises II",
+      "momificación antigua",
+      "historia antigua",
+      "datos curiosos",
+      "reyes de Persia",
+      "civilizaciones antiguas documental",
+      "imperio persa documental",
+      "datos históricos de la biblia"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#historiacuriosa",
+      "#imperiopersas",
+      "#datoscuriosos"
+    ],
+    "video_queries": [
+      "ancient Persian throne room",
+      "embalming wax ancient mummy",
+      "Persian court ancient ceremony",
+      "dead king throne ancient illustration",
+      "ancient Persian empire ruins"
+    ],
+    "has_loop": true,
+    "topic": "ancient civilizations",
+    "structure": "myth-debunk",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "La tormenta de 1972 que apagó el sol en Kansas por 6 horas 😱",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "El cielo se apagó a mediodía",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "fear",
+    "script": "A plena luz del día, el cielo se volvió negro sin que nadie entendiera por qué. El 19 de julio de 1972, una tormenta de polvo masiva cruzó Kansas y bloqueó el sol por casi 6 horas, en plena tarde. Temperaturas bajaron 20 grados en menos de una hora. Pero lo más extraño: los pájaros pararon de cantar y se durmieron, creyendo que era de noche. Mándame este video alguien que crea que Kansas solo tiene tornados. Y exactamente así.",
+    "word_count": 79,
+    "search_summary": "La tormenta de polvo del 19 de julio de 1972 en Kansas bloqueó el sol por 6 horas y causó oscuridad total durante el día.",
+    "comment_question": "¿Vivirías en Kansas sabiendo que el cielo puede apagarse a mediodía? 😱",
+    "source_note": "NOAA Storm Data publication, 1972",
+    "source_url": "https://www.ncdc.noaa.gov/stormevents/",
+    "visual_card": null,
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "tormentas extremas",
+      "clima extremo",
+      "tormenta de polvo",
+      "Kansas 1972",
+      "fenómenos naturales",
+      "datos en 30 segundos",
+      "datos curiosos",
+      "clima peligroso",
+      "tormentas extremas en el mar",
+      "clima extremo que nos espera",
+      "tormenta de polvo en arizona"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#climaextremo",
+      "#tormentas",
+      "#fenomenosnaturales"
+    ],
+    "video_queries": [
+      "dust storm day turns dark",
+      "Kansas plains storm sky",
+      "dust storm temperature drop",
+      "birds sleeping daytime storm"
+    ],
+    "has_loop": true,
+    "topic": "extreme weather",
+    "structure": "myth-debunk",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
   }
 ]
