@@ -1,56 +1,5 @@
 [
   {
-    "title": "¿La NASA perdió una sonda en Marte... y otra la fotografió? 😱",
-    "title_opener": "question",
-    "title_intensity": "extreme",
-    "hook_text": "Perdida en Marte — y encontrada",
-    "hook_template": "sounds-fake",
-    "emotional_tone": "impossible",
-    "script": "Una nave desapareció en Marte sin dejar rastro. Era el Mars Climate Orbiter: en 1999, se perdió señal justo antes de que entrara a órbita. Nueve años después, la cámara HiRISE del Mars Reconnaissance Orbiter fotografió sus restos en la superficie marciana. Se estrelló porque un equipo usó unidades imperiales y otro usó métricas — un error de conversión hundió una misión de 327 millones de dólares. ¿Tú habrías atrapado ese error antes del lanzamiento? Y por eso exactamente.",
-    "word_count": 79,
-    "search_summary": "El Mars Climate Orbiter se estrelló en Marte en 1999 por un error de conversión de unidades y fue fotografiado por el MRO.",
-    "comment_question": "¿Un error de unidades destruyó 327 millones de dólares — quién tuvo la culpa? 🤯",
-    "source_note": "NASA Mars Climate Orbiter Mishap Investigation, 1999",
-    "source_url": "https://llis.nasa.gov/llis_lib/pdf/1009464main1_0641-mr.pdf",
-    "visual_card": null,
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "datos curiosos espacio",
-      "Mars Climate Orbiter",
-      "NASA error Marte",
-      "sonda perdida en Marte",
-      "hechos del espacio",
-      "datos en 30 segundos",
-      "curiosidades NASA",
-      "Marte exploración",
-      "datos curiosos del espacio para niños",
-      "mars climate orbiter crash - 1998"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#datoscuriosos",
-      "#nasa",
-      "#marte",
-      "#espacio"
-    ],
-    "video_queries": [
-      "Mars Climate Orbiter spacecraft animation",
-      "Mars orbit spacecraft signal loss",
-      "HiRISE camera Mars surface photo",
-      "imperial metric unit conversion chart",
-      "NASA mission control engineers shocked"
-    ],
-    "has_loop": true,
-    "topic": "space",
-    "structure": "historical-story",
-    "niche_styled": true,
-    "title_variant": "narrative",
-    "hashtag_position": "end"
-  },
-  {
     "title": "El guerrero de Paracas tenía el cráneo alargado por diseño 😱",
     "title_opener": "the-x",
     "title_intensity": "extreme",
