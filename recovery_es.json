@@ -1,57 +1,79 @@
 {
-  "pending": null,
-  "attempts": [
-    {
-      "id": "34786332637:1",
-      "at": "2026-09-13T22:17:53.438973+00:00",
-      "outcome": "published",
-      "resumed": false,
-      "title": "¿La momia que nadie tocó 2,000 años... habló sola? 😱",
-      "episode": "2026-09-13T22:17:53.438973+00:00",
-      "slot": "2026-09-13T22:17:00+00:00",
-      "video_id": "tzGOuWYSBcw",
-      "selection": {
-        "filter_version": 3,
-        "retries": 0,
-        "retry_recovered": 0,
-        "unknown_usage_attempts": 0,
-        "retry_input_tokens": 0,
-        "retry_output_tokens": 0,
-        "retry_reasons": null,
-        "reused_selections": 0,
-        "extra_searches": 0,
-        "downloaded_scenes": 6,
-        "backup_scenes": 1,
-        "extra_input_tokens": 0,
-        "extra_output_tokens": 0,
-        "initial_scenes": 5,
-        "source_errors": null,
-        "source_candidates": {
-          "pexels": 49,
-          "pixabay": 1,
-          "coverr": 0
-        },
-        "downloaded_sources": {
-          "pexels": 6
-        },
-        "stock_cache_hits": 0,
-        "beats": 5,
-        "vetted": 5,
-        "cache_hits": 0,
-        "no_preview": 0,
-        "api_error": 0,
-        "unparsed": 0,
-        "rejected": 0,
-        "bypass": false,
-        "vision_calls": 5,
-        "no_candidates": 0,
-        "search_error": 0,
-        "input_tokens": 22530,
-        "output_tokens": 320,
-        "target_scenes": 6
-      },
-      "error": null
+  "pending": {
+    "data": {
+      "title": "El guerrero de Paracas tenía el cráneo alargado por diseño 😱",
+      "title_opener": "the-x",
+      "title_intensity": "extreme",
+      "hook_text": "Cabeza humana... rediseñada",
+      "hook_template": "sounds-fake",
+      "emotional_tone": "creepy",
+      "script": "Un cráneo humano remodelado intencionalmente — y lo hacían desde los primeros meses de vida. La cultura Paracas, en Perú, fajaba la cabeza de sus bebés con tablas de madera y vendas para alargar el cráneo hacia arriba. Los cráneos alargados de Paracas, fechados desde el 800 a.C., llegan a medir un 25% más que un cráneo normal. Pero lo extraño no es el resultado — es que solo lo hacían con ciertos niños, no con todos. ¿Quiénes elegían y por qué solo a ellos? Y así es como.",
+      "word_count": 78,
+      "search_summary": "La cultura Paracas en Perú deformaba intencionalmente los cráneos de bebés desde el 800 a.C. con tablas y vendas.",
+      "comment_question": "¿Cambiaría la forma de tu cabeza si fuera señal de estatus en tu cultura? 😱",
+      "source_note": "Museo Nacional de Arqueología de Lima, registro Paracas",
+      "source_url": "https://www.museonacional.cultura.pe/colecciones/paracas",
+      "visual_card": null,
+      "loop_connectors": [
+        "why",
+        "how"
+      ],
+      "tags": [
+        "cráneos alargados Paracas",
+        "deformación craneal antigua",
+        "cultura Paracas Perú",
+        "arqueología Perú",
+        "datos curiosos historia",
+        "descubrimientos arqueológicos",
+        "hechos increíbles",
+        "momias y cráneos antiguos",
+        "cráneos alargados de paracas"
+      ],
+      "hashtags": [
+        "#shorts",
+        "#datoscuriosos",
+        "#arqueología",
+        "#Paracas",
+        "#historiaoculta"
+      ],
+      "video_queries": [
+        "elongated skull ancient Peru",
+        "Paracas culture Peru artifacts",
+        "ancient skull deformation comparison",
+        "baby head binding wooden boards",
+        "Paracas skulls museum display"
+      ],
+      "has_loop": true,
+      "topic": "archaeological discoveries",
+      "structure": "myth-debunk",
+      "niche_styled": true,
+      "title_variant": "narrative",
+      "hashtag_position": "end"
     },
+    "pending_pair": null,
+    "pair_start_mode": false,
+    "selections": {
+      "ec4d931360e30278f74c9161088c6ffcaabe8c2ae1b9a3664bf490796335bc59": [
+        {
+          "link": "https://videos.pexels.com/video-files/5426863/5426863-hd_1080_1920_25fps.mp4",
+          "id": 5426863,
+          "preview": "https://images.pexels.com/videos/5426863/pexels-photo-5426863.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630",
+          "source": "pexels"
+        }
+      ],
+      "0f1a617098cf94fadd68dc97b0cace1946a2834561ad560534ccd7481dc071dc": [
+        {
+          "link": "https://videos.pexels.com/video-files/36902102/15631782_1080_1920_60fps.mp4",
+          "id": 36902102,
+          "preview": "https://images.pexels.com/videos/36902102/pexels-photo-36902102.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630",
+          "source": "pexels"
+        }
+      ]
+    },
+    "status": "prepared",
+    "created": "2026-11-13T13:18:08.545784+00:00"
+  },
+  "attempts": [
     {
       "id": "34792220617:1",
       "at": "2026-09-14T00:18:05.598933+00:00",
@@ -15343,6 +15365,58 @@
         "target_scenes": 6
       },
       "error": null
+    },
+    {
+      "id": "43432365744:1",
+      "at": "2026-11-13T13:18:08.545784+00:00",
+      "outcome": "deferred",
+      "resumed": false,
+      "title": "El guerrero de Paracas tenía el cráneo alargado por diseño 😱",
+      "episode": "2026-11-13T13:18:08.545784+00:00",
+      "slot": "2026-11-13T13:17:00+00:00",
+      "video_id": null,
+      "selection": {
+        "filter_version": 3,
+        "retries": 0,
+        "retry_recovered": 0,
+        "unknown_usage_attempts": 0,
+        "retry_input_tokens": 0,
+        "retry_output_tokens": 0,
+        "retry_reasons": null,
+        "reused_selections": 0,
+        "extra_searches": 3,
+        "downloaded_scenes": 2,
+        "backup_scenes": 0,
+        "extra_input_tokens": 13223,
+        "extra_output_tokens": 192,
+        "initial_scenes": 1,
+        "opening_vetted": false,
+        "source_errors": null,
+        "source_candidates": {
+          "pexels": 79,
+          "pixabay": 0,
+          "coverr": 0
+        },
+        "downloaded_sources": {
+          "pexels": 2
+        },
+        "stock_cache_hits": 0,
+        "beats": 8,
+        "vetted": 2,
+        "cache_hits": 0,
+        "no_preview": 0,
+        "api_error": 0,
+        "unparsed": 0,
+        "rejected": 6,
+        "bypass": false,
+        "vision_calls": 8,
+        "no_candidates": 0,
+        "search_error": 0,
+        "input_tokens": 35281,
+        "output_tokens": 512,
+        "target_scenes": 6
+      },
+      "error": "Добор сцен продолжается: 2/6. Сценарий и одобренные клипы сохранены для следующей попытки."
     }
   ]
 }
