@@ -1,24 +1,24 @@
 {
   "outlier_counts": {
-    "ancient history": 4,
+    "ancient history": 6,
     "archaeological discoveries": 3,
     "ancient civilizations": 3,
-    "historical mysteries": 4,
+    "historical mysteries": 6,
     "the human body": 3,
     "the ocean": 2,
     "evolution": 1,
     "volcanoes and earthquakes": 6,
     "space": 2,
     "future technology": 5,
-    "the animal kingdom": 3,
+    "the animal kingdom": 2,
     "extreme weather": 3,
     "natural wonders": 1
   },
   "outlier_titles": {
     "ancient history": [
+      "DATO CURIOSO - LA NIÑA PERRO #shorts",
       "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos",
-      "Tres datos históricos alucinantes #historia #interesante #hechos",
-      "Balduino IV: el hombre más fuerte de Medio Oriente  #BalduinoIV #datoscuriosos  #historiareal"
+      "#TribusAfricanas #África #Cultura #VidaTribal #Naturaleza #DatosCuriosos #Historia #Shorts"
     ],
     "archaeological discoveries": [
       "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos",
@@ -53,8 +53,8 @@
       "¡Estos desastres naturales podrían destruir el mundo! 😱"
     ],
     "space": [
-      "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos",
-      "El secreto de la gravedad en una Tierra plana #fisica #espacio #datoscuriosos"
+      "¿Qué pasaría si la tierra tuviera forma de AMONG US?",
+      "El 18 de noviembre pasa algo que nunca había pasado 🚀 Algo humano llegará a 1 día luz"
     ],
     "future technology": [
       "Científicos EXPERIMENTOS CASEROS! 😱 #shorts",
@@ -63,11 +63,10 @@
     ],
     "the animal kingdom": [
       "EL MEGALODÓN... ¿¡ES REAL?! | CLUB DE INVESTIGADORES #shorts | #education for #kids",
-      "SHAKIRA se ASUSTÓ por una RATA 😱 #shakira #curiosidades #datoscuriosos",
-      "El DETALLE de hotel Transylvania que NO VISTE #mavis #datoscuriosos #curiosidades"
+      "SHAKIRA se ASUSTÓ por una RATA 😱 #shakira #curiosidades #datoscuriosos"
     ],
     "extreme weather": [
-      "The Scariest Natural Disasters Caught On Camera 🌪 #shorts",
+      "📌 Tumba del Soldado Desconocido #shorts #memorial #datoscuriosos #chutedkv",
       "Multi-Vortex Tornadoes #shorts",
       "Las Cataratas del Niágara se congelaron tras temperaturas extremas. #ClimaExtremo #Viral #Shorts"
     ],
@@ -83,6 +82,22 @@
       "views": 8615803,
       "subs": 13400,
       "ratio": 643.0
+    },
+    {
+      "topic": "space",
+      "title": "El 18 de noviembre pasa algo que nunca había pasado 🚀 Algo humano llegará a 1 día luz",
+      "video_id": "Pf0cI6q7iz4",
+      "views": 855045,
+      "subs": 1530,
+      "ratio": 558.9
+    },
+    {
+      "topic": "ancient history",
+      "title": "#TribusAfricanas #África #Cultura #VidaTribal #Naturaleza #DatosCuriosos #Historia #Shorts",
+      "video_id": "VEredT7GB7s",
+      "views": 4556320,
+      "subs": 12700,
+      "ratio": 358.8
     },
     {
       "topic": "space",
@@ -120,9 +135,9 @@
       "topic": "historical mysteries",
       "title": "✅ La verdadera historia de los tres cerditos 🐷💀 #short #shortsviral",
       "video_id": "QQ0sdApwJ0s",
-      "views": 5186375,
-      "subs": 19700,
-      "ratio": 263.3
+      "views": 5216056,
+      "subs": 19800,
+      "ratio": 263.4
     },
     {
       "topic": "ancient history",
@@ -133,45 +148,29 @@
       "ratio": 259.0
     },
     {
-      "topic": "ancient history",
-      "title": "POPEYE FUE BASADO POR UNA PERSONA EN LA VIDA REAL #datoscuriosos #popeyes #shorts",
-      "video_id": "ON2vmNJTQYQ",
-      "views": 3625291,
-      "subs": 14500,
-      "ratio": 250.0
-    },
-    {
       "topic": "archaeological discoveries",
       "title": "¿Encontraron el Arca de Noé en 2025? 😱 ¡Increíble descubrimiento en Turquía! #shorts #datoscuriosos",
       "video_id": "hHTNpfzZ1lo",
-      "views": 41028,
+      "views": 41685,
       "subs": 165,
-      "ratio": 248.7
-    },
-    {
-      "topic": "historical mysteries",
-      "title": "EL TSUNAMI MÁS GRANDE DE LA HISTORIA",
-      "video_id": "Tp_f3ZBfxcc",
-      "views": 1846901,
-      "subs": 7820,
-      "ratio": 236.2
+      "ratio": 252.6
     }
   ],
   "saturation": {
     "ancient history": 1000000,
-    "archaeological discoveries": 185843,
-    "ancient civilizations": 367756,
-    "shipwrecks and lost treasures": 1820,
-    "historical mysteries": 827858,
+    "archaeological discoveries": 186928,
+    "ancient civilizations": 353342,
+    "shipwrecks and lost treasures": 799,
+    "historical mysteries": 807430,
     "the human body": 1000000,
     "the animal kingdom": 1000000,
     "the ocean": 1000000,
     "evolution": 1000000,
-    "volcanoes and earthquakes": 222422,
-    "extreme weather": 498555,
-    "natural wonders": 562357,
+    "volcanoes and earthquakes": 233678,
+    "extreme weather": 472858,
+    "natural wonders": 571745,
     "space": 1000000,
     "future technology": 298101
   },
-  "updated": "2026-11-09"
+  "updated": "2026-11-16"
 }

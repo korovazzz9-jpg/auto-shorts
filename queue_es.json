@@ -1,5 +1,67 @@
 [
   {
+    "title": "¿La sonda Voyager 1 cruzará 1 día luz del Sol en 2044? 🤯",
+    "title_opener": "question",
+    "title_intensity": "extreme",
+    "hook_text": "Ningún humano llegó tan lejos",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "awe",
+    "script": "Un objeto humano está a punto de cruzar una distancia que nunca cruzó nada que hayamos construido. La sonda Voyager 1, lanzada en 1977, alcanzará 1 día luz del Sol alrededor de 2044 — 26 mil millones de kilómetros. Ya salió del sistema solar en 2012. Pero aquí lo que nadie menciona: su señal tarda 22 horas en llegar a la Tierra hoy, y aún la recibimos. Mándale esto a alguien que crea que el espacio tiene límite. Y por eso exactamente.",
+    "word_count": 80,
+    "search_summary": "La sonda Voyager 1 lanzada en 1977 alcanzará 1 día luz del Sol alrededor de 2044, el objeto más lejano construido por humanos.",
+    "comment_question": "¿Te late que seguiremos recibiendo su señal cuando cruce 1 día luz? 🤯",
+    "source_note": "NASA Jet Propulsion Laboratory, Voyager mission data",
+    "source_url": "https://voyager.jpl.nasa.gov/mission/status/",
+    "visual_card": {
+      "type": "timeline",
+      "subject": "Voyager 1 en el espacio",
+      "items": [
+        "Lanzada 1977",
+        "Salió sistema solar 2012",
+        "1 día luz ~2044"
+      ],
+      "after_query": 3
+    },
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "datos curiosos espacio",
+      "Voyager 1",
+      "sonda más lejana",
+      "cuánto tarda señal Voyager",
+      "sistema solar",
+      "datos en 30 segundos",
+      "facts espacio",
+      "NASA sondas espaciales",
+      "1 día luz distancia",
+      "datos curiosos del espacio para niños",
+      "voyager 19"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datosCuriosos",
+      "#espacio",
+      "#voyager1",
+      "#NASA"
+    ],
+    "video_queries": [
+      "Voyager 1 spacecraft illustration deep space",
+      "rocket launch 1977 NASA archive",
+      "solar system boundary heliosphere animation",
+      "radio signal transmission space antenna",
+      "deep space stars galaxy wide shot"
+    ],
+    "has_loop": true,
+    "topic": "space",
+    "title_variant": "narrative",
+    "hashtag_position": "end",
+    "niche_styled": true,
+    "niche_recreated": true,
+    "recreated_from_niche": "Pf0cI6q7iz4"
+  },
+  {
     "title": "¿La lluvia de 1955 que cayó caliente en Vermont? 😱",
     "title_opener": "question",
     "title_intensity": "extreme",
