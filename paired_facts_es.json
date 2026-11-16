@@ -1,15 +1,5 @@
 [
   {
-    "id": "M0SVcNRgI4o-1788308670",
-    "topic": "ancient history",
-    "part_a_video_id": "M0SVcNRgI4o",
-    "part_a_title": "El esclavo que quemó Roma… y salvó a miles 😱",
-    "claim": "Los galos saquearon Roma completa en 390 a.C. sin resistencia.",
-    "part_b_video_id": null,
-    "status": "awaiting_b",
-    "created_at": 1788308670.820363
-  },
-  {
     "id": "tMapn0EWPPw-1788740725",
     "topic": "historical mysteries",
     "part_a_video_id": "tMapn0EWPPw",
@@ -198,5 +188,15 @@
     "part_b_video_id": null,
     "status": "awaiting_b",
     "created_at": 1794356679.5302453
+  },
+  {
+    "id": "kLXGnDQpz1I-1794788620",
+    "topic": "the animal kingdom",
+    "part_a_video_id": "kLXGnDQpz1I",
+    "part_a_title": "El pez que arrastra a su pareja para siempre 😱",
+    "claim": "Una hembra de rape puede cargar seis machos a la vez.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1794788620.767822
   }
 ]
