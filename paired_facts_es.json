@@ -1,15 +1,5 @@
 [
   {
-    "id": "FV2nNW2TOzM-1788913411",
-    "topic": "archaeological discoveries",
-    "part_a_video_id": "FV2nNW2TOzM",
-    "part_a_title": "La tumba inca que se selló sola con mercurio líquido 😱",
-    "claim": "Teotihuacán fue construida por una civilización que aún no identificamos.",
-    "part_b_video_id": "bXJ14AJqVn4",
-    "status": "resolved",
-    "created_at": 1788913411.6847057
-  },
-  {
     "id": "vDKmgijN4Kw-1789345509",
     "topic": "volcanoes and earthquakes",
     "part_a_video_id": "vDKmgijN4Kw",
@@ -198,5 +188,15 @@
     "part_b_video_id": null,
     "status": "awaiting_b",
     "created_at": 1794961411.4245977
+  },
+  {
+    "id": "zC-PAxTo6nk-1795393524",
+    "topic": "ancient civilizations",
+    "part_a_video_id": "zC-PAxTo6nk",
+    "part_a_title": "¿Los babilonios prestaban dinero con interés en 2000 a.C.? 😱",
+    "claim": "El Código de Hammurabi fijó límites máximos de interés antes que Roma.",
+    "part_b_video_id": null,
+    "status": "awaiting_b",
+    "created_at": 1795393524.0959544
   }
 ]
