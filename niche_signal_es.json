@@ -1,6 +1,6 @@
 {
   "outlier_counts": {
-    "ancient history": 6,
+    "ancient history": 5,
     "archaeological discoveries": 3,
     "ancient civilizations": 3,
     "historical mysteries": 6,
@@ -8,9 +8,9 @@
     "the ocean": 2,
     "evolution": 1,
     "volcanoes and earthquakes": 6,
-    "space": 2,
+    "space": 3,
     "future technology": 5,
-    "the animal kingdom": 2,
+    "the animal kingdom": 4,
     "extreme weather": 3,
     "natural wonders": 1
   },
@@ -41,8 +41,8 @@
       "¿Qué pasaría si tu CUERPO fuera de estos MATERIALES? 🧊🌋💀 #shorts"
     ],
     "the ocean": [
-      "Las profundidades del Oceano #shorts",
-      "¿Tienes Talasofobia? 🤯😰 #shorts #talasofobia #fobias #short #mar #oceano"
+      "¿Tienes Talasofobia? 🤯😰 #shorts #talasofobia #fobias #short #mar #oceano",
+      "Por que nenhum aquário tem um TUBARÃO BRANCO? #curiosidades #fatoscuriosos #tubarão #animais #shorts"
     ],
     "evolution": [
       "La increíble evolución de un bebé paso a paso 👶"
@@ -53,8 +53,9 @@
       "¡Estos desastres naturales podrían destruir el mundo! 😱"
     ],
     "space": [
-      "¿Qué pasaría si la tierra tuviera forma de AMONG US?",
-      "El 18 de noviembre pasa algo que nunca había pasado 🚀 Algo humano llegará a 1 día luz"
+      "¿Por qué los mayas lanzaban bebés desde edificios? 🤯 #Shorts #hechos #datoscuriosos",
+      "El secreto de la gravedad en una Tierra plana #fisica #espacio #datoscuriosos",
+      "Dato curioso de Neptuno #datocuriosodeldia #espacio"
     ],
     "future technology": [
       "Científicos EXPERIMENTOS CASEROS! 😱 #shorts",
@@ -63,7 +64,8 @@
     ],
     "the animal kingdom": [
       "EL MEGALODÓN... ¿¡ES REAL?! | CLUB DE INVESTIGADORES #shorts | #education for #kids",
-      "SHAKIRA se ASUSTÓ por una RATA 😱 #shakira #curiosidades #datoscuriosos"
+      "SHAKIRA se ASUSTÓ por una RATA 😱 #shakira #curiosidades #datoscuriosos",
+      "ASÍ se ve DESTINO FINAL DETRÁS de CÁMARAS 😱 #destinofinal #curiosidades #datoscuriosos"
     ],
     "extreme weather": [
       "📌 Tumba del Soldado Desconocido #shorts #memorial #datoscuriosos #chutedkv",
@@ -71,7 +73,7 @@
       "Las Cataratas del Niágara se congelaron tras temperaturas extremas. #ClimaExtremo #Viral #Shorts"
     ],
     "natural wonders": [
-      "Maravillas del Río Amazonas: Naturaleza Exuberante y Vida Salvaje"
+      "¡Estos Lugares Parecen Falsos, Pero Existen de Verdad! 😱🌍 #Shorts"
     ]
   },
   "top_outliers": [
@@ -95,9 +97,9 @@
       "topic": "ancient history",
       "title": "#TribusAfricanas #África #Cultura #VidaTribal #Naturaleza #DatosCuriosos #Historia #Shorts",
       "video_id": "VEredT7GB7s",
-      "views": 4556320,
-      "subs": 12700,
-      "ratio": 358.8
+      "views": 4744212,
+      "subs": 13100,
+      "ratio": 362.2
     },
     {
       "topic": "space",
@@ -135,9 +137,9 @@
       "topic": "historical mysteries",
       "title": "✅ La verdadera historia de los tres cerditos 🐷💀 #short #shortsviral",
       "video_id": "QQ0sdApwJ0s",
-      "views": 5216056,
+      "views": 5251998,
       "subs": 19800,
-      "ratio": 263.4
+      "ratio": 265.3
     },
     {
       "topic": "ancient history",
@@ -151,26 +153,26 @@
       "topic": "archaeological discoveries",
       "title": "¿Encontraron el Arca de Noé en 2025? 😱 ¡Increíble descubrimiento en Turquía! #shorts #datoscuriosos",
       "video_id": "hHTNpfzZ1lo",
-      "views": 41685,
+      "views": 42251,
       "subs": 165,
-      "ratio": 252.6
+      "ratio": 256.1
     }
   ],
   "saturation": {
     "ancient history": 1000000,
-    "archaeological discoveries": 186928,
-    "ancient civilizations": 353342,
-    "shipwrecks and lost treasures": 799,
-    "historical mysteries": 807430,
+    "archaeological discoveries": 182041,
+    "ancient civilizations": 362668,
+    "shipwrecks and lost treasures": 870,
+    "historical mysteries": 812330,
     "the human body": 1000000,
     "the animal kingdom": 1000000,
     "the ocean": 1000000,
     "evolution": 1000000,
-    "volcanoes and earthquakes": 233678,
-    "extreme weather": 472858,
-    "natural wonders": 571745,
+    "volcanoes and earthquakes": 217466,
+    "extreme weather": 468988,
+    "natural wonders": 543688,
     "space": 1000000,
     "future technology": 298101
   },
-  "updated": "2026-11-16"
+  "updated": "2026-11-23"
 }
