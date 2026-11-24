@@ -1,143 +1,6 @@
 {
-  "pending": {
-    "data": {
-      "title": "¿El macho del rape se funde con la hembra… para siempre? 😱",
-      "title_opener": "question",
-      "title_intensity": "extreme",
-      "hook_text": "Dos cuerpos, una sola sangre",
-      "hook_template": "sounds-fake",
-      "emotional_tone": "impossible",
-      "script": "Ahora mismo, hay machos de rape que literalmente se están fusionando con sus parejas. El macho muerde a la hembra, sus tejidos se sueldan, y en semanas comparten el mismo sistema circulatorio. Él pierde ojos, órganos internos, casi todo — salvo los testículos. Una hembra puede cargar hasta seis machos fundidos así, todos vivos, todos alimentados por su sangre. Para cuando este video termina, alguno completó esa fusión en el Pacífico profundo. ¿Eso es parasitismo o la forma más extrema de compromiso que existe? Y de esta forma.",
-      "word_count": 80,
-      "search_summary": "El macho del rape se fusiona físicamente con la hembra compartiendo sistema circulatorio y perdiendo casi todos sus órganos.",
-      "comment_question": "¿Esto es parasitismo o amor extremo? Defiende tu respuesta 👇",
-      "source_note": "Theodore Pietsch, University of Washington, 2005",
-      "source_url": "https://www.nature.com/articles/433733a",
-      "visual_card": null,
-      "pair_resolved": true,
-      "loop_connectors": [
-        "why",
-        "how"
-      ],
-      "tags": [
-        "rape anglerfish fusión",
-        "macho rape hembra",
-        "datos curiosos animales marinos",
-        "peces abisales curiosidades",
-        "parasitismo sexual peces",
-        "animales increíbles océano profundo",
-        "datos en 30 segundos",
-        "hechos curiosos naturaleza",
-        "datos curiosos sobre animales marinos"
-      ],
-      "hashtags": [
-        "#shorts",
-        "#datoscuriosos",
-        "#oceanoprofundo",
-        "#animalesincreibles",
-        "#rape"
-      ],
-      "video_queries": [
-        "anglerfish male attached female deep sea",
-        "anglerfish bioluminescent deep ocean",
-        "anglerfish fused male parasitic close up",
-        "deep sea fish circulatory system illustration",
-        "anglerfish female multiple males attached"
-      ],
-      "has_loop": true,
-      "topic": "ancient civilizations",
-      "structure": "happening-now",
-      "topical": false,
-      "niche_styled": true,
-      "pairable_claim": "",
-      "title_variant": "narrative",
-      "title_style": "question",
-      "hashtag_position": "end"
-    },
-    "pending_pair": {
-      "id": "kLXGnDQpz1I-1794788620",
-      "topic": "the animal kingdom",
-      "part_a_video_id": "kLXGnDQpz1I",
-      "part_a_title": "El pez que arrastra a su pareja para siempre 😱",
-      "claim": "Una hembra de rape puede cargar seis machos a la vez.",
-      "part_b_video_id": null,
-      "status": "awaiting_b",
-      "created_at": 1794788620.767822
-    },
-    "pair_start_mode": false,
-    "selections": {
-      "a6cfb68ccdecd75f54f48420378acdb1a2afd3cc72fbf84b8a62ed2469bbf488": [
-        {
-          "link": "https://videos.pexels.com/video-files/15807126/15807126-hd_1080_1920_30fps.mp4",
-          "id": 15807126,
-          "preview": "https://images.pexels.com/videos/15807126/aquarium-barcelona-fish-spain-15807126.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630",
-          "source": "pexels"
-        }
-      ],
-      "f39e84d60ccec757749dff0b62b9c61185eca88535e4e2b26600846276e382d0": [
-        {
-          "link": "https://videos.pexels.com/video-files/34617341/14671532_1080_1920_60fps.mp4",
-          "id": 34617341,
-          "preview": "https://images.pexels.com/videos/34617341/pexels-photo-34617341.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630",
-          "source": "pexels"
-        }
-      ]
-    },
-    "status": "prepared",
-    "created": "2026-11-24T00:25:27.962952+00:00"
-  },
+  "pending": null,
   "attempts": [
-    {
-      "id": "36076827578:1",
-      "at": "2026-09-25T00:17:58.963131+00:00",
-      "outcome": "published",
-      "resumed": false,
-      "title": "¿El niño enterrado con 142 perros... en 3000 a.C.? 😱",
-      "episode": "2026-09-25T00:17:58.963131+00:00",
-      "slot": "2026-09-25T00:17:00+00:00",
-      "video_id": "kuCw8SU9L74",
-      "selection": {
-        "filter_version": 3,
-        "retries": 0,
-        "retry_recovered": 0,
-        "unknown_usage_attempts": 0,
-        "retry_input_tokens": 0,
-        "retry_output_tokens": 0,
-        "retry_reasons": null,
-        "reused_selections": 0,
-        "extra_searches": 0,
-        "downloaded_scenes": 7,
-        "backup_scenes": 0,
-        "extra_input_tokens": 0,
-        "extra_output_tokens": 0,
-        "initial_scenes": 7,
-        "source_errors": null,
-        "source_candidates": {
-          "pexels": 65,
-          "pixabay": 1,
-          "coverr": 0
-        },
-        "downloaded_sources": {
-          "pexels": 7
-        },
-        "stock_cache_hits": 0,
-        "beats": 7,
-        "vetted": 7,
-        "cache_hits": 0,
-        "no_preview": 0,
-        "api_error": 0,
-        "unparsed": 0,
-        "rejected": 0,
-        "bypass": false,
-        "vision_calls": 7,
-        "no_candidates": 0,
-        "search_error": 0,
-        "input_tokens": 31216,
-        "output_tokens": 304,
-        "target_scenes": 7
-      },
-      "error": null
-    },
     {
       "id": "36139992371:1",
       "at": "2026-09-25T13:17:53.509748+00:00",
@@ -15487,6 +15350,58 @@
         "target_scenes": 6
       },
       "error": "Добор сцен продолжается: 2/6. Сценарий и одобренные клипы сохранены для следующей попытки."
+    },
+    {
+      "id": "45446855017:1",
+      "at": "2026-11-24T17:18:43.204763+00:00",
+      "outcome": "abandoned",
+      "resumed": true,
+      "title": "¿El macho del rape se funde con la hembra… para siempre? 😱",
+      "episode": "2026-11-24T00:25:27.962952+00:00",
+      "slot": "2026-11-24T17:17:00+00:00",
+      "video_id": null,
+      "selection": {
+        "filter_version": 3,
+        "retries": 0,
+        "retry_recovered": 0,
+        "unknown_usage_attempts": 0,
+        "retry_input_tokens": 0,
+        "retry_output_tokens": 0,
+        "retry_reasons": null,
+        "reused_selections": 2,
+        "extra_searches": 3,
+        "downloaded_scenes": 2,
+        "backup_scenes": 0,
+        "extra_input_tokens": 8809,
+        "extra_output_tokens": 128,
+        "initial_scenes": 1,
+        "opening_vetted": false,
+        "source_errors": null,
+        "source_candidates": {
+          "pexels": 60,
+          "pixabay": 0,
+          "coverr": 0
+        },
+        "downloaded_sources": {
+          "pexels": 2
+        },
+        "stock_cache_hits": 18,
+        "beats": 6,
+        "vetted": 0,
+        "cache_hits": 0,
+        "no_preview": 0,
+        "api_error": 0,
+        "unparsed": 0,
+        "rejected": 6,
+        "bypass": false,
+        "vision_calls": 6,
+        "no_candidates": 0,
+        "search_error": 0,
+        "input_tokens": 26444,
+        "output_tokens": 384,
+        "target_scenes": 6
+      },
+      "error": "Эпизод брошен: 2/6 сцен после 3 попыток. Следующий прогон возьмёт новый сценарий."
     }
   ]
 }
