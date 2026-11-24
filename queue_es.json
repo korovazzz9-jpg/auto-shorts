@@ -1,55 +1,5 @@
 [
   {
-    "title": "El agujero negro que destruyó una estrella en tiempo real 😱",
-    "title_opener": "the-x",
-    "title_intensity": "extreme",
-    "hook_text": "Lo vimos en vivo desde la Tierra",
-    "hook_template": "sounds-fake",
-    "emotional_tone": "awe",
-    "script": "Los telescopios captaron algo que nunca habían visto en directo. En 2011, un agujero negro en la galaxia NGC 4845 desintegró una estrella entera frente a los ojos de la humanidad — en tiempo real. El fenómeno se llama disrupción de marea: la gravedad del agujero estira y tritura la estrella en segundos. Lo detectó el satélite INTEGRAL de la ESA. Pero acá está lo que nadie resuelve: solo debería verse así desde ciertos ángulos — y la Tierra estaba en el ángulo exacto. ¿Fue suerte, o hay algo sobre nuestra posición en el universo que no entendemos? Y de esta forma.",
-    "word_count": 97,
-    "search_summary": "En 2011 el satélite INTEGRAL captó en tiempo real cómo un agujero negro en NGC 4845 destruyó una estrella completa por disrupción de marea.",
-    "comment_question": "¿Crees que fue coincidencia que la Tierra estuviera en el ángulo exacto? 🤔",
-    "source_note": "ESA, satélite INTEGRAL, publicación Astronomy & Astrophysics, 2013",
-    "source_url": "https://www.esa.int/Science_Exploration/Space_Science/Integral_discovers_star_ripped_apart_by_black_hole",
-    "visual_card": null,
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "agujero negro",
-      "disrupción de marea",
-      "NGC 4845",
-      "satélite INTEGRAL ESA",
-      "estrella destruida agujero negro",
-      "datos del espacio",
-      "curiosidades del universo",
-      "hechos espaciales increíbles",
-      "agujero negro real"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#datoscuriosos",
-      "#espacioyuniverso",
-      "#agujerosnegros",
-      "#astronomia"
-    ],
-    "video_queries": [
-      "black hole destroying star animation",
-      "galaxy NGC 4845 telescope view",
-      "tidal disruption event simulation",
-      "ESA INTEGRAL satellite space",
-      "star being torn apart black hole"
-    ],
-    "has_loop": true,
-    "topic": "space",
-    "structure": "unsolved-mystery",
-    "niche_styled": true,
-    "title_variant": "seo",
-    "hashtag_position": "end"
-  },
-  {
     "title": "¿El cráneo de Jericó fue pintado con rostro humano en 7000 a.C.? 😱",
     "title_opener": "question",
     "title_intensity": "extreme",
