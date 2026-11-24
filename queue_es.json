@@ -48,5 +48,153 @@
     "niche_styled": true,
     "title_variant": "seo",
     "hashtag_position": "end"
+  },
+  {
+    "title": "¿El cráneo de Jericó fue pintado con rostro humano en 7000 a.C.? 😱",
+    "title_opener": "question",
+    "title_intensity": "extreme",
+    "hook_text": "Reconstruyeron un rostro muerto",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "awe",
+    "script": "Un cráneo humano fue decorado con cara de persona viva hace 9,000 años — y nadie sabe por qué. En Jericó, alrededor del 7000 a.C., habitantes del Neolítico cubrieron cráneos reales con yeso, pintaron los rasgos faciales y colocaron conchas como ojos. Se asume que adoraban a sus ancestros. Pero varios cráneos llevan rasgos de distintos individuos y fueron enterrados juntos — como si alguien estuviera creando identidades nuevas. ¿Honraban a los muertos... o les robaban la cara para otra cosa? Y por eso.",
+    "word_count": 80,
+    "search_summary": "Los cráneos de Jericó del 7000 a.C. fueron cubiertos con yeso y decorados con rasgos faciales humanos en el Neolítico.",
+    "comment_question": "¿Estaban honrando a sus muertos o creando una identidad falsa? 👁️",
+    "source_note": "British Museum, colección Neolítico de Jericó, excavaciones Kenyon 1953",
+    "source_url": "https://www.britishmuseum.org/collection/object/W_1956-1004-1",
+    "visual_card": null,
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "cráneos de Jericó",
+      "misterios arqueológicos",
+      "neolítico",
+      "culto a los ancestros",
+      "descubrimientos arqueológicos",
+      "datos curiosos",
+      "historia antigua",
+      "arqueología Oriente Medio"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#arqueología",
+      "#misterioshistóricos"
+    ],
+    "video_queries": [
+      "plastered skull Jericho ancient artifact",
+      "Neolithic skull reconstruction shell eyes",
+      "ancient burial ritual bones excavation",
+      "archaeologist excavating ancient skulls"
+    ],
+    "has_loop": true,
+    "topic": "archaeological discoveries",
+    "structure": "unsolved-mystery",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "¿La sonda que grabó cómo suena el interior de Marte? 😱",
+    "title_opener": "question",
+    "title_intensity": "extreme",
+    "hook_text": "Marte tiene un pulso",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "awe",
+    "script": "Un sismógrafo en Marte detectó algo nadie esperaba. En noviembre de 2021, la sonda InSight de NASA registró un terremoto marciano de magnitud 5 — el más grande jamás medido en otro planeta. Las ondas viajaron hasta el núcleo de Marte y rebotaron, revelando que su centro es líquido, no sólido. Dos años de silencio antes de ese momento. ¿Qué más crees que esconde el interior de Marte? Por eso mismo.",
+    "word_count": 72,
+    "search_summary": "La sonda InSight de NASA registró en 2021 un sismo marciano de magnitud 5 que reveló el núcleo líquido de Marte.",
+    "comment_question": "¿Crees que el núcleo líquido de Marte significa que algún día tuvo vida? 🤔",
+    "source_note": "NASA InSight mission, Science journal, 2023",
+    "source_url": "https://www.science.org/doi/10.1126/science.abq7704",
+    "visual_card": null,
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "datos curiosos espacio",
+      "Marte interior",
+      "sonda InSight NASA",
+      "sismo en Marte",
+      "núcleo de Marte",
+      "datos en 30 segundos",
+      "hechos espaciales",
+      "terremoto marciano",
+      "datos curiosos del espacio para niños"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#marte",
+      "#nasa",
+      "#espacio"
+    ],
+    "video_queries": [
+      "InSight lander Mars surface",
+      "Mars planet space animation",
+      "seismic waves planet core animation",
+      "Mars interior liquid core diagram",
+      "NASA InSight spacecraft Mars"
+    ],
+    "has_loop": true,
+    "topic": "space",
+    "structure": "historical-story",
+    "niche_styled": true,
+    "title_variant": "seo",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "El barco de Eilean Mòr: 3 hombres desaparecieron sin rastro en 1900 😱",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "Nadie salió. Nadie entró.",
+    "hook_template": "authority-cant-explain",
+    "emotional_tone": "fear",
+    "script": "Tres guardafaros desaparecieron del islote Eilean Mòr, Escocia, en diciembre de 1900 — sin cuerpos, sin señales de lucha. El inspector que llegó encontró la última comida a medio servir y una silla volcada. La explicación oficial dice que una ola gigante los arrastró. Pero el diario del faro registra ese día con cielos despejados. Cien años después, nadie tiene una respuesta que aguante. ¿Tú qué crees que pasó ahí esa noche? Por eso mismo.",
+    "word_count": 76,
+    "search_summary": "Tres guardafaros desaparecieron sin explicación del faro de Eilean Mòr en Escocia en diciembre de 1900.",
+    "comment_question": "¿Ola gigante con cielos despejados? ¿O algo más pasó en Eilean Mòr? 🌊",
+    "source_note": "Registros Northern Lighthouse Board, 1900",
+    "source_url": "",
+    "visual_card": null,
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "misterios históricos",
+      "Eilean Mòr desaparición",
+      "faro Escocia misterio",
+      "guardafaros desaparecidos 1900",
+      "misterios sin resolver",
+      "datos históricos",
+      "hechos increíbles",
+      "misterios del mar",
+      "misterios históricos sin resolver"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#misterioshistóricos",
+      "#datoscuriosos",
+      "#eileanmor",
+      "#misteriosinresolver"
+    ],
+    "video_queries": [
+      "lighthouse stormy sea Scotland",
+      "abandoned lighthouse interior old",
+      "overturned chair old table food",
+      "storm waves rocky island",
+      "lighthouse logbook old handwriting",
+      "foggy sea empty island"
+    ],
+    "has_loop": true,
+    "topic": "historical mysteries",
+    "structure": "unsolved-mystery",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
   }
 ]
