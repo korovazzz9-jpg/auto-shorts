@@ -1,57 +1,90 @@
 {
-  "pending": null,
-  "attempts": [
-    {
-      "id": "36184839717:1",
-      "at": "2026-09-25T20:17:58.479989+00:00",
-      "outcome": "published",
-      "resumed": false,
-      "title": "La ciudad de Çatalhöyük que enterró a sus muertos bajo el piso del hogar 😱",
-      "episode": "2026-09-25T20:17:58.479989+00:00",
-      "slot": "2026-09-25T20:17:00+00:00",
-      "video_id": "5yQV29b9XSI",
-      "selection": {
-        "filter_version": 3,
-        "retries": 0,
-        "retry_recovered": 0,
-        "unknown_usage_attempts": 0,
-        "retry_input_tokens": 0,
-        "retry_output_tokens": 0,
-        "retry_reasons": null,
-        "reused_selections": 0,
-        "extra_searches": 0,
-        "downloaded_scenes": 6,
-        "backup_scenes": 0,
-        "extra_input_tokens": 0,
-        "extra_output_tokens": 0,
-        "initial_scenes": 6,
-        "source_errors": null,
-        "source_candidates": {
-          "pexels": 56,
-          "pixabay": 0,
-          "coverr": 0
-        },
-        "downloaded_sources": {
-          "pexels": 6
-        },
-        "stock_cache_hits": 0,
-        "beats": 6,
-        "vetted": 6,
-        "cache_hits": 0,
-        "no_preview": 0,
-        "api_error": 0,
-        "unparsed": 0,
-        "rejected": 0,
-        "bypass": false,
-        "vision_calls": 6,
-        "no_candidates": 0,
-        "search_error": 0,
-        "input_tokens": 26273,
-        "output_tokens": 281,
-        "target_scenes": 6
-      },
-      "error": null
+  "pending": {
+    "data": {
+      "title": "El pez arquero derriba insectos con agua a 3 metros 🤯",
+      "title_opener": "the-x",
+      "title_intensity": "extreme",
+      "hook_text": "Cazador sin salir del agua",
+      "hook_template": "sounds-fake",
+      "emotional_tone": "impossible",
+      "script": "Un pez derriba presas en el aire disparando agua — y nadie entiende del todo cómo apunta. El pez arquero, en ríos del sudeste asiático, lanza chorros precisos hasta 3 metros y acierta al primer disparo. Se compensa por la refracción de la luz entre agua y aire — un cálculo óptico que ningún cerebro de pez debería poder hacer. Los científicos documentaron el fenómeno, pero no explican cómo aprende solo. ¿Instinto, cálculo, o algo que todavía no sabemos nombrar? Y así es como.",
+      "word_count": 80,
+      "search_summary": "El pez arquero del sudeste asiático dispara agua para derribar insectos voladores a 3 metros de distancia compensando la refracción de la luz.",
+      "comment_question": "¿Cómo aprende un pez a corregir óptica sin cerebro para eso? 🤯",
+      "source_note": "Journal of Experimental Biology, 2012",
+      "source_url": "https://journals.biologists.com/jeb/article/215/17/3060/10811/Archerfish-use-their-shooting-skills-to-hunt",
+      "visual_card": null,
+      "pairable_claim": "El pez arquero también puede saltar para atrapar presas directamente.",
+      "loop_connectors": [
+        "why",
+        "how"
+      ],
+      "tags": [
+        "datos curiosos animales",
+        "pez arquero",
+        "datos en 30 segundos",
+        "animales increíbles",
+        "curiosidades del reino animal",
+        "peces raros",
+        "instinto animal",
+        "cazadores del reino animal",
+        "datos curiosos animales para niños",
+        "pez arquero en accion"
+      ],
+      "hashtags": [
+        "#datoscuriosos",
+        "#shorts",
+        "#reinoanimal",
+        "#pezarquero",
+        "#naturaleza"
+      ],
+      "video_queries": [
+        "archerfish shooting water insect",
+        "archerfish hunting prey river",
+        "light refraction water surface diagram",
+        "archerfish accurate jet stream closeup",
+        "scientist observing fish tank experiment"
+      ],
+      "has_loop": true,
+      "topic": "the animal kingdom",
+      "structure": "unsolved-mystery",
+      "topical": false,
+      "niche_styled": true,
+      "pair_resolved": false,
+      "title_variant": "narrative",
+      "title_style": "statement",
+      "hashtag_position": "end"
     },
+    "pending_pair": null,
+    "pair_start_mode": true,
+    "selections": {
+      "33d9de8b104d4ed5574b1686223c72728105a2ea1d1472bcfc810699b2e349ce": [
+        {
+          "link": "https://videos.pexels.com/video-files/34308220/14534360_1080_1920_30fps.mp4",
+          "id": 34308220,
+          "preview": "https://images.pexels.com/videos/34308220/pexels-photo-34308220.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630",
+          "source": "pexels"
+        },
+        {
+          "link": "https://videos.pexels.com/video-files/33771382/14335964_1080_1920_30fps.mp4",
+          "id": 33771382,
+          "preview": "https://images.pexels.com/videos/33771382/pexels-photo-33771382.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630",
+          "source": "pexels"
+        }
+      ],
+      "8e54616c38dfdae6f6e58fd22d65eea51a10f19ca662b9a34e9ee6d6f05060a8": [
+        {
+          "link": "https://videos.pexels.com/video-files/30796025/13171739_1080_1920_30fps.mp4",
+          "id": 30796025,
+          "preview": "https://images.pexels.com/videos/30796025/pexels-photo-30796025.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630",
+          "source": "pexels"
+        }
+      ]
+    },
+    "status": "prepared",
+    "created": "2026-11-25T00:18:43.170934+00:00"
+  },
+  "attempts": [
     {
       "id": "36195945556:1",
       "at": "2026-09-25T22:18:01.030038+00:00",
@@ -15404,6 +15437,58 @@
         "target_scenes": 6
       },
       "error": null
+    },
+    {
+      "id": "45516889713:1",
+      "at": "2026-11-25T00:18:43.170934+00:00",
+      "outcome": "deferred",
+      "resumed": false,
+      "title": "El pez arquero derriba insectos con agua a 3 metros 🤯",
+      "episode": "2026-11-25T00:18:43.170934+00:00",
+      "slot": "2026-11-25T00:17:00+00:00",
+      "video_id": null,
+      "selection": {
+        "filter_version": 3,
+        "retries": 0,
+        "retry_recovered": 0,
+        "unknown_usage_attempts": 0,
+        "retry_input_tokens": 0,
+        "retry_output_tokens": 0,
+        "retry_reasons": null,
+        "reused_selections": 0,
+        "extra_searches": 3,
+        "downloaded_scenes": 3,
+        "backup_scenes": 1,
+        "extra_input_tokens": 13763,
+        "extra_output_tokens": 192,
+        "initial_scenes": 1,
+        "opening_vetted": false,
+        "source_errors": null,
+        "source_candidates": {
+          "pexels": 78,
+          "pixabay": 3,
+          "coverr": 0
+        },
+        "downloaded_sources": {
+          "pexels": 3
+        },
+        "stock_cache_hits": 0,
+        "beats": 8,
+        "vetted": 2,
+        "cache_hits": 0,
+        "no_preview": 0,
+        "api_error": 0,
+        "unparsed": 0,
+        "rejected": 6,
+        "bypass": false,
+        "vision_calls": 8,
+        "no_candidates": 0,
+        "search_error": 0,
+        "input_tokens": 36911,
+        "output_tokens": 512,
+        "target_scenes": 6
+      },
+      "error": "Добор сцен продолжается: 3/6. Сценарий и одобренные клипы сохранены для следующей попытки."
     }
   ]
 }
