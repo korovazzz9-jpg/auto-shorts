@@ -1,55 +1,5 @@
 [
   {
-    "title": "¿La sonda que grabó cómo suena el interior de Marte? 😱",
-    "title_opener": "question",
-    "title_intensity": "extreme",
-    "hook_text": "Marte tiene un pulso",
-    "hook_template": "sounds-fake",
-    "emotional_tone": "awe",
-    "script": "Un sismógrafo en Marte detectó algo nadie esperaba. En noviembre de 2021, la sonda InSight de NASA registró un terremoto marciano de magnitud 5 — el más grande jamás medido en otro planeta. Las ondas viajaron hasta el núcleo de Marte y rebotaron, revelando que su centro es líquido, no sólido. Dos años de silencio antes de ese momento. ¿Qué más crees que esconde el interior de Marte? Por eso mismo.",
-    "word_count": 72,
-    "search_summary": "La sonda InSight de NASA registró en 2021 un sismo marciano de magnitud 5 que reveló el núcleo líquido de Marte.",
-    "comment_question": "¿Crees que el núcleo líquido de Marte significa que algún día tuvo vida? 🤔",
-    "source_note": "NASA InSight mission, Science journal, 2023",
-    "source_url": "https://www.science.org/doi/10.1126/science.abq7704",
-    "visual_card": null,
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "datos curiosos espacio",
-      "Marte interior",
-      "sonda InSight NASA",
-      "sismo en Marte",
-      "núcleo de Marte",
-      "datos en 30 segundos",
-      "hechos espaciales",
-      "terremoto marciano",
-      "datos curiosos del espacio para niños"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#datoscuriosos",
-      "#marte",
-      "#nasa",
-      "#espacio"
-    ],
-    "video_queries": [
-      "InSight lander Mars surface",
-      "Mars planet space animation",
-      "seismic waves planet core animation",
-      "Mars interior liquid core diagram",
-      "NASA InSight spacecraft Mars"
-    ],
-    "has_loop": true,
-    "topic": "space",
-    "structure": "historical-story",
-    "niche_styled": true,
-    "title_variant": "seo",
-    "hashtag_position": "end"
-  },
-  {
     "title": "El barco de Eilean Mòr: 3 hombres desaparecieron sin rastro en 1900 😱",
     "title_opener": "the-x",
     "title_intensity": "extreme",
