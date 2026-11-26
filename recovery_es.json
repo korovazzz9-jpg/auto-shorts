@@ -81,63 +81,20 @@
           "preview": "https://images.pexels.com/videos/36273365/animal-aquarium-black-cinema-36273365.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630",
           "source": "pexels"
         }
+      ],
+      "183e2a49f0673aa1e289c275936dba6d467678305ee3f6f0be82db5fc3b7bc3b": [
+        {
+          "link": "https://videos.pexels.com/video-files/6130312/6130312-hd_1080_1920_30fps.mp4",
+          "id": 6130312,
+          "preview": "https://images.pexels.com/videos/6130312/clinic-corona-coronavirus-covid-6130312.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630",
+          "source": "pexels"
+        }
       ]
     },
     "status": "prepared",
     "created": "2026-11-26T00:18:00.554429+00:00"
   },
   "attempts": [
-    {
-      "id": "36275773271:1",
-      "at": "2026-09-26T22:17:53.553394+00:00",
-      "outcome": "published",
-      "resumed": false,
-      "title": "¿El lago que hierve sin calor... y sin volcán? 😱",
-      "episode": "2026-09-26T22:17:53.553394+00:00",
-      "slot": "2026-09-26T22:17:00+00:00",
-      "video_id": "gXpQzhX8LJA",
-      "selection": {
-        "filter_version": 3,
-        "retries": 0,
-        "retry_recovered": 0,
-        "unknown_usage_attempts": 0,
-        "retry_input_tokens": 0,
-        "retry_output_tokens": 0,
-        "retry_reasons": null,
-        "reused_selections": 0,
-        "extra_searches": 0,
-        "downloaded_scenes": 6,
-        "backup_scenes": 0,
-        "extra_input_tokens": 0,
-        "extra_output_tokens": 0,
-        "initial_scenes": 6,
-        "source_errors": null,
-        "source_candidates": {
-          "pexels": 59,
-          "pixabay": 2,
-          "coverr": 0
-        },
-        "downloaded_sources": {
-          "pexels": 6
-        },
-        "stock_cache_hits": 0,
-        "beats": 6,
-        "vetted": 6,
-        "cache_hits": 0,
-        "no_preview": 0,
-        "api_error": 0,
-        "unparsed": 0,
-        "rejected": 0,
-        "bypass": false,
-        "vision_calls": 6,
-        "no_candidates": 0,
-        "search_error": 0,
-        "input_tokens": 27577,
-        "output_tokens": 286,
-        "target_scenes": 6
-      },
-      "error": null
-    },
     {
       "id": "36282037979:1",
       "at": "2026-09-27T00:17:54.946605+00:00",
@@ -15494,6 +15451,58 @@
         "target_scenes": 6
       },
       "error": "Добор сцен продолжается: 2/6. Сценарий и одобренные клипы сохранены для следующей попытки."
+    },
+    {
+      "id": "45827669410:1",
+      "at": "2026-11-26T13:18:03.517189+00:00",
+      "outcome": "deferred",
+      "resumed": true,
+      "title": "¿El rape macho se disuelve vivo dentro de la hembra? 😱",
+      "episode": "2026-11-26T00:18:00.554429+00:00",
+      "slot": "2026-11-26T13:17:00+00:00",
+      "video_id": null,
+      "selection": {
+        "filter_version": 3,
+        "retries": 0,
+        "retry_recovered": 0,
+        "unknown_usage_attempts": 0,
+        "retry_input_tokens": 0,
+        "retry_output_tokens": 0,
+        "retry_reasons": null,
+        "reused_selections": 2,
+        "extra_searches": 3,
+        "downloaded_scenes": 3,
+        "backup_scenes": 0,
+        "extra_input_tokens": 13725,
+        "extra_output_tokens": 192,
+        "initial_scenes": 3,
+        "opening_vetted": true,
+        "source_errors": null,
+        "source_candidates": {
+          "pexels": 55,
+          "pixabay": 3,
+          "coverr": 0
+        },
+        "downloaded_sources": {
+          "pexels": 3
+        },
+        "stock_cache_hits": 18,
+        "beats": 6,
+        "vetted": 1,
+        "cache_hits": 0,
+        "no_preview": 0,
+        "api_error": 0,
+        "unparsed": 0,
+        "rejected": 5,
+        "bypass": false,
+        "vision_calls": 6,
+        "no_candidates": 0,
+        "search_error": 0,
+        "input_tokens": 28028,
+        "output_tokens": 384,
+        "target_scenes": 6
+      },
+      "error": "Добор сцен продолжается: 3/6. Сценарий и одобренные клипы сохранены для следующей попытки."
     }
   ]
 }
