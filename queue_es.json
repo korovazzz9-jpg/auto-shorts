@@ -150,5 +150,166 @@
     "niche_styled": false,
     "title_variant": "narrative",
     "hashtag_position": "end"
+  },
+  {
+    "title": "La tormenta de 1953 que levantó el mar 5 metros en Holanda 😱",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "El mar se tragó un país",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "fear",
+    "script": "El mar subió 5 metros y borró aldeas enteras en una noche. En febrero de 1953, una tormenta del Mar del Norte empujó el océano contra las costas de Holanda. Los diques —construidos para aguantar siglos— cedieron en menos de tres horas. Mil ochocientas treinta y seis personas murieron antes del amanecer. Los ingenieros decían que era imposible. Los propios registros holandeses nunca explicaron por qué tantos diques fallaron al mismo tiempo. ¿Fue el diseño, el mantenimiento, o algo que nadie calculó? Y de esta forma.",
+    "word_count": 80,
+    "search_summary": "La tormenta del Mar del Norte de 1953 inundó Holanda, mató a 1836 personas y destruyó cientos de diques en una noche.",
+    "comment_question": "¿Por qué cedieron tantos diques a la vez si eran los mejores del mundo? 🌊",
+    "source_note": "Rijkswaterstaat / Delta Works Commission, 1954",
+    "source_url": "https://www.deltawerken.com/deltaworks/the-flood-of-1953.html",
+    "visual_card": null,
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "inundación holanda 1953",
+      "tormenta mar del norte",
+      "desastre natural histórico",
+      "datos curiosos",
+      "datos en 30 segundos",
+      "diques holanda",
+      "catástrofe climática",
+      "fenómenos extremos",
+      "tormenta en el mar del norte"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#climaextremo",
+      "#desastrenatural",
+      "#holanda1953"
+    ],
+    "video_queries": [
+      "North Sea storm surge flooding 1953",
+      "Netherlands flooded village aerial 1953",
+      "broken dike floodwater rushing",
+      "rescue boats flooded Netherlands houses",
+      "Dutch Delta Works dike construction"
+    ],
+    "has_loop": true,
+    "topic": "extreme weather",
+    "structure": "unsolved-mystery",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "¿Los antiguos egipcios enterraron un barco en el desierto en 2500 a.C.? 😱",
+    "title_opener": "question",
+    "title_intensity": "extreme",
+    "hook_text": "Un barco... en el desierto",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "impossible",
+    "script": "Un barco completo enterrado en arena seca, a kilómetros del Nilo — y no era un error. En Abidos, Egipto, arqueólogos desenterraron 14 barcos de madera enterrados junto al faraón Khasekhemwy alrededor del 2500 a.C. Cada barco medía más de 18 metros. Pero aquí viene lo extraño: nunca tocaron agua. Los enterraron como vehículos para el más allá, listos para navegar en otra vida. Envíale esto a alguien que crea que el desierto y el mar no tienen nada que ver. Y por eso exactamente.",
+    "word_count": 79,
+    "search_summary": "Arqueólogos encontraron 14 barcos de madera enterrados en el desierto de Abidos junto al faraón Khasekhemwy alrededor del 2500 a.C.",
+    "comment_question": "¿Un barco de 18 metros enterrado en arena para el más allá — lo creerías sin verlo? 😱",
+    "source_note": "Instituto Arqueológico de América, excavaciones Abidos 2000",
+    "source_url": "https://www.archaeological.org/news/sitepreservation/13030",
+    "visual_card": {
+      "type": "before_after",
+      "subject": "barcos de",
+      "items": [
+        "Nunca tocaron agua",
+        "Listos para navegar en otra vida"
+      ],
+      "after_query": 4
+    },
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "descubrimientos arqueológicos",
+      "datos curiosos",
+      "antiguo Egipto",
+      "barcos de Abidos",
+      "faraón Khasekhemwy",
+      "arqueología Egipto",
+      "curiosidades históricas",
+      "datos en 30 segundos",
+      "descubrimientos arqueológicos de la biblia",
+      "datos curiosos de animales",
+      "antiguo egipto documental"
+    ],
+    "hashtags": [
+      "#shorts",
+      "datoscuriosos",
+      "#arqueología",
+      "#egipto",
+      "#historiasincreibles"
+    ],
+    "video_queries": [
+      "ancient wooden boat desert excavation",
+      "Abydos Egypt archaeological dig",
+      "ancient Egypt pharaoh burial artifacts",
+      "wooden boat planks ancient Egypt",
+      "desert sands Egypt ruins aerial"
+    ],
+    "has_loop": true,
+    "topic": "archaeological discoveries",
+    "structure": "myth-debunk",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "¿Tu corazón se detiene cuando estornudas? 😱",
+    "title_opener": "question",
+    "title_intensity": "extreme",
+    "hook_text": "Tu cuerpo te miente",
+    "hook_template": "you-experience",
+    "emotional_tone": "impossible",
+    "script": "Millones de personas creen que su corazón se detiene al estornudar — pero los médicos no pueden confirmar ni descartar eso por completo. Cuando estornudas, la presión en tu pecho aumenta tanto que altera el ritmo eléctrico del corazón. Los electrocardiogramas muestran que el ritmo cambia — pero el corazón nunca se detiene del todo. Nadie sabe exactamente cuánto cambia ese ritmo de persona a persona. ¿Tú le creías al mito — o ya lo dudabas? Y exactamente así.",
+    "word_count": 76,
+    "search_summary": "El corazón no se detiene al estornudar, pero el ritmo cardíaco cambia durante el estornudo según electrocardiogramas.",
+    "comment_question": "¿Siempre creíste que tu corazón se detenía al estornudar? 😱",
+    "source_note": "Library of Congress, Everyday Mysteries, 2019",
+    "source_url": "https://www.loc.gov/everyday-mysteries/item/does-your-heart-really-stop-when-you-sneeze/",
+    "visual_card": null,
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "datos curiosos",
+      "cuerpo humano",
+      "el corazón al estornudar",
+      "mitos del cuerpo",
+      "curiosidades médicas",
+      "ritmo cardíaco",
+      "datos en 30 segundos",
+      "biología humana",
+      "datos curiosos de animales",
+      "cuerpo humano para niños"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#cuerphumano",
+      "#corazon",
+      "#mitos"
+    ],
+    "video_queries": [
+      "person sneezing close up",
+      "human heart beating animation",
+      "ECG electrocardiogram heart monitor",
+      "chest pressure diagram animation",
+      "doctor reviewing heart monitor"
+    ],
+    "has_loop": true,
+    "topic": "the human body",
+    "structure": "unsolved-mystery",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
   }
 ]
