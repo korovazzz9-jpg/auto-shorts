@@ -1,55 +1,5 @@
 [
   {
-    "title": "¿El terremoto de 1811 invirtió el río Misisipi? 😱",
-    "title_opener": "question",
-    "title_intensity": "extreme",
-    "hook_text": "Un río fluyendo al revés",
-    "hook_template": "sounds-fake",
-    "emotional_tone": "impossible",
-    "script": "El río más grande de Norteamérica fluyó al revés. En diciembre de 1811, el terremoto de New Madrid sacudió el centro de Estados Unidos con una magnitud estimada de 7.7. El suelo se hundió tanto que el río Misisipi revirtió su curso durante varias horas. Creó islas nuevas, hundió otras, y se escuchó hasta en Boston. Hoy, esa misma falla sigue activa bajo siete estados. ¿Dormirías tranquilo sabiendo que vives sobre ella? Y exactamente así.",
-    "word_count": 76,
-    "search_summary": "El terremoto de New Madrid de 1811 fue tan intenso que invirtió temporalmente el curso del río Misisipi.",
-    "comment_question": "¿Sabías que la falla de New Madrid sigue activa hoy bajo millones de personas? 😱",
-    "source_note": "USGS, New Madrid Seismic Zone documentation",
-    "source_url": "https://www.usgs.gov/programs/earthquake-hazards/new-madrid-seismic-zone",
-    "visual_card": null,
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "terremoto New Madrid 1811",
-      "río Misisipi al revés",
-      "terremotos históricos",
-      "datos curiosos terremotos",
-      "falla sísmica activa",
-      "desastres naturales historia",
-      "curiosidades geología",
-      "datos en 30 segundos",
-      "terremotos históricos de venezuela"
-    ],
-    "hashtags": [
-      "#shorts",
-      "#datoscuriosos",
-      "#terremotos",
-      "#newmadrid",
-      "#geologiacuriosa"
-    ],
-    "video_queries": [
-      "Mississippi River flowing reversed animation",
-      "New Madrid earthquake 1811 historical map",
-      "river flowing backwards flood",
-      "earthquake ground sinking collapse",
-      "New Madrid seismic zone fault map"
-    ],
-    "has_loop": true,
-    "topic": "volcanoes and earthquakes",
-    "structure": "historical-story",
-    "niche_styled": true,
-    "title_variant": "narrative",
-    "hashtag_position": "end"
-  },
-  {
     "title": "El USS Indianapolis entregó la bomba atómica y nadie lo buscó por 4 días 😱",
     "title_opener": "the-x",
     "title_intensity": "extreme",
