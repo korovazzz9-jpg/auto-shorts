@@ -1,58 +1,92 @@
 {
-  "pending": null,
-  "attempts": [
-    {
-      "id": "36268984895:1",
-      "at": "2026-09-26T20:17:49.932527+00:00",
-      "outcome": "published",
-      "resumed": false,
-      "title": "El volcán que disparó rocas a 800 km en 1257 😱",
-      "episode": "2026-09-26T20:17:49.932527+00:00",
-      "slot": "2026-09-26T20:17:00+00:00",
-      "video_id": "4-9XVeXGp64",
-      "selection": {
-        "filter_version": 3,
-        "retries": 0,
-        "retry_recovered": 0,
-        "unknown_usage_attempts": 0,
-        "retry_input_tokens": 0,
-        "retry_output_tokens": 0,
-        "retry_reasons": null,
-        "reused_selections": 0,
-        "extra_searches": 0,
-        "downloaded_scenes": 6,
-        "backup_scenes": 1,
-        "extra_input_tokens": 0,
-        "extra_output_tokens": 0,
-        "initial_scenes": 5,
-        "source_errors": null,
-        "source_candidates": {
-          "pexels": 50,
-          "pixabay": 2,
-          "coverr": 0
-        },
-        "downloaded_sources": {
-          "pixabay": 1,
-          "pexels": 5
-        },
-        "stock_cache_hits": 0,
-        "beats": 5,
-        "vetted": 5,
-        "cache_hits": 0,
-        "no_preview": 0,
-        "api_error": 0,
-        "unparsed": 0,
-        "rejected": 0,
-        "bypass": false,
-        "vision_calls": 5,
-        "no_candidates": 0,
-        "search_error": 0,
-        "input_tokens": 23042,
-        "output_tokens": 272,
-        "target_scenes": 6
-      },
-      "error": null
+  "pending": {
+    "data": {
+      "title": "¿El rape macho se disuelve vivo dentro de la hembra? 😱",
+      "title_opener": "question",
+      "title_intensity": "extreme",
+      "hook_text": "Se fusionan para siempre",
+      "hook_template": "sounds-fake",
+      "emotional_tone": "impossible",
+      "script": "Un animal se fusiona con su pareja hasta perder su propio cuerpo — y nadie lo vio venir. El rape macho muerde a la hembra, sus tejidos se sueldan, y en semanas se disuelve: pierde ojos, órganos, cerebro. Solo quedan sus testículos, conectados a ella de por vida. Pero aquí está lo extraño: una sola hembra puede absorber hasta ocho machos distintos al mismo tiempo. ¿Cuántos de ustedes van a mandar esto a su pareja? Y así es como.",
+      "word_count": 76,
+      "search_summary": "El rape macho anglerfish se fusiona con la hembra y pierde todos sus órganos excepto los testículos.",
+      "comment_question": "¿Preferirías existir solo para eso o no existir? 😳",
+      "source_note": "Pietsch, Theodore W., Universidad de Washington, 2005",
+      "source_url": "https://www.science.org/doi/10.1126/science.1109767",
+      "visual_card": null,
+      "pair_resolved": true,
+      "loop_connectors": [
+        "why",
+        "how"
+      ],
+      "tags": [
+        "rape pez abismo",
+        "anglerfish fusión",
+        "datos del océano",
+        "peces curiosos",
+        "datos en 30 segundos",
+        "animales marinos increíbles",
+        "fauna marina extraña",
+        "reproducción animal extrema",
+        "datos curiosos del océano"
+      ],
+      "hashtags": [
+        "#shorts",
+        "#datoscuriosos",
+        "#oceano",
+        "#animalesmarinos",
+        "#rape"
+      ],
+      "video_queries": [
+        "anglerfish deep sea swimming",
+        "anglerfish male biting female",
+        "anglerfish tissue fusion microscope",
+        "anglerfish female multiple males attached",
+        "deep sea fish close up"
+      ],
+      "has_loop": true,
+      "topic": "the ocean",
+      "structure": "myth-debunk",
+      "topical": false,
+      "niche_styled": true,
+      "pairable_claim": "",
+      "title_variant": "narrative",
+      "title_style": "question",
+      "hashtag_position": "end"
     },
+    "pending_pair": {
+      "id": "kLXGnDQpz1I-1794788620",
+      "topic": "the animal kingdom",
+      "part_a_video_id": "kLXGnDQpz1I",
+      "part_a_title": "El pez que arrastra a su pareja para siempre 😱",
+      "claim": "Una hembra de rape puede cargar seis machos a la vez.",
+      "part_b_video_id": null,
+      "status": "awaiting_b",
+      "created_at": 1794788620.767822
+    },
+    "pair_start_mode": false,
+    "selections": {
+      "2ddb9e4fb8e64dc5b47db07d3a87facd468753363478a66c8886a11d5fa06eed": [
+        {
+          "link": "https://videos.pexels.com/video-files/15807126/15807126-hd_1080_1920_30fps.mp4",
+          "id": 15807126,
+          "preview": "https://images.pexels.com/videos/15807126/aquarium-barcelona-fish-spain-15807126.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630",
+          "source": "pexels"
+        }
+      ],
+      "7b5b0d30600ea5b68cc067b144b97efa96ce396b4cc8046bb20c3b65625cce2f": [
+        {
+          "link": "https://videos.pexels.com/video-files/36273365/15382266_1080_1920_30fps.mp4",
+          "id": 36273365,
+          "preview": "https://images.pexels.com/videos/36273365/animal-aquarium-black-cinema-36273365.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=630",
+          "source": "pexels"
+        }
+      ]
+    },
+    "status": "prepared",
+    "created": "2026-11-26T00:18:00.554429+00:00"
+  },
+  "attempts": [
     {
       "id": "36275773271:1",
       "at": "2026-09-26T22:17:53.553394+00:00",
@@ -15408,6 +15442,58 @@
         "target_scenes": 6
       },
       "error": null
+    },
+    {
+      "id": "45727640311:1",
+      "at": "2026-11-26T00:18:00.554429+00:00",
+      "outcome": "deferred",
+      "resumed": false,
+      "title": "¿El rape macho se disuelve vivo dentro de la hembra? 😱",
+      "episode": "2026-11-26T00:18:00.554429+00:00",
+      "slot": "2026-11-26T00:17:00+00:00",
+      "video_id": null,
+      "selection": {
+        "filter_version": 3,
+        "retries": 0,
+        "retry_recovered": 0,
+        "unknown_usage_attempts": 0,
+        "retry_input_tokens": 0,
+        "retry_output_tokens": 0,
+        "retry_reasons": null,
+        "reused_selections": 0,
+        "extra_searches": 3,
+        "downloaded_scenes": 2,
+        "backup_scenes": 0,
+        "extra_input_tokens": 13725,
+        "extra_output_tokens": 192,
+        "initial_scenes": 2,
+        "opening_vetted": true,
+        "source_errors": null,
+        "source_candidates": {
+          "pexels": 76,
+          "pixabay": 3,
+          "coverr": 0
+        },
+        "downloaded_sources": {
+          "pexels": 2
+        },
+        "stock_cache_hits": 0,
+        "beats": 8,
+        "vetted": 2,
+        "cache_hits": 0,
+        "no_preview": 0,
+        "api_error": 0,
+        "unparsed": 0,
+        "rejected": 6,
+        "bypass": false,
+        "vision_calls": 8,
+        "no_candidates": 0,
+        "search_error": 0,
+        "input_tokens": 36807,
+        "output_tokens": 512,
+        "target_scenes": 6
+      },
+      "error": "Добор сцен продолжается: 2/6. Сценарий и одобренные клипы сохранены для следующей попытки."
     }
   ]
 }
