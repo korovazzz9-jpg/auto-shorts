@@ -1,55 +1,5 @@
 [
   {
-    "title": "La tormenta de 1972 que sepultó Canadá bajo 1.5 metros de nieve en 24 horas 😱",
-    "title_opener": "the-x",
-    "title_intensity": "extreme",
-    "hook_text": "1.5 metros en un día",
-    "hook_template": "sounds-fake",
-    "emotional_tone": "huge",
-    "script": "En enero de 1972, una sola tormenta sepultó Tahtsa Lake, en Columbia Británica, bajo 1.45 metros de nieve en 24 horas — el mayor acumulado en un día registrado en Canadá. El sistema llegó del Pacífico y colisionó con aire ártico sobre las montañas Costeras. Los meteorólogos esperaban nieve intensa, no que igualara el récord histórico nacional en un día. Décadas después, nadie ha explicado por qué esa combinación de factores nunca volvió a repetirse con esa intensidad. ¿Fue una anomalía única o el clima esconde algo que todavía no entendemos? Y por eso exactamente.",
-    "word_count": 95,
-    "search_summary": "La tormenta de enero de 1972 en Tahtsa Lake, Columbia Británica, acumuló 1.45 metros de nieve en 24 horas, récord canadiense.",
-    "comment_question": "¿Crees que una tormenta así podría repetirse hoy con el cambio climático? ❄️",
-    "source_note": "Environment and Climate Change Canada, registros históricos",
-    "source_url": "https://climate.weather.gc.ca/prods_servs/cdn_climate_summary_e.html",
-    "visual_card": null,
-    "loop_connectors": [
-      "why",
-      "how"
-    ],
-    "tags": [
-      "datos curiosos",
-      "clima extremo",
-      "nevadas históricas",
-      "récord de nieve Canadá",
-      "tormenta 1972",
-      "fenómenos naturales",
-      "meteorología extrema",
-      "datos curiosos del mundo",
-      "clima extremo que nos espera"
-    ],
-    "hashtags": [
-      "#shorts",
-      "climaextremo",
-      "#datoscuriosos",
-      "#nevadahistórica",
-      "#fenómenosnaturales"
-    ],
-    "video_queries": [
-      "heavy snowstorm road buried 1972",
-      "British Columbia mountain snow storm",
-      "snow accumulation record depth aerial",
-      "meteorologist weather map storm system",
-      "deep snow buried trees Canada"
-    ],
-    "has_loop": true,
-    "topic": "extreme weather",
-    "structure": "unsolved-mystery",
-    "niche_styled": true,
-    "title_variant": "narrative",
-    "hashtag_position": "end"
-  },
-  {
     "title": "¿El terremoto de 1811 invirtió el río Misisipi? 😱",
     "title_opener": "question",
     "title_intensity": "extreme",
