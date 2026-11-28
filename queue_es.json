@@ -1,1 +1,305 @@
-[]
+[
+  {
+    "title": "¿Tu cuerpo fabrica un órgano nuevo para destruirlo cada mes? 😱",
+    "title_opener": "question",
+    "title_intensity": "extreme",
+    "hook_text": "Un órgano que muere solo",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "impossible",
+    "script": "Un órgano completo nace y muere en tu cuerpo cada 28 días — y nadie lo nota. Es el endometrio: el recubrimiento del útero se construye desde cero cada ciclo, llega a medir hasta 16 milímetros, y si no hay embarazo, el cuerpo lo destruye y lo expulsa entero. Ningún otro tejido humano hace eso de forma repetida y controlada. Los investigadores todavía no entienden exactamente qué señal molecular detiene la reconstrucción y dispara la destrucción. ¿Qué crees que lo controla — la sangre, el cerebro, o algo que nadie ha encontrado todavía? Y exactamente así.",
+    "word_count": 97,
+    "search_summary": "El endometrio es el único tejido humano que se reconstruye y destruye completamente cada 28 días de forma controlada.",
+    "comment_question": "¿Crees que el cerebro controla esto o el útero actúa solo? 🤔",
+    "source_note": "New England Journal of Medicine, revisiones fisiología endometrial",
+    "source_url": "",
+    "visual_card": null,
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "datos curiosos cuerpo humano",
+      "endometrio ciclo menstrual",
+      "órgano que se regenera",
+      "datos en 30 segundos",
+      "curiosidades del cuerpo",
+      "biología humana sorprendente",
+      "misterios del cuerpo humano",
+      "ciencia cuerpo femenino",
+      "datos curiosos del cuerpo humano"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#cuerphumano",
+      "#biologia",
+      "#misterio"
+    ],
+    "video_queries": [
+      "uterus lining illustration medical animation",
+      "menstrual cycle diagram endometrium",
+      "uterine tissue regeneration 3D animation",
+      "human cell growth microscope time lapse",
+      "woman thinking question mark close up"
+    ],
+    "has_loop": true,
+    "topic": "the human body",
+    "structure": "unsolved-mystery",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "El géiser que erupciona cada 90 minutos en Yellowstone 🤯",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "Está pasando ahora mismo",
+    "hook_template": "you-experience",
+    "emotional_tone": "awe",
+    "script": "Mientras ves esto, Old Faithful en Yellowstone está acumulando presión para su próxima erupción. Cada 90 minutos, lanza 32,000 litros de agua hirviendo a 55 metros de altura — sin fallar desde hace más de 150 años. En total, ha disparado ese chorro más de un millón de veces. La Tierra tiene un reloj propio, y no necesita que nadie lo programe. ¿En qué otro lugar del planeta existe algo tan puntual como esto? Y por eso pasa.",
+    "word_count": 76,
+    "search_summary": "El géiser Old Faithful en Yellowstone erupciona cada 90 minutos lanzando 32,000 litros de agua a 55 metros de altura.",
+    "comment_question": "¿Old Faithful alguna vez ha fallado su horario? 🤯",
+    "source_note": "USGS Yellowstone Volcano Observatory, 2023",
+    "source_url": "https://www.usgs.gov/volcanoes/yellowstone/old-faithful-geyser",
+    "visual_card": null,
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "datos curiosos",
+      "maravillas naturales",
+      "Old Faithful",
+      "géiser Yellowstone",
+      "datos en 30 segundos",
+      "fenómenos naturales",
+      "Yellowstone National Park",
+      "géiseres del mundo",
+      "datos curiosos de animales",
+      "maravillas naturales del mundo",
+      "old faithful geyser"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#maravillasnaturales",
+      "#yellowstone",
+      "#géiser"
+    ],
+    "video_queries": [
+      "Old Faithful geyser eruption close up",
+      "Old Faithful eruption water jet height",
+      "Yellowstone geyser boiling water steam",
+      "Yellowstone National Park aerial landscape",
+      "geyser underground pressure cross section"
+    ],
+    "has_loop": true,
+    "topic": "natural wonders",
+    "structure": "happening-now",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "El niño de Nampa emergió del suelo en 1889 y nadie lo explica 😱",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "Nadie sabe cómo llegó ahí",
+    "hook_template": "authority-cant-explain",
+    "emotional_tone": "impossible",
+    "script": "Una figura humana apareció a 90 metros bajo tierra en 1889 — y los geólogos todavía no se ponen de acuerdo. En Nampa, Idaho, trabajadores perforando un pozo extrajeron una pequeña figurilla de barro humanoide de una capa volcánica de dos millones de años. Los expertos la analizaron: el material era auténtico, sin manipulación moderna. La explicación más simple es que alguien la plantó — pero la capa estaba intacta. ¿Cómo llegó una figura humana a dos millones de años de profundidad? Y de esta forma.",
+    "word_count": 80,
+    "search_summary": "La figurilla de Nampa fue extraída en 1889 de una capa volcánica de dos millones de años en Idaho, sin explicación geológica aceptada.",
+    "comment_question": "¿Alguien la plantó o hay algo que la arqueología no quiere admitir? 👇",
+    "source_note": "Geological Society of America, registros de 1889",
+    "source_url": "",
+    "visual_card": null,
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "misterios arqueológicos",
+      "figurilla de Nampa",
+      "descubrimientos inexplicables",
+      "arqueología prohibida",
+      "datos curiosos",
+      "misterios sin resolver",
+      "Idaho 1889",
+      "hechos increíbles",
+      "descubrimientos inexplicables del mundo"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#misterio",
+      "#arqueología",
+      "#datoscuriosos",
+      "#hechos"
+    ],
+    "video_queries": [
+      "clay humanoid figurine ancient",
+      "water well drilling 1800s",
+      "geological rock layer cross section",
+      "archaeologist examining artifact",
+      "volcanic soil excavation deep"
+    ],
+    "has_loop": true,
+    "topic": "archaeological discoveries",
+    "structure": "unsolved-mystery",
+    "niche_styled": true,
+    "title_variant": "seo",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "El pez arquero que vuela fuera del agua para cazar 😱",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "¿Puede un pez volar?",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "impossible",
+    "script": "Un pez saltó fuera del agua y atrapó un pájaro en el aire. El pez arquero, Toxotes jaculatrix, vive en manglares del sudeste asiático y ya era famoso por disparar chorros de agua para derribar insectos. Pero en 2014, investigadores en Singapur grabaron algo más: el pez saltó hasta 30 centímetros fuera del agua y cazó presas vivas directamente con la boca. Ningún otro pez de su tipo hace esto. ¿Hubiera creído ese video si no existiera la grabación? Y por eso.",
+    "word_count": 80,
+    "search_summary": "El pez arquero Toxotes jaculatrix salta fuera del agua para cazar presas en el aire, documentado en Singapur en 2014.",
+    "comment_question": "¿Le creerías a alguien que te dijera que un pez saltó a atrapar un pájaro? 🐟",
+    "source_note": "PLOS ONE, estudio Universidad Nacional de Singapur, 2014",
+    "source_url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0110460",
+    "visual_card": null,
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "pez arquero",
+      "toxotes jaculatrix",
+      "animales increíbles",
+      "datos curiosos animales",
+      "peces voladores",
+      "curiosidades del reino animal",
+      "animales raros",
+      "datos en 30 segundos",
+      "pez arquero en acuario",
+      "animales increíbles del mundo"
+    ],
+    "hashtags": [
+      "#datoscuriosos",
+      "#shorts",
+      "#reinoanimal",
+      "#pezarquero",
+      "#animalesincreibles"
+    ],
+    "video_queries": [
+      "archerfish jumping out of water",
+      "archerfish spitting water insect",
+      "mangrove fish Southeast Asia",
+      "archerfish catching prey aerial slow motion"
+    ],
+    "has_loop": true,
+    "topic": "the animal kingdom",
+    "structure": "historical-story",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "¿Los babilonios sabían calcular el tiempo en el cielo en 400 a.C.? 🤯",
+    "title_opener": "question",
+    "title_intensity": "extreme",
+    "hook_text": "Calculaban planetas... sin telescopio",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "impossible",
+    "script": "Tablillas de arcilla babilónicas predijeron el movimiento de Júpiter con una técnica que Europa no inventaría hasta 1350 d.C. Los astrónomos de Babilonia, alrededor del año 400 a.C., usaban gráficas de velocidad-tiempo — el mismo método que hoy se enseña en cálculo universitario — para rastrear exactamente cuántos grados recorría el planeta cada día. No miraban el cielo con mejores ojos. Usaban matemáticas puras. Nadie sabe por qué ese conocimiento desapareció por 1,700 años. ¿Tú qué crees que pasó con él? Y de esta forma.",
+    "word_count": 80,
+    "search_summary": "Tablillas babilónicas del 400 a.C. usaban gráficas de velocidad para predecir el movimiento de Júpiter con técnica de cálculo.",
+    "comment_question": "¿Cómo desapareció ese conocimiento babilónico por 1,700 años? 🤯",
+    "source_note": "Mathieu Ossendrijver, Science, 2016",
+    "source_url": "https://www.science.org/doi/10.1126/science.aad8085",
+    "visual_card": null,
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "civilizaciones antiguas",
+      "babilonia",
+      "astronomía antigua",
+      "tablillas cuneiformes",
+      "júpiter predicción",
+      "datos curiosos historia",
+      "misterios históricos",
+      "matemáticas antiguas",
+      "civilizaciones antiguas de mexico",
+      "astronomía en las antiguas civilizaciones"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#historiaantigua",
+      "#babilonia",
+      "#misterios"
+    ],
+    "video_queries": [
+      "cuneiform clay tablets ancient",
+      "Babylon ancient astronomy ruins",
+      "velocity time graph mathematics",
+      "Jupiter planet movement night sky",
+      "ancient scrolls knowledge lost"
+    ],
+    "has_loop": true,
+    "topic": "ancient civilizations",
+    "structure": "unsolved-mystery",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
+  },
+  {
+    "title": "El templo maya encontrado intacto bajo un cenote en 2023 😱",
+    "title_opener": "the-x",
+    "title_intensity": "extreme",
+    "hook_text": "Nadie lo había tocado",
+    "hook_template": "sounds-fake",
+    "emotional_tone": "awe",
+    "script": "Un templo sellado por siglos apareció intacto bajo el agua — y nadie lo había tocado. En 2023, buzos en Chichén Itzá exploraron el cenote Sagrado y encontraron una estructura ceremonial sumergida, con ofrendas aún en su lugar: jade, cerámica, huesos humanos. Los mayas usaban estos cenotes como portales al inframundo. Pero si el cenote era sagrado y visitado, ¿por qué nadie sacó esas ofrendas en mil años? Dime qué crees que los detuvo. Y por eso.",
+    "word_count": 76,
+    "search_summary": "Buzos hallaron en 2023 un templo maya con ofrendas intactas bajo el cenote Sagrado de Chichén Itzá.",
+    "comment_question": "¿Por qué los mayas nunca recuperaron esas ofrendas del cenote? 🤔",
+    "source_note": "INAH, México, 2023",
+    "source_url": "https://www.inah.gob.mx/boletines/se-reporta-hallazgo-de-estructura-prehispanica-en-el-cenote-sagrado-de-chichen-itza",
+    "visual_card": null,
+    "loop_connectors": [
+      "why",
+      "how"
+    ],
+    "tags": [
+      "templo maya bajo el agua",
+      "cenote sagrado Chichén Itzá",
+      "descubrimiento arqueológico 2023",
+      "mayas inframundo cenote",
+      "ofrendas mayas sumergidas",
+      "arqueología submarina México",
+      "datos curiosos mayas",
+      "misterios arqueológicos",
+      "el cenote sagrado de chichén itzá"
+    ],
+    "hashtags": [
+      "#shorts",
+      "#datoscuriosos",
+      "#mayas",
+      "#arqueologia",
+      "#misterio"
+    ],
+    "video_queries": [
+      "underwater temple ruins ancient",
+      "diver exploring cenote Mexico",
+      "maya artifacts jade ceramic underwater",
+      "Chichen Itza cenote aerial view",
+      "ancient offerings bones archaeological site"
+    ],
+    "has_loop": true,
+    "topic": "archaeological discoveries",
+    "structure": "unsolved-mystery",
+    "niche_styled": true,
+    "title_variant": "narrative",
+    "hashtag_position": "end"
+  }
+]
